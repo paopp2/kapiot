@@ -16,7 +16,7 @@ class AuthService {
   final GoogleSignIn googleSignIn;
 
   Future<UserCredential?> signInWithGoogle() async {
-    AuthCredential? googleAuthCreds = await _googleCredentials();
+    AuthCredential? googleAuthCreds = await googleCredentials();
     if (googleAuthCreds == null) {
       return null;
     }
@@ -31,7 +31,7 @@ class AuthService {
     await read(fireauthProvider).signOut();
   }
 
-  Future<AuthCredential?> _googleCredentials() async {
+  Future<AuthCredential?> googleCredentials() async {
     try {
       final googleSignInAcc = await googleSignIn.signIn();
       final googleSignInAuth = await googleSignInAcc?.authentication;
