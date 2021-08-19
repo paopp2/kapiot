@@ -11,7 +11,7 @@ class AppRouter {
     Routes.loginView: (context) => const LoginView(),
   };
 
-  Future<dynamic>? navigateToRoute(String route) {
+  Future<dynamic>? navigateTo(String route) {
     assert(navigationKey.currentState != null);
     navigationKey.currentState!.pushNamed(Routes.homeView);
   }
