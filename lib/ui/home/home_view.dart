@@ -22,8 +22,8 @@ class HomeView extends HookConsumerWidget {
       builder: (context, constraints) {
         return Scaffold(
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: model.goToGwapoHouse,
-            label: const Text('Balay sa gwapo 😎'),
+            onPressed: model.signOut,
+            label: const Text('Sign out'),
           ),
           body: (startLocation == null)
               ? Center(
