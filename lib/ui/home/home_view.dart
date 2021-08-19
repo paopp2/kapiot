@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/home/home_view_model.dart';
 
 class HomeView extends HookConsumerWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(homeViewModel);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -23,7 +25,7 @@ class HomeView extends HookConsumerWidget {
                   // icon: const Icon(FontAwesomeIcons.google),
                   icon: const Icon(Icons.exit_to_app_outlined),
                   label: const Text('Sign Out'),
-                  onPressed: () {},
+                  onPressed: model.signOut,
                 ),
               ),
             ),
