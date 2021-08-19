@@ -11,13 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore: ^2.5.0
   cupertino_icons: ^1.0.2
+  firebase_auth: ^3.0.2
+  firebase_core: ^1.5.0
+  google_sign_in: ^5.0.7
   hooks_riverpod: ^1.0.0-dev.6
 
 dev_dependencies:
+  flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
 
 flutter:
   uses-material-design: true
