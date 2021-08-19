@@ -11,10 +11,13 @@ class AppRouter {
     Routes.loginView: (context) => const LoginView(),
   };
 
-  Future<dynamic>? navigateTo(String route) {
-    assert(navigationKey.currentState != null);
-    navigationKey.currentState!.pushNamed(Routes.homeView);
-  }
+  Map<String, Widget Function(BuildContext)> getRoutes() => instance.routesList;
+
+  Future<dynamic>? navigateToLoginView() =>
+      navigationKey.currentState?.pushNamed(Routes.loginView);
+
+  Future<dynamic>? navigateToHomeView() =>
+      navigationKey.currentState?.pushNamed(Routes.homeView);
 
   void popView() => navigationKey.currentState?.pop();
 }

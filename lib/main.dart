@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/root_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
+import 'package:kapiot/ui/home/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +27,10 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: _appRouter.navigationKey,
       routes: _appRouter.routesList,
-      home: const LoginView(),
+      home: RootView(
+        loggedInBuilder: (_) => const HomeView(),
+        loggedOutBuilder: (_) => const LoginView(),
+      ),
     );
   }
 }
