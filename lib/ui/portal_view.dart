@@ -27,10 +27,6 @@ class PortalView extends StatelessWidget {
                   child: const Text("RiderManagerView"),
                 ),
                 ElevatedButton(
-                  onPressed: model.gotoRiderManagerView,
-                  child: const Text("RiderManagerView"),
-                ),
-                ElevatedButton(
                   onPressed: model.gotoStopPointsView,
                   child: const Text("StopPointsView"),
                 ),
