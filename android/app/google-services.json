@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "492573649619",
+    "project_id": "kapiot-46cbc",
+    "storage_bucket": "kapiot-46cbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492573649619:android:473e9e899833e7a2f14226",
+        "android_client_info": {
+          "package_name": "com.agp.kapiot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492573649619-79ob7g1748f73frv3csn905v3ssg61he.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGEqPZU9zBjdltybhq6oezWSAyEM8abE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492573649619-79ob7g1748f73frv3csn905v3ssg61he.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
