@@ -5,6 +5,7 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/root_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
+import 'package:kapiot/ui/portal_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,10 +28,11 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: _appRouter.navigationKey,
       routes: _appRouter.routesList,
-      home: RootView(
-        loggedInBuilder: (_) => const HomeView(),
-        loggedOutBuilder: (_) => const LoginView(),
-      ),
+      home: const PortalView(),
+      // home: RootView(
+      //   loggedInBuilder: (_) => const HomeView(),
+      //   loggedOutBuilder: (_) => const LoginView(),
+      // ),
     );
   }
 }
