@@ -3,6 +3,8 @@
    <application
         android:label="kapiot"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="AIzaSyB_6X7mr4lMp08itqbA62sNEoqcqukq0SU"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
