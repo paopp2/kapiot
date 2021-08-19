@@ -1,4 +1,4 @@
-package com.example.kapiot
+package com.agp.kapiot
 
 import io.flutter.embedding.android.FlutterActivity
 
