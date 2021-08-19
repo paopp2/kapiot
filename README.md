@@ -1,16 +1,11 @@
-# kapiot
+# Kapiot
 
-A new Flutter project.
+A Proof of Concept of a Carpooled Ridesharing System for the USC Community (manuscript [here](manuscript/manuscript.pdf))
 
-## Getting Started
+## Developers
 
-This project is a starting point for a Flutter application.
+Made with ❤️ by Group K:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Engr. Charles Ausejo Jr.
+- Engr. Christian Benedict Gonzales
+- Engr. Nicolas Paolo Pepito
