@@ -35,8 +35,13 @@ class RiderManagerView extends HookConsumerWidget {
                               padding: EdgeInsets.all(10.0),
                               child: Row(
                                 children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
+                                  ),
                                   Padding(
-                                    padding: EdgeInsets.only(right: 20.0),
+                                    padding: EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
                                     child: Text(model.requestingRiders[index],
                                         style: TextStyle(fontSize: 20.0)),
                                   ),
