@@ -22,6 +22,7 @@ class HomeView extends HookConsumerWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        final mh = constraints.maxHeight;
         return Scaffold(
           appBar: AppBar(
             actions: [
@@ -31,13 +32,45 @@ class HomeView extends HookConsumerWidget {
               )
             ],
           ),
-          floatingActionButton: FloatingActionButton.extended(
-            label: const Text("Go to Lake"),
-            onPressed: model.gotoLake,
+          body: Stack(
+            children: [
+              (currentLoc == null)
+                  ? const LoadingScreen(text: "Fetching current location...")
+                  : GoogleMapSection(model),
+              Positioned(
+                bottom: 20,
+                left: 20,
+                right: 20,
+                child: Container(
+                  height: mh * 0.4,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const TextField(),
+                        const TextField(),
+                        TextButton(
+                          child: const Text("Date picker"),
+                          onPressed: () => showDatePicker(
+                            context: context,
+                            firstDate: DateTime(1970),
+                            lastDate: DateTime(2050),
+                            initialDate: DateTime.now(),
+                          ),
+                        ),
+                        ElevatedButton(
+                          child: const Text("Go to Lake"),
+                          onPressed: model.gotoLake,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          body: (currentLoc == null)
-              ? const LoadingScreen(text: "Fetching current location...")
-              : GoogleMapSection(model),
         );
       },
     );
