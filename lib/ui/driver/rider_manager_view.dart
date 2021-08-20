@@ -15,16 +15,42 @@ class RiderManagerView extends HookConsumerWidget {
             color: Color(0x7679ADFf),
             child: Padding(
               padding: EdgeInsets.all(15.0),
-              child: Center(
-                //*! Provider is not final. Temporary only.
-                child: ListView.builder(
-                    itemCount: model.riderList.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(model.requestingRiders[index]),
-                        subtitle: Text('Rider'),
-                      );
-                    }),
+              child: Column(
+                children: [
+                  SizedBox(height: 100.0),
+                  Expanded(
+                    flex: 1,
+                    child: Text('Hello'),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Center(
+                      //*! Provider is not final. Temporary only.
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: model.requestingRiders.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                                child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 20.0),
+                                    child: Text(model.requestingRiders[index],
+                                        style: TextStyle(fontSize: 20.0)),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text('Accept'),
+                                  ),
+                                ],
+                              ),
+                            ));
+                          }),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
