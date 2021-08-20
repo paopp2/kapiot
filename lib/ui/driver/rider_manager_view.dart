@@ -12,7 +12,21 @@ class RiderManagerView extends HookConsumerWidget {
       builder: (context, constraints) {
         return Scaffold(
           body: Container(
-            color: Colors.red,
+            color: Color(0x7679ADFf),
+            child: Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Center(
+                //*! Provider is not final. Temporary only.
+                child: ListView.builder(
+                    itemCount: model.riderList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(model.riderList[index]),
+                        subtitle: Text('Rider'),
+                      );
+                    }),
+              ),
+            ),
           ),
         );
       },
