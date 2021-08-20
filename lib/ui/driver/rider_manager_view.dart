@@ -21,7 +21,7 @@ class RiderManagerView extends HookConsumerWidget {
                     itemCount: model.riderList.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(model.riderList[index]),
+                        title: Text(model.requestingRiders[index]),
                         subtitle: Text('Rider'),
                       );
                     }),
