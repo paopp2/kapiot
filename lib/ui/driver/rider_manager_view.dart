@@ -21,7 +21,33 @@ class RiderManagerView extends HookConsumerWidget {
                   Expanded(
                       flex: 1,
                       child: ListView.builder(
-                          itemCount: 69, itemBuilder: (context, index) {})),
+                          itemCount: model.acceptedRidersStopPoints.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                                child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
+                                    child: Text(
+                                        model.acceptedRidersStopPoints[index]
+                                            .toString(),
+                                        style: TextStyle(fontSize: 13.0)),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text('Accept'),
+                                  ),
+                                ],
+                              ),
+                            ));
+                          })),
                   Expanded(
                     flex: 6,
                     child: Center(
