@@ -17,9 +17,10 @@ class RiderManagerView extends HookConsumerWidget {
               padding: EdgeInsets.all(15.0),
               child: Column(
                 children: [
-                  SizedBox(height: 100.0),
+                  SizedBox(height: 50.0),
+                  Text("Next Stop"),
                   Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: ListView.builder(
                           itemCount: model.acceptedRidersStopPoints.length,
                           itemBuilder: (context, index) {
@@ -49,7 +50,7 @@ class RiderManagerView extends HookConsumerWidget {
                             ));
                           })),
                   Expanded(
-                    flex: 6,
+                    flex: 4,
                     child: Center(
                       //*! Provider is not final. Temporary only.
                       child: ListView.builder(
