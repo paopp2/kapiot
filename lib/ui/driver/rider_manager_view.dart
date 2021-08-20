@@ -19,9 +19,9 @@ class RiderManagerView extends HookConsumerWidget {
                 children: [
                   SizedBox(height: 100.0),
                   Expanded(
-                    flex: 1,
-                    child: Text('Hello'),
-                  ),
+                      flex: 1,
+                      child: ListView.builder(
+                          itemCount: 69, itemBuilder: (context, index) {})),
                   Expanded(
                     flex: 6,
                     child: Center(

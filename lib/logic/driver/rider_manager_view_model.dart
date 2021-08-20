@@ -18,5 +18,9 @@ class RiderManagerViewModel {
     'Blithe Gonzales',
     'Charles Ausejo'
   ];
+  // *! Temporary list to maintain provider logic
+  List<List<String>> acceptedRidersStopPoints = [
+    ["10.342993", "123.932906"],
+  ];
   void dispose() {}
 }
