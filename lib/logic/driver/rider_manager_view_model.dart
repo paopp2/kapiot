@@ -13,7 +13,10 @@ class RiderManagerViewModel {
 
   void initState() {}
   // *! Temporary list to maintain provider logic
-  var riderList = ['Christian Gonzales', 'Blithe Gonzales', 'Charles Ausejo'];
-
+  List<String> requestingRiders = [
+    'Christian Gonzales',
+    'Blithe Gonzales',
+    'Charles Ausejo'
+  ];
   void dispose() {}
 }
