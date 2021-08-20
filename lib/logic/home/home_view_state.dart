@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final startLocationProvider =
+final currentLocationProvider =
     StateProvider.autoDispose<Position?>((ref) => null);

@@ -23,13 +23,13 @@ class HomeViewModel {
   final Reader read;
   final LocationService locationService;
   final AuthService authService;
+  late final CameraPosition initialCameraPosition;
   final Completer<GoogleMapController> _controller = Completer();
-  late final CameraPosition initialPosition;
 
   Future<void> initState() async {
     final currentLoc = await locationService.getLocation();
-    read(startLocationProvider).state = currentLoc;
-    initialPosition = CameraPosition(
+    read(currentLocationProvider).state = currentLoc;
+    initialCameraPosition = CameraPosition(
       target: LatLng(currentLoc.latitude, currentLoc.longitude),
       bearing: 192.8334901395799,
       tilt: 59.440717697143555,
@@ -41,6 +41,17 @@ class HomeViewModel {
       _controller.complete(gmapController);
 
   Future<void> signOut() async => await authService.signOutGoogle();
+
+  Future<void> gotoLake() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
+
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
 
   void dispose() {}
 }
