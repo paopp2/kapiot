@@ -16,12 +16,16 @@ class RequestDriversView extends StatelessWidget {
             minHeight: panelHeightClosed,
             maxHeight: panelHeightOpened,
             parallaxEnabled: true,
-            parallaxOffset: 5,
+            parallaxOffset: 0.5,
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(20),
             ),
             body: Expanded(
-              child: Container(),
+              child: Container(
+                child: Center(
+                  child: Text("Here lies Map"),
+                ),
+              ),
             ),
             panelBuilder: (controller) => PanelWidget(
               controller: controller,
@@ -55,7 +59,6 @@ class PanelWidget extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                color: Colors.green,
                 width: double.infinity,
                 height: 330,
                 child: ListView(
@@ -64,7 +67,7 @@ class PanelWidget extends StatelessWidget {
                   children: [
                     Container(
                       width: 240,
-                      color: Colors.teal.shade100,
+                      color: Colors.grey[100],
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         children: [
@@ -91,7 +94,7 @@ class PanelWidget extends StatelessWidget {
                     ),
                     Container(
                       width: 240,
-                      color: Colors.teal.shade100,
+                      color: Colors.grey[100],
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         children: [
@@ -118,7 +121,7 @@ class PanelWidget extends StatelessWidget {
                     ),
                     Container(
                       width: 240,
-                      color: Colors.teal.shade100,
+                      color: Colors.grey[100],
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         children: [
