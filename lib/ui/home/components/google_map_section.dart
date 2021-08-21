@@ -19,9 +19,9 @@ class GoogleMapSection extends StatelessWidget {
     return (camPosition == null)
         ? const LoadingScreen(text: "Fetching current location...")
         : GoogleMap(
-            mapType: MapType.hybrid,
+            mapType: MapType.normal,
             initialCameraPosition: camPosition!,
-            onMapCreated: model.onMapCreated,
+            onMapCreated: model.mapController.onMapCreated,
           );
   }
 }

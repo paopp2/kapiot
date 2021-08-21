@@ -73,7 +73,7 @@ class RouteConfigPanel extends StatelessWidget {
             ),
             ElevatedButton(
               child: const Text("Go to Lake"),
-              onPressed: model.gotoLake,
+              onPressed: model.mapController.gotoLake,
             ),
           ],
         ),
