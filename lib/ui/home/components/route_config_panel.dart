@@ -62,7 +62,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(placeSuggestions[index]),
-                          onTap: () => model.chooseSuggestion(
+                          onTap: () => model.pickSuggestion(
                             index: index,
                             forStartLoc: true,
                           ),
@@ -89,7 +89,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(placeSuggestions[index]),
-                          onTap: () => model.chooseSuggestion(
+                          onTap: () => model.pickSuggestion(
                             index: index,
                             forStartLoc: false,
                           ),
