@@ -14,6 +14,5 @@ class LoginViewModel {
 
   void initState() {}
   Future<void> signInWithGoogle() async => await authService.signInWithGoogle();
-  void gotoHomeView() => AppRouter.instance.navigateTo(Routes.homeView);
   void dispose() {}
 }
