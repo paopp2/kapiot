@@ -20,10 +20,10 @@ class RouteConfigPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: constraints.maxHeight * 0.45,
+      height: constraints.maxHeight * 0.43,
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(25.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
