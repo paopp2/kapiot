@@ -28,8 +28,7 @@ class HomeViewModel {
 
   Future<void> initState() async {
     final currentLoc = await locationService.getLocation();
-    read(currentLocationProvider).state = currentLoc;
-    initialCameraPosition = CameraPosition(
+    read(cameraPositionProvider).state = CameraPosition(
       target: LatLng(currentLoc.latitude, currentLoc.longitude),
       bearing: 192.8334901395799,
       tilt: 59.440717697143555,
@@ -52,6 +51,20 @@ class HomeViewModel {
       target: LatLng(37.43296265331129, -122.08832357078792),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
+
+  void toggleIsRider(bool valueHasChanged) {
+    if (valueHasChanged) {
+      final currentIsRider = read(isRiderSelectedProvider).state;
+      read(isRiderSelectedProvider).state = !currentIsRider;
+    }
+  }
+
+  void incRiderCount() => read(riderCountProvider).state++;
+  void decRiderCount() {
+    if (read(riderCountProvider).state > 1) {
+      read(riderCountProvider).state--;
+    }
+  }
 
   void dispose() {}
 }
