@@ -12,13 +12,13 @@ class RequestDriversView extends StatelessWidget {
             color: Colors.blueGrey,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 400,
                   width: double.infinity,
                 ),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
@@ -27,53 +27,54 @@ class RequestDriversView extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                           width: 50,
                           child: Divider(
                             color: Colors.teal,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Text("We found n drivers for your request "),
+                        const Text("We found n drivers for your request "),
                         Expanded(
                           child: ListView(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             scrollDirection: Axis.horizontal,
                             children: [
                               Container(
                                 width: 240,
                                 color: Colors.teal.shade100,
-                                margin: EdgeInsets.all(10),
+                                margin: const EdgeInsets.all(10),
                                 child: Column(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
-                                    CircleAvatar(
+                                    const CircleAvatar(
                                       radius: 40,
                                       backgroundColor: Colors.blue,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Paolo Pepito',
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 70,
                                     ),
                                     Container(
                                       height: 35,
                                       width: 180,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Colors.blue,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5)),
                                       ),
-                                      child: Center(child: Text("Hail ride")),
+                                      child: const Center(
+                                          child: Text("Hail ride")),
                                     )
                                   ],
                                 ),
@@ -81,34 +82,27 @@ class RequestDriversView extends StatelessWidget {
                               Container(
                                 width: 240,
                                 color: Colors.teal.shade100,
-                                margin: EdgeInsets.all(10),
+                                margin: const EdgeInsets.all(10),
                                 child: Column(
                                   children: [
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    CircleAvatar(
+                                    const SizedBox(height: 10),
+                                    const CircleAvatar(
                                       radius: 40,
                                       backgroundColor: Colors.blue,
                                     ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      'Charles Ausejo',
-                                    ),
-                                    SizedBox(
-                                      height: 70,
-                                    ),
+                                    const SizedBox(height: 10),
+                                    const Text('Charles Ausejo'),
+                                    const SizedBox(height: 70),
                                     Container(
                                       height: 35,
                                       width: 180,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Colors.blue,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5)),
                                       ),
-                                      child: Center(child: Text("Hail ride")),
+                                      child: const Center(
+                                          child: Text("Hail ride")),
                                     )
                                   ],
                                 ),

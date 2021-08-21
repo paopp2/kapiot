@@ -12,7 +12,7 @@ class RequestAcceptedView extends StatelessWidget {
             color: Colors.yellow,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 400,
                   width: double.infinity,
                 ),
@@ -21,7 +21,7 @@ class RequestAcceptedView extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(35),
@@ -29,9 +29,9 @@ class RequestAcceptedView extends StatelessWidget {
                           ),
                         ),
                         child: Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Column(
-                            children: [
+                            children: const [
                               SizedBox(
                                 height: 10,
                               ),
@@ -55,7 +55,7 @@ class RequestAcceptedView extends StatelessWidget {
                           child: Container(
                             width: double.infinity,
                             height: 190,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.green,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(35),
@@ -64,28 +64,28 @@ class RequestAcceptedView extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
-                                Text("Your co passengers for this ride"),
+                                const Text("Your co passengers for this ride"),
                                 Expanded(
                                   child: ListView(
                                     scrollDirection: Axis.horizontal,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     children: [
                                       Container(
-                                        margin:
-                                            EdgeInsets.symmetric(horizontal: 5),
-                                        child: CircleAvatar(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: const CircleAvatar(
                                           radius: 30,
                                           backgroundColor: Colors.blue,
                                         ),
                                       ),
                                       Container(
-                                        margin:
-                                            EdgeInsets.symmetric(horizontal: 5),
-                                        child: CircleAvatar(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: const CircleAvatar(
                                           radius: 30,
                                           backgroundColor: Colors.blue,
                                         ),
@@ -96,7 +96,7 @@ class RequestAcceptedView extends StatelessWidget {
                                 Container(
                                   width: double.infinity,
                                   height: 90,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(35),
@@ -104,7 +104,7 @@ class RequestAcceptedView extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
-                                    children: [
+                                    children: const [
                                       Text("Rider's reviews"),
                                     ],
                                   ),
