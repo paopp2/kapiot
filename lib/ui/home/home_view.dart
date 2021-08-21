@@ -34,23 +34,20 @@ class HomeView extends HookConsumerWidget {
               )
             ],
           ),
-          body: Stack(
+          body: Column(
             children: [
-              GoogleMapSection(
-                model: model,
-                camPosition: cameraPosition,
-              ),
-              Positioned(
-                bottom: 20,
-                left: 20,
-                right: 20,
-                child: RouteConfigPanel(
-                  constraints: constraints,
+              Expanded(
+                child: GoogleMapSection(
                   model: model,
-                  isRider: isRider,
-                  riderCount: riderCount,
-                  dateTime: dateTime,
+                  camPosition: cameraPosition,
                 ),
+              ),
+              RouteConfigPanel(
+                constraints: constraints,
+                model: model,
+                isRider: isRider,
+                riderCount: riderCount,
+                dateTime: dateTime,
               ),
             ],
           ),
