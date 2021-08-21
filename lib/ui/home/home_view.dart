@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
-import 'package:kapiot/logic/home/home_view_state.dart';
 
 import 'components/google_map_section.dart';
 import 'components/route_config_panel.dart';
@@ -13,10 +12,6 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(homeViewModelProvider);
-    final cameraPosition = ref.watch(cameraPositionProvider).state;
-    final isRider = ref.watch(isRiderSelectedProvider).state;
-    final riderCount = ref.watch(riderCountProvider).state;
-    final dateTime = ref.watch(dateTimeProvider).state;
 
     useEffect(() {
       model.initState();
@@ -36,18 +31,10 @@ class HomeView extends HookConsumerWidget {
           ),
           body: Column(
             children: [
-              Expanded(
-                child: GoogleMapSection(
-                  model: model,
-                  camPosition: cameraPosition,
-                ),
-              ),
+              Expanded(child: GoogleMapSection(model: model)),
               RouteConfigPanel(
                 constraints: constraints,
                 model: model,
-                isRider: isRider,
-                riderCount: riderCount,
-                dateTime: dateTime,
               ),
             ],
           ),

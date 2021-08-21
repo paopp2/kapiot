@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
+import 'package:kapiot/logic/home/home_view_state.dart';
 
-class RouteConfigPanel extends StatelessWidget {
+class RouteConfigPanel extends HookConsumerWidget {
   const RouteConfigPanel({
     Key? key,
     required this.constraints,
     required this.model,
-    required this.isRider,
-    required this.riderCount,
-    required this.dateTime,
   }) : super(key: key);
 
   final BoxConstraints constraints;
   final HomeViewModel model;
-  final bool isRider;
-  final int riderCount;
-  final DateTime dateTime;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isRider = ref.watch(isRiderSelectedProvider).state;
+    final riderCount = ref.watch(riderCountProvider).state;
+    final dateTime = ref.watch(dateTimeProvider).state;
+
     return Container(
       height: constraints.maxHeight * 0.43,
       color: Colors.white,
