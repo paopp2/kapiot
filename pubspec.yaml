@@ -21,6 +21,7 @@ dependencies:
   geolocator: ^7.4.0
   flutter_hooks: ^0.18.0
   sliding_up_panel: ^2.0.0+1
+  font_awesome_flutter: ^9.1.0
 
 dev_dependencies:
   build_runner: ^2.1.1
