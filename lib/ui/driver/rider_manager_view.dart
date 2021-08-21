@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 
+import 'components/requesting_riders_panel.dart';
+import 'components/stop_point_panel.dart';
+
 class RiderManagerView extends HookConsumerWidget {
   const RiderManagerView({Key? key}) : super(key: key);
 
@@ -11,75 +14,20 @@ class RiderManagerView extends HookConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {},
+            label: const Text("Map View"),
+            icon: const Icon(Icons.map),
+          ),
           body: Container(
             color: const Color(0x7679ADFf),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 50.0),
-                  const Text("Next Stop"),
-                  Expanded(
-                      flex: 2,
-                      child: ListView.builder(
-                          itemCount: model.acceptedRidersStopPoints.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  const CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, right: 20.0),
-                                    child: Text(
-                                        model.acceptedRidersStopPoints[index]
-                                            .toString(),
-                                        style: const TextStyle(fontSize: 13.0)),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('Accept'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          })),
-                  Expanded(
-                    flex: 4,
-                    child: Center(
-                      //*! Provider is not final. Temporary only.
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: model.requestingRiders.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  const CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, right: 20.0),
-                                    child: Text(model.requestingRiders[index],
-                                        style: const TextStyle(fontSize: 20.0)),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('Accept'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
-                    ),
-                  ),
+                  const StopPointPanel(),
+                  RequestingRidersPanel(model: model),
                 ],
               ),
             ),
