@@ -11,10 +11,10 @@ final currentUserProvider = Provider.autoDispose<KapiotUser?>((ref) {
   if (firebaseUser != null) {
     return KapiotUser(
       id: firebaseUser.uid,
-      email: firebaseUser.email,
       displayName: firebaseUser.displayName,
-      photoUrl: firebaseUser.photoURL,
+      email: firebaseUser.email,
       phoneNumber: firebaseUser.phoneNumber,
+      photoUrl: firebaseUser.photoURL,
     );
   } else {
     return null;
