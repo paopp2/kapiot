@@ -49,22 +49,14 @@ class RequestDriversView extends StatelessWidget {
                                 margin: const EdgeInsets.all(10),
                                 child: Column(
                                   children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                    const SizedBox(height: 10),
                                     const CircleAvatar(
                                       radius: 40,
                                       backgroundColor: Colors.blue,
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Text(
-                                      'Paolo Pepito',
-                                    ),
-                                    const SizedBox(
-                                      height: 70,
-                                    ),
+                                    const SizedBox(height: 10),
+                                    const Text('Paolo Pepito'),
+                                    const SizedBox(height: 70),
                                     Container(
                                       height: 35,
                                       width: 180,
