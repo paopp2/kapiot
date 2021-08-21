@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/auth_service.dart';
 import 'package:kapiot/data/services/location_service.dart';
@@ -28,6 +29,8 @@ class HomeViewModel {
   final Reader read;
   final AuthService authService;
   final HomeMapController mapController;
+  final tecStartLoc = TextEditingController();
+  final tecEndLoc = TextEditingController();
   late final CameraPosition initialCameraPosition;
 
   Future<void> initState() async {
@@ -71,6 +74,47 @@ class HomeViewModel {
         time.minute,
       );
     }
+  }
+
+  void showSuggestions({required bool forStartLoc}) {
+    if (forStartLoc) {
+      read(isStartLocFocusedProvider).state = true;
+      read(isEndLocFocusedProvider).state = false;
+    } else {
+      read(isEndLocFocusedProvider).state = true;
+      read(isStartLocFocusedProvider).state = false;
+    }
+  }
+
+  Future<void> getAutoComplete(String? value) async {
+    final googlePlace = GooglePlace("AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI");
+    final result = await googlePlace.autocomplete.get(value ?? '');
+    final predictions = result?.predictions ?? [];
+    read(predictionsProvider).state = predictions;
+  }
+
+  Future<void> getFullDetails(String placeId) async {
+    final googlePlace = GooglePlace("AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI");
+    final details = await googlePlace.details.get(placeId);
+    print(details);
+  }
+
+  void chooseSuggestion({
+    required int index,
+    required bool forStartLoc,
+  }) {
+    final predictions = read(predictionsProvider).state;
+    final chosenPrediction = predictions[index];
+    final chosenSuggestion = chosenPrediction.description ?? '';
+    if (forStartLoc) {
+      tecStartLoc.text = chosenSuggestion;
+      read(isStartLocFocusedProvider).state = false;
+    } else {
+      tecEndLoc.text = chosenSuggestion;
+      read(isEndLocFocusedProvider).state = false;
+    }
+    final placeId = chosenPrediction.placeId;
+    if (placeId != null) getFullDetails(placeId);
   }
 
   void dispose() {}
