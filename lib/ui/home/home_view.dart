@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
-import 'package:kapiot/logic/home/home_view_state.dart';
+
+import 'components/google_map_section.dart';
+import 'components/route_config_panel.dart';
 
 class HomeView extends HookConsumerWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -11,7 +12,6 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(homeViewModelProvider);
-    final startLocation = ref.watch(startLocationProvider).state;
 
     useEffect(() {
       model.initState();
@@ -21,25 +21,23 @@ class HomeView extends HookConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: model.signOut,
-            label: const Text('Sign out'),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.logout),
+                onPressed: model.signOut,
+              )
+            ],
           ),
-          body: (startLocation == null)
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircularProgressIndicator(),
-                      Text("Fetching current location..."),
-                    ],
-                  ),
-                )
-              : GoogleMap(
-                  mapType: MapType.hybrid,
-                  initialCameraPosition: model.initialPosition,
-                  onMapCreated: model.onMapCreated,
-                ),
+          body: Column(
+            children: [
+              Expanded(child: GoogleMapSection(model: model)),
+              RouteConfigPanel(
+                constraints: constraints,
+                model: model,
+              ),
+            ],
+          ),
         );
       },
     );

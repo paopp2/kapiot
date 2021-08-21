@@ -1,46 +1,77 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/auth_service.dart';
 import 'package:kapiot/data/services/location_service.dart';
+import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 
 final homeViewModelProvider = Provider.autoDispose(
   (ref) => HomeViewModel(
     read: ref.read,
-    locationService: ref.watch(locationServiceProvider),
     authService: ref.watch(authServiceProvider),
+    mapController: HomeMapController(
+      read: ref.read,
+      locationService: ref.watch(locationServiceProvider),
+    ),
   ),
 );
 
 class HomeViewModel {
   HomeViewModel({
     required this.read,
-    required this.locationService,
     required this.authService,
+    required this.mapController,
   });
   final Reader read;
-  final LocationService locationService;
   final AuthService authService;
-  final Completer<GoogleMapController> _controller = Completer();
-  late final CameraPosition initialPosition;
+  final HomeMapController mapController;
+  late final CameraPosition initialCameraPosition;
 
   Future<void> initState() async {
-    final currentLoc = await locationService.getLocation();
-    read(startLocationProvider).state = currentLoc;
-    initialPosition = CameraPosition(
-      target: LatLng(currentLoc.latitude, currentLoc.longitude),
-      bearing: 192.8334901395799,
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414,
-    );
+    await mapController.initializeMap();
   }
 
-  void onMapCreated(GoogleMapController gmapController) =>
-      _controller.complete(gmapController);
-
   Future<void> signOut() async => await authService.signOutGoogle();
+
+  void toggleIsRider(bool valueHasChanged) {
+    if (valueHasChanged) {
+      final currentIsRider = read(isRiderSelectedProvider).state;
+      read(isRiderSelectedProvider).state = !currentIsRider;
+    }
+  }
+
+  void incRiderCount() => read(riderCountProvider).state++;
+
+  void decRiderCount() {
+    if (read(riderCountProvider).state > 1) {
+      read(riderCountProvider).state--;
+    }
+  }
+
+  void getDateTime(BuildContext context) async {
+    final date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2050),
+      initialDate: DateTime.now(),
+    );
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (date != null && time != null) {
+      read(dateTimeProvider).state = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
+    }
+  }
 
   void dispose() {}
 }
