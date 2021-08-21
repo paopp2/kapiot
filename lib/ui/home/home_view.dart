@@ -12,7 +12,7 @@ class HomeView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.read(homeViewModelProvider);
+    final model = ref.watch(homeViewModelProvider);
     final cameraPosition = ref.watch(cameraPositionProvider).state;
     final isRider = ref.watch(isRiderSelectedProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
