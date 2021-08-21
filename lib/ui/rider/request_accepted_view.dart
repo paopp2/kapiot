@@ -1,127 +1,140 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class RequestAcceptedView extends StatelessWidget {
   const RequestAcceptedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final panelHeightClosed = MediaQuery.of(context).size.height * 0.1;
+    final panelHeightOpened = MediaQuery.of(context).size.height * 0.55;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          body: Container(
-            color: Colors.yellow,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 400,
-                  width: double.infinity,
-                ),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(35),
-                            topRight: Radius.circular(35),
-                          ),
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Column(
-                            children: const [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              CircleAvatar(
-                                radius: 40,
-                                backgroundColor: Colors.blue,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Paolo Pepito',
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                            width: double.infinity,
-                            height: 190,
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(35),
-                                topRight: Radius.circular(35),
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Text("Your co passengers for this ride"),
-                                Expanded(
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child: const CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: Colors.blue,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child: const CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: Colors.blue,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  height: 90,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(35),
-                                      topRight: Radius.circular(35),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: const [
-                                      Text("Rider's reviews"),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            body: SlidingUpPanel(
+          minHeight: panelHeightClosed,
+          maxHeight: panelHeightOpened,
+          parallaxEnabled: true,
+          parallaxOffset: 0.5,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+          body: Expanded(
+            child: Container(
+              child: Center(
+                child: Text("Here lies Map"),
+              ),
             ),
           ),
-        );
+          panelBuilder: (controller) => PanelWidget(
+            controller: controller,
+          ),
+        ));
       },
     );
   }
 }
+
+class PanelWidget extends StatelessWidget {
+  final ScrollController controller;
+
+  const PanelWidget({Key? key, required this.controller}) : super(key: key);
+  @override
+  Widget build(BuildContext context) => Container(
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            buildDragHandle(),
+            Container(
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  Text("Ride Information"),
+                  SizedBox(height: 25),
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.blue,
+                  ),
+                  SizedBox(height: 10),
+                  Text('Paolo Pepito')
+                ],
+              ),
+            ),
+            Expanded(
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)),
+                        color: Colors.grey.shade200),
+                    height: 210,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text("Your co passengers for this ride"),
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              child: const CircleAvatar(
+                                radius: 30,
+                                backgroundColor: Colors.blue,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              child: const CircleAvatar(
+                                radius: 30,
+                                backgroundColor: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 90,
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      children: const [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text("Rider's reviews"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+}
+
+Widget buildDragHandle() => Container(
+      width: 40,
+      height: 5,
+      decoration: BoxDecoration(
+          color: Colors.grey[300], borderRadius: BorderRadius.circular(12)),
+    );
