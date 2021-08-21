@@ -1,5 +1,4 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final cameraPositionProvider =
@@ -17,10 +16,5 @@ final isStartLocFocusedProvider =
 
 final isEndLocFocusedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
-final placeSuggestionsProvider = StateProvider.autoDispose<List<String>>((ref) {
-  final predictions = ref.watch(predictionsProvider).state;
-  return predictions.map((p) => p.description ?? '').toList();
-});
-
-final predictionsProvider =
-    StateProvider.autoDispose<List<AutocompletePrediction>>((ref) => []);
+final placeSuggestionsProvider =
+    StateProvider.autoDispose<List<String?>>((ref) => []);

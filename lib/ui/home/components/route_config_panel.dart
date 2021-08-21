@@ -50,8 +50,8 @@ class RouteConfigPanel extends HookConsumerWidget {
                 controller: model.tecStartLoc,
                 textAlign: TextAlign.center,
                 decoration: const InputDecoration(hintText: "Start location"),
-                onChanged: model.getAutoComplete,
-                onTap: () => model.showSuggestions(forStartLoc: true),
+                onChanged: model.updateSuggestions,
+                onTap: () => model.expandSuggestions(forStartLoc: true),
               ),
               Visibility(
                 child: SizedBox(
@@ -60,10 +60,11 @@ class RouteConfigPanel extends HookConsumerWidget {
                     child: ListView.builder(
                       itemCount: placeSuggestions.length,
                       itemBuilder: (context, index) {
+                        final suggestion = placeSuggestions[index] ?? "";
                         return ListTile(
-                          title: Text(placeSuggestions[index]),
+                          title: Text(suggestion),
                           onTap: () => model.pickSuggestion(
-                            index: index,
+                            pickedSuggestion: suggestion,
                             forStartLoc: true,
                           ),
                         );
@@ -75,10 +76,10 @@ class RouteConfigPanel extends HookConsumerWidget {
               ),
               TextField(
                 controller: model.tecEndLoc,
-                onChanged: model.getAutoComplete,
+                onChanged: model.updateSuggestions,
                 textAlign: TextAlign.center,
                 decoration: const InputDecoration(hintText: "End location"),
-                onTap: () => model.showSuggestions(forStartLoc: false),
+                onTap: () => model.expandSuggestions(forStartLoc: false),
               ),
               Visibility(
                 child: SizedBox(
@@ -87,10 +88,11 @@ class RouteConfigPanel extends HookConsumerWidget {
                     child: ListView.builder(
                       itemCount: placeSuggestions.length,
                       itemBuilder: (context, index) {
+                        final suggestion = placeSuggestions[index] ?? "";
                         return ListTile(
-                          title: Text(placeSuggestions[index]),
+                          title: Text(suggestion),
                           onTap: () => model.pickSuggestion(
-                            index: index,
+                            pickedSuggestion: suggestion,
                             forStartLoc: false,
                           ),
                         );
