@@ -19,7 +19,7 @@ class LoginView extends HookConsumerWidget {
       builder: (context, constraints) {
         return Scaffold(
           body: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
