@@ -1,6 +1,7 @@
 import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// TODO: Exposed API key! Hide in production
 const googleApiKey = "AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI";
 
 final placesServiceProvider =
