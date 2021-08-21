@@ -8,12 +8,14 @@ class RouteConfigPanel extends StatelessWidget {
     required this.model,
     required this.isRider,
     required this.riderCount,
+    required this.dateTime,
   }) : super(key: key);
 
   final BoxConstraints constraints;
   final HomeViewModel model;
   final bool isRider;
   final int riderCount;
+  final DateTime dateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +51,8 @@ class RouteConfigPanel extends StatelessWidget {
               decoration: InputDecoration(hintText: "End location"),
             ),
             TextButton(
-              child: const Text("Pick a time for the trip"),
-              onPressed: () => showDatePicker(
-                context: context,
-                firstDate: DateTime(1970),
-                lastDate: DateTime(2050),
-                initialDate: DateTime.now(),
-              ),
+              child: Text("$dateTime"),
+              onPressed: () => model.getDateTime(context),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

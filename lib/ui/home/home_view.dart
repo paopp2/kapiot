@@ -16,6 +16,7 @@ class HomeView extends HookConsumerWidget {
     final cameraPosition = ref.watch(cameraPositionProvider).state;
     final isRider = ref.watch(isRiderSelectedProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
+    final dateTime = ref.watch(dateTimeProvider).state;
 
     useEffect(() {
       model.initState();
@@ -48,6 +49,7 @@ class HomeView extends HookConsumerWidget {
                   model: model,
                   isRider: isRider,
                   riderCount: riderCount,
+                  dateTime: dateTime,
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/auth_service.dart';
@@ -47,6 +48,28 @@ class HomeViewModel {
   void decRiderCount() {
     if (read(riderCountProvider).state > 1) {
       read(riderCountProvider).state--;
+    }
+  }
+
+  void getDateTime(BuildContext context) async {
+    final date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2050),
+      initialDate: DateTime.now(),
+    );
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (date != null && time != null) {
+      read(dateTimeProvider).state = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
     }
   }
 

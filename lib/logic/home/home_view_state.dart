@@ -7,3 +7,6 @@ final cameraPositionProvider =
 final isRiderSelectedProvider = StateProvider.autoDispose<bool>((ref) => true);
 
 final riderCountProvider = StateProvider.autoDispose<int>((ref) => 1);
+
+final dateTimeProvider =
+    StateProvider.autoDispose<DateTime>((ref) => DateTime.now());
