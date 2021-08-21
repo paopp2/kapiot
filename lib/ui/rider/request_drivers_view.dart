@@ -79,16 +79,12 @@ class PanelWidget extends StatelessWidget {
                           const SizedBox(height: 10),
                           const Text('Paolo Pepito'),
                           const SizedBox(height: 70),
-                          Container(
-                            height: 35,
-                            width: 180,
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                            child: const Center(child: Text("Hail ride")),
-                          )
+                          ElevatedButton(
+                            onPressed: () {
+                              print("hailed");
+                            },
+                            child: Text("Hail Ride"),
+                          ),
                         ],
                       ),
                     ),
@@ -106,16 +102,12 @@ class PanelWidget extends StatelessWidget {
                           const SizedBox(height: 10),
                           const Text('Charles Ausejo'),
                           const SizedBox(height: 70),
-                          Container(
-                            height: 35,
-                            width: 180,
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                            child: const Center(child: Text("Hail ride")),
-                          )
+                          ElevatedButton(
+                            onPressed: () {
+                              print("hailed");
+                            },
+                            child: Text("Hail Ride"),
+                          ),
                         ],
                       ),
                     ),
@@ -133,16 +125,12 @@ class PanelWidget extends StatelessWidget {
                           const SizedBox(height: 10),
                           const Text('Blithe Gonzales'),
                           const SizedBox(height: 70),
-                          Container(
-                            height: 35,
-                            width: 180,
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                            child: const Center(child: Text("Hail ride")),
-                          )
+                          ElevatedButton(
+                            onPressed: () {
+                              print("hailed");
+                            },
+                            child: Text("Hail Ride"),
+                          ),
                         ],
                       ),
                     ),
