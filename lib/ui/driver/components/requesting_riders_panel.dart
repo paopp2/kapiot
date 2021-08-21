@@ -12,36 +12,42 @@ class RequestingRidersPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        children: [
-          const Text("REQUESTING RIDERS"),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: model.requestingRiders.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
+      child: Container(
+        color: Colors.amber,
+        child: Column(
+          children: [
+            const Text("REQUESTING RIDERS"),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: model.requestingRiders.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Text(model.requestingRiders[index],
+                              style: const TextStyle(fontSize: 20.0)),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Accept'),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                      child: Text(model.requestingRiders[index],
-                          style: const TextStyle(fontSize: 20.0)),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Accept'),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
