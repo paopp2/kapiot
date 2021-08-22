@@ -26,6 +26,7 @@ class GoogleMapSection extends HookConsumerWidget {
             initialCameraPosition: camPosition,
             onMapCreated: model.mapController.onMapCreated,
             markers: markers,
-            polylines: polylines);
+            polylines: polylines,
+          );
   }
 }
