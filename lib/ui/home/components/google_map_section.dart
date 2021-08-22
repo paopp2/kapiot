@@ -17,7 +17,8 @@ class GoogleMapSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final camPosition = ref.watch(cameraPositionProvider).state;
-
+    final marker = ref.watch(sourceAndDestMarkersProvider).state;
+    final polylines = ref.watch(polylinesMapProvider).state;
     return (camPosition == null)
         ? const LoadingScreen(text: "Fetching current location...")
         : GoogleMap(

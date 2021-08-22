@@ -27,7 +27,7 @@ final endLocProvider =
     StateProvider.autoDispose<KapiotLocation?>((ref) => null);
 // TODO: Refactor as one source and destination?
 final sourceAndDestMarkersProvider =
-    StateProvider.autoDispose<Set<Marker>?>((ref) => {});
+    StateProvider.autoDispose<Set<Marker>>((ref) => {});
 
 final sourceLatLngProvider = StateProvider.autoDispose<LatLng?>((ref) => null);
 final destinationLatLngProvider =
@@ -36,5 +36,4 @@ final destinationLatLngProvider =
 final polylineCoordinatesProvider =
     StateProvider.autoDispose<List<LatLng>>((ref) => []);
 
-final polylinesMapProvider =
-    StateProvider.autoDispose<Map<PolylineId, Polyline>>((ref) => {});
+final polylinesProvider = StateProvider.autoDispose<Set<Polyline>>((ref) => {});

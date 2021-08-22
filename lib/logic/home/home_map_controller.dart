@@ -54,7 +54,8 @@ class HomeMapController {
         polylineId: id,
         color: Colors.red,
         points: read(polylineCoordinatesProvider).state);
-    read(polylinesMapProvider).state[id] = polyline;
+    read(polylinesProvider).state.add(polyline);
+    //read(polylinesMapProvider).state[id] = polyline;
   }
 
   Future<void> getPolylines() async {
