@@ -3,14 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/services/auth_service.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final homeViewModelProvider = Provider.autoDispose(
   (ref) => HomeViewModel(
     read: ref.read,
+    currentUser: ref.watch(currentUserProvider),
     authService: ref.watch(authServiceProvider),
     mapController: HomeMapController(
       read: ref.read,
@@ -22,11 +25,13 @@ final homeViewModelProvider = Provider.autoDispose(
 class HomeViewModel {
   HomeViewModel({
     required this.read,
+    required this.currentUser,
     required this.authService,
     required this.mapController,
   });
   final Reader read;
   final AuthService authService;
+  final KapiotUser? currentUser;
   final HomeMapController mapController;
   late final CameraPosition initialCameraPosition;
 
