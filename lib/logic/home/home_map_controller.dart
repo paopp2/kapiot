@@ -41,10 +41,15 @@ class HomeMapController {
   void setMapPins() {
     Set<Marker> _markers = {};
     // source pin
-    _markers
-        .add(Marker(markerId: MarkerId('sourcePin'), position: sourceLocation));
+    _markers.add(Marker(
+        markerId: MarkerId('sourcePin'),
+        position: sourceLocation,
+        icon: BitmapDescriptor.defaultMarker));
     // destination pin
-    _markers.add(Marker(markerId: MarkerId('destPin'), position: destLocation));
+    _markers.add(Marker(
+        markerId: MarkerId('destPin'),
+        position: destLocation,
+        icon: BitmapDescriptor.defaultMarkerWithHue(90)));
     read(sourceAndDestMarkersProvider).state = _markers;
   }
 

@@ -17,14 +17,15 @@ class GoogleMapSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final camPosition = ref.watch(cameraPositionProvider).state;
-    final marker = ref.watch(sourceAndDestMarkersProvider).state;
-    final polylines = ref.watch(polylinesMapProvider).state;
+    final markers = ref.watch(sourceAndDestMarkersProvider).state;
+    final polylines = ref.watch(polylinesProvider).state;
     return (camPosition == null)
         ? const LoadingScreen(text: "Fetching current location...")
         : GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: camPosition,
             onMapCreated: model.mapController.onMapCreated,
-          );
+            markers: markers,
+            polylines: polylines);
   }
 }
