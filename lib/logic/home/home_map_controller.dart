@@ -28,7 +28,6 @@ class HomeMapController {
   final sourceLocation = LatLng(37.43296265331129, -122.08832357078792);
   final destLocation = LatLng(37.423395, -122.072706);
 
-  // TODO: Add the Set<Marker> on marrker and Set<Polyline> on polylines
   Future<void> initializeMap() async {
     final currentLoc = await locationService.getLocation();
     read(cameraPositionProvider).state = CameraPosition(
@@ -58,7 +57,7 @@ class HomeMapController {
     read(polylinesMapProvider).state[id] = polyline;
   }
 
-  void getPolylines() async {
+  Future<void> getPolylines() async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       googleApiKey,
       PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
