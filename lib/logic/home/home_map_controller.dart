@@ -54,9 +54,8 @@ class HomeMapController {
   }
 
   void addPolyline() {
-    PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
-        polylineId: id,
+        polylineId: PolylineId("poly"),
         color: Colors.red,
         points: read(polylineCoordinatesProvider).state);
     read(polylinesProvider).state.add(polyline);
@@ -68,6 +67,7 @@ class HomeMapController {
       googleApiKey,
       PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
       PointLatLng(destLocation.latitude, destLocation.longitude),
+      travelMode: TravelMode.driving,
     );
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) {
