@@ -20,11 +20,12 @@ class HomeMapController {
   final PolylinePoints polylinePoints = PolylinePoints();
 
   //! TEMPORARY VALUES
-  final sourceLocation = LatLng(37.43296265331129, -122.08832357078792);
-  final destLocation = LatLng(37.423395, -122.072706);
+  final sourceLocation = const LatLng(37.43296265331129, -122.08832357078792);
+  final destLocation = const LatLng(37.423395, -122.072706);
 
   Future<void> initializeMap() async {
-    final currentLoc = await locationService.getLocation();
+    var temp = await locationService.getLocation();
+    const currentLoc = LatLng(37.43296265331129, -122.08832357078792);
     read(cameraPositionProvider).state = CameraPosition(
       target: LatLng(currentLoc.latitude, currentLoc.longitude),
       bearing: 192.8334901395799,
@@ -37,24 +38,15 @@ class HomeMapController {
     Set<Marker> _markers = {};
     // source pin
     _markers.add(Marker(
-        markerId: MarkerId('sourcePin'),
+        markerId: const MarkerId('sourcePin'),
         position: sourceLocation,
         icon: BitmapDescriptor.defaultMarker));
     // destination pin
     _markers.add(Marker(
-        markerId: MarkerId('destPin'),
+        markerId: const MarkerId('destPin'),
         position: destLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(90)));
     read(sourceAndDestMarkersProvider).state = _markers;
-  }
-
-  void addPolyline() {
-    Polyline polyline = Polyline(
-        polylineId: PolylineId("poly"),
-        color: Colors.red,
-        points: read(polylineCoordinatesProvider).state);
-    read(polylinesProvider).state.add(polyline);
-    //read(polylinesMapProvider).state[id] = polyline;
   }
 
   Future<void> getPolylines() async {
@@ -65,13 +57,23 @@ class HomeMapController {
       travelMode: TravelMode.driving,
     );
     if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
-        read(polylineCoordinatesProvider)
-            .state
-            .add(LatLng(point.latitude, point.longitude));
-      });
+      List<LatLng> polylineCoordinates = [];
+      for (var point in result.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+      addPolyline(polylineCoordinates);
     }
-    addPolyline();
+  }
+
+  void addPolyline(List<LatLng> polylineCoordinates) {
+    final polylines = read(polylinesProvider).state;
+    Polyline polyline = Polyline(
+      polylineId: const PolylineId("poly"),
+      color: Colors.red,
+      points: polylineCoordinates,
+    );
+    polylines.add(polyline);
+    read(polylinesProvider).state = polylines;
   }
 
   void onMapCreated(GoogleMapController gmapController) async {
