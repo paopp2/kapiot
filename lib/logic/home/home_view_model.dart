@@ -135,5 +135,8 @@ class HomeViewModel {
     }
   }
 
-  void dispose() {}
+  void dispose() {
+    tecStartLoc.dispose();
+    tecEndLoc.dispose();
+  }
 }
