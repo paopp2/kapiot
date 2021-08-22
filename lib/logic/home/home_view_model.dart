@@ -15,10 +15,11 @@ final homeViewModelProvider = Provider.autoDispose(
     read: ref.read,
     authService: ref.watch(authServiceProvider),
     locationService: ref.watch(locationServiceProvider),
-    placesService: ref.watch(placesServiceProvider),
+    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     mapController: HomeMapController(
       read: ref.read,
       locationService: ref.watch(locationServiceProvider),
+      googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     ),
   ),
 );
@@ -28,7 +29,7 @@ class HomeViewModel {
     required this.read,
     required this.authService,
     required this.locationService,
-    required this.placesService,
+    required this.googleMapsApiServices,
     required this.mapController,
   });
   final Reader read;
@@ -37,21 +38,18 @@ class HomeViewModel {
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
   final LocationService locationService;
-  final PlacesService placesService;
+  final GoogleMapsApiServices googleMapsApiServices;
   late final CameraPosition initialCameraPosition;
 
   Future<void> initState() async {
     await mapController.initializeMap();
-    final camPosition = read(cameraPositionProvider).state;
-    if (camPosition != null) {
-      final currentLoc = KapiotLocation(
-        lat: camPosition.target.latitude,
-        lng: camPosition.target.longitude,
-      );
+    final startLocation = read(startLocProvider).state;
+    if (startLocation != null) {
       final currentPlace =
-          await locationService.getAddressFromLocation(currentLoc);
+          await locationService.getAddressFromLocation(startLocation);
       tecStartLoc.text = currentPlace ?? '';
-      read(startLocProvider).state = currentLoc.copyWith(address: currentPlace);
+      read(startLocProvider).state =
+          startLocation.copyWith(address: currentPlace);
     }
   }
 
@@ -105,8 +103,8 @@ class HomeViewModel {
   }
 
   void updateSuggestions(String? value) async {
-    final suggestions =
-        await placesService.getAutocompleteSuggestions(value ?? '');
+    final suggestions = await googleMapsApiServices.places
+        .getAutocompleteSuggestions(value ?? '');
     read(placeSuggestionsProvider).state = suggestions;
   }
 
@@ -126,12 +124,25 @@ class HomeViewModel {
       read(isStartLocFocusedProvider).state = false;
     } else {
       tecEndLoc.text = pickedSuggestion;
-      read(endLocProvider).state = KapiotLocation(
+      final endLocation = KapiotLocation(
         lat: location.lat,
         lng: location.lng,
         address: pickedSuggestion,
       );
+      read(endLocProvider).state = endLocation;
       read(isEndLocFocusedProvider).state = false;
+    }
+    showRouteIfBothLocationsSet();
+  }
+
+  void showRouteIfBothLocationsSet() {
+    final startLocation = read(startLocProvider).state;
+    final endLocation = read(endLocProvider).state;
+    if (startLocation != null && endLocation != null) {
+      mapController.showRoute(
+        start: startLocation,
+        end: endLocation,
+      );
     }
   }
 
