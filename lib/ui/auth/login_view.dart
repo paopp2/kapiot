@@ -25,16 +25,18 @@ class LoginView extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Spacer(
+                  const Spacer(
                     flex: 3,
                   ),
-                  GoogleAuthWidget(),
-                  SizedBox(height: 12),
-                  Text(
+                  GoogleAuthWidget(
+                    model: model,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
                     "Login to continue",
                     style: TextStyle(fontSize: 16),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   // ElevatedButton.icon(
                   //   style: ElevatedButton.styleFrom(
                   //     primary: Colors.white,
@@ -57,11 +59,17 @@ class LoginView extends HookConsumerWidget {
 }
 
 class GoogleAuthWidget extends StatelessWidget {
+  const GoogleAuthWidget({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+  final LoginViewModel model;
+
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         child: OutlinedButton.icon(
-          label: Text(
+          label: const Text(
             "Sign in with Google",
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -69,24 +77,22 @@ class GoogleAuthWidget extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.google,
             color: Colors.red,
           ),
-          onPressed: () {
-            print("insert here model.signInWithGoogle");
-          },
+          onPressed: model.signInWithGoogle,
           style: ButtonStyle(
             padding: MaterialStateProperty.all(
-              EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
             ),
             side: MaterialStateProperty.all(
-              BorderSide(width: 1),
+              const BorderSide(width: 1),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
-                side: BorderSide(color: Colors.black),
+                side: const BorderSide(color: Colors.black),
               ),
             ),
           ),
