@@ -19,62 +19,85 @@ class RouteConfigPanel extends HookConsumerWidget {
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
 
-    return Container(
-      height: constraints.maxHeight * 0.43,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ChoiceChip(
-                  label: const Text("Driver"),
-                  selected: !isRider,
-                  onSelected: model.toggleIsRider,
-                ),
-                ChoiceChip(
-                  label: const Text("Rider"),
-                  selected: isRider,
-                  onSelected: model.toggleIsRider,
-                ),
-              ],
-            ),
-            const TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(hintText: "Start location"),
-            ),
-            const TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(hintText: "End location"),
-            ),
-            TextButton(
-              child: Text("$dateTime"),
-              onPressed: () => model.getDateTime(context),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton(
-                  onPressed: model.decRiderCount,
-                  child: const Icon(Icons.remove),
-                ),
-                Text("$riderCount"),
-                OutlinedButton(
-                  onPressed: model.incRiderCount,
-                  child: const Icon(Icons.add),
-                ),
-              ],
-            ),
-            ElevatedButton(
-              child: const Text("Go to Lake"),
-              onPressed: model.mapController.gotoLake,
-            ),
-          ],
+    return Column(
+      children: [
+        SizedBox(
+          height: 10,
         ),
-      ),
+        buildDragHandle(),
+        SizedBox(
+          height: 15,
+        ),
+        Text(
+          "CONFIGURATION",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 23, letterSpacing: 1),
+        ),
+        Container(
+          height: constraints.maxHeight * 0.43,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ChoiceChip(
+                      label: const Text("Driver"),
+                      selected: !isRider,
+                      onSelected: model.toggleIsRider,
+                    ),
+                    ChoiceChip(
+                      label: const Text("Rider"),
+                      selected: isRider,
+                      onSelected: model.toggleIsRider,
+                    ),
+                  ],
+                ),
+                const TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(hintText: "Start location"),
+                ),
+                const TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(hintText: "End location"),
+                ),
+                TextButton(
+                  child: Text("$dateTime"),
+                  onPressed: () => model.getDateTime(context),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    OutlinedButton(
+                      onPressed: model.decRiderCount,
+                      child: const Icon(Icons.remove),
+                    ),
+                    Text("$riderCount"),
+                    OutlinedButton(
+                      onPressed: model.incRiderCount,
+                      child: const Icon(Icons.add),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                  child: const Text("Go to Lake"),
+                  onPressed: model.mapController.gotoLake,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
+
+Widget buildDragHandle() => Container(
+      width: 40,
+      height: 5,
+      decoration: BoxDecoration(
+          color: Colors.grey[300], borderRadius: BorderRadius.circular(12)),
+    );
