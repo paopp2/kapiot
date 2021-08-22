@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/auth/login_view_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:kapiot/ui/home/components/google_auth_widget.dart';
 
 class LoginView extends HookConsumerWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -24,17 +25,18 @@ class LoginView extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                      minimumSize: const Size(double.infinity, 50),
-                    ),
-                    // icon: const Icon(FontAwesomeIcons.google),
-                    icon: const Icon(Icons.enhanced_encryption_outlined),
-                    label: const Text('Sign In with Google'),
-                    onPressed: model.signInWithGoogle,
+                  const Spacer(
+                    flex: 3,
                   ),
+                  GoogleAuthWidget(
+                    model: model,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    "Login to continue",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const Spacer(),
                 ],
               ),
             ),
