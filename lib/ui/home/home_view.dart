@@ -58,8 +58,8 @@ class HomeView extends HookConsumerWidget {
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
-  final constraints;
-  final model;
+  final BoxConstraints constraints;
+  final HomeViewModel model;
   const PanelWidget(
       {Key? key,
       required this.controller,
