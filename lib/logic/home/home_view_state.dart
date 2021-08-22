@@ -32,3 +32,6 @@ final sourceAndDestMarkersProvider =
 final sourceLatLngProvider = StateProvider.autoDispose<LatLng?>((ref) => null);
 final destinationLatLngProvider =
     StateProvider.autoDispose<LatLng?>((ref) => null);
+
+final polylineCoordinatesProvider =
+    StateProvider.autoDispose<List<LatLng>>((ref) => []);
