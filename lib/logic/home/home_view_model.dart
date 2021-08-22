@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/auth_service.dart';
@@ -9,6 +8,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final homeViewModelProvider = Provider.autoDispose(
   (ref) => HomeViewModel(
@@ -44,10 +44,9 @@ class HomeViewModel {
     await mapController.initializeMap();
     final camPosition = read(cameraPositionProvider).state;
     if (camPosition != null) {
-      final currentLoc = Location(
-        latitude: camPosition.target.latitude,
-        longitude: camPosition.target.longitude,
-        timestamp: DateTime.now(),
+      final currentLoc = KapiotLocation(
+        lat: camPosition.target.latitude,
+        lng: camPosition.target.longitude,
       );
       final currentPlace =
           await locationService.getAddressFromLocation(currentLoc);

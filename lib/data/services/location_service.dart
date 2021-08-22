@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final locationServiceProvider =
     Provider.autoDispose((ref) => LocationService());
@@ -33,15 +34,19 @@ class LocationService {
     return await Geolocator.getCurrentPosition();
   }
 
-  Future<Location> getLocationFromAddress(String address) async {
+  Future<KapiotLocation> getLocationFromAddress(String address) async {
     final locationList = await locationFromAddress(address);
-    return locationList[0]; // Return the first location
+    final firstGeoLocation = locationList[0]; // Return the first location
+    return KapiotLocation(
+      lat: firstGeoLocation.latitude,
+      lng: firstGeoLocation.longitude,
+    );
   }
 
-  Future<String?> getAddressFromLocation(Location location) async {
+  Future<String?> getAddressFromLocation(KapiotLocation location) async {
     final placemarks = await placemarkFromCoordinates(
-      location.latitude,
-      location.longitude,
+      location.lat,
+      location.lng,
     );
     final p = placemarks[0];
     return "${p.name}, ${p.locality}, ${p.subAdministrativeArea}, ${p.administrativeArea}, ${p.country}";
