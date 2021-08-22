@@ -34,12 +34,16 @@ class HomeMapController {
     );
   }
 
-  void setMapPins(LatLng source, LatLng destination) {
+  void setMapPins() {
     Set<Marker> _markers = {};
     // source pin
-    _markers.add(Marker(markerId: MarkerId('sourcePin'), position: source));
+    _markers.add(Marker(
+        markerId: MarkerId('sourcePin'),
+        position: read(sourceLatLngProvider).state as LatLng));
     // destination pin
-    _markers.add(Marker(markerId: MarkerId('destPin'), position: destination));
+    _markers.add(Marker(
+        markerId: MarkerId('destPin'),
+        position: read(destinationLatLngProvider).state as LatLng));
     read(sourceAndDestMarkersProvider).state = _markers;
   }
 
@@ -52,7 +56,7 @@ class HomeMapController {
     read(polylinesMapProvider).state[id] = polyline;
   }
 
-  void getPolylines(LatLng source, LatLng destination) async {
+  void getPolylines() async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       googleApiKey,
       PointLatLng(read(sourceLatLngProvider).state!.latitude,
