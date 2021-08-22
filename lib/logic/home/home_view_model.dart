@@ -112,7 +112,7 @@ class HomeViewModel {
   void pickSuggestion({
     required String pickedSuggestion,
     required bool forStartLoc,
-  }) async {
+  }) {
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
       read(isStartLocFocusedProvider).state = false;
