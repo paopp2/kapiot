@@ -51,6 +51,7 @@ class HomeViewModel {
       final currentPlace =
           await locationService.getAddressFromLocation(currentLoc);
       tecStartLoc.text = currentPlace ?? '';
+      read(startLocProvider).state = currentLoc.copyWith(address: currentPlace);
     }
   }
 
@@ -109,15 +110,27 @@ class HomeViewModel {
     read(placeSuggestionsProvider).state = suggestions;
   }
 
-  void pickSuggestion({
+  Future<void> pickSuggestion({
     required String pickedSuggestion,
     required bool forStartLoc,
-  }) {
+  }) async {
+    final location =
+        await locationService.getLocationFromAddress(pickedSuggestion);
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
+      read(startLocProvider).state = KapiotLocation(
+        lat: location.lat,
+        lng: location.lng,
+        address: pickedSuggestion,
+      );
       read(isStartLocFocusedProvider).state = false;
     } else {
       tecEndLoc.text = pickedSuggestion;
+      read(endLocProvider).state = KapiotLocation(
+        lat: location.lat,
+        lng: location.lng,
+        address: pickedSuggestion,
+      );
       read(isEndLocFocusedProvider).state = false;
     }
   }

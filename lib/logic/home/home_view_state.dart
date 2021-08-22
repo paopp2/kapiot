@@ -1,5 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final cameraPositionProvider =
     StateProvider.autoDispose<CameraPosition?>((ref) => null);
@@ -18,3 +19,9 @@ final isEndLocFocusedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 final placeSuggestionsProvider =
     StateProvider.autoDispose<List<String?>>((ref) => []);
+
+final startLocProvider =
+    StateProvider.autoDispose<KapiotLocation?>((ref) => null);
+
+final endLocProvider =
+    StateProvider.autoDispose<KapiotLocation?>((ref) => null);
