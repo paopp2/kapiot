@@ -4,8 +4,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // TODO: Exposed API key! Hide in production
 const googleApiKey = "AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI";
 
-final placesServiceProvider =
-    Provider.autoDispose((ref) => PlacesService.instance);
+final googleMapsApiServicesProvider = Provider.autoDispose(
+  (ref) => GoogleMapsApiServices(
+    places: PlacesService.instance,
+  ),
+);
+
+class GoogleMapsApiServices {
+  GoogleMapsApiServices({required this.places});
+  final PlacesService places;
+}
 
 class PlacesService {
   PlacesService._();
