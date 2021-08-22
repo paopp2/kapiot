@@ -1,10 +1,12 @@
 import 'dart:async';
-
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/location_service.dart';
-
 import 'home_view_state.dart';
+
+// TODO: Exposed API key! Hide in production
+const googleApiKey = "AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI";
 
 class HomeMapController {
   HomeMapController({
@@ -28,6 +30,15 @@ class HomeMapController {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414,
     );
+  }
+
+  void setMapPins(LatLng source, LatLng destination) {
+    Set<Marker> _markers = {};
+    // source pin
+    _markers.add(Marker(markerId: MarkerId('sourcePin'), position: source));
+    // destination pin
+    _markers.add(Marker(markerId: MarkerId('destPin'), position: destination));
+    read(sourceAndDestMarkersProvider).state = _markers;
   }
 
   void onMapCreated(GoogleMapController gmapController) =>
