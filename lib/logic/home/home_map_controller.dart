@@ -75,12 +75,16 @@ class HomeMapController {
             .state
             .add(LatLng(point.latitude, point.longitude));
       });
-      addPolyline();
     }
+    addPolyline();
   }
 
-  void onMapCreated(GoogleMapController gmapController) =>
-      _controller.complete(gmapController);
+  void onMapCreated(GoogleMapController gmapController) async {
+    _controller.complete(gmapController);
+    // ! TEMPORARY call
+    setMapPins();
+    await getPolylines();
+  }
 
   Future<void> gotoLake() async {
     final GoogleMapController controller = await _controller.future;

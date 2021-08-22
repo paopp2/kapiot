@@ -42,9 +42,6 @@ class HomeViewModel {
 
   Future<void> initState() async {
     await mapController.initializeMap();
-    // ! TEMPORARY call
-    mapController.setMapPins();
-    await mapController.getPolylines();
     final camPosition = read(cameraPositionProvider).state;
     if (camPosition != null) {
       final currentLoc = KapiotLocation(
