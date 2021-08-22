@@ -24,6 +24,11 @@ class HomeMapController {
   final LocationService locationService;
   final PolylinePoints polylinePoints = PolylinePoints();
 
+  //! TEMPORARY VALUES
+  final sourceLocation = LatLng(37.43296265331129, -122.08832357078792);
+  final destLocation = LatLng(37.423395, -122.072706);
+
+  // TODO: Add the Set<Marker> on marrker and Set<Polyline> on polylines
   Future<void> initializeMap() async {
     final currentLoc = await locationService.getLocation();
     read(cameraPositionProvider).state = CameraPosition(
@@ -37,13 +42,10 @@ class HomeMapController {
   void setMapPins() {
     Set<Marker> _markers = {};
     // source pin
-    _markers.add(Marker(
-        markerId: MarkerId('sourcePin'),
-        position: read(sourceLatLngProvider).state as LatLng));
+    _markers
+        .add(Marker(markerId: MarkerId('sourcePin'), position: sourceLocation));
     // destination pin
-    _markers.add(Marker(
-        markerId: MarkerId('destPin'),
-        position: read(destinationLatLngProvider).state as LatLng));
+    _markers.add(Marker(markerId: MarkerId('destPin'), position: destLocation));
     read(sourceAndDestMarkersProvider).state = _markers;
   }
 
@@ -59,10 +61,8 @@ class HomeMapController {
   void getPolylines() async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       googleApiKey,
-      PointLatLng(read(sourceLatLngProvider).state!.latitude,
-          read(sourceLatLngProvider).state!.longitude),
-      PointLatLng(read(destinationLatLngProvider).state!.latitude,
-          read(destinationLatLngProvider).state!.longitude),
+      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
+      PointLatLng(destLocation.latitude, destLocation.longitude),
     );
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) {

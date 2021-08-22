@@ -13,7 +13,6 @@ class PlacesService {
 
   Future<List<String?>> getAutocompleteSuggestions(String query) async {
     final googlePlace = GooglePlace(googleApiKey);
-    // ! FIXME: Failed assertion: line 85 pos 12: 'input != ""': is not true.
     final result = await googlePlace.autocomplete.get(query);
     final predictions = result?.predictions ?? [];
     return (predictions.isNotEmpty)
