@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,6 +22,7 @@ class HomeMapController {
   final Completer<GoogleMapController> _controller = Completer();
   final Reader read;
   final LocationService locationService;
+  final PolylinePoints polylinePoints = PolylinePoints();
 
   Future<void> initializeMap() async {
     final currentLoc = await locationService.getLocation();
@@ -39,6 +41,33 @@ class HomeMapController {
     // destination pin
     _markers.add(Marker(markerId: MarkerId('destPin'), position: destination));
     read(sourceAndDestMarkersProvider).state = _markers;
+  }
+
+  void addPolyline() {
+    PolylineId id = PolylineId("poly");
+    Polyline polyline = Polyline(
+        polylineId: id,
+        color: Colors.red,
+        points: read(polylineCoordinatesProvider).state);
+    read(polylinesMapProvider).state[id] = polyline;
+  }
+
+  void getPolylines(LatLng source, LatLng destination) async {
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      googleApiKey,
+      PointLatLng(read(sourceLatLngProvider).state!.latitude,
+          read(sourceLatLngProvider).state!.longitude),
+      PointLatLng(read(destinationLatLngProvider).state!.latitude,
+          read(destinationLatLngProvider).state!.longitude),
+    );
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        read(polylineCoordinatesProvider)
+            .state
+            .add(LatLng(point.latitude, point.longitude));
+      });
+      addPolyline();
+    }
   }
 
   void onMapCreated(GoogleMapController gmapController) =>

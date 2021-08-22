@@ -35,3 +35,6 @@ final destinationLatLngProvider =
 
 final polylineCoordinatesProvider =
     StateProvider.autoDispose<List<LatLng>>((ref) => []);
+
+final polylinesMapProvider =
+    StateProvider.autoDispose<Map<PolylineId, Polyline>>((ref) => {});
