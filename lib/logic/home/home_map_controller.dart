@@ -46,7 +46,7 @@ class HomeMapController {
         markerId: const MarkerId('destPin'),
         position: destLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(90)));
-    read(sourceAndDestMarkersProvider).state = _markers;
+    read(startEndMarkersProvider).state = _markers;
   }
 
   Future<void> getPolylines() async {
