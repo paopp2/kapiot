@@ -7,7 +7,7 @@ final locationServiceProvider =
     Provider.autoDispose((ref) => LocationService());
 
 class LocationService {
-  Future<Position> getLocation() async {
+  Future<KapiotLocation> getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -31,7 +31,11 @@ class LocationService {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    return await Geolocator.getCurrentPosition();
+    final position = await Geolocator.getCurrentPosition();
+    return KapiotLocation(
+      lat: position.latitude,
+      lng: position.longitude,
+    );
   }
 
   Future<KapiotLocation> getLocationFromAddress(String address) async {
