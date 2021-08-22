@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 
 import 'components/google_map_section.dart';
-import 'components/route_config_panel.dart';
+import 'components/panel_widget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class HomeView extends HookConsumerWidget {
@@ -35,7 +35,7 @@ class HomeView extends HookConsumerWidget {
               maxHeight: constraints.maxHeight * 0.55,
               parallaxEnabled: true,
               parallaxOffset: 0.6,
-              borderRadius: BorderRadius.vertical(
+              borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
               body: Expanded(
@@ -52,26 +52,6 @@ class HomeView extends HookConsumerWidget {
               ),
             ));
       },
-    );
-  }
-}
-
-class PanelWidget extends StatelessWidget {
-  final ScrollController controller;
-  final BoxConstraints constraints;
-  final HomeViewModel model;
-  const PanelWidget(
-      {Key? key,
-      required this.controller,
-      required this.constraints,
-      required this.model})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RouteConfigPanel(
-      constraints: constraints,
-      model: model,
     );
   }
 }
