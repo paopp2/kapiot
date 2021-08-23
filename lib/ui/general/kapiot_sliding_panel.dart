@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class KapiotSlidingPanel extends StatelessWidget {
-  const KapiotSlidingPanel(
-      {Key? key,
-      required this.map,
-      required this.child,
-      required this.constraints})
-      : super(key: key);
+  const KapiotSlidingPanel({
+    Key? key,
+    required this.map,
+    required this.panel,
+    required this.constraints,
+    required this.title,
+  }) : super(key: key);
   final Widget map;
-  final Widget child;
+  final Widget panel;
   final BoxConstraints constraints;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class KapiotSlidingPanel extends StatelessWidget {
         return Container(
           padding: EdgeInsets.zero,
           child: Column(
-            children: <Widget>[
+            children: [
               const SizedBox(
                 height: 10,
               ),
@@ -33,10 +35,18 @@ class KapiotSlidingPanel extends StatelessWidget {
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(12)),
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-              child,
+              const SizedBox(
+                height: 25,
+              ),
+              Text(title),
+              const SizedBox(
+                height: 20,
+              ),
+              panel,
             ],
           ),
         );
