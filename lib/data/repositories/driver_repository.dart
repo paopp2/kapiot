@@ -15,7 +15,7 @@ class DriverRepository {
   void pushDriverConfig(RouteConfig routeConfig) async {
     assert(routeConfig is ForDriver);
     await firestoreHelper.setData(
-      path: FirestorePath.colActiveDrivers(),
+      path: FirestorePath.docActiveDriver(routeConfig.user.id),
       data: routeConfig.toJson(),
     );
   }

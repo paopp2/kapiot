@@ -15,7 +15,7 @@ class RiderRepository {
   void pushRiderConfig(RouteConfig routeConfig) async {
     assert(routeConfig is ForRider);
     await firestoreHelper.setData(
-      path: FirestorePath.colActiveRiders(),
+      path: FirestorePath.docActiveRider(routeConfig.user.id),
       data: routeConfig.toJson(),
     );
   }
