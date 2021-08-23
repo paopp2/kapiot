@@ -120,9 +120,7 @@ class RouteConfigPanel extends HookConsumerWidget {
               ),
               ElevatedButton(
                 child: const Text("Next"),
-                onPressed: () {
-                  // TODO: Push Route Config here
-                },
+                onPressed: model.pushRouteConfig,
               ),
             ],
           ),
