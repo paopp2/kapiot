@@ -11,7 +11,7 @@ class FirestorePath {
 
   // DOCUMENT paths
   static String docActiveDriver(String driverId) => 'active_drivers/$driverId';
-  static String docActiveRider(String riderId) => 'active_rider/$riderId';
+  static String docActiveRider(String riderId) => 'active_riders/$riderId';
   static String docActiveDriverRequest(String driverId, String riderId) =>
       'active_drivers/$driverId/requests/$riderId';
   static String docActiveDriverAccepted(String driverId, String riderId) =>
