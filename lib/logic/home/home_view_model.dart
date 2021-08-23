@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/auth_service.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
@@ -15,6 +16,7 @@ import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 final homeViewModelProvider = Provider.autoDispose(
   (ref) => HomeViewModel(
     read: ref.read,
+    riderRepo: ref.watch(riderRepositoryProvider),
     currentUser: ref.watch(currentUserProvider),
     authService: ref.watch(authServiceProvider),
     locationService: ref.watch(locationServiceProvider),
@@ -30,6 +32,7 @@ final homeViewModelProvider = Provider.autoDispose(
 class HomeViewModel {
   HomeViewModel({
     required this.read,
+    required this.riderRepo,
     required this.currentUser,
     required this.authService,
     required this.locationService,
@@ -37,6 +40,7 @@ class HomeViewModel {
     required this.mapController,
   });
   final Reader read;
+  final RiderRepository riderRepo;
   final AuthService authService;
   final KapiotUser? currentUser;
   final HomeMapController mapController;
@@ -150,6 +154,8 @@ class HomeViewModel {
       );
     }
   }
+
+  Future<void> pushRouteConfig() async {}
 
   void dispose() {
     tecStartLoc.dispose();
