@@ -22,12 +22,12 @@ _$ForRider _$$ForRiderFromJson(Map<String, dynamic> json) => _$ForRider(
 
 Map<String, dynamic> _$$ForRiderToJson(_$ForRider instance) =>
     <String, dynamic>{
-      'user': instance.user,
+      'user': instance.user.toJson(),
       'timeOfTrip': instance.timeOfTrip.toIso8601String(),
       'riderCount': instance.riderCount,
-      'startLocation': instance.startLocation,
-      'endLocation': instance.endLocation,
-      'acceptingDriver': instance.acceptingDriver,
+      'startLocation': instance.startLocation.toJson(),
+      'endLocation': instance.endLocation.toJson(),
+      'acceptingDriver': instance.acceptingDriver?.toJson(),
     };
 
 _$ForDriver _$$ForDriverFromJson(Map<String, dynamic> json) => _$ForDriver(
@@ -39,7 +39,7 @@ _$ForDriver _$$ForDriverFromJson(Map<String, dynamic> json) => _$ForDriver(
 
 Map<String, dynamic> _$$ForDriverToJson(_$ForDriver instance) =>
     <String, dynamic>{
-      'user': instance.user,
+      'user': instance.user.toJson(),
       'timeOfTrip': instance.timeOfTrip.toIso8601String(),
       'riderCount': instance.riderCount,
       'encodedRoute': instance.encodedRoute,
