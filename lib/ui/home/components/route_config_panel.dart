@@ -15,7 +15,7 @@ class RouteConfigPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRider = ref.watch(isRiderSelectedProvider).state;
+    final isRider = ref.watch(isRiderProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
     final isStartLocFocused = ref.watch(isStartLocFocusedProvider).state;

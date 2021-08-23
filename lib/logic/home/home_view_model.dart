@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
@@ -49,12 +48,11 @@ class HomeViewModel {
   final AuthService authService;
   final KapiotUser? currentUser;
   final HomeMapController mapController;
+  final LocationService locationService;
+  final GoogleMapsApiServices googleMapsApiServices;
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
-  final LocationService locationService;
-  final GoogleMapsApiServices googleMapsApiServices;
-  late final CameraPosition initialCameraPosition;
 
   Future<void> initState() async {
     await mapController.initializeMap();
@@ -72,8 +70,8 @@ class HomeViewModel {
 
   void toggleIsRider(bool valueHasChanged) {
     if (valueHasChanged) {
-      final currentIsRider = read(isRiderSelectedProvider).state;
-      read(isRiderSelectedProvider).state = !currentIsRider;
+      final isRider = read(isRiderProvider).state;
+      read(isRiderProvider).state = !isRider;
     }
   }
 
@@ -163,7 +161,7 @@ class HomeViewModel {
 
   Future<void> pushRouteConfig() async {
     assert(currentUser != null);
-    final isRider = read(isRiderSelectedProvider).state;
+    final isRider = read(isRiderProvider).state;
     final startLoc = read(startLocProvider).state;
     final endLoc = read(endLocProvider).state;
     if (startLoc == null || endLoc == null) return;
