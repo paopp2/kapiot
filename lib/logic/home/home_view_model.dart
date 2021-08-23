@@ -162,18 +162,28 @@ class HomeViewModel {
   }
 
   Future<void> pushRouteConfig() async {
-    riderRepo.pushRiderConfig(ForRider(
-        user: currentUser as KapiotUser,
-        timeOfTrip: read(dateTimeProvider).state,
-        riderCount: read(riderCountProvider).state,
-        startLocation: KapiotLocation(
-            lat: 37.423106,
-            lng: -122.084262,
-            address: "[RiderStartt] Ampitheatre Pkwy, Mountain View"),
-        endLocation: KapiotLocation(
-            lat: 37.423736,
-            lng: -122.090060,
-            address: "[RiderEnd] Rengstorff Ave, Mountain View")));
+    // TODO: Add if statement to check if rider or driver using provider
+    final isRider = read(isRiderSelectedProvider).state;
+    if (isRider) {
+      riderRepo.pushRiderConfig(RouteConfig.rider(
+          user: currentUser!,
+          timeOfTrip: read(dateTimeProvider).state,
+          riderCount: read(riderCountProvider).state,
+          startLocation: const KapiotLocation(
+              lat: 37.423106,
+              lng: -122.084262,
+              address: "[RiderStart] Ampitheatre Pkwy, Mountain View"),
+          endLocation: const KapiotLocation(
+              lat: 37.423736,
+              lng: -122.090060,
+              address: "[RiderEnd] Rengstorff Ave, Mountain View")));
+    } else {
+      driverRepo.pushDriverConfig(RouteConfig.driver(
+          user: currentUser!,
+          timeOfTrip: read(dateTimeProvider).state,
+          riderCount: read(riderCountProvider).state,
+          encodedRoute: "Oten"));
+    }
   }
 
   void dispose() {
