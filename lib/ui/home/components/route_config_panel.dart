@@ -18,61 +18,112 @@ class RouteConfigPanel extends HookConsumerWidget {
     final isRider = ref.watch(isRiderSelectedProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
+    final isStartLocFocused = ref.watch(isStartLocFocusedProvider).state;
+    final isEndLocFocused = ref.watch(isEndLocFocusedProvider).state;
+    final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
 
     return Container(
       height: constraints.maxHeight * 0.43,
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ChoiceChip(
-                  label: const Text("Driver"),
-                  selected: !isRider,
-                  onSelected: model.toggleIsRider,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ChoiceChip(
+                    label: const Text("Driver"),
+                    selected: !isRider,
+                    onSelected: model.toggleIsRider,
+                  ),
+                  ChoiceChip(
+                    label: const Text("Rider"),
+                    selected: isRider,
+                    onSelected: model.toggleIsRider,
+                  ),
+                ],
+              ),
+              TextField(
+                controller: model.tecStartLoc,
+                textAlign: TextAlign.center,
+                decoration: const InputDecoration(hintText: "Start location"),
+                onChanged: model.updateSuggestions,
+                onTap: () => model.expandSuggestions(forStartLoc: true),
+              ),
+              Visibility(
+                child: SizedBox(
+                  height: constraints.maxHeight * 0.25,
+                  child: ListView.builder(
+                    itemCount: placeSuggestions.length,
+                    itemBuilder: (context, index) {
+                      final suggestion = placeSuggestions[index] ?? "";
+                      return ListTile(
+                        title: Text(suggestion),
+                        onTap: () => model.pickSuggestion(
+                          pickedSuggestion: suggestion,
+                          forStartLoc: true,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                ChoiceChip(
-                  label: const Text("Rider"),
-                  selected: isRider,
-                  onSelected: model.toggleIsRider,
+                visible: isStartLocFocused,
+              ),
+              TextField(
+                controller: model.tecEndLoc,
+                onChanged: model.updateSuggestions,
+                textAlign: TextAlign.center,
+                decoration: const InputDecoration(hintText: "End location"),
+                onTap: () => model.expandSuggestions(forStartLoc: false),
+              ),
+              Visibility(
+                child: SizedBox(
+                  height: constraints.maxHeight * 0.25,
+                  child: Expanded(
+                    child: ListView.builder(
+                      itemCount: placeSuggestions.length,
+                      itemBuilder: (context, index) {
+                        final suggestion = placeSuggestions[index] ?? "";
+                        return ListTile(
+                          title: Text(suggestion),
+                          onTap: () => model.pickSuggestion(
+                            pickedSuggestion: suggestion,
+                            forStartLoc: false,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ],
-            ),
-            const TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(hintText: "Start location"),
-            ),
-            const TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(hintText: "End location"),
-            ),
-            TextButton(
-              child: Text("$dateTime"),
-              onPressed: () => model.getDateTime(context),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton(
-                  onPressed: model.decRiderCount,
-                  child: const Icon(Icons.remove),
-                ),
-                Text("$riderCount"),
-                OutlinedButton(
-                  onPressed: model.incRiderCount,
-                  child: const Icon(Icons.add),
-                ),
-              ],
-            ),
-            ElevatedButton(
-              child: const Text("Go to Lake"),
-              onPressed: model.mapController.gotoLake,
-            ),
-          ],
+                visible: isEndLocFocused,
+              ),
+              TextButton(
+                child: Text("$dateTime"),
+                onPressed: () => model.getDateTime(context),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton(
+                    onPressed: model.decRiderCount,
+                    child: const Icon(Icons.remove),
+                  ),
+                  Text("$riderCount"),
+                  OutlinedButton(
+                    onPressed: model.incRiderCount,
+                    child: const Icon(Icons.add),
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                child: const Text("Next"),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

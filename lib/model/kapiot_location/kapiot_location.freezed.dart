@@ -21,10 +21,12 @@ KapiotLocation _$KapiotLocationFromJson(Map<String, dynamic> json) {
 class _$KapiotLocationTearOff {
   const _$KapiotLocationTearOff();
 
-  _KapiotLocation call({required double lat, required double lng}) {
+  _KapiotLocation call(
+      {required double lat, required double lng, String? address}) {
     return _KapiotLocation(
       lat: lat,
       lng: lng,
+      address: address,
     );
   }
 
@@ -40,6 +42,7 @@ const $KapiotLocation = _$KapiotLocationTearOff();
 mixin _$KapiotLocation {
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +55,7 @@ abstract class $KapiotLocationCopyWith<$Res> {
   factory $KapiotLocationCopyWith(
           KapiotLocation value, $Res Function(KapiotLocation) then) =
       _$KapiotLocationCopyWithImpl<$Res>;
-  $Res call({double lat, double lng});
+  $Res call({double lat, double lng, String? address});
 }
 
 /// @nodoc
@@ -68,6 +71,7 @@ class _$KapiotLocationCopyWithImpl<$Res>
   $Res call({
     Object? lat = freezed,
     Object? lng = freezed,
+    Object? address = freezed,
   }) {
     return _then(_value.copyWith(
       lat: lat == freezed
@@ -78,6 +82,10 @@ class _$KapiotLocationCopyWithImpl<$Res>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -89,7 +97,7 @@ abstract class _$KapiotLocationCopyWith<$Res>
           _KapiotLocation value, $Res Function(_KapiotLocation) then) =
       __$KapiotLocationCopyWithImpl<$Res>;
   @override
-  $Res call({double lat, double lng});
+  $Res call({double lat, double lng, String? address});
 }
 
 /// @nodoc
@@ -107,6 +115,7 @@ class __$KapiotLocationCopyWithImpl<$Res>
   $Res call({
     Object? lat = freezed,
     Object? lng = freezed,
+    Object? address = freezed,
   }) {
     return _then(_KapiotLocation(
       lat: lat == freezed
@@ -117,6 +126,10 @@ class __$KapiotLocationCopyWithImpl<$Res>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -126,7 +139,7 @@ class __$KapiotLocationCopyWithImpl<$Res>
 class _$_KapiotLocation
     with DiagnosticableTreeMixin
     implements _KapiotLocation {
-  const _$_KapiotLocation({required this.lat, required this.lng});
+  const _$_KapiotLocation({required this.lat, required this.lng, this.address});
 
   factory _$_KapiotLocation.fromJson(Map<String, dynamic> json) =>
       _$$_KapiotLocationFromJson(json);
@@ -135,10 +148,12 @@ class _$_KapiotLocation
   final double lat;
   @override
   final double lng;
+  @override
+  final String? address;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'KapiotLocation(lat: $lat, lng: $lng)';
+    return 'KapiotLocation(lat: $lat, lng: $lng, address: $address)';
   }
 
   @override
@@ -147,7 +162,8 @@ class _$_KapiotLocation
     properties
       ..add(DiagnosticsProperty('type', 'KapiotLocation'))
       ..add(DiagnosticsProperty('lat', lat))
-      ..add(DiagnosticsProperty('lng', lng));
+      ..add(DiagnosticsProperty('lng', lng))
+      ..add(DiagnosticsProperty('address', address));
   }
 
   @override
@@ -157,14 +173,17 @@ class _$_KapiotLocation
             (identical(other.lat, lat) ||
                 const DeepCollectionEquality().equals(other.lat, lat)) &&
             (identical(other.lng, lng) ||
-                const DeepCollectionEquality().equals(other.lng, lng)));
+                const DeepCollectionEquality().equals(other.lng, lng)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality().equals(other.address, address)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(lat) ^
-      const DeepCollectionEquality().hash(lng);
+      const DeepCollectionEquality().hash(lng) ^
+      const DeepCollectionEquality().hash(address);
 
   @JsonKey(ignore: true)
   @override
@@ -178,8 +197,10 @@ class _$_KapiotLocation
 }
 
 abstract class _KapiotLocation implements KapiotLocation {
-  const factory _KapiotLocation({required double lat, required double lng}) =
-      _$_KapiotLocation;
+  const factory _KapiotLocation(
+      {required double lat,
+      required double lng,
+      String? address}) = _$_KapiotLocation;
 
   factory _KapiotLocation.fromJson(Map<String, dynamic> json) =
       _$_KapiotLocation.fromJson;
@@ -188,6 +209,8 @@ abstract class _KapiotLocation implements KapiotLocation {
   double get lat => throw _privateConstructorUsedError;
   @override
   double get lng => throw _privateConstructorUsedError;
+  @override
+  String? get address => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$KapiotLocationCopyWith<_KapiotLocation> get copyWith =>

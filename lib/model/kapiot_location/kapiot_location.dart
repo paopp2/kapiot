@@ -9,6 +9,7 @@ class KapiotLocation with _$KapiotLocation {
   const factory KapiotLocation({
     required double lat,
     required double lng,
+    String? address,
   }) = _KapiotLocation;
 
   factory KapiotLocation.fromJson(Map<String, dynamic> json) =>
