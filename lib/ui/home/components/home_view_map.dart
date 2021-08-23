@@ -6,8 +6,8 @@ import 'package:kapiot/logic/home/home_view_state.dart';
 
 import 'loading_screen.dart';
 
-class GoogleMapSection extends HookConsumerWidget {
-  const GoogleMapSection({
+class HomeViewMap extends HookConsumerWidget {
+  const HomeViewMap({
     required this.model,
     Key? key,
   }) : super(key: key);
