@@ -26,6 +26,30 @@ class LoginView extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Spacer(
+                    flex: 2,
+                  ),
+                  const Text(
+                    'kapiot',
+                    style: TextStyle(
+                        fontSize: 84,
+                        fontFamily: 'Sanz',
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 7,
+                        color: Color(0xff5eab53)),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    'University of San Carlos',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Vegur',
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const Spacer(
                     flex: 3,
                   ),
                   GoogleAuthWidget(
