@@ -39,3 +39,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  fonts:
+    - family: Sanz
+      fonts: 
+        - asset: lib/ui/assets/fonts/RNSSanz-Bold.otf
+    - family: Vegur
+      fonts: 
+        - asset: lib/ui/assets/fonts/Vegur-Regular.otf
+        - asset: lib/ui/assets/fonts/Vegur-Light.otf
+          weight: 300
+        - asset: lib/ui/assets/fonts/Vegur-Bold.otf
+          weight: 700
+    
