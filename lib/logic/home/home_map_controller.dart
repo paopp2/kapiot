@@ -7,6 +7,8 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'home_view_state.dart';
 
+const double latLngBoundsPadding = 50.0;
+
 class HomeMapController {
   HomeMapController({
     required this.read,
@@ -46,6 +48,7 @@ class HomeMapController {
     addMarker(markerId: "end_location", location: end);
     final routeCoordinates = await googleMapsApiServices.directions
         .getRouteCoordinates(start: start, end: end);
+    read(routeCoordinatesProvider).state = routeCoordinates;
     drawRouteOutline(routeCoordinates);
     controller.animateCamera(
       CameraUpdate.newLatLngBounds(
@@ -58,7 +61,7 @@ class HomeMapController {
                 southwest: LatLng(end.lat, end.lng),
                 northeast: LatLng(start.lat, start.lng),
               ),
-        50,
+        latLngBoundsPadding,
       ),
     );
   }
