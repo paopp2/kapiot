@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/auth_service.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -12,11 +13,13 @@ import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 final homeViewModelProvider = Provider.autoDispose(
   (ref) => HomeViewModel(
     read: ref.read,
     riderRepo: ref.watch(riderRepositoryProvider),
+    driverRepo: ref.watch(driverRepositoryProvider),
     currentUser: ref.watch(currentUserProvider),
     authService: ref.watch(authServiceProvider),
     locationService: ref.watch(locationServiceProvider),
@@ -33,6 +36,7 @@ class HomeViewModel {
   HomeViewModel({
     required this.read,
     required this.riderRepo,
+    required this.driverRepo,
     required this.currentUser,
     required this.authService,
     required this.locationService,
@@ -41,9 +45,11 @@ class HomeViewModel {
   });
   final Reader read;
   final RiderRepository riderRepo;
+  final DriverRepository driverRepo;
   final AuthService authService;
   final KapiotUser? currentUser;
   final HomeMapController mapController;
+  final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
   final LocationService locationService;
@@ -155,7 +161,20 @@ class HomeViewModel {
     }
   }
 
-  Future<void> pushRouteConfig() async {}
+  Future<void> pushRouteConfig() async {
+    riderRepo.pushRiderConfig(ForRider(
+        user: currentUser as KapiotUser,
+        timeOfTrip: read(dateTimeProvider).state,
+        riderCount: read(riderCountProvider).state,
+        startLocation: KapiotLocation(
+            lat: 37.423106,
+            lng: -122.084262,
+            address: "[RiderStartt] Ampitheatre Pkwy, Mountain View"),
+        endLocation: KapiotLocation(
+            lat: 37.423736,
+            lng: -122.090060,
+            address: "[RiderEnd] Rengstorff Ave, Mountain View")));
+  }
 
   void dispose() {
     tecStartLoc.dispose();
