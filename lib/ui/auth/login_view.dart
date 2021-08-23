@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/auth/login_view_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:kapiot/ui/home/components/google_auth_widget.dart';
+import 'package:kapiot/ui/auth/components/google_auth_widget.dart';
 
 class LoginView extends HookConsumerWidget {
   const LoginView({Key? key}) : super(key: key);
