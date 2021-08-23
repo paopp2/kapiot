@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -137,12 +138,11 @@ class HomeViewModel {
       read(isStartLocFocusedProvider).state = false;
     } else {
       tecEndLoc.text = pickedSuggestion;
-      final endLocation = KapiotLocation(
+      read(endLocProvider).state = KapiotLocation(
         lat: location.lat,
         lng: location.lng,
         address: pickedSuggestion,
       );
-      read(endLocProvider).state = endLocation;
       read(isEndLocFocusedProvider).state = false;
     }
     showRouteIfBothLocationsSet();
@@ -175,6 +175,7 @@ class HomeViewModel {
           endLocation: endLoc,
         ),
       );
+      AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
       final routeCoordinates = read(routeCoordinatesProvider).state;
       final encodedRoute =
@@ -187,12 +188,17 @@ class HomeViewModel {
           encodedRoute: encodedRoute,
         ),
       );
+      AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
   }
 
   void dispose() {
     tecStartLoc.dispose();
     tecEndLoc.dispose();
+
+    // Manual dispose providers that can't be autoDisposed
     read(routeCoordinatesProvider).dispose();
+    read(startLocProvider).dispose();
+    read(endLocProvider).dispose();
   }
 }
