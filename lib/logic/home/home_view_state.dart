@@ -27,3 +27,5 @@ final startEndMarkersProvider =
     StateProvider.autoDispose<Set<Marker>>((ref) => {});
 
 final polylinesProvider = StateProvider.autoDispose<Set<Polyline>>((ref) => {});
+
+final routeCoordinatesProvider = StateProvider<List<LatLng>>((ref) => []);

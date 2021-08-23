@@ -162,31 +162,39 @@ class HomeViewModel {
   }
 
   Future<void> pushRouteConfig() async {
+    assert(currentUser != null);
     final isRider = read(isRiderSelectedProvider).state;
+    final startLoc = read(startLocProvider).state;
+    final endLoc = read(endLocProvider).state;
+    if (startLoc == null || endLoc == null) return;
     if (isRider) {
-      riderRepo.pushRiderConfig(RouteConfig.rider(
+      riderRepo.pushRiderConfig(
+        RouteConfig.rider(
           user: currentUser!,
           timeOfTrip: read(dateTimeProvider).state,
           riderCount: read(riderCountProvider).state,
-          startLocation: const KapiotLocation(
-              lat: 37.423106,
-              lng: -122.084262,
-              address: "[RiderStart] Ampitheatre Pkwy, Mountain View"),
-          endLocation: const KapiotLocation(
-              lat: 37.423736,
-              lng: -122.090060,
-              address: "[RiderEnd] Rengstorff Ave, Mountain View")));
+          startLocation: startLoc,
+          endLocation: endLoc,
+        ),
+      );
     } else {
-      driverRepo.pushDriverConfig(RouteConfig.driver(
+      final routeCoordinates = read(routeCoordinatesProvider).state;
+      final encodedRoute =
+          await googleMapsApiServices.utils.encodeRoute(routeCoordinates);
+      driverRepo.pushDriverConfig(
+        RouteConfig.driver(
           user: currentUser!,
           timeOfTrip: read(dateTimeProvider).state,
           riderCount: read(riderCountProvider).state,
-          encodedRoute: "Oten"));
+          encodedRoute: encodedRoute,
+        ),
+      );
     }
   }
 
   void dispose() {
     tecStartLoc.dispose();
     tecEndLoc.dispose();
+    read(routeCoordinatesProvider).dispose();
   }
 }
