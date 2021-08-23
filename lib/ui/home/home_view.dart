@@ -10,7 +10,7 @@ class HomeView extends HookConsumerWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(context, ref) {
     final model = ref.watch(homeViewModelProvider);
 
     useEffect(() {

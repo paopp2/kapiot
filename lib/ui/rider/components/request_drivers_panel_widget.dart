@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'drag_handle_widget.dart';
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
@@ -14,7 +13,13 @@ class PanelWidget extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              buildDragHandle(),
+              Container(
+                width: 40,
+                height: 5,
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(12)),
+              ),
               SizedBox(
                 height: 25,
               ),
