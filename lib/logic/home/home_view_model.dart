@@ -162,7 +162,6 @@ class HomeViewModel {
   }
 
   Future<void> pushRouteConfig() async {
-    // TODO: Add if statement to check if rider or driver using provider
     final isRider = read(isRiderSelectedProvider).state;
     if (isRider) {
       riderRepo.pushRiderConfig(RouteConfig.rider(
