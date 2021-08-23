@@ -58,7 +58,7 @@ class HomeMapController {
                 southwest: LatLng(end.lat, end.lng),
                 northeast: LatLng(start.lat, start.lng),
               ),
-        0,
+        50,
       ),
     );
   }
