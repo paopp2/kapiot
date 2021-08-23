@@ -11,13 +11,13 @@ class RequestAcceptedView extends StatelessWidget {
         return Scaffold(
           body: KapiotSlidingPanel(
             constraints: constraints,
-            title: "Ride Information",
+            title: 'Ride Information',
             map: const Center(
               child: Text('Here lies Map'),
             ),
             panel: Stack(
               alignment: Alignment.bottomCenter,
-              children: <Widget>[
+              children: [
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(
@@ -27,7 +27,7 @@ class RequestAcceptedView extends StatelessWidget {
                   ),
                   height: constraints.maxHeight * 0.28,
                   child: Column(
-                    children: <Widget>[
+                    children: [
                       const SizedBox(
                         height: 10,
                       ),
@@ -37,7 +37,7 @@ class RequestAcceptedView extends StatelessWidget {
                       const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
+                        children: [
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
                             child: const CircleAvatar(
@@ -68,7 +68,7 @@ class RequestAcceptedView extends StatelessWidget {
                     ),
                   ),
                   child: Column(
-                    children: const <Widget>[
+                    children: const [
                       SizedBox(
                         height: 10,
                       ),
