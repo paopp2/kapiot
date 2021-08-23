@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../general/kapiot_sliding_panel.dart';
+import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 
 class RequestAcceptedView extends StatelessWidget {
   const RequestAcceptedView({Key? key}) : super(key: key);

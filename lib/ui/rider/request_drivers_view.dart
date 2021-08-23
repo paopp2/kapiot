@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../general/kapiot_sliding_panel.dart';
+import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 
 class RequestDriversView extends StatelessWidget {
   const RequestDriversView({Key? key}) : super(key: key);
