@@ -4,7 +4,7 @@ import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
-final requestDriversViewModel =
+final requestDriversViewModelProvider =
     Provider.autoDispose((ref) => RequestDriversViewModel(
           read: ref.read,
           riderRepo: ref.watch(riderRepositoryProvider),
