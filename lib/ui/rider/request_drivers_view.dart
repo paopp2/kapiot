@@ -11,7 +11,7 @@ class RequestDriversView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(requestDriversViewModel);
-    final compatibleDrivers = ref.watch(compatibleDriversStreamProvider);
+    final compatibleDriversStream = ref.watch(compatibleDriversStreamProvider);
 
     useEffect(() {
       model.initState();
@@ -30,7 +30,7 @@ class RequestDriversView extends HookConsumerWidget {
             panel: SizedBox(
               width: double.infinity,
               height: 330,
-              child: compatibleDrivers.when(
+              child: compatibleDriversStream.when(
                 error: (_, __) => const Center(
                   child: Text('Error'),
                 ),
