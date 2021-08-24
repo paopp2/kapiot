@@ -1,17 +1,33 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/repositories/driver_repository.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
-// TODO: Add relevant providers
 final riderManagerViewModel =
     Provider.autoDispose((ref) => RiderManagerViewModel(
           read: ref.read,
+          driverRepo: ref.watch(driverRepositoryProvider),
+          currentUser: ref.watch(currentUserProvider),
         ));
 
-// TODO: Add constructors to relevant providers
 class RiderManagerViewModel {
-  RiderManagerViewModel({required this.read});
+  RiderManagerViewModel({
+    required this.read,
+    required this.driverRepo,
+    required this.currentUser,
+  });
   final Reader read;
+  final DriverRepository driverRepo;
+  final KapiotUser? currentUser;
 
   void initState() {}
+
+  Stream<List<KapiotUser>> getAcceptedRidersStream() =>
+      driverRepo.getAcceptedRidersStream(currentUser!);
+
+  Stream<List<KapiotUser>> getRequestingRidersStream() =>
+      driverRepo.getRequestingRidersStream(currentUser!);
+
   // *! Temporary list to maintain provider logic
   List<String> requestingRiders = [
     'Christian Gonzales',
