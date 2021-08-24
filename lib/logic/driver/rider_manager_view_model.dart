@@ -22,6 +22,12 @@ class RiderManagerViewModel {
 
   void initState() {}
 
+  Stream<List<KapiotUser>> getAcceptedRidersStream() =>
+      driverRepo.getAcceptedRidersStream(currentUser!);
+
+  Stream<List<KapiotUser>> getRequestingRidersStream() =>
+      driverRepo.getRequestingRidersStream(currentUser!);
+
   // *! Temporary list to maintain provider logic
   List<String> requestingRiders = [
     'Christian Gonzales',
