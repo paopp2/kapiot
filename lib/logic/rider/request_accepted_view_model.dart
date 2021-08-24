@@ -1,10 +1,9 @@
-// TODO: Verify provider name
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
-final requestAcceptedViewModelProvider =
+final requestAcceptedViewModel =
     Provider.autoDispose((ref) => RequestAcceptedViewModel(
           read: ref.read,
           riderRepo: ref.watch(riderRepositoryProvider),
