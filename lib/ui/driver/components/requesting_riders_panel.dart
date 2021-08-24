@@ -29,32 +29,40 @@ class RequestingRidersPanel extends HookConsumerWidget {
           children: [
             const Text("REQUESTING RIDERS"),
             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: model.requestingRiders.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png'),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: Text(model.requestingRiders[index],
-                              style: const TextStyle(fontSize: 20.0)),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Accept'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              child: requestingRidersStream.when(
+                error: (_, __) => const Center(
+                  child: Text('Error'),
+                ),
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                data: (requestingRiders) => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: requestingRiders.length,
+                  itemBuilder: (context, index) {
+                    final rider = requestingRiders[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(rider.photoUrl!),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Text(rider.displayName ?? 'No Name',
+                                style: const TextStyle(fontSize: 20.0)),
+                          ),
+                          ElevatedButton(
+                            onPressed: () => model.acceptRider(rider.id),
+                            child: const Text('Accept'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
