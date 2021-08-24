@@ -20,11 +20,10 @@ class RiderRepository {
     );
   }
 
-  void requestDriver(
-      String riderId, String driverId, RouteConfig routeConfig) async {
+  void requestDriver(String driverId, RouteConfig routeConfig) async {
     assert(routeConfig is ForRider);
     await firestoreHelper.setData(
-      path: FirestorePath.docActiveDriverRequest(driverId, riderId),
+      path: FirestorePath.docActiveDriverRequest(driverId, routeConfig.user.id),
       data: routeConfig.toJson(),
     );
   }
