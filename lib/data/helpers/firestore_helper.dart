@@ -29,6 +29,21 @@ class FirestoreHelper {
     await reference.delete();
   }
 
+  Future<void> moveData({
+    required String sourcePath,
+    required String destPath,
+  }) async {
+    final doc = await getData(
+      path: sourcePath,
+      builder: (data, _) => data,
+    );
+    await setData(
+      path: destPath,
+      data: doc,
+    );
+    await deleteData(path: sourcePath);
+  }
+
   Stream<List<T>> collectionStream<T>({
     required String path,
     required T Function(Map<String, dynamic> data, String documentID) builder,
