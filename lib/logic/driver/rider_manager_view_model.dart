@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final riderManagerViewModel =
@@ -28,7 +29,15 @@ class RiderManagerViewModel {
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
       driverRepo.getRequestingRidersStream(currentUser!);
 
-  void acceptRider() {}
+  void acceptRider(String riderId) {
+    final currentRouteConfig = read(currentRouteConfigProvider).state;
+    assert(currentRouteConfig != null);
+    driverRepo.acceptRider(
+      riderId,
+      currentRouteConfig!,
+    );
+  }
+
   // *! Temporary list to maintain provider logic
   List<String> requestingRiders = [
     'Christian Gonzales',
