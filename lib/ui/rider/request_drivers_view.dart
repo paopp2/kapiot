@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/rider/request_drivers_view_model.dart';
 import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 
-class RequestDriversView extends StatelessWidget {
+class RequestDriversView extends HookConsumerWidget {
   const RequestDriversView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(requestDriversViewModelProvider);
+
+    useEffect(() {
+      model.initState();
+      return model.dispose;
+    }, []);
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -60,9 +70,8 @@ class RequestDriversView extends StatelessWidget {
                         const Text('Charles Ausejo'),
                         const SizedBox(height: 70),
                         ElevatedButton(
-                          onPressed: () {
-                            print("hailed");
-                          },
+                          onPressed: () => model
+                              .requestDriver('HV9BcFRIKMYrQOYzd2gStGqErW12'),
                           child: const Text('Hail Ride'),
                         ),
                       ],
