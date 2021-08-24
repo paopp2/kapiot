@@ -23,6 +23,8 @@ class RequestDriversViewModel {
 
   void initState() {}
 
+  // TODO: When requesting for a driver, the driver ID must be known to add in designated collection of that driver
+
   Stream<List<KapiotUser>> getCompatibleDrivers() =>
       riderRepo.getCompatibleDrivers();
 
