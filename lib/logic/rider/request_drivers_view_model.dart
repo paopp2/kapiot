@@ -36,9 +36,5 @@ class RequestDriversViewModel {
   Stream<List<KapiotUser>> getCompatibleDrivers() =>
       riderRepo.getCompatibleDrivers();
 
-  void dispose() {
-    read(currentRouteConfigProvider).dispose();
-  }
+  void dispose() {}
 }
-
-List<String> tempList = [];
