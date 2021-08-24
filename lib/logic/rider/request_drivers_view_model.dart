@@ -24,7 +24,7 @@ class RequestDriversViewModel {
   void initState() {}
 
   Stream<List<KapiotUser>> getCompatibleDrivers() =>
-      riderRepo.getCompatibleDrivers(currentUser!);
+      riderRepo.getCompatibleDrivers();
 
   void dispose() {}
 }
