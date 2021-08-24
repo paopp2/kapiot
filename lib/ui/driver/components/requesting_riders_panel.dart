@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/request_manager_view_state.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
@@ -14,13 +13,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(riderManagerViewModel);
     final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
-
-    useEffect(() {
-      model.initState();
-      return model.dispose;
-    }, []);
 
     return Expanded(
       child: Container(
