@@ -28,12 +28,9 @@ class DriverRepository {
       path: FirestorePath.docActiveDriverRequest(driverId, riderId),
       builder: (data, id) => RouteConfig.fromJson(data),
     );
-    await firestoreHelper.setData(
-      path: FirestorePath.docActiveDriverAccepted(driverId, riderId),
-      data: acceptedRiderConfig.toJson(),
-    );
-    await firestoreHelper.deleteData(
-      path: FirestorePath.docActiveDriverRequest(driverId, riderId),
+    await firestoreHelper.moveData(
+      sourcePath: FirestorePath.docActiveDriverRequest(driverId, riderId),
+      destPath: FirestorePath.docActiveDriverAccepted(driverId, riderId),
     );
     if (acceptedRiderConfig is ForRider) {
       await firestoreHelper.setData(
