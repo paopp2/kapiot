@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers_view_model.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/logic/rider/request_drivers_view_state.dart';
 
 import 'driver_card.dart';
 
-class DriverStream extends StatelessWidget {
-  const DriverStream({
+class DriverCardStream extends HookConsumerWidget {
+  const DriverCardStream({
     Key? key,
-    required this.compatibleDriversStream,
     required this.model,
   }) : super(key: key);
 
-  final AsyncValue<List<KapiotUser>> compatibleDriversStream;
   final RequestDriversViewModel model;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final compatibleDriversStream = ref.watch(compatibleDriversStreamProvider);
     return Builder(builder: (context) {
       return compatibleDriversStream.when(
         error: (_, __) => const Center(
