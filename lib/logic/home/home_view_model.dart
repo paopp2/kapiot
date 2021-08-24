@@ -11,6 +11,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
@@ -166,28 +167,28 @@ class HomeViewModel {
     final endLoc = read(endLocProvider).state;
     if (startLoc == null || endLoc == null) return;
     if (isRider) {
-      riderRepo.pushRiderConfig(
-        RouteConfig.rider(
-          user: currentUser!,
-          timeOfTrip: read(dateTimeProvider).state,
-          riderCount: read(riderCountProvider).state,
-          startLocation: startLoc,
-          endLocation: endLoc,
-        ),
+      final riderConfig = RouteConfig.rider(
+        user: currentUser!,
+        timeOfTrip: read(dateTimeProvider).state,
+        riderCount: read(riderCountProvider).state,
+        startLocation: startLoc,
+        endLocation: endLoc,
       );
+      riderRepo.pushRiderConfig(riderConfig);
+      read(currentRouteConfigProvider).state = riderConfig;
       AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
       final routeCoordinates = read(routeCoordinatesProvider).state;
       final encodedRoute =
           await googleMapsApiServices.utils.encodeRoute(routeCoordinates);
-      driverRepo.pushDriverConfig(
-        RouteConfig.driver(
-          user: currentUser!,
-          timeOfTrip: read(dateTimeProvider).state,
-          riderCount: read(riderCountProvider).state,
-          encodedRoute: encodedRoute,
-        ),
+      final driverConfig = RouteConfig.driver(
+        user: currentUser!,
+        timeOfTrip: read(dateTimeProvider).state,
+        riderCount: read(riderCountProvider).state,
+        encodedRoute: encodedRoute,
       );
+      driverRepo.pushDriverConfig(driverConfig);
+      read(currentRouteConfigProvider).state = driverConfig;
       AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
   }
