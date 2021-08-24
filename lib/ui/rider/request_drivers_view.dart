@@ -9,7 +9,7 @@ class RequestDriversView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(requestDriversViewModelProvider);
+    final model = ref.watch(requestDriversViewModel);
 
     useEffect(() {
       model.initState();

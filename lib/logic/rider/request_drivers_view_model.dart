@@ -1,17 +1,16 @@
-// TODO: Verify provider name
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
-import 'package:kapiot/model/route_config/route_config.dart';
 
-final requestDriversViewModelProvider =
-    Provider.autoDispose((ref) => RequestDriversViewModel(
-          read: ref.read,
-          riderRepo: ref.watch(riderRepositoryProvider),
-          currentUser: ref.watch(currentUserProvider),
-        ));
+final requestDriversViewModel = Provider.autoDispose(
+  (ref) => RequestDriversViewModel(
+    read: ref.read,
+    riderRepo: ref.watch(riderRepositoryProvider),
+    currentUser: ref.watch(currentUserProvider),
+  ),
+);
 
 class RequestDriversViewModel {
   RequestDriversViewModel({
