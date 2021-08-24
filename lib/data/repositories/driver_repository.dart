@@ -20,13 +20,21 @@ class DriverRepository {
     );
   }
 
-  // TODO: Kapiot algorithm here
-  Stream<List<KapiotUser>> getCompatibleDrivers() {
-    final compatibleDriversStream = firestoreHelper.collectionStream(
-      path: FirestorePath.colActiveDrivers(),
+  Stream<List<KapiotUser>> getAcceptedRidersStream(KapiotUser driver) {
+    final acceptedRidersConfigStream = firestoreHelper.collectionStream(
+      path: FirestorePath.colAcceptedRiders(driver.id),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-    return compatibleDriversStream
+    return acceptedRidersConfigStream
+        .map((routeConfig) => routeConfig.map((rc) => rc.user).toList());
+  }
+
+  Stream<List<KapiotUser>> getRequestingRidersStream(KapiotUser driver) {
+    final requestingRidersConfigStream = firestoreHelper.collectionStream(
+      path: FirestorePath.colRequestingRiders(driver.id),
+      builder: (data, docID) => RouteConfig.fromJson(data),
+    );
+    return requestingRidersConfigStream
         .map((routeConfig) => routeConfig.map((rc) => rc.user).toList());
   }
 }
