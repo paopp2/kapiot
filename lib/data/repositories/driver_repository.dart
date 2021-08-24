@@ -22,6 +22,9 @@ class DriverRepository {
 
   void acceptRider(String riderId, RouteConfig routeConfig) async {
     assert(routeConfig is ForDriver);
+    await firestoreHelper.deleteData(
+        path:
+            FirestorePath.docActiveDriverRequest(routeConfig.user.id, riderId));
     await firestoreHelper.setData(
       path: FirestorePath.docActiveDriverAccepted(routeConfig.user.id, riderId),
       data: routeConfig.toJson(),
