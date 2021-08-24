@@ -49,5 +49,7 @@ class RiderManagerViewModel {
     ["Angel", "10.342993", "123.932906"],
     ["Grace", "10.367631", "123.913818"],
   ];
-  void dispose() {}
+  void dispose() {
+    read(currentRouteConfigProvider).dispose();
+  }
 }
