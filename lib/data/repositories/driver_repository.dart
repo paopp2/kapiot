@@ -20,7 +20,14 @@ class DriverRepository {
     );
   }
 
-  void acceptRider(String riderId, RouteConfig routeConfig) {}
+  void acceptRider(String riderId, RouteConfig routeConfig) async {
+    assert(routeConfig is ForDriver);
+    await firestoreHelper.setData(
+      path: FirestorePath.docActiveDriverAccepted(routeConfig.user.id, riderId),
+      data: routeConfig.toJson(),
+    );
+  }
+
   Stream<List<KapiotUser>> getAcceptedRidersStream(KapiotUser driver) {
     final acceptedRidersConfigStream = firestoreHelper.collectionStream(
       path: FirestorePath.colAcceptedRiders(driver.id),
