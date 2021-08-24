@@ -4,6 +4,15 @@ class FirestoreHelper {
   FirestoreHelper._();
   static final instance = FirestoreHelper._();
 
+  Future<T> getData<T>({
+    required String path,
+    required T Function(Map<String, dynamic> data, String documentID) builder,
+  }) async {
+    final DocumentReference reference = FirebaseFirestore.instance.doc(path);
+    final DocumentSnapshot snapshot = await reference.get();
+    return builder(snapshot.data() as Map<String, dynamic>, snapshot.id);
+  }
+
   Future<void> setData({
     required String path,
     required Map<String, dynamic> data,
@@ -18,6 +27,21 @@ class FirestoreHelper {
     final reference = FirebaseFirestore.instance.doc(path);
     print('delete: $path');
     await reference.delete();
+  }
+
+  Future<void> moveData({
+    required String sourcePath,
+    required String destPath,
+  }) async {
+    final doc = await getData(
+      path: sourcePath,
+      builder: (data, _) => data,
+    );
+    await setData(
+      path: destPath,
+      data: doc,
+    );
+    await deleteData(path: sourcePath);
   }
 
   Stream<List<T>> collectionStream<T>({
