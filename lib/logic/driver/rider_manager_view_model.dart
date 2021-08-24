@@ -30,11 +30,11 @@ class RiderManagerViewModel {
       driverRepo.getRequestingRidersStream(currentUser!);
 
   void acceptRider(String riderId) {
-    final currentRouteConfig = read(currentRouteConfigProvider).state;
-    assert(currentRouteConfig != null);
+    final currentDriverConfig = read(currentRouteConfigProvider).state;
+    assert(currentDriverConfig != null);
     driverRepo.acceptRider(
       riderId,
-      currentRouteConfig!,
+      currentDriverConfig!,
     );
   }
 
