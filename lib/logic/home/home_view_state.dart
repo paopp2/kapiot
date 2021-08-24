@@ -17,13 +17,20 @@ final isEndLocFocusedProvider = StateProvider.autoDispose<bool>((ref) => false);
 final placeSuggestionsProvider =
     StateProvider.autoDispose<List<String?>>((ref) => []);
 
-final startLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+final startLocProvider =
+    StateProvider.autoDispose<KapiotLocation?>((ref) => null);
 
-final endLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+final endLocProvider = StateProvider.autoDispose<KapiotLocation?>((ref) {
+  ref.maintainState = true;
+  return null;
+});
 
 final startEndMarkersProvider =
     StateProvider.autoDispose<Set<Marker>>((ref) => {});
 
 final polylinesProvider = StateProvider.autoDispose<Set<Polyline>>((ref) => {});
 
-final routeCoordinatesProvider = StateProvider<List<LatLng>>((ref) => []);
+final routeCoordinatesProvider = StateProvider.autoDispose<List<LatLng>>((ref) {
+  ref.maintainState = true;
+  return [];
+});

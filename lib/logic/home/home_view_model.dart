@@ -196,10 +196,5 @@ class HomeViewModel {
   void dispose() {
     tecStartLoc.dispose();
     tecEndLoc.dispose();
-
-    // Manual dispose providers that can't be autoDisposed
-    read(routeCoordinatesProvider).dispose();
-    read(startLocProvider).dispose();
-    read(endLocProvider).dispose();
   }
 }
