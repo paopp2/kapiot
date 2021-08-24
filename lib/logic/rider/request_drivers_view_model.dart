@@ -2,7 +2,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 final requestDriversViewModelProvider =
     Provider.autoDispose((ref) => RequestDriversViewModel(
@@ -23,7 +25,14 @@ class RequestDriversViewModel {
 
   void initState() {}
 
-  // TODO: When requesting for a driver, the driver ID must be known to add in designated collection of that driver
+  void requestDriver(String driverId) {
+    final currentRouteConfig = read(currentRouteConfigProvider).state;
+    assert(currentRouteConfig != null);
+    riderRepo.requestDriver(
+      driverId,
+      currentRouteConfig!,
+    );
+  }
 
   Stream<List<KapiotUser>> getCompatibleDrivers() =>
       riderRepo.getCompatibleDrivers();
