@@ -26,7 +26,11 @@ class LoginView extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Spacer(
-                    flex: 2,
+                    flex: 1,
+                  ),
+                  const Image(
+                    image: AssetImage('lib/ui/assets/images/usc_logo.png'),
+                    width: 70,
                   ),
                   const Text(
                     'kapiot',
@@ -43,6 +47,7 @@ class LoginView extends HookConsumerWidget {
                   const Text(
                     'University of San Carlos',
                     style: TextStyle(
+                      letterSpacing: 3.5,
                       fontSize: 18,
                       fontFamily: 'Vegur',
                       color: Colors.grey,
@@ -50,7 +55,7 @@ class LoginView extends HookConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(
-                    flex: 3,
+                    flex: 2,
                   ),
                   GoogleAuthWidget(
                     model: model,

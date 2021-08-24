@@ -41,6 +41,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   
+  assets:
+    - lib/ui/assets/images/
   fonts:
     - family: Sanz
       fonts: 

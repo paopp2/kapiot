@@ -14,9 +14,9 @@ class GoogleAuthWidget extends StatelessWidget {
         padding: const EdgeInsets.all(4),
         child: OutlinedButton.icon(
           label: const Text(
-            "Sign in with Google",
+            "Sign in with USC Email",
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              // fontWeight: FontWeight.bold,
               fontSize: 20,
               color: Colors.black,
             ),
