@@ -28,56 +28,10 @@ class RequestDriversView extends HookConsumerWidget {
             panel: SizedBox(
               width: double.infinity,
               height: 330,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(20),
-                children: [
-                  Container(
-                    width: 240,
-                    color: Colors.grey[100],
-                    margin: const EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        const SizedBox(height: 10),
-                        const CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.blue,
-                        ),
-                        const SizedBox(height: 10),
-                        const Text('Paolo Pepito'),
-                        const SizedBox(height: 70),
-                        ElevatedButton(
-                          onPressed: () {
-                            print("hailed");
-                          },
-                          child: const Text('Hail Ride'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 240,
-                    color: Colors.grey[100],
-                    margin: const EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        const SizedBox(height: 10),
-                        const CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.blue,
-                        ),
-                        const SizedBox(height: 10),
-                        const Text('Charles Ausejo'),
-                        const SizedBox(height: 70),
-                        ElevatedButton(
-                          onPressed: () => model
-                              .requestDriver('HV9BcFRIKMYrQOYzd2gStGqErW12'),
-                          child: const Text('Hail Ride'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
+                itemBuilder: (context, index) {
+                  return Container(
                     width: 240,
                     color: Colors.grey[100],
                     margin: const EdgeInsets.all(10),
@@ -99,8 +53,8 @@ class RequestDriversView extends HookConsumerWidget {
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),
