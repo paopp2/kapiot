@@ -20,6 +20,7 @@ class DriverRepository {
     );
   }
 
+  void acceptRider(String riderId, RouteConfig routeConfig) {}
   Stream<List<KapiotUser>> getAcceptedRidersStream(KapiotUser driver) {
     final acceptedRidersConfigStream = firestoreHelper.collectionStream(
       path: FirestorePath.colAcceptedRiders(driver.id),
