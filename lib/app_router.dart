@@ -4,8 +4,8 @@ import 'package:kapiot/ui/driver/rider_manager_view.dart';
 import 'package:kapiot/ui/driver/stop_points_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
-import 'package:kapiot/ui/rider/request_accepted_view.dart';
-import 'package:kapiot/ui/rider/request_drivers_view.dart';
+import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
+import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
 
 class AppRouter {
   AppRouter._();

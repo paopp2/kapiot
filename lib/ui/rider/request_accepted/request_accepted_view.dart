@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
-import 'package:kapiot/ui/rider/components/request_accepted/request_accepted_map.dart';
+import 'package:kapiot/ui/rider/request_accepted/components/request_accepted_map.dart';
 import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 
 import 'components/request_accepted/ride_info_panel.dart';
