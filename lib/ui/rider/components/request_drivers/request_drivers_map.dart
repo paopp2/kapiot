@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers_view_model.dart';
 
-class RequestDriversViewMap extends StatelessWidget {
+class RequestDriversViewMap extends HookConsumerWidget {
   const RequestDriversViewMap({
     required this.model,
     Key? key,
@@ -12,7 +12,7 @@ class RequestDriversViewMap extends StatelessWidget {
   final RequestDriversViewModel model;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container();
   }
 }
