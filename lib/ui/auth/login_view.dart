@@ -56,17 +56,8 @@ class LoginView extends HookConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const Spacer(
-                  flex: 2,
-                ),
-                GoogleAuthWidget(
-                  model: model,
-                ),
-                // const SizedBox(height: 12),
-                // const Text(
-                //   "Login to continue",
-                //   style: TextStyle(fontSize: 16),
-                // ),
+                const Spacer(flex: 2),
+                GoogleAuthWidget(model: model),
                 const Spacer(),
               ],
             ),
