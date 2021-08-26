@@ -34,24 +34,22 @@ class RequestingRidersPanel extends HookConsumerWidget {
                   itemCount: requestingRiders.length,
                   itemBuilder: (context, index) {
                     final rider = requestingRiders[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
+                    return InkWell(
+                      onTap: () => model.acceptRider(rider.id),
+                      splashColor: Colors.green[200],
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 3),
+                        child: ListTile(
+                          leading: CircleAvatar(
                             backgroundImage: NetworkImage(rider.photoUrl!),
                           ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                          title: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
                             child: Text(rider.displayName ?? 'No Name',
                                 style: const TextStyle(fontSize: 20.0)),
                           ),
-                          ElevatedButton(
-                            onPressed: () => model.acceptRider(rider.id),
-                            child: const Text('Accept'),
-                          ),
-                        ],
+                        ),
                       ),
                     );
                   },
