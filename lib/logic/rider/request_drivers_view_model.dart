@@ -3,12 +3,12 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
-import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/rider/request_drivers_map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
+import 'request_drivers_view_state.dart';
 
 final requestDriversViewModel = Provider.autoDispose(
   (ref) => RequestDriversViewModel(
