@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/rider/request_accepted_view_model.dart';
+import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 
 class RideInfoPanel extends HookConsumerWidget {
