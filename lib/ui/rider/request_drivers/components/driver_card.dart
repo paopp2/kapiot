@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kapiot/logic/rider/request_drivers_view_model.dart';
+import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 class DriverCard extends StatelessWidget {
