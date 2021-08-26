@@ -47,8 +47,9 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> respondWhenDriverAccepts(
     Stream<KapiotUser?> acceptingDriver,
   ) async {
-    acceptingDriver.listen((acceptingDriver) {
-      if (acceptingDriver != null) {
+    acceptingDriver.listen((driver) {
+      if (driver != null) {
+        read(acceptingDriverProvider).state = driver;
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);
       }
     });

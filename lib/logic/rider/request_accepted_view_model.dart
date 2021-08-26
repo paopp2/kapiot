@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
@@ -19,4 +20,9 @@ class RequestAcceptedViewModel extends ViewModel {
   }) : super(read);
   final RiderRepository riderRepo;
   final KapiotUser? currentUser;
+
+  @override
+  void initState() {
+    assert(read(acceptingDriverProvider).state != null);
+  }
 }
