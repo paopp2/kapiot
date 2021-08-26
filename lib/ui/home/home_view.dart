@@ -9,6 +9,7 @@ import 'components/home_view_map.dart';
 class HomeView extends HookConsumerWidget {
   const HomeView({Key? key}) : super(key: key);
 
+
   @override
   Widget build(context, ref) {
     final model = ref.watch(homeViewModelProvider);
