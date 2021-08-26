@@ -28,11 +28,10 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: _appRouter.navigationKey,
       routes: _appRouter.routesList,
-      home: PortalView(),
-      // home: RootView(
-      //   loggedInBuilder: (_) => const HomeView(),
-      //   loggedOutBuilder: (_) => const LoginView(),
-      // ),
+      home: RootView(
+        loggedInBuilder: (_) => const HomeView(),
+        loggedOutBuilder: (_) => const LoginView(),
+      ),
     );
   }
 }
