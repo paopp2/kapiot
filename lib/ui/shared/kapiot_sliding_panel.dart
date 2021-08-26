@@ -17,10 +17,12 @@ class KapiotSlidingPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
+      defaultPanelState: PanelState.OPEN,
       minHeight: constraints.maxHeight * 0.1,
       maxHeight: constraints.maxHeight * 0.55,
       parallaxEnabled: true,
       parallaxOffset: 0.5,
+      backdropEnabled: true,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       body: map,
       panelBuilder: (controller) {
