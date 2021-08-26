@@ -5,8 +5,8 @@ import 'package:kapiot/logic/rider/request_accepted_view_state.dart';
 import 'package:kapiot/logic/rider/request_accepted_view_model.dart';
 import 'package:kapiot/ui/home/components/loading_screen.dart';
 
-class RequestDriversViewMap extends HookConsumerWidget {
-  const RequestDriversViewMap({
+class RequestAcceptedViewMap extends HookConsumerWidget {
+  const RequestAcceptedViewMap({
     required this.model,
     Key? key,
   }) : super(key: key);
