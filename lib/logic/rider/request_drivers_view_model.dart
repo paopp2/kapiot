@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final requestDriversViewModel = Provider.autoDispose(
@@ -12,17 +13,14 @@ final requestDriversViewModel = Provider.autoDispose(
   ),
 );
 
-class RequestDriversViewModel {
+class RequestDriversViewModel extends ViewModel {
   RequestDriversViewModel({
-    required this.read,
+    required Reader read,
     required this.riderRepo,
     required this.currentUser,
-  });
-  final Reader read;
+  }) : super(read);
   final RiderRepository riderRepo;
   final KapiotUser? currentUser;
-
-  void initState() {}
 
   void requestDriver(String driverId) {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
@@ -35,6 +33,4 @@ class RequestDriversViewModel {
 
   Stream<List<KapiotUser>> getCompatibleDrivers() =>
       riderRepo.getCompatibleDrivers();
-
-  void dispose() {}
 }

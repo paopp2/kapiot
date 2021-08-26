@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final riderManagerViewModel =
@@ -11,17 +12,19 @@ final riderManagerViewModel =
           currentUser: ref.watch(currentUserProvider),
         ));
 
-class RiderManagerViewModel {
+class RiderManagerViewModel extends ViewModel {
   RiderManagerViewModel({
-    required this.read,
+    required Reader read,
     required this.driverRepo,
     required this.currentUser,
-  });
-  final Reader read;
+  }) : super(read);
   final DriverRepository driverRepo;
   final KapiotUser? currentUser;
 
-  void initState() {}
+  @override
+  void dispose() {
+    read(currentRouteConfigProvider).dispose();
+  }
 
   Stream<List<KapiotUser>> getAcceptedRidersStream() =>
       driverRepo.getAcceptedRidersStream(currentUser!);
@@ -49,7 +52,4 @@ class RiderManagerViewModel {
     ["Angel", "10.342993", "123.932906"],
     ["Grace", "10.367631", "123.913818"],
   ];
-  void dispose() {
-    read(currentRouteConfigProvider).dispose();
-  }
 }

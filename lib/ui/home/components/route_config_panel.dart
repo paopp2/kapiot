@@ -82,20 +82,18 @@ class RouteConfigPanel extends HookConsumerWidget {
               Visibility(
                 child: SizedBox(
                   height: constraints.maxHeight * 0.25,
-                  child: Expanded(
-                    child: ListView.builder(
-                      itemCount: placeSuggestions.length,
-                      itemBuilder: (context, index) {
-                        final suggestion = placeSuggestions[index] ?? "";
-                        return ListTile(
-                          title: Text(suggestion),
-                          onTap: () => model.pickSuggestion(
-                            pickedSuggestion: suggestion,
-                            forStartLoc: false,
-                          ),
-                        );
-                      },
-                    ),
+                  child: ListView.builder(
+                    itemCount: placeSuggestions.length,
+                    itemBuilder: (context, index) {
+                      final suggestion = placeSuggestions[index] ?? "";
+                      return ListTile(
+                        title: Text(suggestion),
+                        onTap: () => model.pickSuggestion(
+                          pickedSuggestion: suggestion,
+                          forStartLoc: false,
+                        ),
+                      );
+                    },
                   ),
                 ),
                 visible: isEndLocFocused,
