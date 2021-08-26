@@ -28,9 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: _appRouter.navigationKey,
       routes: _appRouter.routesList,
-      home:
-          // PortalView(),
-          RootView(
+      home: RootView(
         loggedInBuilder: (_) => const HomeView(),
         loggedOutBuilder: (_) => const LoginView(),
       ),

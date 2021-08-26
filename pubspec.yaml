@@ -43,6 +43,7 @@ flutter:
   
   assets:
     - lib/ui/assets/images/
+    - lib/ui/assets/icons/
   fonts:
     - family: Sanz
       fonts: 

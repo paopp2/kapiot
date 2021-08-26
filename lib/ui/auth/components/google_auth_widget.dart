@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kapiot/logic/auth/login_view_model.dart';
 
 class GoogleAuthWidget extends StatelessWidget {
@@ -11,27 +10,26 @@ class GoogleAuthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
+        width: double.infinity,
         padding: const EdgeInsets.all(4),
         child: OutlinedButton.icon(
           label: const Text(
-            "Sign in with USC Email",
+            "Log in with USC Email",
             style: TextStyle(
-              // fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
               color: Colors.black,
             ),
           ),
-          icon: const FaIcon(
-            FontAwesomeIcons.google,
-            color: Colors.red,
+          icon: Image.asset(
+            'lib/ui/assets/icons/google.png',
+            width: 25,
+            height: 25,
           ),
           onPressed: model.signInWithGoogle,
           style: ButtonStyle(
             padding: MaterialStateProperty.all(
               const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-            ),
-            side: MaterialStateProperty.all(
-              const BorderSide(width: 1),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
