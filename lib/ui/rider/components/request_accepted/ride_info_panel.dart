@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/rider/request_accepted_view_model.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
 
-class RideInfoPanel extends StatelessWidget {
+class RideInfoPanel extends HookConsumerWidget {
   const RideInfoPanel(
-      {Key? key, required this.acceptingDriver, required this.constraints})
+      {Key? key, required this.model, required this.constraints})
       : super(key: key);
 
-  final KapiotUser acceptingDriver;
   final BoxConstraints constraints;
+  final RequestAcceptedViewModel model;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final acceptingDriver = ref.watch(acceptingDriverProvider).state!;
     return Column(
       children: [
         CircleAvatar(

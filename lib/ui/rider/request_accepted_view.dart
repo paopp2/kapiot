@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted_view_model.dart';
-import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 
 import 'components/request_accepted/ride_info_panel.dart';
@@ -13,7 +12,6 @@ class RequestAcceptedView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(requestAcceptedViewModel);
-    final acceptingDriver = ref.watch(acceptingDriverProvider).state!;
 
     useEffect(() {
       model.initState();
@@ -30,7 +28,7 @@ class RequestAcceptedView extends HookConsumerWidget {
               child: Text('Here lies Map'),
             ),
             panel: RideInfoPanel(
-              acceptingDriver: acceptingDriver,
+              model: model,
               constraints: constraints,
             ),
           ),
