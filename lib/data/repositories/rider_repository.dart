@@ -37,4 +37,22 @@ class RiderRepository {
     return compatibleDriversConfigStream
         .map((routeConfig) => routeConfig.map((rc) => rc.user).toList());
   }
+
+  Stream<KapiotUser?> getAcceptingDriverAsStream(String riderId) {
+    final riderConfigStream = firestoreHelper.documentStream(
+      path: FirestorePath.docActiveRider(riderId),
+      builder: (data, id) => RouteConfig.fromJson(data),
+    );
+
+    // Remaps the rider's RouteConfig stream into a different stream only
+    // emitting the 'acceptingDriver' field
+    return riderConfigStream.map((routeConfig) {
+      // This 'maybeMap' is required in order to access the 'acceptingDriver'
+      // property which is "ForRider" only
+      return routeConfig.maybeMap(
+        rider: (r) => r.acceptingDriver,
+        orElse: () => null,
+      );
+    });
+  }
 }
