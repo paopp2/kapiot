@@ -12,6 +12,7 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
@@ -33,9 +34,9 @@ final homeViewModelProvider = Provider.autoDispose(
   ),
 );
 
-class HomeViewModel {
+class HomeViewModel extends ViewModel {
   HomeViewModel({
-    required this.read,
+    required Reader read,
     required this.riderRepo,
     required this.driverRepo,
     required this.currentUser,
@@ -43,8 +44,7 @@ class HomeViewModel {
     required this.locationService,
     required this.googleMapsApiServices,
     required this.mapController,
-  });
-  final Reader read;
+  }) : super(read);
   final RiderRepository riderRepo;
   final DriverRepository driverRepo;
   final AuthService authService;
@@ -56,6 +56,7 @@ class HomeViewModel {
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
 
+  @override
   Future<void> initState() async {
     await mapController.initializeMap();
     final startLocation = read(startLocProvider).state;
@@ -66,6 +67,12 @@ class HomeViewModel {
       read(startLocProvider).state =
           startLocation.copyWith(address: currentPlace);
     }
+  }
+
+  @override
+  void dispose() {
+    tecStartLoc.dispose();
+    tecEndLoc.dispose();
   }
 
   Future<void> signOut() async => await authService.signOutGoogle();
@@ -191,15 +198,5 @@ class HomeViewModel {
       read(currentRouteConfigProvider).state = driverConfig;
       AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
-  }
-
-  void dispose() {
-    tecStartLoc.dispose();
-    tecEndLoc.dispose();
-
-    // Manual dispose providers that can't be autoDisposed
-    read(routeCoordinatesProvider).dispose();
-    read(startLocProvider).dispose();
-    read(endLocProvider).dispose();
   }
 }

@@ -20,6 +20,27 @@ class DriverRepository {
     );
   }
 
+  void acceptRider(String riderId, RouteConfig driverConfig) async {
+    assert(driverConfig is ForDriver);
+    final driver = driverConfig.user;
+    final driverId = driver.id;
+    final acceptedRiderConfig = await firestoreHelper.getData(
+      path: FirestorePath.docActiveDriverRequest(driverId, riderId),
+      builder: (data, id) => RouteConfig.fromJson(data),
+    );
+    await firestoreHelper.moveData(
+      sourcePath: FirestorePath.docActiveDriverRequest(driverId, riderId),
+      destPath: FirestorePath.docActiveDriverAccepted(driverId, riderId),
+    );
+    if (acceptedRiderConfig is ForRider) {
+      await firestoreHelper.setData(
+          path: FirestorePath.docActiveRider(acceptedRiderConfig.user.id),
+          data: acceptedRiderConfig.copyWith(acceptingDriver: driver).toJson());
+    } else {
+      throw Exception("The received RouteConfig is not for Rider");
+    }
+  }
+
   Stream<List<KapiotUser>> getAcceptedRidersStream(KapiotUser driver) {
     final acceptedRidersConfigStream = firestoreHelper.collectionStream(
       path: FirestorePath.colAcceptedRiders(driver.id),

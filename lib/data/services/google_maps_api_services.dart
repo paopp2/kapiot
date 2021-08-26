@@ -72,7 +72,14 @@ class MapsUtils {
     final convertedLatLngList = routeCoordinates
         .map((c) => Utils.LatLng(c.latitude, c.longitude))
         .toList();
-    final encodedRoute = Utils.PolygonUtil.encode(convertedLatLngList);
-    return encodedRoute;
+    return Utils.PolygonUtil.encode(convertedLatLngList);
+  }
+
+  // Same case with encodeRoute (why conversion is necessary)
+  Future<List<Gmaps.LatLng>> decodeRoute(String encodedRoute) async {
+    final preConvertRouteCoordinates = Utils.PolygonUtil.decode(encodedRoute);
+    return preConvertRouteCoordinates
+        .map((coor) => Gmaps.LatLng(coor.latitude, coor.longitude))
+        .toList();
   }
 }

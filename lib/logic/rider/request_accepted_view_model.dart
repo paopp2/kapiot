@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final requestAcceptedViewModel =
@@ -10,16 +12,17 @@ final requestAcceptedViewModel =
           currentUser: ref.watch(currentUserProvider),
         ));
 
-class RequestAcceptedViewModel {
+class RequestAcceptedViewModel extends ViewModel {
   RequestAcceptedViewModel({
-    required this.read,
+    required Reader read,
     required this.riderRepo,
     required this.currentUser,
-  });
-  final Reader read;
+  }) : super(read);
   final RiderRepository riderRepo;
   final KapiotUser? currentUser;
 
-  void initState() {}
-  void dispose() {}
+  @override
+  void initState() {
+    assert(read(acceptingDriverProvider).state != null);
+  }
 }

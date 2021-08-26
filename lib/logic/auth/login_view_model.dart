@@ -1,18 +1,20 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/services/auth_service.dart';
+import 'package:kapiot/logic/shared/view_model.dart';
 
-final loginViewModel = Provider.autoDispose((ref) => LoginViewModel(
-      read: ref.read,
-      authService: ref.watch(authServiceProvider),
-    ));
+final loginViewModel = Provider.autoDispose(
+  (ref) => LoginViewModel(
+    read: ref.read,
+    authService: ref.watch(authServiceProvider),
+  ),
+);
 
-class LoginViewModel {
-  LoginViewModel({required this.read, required this.authService});
-  final Reader read;
+class LoginViewModel extends ViewModel {
+  LoginViewModel({
+    required Reader read,
+    required this.authService,
+  }) : super(read);
   final AuthService authService;
 
-  void initState() {}
   Future<void> signInWithGoogle() async => await authService.signInWithGoogle();
-  void dispose() {}
 }
