@@ -3,14 +3,16 @@ import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.da
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 class DriverCard extends StatelessWidget {
-  const DriverCard({
-    Key? key,
-    required this.driver,
-    required this.model,
-  }) : super(key: key);
+  const DriverCard(
+      {Key? key,
+      required this.driver,
+      required this.model,
+      required this.constraints})
+      : super(key: key);
 
   final KapiotUser driver;
   final RequestDriversViewModel model;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +22,15 @@ class DriverCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Column(
         children: [
-          const SizedBox(height: 30),
+          SizedBox(height: constraints.maxHeight * 0.04),
           CircleAvatar(
             radius: 40,
             backgroundColor: Colors.blue,
             backgroundImage: NetworkImage(driver.photoUrl!),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: constraints.maxHeight * 0.01),
           Text(driver.displayName ?? 'No name'),
-          const SizedBox(height: 70),
+          SizedBox(height: constraints.maxHeight * 0.09),
           ElevatedButton(
             onPressed: () => model.requestDriver(driver.id),
             child: const Text('Hail Ride'),

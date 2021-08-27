@@ -6,12 +6,12 @@ import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.da
 import 'driver_card.dart';
 
 class DriverCardStream extends HookConsumerWidget {
-  const DriverCardStream({
-    Key? key,
-    required this.model,
-  }) : super(key: key);
+  const DriverCardStream(
+      {Key? key, required this.model, required this.constraints})
+      : super(key: key);
 
   final RequestDriversViewModel model;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +29,8 @@ class DriverCardStream extends HookConsumerWidget {
           itemCount: compatibleDrivers.length,
           itemBuilder: (context, index) {
             final driver = compatibleDrivers[index];
-            return DriverCard(driver: driver, model: model);
+            return DriverCard(
+                driver: driver, model: model, constraints: constraints);
           },
         ),
       );
