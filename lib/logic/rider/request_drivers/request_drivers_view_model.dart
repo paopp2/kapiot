@@ -16,11 +16,7 @@ final requestDriversViewModel = Provider.autoDispose(
     riderRepo: ref.watch(riderRepositoryProvider),
     locationService: ref.watch(locationServiceProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
-    mapController: RequestDriversMapController(
-      read: ref.read,
-      locationService: ref.watch(locationServiceProvider),
-      googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
-    ),
+    mapController: ref.watch(requestDriversMapController),
   ),
 );
 
