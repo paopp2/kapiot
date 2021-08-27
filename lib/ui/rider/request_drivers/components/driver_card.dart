@@ -22,15 +22,18 @@ class DriverCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Column(
         children: [
-          SizedBox(height: constraints.maxHeight * 0.04),
-          CircleAvatar(
-            radius: 40,
-            backgroundColor: Colors.blue,
-            backgroundImage: NetworkImage(driver.photoUrl!),
+          Container(
+            margin: EdgeInsets.only(
+                top: constraints.maxHeight * 0.04,
+                bottom: constraints.maxHeight * 0.01),
+            child: CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.blue,
+              backgroundImage: NetworkImage(driver.photoUrl!),
+            ),
           ),
-          SizedBox(height: constraints.maxHeight * 0.01),
           Text(driver.displayName ?? 'No name'),
-          SizedBox(height: constraints.maxHeight * 0.09),
+          SizedBox(height: constraints.maxHeight * 0.15),
           ElevatedButton(
             onPressed: () => model.requestDriver(driver.id),
             child: const Text('Hail Ride'),

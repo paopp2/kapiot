@@ -22,17 +22,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _appRouter = AppRouter.instance;
     return MaterialApp(
-        title: 'Kapiot',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        navigatorKey: _appRouter.navigationKey,
-        routes: _appRouter.routesList,
-        home: PortalView()
-        //  RootView(
-        //   loggedInBuilder: (_) => const HomeView(),
-        //   loggedOutBuilder: (_) => const LoginView(),
-        // ),
-        );
+      title: 'Kapiot',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      navigatorKey: _appRouter.navigationKey,
+      routes: _appRouter.routesList,
+      home: RootView(
+        loggedInBuilder: (_) => const HomeView(),
+        loggedOutBuilder: (_) => const LoginView(),
+      ),
+    );
   }
 }
