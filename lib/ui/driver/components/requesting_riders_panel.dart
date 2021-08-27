@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/request_manager_view_state.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
+import 'package:kapiot/ui/shared/loading_widget.dart';
 
 class RequestingRidersPanel extends HookConsumerWidget {
   const RequestingRidersPanel({
@@ -26,9 +27,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
                 error: (_, __) => const Center(
                   child: Text('Error'),
                 ),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                loading: () => const LoadingWidget(),
                 data: (requestingRiders) => ListView.builder(
                   shrinkWrap: true,
                   itemCount: requestingRiders.length,
