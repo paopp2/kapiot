@@ -26,11 +26,7 @@ final homeViewModelProvider = Provider.autoDispose(
     authService: ref.watch(authServiceProvider),
     locationService: ref.watch(locationServiceProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
-    mapController: HomeMapController(
-      read: ref.read,
-      locationService: ref.watch(locationServiceProvider),
-      googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
-    ),
+    mapController: ref.watch(homeMapController),
   ),
 );
 
@@ -156,13 +152,19 @@ class HomeViewModel extends ViewModel {
     showRouteIfBothLocationsSet();
   }
 
-  void showRouteIfBothLocationsSet() {
+  void showRouteIfBothLocationsSet() async {
     final startLocation = read(startLocProvider).state;
     final endLocation = read(endLocProvider).state;
     if (startLocation != null && endLocation != null) {
+      final routeCoordinates = await mapController.getRouteCoordinates(
+        start: startLocation,
+        end: endLocation,
+      );
+      read(routeCoordinatesProvider).state = routeCoordinates;
       mapController.showRoute(
         start: startLocation,
         end: endLocation,
+        routeCoordinates: routeCoordinates,
       );
     }
   }

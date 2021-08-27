@@ -19,7 +19,7 @@ final requestDriversViewModel = Provider.autoDispose(
     mapController: RequestDriversMapController(
       read: ref.read,
       locationService: ref.watch(locationServiceProvider),
-      googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+      gmapsApiServices: ref.watch(googleMapsApiServicesProvider),
     ),
   ),
 );

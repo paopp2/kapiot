@@ -19,7 +19,7 @@ final requestAcceptedViewModel = Provider.autoDispose(
     mapController: RequestAcceptedMapController(
       read: ref.read,
       locationService: ref.watch(locationServiceProvider),
-      googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+      gmapsApiServices: ref.watch(googleMapsApiServicesProvider),
     ),
   ),
 );

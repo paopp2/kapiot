@@ -25,11 +25,6 @@ final endLocProvider = StateProvider.autoDispose<KapiotLocation?>((ref) {
   return null;
 });
 
-final startEndMarkersProvider =
-    StateProvider.autoDispose<Set<Marker>>((ref) => {});
-
-final polylinesProvider = StateProvider.autoDispose<Set<Polyline>>((ref) => {});
-
 final routeCoordinatesProvider = StateProvider.autoDispose<List<LatLng>>((ref) {
   ref.maintainState = true;
   return [];
