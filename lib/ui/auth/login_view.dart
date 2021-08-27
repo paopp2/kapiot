@@ -41,8 +41,8 @@ class LoginView extends HookConsumerWidget {
                       letterSpacing: 7,
                       color: Color(0xff5eab53)),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: constraints.maxHeight * 0.01,
                 ),
                 const Center(
                   child: Text(

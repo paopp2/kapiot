@@ -18,8 +18,6 @@ class KapiotSlidingPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
       defaultPanelState: PanelState.OPEN,
-      minHeight: constraints.maxHeight * 0.1,
-      maxHeight: constraints.maxHeight * 0.55,
       parallaxEnabled: true,
       parallaxOffset: 0.5,
       backdropEnabled: true,
@@ -30,8 +28,8 @@ class KapiotSlidingPanel extends StatelessWidget {
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: constraints.maxHeight * 0.01,
               ),
               Container(
                 width: 40,
@@ -41,12 +39,10 @@ class KapiotSlidingPanel extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              Text(title),
-              const SizedBox(
-                height: 20,
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: constraints.maxHeight * 0.03),
+                child: Text(title),
               ),
               panel,
             ],

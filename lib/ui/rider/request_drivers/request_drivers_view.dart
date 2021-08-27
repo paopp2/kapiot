@@ -31,8 +31,8 @@ class RequestDriversView extends HookConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: SizedBox(
                 width: double.infinity,
-                height: 330,
-                child: DriverCardStream(model: model),
+                height: constraints.maxHeight * 0.5,
+                child: DriverCardStream(model: model, constraints: constraints),
               ),
             ),
           ),
