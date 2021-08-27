@@ -12,6 +12,8 @@ class RiderRepository {
   RiderRepository({required this.firestoreHelper});
   final FirestoreHelper firestoreHelper;
 
+  static List<String> driverIdList = [];
+
   void pushRiderConfig(RouteConfig routeConfig) async {
     assert(routeConfig is ForRider);
     await firestoreHelper.setData(
@@ -26,6 +28,8 @@ class RiderRepository {
       path: FirestorePath.docActiveDriverRequest(driverId, riderConfig.user.id),
       data: riderConfig.toJson(),
     );
+    driverIdList.add(driverId);
+    print(driverIdList);
   }
 
   // TODO: Kapiot algorithm here
