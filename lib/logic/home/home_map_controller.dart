@@ -12,22 +12,20 @@ final homeMapController = Provider.autoDispose(
   (ref) => HomeMapController(
     read: ref.read,
     locationService: ref.watch(locationServiceProvider),
-    gmapsApiServices: ref.watch(googleMapsApiServicesProvider),
+    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
   ),
 );
 
 class HomeMapController extends MapController {
   HomeMapController({
-    required this.read,
+    required Reader read,
+    required GoogleMapsApiServices googleMapsApiServices,
     required this.locationService,
-    required this.gmapsApiServices,
   }) : super(
-          baseRead: read,
-          googleMapsApiServices: gmapsApiServices,
+          read: read,
+          googleMapsApiServices: googleMapsApiServices,
         );
-  final Reader read;
   final LocationService locationService;
-  final GoogleMapsApiServices gmapsApiServices;
 
   @override
   Future<void> initializeMap() async {
@@ -37,6 +35,7 @@ class HomeMapController extends MapController {
       zoom: 20,
     );
     read(startLocProvider).state = currentLoc;
+    clearMap();
     addMarker(
       markerId: "start_location",
       location: currentLoc,

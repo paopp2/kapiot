@@ -12,22 +12,20 @@ final requestAcceptedMapController = Provider.autoDispose(
   (ref) => RequestAcceptedMapController(
     read: ref.read,
     locationService: ref.watch(locationServiceProvider),
-    gmapsApiServices: ref.watch(googleMapsApiServicesProvider),
+    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
   ),
 );
 
 class RequestAcceptedMapController extends MapController {
   RequestAcceptedMapController({
-    required this.read,
+    required Reader read,
+    required GoogleMapsApiServices googleMapsApiServices,
     required this.locationService,
-    required this.gmapsApiServices,
   }) : super(
-          baseRead: read,
-          googleMapsApiServices: gmapsApiServices,
+          read: read,
+          googleMapsApiServices: googleMapsApiServices,
         );
-  final Reader read;
   final LocationService locationService;
-  final GoogleMapsApiServices gmapsApiServices;
 
   @override
   Future<void> initializeMap() async {

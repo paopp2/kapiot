@@ -13,10 +13,10 @@ final polylinesProvider = StateProvider<Set<Polyline>>((ref) => {});
 
 abstract class MapController {
   MapController({
-    required this.baseRead,
+    required this.read,
     required this.googleMapsApiServices,
   });
-  final Reader baseRead;
+  final Reader read;
   final GoogleMapsApiServices googleMapsApiServices;
   final Completer<GoogleMapController> _tempController = Completer();
   late final GoogleMapController gmapController;
@@ -31,8 +31,8 @@ abstract class MapController {
   }
 
   void clearMap() {
-    baseRead(markersProvider).state = {};
-    baseRead(polylinesProvider).state = {};
+    read(markersProvider).state = {};
+    read(polylinesProvider).state = {};
   }
 
   Future<List<LatLng>> getRouteCoordinates({
@@ -48,7 +48,7 @@ abstract class MapController {
     required KapiotLocation end,
     required List<LatLng> routeCoordinates,
   }) async {
-    baseRead(markersProvider).state = {};
+    read(markersProvider).state = {};
     addMarker(markerId: "start_location", location: start);
     addMarker(markerId: "end_location", location: end);
     drawPolyLine(routeCoordinates);
@@ -69,18 +69,18 @@ abstract class MapController {
   }
 
   void drawPolyLine(List<LatLng> routeCoordinates) {
-    final polylines = baseRead(polylinesProvider).state;
+    final polylines = read(polylinesProvider).state;
     Polyline polyline = Polyline(
       polylineId: const PolylineId("poly"),
       color: Colors.red,
       points: routeCoordinates,
     );
     polylines.add(polyline);
-    baseRead(polylinesProvider).state = polylines;
+    read(polylinesProvider).state = polylines;
   }
 
   void addMarker({required String markerId, required KapiotLocation location}) {
-    final markers = baseRead(markersProvider).state;
+    final markers = read(markersProvider).state;
     markers.add(
       Marker(
         markerId: MarkerId(markerId),
@@ -88,6 +88,6 @@ abstract class MapController {
         icon: BitmapDescriptor.defaultMarker,
       ),
     );
-    baseRead(markersProvider).state = markers;
+    read(markersProvider).state = markers;
   }
 }
