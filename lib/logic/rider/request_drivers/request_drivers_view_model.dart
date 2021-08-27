@@ -70,7 +70,6 @@ class RequestDriversViewModel extends ViewModel {
   ) async {
     final currentRiderConfig = read(currentRouteConfigProvider).state;
     final riderId = currentRiderConfig!.user.id;
-    // TODO: Move line of code below
     acceptingDriver.listen((driver) {
       if (driver != null) {
         riderRepo.deletePendingRequests(riderId);
