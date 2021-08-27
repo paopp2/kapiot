@@ -12,7 +12,12 @@ class RiderRepository {
   RiderRepository({required this.firestoreHelper});
   final FirestoreHelper firestoreHelper;
 
-  static List<String> driverIdList = [];
+  // TODO: Initialize as empty. List all drivers temporarily.
+  static List<String> driverIdList = [
+    '3WO9ATwspsMwYCRCgdbXnfpp5r83',
+    'HV9BcFRIKMYrQOYzd2gStGqErW12',
+    'TNZyDLzIrLhS4Bklz5yG1rCoDoF2'
+  ];
 
   void pushRiderConfig(RouteConfig routeConfig) async {
     assert(routeConfig is ForRider);
@@ -29,7 +34,14 @@ class RiderRepository {
       data: riderConfig.toJson(),
     );
     driverIdList.add(driverId);
-    print(driverIdList);
+  }
+
+  /// Deletes all other requests from a Driver's requests colection
+  void deletePendingRequests(String acceptingDriverId, String riderId) {
+    for (var driverId in driverIdList) {
+      firestoreHelper.deleteData(
+          path: FirestorePath.docActiveDriverRequest(driverId, riderId));
+    }
   }
 
   // TODO: Kapiot algorithm here
