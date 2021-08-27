@@ -2,8 +2,8 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart' as Gmaps;
-import 'package:maps_toolkit/maps_toolkit.dart' as Utils;
+import 'package:google_maps_flutter/google_maps_flutter.dart' as gmaps;
+import 'package:maps_toolkit/maps_toolkit.dart' as utils;
 
 // TODO: Exposed API key! Hide in production
 const googleApiKey = "AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI";
@@ -47,7 +47,7 @@ class DirectionsService {
   static final instance = DirectionsService._();
   final _polylinePoints = PolylinePoints();
 
-  Future<List<Gmaps.LatLng>> getRouteCoordinates({
+  Future<List<gmaps.LatLng>> getRouteCoordinates({
     required KapiotLocation start,
     required KapiotLocation end,
   }) async {
@@ -58,7 +58,7 @@ class DirectionsService {
       travelMode: TravelMode.driving,
     );
     return result.points
-        .map((p) => Gmaps.LatLng(p.latitude, p.longitude))
+        .map((p) => gmaps.LatLng(p.latitude, p.longitude))
         .toList();
   }
 }
@@ -69,18 +69,18 @@ class MapsUtils {
 
   // Conversion is necessary as google_maps_flutter and maps_toolkit both
   // implement a LatLng class
-  Future<String> encodeRoute(List<Gmaps.LatLng> routeCoordinates) async {
+  Future<String> encodeRoute(List<gmaps.LatLng> routeCoordinates) async {
     final convertedLatLngList = routeCoordinates
-        .map((c) => Utils.LatLng(c.latitude, c.longitude))
+        .map((c) => utils.LatLng(c.latitude, c.longitude))
         .toList();
-    return Utils.PolygonUtil.encode(convertedLatLngList);
+    return utils.PolygonUtil.encode(convertedLatLngList);
   }
 
   // Same case with encodeRoute (why conversion is necessary)
-  Future<List<Gmaps.LatLng>> decodeRoute(String encodedRoute) async {
-    final preConvertRouteCoordinates = Utils.PolygonUtil.decode(encodedRoute);
+  Future<List<gmaps.LatLng>> decodeRoute(String encodedRoute) async {
+    final preConvertRouteCoordinates = utils.PolygonUtil.decode(encodedRoute);
     return preConvertRouteCoordinates
-        .map((coor) => Gmaps.LatLng(coor.latitude, coor.longitude))
+        .map((coor) => gmaps.LatLng(coor.latitude, coor.longitude))
         .toList();
   }
 }
