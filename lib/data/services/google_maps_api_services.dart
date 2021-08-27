@@ -32,6 +32,7 @@ class PlacesService {
   static final instance = PlacesService._();
 
   Future<List<String?>> getAutocompleteSuggestions(String query) async {
+    if (query.isEmpty) return [];
     final googlePlace = GooglePlace(googleApiKey);
     final result = await googlePlace.autocomplete.get(query);
     final predictions = result?.predictions ?? [];
