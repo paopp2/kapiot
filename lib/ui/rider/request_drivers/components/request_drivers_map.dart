@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
-import 'package:kapiot/ui/shared/loading_screen.dart';
+import 'package:kapiot/ui/shared/loading_widget.dart';
 
 class RequestDriversViewMap extends HookConsumerWidget {
   const RequestDriversViewMap({
@@ -20,7 +20,7 @@ class RequestDriversViewMap extends HookConsumerWidget {
     final markers = ref.watch(markersProvider).state;
     final polylines = ref.watch(polylinesProvider).state;
     return (startLocation == null)
-        ? const LoadingScreen(text: "Fetching current location...")
+        ? const LoadingWidget(text: "Fetching current location...")
         : GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: model.mapController.initialCameraPosition,

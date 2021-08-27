@@ -5,7 +5,7 @@ import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
-import 'package:kapiot/ui/shared/loading_screen.dart';
+import 'package:kapiot/ui/shared/loading_widget.dart';
 
 class HomeViewMap extends HookConsumerWidget {
   const HomeViewMap({
@@ -22,7 +22,7 @@ class HomeViewMap extends HookConsumerWidget {
     final markers = ref.watch(markersProvider).state;
     final polylines = ref.watch(polylinesProvider).state;
     return (startLocation == null)
-        ? const LoadingScreen(text: "Fetching current location...")
+        ? const LoadingWidget(text: "Fetching current location...")
         : GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: mapController.initialCameraPosition,

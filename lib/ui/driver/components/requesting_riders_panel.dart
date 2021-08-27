@@ -27,7 +27,8 @@ class RequestingRidersPanel extends HookConsumerWidget {
                 error: (_, __) => const Center(
                   child: Text('Error'),
                 ),
-                loading: () => const LoadingWidget(),
+                loading: () =>
+                    const LoadingWidget(text: 'Fetching ride requests...'),
                 data: (requestingRiders) => ListView.builder(
                   shrinkWrap: true,
                   itemCount: requestingRiders.length,
