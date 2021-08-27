@@ -6,8 +6,6 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'home_view_state.dart';
 
-const double latLngBoundsPadding = 50.0;
-
 final homeMapController = Provider.autoDispose(
   (ref) => HomeMapController(
     read: ref.read,

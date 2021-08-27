@@ -6,8 +6,6 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 
-const double latLngBoundsPadding = 50.0;
-
 final requestAcceptedMapController = Provider.autoDispose(
   (ref) => RequestAcceptedMapController(
     read: ref.read,
