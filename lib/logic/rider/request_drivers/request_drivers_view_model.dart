@@ -68,8 +68,11 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> respondWhenDriverAccepts(
     Stream<KapiotUser?> acceptingDriver,
   ) async {
+    final currentRiderConfig = read(currentRouteConfigProvider).state;
+    final riderId = currentRiderConfig!.user.id;
     acceptingDriver.listen((driver) {
       if (driver != null) {
+        riderRepo.deletePendingRequests(riderId);
         read(acceptingDriverProvider).state = driver;
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);
       }
