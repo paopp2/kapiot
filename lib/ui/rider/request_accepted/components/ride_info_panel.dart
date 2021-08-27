@@ -21,10 +21,10 @@ class RideInfoPanel extends HookConsumerWidget {
           backgroundColor: Colors.blue,
           backgroundImage: NetworkImage(acceptingDriver.photoUrl!),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: constraints.maxHeight * 0.01),
         Text(acceptingDriver.displayName!),
-        const SizedBox(
-          height: 10,
+        SizedBox(
+          height: constraints.maxHeight * 0.01,
         ),
         Stack(
           alignment: Alignment.bottomCenter,
@@ -39,13 +39,13 @@ class RideInfoPanel extends HookConsumerWidget {
               height: constraints.maxHeight * 0.28,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: constraints.maxHeight * 0.01,
                   ),
                   const Center(
                     child: Text('Your co passengers for this ride'),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: constraints.maxHeight * 0.015),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -79,11 +79,11 @@ class RideInfoPanel extends HookConsumerWidget {
                 ),
               ),
               child: Column(
-                children: const [
+                children: [
                   SizedBox(
-                    height: 10,
+                    height: constraints.maxHeight * 0.01,
                   ),
-                  Text("Rider's reviews"),
+                  const Text("Rider's reviews"),
                 ],
               ),
             ),
