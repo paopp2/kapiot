@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
+import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
@@ -9,6 +10,7 @@ final riderManagerViewModel =
     Provider.autoDispose((ref) => RiderManagerViewModel(
           read: ref.read,
           driverRepo: ref.watch(driverRepositoryProvider),
+          riderRepo: ref.watch(riderRepositoryProvider),
           currentUser: ref.watch(currentUserProvider),
         ));
 
@@ -16,8 +18,10 @@ class RiderManagerViewModel extends ViewModel {
   RiderManagerViewModel({
     required Reader read,
     required this.driverRepo,
+    required this.riderRepo,
     required this.currentUser,
   }) : super(read);
+  final RiderRepository riderRepo;
   final DriverRepository driverRepo;
   final KapiotUser? currentUser;
 
@@ -39,6 +43,7 @@ class RiderManagerViewModel extends ViewModel {
       riderId,
       currentDriverConfig!,
     );
+    riderRepo.deletePendingRequests(currentDriverConfig.user.id, riderId);
   }
 
   // *! Temporary list to maintain provider logic
