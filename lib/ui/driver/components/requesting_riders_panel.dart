@@ -33,21 +33,18 @@ class RequestingRidersPanel extends HookConsumerWidget {
                   itemCount: requestingRiders.length,
                   itemBuilder: (context, index) {
                     final rider = requestingRiders[index];
-                    return InkWell(
-                      onTap: () => model.acceptRider(rider.id),
-                      splashColor: Colors.green[200],
-                      child: Card(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 3),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(rider.photoUrl!),
-                          ),
-                          title: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Text(rider.displayName ?? 'No Name',
-                                style: const TextStyle(fontSize: 20.0)),
-                          ),
+                    return Card(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 3),
+                      child: ListTile(
+                        onTap: () => model.acceptRider(rider.id),
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(rider.photoUrl!),
+                        ),
+                        title: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(rider.displayName ?? 'No Name',
+                              style: const TextStyle(fontSize: 20.0)),
                         ),
                       ),
                     );
