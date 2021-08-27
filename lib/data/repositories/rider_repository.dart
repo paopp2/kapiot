@@ -37,7 +37,7 @@ class RiderRepository {
   }
 
   /// Deletes all other requests from a Driver's requests colection
-  void deletePendingRequests(String acceptingDriverId, String riderId) {
+  void deletePendingRequests(String riderId) {
     for (var driverId in driverIdList) {
       firestoreHelper.deleteData(
           path: FirestorePath.docActiveDriverRequest(driverId, riderId));

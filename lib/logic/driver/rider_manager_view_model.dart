@@ -10,7 +10,6 @@ final riderManagerViewModel =
     Provider.autoDispose((ref) => RiderManagerViewModel(
           read: ref.read,
           driverRepo: ref.watch(driverRepositoryProvider),
-          riderRepo: ref.watch(riderRepositoryProvider),
           currentUser: ref.watch(currentUserProvider),
         ));
 
@@ -18,10 +17,8 @@ class RiderManagerViewModel extends ViewModel {
   RiderManagerViewModel({
     required Reader read,
     required this.driverRepo,
-    required this.riderRepo,
     required this.currentUser,
   }) : super(read);
-  final RiderRepository riderRepo;
   final DriverRepository driverRepo;
   final KapiotUser? currentUser;
 
@@ -43,7 +40,6 @@ class RiderManagerViewModel extends ViewModel {
       riderId,
       currentDriverConfig!,
     );
-    riderRepo.deletePendingRequests(currentDriverConfig.user.id, riderId);
   }
 
   // *! Temporary list to maintain provider logic
