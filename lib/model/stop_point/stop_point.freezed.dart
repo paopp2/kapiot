@@ -18,10 +18,12 @@ class _$StopPointTearOff {
   const _$StopPointTearOff();
 
   _StopPoint call(
-      {required KapiotUser rider,
+      {required String id,
+      required KapiotUser rider,
       required KapiotLocation stopLocation,
       required bool isPickUp}) {
     return _StopPoint(
+      id: id,
       rider: rider,
       stopLocation: stopLocation,
       isPickUp: isPickUp,
@@ -34,6 +36,7 @@ const $StopPoint = _$StopPointTearOff();
 
 /// @nodoc
 mixin _$StopPoint {
+  String get id => throw _privateConstructorUsedError;
   KapiotUser get rider => throw _privateConstructorUsedError;
   KapiotLocation get stopLocation => throw _privateConstructorUsedError;
   bool get isPickUp => throw _privateConstructorUsedError;
@@ -47,7 +50,11 @@ mixin _$StopPoint {
 abstract class $StopPointCopyWith<$Res> {
   factory $StopPointCopyWith(StopPoint value, $Res Function(StopPoint) then) =
       _$StopPointCopyWithImpl<$Res>;
-  $Res call({KapiotUser rider, KapiotLocation stopLocation, bool isPickUp});
+  $Res call(
+      {String id,
+      KapiotUser rider,
+      KapiotLocation stopLocation,
+      bool isPickUp});
 
   $KapiotUserCopyWith<$Res> get rider;
   $KapiotLocationCopyWith<$Res> get stopLocation;
@@ -63,11 +70,16 @@ class _$StopPointCopyWithImpl<$Res> implements $StopPointCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? rider = freezed,
     Object? stopLocation = freezed,
     Object? isPickUp = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       rider: rider == freezed
           ? _value.rider
           : rider // ignore: cast_nullable_to_non_nullable
@@ -104,7 +116,11 @@ abstract class _$StopPointCopyWith<$Res> implements $StopPointCopyWith<$Res> {
           _StopPoint value, $Res Function(_StopPoint) then) =
       __$StopPointCopyWithImpl<$Res>;
   @override
-  $Res call({KapiotUser rider, KapiotLocation stopLocation, bool isPickUp});
+  $Res call(
+      {String id,
+      KapiotUser rider,
+      KapiotLocation stopLocation,
+      bool isPickUp});
 
   @override
   $KapiotUserCopyWith<$Res> get rider;
@@ -123,11 +139,16 @@ class __$StopPointCopyWithImpl<$Res> extends _$StopPointCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? rider = freezed,
     Object? stopLocation = freezed,
     Object? isPickUp = freezed,
   }) {
     return _then(_StopPoint(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       rider: rider == freezed
           ? _value.rider
           : rider // ignore: cast_nullable_to_non_nullable
@@ -148,10 +169,13 @@ class __$StopPointCopyWithImpl<$Res> extends _$StopPointCopyWithImpl<$Res>
 
 class _$_StopPoint with DiagnosticableTreeMixin implements _StopPoint {
   const _$_StopPoint(
-      {required this.rider,
+      {required this.id,
+      required this.rider,
       required this.stopLocation,
       required this.isPickUp});
 
+  @override
+  final String id;
   @override
   final KapiotUser rider;
   @override
@@ -161,7 +185,7 @@ class _$_StopPoint with DiagnosticableTreeMixin implements _StopPoint {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'StopPoint(rider: $rider, stopLocation: $stopLocation, isPickUp: $isPickUp)';
+    return 'StopPoint(id: $id, rider: $rider, stopLocation: $stopLocation, isPickUp: $isPickUp)';
   }
 
   @override
@@ -169,6 +193,7 @@ class _$_StopPoint with DiagnosticableTreeMixin implements _StopPoint {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'StopPoint'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('rider', rider))
       ..add(DiagnosticsProperty('stopLocation', stopLocation))
       ..add(DiagnosticsProperty('isPickUp', isPickUp));
@@ -178,6 +203,8 @@ class _$_StopPoint with DiagnosticableTreeMixin implements _StopPoint {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _StopPoint &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.rider, rider) ||
                 const DeepCollectionEquality().equals(other.rider, rider)) &&
             (identical(other.stopLocation, stopLocation) ||
@@ -191,6 +218,7 @@ class _$_StopPoint with DiagnosticableTreeMixin implements _StopPoint {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rider) ^
       const DeepCollectionEquality().hash(stopLocation) ^
       const DeepCollectionEquality().hash(isPickUp);
@@ -203,10 +231,13 @@ class _$_StopPoint with DiagnosticableTreeMixin implements _StopPoint {
 
 abstract class _StopPoint implements StopPoint {
   const factory _StopPoint(
-      {required KapiotUser rider,
+      {required String id,
+      required KapiotUser rider,
       required KapiotLocation stopLocation,
       required bool isPickUp}) = _$_StopPoint;
 
+  @override
+  String get id => throw _privateConstructorUsedError;
   @override
   KapiotUser get rider => throw _privateConstructorUsedError;
   @override
