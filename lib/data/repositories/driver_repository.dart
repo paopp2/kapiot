@@ -42,17 +42,24 @@ class DriverRepository {
     }
   }
 
+  Future<void> removeRiderFromAccepted(String driverId, String riderId) async {
+    firestoreHelper.deleteData(
+      path: FirestorePath.docActiveDriverAccepted(driverId, riderId),
+    );
+  }
+
   Stream<List<StopPoint>> getStopPointsStream(KapiotUser driver) {
     final acceptedRidersConfigStream = firestoreHelper.collectionStream(
       path: FirestorePath.colAcceptedRiders(driver.id),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
     return acceptedRidersConfigStream.map<List<StopPoint>>((rcList) {
-      // Splitting up a Rider's RouteConfig into two StopPoints, one for pickup
-      // and one for drop off
+      // Splitting up an accepted Rider's RouteConfig into two StopPoints, one
+      // for pickup and one for drop off
       final List<StopPoint> unsortedStopPoints = rcList.expand<StopPoint>((rc) {
         // ForRider check is necessary in order to be able to access a rider's
-        // startLoc and endLoc property
+        // startLoc and endLoc property even if all returned RouteConfigs here
+        // should be ForRider anyway
         assert(rc is ForRider);
         if (rc is ForRider) {
           final pickUpPoint = StopPoint(

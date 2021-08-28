@@ -24,6 +24,33 @@ class RiderManagerViewModel extends ViewModel {
   final KapiotUser? currentUser;
 
   @override
+  void initState() {
+    final stopPointsStream = getStopPointsStream();
+    stopPointsStream.listen((stopPointsList) {
+      read(stopPointsProvider).state = stopPointsList;
+      StopPoint? nextStop = read(nextStopProvider).state;
+
+      if (stopPointsList.length > 1) {
+        if (nextStop == null) {
+          // Initialize
+          read(currentStopProvider).state = stopPointsList.first;
+          read(nextStopProvider).state = stopPointsList[1];
+        } else {
+          read(currentStopProvider).state = nextStop;
+          final currentIndex = stopPointsList.indexOf(nextStop);
+          read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+        }
+      } else if (stopPointsList.length == 1) {
+        read(currentStopProvider).state = stopPointsList.first;
+        read(nextStopProvider).state = null;
+      } else {
+        read(currentStopProvider).state = null;
+        read(nextStopProvider).state = null;
+      }
+    });
+  }
+
+  @override
   void dispose() {
     read(currentRouteConfigProvider).dispose();
   }
@@ -43,15 +70,28 @@ class RiderManagerViewModel extends ViewModel {
     );
   }
 
-  void nextStopPoint(StopPoint currentStopPoint) {
-    read(stopPointIndexProvider).state++;
+  void nextStop() {
+    final stopPointsList = read(stopPointsProvider).state;
+    final currentStop = read(currentStopProvider).state;
+    final nextStop = read(nextStopProvider).state;
+    assert(currentStop != null);
+    if (currentStop!.isPickUp) {
+      read(currentStopProvider).state = nextStop;
+      if (nextStop != null) {
+        final currentIndex = stopPointsList.indexOf(nextStop);
+        if (stopPointsList.length > (currentIndex + 1)) {
+          read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+        } else {
+          read(nextStopProvider).state = null;
+        }
+      }
+    } else {
+      final currentDriverConfig = read(currentRouteConfigProvider).state;
+      assert(currentDriverConfig != null);
+      driverRepo.removeRiderFromAccepted(
+        currentDriverConfig!.user.id,
+        currentStop.rider.id,
+      );
+    }
   }
 }
-
-
-// if (!currentStopPoint.isPickUp) {
-//   read(stopPointIndexProvider).state++;
-// } else {
-//   // delete rider from accepted
-//   // reset index to 0
-// }
