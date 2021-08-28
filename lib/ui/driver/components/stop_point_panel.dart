@@ -6,8 +6,8 @@ import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
-class NextStopPointPanel extends HookConsumerWidget {
-  const NextStopPointPanel({
+class StopPointPanel extends HookConsumerWidget {
+  const StopPointPanel({
     Key? key,
     required this.model,
   }) : super(key: key);
