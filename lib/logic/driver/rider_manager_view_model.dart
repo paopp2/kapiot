@@ -1,9 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
+import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/stop_point/stop_point.dart';
 
 final riderManagerViewModel =
     Provider.autoDispose((ref) => RiderManagerViewModel(
@@ -22,15 +24,42 @@ class RiderManagerViewModel extends ViewModel {
   final KapiotUser? currentUser;
 
   @override
+  void initState() {
+    final stopPointsStream = getStopPointsStream();
+    stopPointsStream.listen((stopPointsList) {
+      read(stopPointsProvider).state = stopPointsList;
+      StopPoint? nextStop = read(nextStopProvider).state;
+
+      if (stopPointsList.length > 1) {
+        if (nextStop == null) {
+          // Initialize
+          read(currentStopProvider).state = stopPointsList.first;
+          read(nextStopProvider).state = stopPointsList[1];
+        } else {
+          read(currentStopProvider).state = nextStop;
+          final currentIndex = stopPointsList.indexOf(nextStop);
+          read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+        }
+      } else if (stopPointsList.length == 1) {
+        read(currentStopProvider).state = stopPointsList.first;
+        read(nextStopProvider).state = null;
+      } else {
+        read(currentStopProvider).state = null;
+        read(nextStopProvider).state = null;
+      }
+    });
+  }
+
+  @override
   void dispose() {
     read(currentRouteConfigProvider).dispose();
   }
 
-  Stream<List<KapiotUser>> getAcceptedRidersStream() =>
-      driverRepo.getAcceptedRidersStream(currentUser!);
-
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
       driverRepo.getRequestingRidersStream(currentUser!);
+
+  Stream<List<StopPoint>> getStopPointsStream() =>
+      driverRepo.getStopPointsStream(currentUser!);
 
   void acceptRider(String riderId) {
     final currentDriverConfig = read(currentRouteConfigProvider).state;
@@ -41,15 +70,28 @@ class RiderManagerViewModel extends ViewModel {
     );
   }
 
-  // *! Temporary list to maintain provider logic
-  List<String> requestingRiders = [
-    'Christian Gonzales',
-    'Blithe Gonzales',
-    'Charles Ausejo'
-  ];
-  // *! Temporary list to maintain provider logic. Pretend this is a model instead of a list
-  List<List<String>> acceptedRidersStopPoints = [
-    ["Angel", "10.342993", "123.932906"],
-    ["Grace", "10.367631", "123.913818"],
-  ];
+  void nextStop() {
+    final stopPointsList = read(stopPointsProvider).state;
+    final currentStop = read(currentStopProvider).state;
+    final nextStop = read(nextStopProvider).state;
+    assert(currentStop != null);
+    if (currentStop!.isPickUp) {
+      read(currentStopProvider).state = nextStop;
+      if (nextStop != null) {
+        final currentIndex = stopPointsList.indexOf(nextStop);
+        if (stopPointsList.length > (currentIndex + 1)) {
+          read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+        } else {
+          read(nextStopProvider).state = null;
+        }
+      }
+    } else {
+      final currentDriverConfig = read(currentRouteConfigProvider).state;
+      assert(currentDriverConfig != null);
+      driverRepo.removeRiderFromAccepted(
+        currentDriverConfig!.user.id,
+        currentStop.rider.id,
+      );
+    }
+  }
 }

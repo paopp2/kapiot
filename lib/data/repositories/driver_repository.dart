@@ -3,6 +3,7 @@ import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
+import 'package:kapiot/model/stop_point/stop_point.dart';
 
 final driverRepositoryProvider = Provider.autoDispose(
   (ref) => DriverRepository(firestoreHelper: FirestoreHelper.instance),
@@ -41,13 +42,44 @@ class DriverRepository {
     }
   }
 
-  Stream<List<KapiotUser>> getAcceptedRidersStream(KapiotUser driver) {
+  Future<void> removeRiderFromAccepted(String driverId, String riderId) async {
+    firestoreHelper.deleteData(
+      path: FirestorePath.docActiveDriverAccepted(driverId, riderId),
+    );
+  }
+
+  Stream<List<StopPoint>> getStopPointsStream(KapiotUser driver) {
     final acceptedRidersConfigStream = firestoreHelper.collectionStream(
       path: FirestorePath.colAcceptedRiders(driver.id),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-    return acceptedRidersConfigStream
-        .map((routeConfig) => routeConfig.map((rc) => rc.user).toList());
+    return acceptedRidersConfigStream.map<List<StopPoint>>((rcList) {
+      // Splitting up an accepted Rider's RouteConfig into two StopPoints, one
+      // for pickup and one for drop off
+      final List<StopPoint> unsortedStopPoints = rcList.expand<StopPoint>((rc) {
+        // ForRider check is necessary in order to be able to access a rider's
+        // startLoc and endLoc property even if all returned RouteConfigs here
+        // should be ForRider anyway
+        assert(rc is ForRider);
+        if (rc is ForRider) {
+          final pickUpPoint = StopPoint(
+            rider: rc.user,
+            stopLocation: rc.startLocation,
+            isPickUp: true,
+          );
+          final dropOffPoint = pickUpPoint.copyWith(
+            stopLocation: rc.endLocation,
+            isPickUp: false,
+          );
+          return [pickUpPoint, dropOffPoint];
+        }
+        throw Exception(
+          "Error remapping acceptedRiderConfigs into StopPoints (config not ForRider)",
+        );
+      }).toList();
+      // TODO: sort(unsortedStopPoints) according to driver's route
+      return unsortedStopPoints;
+    });
   }
 
   Stream<List<KapiotUser>> getRequestingRidersStream(KapiotUser driver) {
