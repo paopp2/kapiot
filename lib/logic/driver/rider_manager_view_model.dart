@@ -26,9 +26,6 @@ class RiderManagerViewModel extends ViewModel {
     read(currentRouteConfigProvider).dispose();
   }
 
-  Stream<List<KapiotUser>> getAcceptedRidersStream() =>
-      driverRepo.getAcceptedRidersStream(currentUser!);
-
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
       driverRepo.getRequestingRidersStream(currentUser!);
 
@@ -40,16 +37,4 @@ class RiderManagerViewModel extends ViewModel {
       currentDriverConfig!,
     );
   }
-
-  // *! Temporary list to maintain provider logic
-  List<String> requestingRiders = [
-    'Christian Gonzales',
-    'Blithe Gonzales',
-    'Charles Ausejo'
-  ];
-  // *! Temporary list to maintain provider logic. Pretend this is a model instead of a list
-  List<List<String>> acceptedRidersStopPoints = [
-    ["Angel", "10.342993", "123.932906"],
-    ["Grace", "10.367631", "123.913818"],
-  ];
 }
