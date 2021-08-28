@@ -8,7 +8,6 @@ part 'stop_point.freezed.dart';
 @freezed
 class StopPoint with _$StopPoint {
   const factory StopPoint({
-    required String id,
     required KapiotUser rider,
     required KapiotLocation stopLocation,
     required bool isPickUp,
