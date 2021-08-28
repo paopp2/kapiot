@@ -5,17 +5,11 @@ import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 part 'stop_point.freezed.dart';
 
-enum StopPointAction {
-  pickUp,
-  dropOff,
-}
-
 @freezed
 class StopPoint with _$StopPoint {
   const factory StopPoint({
     required KapiotUser rider,
-    required KapiotLocation startLoc,
-    required KapiotLocation endLoc,
-    required StopPointAction action,
+    required KapiotLocation stopLocation,
+    required bool isPickUp,
   }) = _StopPoint;
 }
