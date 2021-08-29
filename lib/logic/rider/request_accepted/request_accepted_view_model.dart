@@ -38,6 +38,7 @@ class RequestAcceptedViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     assert(read(acceptingDriverProvider).state != null);
+    assert(currentUser != null);
     await mapController.initializeMap();
     final startLocation = read(startLocProvider).state;
     if (startLocation != null) {
@@ -46,5 +47,14 @@ class RequestAcceptedViewModel extends ViewModel {
       read(startLocProvider).state =
           startLocation.copyWith(address: currentPlace);
     }
+  }
+
+  Stream<List<KapiotUser>> getCoRidersStream() {
+    final acceptingDriver = read(acceptingDriverProvider).state;
+    assert(acceptingDriver != null);
+    return riderRepo.getCoRidersStream(
+      currentUser: currentUser!,
+      driver: acceptingDriver!,
+    );
   }
 }

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
+import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/ui/shared/loading_widget.dart';
+
+const uscLogo =
+    'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
 class RideInfoPanel extends HookConsumerWidget {
   const RideInfoPanel(
@@ -14,6 +19,7 @@ class RideInfoPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final acceptingDriver = ref.watch(acceptingDriverProvider).state!;
+    final coRidersStream = ref.watch(coRidersStreamProvider);
     return Column(
       children: [
         CircleAvatar(
@@ -46,24 +52,36 @@ class RideInfoPanel extends HookConsumerWidget {
                     child: Text('Your co passengers for this ride'),
                   ),
                   SizedBox(height: constraints.maxHeight * 0.015),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        child: const CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.blue,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        child: const CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.blue,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: constraints.maxHeight * 0.08,
+                    child: coRidersStream.when(
+                      error: (e, __) => Center(child: Text(e.toString())),
+                      loading: () =>
+                          const LoadingWidget(text: "Fetching co-riders..."),
+                      data: (coRidersList) {
+                        return Center(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: coRidersList.length,
+                            itemBuilder: (context, index) {
+                              final coRider = coRidersList[index];
+                              return Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.blue,
+                                  backgroundImage: NetworkImage(
+                                    coRider.photoUrl ?? uscLogo,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

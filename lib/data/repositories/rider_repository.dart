@@ -12,12 +12,7 @@ class RiderRepository {
   RiderRepository({required this.firestoreHelper});
   final FirestoreHelper firestoreHelper;
 
-  // TODO: Initialize as empty. List all drivers temporarily.
-  static List<String> driverIdList = [
-    '3WO9ATwspsMwYCRCgdbXnfpp5r83',
-    'HV9BcFRIKMYrQOYzd2gStGqErW12',
-    'TNZyDLzIrLhS4Bklz5yG1rCoDoF2'
-  ];
+  static final List<String> _driverIdList = [];
 
   void pushRiderConfig(RouteConfig routeConfig) async {
     assert(routeConfig is ForRider);
@@ -33,12 +28,12 @@ class RiderRepository {
       path: FirestorePath.docActiveDriverRequest(driverId, riderConfig.user.id),
       data: riderConfig.toJson(),
     );
-    driverIdList.add(driverId);
+    _driverIdList.add(driverId);
   }
 
   /// Deletes all other requests from a Driver's requests colection
   void deletePendingRequests(String riderId) {
-    for (var driverId in driverIdList) {
+    for (var driverId in _driverIdList) {
       firestoreHelper.deleteData(
           path: FirestorePath.docActiveDriverRequest(driverId, riderId));
     }
@@ -67,6 +62,21 @@ class RiderRepository {
         rider: (r) => r.acceptingDriver,
         orElse: () => null,
       );
+    });
+  }
+
+  Stream<List<KapiotUser>> getCoRidersStream({
+    required KapiotUser driver,
+    required KapiotUser currentUser,
+  }) {
+    final acceptedRidersConfigStream = firestoreHelper.collectionStream(
+      path: FirestorePath.colAcceptedRiders(driver.id),
+      builder: (data, docID) => RouteConfig.fromJson(data),
+    );
+    return acceptedRidersConfigStream.map((rcList) {
+      final routeConfigListWithoutCurrentUser =
+          rcList.where((rc) => rc.user.id != currentUser.id);
+      return routeConfigListWithoutCurrentUser.map((rc) => rc.user).toList();
     });
   }
 }
