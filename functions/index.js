@@ -36,9 +36,11 @@ exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
   });
 
 exports.requestRider = functions.https.onRequest(async (req, res) =>  {
+    // add function that can modify which driver or rider
     const driverId = test_data.driversList[0].id;
-    await db.collection('active_riders').doc(driverId).add(test_data.singleRider)
-    .then(res.send(snapshot.docs.map(doc => doc.data())))
+    const requestingRider = test_data.singleRider;
+    await db.collection('active_drivers').doc(driverId).collection('requests').add(requestingRider)
+    .then(res.json(requestingRider))
     .catch(err => res.status(400).json('Error : ' + err));
 });
 
