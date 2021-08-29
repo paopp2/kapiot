@@ -6,6 +6,7 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'request_drivers_view_state.dart';
@@ -53,14 +54,28 @@ class RequestDriversViewModel extends ViewModel {
     }
   }
 
+  Future<void> getDriverEncodedRoute(String driverId) async {
+    final driverEndcodedRoute = await riderRepo.getDriverEncodedRoute(driverId);
+    print('Encoded Route $driverEndcodedRoute');
+    final driverDecodedRoute =
+        await googleMapsApiServices.utils.decodeRoute(driverEndcodedRoute!);
+    final driverRouteLat = driverDecodedRoute[0].latitude;
+    final driverRouteLng = driverDecodedRoute[0].longitude;
+    print('Decoded Route $driverDecodedRoute');
+    read(startLocProvider).state = KapiotLocation(
+      lat: driverRouteLat,
+      lng: driverRouteLng,
+    );
+    print(read(startLocProvider).state);
+  }
+
   Future<void> requestDriver(String driverId) async {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
     assert(currentRouteConfig != null);
     // get driver's routeConfig using riderRepo
     // set a StateProvider
     // read state on map controller
-    final driverEndcodedRoute = await riderRepo.getDriverEncodedRoute(driverId);
-    print('Encoded Route $driverEndcodedRoute');
+    getDriverEncodedRoute(driverId);
 
     riderRepo.requestDriver(
       driverId,
