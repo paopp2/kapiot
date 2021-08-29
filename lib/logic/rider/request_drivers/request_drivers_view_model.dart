@@ -73,11 +73,9 @@ class RequestDriversViewModel extends ViewModel {
   }
 
   Future<void> showDriverRoute(RouteConfig driverConfig) async {
-    // final driverId = driverConfig.user.id;
     final driverEncodedRoute = (driverConfig is ForDriver)
         ? driverConfig.encodedRoute
         : throw Exception("Not ForDriver");
-    // final driverEndcodedRoute = await riderRepo.getDriverEncodedRoute(driverId);
     final driverDecodedRoute =
         await googleMapsApiServices.utils.decodeRoute(driverEncodedRoute);
     final driverStartRouteLat = driverDecodedRoute.first.latitude;
