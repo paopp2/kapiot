@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 class DriverCard extends StatelessWidget {
   const DriverCard(
       {Key? key,
-      required this.driver,
+      required this.driverConfig,
       required this.model,
       required this.constraints})
       : super(key: key);
 
-  final KapiotUser driver;
+  final RouteConfig driverConfig;
   final RequestDriversViewModel model;
   final BoxConstraints constraints;
 
@@ -22,9 +22,7 @@ class DriverCard extends StatelessWidget {
         color: Colors.grey[100],
         margin: const EdgeInsets.all(10),
         child: InkWell(
-          onTap: () {
-            print('card tapped');
-          },
+          onTap: () => model.showDriverRoute(driverConfig),
           splashColor: Colors.black,
           child: Column(
             children: [
@@ -35,15 +33,15 @@ class DriverCard extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.blue,
-                  backgroundImage: NetworkImage(driver.photoUrl!),
+                  backgroundImage: NetworkImage(driverConfig.user.photoUrl!),
                 ),
               ),
               SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Text(driver.displayName ?? 'No name')),
+                  child: Text(driverConfig.user.displayName ?? 'No name')),
               SizedBox(height: constraints.maxHeight * 0.15),
               ElevatedButton(
-                onPressed: () => model.requestDriver(driver.id),
+                onPressed: () => model.requestDriver(driverConfig.user.id),
                 child: const Text('Hail Ride'),
               ),
             ],

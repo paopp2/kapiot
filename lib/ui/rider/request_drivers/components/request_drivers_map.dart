@@ -16,7 +16,7 @@ class RequestDriversViewMap extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final startLocation = ref.watch(startLocProvider).state;
+    final startLocation = ref.watch(driverStartLocProvider).state;
     final markers = ref.watch(markersProvider).state;
     final polylines = ref.watch(polylinesProvider).state;
     return (startLocation == null)

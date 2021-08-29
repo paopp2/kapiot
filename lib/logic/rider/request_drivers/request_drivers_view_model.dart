@@ -6,6 +6,7 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'request_drivers_view_state.dart';
@@ -44,26 +45,68 @@ class RequestDriversViewModel extends ViewModel {
     );
     respondWhenDriverAccepts(_acceptingDriver);
     await mapController.initializeMap();
-    final startLocation = read(startLocProvider).state;
+    final startLocation = read(driverStartLocProvider).state;
     if (startLocation != null) {
       final currentPlace =
           await locationService.getAddressFromLocation(startLocation);
-      read(startLocProvider).state =
+      read(driverStartLocProvider).state =
           startLocation.copyWith(address: currentPlace);
     }
   }
 
-  void requestDriver(String driverId) {
+  // TODO: Refactor
+  void showRouteIfBothLocationsSet() async {
+    final startLocation = read(driverStartLocProvider).state;
+    final endLocation = read(driverEndLocProvider).state;
+    if (startLocation != null && endLocation != null) {
+      final routeCoordinates = await mapController.getRouteCoordinates(
+        start: startLocation,
+        end: endLocation,
+      );
+      read(driverRouteCoordinatesProvider).state = routeCoordinates;
+      mapController.showRoute(
+        start: startLocation,
+        end: endLocation,
+        routeCoordinates: routeCoordinates,
+      );
+    }
+  }
+
+  Future<void> showDriverRoute(RouteConfig driverConfig) async {
+    final driverEncodedRoute = (driverConfig is ForDriver)
+        ? driverConfig.encodedRoute
+        : throw Exception("Not ForDriver");
+    final driverDecodedRoute =
+        await googleMapsApiServices.utils.decodeRoute(driverEncodedRoute);
+    final driverStartRouteLat = driverDecodedRoute.first.latitude;
+    final driverStartRouteLng = driverDecodedRoute.first.longitude;
+    final driverEndRouteLat = driverDecodedRoute.last.latitude;
+    final driverEndRouteLng = driverDecodedRoute.last.longitude;
+    read(driverStartLocProvider).state = KapiotLocation(
+      lat: driverStartRouteLat,
+      lng: driverStartRouteLng,
+    );
+    read(driverEndLocProvider).state = KapiotLocation(
+      lat: driverEndRouteLat,
+      lng: driverEndRouteLng,
+    );
+    if (read(driverStartLocProvider).state != null &&
+        read(driverEndLocProvider).state != null) {
+      showRouteIfBothLocationsSet();
+    }
+  }
+
+  Future<void> requestDriver(String driverId) async {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
     assert(currentRouteConfig != null);
-    riderRepo.requestDriver(
+    await riderRepo.requestDriver(
       driverId,
       currentRouteConfig!,
     );
   }
 
-  Stream<List<KapiotUser>> getCompatibleDrivers() =>
-      riderRepo.getCompatibleDrivers();
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() =>
+      riderRepo.getCompatibleDriverConfigs();
 
   Future<void> respondWhenDriverAccepts(
     Stream<KapiotUser?> acceptingDriver,
