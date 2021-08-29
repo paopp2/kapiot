@@ -6,7 +6,6 @@ import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
-import 'package:kapiot/model/route_config/route_config.dart';
 import 'request_accepted_map_controller.dart';
 import 'request_accepted_view_state.dart';
 
@@ -39,7 +38,7 @@ class RequestAcceptedViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     assert(read(acceptingDriverProvider).state != null);
-    getCoRidersStream();
+    assert(currentUser != null);
     await mapController.initializeMap();
     final startLocation = read(startLocProvider).state;
     if (startLocation != null) {
@@ -53,6 +52,9 @@ class RequestAcceptedViewModel extends ViewModel {
   Stream<List<KapiotUser>> getCoRidersStream() {
     final acceptingDriver = read(acceptingDriverProvider).state;
     assert(acceptingDriver != null);
-    return riderRepo.getCoRidersStream(acceptingDriver!);
+    return riderRepo.getCoRidersStream(
+      currentUser: currentUser!,
+      driver: acceptingDriver!,
+    );
   }
 }

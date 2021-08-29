@@ -19,7 +19,7 @@ class RideInfoPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final acceptingDriver = ref.watch(acceptingDriverProvider).state!;
-    final coRiderStream = ref.watch(coRidersStreamProvider);
+    final coRidersStream = ref.watch(coRidersStreamProvider);
     return Column(
       children: [
         CircleAvatar(
@@ -54,27 +54,31 @@ class RideInfoPanel extends HookConsumerWidget {
                   SizedBox(height: constraints.maxHeight * 0.015),
                   SizedBox(
                     height: constraints.maxHeight * 0.08,
-                    child: coRiderStream.when(
+                    child: coRidersStream.when(
                       error: (e, __) => Center(child: Text(e.toString())),
                       loading: () =>
                           const LoadingWidget(text: "Fetching co-riders..."),
                       data: (coRidersList) {
-                        return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: coRidersList.length,
-                          itemBuilder: (context, index) {
-                            final coRider = coRidersList[index];
-                            return Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 5),
-                              child: CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Colors.blue,
-                                backgroundImage: NetworkImage(
-                                  coRider.photoUrl ?? uscLogo,
+                        return Center(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: coRidersList.length,
+                            itemBuilder: (context, index) {
+                              final coRider = coRidersList[index];
+                              return Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.blue,
+                                  backgroundImage: NetworkImage(
+                                    coRider.photoUrl ?? uscLogo,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         );
                       },
                     ),
