@@ -12,12 +12,7 @@ class RiderRepository {
   RiderRepository({required this.firestoreHelper});
   final FirestoreHelper firestoreHelper;
 
-  // TODO: Initialize as empty. List all drivers temporarily.
-  static final List<String> _driverIdList = [
-    '3WO9ATwspsMwYCRCgdbXnfpp5r83',
-    'HV9BcFRIKMYrQOYzd2gStGqErW12',
-    'TNZyDLzIrLhS4Bklz5yG1rCoDoF2'
-  ];
+  static final List<String> _driverIdList = [];
 
   void pushRiderConfig(RouteConfig routeConfig) async {
     assert(routeConfig is ForRider);
