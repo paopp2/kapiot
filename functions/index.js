@@ -3,6 +3,7 @@ const admin = require("firebase-admin");
 const test_data = require("./test_data");
 admin.initializeApp();
 const db = admin.firestore();
+
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await db.collection('active_riders').get();
     res.send(snapshot.docs.map(doc => doc.data()))
@@ -36,13 +37,35 @@ exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
   });
 
 exports.requestRider = functions.https.onRequest(async (req, res) =>  {
-    // add function that can modify which driver or rider
-    const driverId = test_data.driversList[0].id;
-    const requestingRider = test_data.singleRider;
-    await db.collection('active_drivers').doc(driverId).collection('requests').add(requestingRider)
+    const driverId = test_data.driversList[1].id; // DRIVER
+    const requestingRider = test_data.requestingRider[1]; // RIDER
+    await db.collection('active_drivers').doc(driverId).collection('requests')
+    .doc(requestingRider.id).set({
+        'address' : requestingRider.address,
+        "id" : requestingRider.id,
+        'name' : requestingRider.name,
+    })
     .then(res.json(requestingRider))
     .catch(err => res.status(400).json('Error : ' + err));
 });
+
+exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
+    const requestingRider = test_data.requestingRider[0] // RIDER
+    const riderId = requestingRider.id; 
+    const acceptingDriver = test_data.driversList[1]; // DRIVER
+    await db.collection('active_drivers').doc(acceptingDriver.id).collection('requests').doc(riderId)
+    .delete();
+    await db.collection('active_drivers').doc(acceptingDriver.id).collection('accepted').doc(riderId)
+    .set({
+        'address' : requestingRider.address,
+        "id" : requestingRider.id,
+        'name' : requestingRider.name,
+    })
+    .then(res.json('Accepted: ' + riderId))
+    .catch(err => res.status(400).json('Error : ' + err));
+});
+
+
 
 
 
