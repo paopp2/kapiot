@@ -13,7 +13,7 @@ class RiderRepository {
   final FirestoreHelper firestoreHelper;
 
   // TODO: Initialize as empty. List all drivers temporarily.
-  static List<String> driverIdList = [
+  static final List<String> _driverIdList = [
     '3WO9ATwspsMwYCRCgdbXnfpp5r83',
     'HV9BcFRIKMYrQOYzd2gStGqErW12',
     'TNZyDLzIrLhS4Bklz5yG1rCoDoF2'
@@ -33,12 +33,12 @@ class RiderRepository {
       path: FirestorePath.docActiveDriverRequest(driverId, riderConfig.user.id),
       data: riderConfig.toJson(),
     );
-    driverIdList.add(driverId);
+    _driverIdList.add(driverId);
   }
 
   /// Deletes all other requests from a Driver's requests colection
   void deletePendingRequests(String riderId) {
-    for (var driverId in driverIdList) {
+    for (var driverId in _driverIdList) {
       firestoreHelper.deleteData(
           path: FirestorePath.docActiveDriverRequest(driverId, riderId));
     }
