@@ -17,19 +17,13 @@ class DriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(driverConfig is ForDriver);
-    final driver = driverConfig.user;
-    String encodedRoute;
-    if(driverConfig is ForDriver) {
-      encodedRoute = driverConfig.encodedRoute;
-    }
     return SizedBox(
       width: 240,
       child: Card(
         color: Colors.grey[100],
         margin: const EdgeInsets.all(10),
         child: InkWell(
-          onTap: () => model.showDriverRoute((driverConfig is ForDriver) ? driverConfig. : ),
+          onTap: () => model.showDriverRoute(driverConfig),
           splashColor: Colors.black,
           child: Column(
             children: [
@@ -40,15 +34,15 @@ class DriverCard extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.blue,
-                  backgroundImage: NetworkImage(driver.photoUrl!),
+                  backgroundImage: NetworkImage(driverConfig.user.photoUrl!),
                 ),
               ),
               SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Text(driver.displayName ?? 'No name')),
+                  child: Text(driverConfig.user.displayName ?? 'No name')),
               SizedBox(height: constraints.maxHeight * 0.15),
               ElevatedButton(
-                onPressed: () => model.requestDriver(driver.id),
+                onPressed: () => model.requestDriver(driverConfig.user.id),
                 child: const Text('Hail Ride'),
               ),
             ],

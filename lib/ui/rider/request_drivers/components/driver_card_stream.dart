@@ -30,9 +30,12 @@ class DriverCardStream extends HookConsumerWidget {
             scrollDirection: Axis.horizontal,
             itemCount: compatibleDriverConfigs.length,
             itemBuilder: (context, index) {
-              final driver = compatibleDriverConfigs[index].user;
+              final driverConfig = compatibleDriverConfigs[index];
               return DriverCard(
-                  driver: driver, model: model, constraints: constraints);
+                driverConfig: driverConfig,
+                model: model,
+                constraints: constraints,
+              );
             },
           );
         },
