@@ -57,13 +57,11 @@ class RiderRepository {
   }
 
   // TODO: Kapiot algorithm here
-  Stream<List<KapiotUser>> getCompatibleDrivers() {
-    final compatibleDriversConfigStream = firestoreHelper.collectionStream(
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() {
+    return firestoreHelper.collectionStream(
       path: FirestorePath.colActiveDrivers(),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-    return compatibleDriversConfigStream
-        .map((routeConfig) => routeConfig.map((rc) => rc.user).toList());
   }
 
   Stream<KapiotUser?> getAcceptingDriverAsStream(String riderId) {

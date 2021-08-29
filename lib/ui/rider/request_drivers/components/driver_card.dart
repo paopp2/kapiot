@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 class DriverCard extends StatelessWidget {
   const DriverCard(
       {Key? key,
-      required this.driver,
+      required this.driverConfig,
       required this.model,
       required this.constraints})
       : super(key: key);
 
-  final KapiotUser driver;
+  final RouteConfig driverConfig;
   final RequestDriversViewModel model;
   final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
+    assert(driverConfig is ForDriver);
+    final driver = driverConfig.user;
+    String encodedRoute;
+    if(driverConfig is ForDriver) {
+      encodedRoute = driverConfig.encodedRoute;
+    }
     return SizedBox(
       width: 240,
       child: Card(
         color: Colors.grey[100],
         margin: const EdgeInsets.all(10),
         child: InkWell(
-          onTap: () => model.showDriverRoute(driver.id),
+          onTap: () => model.showDriverRoute((driverConfig is ForDriver) ? driverConfig. : ),
           splashColor: Colors.black,
           child: Column(
             children: [

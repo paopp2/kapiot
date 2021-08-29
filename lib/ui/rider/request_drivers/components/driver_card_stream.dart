@@ -15,24 +15,27 @@ class DriverCardStream extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final compatibleDriversStream = ref.watch(compatibleDriversStreamProvider);
+    final compatibleDriverConfigStream =
+        ref.watch(compatibleDriverConfigStreamProvider);
     return Builder(builder: (context) {
-      return compatibleDriversStream.when(
+      return compatibleDriverConfigStream.when(
         error: (_, __) => const Center(
           child: Text('Error'),
         ),
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
-        data: (compatibleDrivers) => ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: compatibleDrivers.length,
-          itemBuilder: (context, index) {
-            final driver = compatibleDrivers[index];
-            return DriverCard(
-                driver: driver, model: model, constraints: constraints);
-          },
-        ),
+        data: (compatibleDriverConfigs) {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: compatibleDriverConfigs.length,
+            itemBuilder: (context, index) {
+              final driver = compatibleDriverConfigs[index].user;
+              return DriverCard(
+                  driver: driver, model: model, constraints: constraints);
+            },
+          );
+        },
       );
     });
   }

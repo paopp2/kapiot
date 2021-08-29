@@ -54,6 +54,7 @@ class RequestDriversViewModel extends ViewModel {
     }
   }
 
+  // TODO: Refactor
   void showRouteIfBothLocationsSet() async {
     final startLocation = read(driverStartLocProvider).state;
     final endLocation = read(driverEndLocProvider).state;
@@ -102,8 +103,8 @@ class RequestDriversViewModel extends ViewModel {
     );
   }
 
-  Stream<List<KapiotUser>> getCompatibleDrivers() =>
-      riderRepo.getCompatibleDrivers();
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() =>
+      riderRepo.getCompatibleDriverConfigs();
 
   Future<void> respondWhenDriverAccepts(
     Stream<KapiotUser?> acceptingDriver,
