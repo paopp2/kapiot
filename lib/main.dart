@@ -11,14 +11,14 @@ import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 
 // Set to false when in production
-const bool useFirebaseEmulator = true;
+const bool useFirebaseEmulator = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';
 
   if (useFirebaseEmulator) {
+    final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';
     FirebaseFirestore.instance.settings = Settings(
       host: '$localHostString:8080',
       sslEnabled: false,
