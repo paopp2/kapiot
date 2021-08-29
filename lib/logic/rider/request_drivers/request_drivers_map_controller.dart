@@ -27,16 +27,18 @@ class RequestDriversMapController extends MapController {
 
   @override
   Future<void> initializeMap() async {
-    final currentLoc = await locationService.getLocation();
+    var driverStartLoc = read(driverStartLocProvider).state;
+    driverStartLoc ??= await locationService.getLocation();
+
     initialCameraPosition = CameraPosition(
-      target: LatLng(currentLoc.lat, currentLoc.lng),
+      target: LatLng(driverStartLoc!.lat, driverStartLoc!.lng),
       zoom: 20,
     );
-    read(startLocProvider).state = currentLoc;
+    read(driverStartLocProvider).state = driverStartLoc;
     clearMap();
     addMarker(
       markerId: "start_location",
-      location: currentLoc,
+      location: driverStartLoc,
     );
     super.initializeMap();
   }
