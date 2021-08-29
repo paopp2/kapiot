@@ -45,12 +45,29 @@ class RequestDriversViewModel extends ViewModel {
     );
     respondWhenDriverAccepts(_acceptingDriver);
     await mapController.initializeMap();
-    final startLocation = read(startLocProvider).state;
+    final startLocation = read(driverStartLocProvider).state;
     if (startLocation != null) {
       final currentPlace =
           await locationService.getAddressFromLocation(startLocation);
-      read(startLocProvider).state =
+      read(driverStartLocProvider).state =
           startLocation.copyWith(address: currentPlace);
+    }
+  }
+
+  void showRouteIfBothLocationsSet() async {
+    final startLocation = read(driverStartLocProvider).state;
+    final endLocation = read(driverEndLocProvider).state;
+    if (startLocation != null && endLocation != null) {
+      final routeCoordinates = await mapController.getRouteCoordinates(
+        start: startLocation,
+        end: endLocation,
+      );
+      read(driverRouteCoordinatesProvider).state = routeCoordinates;
+      mapController.showRoute(
+        start: startLocation,
+        end: endLocation,
+        routeCoordinates: routeCoordinates,
+      );
     }
   }
 
@@ -59,14 +76,25 @@ class RequestDriversViewModel extends ViewModel {
     print('Encoded Route $driverEndcodedRoute');
     final driverDecodedRoute =
         await googleMapsApiServices.utils.decodeRoute(driverEndcodedRoute!);
-    final driverRouteLat = driverDecodedRoute[0].latitude;
-    final driverRouteLng = driverDecodedRoute[0].longitude;
+    final driverStartRouteLat = driverDecodedRoute.first.latitude;
+    final driverStartRouteLng = driverDecodedRoute.first.longitude;
+    final driverEndRouteLat = driverDecodedRoute.last.latitude;
+    final driverEndRouteLng = driverDecodedRoute.last.longitude;
     print('Decoded Route $driverDecodedRoute');
-    read(startLocProvider).state = KapiotLocation(
-      lat: driverRouteLat,
-      lng: driverRouteLng,
+    read(driverStartLocProvider).state = KapiotLocation(
+      lat: driverStartRouteLat,
+      lng: driverStartRouteLng,
     );
-    print(read(startLocProvider).state);
+    read(driverEndLocProvider).state = KapiotLocation(
+      lat: driverEndRouteLat,
+      lng: driverEndRouteLng,
+    );
+    if (read(driverStartLocProvider).state != null &&
+        read(driverEndLocProvider).state != null) {
+      showRouteIfBothLocationsSet();
+    }
+    print(read(driverStartLocProvider).state);
+    print(read(driverEndLocProvider).state);
   }
 
   Future<void> requestDriver(String driverId) async {
