@@ -53,9 +53,15 @@ class RequestDriversViewModel extends ViewModel {
     }
   }
 
-  void requestDriver(String driverId) {
+  Future<void> requestDriver(String driverId) async {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
     assert(currentRouteConfig != null);
+    // get driver's routeConfig using riderRepo
+    // set a StateProvider
+    // read state on map controller
+    final driverEndcodedRoute = await riderRepo.getDriverEncodedRoute(driverId);
+    print('Encoded Route $driverEndcodedRoute');
+
     riderRepo.requestDriver(
       driverId,
       currentRouteConfig!,
