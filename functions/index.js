@@ -1,9 +1,8 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const test_data = require("./test_data");
-const db = admin.firestore();
 admin.initializeApp();
-
+const db = admin.firestore();
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await db.collection('active_riders').get();
     res.send(snapshot.docs.map(doc => doc.data()))
@@ -36,7 +35,12 @@ exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
       res.json({result: "Populated 'active_drivers'"});
   });
 
-
+exports.requestRider = functions.https.onRequest(async (req, res) =>  {
+    const driverId = test_data.driversList[0].id;
+    await db.collection('active_riders').doc(driverId).add(test_data.singleRider)
+    .then(res.send(snapshot.docs.map(doc => doc.data())))
+    .catch(err => res.status(400).json('Error : ' + err));
+});
 
 
 
