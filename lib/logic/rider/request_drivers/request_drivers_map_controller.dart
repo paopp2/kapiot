@@ -33,8 +33,8 @@ class RequestDriversMapController extends MapController {
       target: LatLng(driverStartLoc.lat, driverStartLoc.lng),
       zoom: 20,
     );
+    resetMap();
     read(driverStartLocProvider).state = driverStartLoc;
-    clearMap();
     addMarker(
       markerId: "start_location",
       location: driverStartLoc,

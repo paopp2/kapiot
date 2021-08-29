@@ -7,6 +7,10 @@ import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 const double latLngBoundsPadding = 50.0;
 
+final startLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+
+final endLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+
 final markersProvider = StateProvider<Set<Marker>>((ref) => {});
 
 final polylinesProvider = StateProvider<Set<Polyline>>((ref) => {});
@@ -27,10 +31,14 @@ abstract class MapController {
   }
 
   void onMapCreated(GoogleMapController gmapController) async {
-    _tempController.complete(gmapController);
+    if (!_tempController.isCompleted) {
+      _tempController.complete(gmapController);
+    }
   }
 
-  void clearMap() {
+  void resetMap() {
+    read(startLocProvider).state = null;
+    read(endLocProvider).state = null;
     read(markersProvider).state = {};
     read(polylinesProvider).state = {};
   }
@@ -90,5 +98,13 @@ abstract class MapController {
       ),
     );
     read(markersProvider).state = markers;
+  }
+
+  void setStartLocation(KapiotLocation startLocation) {
+    read(startLocProvider).state = startLocation;
+  }
+
+  void setEndLocation(KapiotLocation endLocation) {
+    read(endLocProvider).state = endLocation;
   }
 }

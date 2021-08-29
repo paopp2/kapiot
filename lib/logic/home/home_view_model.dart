@@ -11,6 +11,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
@@ -60,8 +61,9 @@ class HomeViewModel extends ViewModel {
       final currentPlace =
           await locationService.getAddressFromLocation(startLocation);
       tecStartLoc.text = currentPlace ?? '';
-      read(startLocProvider).state =
-          startLocation.copyWith(address: currentPlace);
+      mapController.setStartLocation(
+        startLocation.copyWith(address: currentPlace),
+      );
     }
   }
 

@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
-import 'home_view_state.dart';
 
 final homeMapController = Provider.autoDispose(
   (ref) => HomeMapController(
@@ -32,8 +31,8 @@ class HomeMapController extends MapController {
       target: LatLng(currentLoc.lat, currentLoc.lng),
       zoom: 20,
     );
+    resetMap();
     read(startLocProvider).state = currentLoc;
-    clearMap();
     addMarker(
       markerId: "start_location",
       location: currentLoc,
