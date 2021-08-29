@@ -32,10 +32,24 @@ const singleRider = {
     address: "Tunga sa old bridge",
 };
 
+const requestingRider = [
+    {
+        id: "requesting1",
+        name: "Irish",
+        address: "Lahug",
+    },
+    {
+        id: "requesting2",
+        name: "Angel",
+        address: "Labangon",
+    },
+];
+
 module.exports = {
     ridersList,
     driversList,
     singleRider,
+    requestingRider,
 };
 
 
