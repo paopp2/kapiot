@@ -96,7 +96,7 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> requestDriver(String driverId) async {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
     assert(currentRouteConfig != null);
-    riderRepo.requestDriver(
+    await riderRepo.requestDriver(
       driverId,
       currentRouteConfig!,
     );
