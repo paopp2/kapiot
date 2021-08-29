@@ -71,16 +71,14 @@ class RequestDriversViewModel extends ViewModel {
     }
   }
 
-  Future<void> getDriverEncodedRoute(String driverId) async {
+  Future<void> showDriverRoute(String driverId) async {
     final driverEndcodedRoute = await riderRepo.getDriverEncodedRoute(driverId);
-    print('Encoded Route $driverEndcodedRoute');
     final driverDecodedRoute =
         await googleMapsApiServices.utils.decodeRoute(driverEndcodedRoute!);
     final driverStartRouteLat = driverDecodedRoute.first.latitude;
     final driverStartRouteLng = driverDecodedRoute.first.longitude;
     final driverEndRouteLat = driverDecodedRoute.last.latitude;
     final driverEndRouteLng = driverDecodedRoute.last.longitude;
-    print('Decoded Route $driverDecodedRoute');
     read(driverStartLocProvider).state = KapiotLocation(
       lat: driverStartRouteLat,
       lng: driverStartRouteLng,
@@ -93,18 +91,11 @@ class RequestDriversViewModel extends ViewModel {
         read(driverEndLocProvider).state != null) {
       showRouteIfBothLocationsSet();
     }
-    print(read(driverStartLocProvider).state);
-    print(read(driverEndLocProvider).state);
   }
 
   Future<void> requestDriver(String driverId) async {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
     assert(currentRouteConfig != null);
-    // get driver's routeConfig using riderRepo
-    // set a StateProvider
-    // read state on map controller
-    getDriverEncodedRoute(driverId);
-
     riderRepo.requestDriver(
       driverId,
       currentRouteConfig!,
