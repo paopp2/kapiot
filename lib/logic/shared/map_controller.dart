@@ -69,6 +69,7 @@ abstract class MapController {
   }
 
   void drawPolyLine(List<LatLng> routeCoordinates) {
+    read(polylinesProvider).state = {};
     final polylines = read(polylinesProvider).state;
     Polyline polyline = Polyline(
       polylineId: const PolylineId("poly"),
