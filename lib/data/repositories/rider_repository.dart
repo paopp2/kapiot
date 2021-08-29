@@ -44,18 +44,6 @@ class RiderRepository {
     }
   }
 
-  /// Fetches a driver's routeConfig
-  Future<String?> getDriverEncodedRoute(String driverId) async {
-    final driverRouteConfig = await firestoreHelper.getData(
-      path: FirestorePath.docActiveDriver(driverId),
-      builder: (data, id) => RouteConfig.fromJson(data),
-    );
-    if (driverRouteConfig is ForDriver) {
-      return driverRouteConfig.encodedRoute;
-    }
-    return null;
-  }
-
   // TODO: Kapiot algorithm here
   Stream<List<RouteConfig>> getCompatibleDriverConfigs() {
     return firestoreHelper.collectionStream(
