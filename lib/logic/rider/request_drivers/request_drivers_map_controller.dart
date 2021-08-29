@@ -29,9 +29,8 @@ class RequestDriversMapController extends MapController {
   Future<void> initializeMap() async {
     var driverStartLoc = read(driverStartLocProvider).state;
     driverStartLoc ??= await locationService.getLocation();
-
     initialCameraPosition = CameraPosition(
-      target: LatLng(driverStartLoc!.lat, driverStartLoc!.lng),
+      target: LatLng(driverStartLoc.lat, driverStartLoc.lng),
       zoom: 20,
     );
     read(driverStartLocProvider).state = driverStartLoc;
