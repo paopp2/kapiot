@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
@@ -11,6 +12,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
@@ -51,17 +53,19 @@ class HomeViewModel extends ViewModel {
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
+  List<LatLng> _routeCoordinates = [];
 
   @override
   Future<void> initState() async {
-    await mapController.initializeMap();
+    await mapController.initializeHomeMap();
     final startLocation = read(startLocProvider).state;
     if (startLocation != null) {
       final currentPlace =
           await locationService.getAddressFromLocation(startLocation);
       tecStartLoc.text = currentPlace ?? '';
-      read(startLocProvider).state =
-          startLocation.copyWith(address: currentPlace);
+      mapController.setStartLocation(
+        startLocation.copyWith(address: currentPlace),
+      );
     }
   }
 
@@ -134,39 +138,30 @@ class HomeViewModel extends ViewModel {
         await locationService.getLocationFromAddress(pickedSuggestion);
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
-      read(startLocProvider).state = KapiotLocation(
-        lat: location.lat,
-        lng: location.lng,
-        address: pickedSuggestion,
+      mapController.setStartLocation(
+        KapiotLocation(
+          lat: location.lat,
+          lng: location.lng,
+          address: pickedSuggestion,
+        ),
       );
       read(isStartLocFocusedProvider).state = false;
     } else {
       tecEndLoc.text = pickedSuggestion;
-      read(endLocProvider).state = KapiotLocation(
-        lat: location.lat,
-        lng: location.lng,
-        address: pickedSuggestion,
+      mapController.setEndLocation(
+        KapiotLocation(
+          lat: location.lat,
+          lng: location.lng,
+          address: pickedSuggestion,
+        ),
       );
       read(isEndLocFocusedProvider).state = false;
     }
-    showRouteIfBothLocationsSet();
-  }
 
-  void showRouteIfBothLocationsSet() async {
-    final startLocation = read(startLocProvider).state;
-    final endLocation = read(endLocProvider).state;
-    if (startLocation != null && endLocation != null) {
-      final routeCoordinates = await mapController.getRouteCoordinates(
-        start: startLocation,
-        end: endLocation,
-      );
-      read(routeCoordinatesProvider).state = routeCoordinates;
-      mapController.showRoute(
-        start: startLocation,
-        end: endLocation,
-        routeCoordinates: routeCoordinates,
-      );
-    }
+    mapController.showRouteIfBothLocationsSet(
+      onRouteCalculated: (routeCoordinates) =>
+          _routeCoordinates = routeCoordinates,
+    );
   }
 
   Future<void> pushRouteConfig() async {
@@ -187,9 +182,9 @@ class HomeViewModel extends ViewModel {
       read(currentRouteConfigProvider).state = riderConfig;
       AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
-      final routeCoordinates = read(routeCoordinatesProvider).state;
+      assert(_routeCoordinates.isNotEmpty);
       final encodedRoute =
-          await googleMapsApiServices.utils.encodeRoute(routeCoordinates);
+          await googleMapsApiServices.utils.encodeRoute(_routeCoordinates);
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,

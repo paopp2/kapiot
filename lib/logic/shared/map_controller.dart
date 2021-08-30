@@ -7,6 +7,10 @@ import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 const double latLngBoundsPadding = 50.0;
 
+final startLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+
+final endLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+
 final markersProvider = StateProvider<Set<Marker>>((ref) => {});
 
 final polylinesProvider = StateProvider<Set<Polyline>>((ref) => {});
@@ -22,12 +26,21 @@ abstract class MapController {
   late final GoogleMapController gmapController;
   late final CameraPosition initialCameraPosition;
 
-  Future<void> initializeMap() async {
+  Future<void> initializeMap({
+    required CameraPosition initialCameraPosition,
+    bool clearMap = false,
+  }) async {
+    this.initialCameraPosition = initialCameraPosition;
     gmapController = await _tempController.future;
+    if (clearMap) {
+      this.clearMap();
+    }
   }
 
   void onMapCreated(GoogleMapController gmapController) async {
-    _tempController.complete(gmapController);
+    if (!_tempController.isCompleted) {
+      _tempController.complete(gmapController);
+    }
   }
 
   void clearMap() {
@@ -90,5 +103,34 @@ abstract class MapController {
       ),
     );
     read(markersProvider).state = markers;
+  }
+
+  void setStartLocation(KapiotLocation startLocation) {
+    read(startLocProvider).state = startLocation;
+  }
+
+  void setEndLocation(KapiotLocation endLocation) {
+    read(endLocProvider).state = endLocation;
+  }
+
+  void showRouteIfBothLocationsSet({
+    Function(List<LatLng> routeCoordinates)? onRouteCalculated,
+  }) async {
+    final startLocation = read(startLocProvider).state;
+    final endLocation = read(endLocProvider).state;
+    if (startLocation != null && endLocation != null) {
+      final routeCoordinates = await getRouteCoordinates(
+        start: startLocation,
+        end: endLocation,
+      );
+      showRoute(
+        start: startLocation,
+        end: endLocation,
+        routeCoordinates: routeCoordinates,
+      );
+      if (onRouteCalculated != null) {
+        onRouteCalculated(routeCoordinates);
+      }
+    }
   }
 }

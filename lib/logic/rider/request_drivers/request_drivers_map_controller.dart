@@ -3,7 +3,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
-import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 
 final requestDriversMapController = Provider.autoDispose(
@@ -25,20 +24,22 @@ class RequestDriversMapController extends MapController {
         );
   final LocationService locationService;
 
-  @override
-  Future<void> initializeMap() async {
-    var driverStartLoc = read(driverStartLocProvider).state;
-    driverStartLoc ??= await locationService.getLocation();
-    initialCameraPosition = CameraPosition(
-      target: LatLng(driverStartLoc.lat, driverStartLoc.lng),
-      zoom: 20,
+  Future<void> initializeRequestDriversMap() async {
+    final locationFromPreviousView = read(startLocProvider).state!;
+    await super.initializeMap(
+      initialCameraPosition: CameraPosition(
+        target: LatLng(
+          locationFromPreviousView.lat,
+          locationFromPreviousView.lng,
+        ),
+        zoom: 20,
+      ),
+      clearMap: true,
     );
-    read(driverStartLocProvider).state = driverStartLoc;
-    clearMap();
+    // Re-add the marker for the startLocation after clearing map
     addMarker(
       markerId: "start_location",
-      location: driverStartLoc,
+      location: locationFromPreviousView,
     );
-    super.initializeMap();
   }
 }
