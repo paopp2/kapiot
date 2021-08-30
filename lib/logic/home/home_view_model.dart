@@ -136,18 +136,22 @@ class HomeViewModel extends ViewModel {
         await locationService.getLocationFromAddress(pickedSuggestion);
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
-      read(startLocProvider).state = KapiotLocation(
-        lat: location.lat,
-        lng: location.lng,
-        address: pickedSuggestion,
+      mapController.setStartLocation(
+        KapiotLocation(
+          lat: location.lat,
+          lng: location.lng,
+          address: pickedSuggestion,
+        ),
       );
       read(isStartLocFocusedProvider).state = false;
     } else {
       tecEndLoc.text = pickedSuggestion;
-      read(endLocProvider).state = KapiotLocation(
-        lat: location.lat,
-        lng: location.lng,
-        address: pickedSuggestion,
+      mapController.setEndLocation(
+        KapiotLocation(
+          lat: location.lat,
+          lng: location.lng,
+          address: pickedSuggestion,
+        ),
       );
       read(isEndLocFocusedProvider).state = false;
     }

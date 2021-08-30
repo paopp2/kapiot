@@ -74,18 +74,20 @@ class RequestDriversViewModel extends ViewModel {
     final driverStartRouteLng = driverDecodedRoute.first.longitude;
     final driverEndRouteLat = driverDecodedRoute.last.latitude;
     final driverEndRouteLng = driverDecodedRoute.last.longitude;
-    read(startLocProvider).state = KapiotLocation(
-      lat: driverStartRouteLat,
-      lng: driverStartRouteLng,
+
+    mapController.setStartLocation(
+      KapiotLocation(
+        lat: driverStartRouteLat,
+        lng: driverStartRouteLng,
+      ),
     );
-    read(endLocProvider).state = KapiotLocation(
-      lat: driverEndRouteLat,
-      lng: driverEndRouteLng,
+    mapController.setEndLocation(
+      KapiotLocation(
+        lat: driverEndRouteLat,
+        lng: driverEndRouteLng,
+      ),
     );
-    if (read(startLocProvider).state != null &&
-        read(endLocProvider).state != null) {
-      showRouteIfBothLocationsSet();
-    }
+    showRouteIfBothLocationsSet();
   }
 
   Future<void> requestDriver(String driverId) async {

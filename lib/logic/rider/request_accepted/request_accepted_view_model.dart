@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
-import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -40,13 +39,6 @@ class RequestAcceptedViewModel extends ViewModel {
     assert(read(acceptingDriverProvider).state != null);
     assert(currentUser != null);
     await mapController.initializeRequestAcceptedMap();
-    final startLocation = read(startLocProvider).state;
-    if (startLocation != null) {
-      final currentPlace =
-          await locationService.getAddressFromLocation(startLocation);
-      read(startLocProvider).state =
-          startLocation.copyWith(address: currentPlace);
-    }
   }
 
   Stream<List<KapiotUser>> getCoRidersStream() {
