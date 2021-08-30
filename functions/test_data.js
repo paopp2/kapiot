@@ -103,22 +103,92 @@ const driversList = [
 ];
 
 const singleRider = {
-    id: "single_add",
-    name: "Jane",
-    address: "Tunga sa old bridge",
+    // id: "single_add",
+    // name: "Jane",
+    // address: "Tunga sa old bridge",
+    id: "rider1",
+    acceptingDriver: null,
+    endLocation: {
+        address: "Pitogo, Cebu, Philippines",
+        lat: 10.3786493,
+        lng: 123.97360830000001,
+    },
+    riderCount: 1,
+    runtimeType: "rider",
+    startLocation: {
+        address: "9W2R+GQF, Mandaue City, Cebu, Central Visayas, Philippines",
+        lat: 10.350618,
+        lng: 123.9415964,
+    },
+    timeOfTrip: "2021-08-27T20:02:56.483457",
+    user: {
+        displayName: "Blithe Jan Tristen Gonzales",
+        email: "18102570@usc.edu.ph",
+        id: "rider1",
+        phoneNumber: "09331239087",
+        photoUrl: "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
+    } 
 };
 
 const requestingRider = [
+    // {
+    //     id: "requesting1",
+    //     name: "Irish",
+    //     address: "Lahug",
+    // },
+    // {
+    //     id: "requesting2",
+    //     name: "Angel",
+    //     address: "Labangon",
+    // },
     {
-        id: "requesting1",
-        name: "Irish",
-        address: "Lahug",
+        id: "rider1",
+        acceptingDriver: null,
+        endLocation: {
+            address: "Pitogo, Cebu, Philippines",
+            lat: 10.3786493,
+            lng: 123.97360830000001,
+        },
+        riderCount: 1,
+        runtimeType: "rider",
+        startLocation: {
+            address: "9W2R+GQF, Mandaue City, Cebu, Central Visayas, Philippines",
+            lat: 10.350618,
+            lng: 123.9415964,
+        },
+        timeOfTrip: "2021-08-27T20:02:56.483457",
+        user: {
+            displayName: "Blithe Jan Tristen Gonzales",
+            email: "18102570@usc.edu.ph",
+            id: "rider1",
+            phoneNumber: "09331239087",
+            photoUrl: "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
+        }
     },
     {
-        id: "requesting2",
-        name: "Angel",
-        address: "Labangon",
-    },
+        id: "rider2",
+        acceptingDriver: null,
+        endLocation: {
+            address: "Basak, Lapu-Lapu City, Cebu, Philippines",
+            lat: 10.291023899999999,
+            lng: 123.961041,
+        },
+        riderCount: 1,
+        runtimeType: "rider",
+        startLocation: {
+            address: "Maximo V. Patalinghug Jr Avenue, Lapu-Lapu City, Cebu, Central Visayas, Philippines",
+            lat: 10.3006433,
+            lng: 123.9625267,
+        },
+        timeOfTrip: "2021-08-29T06:45:22.819077",
+        user: {
+            displayName: "Nicolas Paolo Pepito",
+            email: "16100825@usc.edu.ph",
+            id: "rider2",
+            phoneNumber: "09451230987",
+            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c",
+        }
+    }
 ];
 
 module.exports = {
