@@ -11,7 +11,7 @@ import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 
 // Set to false when in production
-const bool useFirebaseEmulator = true;
+const bool useFirebaseEmulator = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

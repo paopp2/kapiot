@@ -20,23 +20,25 @@ class RiderManagerView extends HookConsumerWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
-            label: const Text("Map View"),
-            icon: const Icon(Icons.map),
-          ),
-          body: Container(
-            color: const Color(0x7679ADFf),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  StopPointPanel(model: model),
-                  const SizedBox(height: 15),
-                  RequestingRidersPanel(model: model),
-                ],
+        return SafeArea(
+          child: Scaffold(
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {},
+              label: const Text("Map View"),
+              icon: const Icon(Icons.map),
+            ),
+            body: Container(
+              color: const Color(0x7679ADFf),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StopPointPanel(model: model, constraints: constraints),
+                    const SizedBox(height: 15),
+                    RequestingRidersPanel(model: model),
+                  ],
+                ),
               ),
             ),
           ),
