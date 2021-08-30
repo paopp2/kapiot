@@ -75,7 +75,7 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     await driversRef.doc(acceptingDriver.id).collection('requests').doc(riderId)
     .delete();
     await ridersRef.doc(requestingRider.id).update({
-        acceptingDriver: acceptingDriver,
+        acceptingDriver: acceptingDriver.user,
     });
     await driversRef.doc(acceptingDriver.id).collection('accepted').doc(riderId)
     .create(requestingRider)
