@@ -24,19 +24,18 @@ class HomeMapController extends MapController {
         );
   final LocationService locationService;
 
-  @override
-  Future<void> initializeMap() async {
+  Future<void> initializeHomeMap() async {
     final currentLoc = await locationService.getLocation();
-    initialCameraPosition = CameraPosition(
-      target: LatLng(currentLoc.lat, currentLoc.lng),
-      zoom: 20,
+    super.initializeMap(
+      initialCameraPosition: CameraPosition(
+        target: LatLng(currentLoc.lat, currentLoc.lng),
+        zoom: 20,
+      ),
     );
-    resetMap();
-    read(startLocProvider).state = currentLoc;
+    setStartLocation(currentLoc);
     addMarker(
       markerId: "start_location",
       location: currentLoc,
     );
-    super.initializeMap();
   }
 }

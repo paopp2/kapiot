@@ -39,7 +39,7 @@ class RequestAcceptedViewModel extends ViewModel {
   Future<void> initState() async {
     assert(read(acceptingDriverProvider).state != null);
     assert(currentUser != null);
-    await mapController.initializeMap();
+    await mapController.initializeRequestAcceptedMap();
     final startLocation = read(startLocProvider).state;
     if (startLocation != null) {
       final currentPlace =

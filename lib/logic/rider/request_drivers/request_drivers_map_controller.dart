@@ -24,19 +24,22 @@ class RequestDriversMapController extends MapController {
         );
   final LocationService locationService;
 
-  @override
-  Future<void> initializeMap() async {
-    var driverStartLoc = read(startLocProvider).state;
-    initialCameraPosition = CameraPosition(
-      target: LatLng(driverStartLoc!.lat, driverStartLoc.lng),
-      zoom: 20,
+  Future<void> initializeRequestDriversMap() async {
+    final locationFromPreviousView = read(startLocProvider).state!;
+    await super.initializeMap(
+      initialCameraPosition: CameraPosition(
+        target: LatLng(
+          locationFromPreviousView.lat,
+          locationFromPreviousView.lng,
+        ),
+        zoom: 20,
+      ),
+      clearMap: true,
     );
-    await super.initializeMap();
-    resetMap();
-    read(startLocProvider).state = driverStartLoc;
+    // Re-add the marker for the startLocation after clearing map
     addMarker(
       markerId: "start_location",
-      location: driverStartLoc,
+      location: locationFromPreviousView,
     );
   }
 }

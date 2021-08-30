@@ -26,8 +26,15 @@ abstract class MapController {
   late final GoogleMapController gmapController;
   late final CameraPosition initialCameraPosition;
 
-  Future<void> initializeMap() async {
+  Future<void> initializeMap({
+    required CameraPosition initialCameraPosition,
+    bool clearMap = false,
+  }) async {
+    this.initialCameraPosition = initialCameraPosition;
     gmapController = await _tempController.future;
+    if (clearMap) {
+      this.clearMap();
+    }
   }
 
   void onMapCreated(GoogleMapController gmapController) async {
@@ -36,9 +43,7 @@ abstract class MapController {
     }
   }
 
-  void resetMap() {
-    read(startLocProvider).state = null;
-    read(endLocProvider).state = null;
+  void clearMap() {
     read(markersProvider).state = {};
     read(polylinesProvider).state = {};
   }

@@ -24,19 +24,22 @@ class RequestAcceptedMapController extends MapController {
         );
   final LocationService locationService;
 
-  @override
-  Future<void> initializeMap() async {
-    final currentLoc = await locationService.getLocation();
-    initialCameraPosition = CameraPosition(
-      target: LatLng(currentLoc.lat, currentLoc.lng),
-      zoom: 20,
+  Future<void> initializeRequestAcceptedMap() async {
+    final locationFromPreviousView = read(startLocProvider).state!;
+    await super.initializeMap(
+      initialCameraPosition: CameraPosition(
+        target: LatLng(
+          locationFromPreviousView.lat,
+          locationFromPreviousView.lng,
+        ),
+        zoom: 20,
+      ),
+      clearMap: true,
     );
-    resetMap();
-    setStartLocation(currentLoc);
+    // Re-add the marker for the startLocation after clearing map
     addMarker(
       markerId: "start_location",
-      location: currentLoc,
+      location: locationFromPreviousView,
     );
-    super.initializeMap();
   }
 }

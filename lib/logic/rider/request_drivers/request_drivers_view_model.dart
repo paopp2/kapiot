@@ -44,7 +44,7 @@ class RequestDriversViewModel extends ViewModel {
       _routeConfig.user.id,
     );
     respondWhenDriverAccepts(_acceptingDriver);
-    await mapController.initializeMap();
+    await mapController.initializeRequestDriversMap();
   }
 
   // TODO: Refactor

@@ -55,7 +55,7 @@ class HomeViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
-    await mapController.initializeMap();
+    await mapController.initializeHomeMap();
     final startLocation = read(startLocProvider).state;
     if (startLocation != null) {
       final currentPlace =
