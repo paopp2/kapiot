@@ -52,21 +52,16 @@ class RequestDriversViewModel extends ViewModel {
         : throw Exception("Not ForDriver");
     final driverDecodedRoute =
         await googleMapsApiServices.utils.decodeRoute(driverEncodedRoute);
-    final driverStartRouteLat = driverDecodedRoute.first.latitude;
-    final driverStartRouteLng = driverDecodedRoute.first.longitude;
-    final driverEndRouteLat = driverDecodedRoute.last.latitude;
-    final driverEndRouteLng = driverDecodedRoute.last.longitude;
-
     mapController.setStartLocation(
       KapiotLocation(
-        lat: driverStartRouteLat,
-        lng: driverStartRouteLng,
+        lat: driverDecodedRoute.first.latitude,
+        lng: driverDecodedRoute.first.longitude,
       ),
     );
     mapController.setEndLocation(
       KapiotLocation(
-        lat: driverEndRouteLat,
-        lng: driverEndRouteLng,
+        lat: driverDecodedRoute.last.latitude,
+        lng: driverDecodedRoute.last.longitude,
       ),
     );
     mapController.showRouteIfBothLocationsSet();

@@ -43,7 +43,6 @@ class RequestAcceptedViewModel extends ViewModel {
 
   Stream<List<KapiotUser>> getCoRidersStream() {
     final acceptingDriver = read(acceptingDriverProvider).state;
-    assert(acceptingDriver != null);
     return riderRepo.getCoRidersStream(
       currentUser: currentUser!,
       driver: acceptingDriver!,
