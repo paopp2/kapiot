@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable max-len */
 /* eslint-disable indent */
 const ridersList = [
     {
@@ -23,7 +24,7 @@ const ridersList = [
             id: "rider1",
             phoneNumber: "09331239087",
             photoUrl: "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
-        }
+        },
     },
     {
         id: "rider2",
@@ -53,8 +54,8 @@ const ridersList = [
             id: "rider2",
             phoneNumber: "09451230987",
             photoUrl: "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c",
-        }
-    }
+        },
+    },
 ];
 
 const driversList = [
@@ -70,7 +71,7 @@ const driversList = [
             id: "driver1",
             phoneNumber: "09450987654",
             photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c"
-        }
+        },
     },
     {
         id: "driver2",
@@ -84,7 +85,7 @@ const driversList = [
             id: "driver2",
             phoneNumber: "09451230987",
             photoUrl: "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c"
-        }
+        },
     },
     {
         id: "driver3",
@@ -98,8 +99,8 @@ const driversList = [
             id: "driver3",
             phoneNumber: "09451231234",
             photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gi6RZJXfmElWMUsZUJ0O7zZwQboH7mEH3Hcnxmc=s96-c"
-        }
-    }
+        },
+    },
 ];
 
 const singleRider = {
@@ -124,7 +125,7 @@ const singleRider = {
         id: "rider1",
         phoneNumber: "09331239087",
         photoUrl: "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
-    } 
+    },
 };
 
 const requestingRider = [
@@ -150,7 +151,7 @@ const requestingRider = [
             id: "rider1",
             phoneNumber: "09331239087",
             photoUrl: "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
-        }
+        },
     },
     {
         id: "rider2",
@@ -174,8 +175,8 @@ const requestingRider = [
             id: "rider2",
             phoneNumber: "09451230987",
             photoUrl: "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c",
-        }
-    }
+        },
+    },
 ];
 
 module.exports = {
