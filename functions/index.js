@@ -3,6 +3,8 @@ const admin = require("firebase-admin");
 const test_data = require("./test_data");
 admin.initializeApp();
 const db = admin.firestore();
+const driversRef = db.collection('active_drivers');
+const ridersRef = db.collection('active_riders');
 // TODO: make a temporary collection in firestore that will have all the driverId
 var driverIdList = []; 
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
@@ -38,79 +40,29 @@ exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
   });
 
 exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
-    const requestedDriver = test_data.driversList[0]; // DRIVER
+    const requestedDriver = test_data.driversList[1]; // DRIVER
     const driverId = requestedDriver.id; 
-    const requestingRider = test_data.requestingRider[0]; // RIDER
-    const rider = requestingRider.user;
+    //const requestingRider = test_data.requestingRider[0]; // RIDER
+    const requestingRider = test_data.singleRider;
     const riderId = requestingRider.id; 
-    const riderEndLoc = requestingRider.endLocation;
-    const riderStartLoc = requestingRider.startLocation;
-    await db.collection('active_drivers').doc(driverId).collection('requests')
-    .doc(riderId).set({
-        id: riderId,
-        acceptingDriver: requestingRider.acceptingDriver,
-        endLocation: {
-            address: riderEndLoc.address,
-            lat: riderEndLoc.lat,
-            lng: riderEndLoc.lng,
-        },
-        riderCount: requestingRider.riderCount,
-        runtimeType: requestingRider.runtimeType,
-        startLocation: {
-            address: riderStartLoc.address,
-            lat: riderStartLoc.lat,
-            lng: riderStartLoc.lng,
-        },
-        timeOfTrip: requestingRider.timeOfTrip,
-        user: {
-            displayName: rider.displayName,
-            email: rider.email,
-            id: rider.id,
-            phoneNumber: rider.phoneNumber,
-            photoUrl: rider.photoUrl,
-        },
-    })
+    await driversRef.doc(driverId).collection('requests').doc(riderId)
+    .create(requestingRider)
     .then(res.json(requestingRider))
     .catch(err => res.status(400).json('Error : ' + err));
 });
 
 exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
-    const requestingRider = test_data.ridersList[0] // RIDER
-    const rider = requestingRider.user;
+    //const requestingRider = test_data.ridersList[0] // RIDER
+    const requestingRider = test_data.singleRider;
     const riderId = requestingRider.id; 
-    const riderEndLoc = requestingRider.endLocation;
-    const riderStartLoc = requestingRider.startLocation;
-    const acceptingDriver = test_data.driversList[0]; // DRIVER
-    await db.collection('active_drivers').doc(acceptingDriver.id).collection('requests').doc(riderId)
+    const acceptingDriver = test_data.driversList[1]; // DRIVER
+    await driversRef.doc(acceptingDriver.id).collection('requests').doc(riderId)
     .delete();
-    await db.collection('active_riders').doc(requestingRider.id).update({
+    await ridersRef.doc(requestingRider.id).update({
         acceptingDriver: acceptingDriver,
     });
-    await db.collection('active_drivers').doc(acceptingDriver.id).collection('accepted').doc(riderId)
-    .set({
-        id: riderId,
-        acceptingDriver: acceptingDriver,
-        endLocation: {
-            address: riderEndLoc.address,
-            lat: riderEndLoc.lat,
-            lng: riderEndLoc.lng,
-        },
-        riderCount: requestingRider.riderCount,
-        runtimeType: requestingRider.runtimeType,
-        startLocation: {
-            address: riderStartLoc.address,
-            lat: riderStartLoc.lat,
-            lng: riderStartLoc.lng,
-        },
-        timeOfTrip: requestingRider.timeOfTrip,
-        user: {
-            displayName: rider.displayName,
-            email: rider.email,
-            id: rider.id,
-            phoneNumber: rider.phoneNumber,
-            photoUrl: rider.photoUrl,
-        },
-    })
+    await driversRef.doc(acceptingDriver.id).collection('accepted').doc(riderId)
+    .create(requestingRider)
     .then(res.json('Accepted: ' + riderId))
     .catch(err => res.status(400).json('Error : ' + err));
  

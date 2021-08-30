@@ -98,7 +98,7 @@ const driversList = [
 ];
 
 const singleRider = {
-    id: "rider1",
+    id: "you",
     acceptingDriver: null,
     endLocation: {
         address: "Pitogo, Cebu, Philippines",
@@ -114,9 +114,9 @@ const singleRider = {
     },
     timeOfTrip: "2021-08-27T20:02:56.483457",
     user: {
-        displayName: "Blithe Jan Tristen Gonzales",
-        email: "18102570@usc.edu.ph",
-        id: "rider1",
+        displayName: "This is You",
+        email: "69696969@usc.edu.ph",
+        id: "you",
         phoneNumber: "09331239087",
         photoUrl: "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
     },
