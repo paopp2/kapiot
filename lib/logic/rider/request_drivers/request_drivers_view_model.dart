@@ -4,12 +4,12 @@ import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_map_controller.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
-import 'request_drivers_view_state.dart';
 
 final requestDriversViewModel = Provider.autoDispose(
   (ref) => RequestDriversViewModel(
@@ -45,19 +45,12 @@ class RequestDriversViewModel extends ViewModel {
     );
     respondWhenDriverAccepts(_acceptingDriver);
     await mapController.initializeMap();
-    final startLocation = read(driverStartLocProvider).state;
-    if (startLocation != null) {
-      final currentPlace =
-          await locationService.getAddressFromLocation(startLocation);
-      read(driverStartLocProvider).state =
-          startLocation.copyWith(address: currentPlace);
-    }
   }
 
   // TODO: Refactor
   void showRouteIfBothLocationsSet() async {
-    final startLocation = read(driverStartLocProvider).state;
-    final endLocation = read(driverEndLocProvider).state;
+    final startLocation = read(startLocProvider).state;
+    final endLocation = read(endLocProvider).state;
     if (startLocation != null && endLocation != null) {
       final routeCoordinates = await mapController.getRouteCoordinates(
         start: startLocation,
@@ -81,16 +74,16 @@ class RequestDriversViewModel extends ViewModel {
     final driverStartRouteLng = driverDecodedRoute.first.longitude;
     final driverEndRouteLat = driverDecodedRoute.last.latitude;
     final driverEndRouteLng = driverDecodedRoute.last.longitude;
-    read(driverStartLocProvider).state = KapiotLocation(
+    read(startLocProvider).state = KapiotLocation(
       lat: driverStartRouteLat,
       lng: driverStartRouteLng,
     );
-    read(driverEndLocProvider).state = KapiotLocation(
+    read(endLocProvider).state = KapiotLocation(
       lat: driverEndRouteLat,
       lng: driverEndRouteLng,
     );
-    if (read(driverStartLocProvider).state != null &&
-        read(driverEndLocProvider).state != null) {
+    if (read(startLocProvider).state != null &&
+        read(endLocProvider).state != null) {
       showRouteIfBothLocationsSet();
     }
   }

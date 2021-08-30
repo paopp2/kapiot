@@ -6,8 +6,8 @@ final compatibleDriverConfigStreamProvider = StreamProvider.autoDispose(
   (ref) => ref.watch(requestDriversViewModel).getCompatibleDriverConfigs(),
 );
 
-final driverStartLocProvider =
-    StateProvider.autoDispose<KapiotLocation?>((ref) => null);
+// final driverStartLocProvider =
+//     StateProvider.autoDispose<KapiotLocation?>((ref) => null);
 
-final driverEndLocProvider =
-    StateProvider.autoDispose<KapiotLocation?>((ref) => null);
+// final driverEndLocProvider =
+//     StateProvider.autoDispose<KapiotLocation?>((ref) => null);
