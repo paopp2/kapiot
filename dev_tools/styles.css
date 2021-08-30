@@ -1,0 +1,23 @@
+.field{
+    padding: 20px;
+    display: flex;
+}
+.index_input{
+    margin-left: 10px;
+}
+.populate:visited{
+    color: white;
+    text-decoration: none !important;
+}
+.populate:link{
+    color: white !important;
+    text-decoration: none !important;
+}
+.command{
+    margin: 20px;
+}
+.buttons{
+    text-align: center;
+    padding: 40px;
+    margin: 10px;
+}

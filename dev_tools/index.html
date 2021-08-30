@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kapiot - Firebase Emulator Interface</title>
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">Kapiot - Firebase Emulator Interface </span>
+            </div>
+          </nav>
+        <div>
+        </div>
+        <div class="card">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">index</th>
+                    <th scope="col">rider</th>
+                    <th scope="col">driver</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">0</th>
+                    <td>Charles Ausejo</td>
+                    <td>Charles Ausejo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Christian Gonzales</td>
+                    <td>Christian Gonzales</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Paolo Pepito</td>
+                    <td>Paolo Pepito</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Aurora Lane</td>
+                    <td>Baby Driver</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Jim Preston</td>
+                    <td>Dominic Toretto</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>Arthur</td>
+                    <td>Mad Max</td>
+                  </tr>
+                </tbody>
+              </table>
+            <div class='field'>
+                <h4>Rider Index</h4>
+                <input id="rider_index" class="searchField index_input" type="number" value="0"/>
+            </div>
+            <div class='field'>
+                <h4>Driver Index</h4>
+                <input id="driver_index" class="searchField index_input" type="number" value="0"/>
+            </div> 
+            <div class="d-flex justify-content-center">
+                <button type='button' class="btn btn-primary command" onclick="requestDriver()">Request Driver</button>
+                <button type='button' class="btn btn-primary command" onclick="requestAllDrivers()">Request All Drivers</button>
+                <button type='button' class="btn btn-primary command" onclick="acceptRider()">Accept Rider</button>
+                <button type='button' class="btn btn-success command"><a class='populate' href="http://localhost:5001/kapiot-46cbc/us-central1/populateAll">Populate All</a></button> 
+            </div>
+            <div>
+                
+            </div>
+        </div>
+        
+ 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+<script type="text/javascript">
+    function requestAllDrivers(){
+        const rider_index = document.getElementById("rider_index").value.toString();
+        window.location = "http://localhost:5001/kapiot-46cbc/us-central1/requestAllDrivers?r=" + rider_index;
+    }
+    function requestDriver(){
+        const rider_index = document.getElementById("rider_index").value.toString();
+        const driver_index = document.getElementById("driver_index").value.toString();
+        window.location = "http://localhost:5001/kapiot-46cbc/us-central1/requestDriver?r=" + rider_index + "&d=" + driver_index;
+    }
+    function acceptRider(){
+        const rider_index = document.getElementById("rider_index").value.toString();
+        const driver_index = document.getElementById("driver_index").value.toString();
+        window.location = "http://localhost:5001/kapiot-46cbc/us-central1/acceptRider?r=" + rider_index + "&d=" + driver_index;
+    }
+</script>
