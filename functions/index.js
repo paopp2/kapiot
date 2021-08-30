@@ -117,21 +117,3 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
 });
 
 
-
-/*
-        id: driverId,
-        encodedRoute: requestedDriver.encodedRoute,
-        riderCount: requestedDriver.riderCount,
-        runtimeType: requestedDriver.runtimeType,
-        timeOfTrip: requestedDriver.timeOfTrip,
-        user: {
-            displayName: driver.displayName,
-            email: driver.email,
-            id: driver.id,
-            phoneNumber: driver.phoneNumber,
-            photoUrl: driver.photoUrl,
-        },
-
-*/
-
-
