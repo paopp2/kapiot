@@ -24,10 +24,9 @@ class StopPointPanel extends HookConsumerWidget {
 
     return Expanded(
         child: (currentStop == null)
-            ? const Center(
-                child: Text("No stop points"),
-              )
+            ? Container()
             : Container(
+                margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),

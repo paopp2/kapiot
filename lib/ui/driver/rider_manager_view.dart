@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
+import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 
 import 'components/requesting_riders_panel.dart';
 import 'components/stop_point_panel.dart';
@@ -12,6 +13,7 @@ class RiderManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
+    final currentStop = ref.watch(currentStopProvider).state;
 
     useEffect(() {
       model.initState();
@@ -34,8 +36,9 @@ class RiderManagerView extends HookConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    StopPointPanel(model: model, constraints: constraints),
-                    SizedBox(height: constraints.maxHeight * 0.02),
+                    (currentStop != null)
+                        ? StopPointPanel(model: model, constraints: constraints)
+                        : Container(),
                     RequestingRidersPanel(model: model),
                   ],
                 ),
