@@ -63,7 +63,6 @@ class RequestDriversViewModel extends ViewModel {
         start: startLocation,
         end: endLocation,
       );
-      read(driverRouteCoordinatesProvider).state = routeCoordinates;
       mapController.showRoute(
         start: startLocation,
         end: endLocation,
