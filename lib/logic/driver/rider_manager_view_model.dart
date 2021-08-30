@@ -36,9 +36,14 @@ class RiderManagerViewModel extends ViewModel {
           read(currentStopProvider).state = stopPointsList.first;
           read(nextStopProvider).state = stopPointsList[1];
         } else {
-          read(currentStopProvider).state = nextStop;
-          final currentIndex = stopPointsList.indexOf(nextStop);
-          read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+          final currentStop = read(currentStopProvider).state;
+          if (currentStop != null) {
+            if (!currentStop.isPickUp) {
+              read(currentStopProvider).state = nextStop;
+              final currentIndex = stopPointsList.indexOf(nextStop);
+              read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+            }
+          }
         }
       } else if (stopPointsList.length == 1) {
         read(currentStopProvider).state = stopPointsList.first;
