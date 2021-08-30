@@ -35,7 +35,7 @@ class RiderManagerView extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     StopPointPanel(model: model, constraints: constraints),
-                    const SizedBox(height: 15),
+                    SizedBox(height: constraints.maxHeight * 0.02),
                     RequestingRidersPanel(model: model),
                   ],
                 ),

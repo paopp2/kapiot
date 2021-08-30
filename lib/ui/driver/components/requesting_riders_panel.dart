@@ -18,10 +18,19 @@ class RequestingRidersPanel extends HookConsumerWidget {
 
     return Expanded(
       child: Container(
-        color: Colors.amber,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: Colors.white,
+        ),
         child: Column(
           children: [
-            const Text("REQUESTING RIDERS"),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15),
+              child: const Text(
+                "REQUESTING RIDERS",
+                style: TextStyle(fontSize: 23),
+              ),
+            ),
             Expanded(
               child: requestingRidersStream.when(
                 error: (_, __) => const Center(
