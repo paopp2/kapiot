@@ -60,7 +60,7 @@ const ridersList = [
 const driversList = [
     {
         id: "driver1",
-        encodedRoute: "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\VRtBpDrAlBfHzD~DxB",
+        encodedRoute: "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
         riderCount: 2,
         runtimeType: "driver",
         timeOfTrip: "2021-08-29T06:47:07.099561",
