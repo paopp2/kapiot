@@ -28,13 +28,7 @@ const ridersList = [
     },
     {
         id: "rider2",
-        acceptingDriver: {
-            displayName: "Charles Jr. Ausejo",
-            email: "16100938@usc.edu.ph",
-            id: "driver1",
-            phoneNumber: "09450987654",
-            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c",
-        },
+        acceptingDriver: null,
         endLocation: {
             address: "Basak, Lapu-Lapu City, Cebu, Philippines",
             lat: 10.291023899999999,
@@ -70,7 +64,7 @@ const driversList = [
             email: "16100938@usc.edu.ph",
             id: "driver1",
             phoneNumber: "09450987654",
-            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c"
+            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c",
         },
     },
     {
@@ -84,7 +78,7 @@ const driversList = [
             email: "16100825@usc.edu.ph",
             id: "driver2",
             phoneNumber: "09451230987",
-            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c"
+            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c",
         },
     },
     {
@@ -98,7 +92,7 @@ const driversList = [
             email: "cgonz@gmail.com",
             id: "driver3",
             phoneNumber: "09451231234",
-            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gi6RZJXfmElWMUsZUJ0O7zZwQboH7mEH3Hcnxmc=s96-c"
+            photoUrl: "https://lh3.googleusercontent.com/a-/AOh14Gi6RZJXfmElWMUsZUJ0O7zZwQboH7mEH3Hcnxmc=s96-c",
         },
     },
 ];
