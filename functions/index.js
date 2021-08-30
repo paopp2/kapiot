@@ -5,6 +5,17 @@ admin.initializeApp();
 const db = admin.firestore();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
+
+/* Pick your rider as your own */
+const charlesRider = test_data.ridersList[0];
+const paoloRider = test_data.ridersList[1];
+const christianRider = test_data.ridersList[2];
+
+/* Pick your driver to your liking */
+const charlesDriver = test_data.driversList[0];
+const paoloDriver = test_data.driversList[1];
+const christianDriver = test_data.driversList[2];
+
 // TODO: make a temporary collection in firestore that will have all the driverId
 var driverIdList = []; 
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
@@ -17,32 +28,39 @@ exports.getActiveDrivers = functions.https.onRequest(async (req, res) =>  {
     res.send(snapshot.docs.map(doc => doc.data()))
 });
 
-exports.populateActiveRiders = functions.https.onRequest(async (req, res) =>  {
-    const original = req.query.text;
+// use populateAll instead to populate all riders and drivers with our own infos
+exports.populateAll = functions.https.onRequest(async (req, res) =>  {
     test_data.ridersList.forEach(addRider);
-    var writeResult = ''
-    async function addRider(rider, index, arr) {
-        writeResult += await ridersRef.doc(rider.id).set(rider);
+    async function addRider(rider) {
+        await ridersRef.doc(rider.id).set(rider);
+    }
+    test_data.driversList.forEach(addDriver);
+    async function addDriver(driver) {
+        await driversRef.doc(driver.id).set(driver);
+    }
+    res.json({result: "Populated drivers and riders'"});
+});
+
+exports.populateActiveRiders = functions.https.onRequest(async (req, res) =>  {
+    test_data.ridersList.forEach(addRider);
+    async function addRider(rider) {
+        await ridersRef.doc(rider.id).set(rider);
     }
     res.json({result: "Populated 'active_riders'"});
 });
 
 exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
-    const original = req.query.text;
     test_data.driversList.forEach(addDriver);
-    
-    var writeResult = ''
-    async function addDriver(driver, index, arr) {
-        writeResult += await driversRef.doc(driver.id).set(driver);
+    async function addDriver(driver) {
+        await driversRef.doc(driver.id).set(driver);
     }
     res.json({result: "Populated 'active_drivers'"});
 });
 
 exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
-    const requestedDriver = test_data.driversList[0]; // DRIVER
+    const requestedDriver = charlesDriver; // Changeable 
     const driverId = requestedDriver.id; 
-    //const requestingRider = test_data.requestingRider[0]; // RIDER
-    const requestingRider = test_data.charlesRider; // change to your name
+    const requestingRider = charlesRider; // Changeable
     const riderId = requestingRider.id; 
     await driversRef.doc(driverId).collection('requests').doc(riderId)
     .create(requestingRider)
@@ -51,10 +69,9 @@ exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
 });
 
 exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
-    //const requestingRider = test_data.ridersList[0] // RIDER
-    const requestingRider = test_data.charlesRider; // change to your name
+    const requestingRider = charlesRider; // Changeable
     const riderId = requestingRider.id; 
-    const acceptingDriver = test_data.driversList[0]; // DRIVER
+    const acceptingDriver = charlesDriver; // Changeable
     await driversRef.doc(acceptingDriver.id).collection('requests').doc(riderId)
     .delete();
     await ridersRef.doc(requestingRider.id).update({
@@ -65,6 +82,18 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     .then(res.json('Accepted: ' + riderId))
     .catch(err => res.status(400).json('Error : ' + err));
  
+});
+
+exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {
+    const driversList = test_data.driversList;
+    const requestingRider = charlesRider; // Changeable
+    const riderId = requestingRider.id; 
+    driversList.forEach(requestDriver);
+    async function requestDriver(driver) {
+        await driversRef.doc(driver.id).collection('requests').doc(riderId)
+        .create(requestingRider);
+    }
+    res.json({result: "Requested all drivers"});
 });
 
 

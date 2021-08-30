@@ -30,9 +30,9 @@ const ridersList = [
         id: "HV9BcFRIKMYrQOYzd2gStGqErW12",
         acceptingDriver: null,
         endLocation: {
-            address: "Basak, Lapu-Lapu City, Cebu, Philippines",
-            lat: 10.291023899999999,
-            lng: 123.961041,
+            address: "SM City Consolacion, Consolacion, Cebu, Philippines",
+            lat: 10.379990099999999,
+            lng: 123.96463469999999,
         },
         riderCount: 1,
         runtimeType: "rider",
