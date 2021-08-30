@@ -58,9 +58,9 @@ exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
 });
 
 exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
-    const requestedDriver = charlesDriver; // Changeable 
+    const requestedDriver = test_data.driversList[parseInt(req.query.d,10)]; // Changeable 
     const driverId = requestedDriver.id; 
-    const requestingRider = charlesRider; // Changeable
+    const requestingRider = test_data.ridersList[parseInt(req.query.r,10)]; // Changeable
     const riderId = requestingRider.id; 
     await driversRef.doc(driverId).collection('requests').doc(riderId)
     .create(requestingRider)
@@ -74,7 +74,7 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     const requestingRider = test_data.ridersList[parseInt(req.query.r,10)];
     const riderId = requestingRider.id;
     // const acceptingDriver = charlesDriver; // Changeable
-    const acceptingDriver = test_data.driversList[parseInt(req.query.d,10)]; // Changeable
+    const acceptingDriver = test_data.driversList[parseInt(req.query.d,10)]; 
     await driversRef.doc(acceptingDriver.id).collection('requests').doc(riderId)
     .delete();
     await ridersRef.doc(requestingRider.id).update({
@@ -89,7 +89,7 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
 
 exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {
     const driversList = test_data.driversList;
-    const requestingRider = charlesRider; // Changeable
+    const requestingRider = test_data.ridersList[parseInt(req.query.r,10)]; 
     const riderId = requestingRider.id; 
     driversList.forEach(requestDriver);
     async function requestDriver(driver) {
