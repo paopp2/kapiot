@@ -3,16 +3,6 @@
 const ridersList = [
     {
         id: "rider1",
-        name: "John",
-        address: "Mandaue",
-    },
-    {
-        id: "rider2",
-        name: "Bob",
-        address: "Lapu-Lapu",
-    },
-    {
-        id: "rider1",
         acceptingDriver: null,
         endLocation: {
             address: "Pitogo, Cebu, Philippines",
