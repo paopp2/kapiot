@@ -26,7 +26,11 @@ class AuthService {
   }
 
   Future<void> signOutGoogle() async {
-    await googleSignIn.disconnect();
+    try {
+      await googleSignIn.disconnect();
+    } catch (e) {
+      print(e);
+    }
     await googleSignIn.signOut();
     await read(fireauthProvider).signOut();
   }
