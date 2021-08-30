@@ -103,9 +103,6 @@ const driversList = [
 ];
 
 const singleRider = {
-    // id: "single_add",
-    // name: "Jane",
-    // address: "Tunga sa old bridge",
     id: "rider1",
     acceptingDriver: null,
     endLocation: {
@@ -131,16 +128,6 @@ const singleRider = {
 };
 
 const requestingRider = [
-    // {
-    //     id: "requesting1",
-    //     name: "Irish",
-    //     address: "Lahug",
-    // },
-    // {
-    //     id: "requesting2",
-    //     name: "Angel",
-    //     address: "Labangon",
-    // },
     {
         id: "rider1",
         acceptingDriver: null,
