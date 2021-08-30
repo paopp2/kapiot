@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
@@ -52,6 +53,7 @@ class HomeViewModel extends ViewModel {
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
+  List<LatLng> _routeCoordinates = [];
 
   @override
   Future<void> initState() async {
@@ -155,24 +157,11 @@ class HomeViewModel extends ViewModel {
       );
       read(isEndLocFocusedProvider).state = false;
     }
-    showRouteIfBothLocationsSet();
-  }
 
-  void showRouteIfBothLocationsSet() async {
-    final startLocation = read(startLocProvider).state;
-    final endLocation = read(endLocProvider).state;
-    if (startLocation != null && endLocation != null) {
-      final routeCoordinates = await mapController.getRouteCoordinates(
-        start: startLocation,
-        end: endLocation,
-      );
-      read(routeCoordinatesProvider).state = routeCoordinates;
-      mapController.showRoute(
-        start: startLocation,
-        end: endLocation,
-        routeCoordinates: routeCoordinates,
-      );
-    }
+    mapController.showRouteIfBothLocationsSet(
+      onRouteCalculated: (routeCoordinates) =>
+          _routeCoordinates = routeCoordinates,
+    );
   }
 
   Future<void> pushRouteConfig() async {
@@ -193,9 +182,9 @@ class HomeViewModel extends ViewModel {
       read(currentRouteConfigProvider).state = riderConfig;
       AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
-      final routeCoordinates = read(routeCoordinatesProvider).state;
+      assert(_routeCoordinates.isNotEmpty);
       final encodedRoute =
-          await googleMapsApiServices.utils.encodeRoute(routeCoordinates);
+          await googleMapsApiServices.utils.encodeRoute(_routeCoordinates);
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,

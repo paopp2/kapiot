@@ -1,4 +1,3 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final isRiderProvider = StateProvider.autoDispose<bool>((ref) => true);
@@ -15,8 +14,3 @@ final isEndLocFocusedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 final placeSuggestionsProvider =
     StateProvider.autoDispose<List<String?>>((ref) => []);
-
-final routeCoordinatesProvider = StateProvider.autoDispose<List<LatLng>>((ref) {
-  ref.maintainState = true;
-  return [];
-});

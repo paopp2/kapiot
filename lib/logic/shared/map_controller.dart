@@ -112,4 +112,25 @@ abstract class MapController {
   void setEndLocation(KapiotLocation endLocation) {
     read(endLocProvider).state = endLocation;
   }
+
+  void showRouteIfBothLocationsSet({
+    Function(List<LatLng> routeCoordinates)? onRouteCalculated,
+  }) async {
+    final startLocation = read(startLocProvider).state;
+    final endLocation = read(endLocProvider).state;
+    if (startLocation != null && endLocation != null) {
+      final routeCoordinates = await getRouteCoordinates(
+        start: startLocation,
+        end: endLocation,
+      );
+      showRoute(
+        start: startLocation,
+        end: endLocation,
+        routeCoordinates: routeCoordinates,
+      );
+      if (onRouteCalculated != null) {
+        onRouteCalculated(routeCoordinates);
+      }
+    }
+  }
 }

@@ -4,7 +4,6 @@ import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_map_controller.dart';
-import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
@@ -47,23 +46,6 @@ class RequestDriversViewModel extends ViewModel {
     await mapController.initializeRequestDriversMap();
   }
 
-  // TODO: Refactor
-  void showRouteIfBothLocationsSet() async {
-    final startLocation = read(startLocProvider).state;
-    final endLocation = read(endLocProvider).state;
-    if (startLocation != null && endLocation != null) {
-      final routeCoordinates = await mapController.getRouteCoordinates(
-        start: startLocation,
-        end: endLocation,
-      );
-      mapController.showRoute(
-        start: startLocation,
-        end: endLocation,
-        routeCoordinates: routeCoordinates,
-      );
-    }
-  }
-
   Future<void> showDriverRoute(RouteConfig driverConfig) async {
     final driverEncodedRoute = (driverConfig is ForDriver)
         ? driverConfig.encodedRoute
@@ -87,7 +69,7 @@ class RequestDriversViewModel extends ViewModel {
         lng: driverEndRouteLng,
       ),
     );
-    showRouteIfBothLocationsSet();
+    mapController.showRouteIfBothLocationsSet();
   }
 
   Future<void> requestDriver(String driverId) async {
