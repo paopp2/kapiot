@@ -43,6 +43,13 @@ function action(e,option){
         alert('An error occured');
     }
     wnd = window.open(url);
-    wnd.close();
+    var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+    if (isFirefox) {
+        setTimeout(function() {
+            wnd.close();
+        },300);
+    } else {
+        wnd.close();
+    }
     e.preventDefault();
 }
