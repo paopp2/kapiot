@@ -69,22 +69,18 @@ exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
 });
 
 exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
-    // const requestingRider = charlesRider; // Changeable
-    // functions.logger.info("Hello logs!", {structuredData: parseInt(req.query.index, 10)});
-    const requestingRider = test_data.ridersList[parseInt(req.query.r,10)];
-    const riderId = requestingRider.id;
-    // const acceptingDriver = charlesDriver; // Changeable
-    const acceptingDriver = test_data.driversList[parseInt(req.query.d,10)]; 
-    await driversRef.doc(acceptingDriver.id).collection('requests').doc(riderId)
+    const requestingRiderConfig = test_data.ridersList[parseInt(req.query.r,10)];
+    const riderId = requestingRiderConfig.id;
+    const acceptingDriverConfig = test_data.driversList[parseInt(req.query.d,10)]; 
+    await driversRef.doc(acceptingDriverConfig.id).collection('requests').doc(riderId)
     .delete();
-    await ridersRef.doc(requestingRider.id).update({
-        acceptingDriver: acceptingDriver.user,
+    await ridersRef.doc(requestingRiderConfig.id).update({
+        acceptingDriverConfig: acceptingDriverConfig,
     });
-    await driversRef.doc(acceptingDriver.id).collection('accepted').doc(riderId)
-    .create(requestingRider)
+    await driversRef.doc(acceptingDriverConfig.id).collection('accepted').doc(riderId)
+    .create(requestingRiderConfig)
     .then(res.json('Accepted: ' + riderId))
     .catch(err => res.status(400).json('Error : ' + err));
- 
 });
 
 exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {

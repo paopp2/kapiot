@@ -81,6 +81,45 @@ abstract class MapController {
     );
   }
 
+  Future<void> showRouteFromEncoded({required String encodedRoute}) async {
+    final decodedRoute =
+        await googleMapsApiServices.utils.decodeRoute(encodedRoute);
+    read(markersProvider).state = {};
+    final startLocation = KapiotLocation(
+      lat: decodedRoute.first.latitude,
+      lng: decodedRoute.first.longitude,
+    );
+    final endLocation = KapiotLocation(
+      lat: decodedRoute.last.latitude,
+      lng: decodedRoute.last.longitude,
+    );
+    setStartLocation(startLocation);
+    setEndLocation(endLocation);
+    addMarker(
+      markerId: "start_location",
+      location: startLocation,
+    );
+    addMarker(
+      markerId: "end_location",
+      location: endLocation,
+    );
+    drawPolyLine(decodedRoute);
+    gmapController.animateCamera(
+      CameraUpdate.newLatLngBounds(
+        (startLocation.lat <= endLocation.lat)
+            ? LatLngBounds(
+                southwest: LatLng(startLocation.lat, startLocation.lng),
+                northeast: LatLng(endLocation.lat, endLocation.lng),
+              )
+            : LatLngBounds(
+                southwest: LatLng(endLocation.lat, endLocation.lng),
+                northeast: LatLng(startLocation.lat, startLocation.lng),
+              ),
+        latLngBoundsPadding,
+      ),
+    );
+  }
+
   void drawPolyLine(List<LatLng> routeCoordinates) {
     read(polylinesProvider).state = {};
     final polylines = read(polylinesProvider).state;
@@ -105,11 +144,11 @@ abstract class MapController {
     read(markersProvider).state = markers;
   }
 
-  void setStartLocation(KapiotLocation startLocation) {
+  void setStartLocation(KapiotLocation? startLocation) {
     read(startLocProvider).state = startLocation;
   }
 
-  void setEndLocation(KapiotLocation endLocation) {
+  void setEndLocation(KapiotLocation? endLocation) {
     read(endLocProvider).state = endLocation;
   }
 

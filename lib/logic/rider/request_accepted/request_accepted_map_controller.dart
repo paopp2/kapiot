@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 final requestAcceptedMapController = Provider.autoDispose(
   (ref) => RequestAcceptedMapController(
@@ -36,10 +38,13 @@ class RequestAcceptedMapController extends MapController {
       ),
       clearMap: true,
     );
-    // Re-add the marker for the startLocation after clearing map
-    addMarker(
-      markerId: "start_location",
-      location: locationFromPreviousView,
-    );
+  }
+
+  Future<void> showAcceptingDriverRoute() async {
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
+    final driverEncodedRoute = (acceptingDriverConfig is ForDriver)
+        ? acceptingDriverConfig.encodedRoute
+        : throw Exception("Not ForDriver");
+    await showRouteFromEncoded(encodedRoute: driverEncodedRoute);
   }
 }

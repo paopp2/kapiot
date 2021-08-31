@@ -36,16 +36,22 @@ class RequestAcceptedViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
-    assert(read(acceptingDriverProvider).state != null);
+    assert(read(acceptingDriverConfigProvider).state != null);
     assert(currentUser != null);
     await mapController.initializeRequestAcceptedMap();
+    // This delay of arbitrary duration allows the map to finish initializing
+    // before showing the acceptingDriver's route. Removing this delay seems to
+    // result to a race condition. Should anyone have a better alternative to
+    // this workaround, feel free to send a pull request
+    await Future.delayed(const Duration(milliseconds: 50));
+    mapController.showAcceptingDriverRoute();
   }
 
   Stream<List<KapiotUser>> getCoRidersStream() {
-    final acceptingDriver = read(acceptingDriverProvider).state;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
     return riderRepo.getCoRidersStream(
       currentUser: currentUser!,
-      driver: acceptingDriver!,
+      driver: acceptingDriverConfig.user,
     );
   }
 }

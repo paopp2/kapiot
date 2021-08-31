@@ -4,7 +4,7 @@
 const ridersList = [
     {
         id: "3WO9ATwspsMwYCRCgdbXnfpp5r83",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "Basak, Lapu-Lapu City, Cebu, Philippines",
             lat: 10.291023899999999,
@@ -28,7 +28,7 @@ const ridersList = [
     },
     {
         id: "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "SM Seaside City Cebu, Cebu City, Cebu, Philippines",
             lat: 10.2816952,
@@ -52,7 +52,7 @@ const ridersList = [
     },
     {
         id: "HV9BcFRIKMYrQOYzd2gStGqErW12",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "SM City Consolacion, Consolacion, Cebu, Philippines",
             lat: 10.379990099999999,
@@ -76,7 +76,7 @@ const ridersList = [
     },
     {
         id: "hWU1ZYSi82KhFfF8x7z32e0UZz64",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "Basak, Lapu-Lapu City, Cebu, Philippines",
             lat: 10.291023899999999,
@@ -100,7 +100,7 @@ const ridersList = [
     },
     {
         id: "ji89ti6ie104O4j0YZcPSKFk5GS9",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "SM Seaside City Cebu, Cebu City, Cebu, Philippines",
             lat: 10.2816952,
@@ -124,7 +124,7 @@ const ridersList = [
     },
     {
         id: "rJFY8bzVgabltKJ5glwvwDeKX765",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "SM City Consolacion, Consolacion, Cebu, Philippines",
             lat: 10.379990099999999,
@@ -165,7 +165,7 @@ const driversList = [
     },
     {
         id: "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
-        encodedRoute: "w|g~@{|hsVCQ@MTLl@Lx@@F_@BIFEdCg@nA_@t@a@VUFMFc@Ka@Ue@AOCm@Ke@i@aA}@yBc@_A_@i@o@m@YPK@ME",
+        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBd@HMf@OrA",
         riderCount: 1,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T13:45:35.234433",
@@ -221,7 +221,7 @@ const driversList = [
     },
     {
         id: "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
-        encodedRoute: "w|g~@{|hsVCQ@MTLl@Lx@@F_@BIFEdCg@nA_@t@a@VUFMFc@Ka@Ue@AOCm@Ke@i@aA}@yBc@_A_@i@o@m@YPK@ME",
+        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBd@HMf@OrA",
         riderCount: 1,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T13:45:35.234433",
@@ -238,7 +238,7 @@ const driversList = [
 const requestingRider = [
     {
         id: "rider1",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "Pitogo, Cebu, Philippines",
             lat: 10.3786493,
@@ -262,7 +262,7 @@ const requestingRider = [
     },
     {
         id: "rider2",
-        acceptingDriver: null,
+        acceptingDriverConfig: null,
         endLocation: {
             address: "Basak, Lapu-Lapu City, Cebu, Philippines",
             lat: 10.291023899999999,

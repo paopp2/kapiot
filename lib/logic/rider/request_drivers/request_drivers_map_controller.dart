@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 final requestDriversMapController = Provider.autoDispose(
   (ref) => RequestDriversMapController(
@@ -25,6 +26,7 @@ class RequestDriversMapController extends MapController {
   final LocationService locationService;
 
   Future<void> initializeRequestDriversMap() async {
+    // Use location set from the previous view to initialize new GoogleMap
     final locationFromPreviousView = read(startLocProvider).state!;
     await super.initializeMap(
       initialCameraPosition: CameraPosition(
@@ -36,10 +38,12 @@ class RequestDriversMapController extends MapController {
       ),
       clearMap: true,
     );
-    // Re-add the marker for the startLocation after clearing map
-    addMarker(
-      markerId: "start_location",
-      location: locationFromPreviousView,
-    );
+  }
+
+  Future<void> showSelectedDriverRoute(RouteConfig driverConfig) async {
+    final driverEncodedRoute = (driverConfig is ForDriver)
+        ? driverConfig.encodedRoute
+        : throw Exception("Not ForDriver");
+    await showRouteFromEncoded(encodedRoute: driverEncodedRoute);
   }
 }

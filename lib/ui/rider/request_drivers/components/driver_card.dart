@@ -22,7 +22,8 @@ class DriverCard extends StatelessWidget {
         color: Colors.grey[100],
         margin: const EdgeInsets.all(10),
         child: InkWell(
-          onTap: () => model.showDriverRoute(driverConfig),
+          onTap: () =>
+              model.mapController.showSelectedDriverRoute(driverConfig),
           splashColor: Colors.black,
           child: Column(
             children: [

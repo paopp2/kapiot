@@ -18,7 +18,9 @@ class RideInfoPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final acceptingDriver = ref.watch(acceptingDriverProvider).state!;
+    final acceptingDriverConfig =
+        ref.watch(acceptingDriverConfigProvider).state!;
+    final acceptingDriver = acceptingDriverConfig.user;
     final coRidersStream = ref.watch(coRidersStreamProvider);
     return Column(
       children: [
