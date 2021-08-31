@@ -35,24 +35,19 @@ class AuthService {
     await read(fireauthProvider).signOut();
   }
 
-  //TODO: Revert back to checking for USC email
   Future<AuthCredential?> googleCredentials() async {
     try {
       final googleSignInAcc = await googleSignIn.signIn();
       final googleSignInAuth = await googleSignInAcc?.authentication;
-      // if (googleSignInAcc!.email.split("@")[1] == 'usc.edu.ph') {
-      //   return GoogleAuthProvider.credential(
-      //     accessToken: googleSignInAuth?.accessToken,
-      //     idToken: googleSignInAuth?.idToken,
-      //   );
-      // } else {
-      //   signOutGoogle();
-      //   throw Exception('Not USC Email');
-      // }
-      return GoogleAuthProvider.credential(
-        accessToken: googleSignInAuth?.accessToken,
-        idToken: googleSignInAuth?.idToken,
-      );
+      if (googleSignInAcc!.email.split("@")[1] == 'usc.edu.ph') {
+        return GoogleAuthProvider.credential(
+          accessToken: googleSignInAuth?.accessToken,
+          idToken: googleSignInAuth?.idToken,
+        );
+      } else {
+        signOutGoogle();
+        throw Exception('Not USC Email');
+      }
     } catch (e) {
       print(e);
       return null;
