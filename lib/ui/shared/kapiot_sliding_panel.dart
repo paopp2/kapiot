@@ -29,7 +29,7 @@ class KapiotSlidingPanel extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: constraints.maxHeight * 0.01,
+                height: constraints.maxHeight * 0.02,
               ),
               Container(
                 width: 40,
@@ -41,7 +41,7 @@ class KapiotSlidingPanel extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.03),
+                    vertical: constraints.maxHeight * 0.04),
                 child: Text(title),
               ),
               panel,

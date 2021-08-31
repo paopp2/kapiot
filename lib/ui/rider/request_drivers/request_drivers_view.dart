@@ -20,19 +20,22 @@ class RequestDriversView extends HookConsumerWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Scaffold(
-          body: KapiotSlidingPanel(
-            constraints: constraints,
-            title: "We found n drivers for your request",
-            map: Center(
-              child: RequestDriversViewMap(model: model),
-            ),
-            panel: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: SizedBox(
-                width: double.infinity,
-                height: constraints.maxHeight * 0.5,
-                child: DriverCardStream(model: model, constraints: constraints),
+        return SafeArea(
+          child: Scaffold(
+            body: KapiotSlidingPanel(
+              constraints: constraints,
+              title: "We found n drivers for your request",
+              map: Center(
+                child: RequestDriversViewMap(model: model),
+              ),
+              panel: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: constraints.maxHeight * 0.5,
+                  child:
+                      DriverCardStream(model: model, constraints: constraints),
+                ),
               ),
             ),
           ),
