@@ -11,16 +11,16 @@ class StopPointPanel extends StatelessWidget {
     Key? key,
     required this.model,
     required this.constraints,
-    required this.currentStop,
+    required this.nextStop,
   }) : super(key: key);
 
   final RiderManagerViewModel model;
   final BoxConstraints constraints;
-  final StopPoint currentStop;
+  final StopPoint nextStop;
 
   @override
   Widget build(BuildContext context) {
-    final rider = currentStop.rider;
+    final rider = nextStop.rider;
 
     return Expanded(
       child: Container(
@@ -63,10 +63,10 @@ class StopPointPanel extends StatelessWidget {
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Text("ACTION: " +
-                              ((currentStop.isPickUp)
-                                  ? "Pick up"
-                                  : "Drop off")),
+                          child: Text(
+                            "ACTION: " +
+                                ((nextStop.isPickUp) ? "Pick up" : "Drop off"),
+                          ),
                         ),
                       ],
                     ),
@@ -76,7 +76,7 @@ class StopPointPanel extends StatelessWidget {
             ),
             Expanded(
               child: Marquee(
-                text: (currentStop.stopLocation.address ?? ""),
+                text: (nextStop.stopLocation.address ?? ""),
                 style: const TextStyle(fontSize: 17, color: Colors.grey),
                 blankSpace: 90,
                 pauseAfterRound: const Duration(seconds: 2),
@@ -91,7 +91,7 @@ class StopPointPanel extends StatelessWidget {
                   child: const Text("Cancel"),
                 ),
                 ElevatedButton(
-                  onPressed: model.nextStop,
+                  onPressed: model.updateNextStop,
                   child: const Text("Done"),
                 )
               ],

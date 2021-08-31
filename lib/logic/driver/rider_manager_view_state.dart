@@ -6,11 +6,6 @@ final requestingRidersStreamProvider = StreamProvider.autoDispose(
   (ref) => ref.watch(riderManagerViewModel).getRequestingRidersStream(),
 );
 
-final currentStopProvider = StateProvider.autoDispose<StopPoint?>((ref) {
-  ref.maintainState = true;
-  return null;
-});
-
 final nextStopProvider = StateProvider.autoDispose<StopPoint?>((ref) {
   ref.maintainState = true;
   return null;

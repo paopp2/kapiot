@@ -102,9 +102,9 @@ const ridersList = [
         id: "ji89ti6ie104O4j0YZcPSKFk5GS9",
         acceptingDriverConfig: null,
         endLocation: {
-            address: "The Generics Pharmacy, Mandaue City, Cebu, Philippines",
-            lat: 10.351523987011937,
-            lng: 123.94912011634415,
+            address: "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu, Philippines",
+            lat: 10.341064019974215, 
+            lng: 123.94752861317745,
         },
         riderCount: 1,
         runtimeType: "rider",
