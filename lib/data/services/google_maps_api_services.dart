@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmaps;
 import 'package:maps_toolkit/maps_toolkit.dart' as utils;
+import 'dart:math' show cos, sqrt, asin;
 
 // TODO: Exposed API key! Hide in production
 const googleApiKey = "AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI";
@@ -101,5 +102,23 @@ class MapsUtils {
       true,
       tolerance: 100,
     );
+  }
+
+  /// Calculates distance between two points using the Haversine formula and
+  /// returns the result in km
+  double calculateDistance({
+    required KapiotLocation pointA,
+    required KapiotLocation pointB,
+  }) {
+    final lat1 = pointA.lat;
+    final lon1 = pointA.lng;
+    final lat2 = pointB.lat;
+    final lon2 = pointB.lng;
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 }
