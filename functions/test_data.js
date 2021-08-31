@@ -165,7 +165,7 @@ const driversList = [
     },
     {
         id: "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
-        encodedRoute: "w|g~@{|hsVCQ@MTLl@Lx@@F_@BIFEdCg@nA_@t@a@VUFMFc@Ka@Ue@AOCm@Ke@i@aA}@yBc@_A_@i@o@m@YPK@ME",
+        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBd@HMf@OrA",
         riderCount: 1,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T13:45:35.234433",
@@ -221,7 +221,7 @@ const driversList = [
     },
     {
         id: "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
-        encodedRoute: "w|g~@{|hsVCQ@MTLl@Lx@@F_@BIFEdCg@nA_@t@a@VUFMFc@Ka@Ue@AOCm@Ke@i@aA}@yBc@_A_@i@o@m@YPK@ME",
+        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBd@HMf@OrA",
         riderCount: 1,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T13:45:35.234433",
