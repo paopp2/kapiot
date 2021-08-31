@@ -36,21 +36,18 @@ class RequestAcceptedViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
-    assert(read(acceptingDriverProvider).state != null);
+    assert(read(acceptingDriverConfigProvider).state != null);
     assert(currentUser != null);
     await mapController.initializeRequestAcceptedMap();
-    final acceptingDriver = read(acceptingDriverProvider).state;
-    final acceptingDriverConfig = await riderRepo.getAcceptingDriverConfig(
-      acceptingDriver!.id,
-    );
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
     mapController.showDriverRoute(acceptingDriverConfig);
   }
 
   Stream<List<KapiotUser>> getCoRidersStream() {
-    final acceptingDriver = read(acceptingDriverProvider).state;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
     return riderRepo.getCoRidersStream(
       currentUser: currentUser!,
-      driver: acceptingDriver!,
+      driver: acceptingDriverConfig.user,
     );
   }
 }

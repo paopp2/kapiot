@@ -14,10 +14,10 @@ _$ForRider _$$ForRiderFromJson(Map<String, dynamic> json) => _$ForRider(
           json['startLocation'] as Map<String, dynamic>),
       endLocation:
           KapiotLocation.fromJson(json['endLocation'] as Map<String, dynamic>),
-      acceptingDriver: json['acceptingDriver'] == null
+      acceptingDriverConfig: json['acceptingDriverConfig'] == null
           ? null
-          : KapiotUser.fromJson(
-              json['acceptingDriver'] as Map<String, dynamic>),
+          : RouteConfig.fromJson(
+              json['acceptingDriverConfig'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ForRiderToJson(_$ForRider instance) =>
@@ -27,7 +27,7 @@ Map<String, dynamic> _$$ForRiderToJson(_$ForRider instance) =>
       'riderCount': instance.riderCount,
       'startLocation': instance.startLocation.toJson(),
       'endLocation': instance.endLocation.toJson(),
-      'acceptingDriver': instance.acceptingDriver?.toJson(),
+      'acceptingDriverConfig': instance.acceptingDriverConfig?.toJson(),
     };
 
 _$ForDriver _$$ForDriverFromJson(Map<String, dynamic> json) => _$ForDriver(

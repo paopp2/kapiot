@@ -14,7 +14,7 @@ class RouteConfig with _$RouteConfig {
     required int riderCount,
     required KapiotLocation startLocation,
     required KapiotLocation endLocation,
-    KapiotUser? acceptingDriver,
+    RouteConfig? acceptingDriverConfig,
   }) = ForRider;
 
   const factory RouteConfig.driver({
