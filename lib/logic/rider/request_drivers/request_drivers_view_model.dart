@@ -58,8 +58,10 @@ class RequestDriversViewModel extends ViewModel {
     );
   }
 
-  Stream<List<RouteConfig>> getCompatibleDriverConfigs() =>
-      riderRepo.getCompatibleDriverConfigs();
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() {
+    final currentRiderConfig = read(currentRouteConfigProvider).state!;
+    return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
+  }
 
   Future<void> respondWhenDriverAccepts(
     Stream<RouteConfig?> acceptingDriverConfig,

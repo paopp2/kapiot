@@ -13,7 +13,7 @@ class RiderManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
-    final currentStop = ref.watch(currentStopProvider).state;
+    final nextStop = ref.watch(nextStopProvider).state;
 
     useEffect(() {
       model.initState();
@@ -36,11 +36,11 @@ class RiderManagerView extends HookConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    (currentStop != null)
+                    (nextStop != null)
                         ? StopPointPanel(
                             model: model,
                             constraints: constraints,
-                            currentStop: currentStop,
+                            nextStop: nextStop,
                           )
                         : const SizedBox(),
                     RequestingRidersPanel(model: model),

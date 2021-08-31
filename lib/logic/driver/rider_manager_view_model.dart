@@ -22,34 +22,26 @@ class RiderManagerViewModel extends ViewModel {
   }) : super(read);
   final DriverRepository driverRepo;
   final KapiotUser? currentUser;
+  static final List<StopPoint> _finishedStopPoints = [];
 
   @override
   void initState() {
     final stopPointsStream = getStopPointsStream();
     stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
-      StopPoint? nextStop = read(nextStopProvider).state;
-
-      if (stopPointsList.length > 1) {
-        if (nextStop == null) {
-          // Initialize
-          read(currentStopProvider).state = stopPointsList.first;
-          read(nextStopProvider).state = stopPointsList[1];
+      if (stopPointsList.isNotEmpty) {
+        if (_finishedStopPoints.isEmpty) {
+          read(nextStopProvider).state = stopPointsList.first;
         } else {
-          final currentStop = read(currentStopProvider).state;
-          if (currentStop != null) {
-            if (!currentStop.isPickUp) {
-              read(currentStopProvider).state = nextStop;
-              final currentIndex = stopPointsList.indexOf(nextStop);
-              read(nextStopProvider).state = stopPointsList[currentIndex + 1];
-            }
+          int i = 0;
+          StopPoint stop = stopPointsList[i];
+          while (_finishedStopPoints.contains(stop)) {
+            stop = stopPointsList[i++];
           }
+          read(nextStopProvider).state = stop;
         }
-      } else if (stopPointsList.length == 1) {
-        read(currentStopProvider).state = stopPointsList.first;
-        read(nextStopProvider).state = null;
       } else {
-        read(currentStopProvider).state = null;
+        _finishedStopPoints.clear();
         read(nextStopProvider).state = null;
       }
     });
@@ -63,8 +55,10 @@ class RiderManagerViewModel extends ViewModel {
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
       driverRepo.getRequestingRidersStream(currentUser!);
 
-  Stream<List<StopPoint>> getStopPointsStream() =>
-      driverRepo.getStopPointsStream(currentUser!);
+  Stream<List<StopPoint>> getStopPointsStream() {
+    final currentDriverConfig = read(currentRouteConfigProvider).state!;
+    return driverRepo.getStopPointsStream(currentDriverConfig);
+  }
 
   void acceptRider(String riderId) {
     final currentDriverConfig = read(currentRouteConfigProvider).state;
@@ -75,26 +69,17 @@ class RiderManagerViewModel extends ViewModel {
     );
   }
 
-  void nextStop() {
-    final stopPointsList = read(stopPointsProvider).state;
-    final currentStop = read(currentStopProvider).state;
-    final nextStop = read(nextStopProvider).state;
-    assert(currentStop != null);
-    if (currentStop!.isPickUp) {
-      read(currentStopProvider).state = nextStop;
-      if (nextStop != null) {
-        final currentIndex = stopPointsList.indexOf(nextStop);
-        if (stopPointsList.length > (currentIndex + 1)) {
-          read(nextStopProvider).state = stopPointsList[currentIndex + 1];
-        } else {
-          read(nextStopProvider).state = null;
-        }
-      }
+  void updateNextStop() {
+    final currentStop = read(nextStopProvider).state!;
+    _finishedStopPoints.add(currentStop);
+    if (currentStop.isPickUp) {
+      final stopPointsList = read(stopPointsProvider).state;
+      final currentIndex = stopPointsList.indexOf(currentStop);
+      read(nextStopProvider).state = stopPointsList[currentIndex + 1];
     } else {
-      final currentDriverConfig = read(currentRouteConfigProvider).state;
-      assert(currentDriverConfig != null);
+      final currentDriverConfig = read(currentRouteConfigProvider).state!;
       driverRepo.removeRiderFromAccepted(
-        currentDriverConfig!.user.id,
+        currentDriverConfig.user.id,
         currentStop.rider.id,
       );
     }
