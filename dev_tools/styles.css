@@ -21,3 +21,8 @@
     padding: 40px;
     margin: 10px;
 }
+.performed{
+    border-radius: 10px;
+    color: white;
+    background-color: teal !important;
+}

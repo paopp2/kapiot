@@ -19,39 +19,65 @@
                   <tr>
                     <th scope="col">index</th>
                     <th scope="col">rider</th>
+                    <th scope="col">riderId</th>
                     <th scope="col">driver</th>
+                    <th scope="col">driverId</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">0</th>
-                    <td>Charles Ausejo</td>
-                    <td>Charles Ausejo</td>
+                    <td class="rider0">Charles Ausejo</td>
+                    <td class="riderId0">
+                        <small>3WO9ATwspsMwYCRCgdbXnfpp5r83</small></td>
+                    <td class="driver0">Charles Ausejo</td>
+                    <td class="driverId0">
+                        <small>3WO9ATwspsMwYCRCgdbXnfpp5r83</small></td>
                   </tr>
                   <tr>
                     <th scope="row">1</th>
-                    <td>Christian Gonzales</td>
-                    <td>Christian Gonzales</td>
+                    <td class="rider1">Christian Gonzales</td>
+                    <td class="riderId1">
+                        <small>TNZyDLzIrLhS4Bklz5yG1rCoDoF2</small></td>
+                    <td class="driver1"> Christian Gonzales</td>
+                    <td class="driverId1">
+                        <small>TNZyDLzIrLhS4Bklz5yG1rCoDoF2</small></td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
-                    <td>Paolo Pepito</td>
-                    <td>Paolo Pepito</td>
+                    <td class="rider2">Paolo Pepito</td>
+                    <td class="riderId2">
+                        <small>HV9BcFRIKMYrQOYzd2gStGqErW12</small></td>
+                    <td class="driver2">Paolo Pepito</td>
+                    <td class="driverId2">
+                        <small>HV9BcFRIKMYrQOYzd2gStGqErW12</small></td>
                   </tr>
                   <tr>
                     <th scope="row">3</th>
-                    <td>Aurora Lane</td>
-                    <td>Baby Driver</td>
+                    <td class="rider3">Aurora Lane</td>
+                    <td class="riderId3">
+                        <small>hWU1ZYSi82KhFfF8x7z32e0UZz64</small></td>
+                    <td class="driver3">Baby Driver</td>
+                    <td class="driverId3">
+                        <small>KI0fd3dXH86U9RzmiN4618j18mRP</small></td>
                   </tr>
                   <tr>
                     <th scope="row">4</th>
-                    <td>Jim Preston</td>
-                    <td>Dominic Toretto</td>
+                    <td class="rider4">Jim Preston</td>
+                    <td class="riderId4">
+                        <small>ji89ti6ie104O4j0YZcPSKFk5GS9</small></td>
+                    <td class="driver4">Dominic Toretto</td>
+                    <td class="driverId4">
+                        <small>EB55n43tR4epE18aq8IZxIm4T1Eu</small></td>
                   </tr>
                   <tr>
                     <th scope="row">5</th>
-                    <td>Arthur</td>
-                    <td>Mad Max</td>
+                    <td class="rider5">Arthur</td>
+                    <td class="riderId5">
+                        <small>rJFY8bzVgabltKJ5glwvwDeKX765</small></td>
+                    <td class="driver5">Mad Max</td>
+                    <td class="driverId5">
+                        <small>31jNtDbgk9xJ2w9TyCIK7Qw9AJzt</small></td>
                   </tr>
                 </tbody>
               </table>
@@ -64,10 +90,10 @@
                 <input id="driver_index" class="searchField index_input" type="number" value="0"/>
             </div> 
             <div class="d-flex justify-content-center">
-                <button type='button' class="btn btn-primary command" onclick="requestDriver()">Request Driver</button>
-                <button type='button' class="btn btn-primary command" onclick="requestAllDrivers()">Request All Drivers</button>
-                <button type='button' class="btn btn-primary command" onclick="acceptRider()">Accept Rider</button>
-                <button type='button' class="btn btn-success command"><a class='populate' href="http://localhost:5001/kapiot-46cbc/us-central1/populateAll">Populate All</a></button> 
+                <button type='button' class="btn btn-primary command" onclick="action(event,1)">Request Driver</button>
+                <button type='button' class="btn btn-primary command" onclick="action(event,2)">Request All Drivers</button>
+                <button type='button' class="btn btn-primary command" onclick="action(event,3)">Accept Rider</button>
+                <button type='button' class="btn btn-success command populateAll" onclick="action(event,4)">Populate All</button> 
             </div>
             <div>
                 
@@ -79,19 +105,5 @@
     </body>
 </html>
 
-<script type="text/javascript">
-    function requestAllDrivers(){
-        const rider_index = document.getElementById("rider_index").value.toString();
-        window.location = "http://localhost:5001/kapiot-46cbc/us-central1/requestAllDrivers?r=" + rider_index;
-    }
-    function requestDriver(){
-        const rider_index = document.getElementById("rider_index").value.toString();
-        const driver_index = document.getElementById("driver_index").value.toString();
-        window.location = "http://localhost:5001/kapiot-46cbc/us-central1/requestDriver?r=" + rider_index + "&d=" + driver_index;
-    }
-    function acceptRider(){
-        const rider_index = document.getElementById("rider_index").value.toString();
-        const driver_index = document.getElementById("driver_index").value.toString();
-        window.location = "http://localhost:5001/kapiot-46cbc/us-central1/acceptRider?r=" + rider_index + "&d=" + driver_index;
-    }
-</script>
+<script type="text/javascript" src="index.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
