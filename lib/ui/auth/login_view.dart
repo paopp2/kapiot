@@ -18,48 +18,50 @@ class LoginView extends HookConsumerWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Scaffold(
-          body: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: constraints.maxHeight * 0.04),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(
-                  flex: 1,
-                ),
-                const Image(
-                  image: AssetImage('lib/ui/assets/images/usc_logo.png'),
-                  width: 70,
-                ),
-                const Text(
-                  'kapiot',
-                  style: TextStyle(
-                      fontSize: 84,
-                      fontFamily: 'Sanz',
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 7,
-                      color: Color(0xff5eab53)),
-                ),
-                SizedBox(
-                  height: constraints.maxHeight * 0.01,
-                ),
-                const Center(
-                  child: Text(
-                    'University of San Carlos',
-                    style: TextStyle(
-                      letterSpacing: 3.5,
-                      fontSize: 18,
-                      fontFamily: 'Vegur',
-                      color: Colors.grey,
-                    ),
-                    textAlign: TextAlign.center,
+        return SafeArea(
+          child: Scaffold(
+            body: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxHeight * 0.04),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Spacer(
+                    flex: 1,
                   ),
-                ),
-                const Spacer(flex: 2),
-                GoogleAuthWidget(model: model),
-                const Spacer(),
-              ],
+                  const Image(
+                    image: AssetImage('lib/ui/assets/images/usc_logo.png'),
+                    width: 70,
+                  ),
+                  const Text(
+                    'kapiot',
+                    style: TextStyle(
+                        fontSize: 84,
+                        fontFamily: 'Sanz',
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 7,
+                        color: Color(0xff5eab53)),
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.01,
+                  ),
+                  const Center(
+                    child: Text(
+                      'University of San Carlos',
+                      style: TextStyle(
+                        letterSpacing: 3.5,
+                        fontSize: 18,
+                        fontFamily: 'Vegur',
+                        color: Colors.grey,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const Spacer(flex: 2),
+                  GoogleAuthWidget(model: model),
+                  const Spacer(),
+                ],
+              ),
             ),
           ),
         );
