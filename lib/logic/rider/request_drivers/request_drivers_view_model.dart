@@ -38,7 +38,7 @@ class RequestDriversViewModel extends ViewModel {
     await mapController.initializeRequestDriversMap();
     // Show the route of the first compatible driver on the list
     final compatibleDrivers = await getCompatibleDriverConfigs().first;
-    mapController.showDriverRoute(compatibleDrivers[0]);
+    mapController.showSelectedDriverRoute(compatibleDrivers[0]);
 
     assert(read(currentRouteConfigProvider).state != null);
     _routeConfig = read(currentRouteConfigProvider).state!;
