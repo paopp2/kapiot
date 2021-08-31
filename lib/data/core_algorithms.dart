@@ -12,6 +12,10 @@ class CoreAlgorithms {
   CoreAlgorithms({required this.googleMapsApiServices});
   final GoogleMapsApiServices googleMapsApiServices;
 
+  /// Retrieves compatible drivers from [driverConfigs] based on the [riderConfig]
+  ///
+  /// Better alternative: Build this as a Cloud Function to avoid having to
+  /// retrieve all active_drivers and filtering them in-app
   Future<List<RouteConfig>> getCompatibleDrivers({
     required RouteConfig riderConfig,
     required List<RouteConfig> driverConfigs,

@@ -83,4 +83,23 @@ class MapsUtils {
         .map((coor) => gmaps.LatLng(coor.latitude, coor.longitude))
         .toList();
   }
+
+  Future<bool> isLocationAlongRoute({
+    required KapiotLocation location,
+    required String encodedRoute,
+  }) async {
+    final decodedRoute = await decodeRoute(encodedRoute);
+    final convertedLocation = utils.LatLng(location.lat, location.lng);
+    return utils.PolygonUtil.isLocationOnPath(
+      convertedLocation,
+      decodedRoute
+          .map((gmapsLatLng) => utils.LatLng(
+                gmapsLatLng.latitude,
+                gmapsLatLng.longitude,
+              ))
+          .toList(),
+      true,
+      tolerance: 100,
+    );
+  }
 }
