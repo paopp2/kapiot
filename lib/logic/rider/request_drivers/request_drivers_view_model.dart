@@ -6,7 +6,6 @@ import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
-import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
@@ -40,7 +39,7 @@ class RequestDriversViewModel extends ViewModel {
     await mapController.initializeRequestDriversMap();
     // Show the route of the first compatible driver on the list
     final compatibleDrivers = await getCompatibleDriverConfigs().first;
-    showDriverRoute(compatibleDrivers[0]);
+    mapController.showDriverRoute(compatibleDrivers[0]);
 
     assert(read(currentRouteConfigProvider).state != null);
     _routeConfig = read(currentRouteConfigProvider).state!;
@@ -49,27 +48,6 @@ class RequestDriversViewModel extends ViewModel {
     );
     // Listen to when a driver accepts and respond accordingly
     respondWhenDriverAccepts(_acceptingDriver);
-  }
-
-  Future<void> showDriverRoute(RouteConfig driverConfig) async {
-    final driverEncodedRoute = (driverConfig is ForDriver)
-        ? driverConfig.encodedRoute
-        : throw Exception("Not ForDriver");
-    final driverDecodedRoute =
-        await googleMapsApiServices.utils.decodeRoute(driverEncodedRoute);
-    mapController.setStartLocation(
-      KapiotLocation(
-        lat: driverDecodedRoute.first.latitude,
-        lng: driverDecodedRoute.first.longitude,
-      ),
-    );
-    mapController.setEndLocation(
-      KapiotLocation(
-        lat: driverDecodedRoute.last.latitude,
-        lng: driverDecodedRoute.last.longitude,
-      ),
-    );
-    mapController.showRouteIfBothLocationsSet();
   }
 
   Future<void> requestDriver(String driverId) async {
