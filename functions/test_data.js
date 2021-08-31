@@ -165,7 +165,7 @@ const driversList = [
     },
     {
         id: "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
-        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBd@HMf@OrA",
+        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
         riderCount: 1,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T13:45:35.234433",
@@ -179,7 +179,7 @@ const driversList = [
     },
     {
         id: "HV9BcFRIKMYrQOYzd2gStGqErW12",
-        encodedRoute: "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`CX~@gAj@a@V",
+        encodedRoute: "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
         riderCount: 3,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T12:41:39.580591",
@@ -207,7 +207,7 @@ const driversList = [
     },
     {
         id: "EB55n43tR4epE18aq8IZxIm4T1Eu",
-        encodedRoute: "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`CX~@gAj@a@V",
+        encodedRoute: "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
         riderCount: 3,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T12:41:39.580591",
@@ -221,7 +221,7 @@ const driversList = [
     },
     {
         id: "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
-        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBd@HMf@OrA",
+        encodedRoute: "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
         riderCount: 1,
         runtimeType: "driver",
         timeOfTrip: "2021-08-30T13:45:35.234433",
