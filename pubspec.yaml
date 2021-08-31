@@ -27,6 +27,7 @@ dependencies:
   geocoding: ^2.0.0
   flutter_polyline_points: ^1.0.0
   maps_toolkit: ^2.0.0
+  marquee: ^2.2.0
 
 dev_dependencies:
   build_runner: ^2.1.1
