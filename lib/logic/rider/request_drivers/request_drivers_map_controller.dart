@@ -25,6 +25,7 @@ class RequestDriversMapController extends MapController {
   final LocationService locationService;
 
   Future<void> initializeRequestDriversMap() async {
+    // Use location set from the previous view to initialize new GoogleMap
     final locationFromPreviousView = read(startLocProvider).state!;
     await super.initializeMap(
       initialCameraPosition: CameraPosition(
@@ -35,11 +36,6 @@ class RequestDriversMapController extends MapController {
         zoom: 20,
       ),
       clearMap: true,
-    );
-    // Re-add the marker for the startLocation after clearing map
-    addMarker(
-      markerId: "start_location",
-      location: locationFromPreviousView,
     );
   }
 }
