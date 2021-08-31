@@ -42,17 +42,6 @@ function action(e,option){
     else{
         alert('An error occured');
     }
-    // wnd = window.open(url);
-    // wnd.blur();
-    // wnd.close();
-    // var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-    // if (isFirefox) {
-    //     setTimeout(function() {
-    //         wnd.close();
-    //     },300);
-    // } else {
-    //     wnd.close();
-    // }
     $.get(url); 
     e.preventDefault();
 }
