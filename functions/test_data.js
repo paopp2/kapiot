@@ -102,16 +102,16 @@ const ridersList = [
         id: "ji89ti6ie104O4j0YZcPSKFk5GS9",
         acceptingDriverConfig: null,
         endLocation: {
-            address: "SM Seaside City Cebu, Cebu City, Cebu, Philippines",
-            lat: 10.2816952,
-            lng: 123.88144169999998,
+            address: "The Generics Pharmacy, Mandaue City, Cebu, Philippines",
+            lat: 10.351523987011937,
+            lng: 123.94912011634415,
         },
         riderCount: 1,
         runtimeType: "rider",
         startLocation: {
-            address: "1183, Cebu City, Cebu, Central Visayas, Philippines",
-            lat: 10.3676667,
-            lng: 123.9138917,
+            address: "Basak Elementary School, Mandaue City, Cebu, Philippines",
+            lat: 10.354020048179562,
+            lng: 123.95020372879284,
         },
         timeOfTrip: "2021-08-29T06:45:22.819077",
         user: {
