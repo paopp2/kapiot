@@ -65,6 +65,16 @@ class RiderRepository {
     });
   }
 
+  // Alternative: Set the whole Driver's RouteConfig in the 'acceptingDriver'
+  // field in a Rider's RouteConfig to be able to access the encoded route from
+  // the method above
+  Future<RouteConfig> getAcceptingDriverConfig(String driverId) {
+    return firestoreHelper.getData(
+      path: FirestorePath.docActiveDriver(driverId),
+      builder: (data, id) => RouteConfig.fromJson(data),
+    );
+  }
+
   Stream<List<KapiotUser>> getCoRidersStream({
     required KapiotUser driver,
     required KapiotUser currentUser,
