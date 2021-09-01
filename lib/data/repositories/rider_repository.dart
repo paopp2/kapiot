@@ -53,11 +53,11 @@ class RiderRepository {
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
     await for (var driverConfigs in allDriversStream) {
-      final compatibleDriversList = await coreAlgorithms.getCompatibleDrivers(
+      final compatibleDriverConfigs = await coreAlgorithms.getCompatibleDrivers(
         riderConfig: riderConfig,
         driverConfigs: driverConfigs,
       );
-      yield compatibleDriversList;
+      yield compatibleDriverConfigs;
     }
   }
 

@@ -49,10 +49,10 @@ class CoreAlgorithms {
     required RouteConfig driverConfig,
     required List<StopPoint> stopPoints,
   }) async {
-    final utils = googleMapsApiServices.utils;
+    final gmapsUtils = googleMapsApiServices.utils;
     driverConfig as ForDriver;
-    final decodedRoute = await googleMapsApiServices.utils
-        .decodeRoute(driverConfig.encodedRoute);
+    final decodedRoute =
+        await gmapsUtils.decodeRoute(driverConfig.encodedRoute);
     final startPoint = KapiotLocation(
       lat: decodedRoute.first.latitude,
       lng: decodedRoute.first.longitude,
@@ -62,7 +62,7 @@ class CoreAlgorithms {
     // route based on how far they are from the startPoint. Much room for
     // improvement, I know, but it'll do for the moment
     List<Map<String, dynamic>> stopPointMapList = stopPoints.map((stopPoint) {
-      final distanceFromStart = utils.calculateDistance(
+      final distanceFromStart = gmapsUtils.calculateDistance(
         pointA: startPoint,
         pointB: stopPoint.stopLocation,
       );
@@ -77,7 +77,7 @@ class CoreAlgorithms {
 
     // Remap back to a List<StopPoint> and return
     return stopPointMapList
-        .map((map) => map["stopPoint"] as StopPoint)
+        .map((spMap) => spMap["stopPoint"] as StopPoint)
         .toList();
   }
 }

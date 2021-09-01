@@ -63,7 +63,6 @@ class DriverRepository {
       path: FirestorePath.colAcceptedRiders(driver.id),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-
     await for (var rcList in acceptedRidersConfigStream) {
       final List<StopPoint> unsortedStopPoints = rcList.expand<StopPoint>((rc) {
         rc as ForRider;
