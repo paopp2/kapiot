@@ -41,9 +41,8 @@ class RequestDriversMapController extends MapController {
   }
 
   Future<void> showSelectedDriverRoute(RouteConfig driverConfig) async {
-    final driverEncodedRoute = (driverConfig is ForDriver)
-        ? driverConfig.encodedRoute
-        : throw Exception("Not ForDriver");
+    driverConfig as ForDriver;
+    final driverEncodedRoute = driverConfig.encodedRoute;
     await showRouteFromEncoded(encodedRoute: driverEncodedRoute);
   }
 }

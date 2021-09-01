@@ -42,9 +42,8 @@ class RequestAcceptedMapController extends MapController {
 
   Future<void> showAcceptingDriverRoute() async {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
-    final driverEncodedRoute = (acceptingDriverConfig is ForDriver)
-        ? acceptingDriverConfig.encodedRoute
-        : throw Exception("Not ForDriver");
+    acceptingDriverConfig as ForDriver;
+    final driverEncodedRoute = acceptingDriverConfig.encodedRoute;
     await showRouteFromEncoded(encodedRoute: driverEncodedRoute);
   }
 }

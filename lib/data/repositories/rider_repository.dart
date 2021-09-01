@@ -20,11 +20,11 @@ class RiderRepository {
 
   static final List<String> _driverIdList = [];
 
-  void pushRiderConfig(RouteConfig routeConfig) async {
-    assert(routeConfig is ForRider);
+  void pushRiderConfig(RouteConfig riderConfig) async {
+    assert(riderConfig is ForRider);
     await firestoreHelper.setData(
-      path: FirestorePath.docActiveRider(routeConfig.user.id),
-      data: routeConfig.toJson(),
+      path: FirestorePath.docActiveRider(riderConfig.user.id),
+      data: riderConfig.toJson(),
     );
   }
 
@@ -66,16 +66,11 @@ class RiderRepository {
       path: FirestorePath.docActiveRider(riderId),
       builder: (data, id) => RouteConfig.fromJson(data),
     );
-
     // Remaps the rider's RouteConfig stream into a different stream only
     // emitting the 'acceptingDriver' field
-    return riderConfigStream.map((routeConfig) {
-      // This 'maybeMap' is required in order to access the 'acceptingDriver'
-      // property which is "ForRider" only
-      return routeConfig.maybeMap(
-        rider: (r) => r.acceptingDriverConfig,
-        orElse: () => null,
-      );
+    return riderConfigStream.map((riderConfig) {
+      riderConfig as ForRider;
+      return riderConfig.acceptingDriverConfig;
     });
   }
 

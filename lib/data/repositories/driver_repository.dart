@@ -21,11 +21,11 @@ class DriverRepository {
   final FirestoreHelper firestoreHelper;
   final CoreAlgorithms coreAlgorithms;
 
-  void pushDriverConfig(RouteConfig routeConfig) async {
-    assert(routeConfig is ForDriver);
+  void pushDriverConfig(RouteConfig driverConfig) async {
+    assert(driverConfig is ForDriver);
     await firestoreHelper.setData(
-      path: FirestorePath.docActiveDriver(routeConfig.user.id),
-      data: routeConfig.toJson(),
+      path: FirestorePath.docActiveDriver(driverConfig.user.id),
+      data: driverConfig.toJson(),
     );
   }
 
@@ -40,15 +40,12 @@ class DriverRepository {
       sourcePath: FirestorePath.docActiveDriverRequest(driverId, riderId),
       destPath: FirestorePath.docActiveDriverAccepted(driverId, riderId),
     );
-    if (acceptedRiderConfig is ForRider) {
-      await firestoreHelper.setData(
-          path: FirestorePath.docActiveRider(acceptedRiderConfig.user.id),
-          data: acceptedRiderConfig
-              .copyWith(acceptingDriverConfig: driverConfig)
-              .toJson());
-    } else {
-      throw Exception("The received RouteConfig is not for Rider");
-    }
+    acceptedRiderConfig as ForRider;
+    await firestoreHelper.setData(
+        path: FirestorePath.docActiveRider(acceptedRiderConfig.user.id),
+        data: acceptedRiderConfig
+            .copyWith(acceptingDriverConfig: driverConfig)
+            .toJson());
   }
 
   Future<void> removeRiderFromAccepted(String driverId, String riderId) async {
