@@ -4,7 +4,7 @@
             "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
             "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
             "riderCount": 2,
-            "runtimType": "driver",
+            "runtimeType": "driver",
             "timeOfTrip": "2021-08-29T06:47:07.099561",
             "user": {
                 "displayName": "Charles Jr. Ausejo (0)",
@@ -18,7 +18,7 @@
             "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
             "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
             "riderCount": 1,
-            "runtimType": "driver",
+            "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
                 "displayName": "Christian Benedict Gonzales (1)",
@@ -32,7 +32,7 @@
             "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
             "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
             "riderCount": 3,
-            "runtimType": "driver",
+            "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T12:41:39.580591",
             "user": {
                 "displayName": "Nicolas Paolo Pepito (2)",
@@ -46,7 +46,7 @@
             "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
             "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
             "riderCount": 2,
-            "runtimType": "driver",
+            "runtimeType": "driver",
             "timeOfTrip": "2021-08-29T06:47:07.099561",
             "user": {
                 "displayName": "Baby Driver (3)",
@@ -60,7 +60,7 @@
             "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
             "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
             "riderCount": 3,
-            "runtimType": "driver",
+            "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T12:41:39.580591",
             "user": {
                 "displayName": "Dominic Toretto (4)",
@@ -74,7 +74,7 @@
             "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
             "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
             "riderCount": 1,
-            "runtimType": "driver",
+            "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
                 "displayName": "Mad Max (5)",
