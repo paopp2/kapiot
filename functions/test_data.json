@@ -1,0 +1,94 @@
+{
+    "driversList": [
+        {
+            "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
+            "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
+            "riderCount": 2,
+            "runtimType": "driver",
+            "timeOfTrip": "2021-08-29T06:47:07.099561",
+            "user": {
+                "displayName": "Charles Jr. Ausejo (0)",
+                "email": "16100938@usc.edu.ph",
+                "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
+                "phoneNumber": "",
+                "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c"
+            }
+        },
+        {
+            "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
+            "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
+            "riderCount": 1,
+            "runtimType": "driver",
+            "timeOfTrip": "2021-08-30T13:45:35.234433",
+            "user": {
+                "displayName": "Christian Benedict Gonzales (1)",
+                "email": "18105024@gmail.com",
+                "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
+                "phoneNumber": "",
+                "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gi6RZJXfmElWMUsZUJ0O7zZwQboH7mEH3Hcnxmc=s96-c"
+            }
+        },
+        {
+            "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
+            "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+            "riderCount": 3,
+            "runtimType": "driver",
+            "timeOfTrip": "2021-08-30T12:41:39.580591",
+            "user": {
+                "displayName": "Nicolas Paolo Pepito (2)",
+                "email": "16100825@usc.edu.ph",
+                "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
+                "phoneNumber": "",
+                "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c"
+            }
+        },
+        {
+            "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
+            "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
+            "riderCount": 2,
+            "runtimType": "driver",
+            "timeOfTrip": "2021-08-29T06:47:07.099561",
+            "user": {
+                "displayName": "Baby Driver (3)",
+                "email": "babydriver@email.com",
+                "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
+                "phoneNumber": "",
+                "photoUrl": "https://i.pinimg.com/originals/94/d3/8c/94d38cd264ea699ef6ce1a067f764611.jpg"
+            }
+        },
+        {
+            "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
+            "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+            "riderCount": 3,
+            "runtimType": "driver",
+            "timeOfTrip": "2021-08-30T12:41:39.580591",
+            "user": {
+                "displayName": "Dominic Toretto (4)",
+                "email": "fastnfurious4eva@usc.com",
+                "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
+                "phoneNumber": "",
+                "photoUrl": "https://static.wikia.nocookie.net/fastandfurious/images/5/59/Dom_-_Fast9Profile.jpeg/revision/latest?cb=20200310093642"
+            }
+        },
+        {
+            "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
+            "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
+            "riderCount": 1,
+            "runtimType": "driver",
+            "timeOfTrip": "2021-08-30T13:45:35.234433",
+            "user": {
+                "displayName": "Mad Max (5)",
+                "email": "mad_max69@gmail.com",
+                "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
+                "phoneNumber": "",
+                "photoUrl": "https://c4.wallpaperflare.com/wallpaper/210/209/106/movie-mad-max-fury-road-max-rockatansky-tom-hardy-wallpaper-preview.jpg"
+            }
+        }
+    ]
+}
+    
+    
+    
+    
+    
+    
