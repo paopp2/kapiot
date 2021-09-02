@@ -1,23 +1,10 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const test_data = require("./test_data");
-const test_data_json = require("./test_data.json");
-
-
+const test_data = require("./test_data.json");
 admin.initializeApp();
 const db = admin.firestore();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
-
-/* Pick your rider as your own */
-const charlesRider = test_data.ridersList[0];
-const paoloRider = test_data.ridersList[1];
-const christianRider = test_data.ridersList[2];
-
-/* Pick your driver to your liking */
-const charlesDriver = test_data.driversList[0];
-const paoloDriver = test_data.driversList[1];
-const christianDriver = test_data.driversList[2];
 
 // TODO: make a temporary collection in firestore that will have all the driverId
 var driverIdList = []; 
@@ -100,23 +87,14 @@ exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {
 });
 
 exports.dropRider = functions.https.onRequest(async (req, res) =>  {
-    const driver = test_data.driversList[parseInt(req.query.r,10)];
-    const rider = test_data.driversList[parseInt(req.query.r,10)];
+    const driver = test_data.driversList[parseInt(req.query.d,10)];
+    const rider = test_data.ridersList[parseInt(req.query.r,10)];
     const driverId = driver.id;
     const riderId = rider.id; 
     const riderName = rider.user.displayName;
     await driversRef.doc(driverId).collection('accepted').doc(riderId)
     .delete()
-    .then(res.json('Dropped ' + riderName ))
+    .then(res.json('Dropped ' + riderName))
     .catch(err => res.statusMessage(400).json('Error: ' + err));
-
-});
-
-exports.testPopulate = functions.https.onRequest(async (req, res) =>  {
-    test_data_json.driversList.forEach(addDriver);
-    async function addDriver(driver) {
-        await driversRef.doc(driver.id).set(driver);
-    }
-    res.json({result: "Populated 'active_drivers'"});
 });
 
