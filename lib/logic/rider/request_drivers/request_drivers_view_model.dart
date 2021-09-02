@@ -27,8 +27,6 @@ class RequestDriversViewModel extends ViewModel {
     required this.mapController,
   }) : super(read);
   final RiderRepository riderRepo;
-  late final Stream<RouteConfig?> _acceptingDriverConfig;
-  late final RouteConfig _routeConfig;
   final RequestDriversMapController mapController;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
@@ -38,15 +36,15 @@ class RequestDriversViewModel extends ViewModel {
     await mapController.initializeRequestDriversMap();
 
     assert(read(currentRouteConfigProvider).state != null);
-    _routeConfig = read(currentRouteConfigProvider).state!;
-    _acceptingDriverConfig = riderRepo.getAcceptingDriverConfigAsStream(
-      _routeConfig.user.id,
+    final routeConfig = read(currentRouteConfigProvider).state!;
+    final driverConfigStream = riderRepo.getAcceptingDriverConfigAsStream(
+      routeConfig.user.id,
     );
     // Listen to when a driver accepts and respond accordingly
-    respondWhenDriverAccepts(_acceptingDriverConfig);
+    respondWhenDriverAccepts(driverConfigStream);
 
     // Show the route of the first compatible driver on the list
-    final compatibleDrivers = await getCompatibleDriverConfigs().single;
+    final compatibleDrivers = await getCompatibleDriverConfigs().first;
     if (compatibleDrivers.isNotEmpty) {
       mapController.showSelectedDriverRoute(compatibleDrivers.first);
     }
