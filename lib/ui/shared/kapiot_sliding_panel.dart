@@ -19,7 +19,7 @@ class KapiotSlidingPanel extends StatelessWidget {
     return SlidingUpPanel(
       defaultPanelState: PanelState.OPEN,
       parallaxEnabled: true,
-      parallaxOffset: 0.5,
+      parallaxOffset: 0.6,
       backdropEnabled: true,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       body: map,
