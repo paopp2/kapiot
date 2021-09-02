@@ -35,7 +35,6 @@ function action(e,option){
                 break;
             case 5: 
                 url = "http://localhost:5001/kapiot-46cbc/us-central1/dropRider?r=" + rider_index + "&d=" + driver_index;
-                alert(url);
                 break;
             default:
                 alert('An error occured');
