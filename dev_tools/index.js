@@ -8,10 +8,10 @@ function action(e,option){
     if(option==4){
         url = "http://localhost:5001/kapiot-46cbc/us-central1/populateAll";
     }
-    else if(option==1 || option==2 || option==3){
+    else if(option==1 || option==2 || option==3 || option==5){
         const rider_index = document.getElementById("rider_index").value.toString();
         const driver_index = document.getElementById("driver_index").value.toString();
-        if(option==1 || option==3){
+        if(option==1 || option==3 || option==5){
             if(prevDriverIndex!='' && prevRiderIndex != ''){
                 document.querySelector(".rider"+prevRiderIndex).classList.remove('performed');
                 document.querySelector(".driver"+prevDriverIndex).classList.remove('performed');
@@ -32,6 +32,13 @@ function action(e,option){
                 break;
             case 3: 
                 url = "http://localhost:5001/kapiot-46cbc/us-central1/acceptRider?r=" + rider_index + "&d=" + driver_index;
+                break;
+            case 5: 
+                url = "http://localhost:5001/kapiot-46cbc/us-central1/dropRider?r=" + rider_index + "&d=" + driver_index;
+                alert(url);
+                break;
+            default:
+                alert('An error occured');
                 break;
         }
         prevRiderIndex = rider_index;
