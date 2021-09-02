@@ -1,6 +1,9 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const test_data = require("./test_data");
+const test_data_json = require("./test_data.json");
+
+
 admin.initializeApp();
 const db = admin.firestore();
 const driversRef = db.collection('active_drivers');
@@ -72,7 +75,7 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     const requestingRiderConfig = test_data.ridersList[parseInt(req.query.r,10)];
     const acceptingDriverConfig = test_data.driversList[parseInt(req.query.d,10)]; 
     const riderId = requestingRiderConfig.id;
-    const driverId = acceptingDriverConfig,id;
+    const driverId = acceptingDriverConfig.id;
     await driversRef.doc(driverId).collection('requests').doc(riderId)
     .delete();
     await ridersRef.doc(riderId).update({
@@ -107,5 +110,13 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
     .then(res.json('Dropped ' + riderName ))
     .catch(err => res.statusMessage(400).json('Error: ' + err));
 
+});
+
+exports.testPopulate = functions.https.onRequest(async (req, res) =>  {
+    test_data_json.driversList.forEach(addDriver);
+    async function addDriver(driver) {
+        await driversRef.doc(driver.id).set(driver);
+    }
+    res.json({result: "Populated 'active_drivers'"});
 });
 
