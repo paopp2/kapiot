@@ -16,7 +16,6 @@ import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
-import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final homeViewModelProvider = Provider.autoDispose(
@@ -53,6 +52,12 @@ class HomeViewModel extends ViewModel {
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
+
+  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
+  /// from "address"
+  static List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+
+  /// Caches routeCoordinates. Required when pushing a driverConfig
   List<LatLng> _routeCoordinates = [];
 
   @override
@@ -116,9 +121,19 @@ class HomeViewModel extends ViewModel {
 
   void expandSuggestions({required bool forStartLoc}) {
     if (forStartLoc) {
+      // Highlight all text within the startLoc TextField
+      tecStartLoc.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: tecStartLoc.text.length,
+      );
       read(isStartLocFocusedProvider).state = true;
       read(isEndLocFocusedProvider).state = false;
     } else {
+      // Highlight all text within the endLoc TextField
+      tecEndLoc.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: tecEndLoc.text.length,
+      );
       read(isEndLocFocusedProvider).state = true;
       read(isStartLocFocusedProvider).state = false;
     }
@@ -127,33 +142,31 @@ class HomeViewModel extends ViewModel {
   void updateSuggestions(String? value) async {
     final suggestions = await googleMapsApiServices.places
         .getAutocompleteSuggestions(value ?? '');
-    read(placeSuggestionsProvider).state = suggestions;
+    _autocompleteSuggestionMaps = suggestions;
+    read(placeSuggestionsProvider).state =
+        suggestions.map((s) => s["address"]).toList();
   }
 
   Future<void> pickSuggestion({
     required String pickedSuggestion,
     required bool forStartLoc,
   }) async {
+    final pickedSuggestionMap = _autocompleteSuggestionMaps.firstWhere(
+      (s) => s["address"] == pickedSuggestion,
+    );
+    final placeId = pickedSuggestionMap["id"] as String;
     final location =
-        await locationService.getLocationFromAddress(pickedSuggestion);
+        await googleMapsApiServices.places.getLocFromPlaceId(placeId);
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
       mapController.setStartLocation(
-        KapiotLocation(
-          lat: location.lat,
-          lng: location.lng,
-          address: pickedSuggestion,
-        ),
+        location?.copyWith(address: pickedSuggestion),
       );
       read(isStartLocFocusedProvider).state = false;
     } else {
       tecEndLoc.text = pickedSuggestion;
       mapController.setEndLocation(
-        KapiotLocation(
-          lat: location.lat,
-          lng: location.lng,
-          address: pickedSuggestion,
-        ),
+        location?.copyWith(address: pickedSuggestion),
       );
       read(isEndLocFocusedProvider).state = false;
     }

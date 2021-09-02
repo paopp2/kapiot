@@ -38,15 +38,6 @@ class LocationService {
     );
   }
 
-  Future<KapiotLocation> getLocationFromAddress(String address) async {
-    final locationList = await locationFromAddress(address);
-    final firstGeoLocation = locationList[0]; // Return the first location
-    return KapiotLocation(
-      lat: firstGeoLocation.latitude,
-      lng: firstGeoLocation.longitude,
-    );
-  }
-
   Future<String?> getAddressFromLocation(KapiotLocation location) async {
     final placemarks = await placemarkFromCoordinates(
       location.lat,
