@@ -110,9 +110,8 @@ class MapsUtils {
 
   Future<bool> isLocationAlongRoute({
     required KapiotLocation location,
-    required String encodedRoute,
+    required List<gmaps.LatLng> decodedRoute,
   }) async {
-    final decodedRoute = await decodeRoute(encodedRoute);
     final convertedLocation = utils.LatLng(location.lat, location.lng);
     return utils.PolygonUtil.isLocationOnPath(
       convertedLocation,

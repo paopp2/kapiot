@@ -30,16 +30,37 @@ class CoreAlgorithms {
     // rider lie along the driverConfig's route
     for (var driverConfig in driverConfigs) {
       driverConfig as ForDriver;
-      bool riderStartCompatible = await utils.isLocationAlongRoute(
-        location: riderConfig.startLocation,
-        encodedRoute: driverConfig.encodedRoute,
+      final decodedRoute = await utils.decodeRoute(driverConfig.encodedRoute);
+      final driverStartLocation = KapiotLocation(
+        lat: decodedRoute.first.latitude,
+        lng: decodedRoute.first.longitude,
       );
-      bool riderEndCompatible = await utils.isLocationAlongRoute(
-        location: riderConfig.endLocation,
-        encodedRoute: driverConfig.encodedRoute,
+
+      final distFromDriverStartToRiderStart = utils.calculateDistance(
+        pointA: driverStartLocation,
+        pointB: riderConfig.startLocation,
       );
-      if (riderStartCompatible && riderEndCompatible) {
-        compatibleDrivers.add(driverConfig);
+
+      final distFromDriverStartToRiderEnd = utils.calculateDistance(
+        pointA: driverStartLocation,
+        pointB: riderConfig.endLocation,
+      );
+
+      bool isGoingTheSameDirection =
+          (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
+
+      if (isGoingTheSameDirection) {
+        bool riderStartCompatible = await utils.isLocationAlongRoute(
+          location: riderConfig.startLocation,
+          decodedRoute: decodedRoute,
+        );
+        bool riderEndCompatible = await utils.isLocationAlongRoute(
+          location: riderConfig.endLocation,
+          decodedRoute: decodedRoute,
+        );
+        if (riderStartCompatible && riderEndCompatible) {
+          compatibleDrivers.add(driverConfig);
+        }
       }
     }
     return compatibleDrivers;
