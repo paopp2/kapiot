@@ -32,14 +32,37 @@ class PlacesService {
   PlacesService._();
   static final instance = PlacesService._();
 
-  Future<List<String?>> getAutocompleteSuggestions(String query) async {
+  /// Returns a list of maps containing the "id" (placeId) of the suggestion
+  /// and the "address" containing the description of the suggestion
+  Future<List<Map<String, String?>>> getAutocompleteSuggestions(
+      String query) async {
     if (query.isEmpty) return [];
     final googlePlace = GooglePlace(googleApiKey);
     final result = await googlePlace.autocomplete.get(query);
     final predictions = result?.predictions ?? [];
     return (predictions.isNotEmpty)
-        ? predictions.map((p) => p.description).toList()
+        ? predictions
+            .map((p) => {
+                  "id": p.placeId,
+                  "address": p.description,
+                })
+            .toList()
         : [];
+  }
+
+  Future<KapiotLocation?> getLocFromPlaceId(String placeId) async {
+    final googlePlace = GooglePlace(googleApiKey);
+    final response = await googlePlace.details.get(placeId);
+    final latitude = response?.result?.geometry?.location?.lat;
+    final longitude = response?.result?.geometry?.location?.lng;
+    if (latitude != null && longitude != null) {
+      return KapiotLocation(
+        lat: latitude,
+        lng: longitude,
+      );
+    } else {
+      return null;
+    }
   }
 }
 
