@@ -99,6 +99,13 @@ exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {
 exports.dropRider = functions.https.onRequest(async (req, res) =>  {
     const driver = test_data.driversList[parseInt(req.query.r,10)];
     const rider = test_data.driversList[parseInt(req.query.r,10)];
-    await driversRef.doc()
+    const driverId = driver.id;
+    const riderId = rider.id; 
+    const riderName = rider.user.displayName;
+    await driversRef.doc(driverId).collection('accepted').doc(riderId)
+    .delete()
+    .then(res.json('Dropped ' + riderName ))
+    .catch(err => res.statusMessage(400).json('Error: ' + err));
+
 });
 
