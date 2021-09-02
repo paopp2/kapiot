@@ -70,14 +70,15 @@ exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
 
 exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     const requestingRiderConfig = test_data.ridersList[parseInt(req.query.r,10)];
-    const riderId = requestingRiderConfig.id;
     const acceptingDriverConfig = test_data.driversList[parseInt(req.query.d,10)]; 
-    await driversRef.doc(acceptingDriverConfig.id).collection('requests').doc(riderId)
+    const riderId = requestingRiderConfig.id;
+    const driverId = acceptingDriverConfig,id;
+    await driversRef.doc(driverId).collection('requests').doc(riderId)
     .delete();
-    await ridersRef.doc(requestingRiderConfig.id).update({
+    await ridersRef.doc(riderId).update({
         acceptingDriverConfig: acceptingDriverConfig,
     });
-    await driversRef.doc(acceptingDriverConfig.id).collection('accepted').doc(riderId)
+    await driversRef.doc(driverId).collection('accepted').doc(riderId)
     .create(requestingRiderConfig)
     .then(res.json('Accepted: ' + riderId))
     .catch(err => res.status(400).json('Error : ' + err));
@@ -96,7 +97,8 @@ exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {
 });
 
 exports.dropRider = functions.https.onRequest(async (req, res) =>  {
-    const driver = test_data.driversList[parseInt(req.query.r,9)];
-    const rider = test_data.driversList[parseInt(req.query.r,9)];
+    const driver = test_data.driversList[parseInt(req.query.r,10)];
+    const rider = test_data.driversList[parseInt(req.query.r,10)];
+    await driversRef.doc()
 });
 
