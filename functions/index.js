@@ -95,4 +95,8 @@ exports.requestAllDrivers = functions.https.onRequest(async (req, res) =>  {
     res.json({result: "Requested all drivers"});
 });
 
+exports.dropRider = functions.https.onRequest(async (req, res) =>  {
+    const driver = test_data.driversList[parseInt(req.query.r,9)];
+    const rider = test_data.driversList[parseInt(req.query.r,9)];
+});
 
