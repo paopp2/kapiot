@@ -38,6 +38,10 @@ class PortalView extends StatelessWidget {
                   onPressed: model.gotoRequestAcceptedView,
                   child: const Text("RequestAcceptedView"),
                 ),
+                ElevatedButton(
+                  onPressed: model.gotoPlaceSuggestionsView,
+                  child: const Text("PlaceSuggestionsView"),
+                ),
               ],
             ),
           ),
@@ -57,4 +61,6 @@ class PortalViewModel {
       _router.navigateTo(Routes.requestDriversView);
   void gotoRequestAcceptedView() =>
       _router.navigateTo(Routes.requestAcceptedView);
+  void gotoPlaceSuggestionsView() =>
+      _router.navigateTo(Routes.placeSuggestionsView);
 }

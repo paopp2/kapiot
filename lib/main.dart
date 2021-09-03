@@ -11,7 +11,7 @@ import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 
 // Set to false when in production
-const bool useFirebaseEmulator = true;
+const bool useFirebaseEmulator = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,10 +44,11 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: _appRouter.navigationKey,
       routes: _appRouter.routesList,
-      home: RootView(
-        loggedInBuilder: (_) => const HomeView(),
-        loggedOutBuilder: (_) => const LoginView(),
-      ),
+      home: PortalView(),
+      // RootView(
+      //   loggedInBuilder: (_) => const HomeView(),
+      //   loggedOutBuilder: (_) => const LoginView(),
+      // ),
     );
   }
 }
