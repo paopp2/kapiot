@@ -47,11 +47,19 @@ class RequestAcceptedViewModel extends ViewModel {
     mapController.showAcceptingDriverRoute();
   }
 
-  Stream<List<KapiotUser>> getCoRidersStream() {
+  /// Remaps the stream containing all riders that have been accepted by the
+  /// current rider's acceptingDriver except for the current rider
+  Stream<List<KapiotUser>> getMyCoRidersStream() {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
-    return riderRepo.getCoRidersStream(
-      currentUser: currentUser!,
+    final allCoRidersStream = riderRepo.getAllCoRidersStream(
       driver: acceptingDriverConfig.user,
+    );
+    return allCoRidersStream.map(
+      (riderList) {
+        return riderList
+            .where((rider) => (rider.id != currentUser!.id))
+            .toList();
+      },
     );
   }
 }
