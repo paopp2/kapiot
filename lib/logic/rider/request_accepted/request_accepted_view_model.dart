@@ -38,6 +38,13 @@ class RequestAcceptedViewModel extends ViewModel {
   Future<void> initState() async {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(currentUser != null);
+
+    isDroppedOffStream().listen((isDroppedOff) {
+      if (isDroppedOff) {
+        print("Dropped off");
+      }
+    });
+
     await mapController.initializeRequestAcceptedMap();
     // This delay of arbitrary duration allows the map to finish initializing
     // before showing the acceptingDriver's route. Removing this delay seems to
@@ -61,5 +68,23 @@ class RequestAcceptedViewModel extends ViewModel {
             .toList();
       },
     );
+  }
+
+  /// Stream that listens whether this rider has already been "dropped off"
+  ///
+  /// When the acceptingDriver drops off a rider, the driver deletes the rider
+  /// from the driver's "accepted" collection. Listening for when this happens
+  /// signifies the app as to when this rider is dropped off.
+  Stream<bool> isDroppedOffStream() async* {
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
+    final allCoRidersStream = riderRepo.getAllCoRidersStream(
+      driver: acceptingDriverConfig.user,
+    );
+    await for (var coRidersList in allCoRidersStream) {
+      final hasRider = coRidersList.any(
+        (rider) => (rider.id == currentUser!.id),
+      );
+      yield !hasRider;
+    }
   }
 }
