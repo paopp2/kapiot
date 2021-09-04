@@ -276,16 +276,16 @@
             "id": "QVeUtU6YxWjGkkOulRU3gG5xyAmT",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Tamiya, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.301158,
-                "lng": 123.9649053
+                "address": "Gaisano Grandmall Basak, Grandmall, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.2861709,
+                "lng": 123.9696562
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Gaisano Grandmall Basak, Grandmall, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.2861709,
-                "lng": 123.9696562
+                "address": "Soltana Nature Residences, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.2792615,
+                "lng": 123.9721603
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
@@ -300,16 +300,16 @@
             "id": "yEWNzz8ExMC7NJxVjV6555jm8pkg",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Insotec Computers, South Osmeña Street, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.3040828,
-                "lng": 123.954996
+                "address": "City Time Square Mactan, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.2992246,
+                "lng": 123.9633085
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Basak, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.2910239,
-                "lng": 123.961041
+                "address": "Papa Rony Shawarma food shop, Basak-Marigondon Road, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.2954465,
+                "lng": 123.9649365
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
@@ -348,16 +348,16 @@
             "id": "mLqb9RxMhDpsnk9ygmXKa7XffiNx",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Tamiya, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.301158,
-                "lng": 123.9649053
+                "address": "BOSS B Food Hub, A. Tumulak Street, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.3059828,
+                "lng": 123.9525222
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Mactan Doctors' Hospital, Jr. Avenue, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.2898386,
-                "lng": 123.9668083
+                "address": "Cookies N’ Dream, South Osmeña Street, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.3018736,
+                "lng": 123.9605046
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
@@ -372,16 +372,16 @@
             "id": "XSA0DNCgIMECX4juiI16h1Qy8Bdm",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Babag II Road, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.274046,
-                "lng": 123.9457074
+                "address": "YES Mart, Mactan Circumferential Road, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.304074,
+                "lng": 123.0073734
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Mactan Island Mall, M.L. Quezon National Highway, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.3167056,
-                "lng": 123.9630579
+                "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.3070114,
+                "lng": 123.0100629
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
@@ -396,16 +396,16 @@
             "id": "bmnIgkNSPz0P4eBgx2vpL8bAO9zG",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Tiangue Road, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.2951985,
-                "lng": 123.9458764
+                "address": "MACTAN POOLS - POOL CONTRACTOR , DESIGNER AND EQUIPMENT SUPPLIER, M.L. Quezon National Highway, Maribago, Lapu-Lapu City, Cebu, PhilippinesTiangue Road, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.293952,
+                "lng": 123.9983796
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Pajo, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.3145134,
-                "lng": 123.9584921
+                "address": "Pajo, Lapu-Lapu City, Cebu, PhilippinesRF PRINT SERVICES, Casanta Soong, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.3030118,
+                "lng": 123.006218
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
@@ -420,16 +420,16 @@
             "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Super Metro Lapu-Lapu, M.L. Quezon National Highway, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.3127058,
-                "lng": 123.9556015
+                "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.2714003,
+                "lng": 123.9688101
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Island Central Mactan, Mactan, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.3265828,
-                "lng": 123.9758581
+                "address": "Savemore Market Maribago, Maribago, Lapu-Lapu City, Cebu, Philippines",
+                "lat": 10.2865945,
+                "lng": 123.9974986
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
@@ -444,16 +444,16 @@
             "id": "LPRde2OpOF101T42uHSWAc6tvDci",
             "acceptingDriverConfig": null,
             "endLocation": {
-                "address": "Babag 1 Elementary School, Purok Butterfly, Babag 1, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.288881,
-                "lng": 123.945039
+                "address": "Taytayan Floating Restaurant, Babag II Road, Cordova, Cebu, Philippines",
+                "lat": 10.2708654,
+                "lng": 123.945804
             },
             "riderCount": 1,
             "runtimeType": "rider",
             "startLocation": {
-                "address": "Super Metro Lapu-Lapu, M.L. Quezon National Highway, Lapu-Lapu City, Cebu, Philippines",
-                "lat": 10.3127058,
-                "lng": 123.9556015
+                "address": "Andalucia Crest, Cordova, Cebu, Philippines",
+                "lat": 10.2652024,
+                "lng": 123.9642778
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
