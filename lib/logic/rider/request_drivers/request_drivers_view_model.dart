@@ -36,20 +36,12 @@ class RequestDriversViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
-
     assert(read(currentRouteConfigProvider).state != null);
     final routeConfig = read(currentRouteConfigProvider).state!;
     final driverConfigStream = riderRepo.getAcceptingDriverConfigAsStream(
       routeConfig.user.id,
     );
-    // Listen to when a driver accepts and respond accordingly
     respondWhenDriverAccepts(driverConfigStream);
-
-    // Show the route of the first compatible driver on the list
-    final compatibleDrivers = await getCompatibleDriverConfigs().first;
-    if (compatibleDrivers.isNotEmpty) {
-      mapController.showSelectedDriverRoute(compatibleDrivers.first);
-    }
   }
 
   Future<void> requestDriver(String driverId) async {
@@ -66,6 +58,7 @@ class RequestDriversViewModel extends ViewModel {
     return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
   }
 
+  /// Listen to when a driver accepts and respond accordingly
   Future<void> respondWhenDriverAccepts(
     Stream<RouteConfig?> acceptingDriverConfig,
   ) async {
