@@ -38,9 +38,9 @@ class RiderManagerView extends HookConsumerWidget {
               color: const Color(0x7679ADFf),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.03, horizontal: 10),
+                    horizontal: constraints.maxWidth * 0.05),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     (nextStop != null)
                         ? StopPointPanel(
