@@ -6,8 +6,15 @@ const db = admin.firestore();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
 
-// TODO: make a temporary collection in firestore that will have all the driverId
-var driverIdList = []; 
+var driverIdDict = {
+    "3WO9ATwspsMwYCRCgdbXnfpp5r83" : [],
+    "TNZyDLzIrLhS4Bklz5yG1rCoDoF2" : [],
+    "HV9BcFRIKMYrQOYzd2gStGqErW12" : [],
+    "" : [],
+    "" : [],
+    "" : []
+}; 
+
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await ridersRef.get();
     res.send(snapshot.docs.map(doc => doc.data()))
@@ -48,9 +55,9 @@ exports.populateActiveDrivers = functions.https.onRequest(async (req, res) =>  {
 });
 
 exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
-    const requestedDriver = test_data.driversList[parseInt(req.query.d,10)]; // Changeable 
+    const requestedDriver = test_data.driversList[parseInt(req.query.d,10)];  
     const driverId = requestedDriver.id; 
-    const requestingRider = test_data.ridersList[parseInt(req.query.r,10)]; // Changeable
+    const requestingRider = test_data.ridersList[parseInt(req.query.r,10)]; 
     const riderId = requestingRider.id; 
     await driversRef.doc(driverId).collection('requests').doc(riderId)
     .create(requestingRider)
@@ -61,10 +68,14 @@ exports.requestDriver = functions.https.onRequest(async (req, res) =>  {
 exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     const requestingRiderConfig = test_data.ridersList[parseInt(req.query.r,10)];
     const acceptingDriverConfig = test_data.driversList[parseInt(req.query.d,10)]; 
+    const driversIdList = test_data.driversList.map(driver => driver.id);
     const riderId = requestingRiderConfig.id;
     const driverId = acceptingDriverConfig.id;
-    await driversRef.doc(driverId).collection('requests').doc(riderId)
-    .delete();
+
+    driversIdList.forEach(deleteRequests);
+    async function deleteRequests(id){
+        await driversRef.doc(id).collection('requests').doc(riderId).delete();
+    }
     await ridersRef.doc(riderId).update({
         acceptingDriverConfig: acceptingDriverConfig,
     });
