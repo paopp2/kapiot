@@ -22,13 +22,13 @@ class RiderManagerView extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        (nextStop != null)
-            ? height = constraints.maxHeight * 0.5
-            : height = constraints.maxHeight * 0.9;
-        return SafeArea(
-          child: Scaffold(
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          (nextStop != null)
+              ? height = constraints.maxHeight * 0.5
+              : height = constraints.maxHeight * 0.95;
+          return Scaffold(
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {},
               label: const Text("Map View"),
@@ -58,9 +58,9 @@ class RiderManagerView extends HookConsumerWidget {
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
