@@ -37,7 +37,7 @@ abstract class MapController {
     }
   }
 
-  void onMapCreated(GoogleMapController gmapController) async {
+  Future<void> onMapCreated(GoogleMapController gmapController) async {
     if (!_tempController.isCompleted) {
       _tempController.complete(gmapController);
     }
