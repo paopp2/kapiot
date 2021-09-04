@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
@@ -38,6 +42,25 @@ class RequestAcceptedViewModel extends ViewModel {
   Future<void> initState() async {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(currentUser != null);
+
+    StreamSubscription? streamSub;
+    streamSub = isDroppedOffStream().listen((isDroppedOff) {
+      if (isDroppedOff) {
+        // Reset map state
+        mapController
+          ..setStartLocation(null)
+          ..setEndLocation(null)
+          ..clearMap();
+
+        // Change a new resetKey. Notifies the HomeView that it should reset
+        read(resetKeyProvider).state = UniqueKey();
+        streamSub!.cancel();
+
+        // Remove all Views then navigate to HomeView
+        AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
+      }
+    });
+
     await mapController.initializeRequestAcceptedMap();
     // This delay of arbitrary duration allows the map to finish initializing
     // before showing the acceptingDriver's route. Removing this delay seems to
@@ -47,11 +70,37 @@ class RequestAcceptedViewModel extends ViewModel {
     mapController.showAcceptingDriverRoute();
   }
 
-  Stream<List<KapiotUser>> getCoRidersStream() {
+  /// Remaps the stream containing all riders that have been accepted by the
+  /// current rider's acceptingDriver except for the current rider
+  Stream<List<KapiotUser>> getMyCoRidersStream() {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
-    return riderRepo.getCoRidersStream(
-      currentUser: currentUser!,
+    final allCoRidersStream = riderRepo.getAllCoRidersStream(
       driver: acceptingDriverConfig.user,
     );
+    return allCoRidersStream.map(
+      (riderList) {
+        return riderList
+            .where((rider) => (rider.id != currentUser!.id))
+            .toList();
+      },
+    );
+  }
+
+  /// Stream that listens whether this rider has already been "dropped off"
+  ///
+  /// When the acceptingDriver drops off a rider, the driver deletes the rider
+  /// from the driver's "accepted" collection. Listening for when this happens
+  /// signifies the app as to when this rider is dropped off.
+  Stream<bool> isDroppedOffStream() async* {
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
+    final allCoRidersStream = riderRepo.getAllCoRidersStream(
+      driver: acceptingDriverConfig.user,
+    );
+    await for (var coRidersList in allCoRidersStream) {
+      final hasRider = coRidersList.any(
+        (rider) => (rider.id == currentUser!.id),
+      );
+      yield !hasRider;
+    }
   }
 }

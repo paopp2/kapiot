@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -27,8 +29,6 @@ class RequestDriversViewModel extends ViewModel {
     required this.mapController,
   }) : super(read);
   final RiderRepository riderRepo;
-  late final Stream<RouteConfig?> _acceptingDriverConfig;
-  late final RouteConfig _routeConfig;
   final RequestDriversMapController mapController;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
@@ -38,15 +38,15 @@ class RequestDriversViewModel extends ViewModel {
     await mapController.initializeRequestDriversMap();
 
     assert(read(currentRouteConfigProvider).state != null);
-    _routeConfig = read(currentRouteConfigProvider).state!;
-    _acceptingDriverConfig = riderRepo.getAcceptingDriverConfigAsStream(
-      _routeConfig.user.id,
+    final routeConfig = read(currentRouteConfigProvider).state!;
+    final driverConfigStream = riderRepo.getAcceptingDriverConfigAsStream(
+      routeConfig.user.id,
     );
     // Listen to when a driver accepts and respond accordingly
-    respondWhenDriverAccepts(_acceptingDriverConfig);
+    respondWhenDriverAccepts(driverConfigStream);
 
     // Show the route of the first compatible driver on the list
-    final compatibleDrivers = await getCompatibleDriverConfigs().single;
+    final compatibleDrivers = await getCompatibleDriverConfigs().first;
     if (compatibleDrivers.isNotEmpty) {
       mapController.showSelectedDriverRoute(compatibleDrivers.first);
     }
@@ -71,12 +71,14 @@ class RequestDriversViewModel extends ViewModel {
   ) async {
     final currentRiderConfig = read(currentRouteConfigProvider).state;
     assert(currentRiderConfig != null);
-    acceptingDriverConfig.listen((driverConfig) {
+    StreamSubscription? streamSub;
+    streamSub = acceptingDriverConfig.listen((driverConfig) {
       if (driverConfig != null) {
         final riderId = currentRiderConfig!.user.id;
         riderRepo.deletePendingRequests(riderId);
         read(acceptingDriverConfigProvider).state = driverConfig;
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);
+        streamSub!.cancel();
       }
     });
   }

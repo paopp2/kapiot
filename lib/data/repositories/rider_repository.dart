@@ -74,18 +74,16 @@ class RiderRepository {
     });
   }
 
-  Stream<List<KapiotUser>> getCoRidersStream({
+  /// Returns all riders that have been accepted by [driver]
+  Stream<List<KapiotUser>> getAllCoRidersStream({
     required KapiotUser driver,
-    required KapiotUser currentUser,
   }) {
     final acceptedRidersConfigStream = firestoreHelper.collectionStream(
       path: FirestorePath.colAcceptedRiders(driver.id),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-    return acceptedRidersConfigStream.map((rcList) {
-      final routeConfigListWithoutCurrentUser =
-          rcList.where((rc) => rc.user.id != currentUser.id);
-      return routeConfigListWithoutCurrentUser.map((rc) => rc.user).toList();
-    });
+    return acceptedRidersConfigStream.map(
+      (rcList) => rcList.map((rc) => rc.user).toList(),
+    );
   }
 }

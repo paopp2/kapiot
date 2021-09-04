@@ -76,8 +76,8 @@ class HomeViewModel extends ViewModel {
 
   @override
   void dispose() {
-    tecStartLoc.dispose();
-    tecEndLoc.dispose();
+    tecStartLoc.clear();
+    tecEndLoc.clear();
   }
 
   Future<void> signOut() async => await authService.signOutGoogle();
