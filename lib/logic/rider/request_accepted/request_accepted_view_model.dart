@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
@@ -44,8 +46,18 @@ class RequestAcceptedViewModel extends ViewModel {
     StreamSubscription? streamSub;
     streamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
-        print("Dropped off");
+        // Reset map state
+        mapController
+          ..setStartLocation(null)
+          ..setEndLocation(null)
+          ..clearMap();
+
+        // Change a new resetKey. Notifies the HomeView that it should reset
+        read(resetKeyProvider).state = UniqueKey();
         streamSub!.cancel();
+
+        // Remove all Views then navigate to HomeView
+        AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
       }
     });
 
