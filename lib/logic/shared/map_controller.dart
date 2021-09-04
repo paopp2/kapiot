@@ -171,4 +171,11 @@ abstract class MapController {
       }
     }
   }
+
+  static void reset(Reader read) {
+    read(markersProvider).state = {};
+    read(polylinesProvider).state = {};
+    read(startLocProvider).state = null;
+    read(endLocProvider).state = null;
+  }
 }

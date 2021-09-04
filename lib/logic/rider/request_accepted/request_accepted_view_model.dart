@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -43,14 +44,19 @@ class RequestAcceptedViewModel extends ViewModel {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(currentUser != null);
 
+    await mapController.initializeRequestAcceptedMap();
+    // This delay of arbitrary duration allows the map to finish initializing
+    // before showing the acceptingDriver's route. Removing this delay seems to
+    // result to a race condition. Should anyone have a better alternative to
+    // this workaround, feel free to send a pull request
+    await Future.delayed(const Duration(milliseconds: 50));
+    mapController.showAcceptingDriverRoute();
+
     StreamSubscription? streamSub;
     streamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
         // Reset map state
-        mapController
-          ..setStartLocation(null)
-          ..setEndLocation(null)
-          ..clearMap();
+        MapController.reset(read);
 
         // Change a new resetKey. Notifies the HomeView that it should reset
         read(resetKeyProvider).state = UniqueKey();
@@ -60,14 +66,6 @@ class RequestAcceptedViewModel extends ViewModel {
         AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
       }
     });
-
-    await mapController.initializeRequestAcceptedMap();
-    // This delay of arbitrary duration allows the map to finish initializing
-    // before showing the acceptingDriver's route. Removing this delay seems to
-    // result to a race condition. Should anyone have a better alternative to
-    // this workaround, feel free to send a pull request
-    await Future.delayed(const Duration(milliseconds: 50));
-    mapController.showAcceptingDriverRoute();
   }
 
   /// Remaps the stream containing all riders that have been accepted by the
