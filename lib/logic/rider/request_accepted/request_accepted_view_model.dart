@@ -55,10 +55,9 @@ class RequestAcceptedViewModel extends ViewModel {
     StreamSubscription? streamSub;
     streamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
-        // Reset map state
         MapController.reset(read);
 
-        // Change a new resetKey. Notifies the HomeView that it should reset
+        // Set a new resetKey; notifies the HomeView that it should reset
         read(resetKeyProvider).state = UniqueKey();
         streamSub!.cancel();
 

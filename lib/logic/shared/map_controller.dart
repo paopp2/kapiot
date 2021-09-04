@@ -172,6 +172,7 @@ abstract class MapController {
     }
   }
 
+  /// Resets the shared map state
   static void reset(Reader read) {
     read(markersProvider).state = {};
     read(polylinesProvider).state = {};
