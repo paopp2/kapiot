@@ -59,7 +59,7 @@ class RideInfoPanel extends HookConsumerWidget {
                     child: coRidersStream.when(
                       error: (e, __) => Center(child: Text(e.toString())),
                       loading: () =>
-                          const LoadingWidget(text: "Fetching co-riders..."),
+                          const Center(child: CircularProgressIndicator()),
                       data: (coRidersList) {
                         return Center(
                           child: ListView.builder(
