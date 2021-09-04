@@ -22,14 +22,15 @@ abstract class MapController {
   });
   final Reader read;
   final GoogleMapsApiServices googleMapsApiServices;
-  final Completer<GoogleMapController> _tempController = Completer();
-  late final GoogleMapController gmapController;
-  late final CameraPosition initialCameraPosition;
+  late Completer<GoogleMapController> _tempController;
+  late GoogleMapController gmapController;
+  late CameraPosition initialCameraPosition;
 
   Future<void> initializeMap({
     required CameraPosition initialCameraPosition,
     bool clearMap = false,
   }) async {
+    _tempController = Completer();
     this.initialCameraPosition = initialCameraPosition;
     gmapController = await _tempController.future;
     if (clearMap) {
@@ -38,9 +39,7 @@ abstract class MapController {
   }
 
   Future<void> onMapCreated(GoogleMapController gmapController) async {
-    if (!_tempController.isCompleted) {
-      _tempController.complete(gmapController);
-    }
+    _tempController.complete(gmapController);
   }
 
   void clearMap() {
