@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -39,9 +41,11 @@ class RequestAcceptedViewModel extends ViewModel {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(currentUser != null);
 
-    isDroppedOffStream().listen((isDroppedOff) {
+    StreamSubscription? streamSub;
+    streamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
         print("Dropped off");
+        streamSub!.cancel();
       }
     });
 

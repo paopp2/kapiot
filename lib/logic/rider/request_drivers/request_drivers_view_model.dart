@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -69,12 +71,14 @@ class RequestDriversViewModel extends ViewModel {
   ) async {
     final currentRiderConfig = read(currentRouteConfigProvider).state;
     assert(currentRiderConfig != null);
-    acceptingDriverConfig.listen((driverConfig) {
+    StreamSubscription? streamSub;
+    streamSub = acceptingDriverConfig.listen((driverConfig) {
       if (driverConfig != null) {
         final riderId = currentRiderConfig!.user.id;
         riderRepo.deletePendingRequests(riderId);
         read(acceptingDriverConfigProvider).state = driverConfig;
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);
+        streamSub!.cancel();
       }
     });
   }
