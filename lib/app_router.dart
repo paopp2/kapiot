@@ -25,6 +25,9 @@ class AppRouter {
       navigationKey.currentState?.pushNamed(route);
 
   void popView() => navigationKey.currentState?.pop();
+
+  void popAllThenNavigateTo(String route) =>
+      navigationKey.currentState?.pushNamedAndRemoveUntil(route, (_) => false);
 }
 
 class Routes {
