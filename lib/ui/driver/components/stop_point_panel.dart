@@ -22,7 +22,7 @@ class StopPointPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final rider = nextStop.rider;
 
-    return Expanded(
+    return Flexible(
       child: Container(
         margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
         padding: const EdgeInsets.all(15),
@@ -30,12 +30,11 @@ class StopPointPanel extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           color: Colors.white,
         ),
-        child: Column(
+        child: ListView(
           children: [
-            const Spacer(),
             Container(
               margin:
-                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.01),
+                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.03),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +73,8 @@ class StopPointPanel extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            SizedBox(
+              height: 40,
               child: Marquee(
                 text: (nextStop.stopLocation.address ?? ""),
                 style: const TextStyle(fontSize: 17, color: Colors.grey),
@@ -82,19 +82,22 @@ class StopPointPanel extends StatelessWidget {
                 pauseAfterRound: const Duration(seconds: 2),
               ),
             ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Cancel"),
-                ),
-                ElevatedButton(
-                  onPressed: model.updateNextStop,
-                  child: const Text("Done"),
-                )
-              ],
+            Container(
+              margin:
+                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("Cancel"),
+                  ),
+                  ElevatedButton(
+                    onPressed: model.updateNextStop,
+                    child: const Text("Done"),
+                  )
+                ],
+              ),
             ),
           ],
         ),

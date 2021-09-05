@@ -15,15 +15,20 @@ class RiderManagerView extends HookConsumerWidget {
     final model = ref.watch(riderManagerViewModel);
     final nextStop = ref.watch(nextStopProvider).state;
 
+    double height;
+
     useEffect(() {
       model.initState();
       return model.dispose;
     }, []);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SafeArea(
-          child: Scaffold(
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          (nextStop != null)
+              ? height = constraints.maxHeight * 0.5
+              : height = constraints.maxHeight * 0.95;
+          return Scaffold(
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {},
               label: const Text("Map View"),
@@ -32,9 +37,11 @@ class RiderManagerView extends HookConsumerWidget {
             body: Container(
               color: const Color(0x7679ADFf),
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth * 0.05,
+                    vertical: constraints.maxHeight * 0.025),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     (nextStop != null)
                         ? StopPointPanel(
@@ -43,14 +50,18 @@ class RiderManagerView extends HookConsumerWidget {
                             nextStop: nextStop,
                           )
                         : const SizedBox(),
-                    RequestingRidersPanel(model: model),
+                    RequestingRidersPanel(
+                      model: model,
+                      constraints: constraints,
+                      height: height,
+                    ),
                   ],
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
