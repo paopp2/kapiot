@@ -72,16 +72,16 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     const riderId = requestingRiderConfig.id;
     const driverId = acceptingDriverConfig.id;
 
+    await ridersRef.doc(riderId).update({
+        acceptingDriverConfig: acceptingDriverConfig,
+    });
     driversIdList.forEach(deleteRequests);
     async function deleteRequests(id){
         await driversRef.doc(id).collection('requests').doc(riderId).delete();
     }
-    await ridersRef.doc(riderId).update({
-        acceptingDriverConfig: acceptingDriverConfig,
-    });
     await driversRef.doc(driverId).collection('accepted').doc(riderId)
     .create(requestingRiderConfig)
-    .then(res.json('Accepted: ' + riderId))
+    .then(res.json('Accepted: ' + driversIdList))
     .catch(err => res.status(400).json('Error : ' + err));
 });
 
