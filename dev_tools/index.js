@@ -11,6 +11,7 @@ function action(e,option){
     else if(option==1 || option==2 || option==3 || option==5){
         const rider_index = document.getElementById("rider_index").value.toString();
         const driver_index = document.getElementById("driver_index").value.toString();
+        /*
         if(option==1 || option==3 || option==5){
             if(prevDriverIndex!='' && prevRiderIndex != ''){
                 document.querySelector(".rider"+prevRiderIndex).classList.remove('performed');
@@ -22,7 +23,7 @@ function action(e,option){
             document.querySelector(".driver"+driver_index).classList.add('performed');
             document.querySelector(".riderId"+rider_index).classList.add('performed');
             document.querySelector(".driverId"+driver_index).classList.add('performed');
-        }
+        }*/
         switch(option){
             case 1:
                 url  = "http://localhost:5001/kapiot-46cbc/us-central1/requestDriver?r=" + rider_index + "&d=" + driver_index;
