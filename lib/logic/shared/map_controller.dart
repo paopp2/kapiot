@@ -103,17 +103,33 @@ abstract class MapController {
       location: endLocation,
     );
     drawPolyLine(decodedRoute);
+
+    // Determine correct LatLngBounds for Google map camera animation
+    double northEastLat, southWestLat;
+    double northEastLng, southWestLng;
+
+    if (startLocation.lat <= endLocation.lat) {
+      southWestLat = startLocation.lat;
+      northEastLat = endLocation.lat;
+    } else {
+      northEastLat = startLocation.lat;
+      southWestLat = endLocation.lat;
+    }
+
+    if (startLocation.lng <= endLocation.lng) {
+      southWestLng = startLocation.lng;
+      northEastLng = endLocation.lng;
+    } else {
+      northEastLng = startLocation.lng;
+      southWestLng = endLocation.lng;
+    }
+
     gmapController.animateCamera(
       CameraUpdate.newLatLngBounds(
-        (startLocation.lat <= endLocation.lat)
-            ? LatLngBounds(
-                southwest: LatLng(startLocation.lat, startLocation.lng),
-                northeast: LatLng(endLocation.lat, endLocation.lng),
-              )
-            : LatLngBounds(
-                southwest: LatLng(endLocation.lat, endLocation.lng),
-                northeast: LatLng(startLocation.lat, startLocation.lng),
-              ),
+        LatLngBounds(
+          southwest: LatLng(southWestLat, southWestLng),
+          northeast: LatLng(northEastLat, northEastLng),
+        ),
         latLngBoundsPadding,
       ),
     );
