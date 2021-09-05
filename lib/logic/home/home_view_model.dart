@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
@@ -175,6 +176,7 @@ class HomeViewModel extends ViewModel {
       onRouteCalculated: (routeCoordinates) =>
           _routeCoordinates = routeCoordinates,
     );
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
   }
 
   Future<void> pushRouteConfig() async {
