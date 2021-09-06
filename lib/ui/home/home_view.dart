@@ -20,10 +20,10 @@ class HomeView extends HookConsumerWidget {
       return model.dispose;
     }, [resetKey]);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SafeArea(
-          child: Scaffold(
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scaffold(
             appBar: AppBar(
               actions: [
                 IconButton(
@@ -41,9 +41,9 @@ class HomeView extends HookConsumerWidget {
                 model: model,
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
