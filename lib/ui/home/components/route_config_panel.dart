@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 
 class RouteConfigPanel extends HookConsumerWidget {
   const RouteConfigPanel({
@@ -18,109 +21,138 @@ class RouteConfigPanel extends HookConsumerWidget {
     final isRider = ref.watch(isRiderProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
-    final isStartLocFocused = ref.watch(isStartLocFocusedProvider).state;
-    final isEndLocFocused = ref.watch(isEndLocFocusedProvider).state;
-    final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
+    final startAddress = ref.watch(startLocProvider).state?.address ?? '';
+    final endAddress = ref.watch(endLocProvider).state?.address ?? '';
 
-    return Container(
-      height: constraints.maxHeight * 0.43,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ChoiceChip(
-                    label: const Text("Driver"),
-                    selected: !isRider,
-                    onSelected: model.toggleIsRider,
-                  ),
-                  ChoiceChip(
-                    label: const Text("Rider"),
-                    selected: isRider,
-                    onSelected: model.toggleIsRider,
-                  ),
-                ],
-              ),
-              TextField(
-                controller: model.tecStartLoc,
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(hintText: "Start location"),
-                onChanged: model.updateSuggestions,
-                onTap: () => model.expandSuggestions(forStartLoc: true),
-              ),
-              Visibility(
-                child: SizedBox(
-                  height: constraints.maxHeight * 0.25,
-                  child: ListView.builder(
-                    itemCount: placeSuggestions.length,
-                    itemBuilder: (context, index) {
-                      final suggestion = placeSuggestions[index] ?? "";
-                      return ListTile(
-                        title: Text(suggestion),
-                        onTap: () => model.pickSuggestion(
-                          pickedSuggestion: suggestion,
-                          forStartLoc: true,
+    return Expanded(
+      child: SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ChoiceChip(
+                      label: const Text("Driver"),
+                      selected: !isRider,
+                      onSelected: model.toggleIsRider,
+                    ),
+                    ChoiceChip(
+                      label: const Text("Rider"),
+                      selected: isRider,
+                      onSelected: model.toggleIsRider,
+                    ),
+                  ],
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0XFFE7DFE0)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth * 0.05),
+                  margin: EdgeInsets.symmetric(
+                      vertical: constraints.maxHeight * 0.01),
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: model.tecStartLoc..text = startAddress,
+                        readOnly: true,
+                        textAlign: TextAlign.start,
+                        decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              CupertinoIcons.smallcircle_circle,
+                            ),
+                            hintText: "Start location",
+                            border: InputBorder.none),
+                        onTap: () => model.openPlacePickerView(
+                          isForStartLoc: true,
                         ),
-                      );
-                    },
+                      ),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 1,
+                        height: 0.05,
+                      ),
+                      TextField(
+                        controller: model.tecEndLoc..text = endAddress,
+                        readOnly: true,
+                        textAlign: TextAlign.start,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(CupertinoIcons.location),
+                          hintText: "End location",
+                          border: InputBorder.none,
+                        ),
+                        onTap: () => model.openPlacePickerView(
+                          isForStartLoc: false,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                visible: isStartLocFocused,
-              ),
-              TextField(
-                controller: model.tecEndLoc,
-                onChanged: model.updateSuggestions,
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(hintText: "End location"),
-                onTap: () => model.expandSuggestions(forStartLoc: false),
-              ),
-              Visibility(
-                child: SizedBox(
-                  height: constraints.maxHeight * 0.25,
-                  child: ListView.builder(
-                    itemCount: placeSuggestions.length,
-                    itemBuilder: (context, index) {
-                      final suggestion = placeSuggestions[index] ?? "";
-                      return ListTile(
-                        title: Text(suggestion),
-                        onTap: () => model.pickSuggestion(
-                          pickedSuggestion: suggestion,
-                          forStartLoc: false,
+                TextButton(
+                  child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
+                  onPressed: () => model.getDateTime(context),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth * 0.05),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Icon(
+                            CupertinoIcons.person_3,
+                            size: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              RawMaterialButton(
+                                fillColor: Colors.blue,
+                                elevation: 0,
+                                shape: const CircleBorder(),
+                                onPressed: model.decRiderCount,
+                                child: const Icon(Icons.remove,
+                                    color: Colors.white),
+                              ),
+                              Text("$riderCount"),
+                              RawMaterialButton(
+                                fillColor: Colors.blue,
+                                elevation: 0,
+                                shape: const CircleBorder(),
+                                onPressed: model.incRiderCount,
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: constraints.maxHeight * 0.03,
                         ),
-                      );
-                    },
+                        child: const Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                          height: 0.05,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                visible: isEndLocFocused,
-              ),
-              TextButton(
-                child: Text("$dateTime"),
-                onPressed: () => model.getDateTime(context),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  OutlinedButton(
-                    onPressed: model.decRiderCount,
-                    child: const Icon(Icons.remove),
-                  ),
-                  Text("$riderCount"),
-                  OutlinedButton(
-                    onPressed: model.incRiderCount,
-                    child: const Icon(Icons.add),
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                child: const Text("Next"),
-                onPressed: model.pushRouteConfig,
-              ),
-            ],
+                ElevatedButton(
+                  child: const Text("Next"),
+                  onPressed: model.pushRouteConfig,
+                ),
+              ],
+            ),
           ),
         ),
       ),

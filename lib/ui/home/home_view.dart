@@ -12,7 +12,7 @@ class HomeView extends HookConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final model = ref.watch(homeViewModelProvider);
+    final model = ref.watch(homeViewModel);
     final resetKey = ref.watch(resetKeyProvider).state;
 
     useEffect(() {

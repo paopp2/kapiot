@@ -1,12 +1,12 @@
 name: kapiot
 description: A Proof of Concept of a Carpooled Ridesharing System for the USC Community
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 0.0.1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -28,6 +28,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   maps_toolkit: ^2.0.0
   marquee: ^2.2.0
+  jiffy: ^4.1.0
 
 dev_dependencies:
   build_runner: ^2.1.1
@@ -41,19 +42,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
+
   assets:
     - lib/ui/assets/images/
     - lib/ui/assets/icons/
   fonts:
     - family: Sanz
-      fonts: 
+      fonts:
         - asset: lib/ui/assets/fonts/RNSSanz-Bold.otf
     - family: Vegur
-      fonts: 
+      fonts:
         - asset: lib/ui/assets/fonts/Vegur-Regular.otf
         - asset: lib/ui/assets/fonts/Vegur-Light.otf
           weight: 300
         - asset: lib/ui/assets/fonts/Vegur-Bold.otf
           weight: 700
-    
