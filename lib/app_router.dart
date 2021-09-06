@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
 import 'package:kapiot/ui/driver/stop_points_view.dart';
-import 'package:kapiot/ui/home/components/place_suggestions_view.dart';
+import 'package:kapiot/ui/home/components/place_picker_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
@@ -20,7 +20,7 @@ class AppRouter {
     Routes.stopPointsView: (context) => const StopPointsView(),
     Routes.requestDriversView: (context) => const RequestDriversView(),
     Routes.requestAcceptedView: (context) => const RequestAcceptedView(),
-    Routes.placeSuggestionsView: (context) => const PlaceSuggestionsView(),
+    Routes.placeSuggestionsView: (context) => const PlacePickerView(),
   };
 
   Future<dynamic>? navigateTo(String route) =>
