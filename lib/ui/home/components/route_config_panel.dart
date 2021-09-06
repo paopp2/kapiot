@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 
 class RouteConfigPanel extends HookConsumerWidget {
   const RouteConfigPanel({
@@ -20,6 +21,8 @@ class RouteConfigPanel extends HookConsumerWidget {
     final isRider = ref.watch(isRiderProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
+    final startAddress = ref.watch(startLocProvider).state?.address ?? '';
+    final endAddress = ref.watch(endLocProvider).state?.address ?? '';
 
     return Expanded(
       child: SizedBox(
@@ -55,7 +58,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TextField(
-                        controller: model.tecStartLoc,
+                        controller: model.tecStartLoc..text = startAddress,
                         readOnly: true,
                         textAlign: TextAlign.start,
                         decoration: const InputDecoration(
@@ -74,7 +77,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                         height: 0.05,
                       ),
                       TextField(
-                        controller: model.tecEndLoc,
+                        controller: model.tecEndLoc..text = endAddress,
                         readOnly: true,
                         textAlign: TextAlign.start,
                         decoration: const InputDecoration(
