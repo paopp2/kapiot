@@ -93,22 +93,23 @@ class PlacePickerView extends HookConsumerWidget {
                       itemCount: placeSuggestions.length,
                       itemBuilder: (context, index) {
                         final suggestion = placeSuggestions[index] ?? "";
+                        final suggestionSplit = model.splitAddress(suggestion);
                         return Column(
                           children: [
                             ListTile(
                               dense: true,
                               title: Text(
-                                suggestion,
+                                suggestionSplit.first,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              subtitle: const Text(
-                                "Cebu, Philippines",
+                              subtitle: Text(
+                                suggestionSplit.last,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 13),
+                                style: const TextStyle(fontSize: 13),
                               ),
                               onTap: () => model.pickSuggestion(
                                 pickedSuggestion: suggestion,
