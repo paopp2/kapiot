@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kapiot/app_router.dart';
 
 class PlaceSuggestionsView extends StatelessWidget {
   const PlaceSuggestionsView({Key? key}) : super(key: key);
@@ -13,9 +14,12 @@ class PlaceSuggestionsView extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.white,
                 elevation: 0,
-                leading: const Icon(
-                  CupertinoIcons.arrow_left,
-                  color: Colors.blue,
+                leading: IconButton(
+                  onPressed: AppRouter.instance.popView,
+                  icon: const Icon(
+                    CupertinoIcons.arrow_left,
+                    color: Colors.blue,
+                  ),
                 ),
               ),
               backgroundColor: Colors.white,

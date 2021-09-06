@@ -120,6 +120,9 @@ class HomeViewModel extends ViewModel {
     }
   }
 
+  void openPlaceSuggestionsView() =>
+      AppRouter.instance.navigateTo(Routes.placeSuggestionsView);
+
   void expandSuggestions({required bool forStartLoc}) {
     if (forStartLoc) {
       // Highlight all text within the startLoc TextField
