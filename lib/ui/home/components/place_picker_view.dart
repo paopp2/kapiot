@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
@@ -14,6 +15,11 @@ class PlacePickerView extends HookConsumerWidget {
     final model = ref.watch(placePickerViewModel);
     final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
     final isForStartLoc = ref.watch(isForStartLocProvider).state;
+
+    useEffect(() {
+      model.initState();
+      return model.dispose;
+    }, []);
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -47,6 +53,7 @@ class PlacePickerView extends HookConsumerWidget {
                       children: [
                         TextField(
                           controller: model.tecStartLoc,
+                          focusNode: model.startLocFocusNode,
                           textAlign: TextAlign.start,
                           onTap: () => model.expandSuggestions(
                             isForStartLoc: true,
@@ -66,6 +73,7 @@ class PlacePickerView extends HookConsumerWidget {
                         ),
                         TextField(
                           controller: model.tecEndLoc,
+                          focusNode: model.endLocFocusNode,
                           textAlign: TextAlign.start,
                           onTap: () => model.expandSuggestions(
                             isForStartLoc: false,

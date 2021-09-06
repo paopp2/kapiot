@@ -56,6 +56,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                     children: [
                       TextField(
                         controller: model.tecStartLoc,
+                        readOnly: true,
                         textAlign: TextAlign.start,
                         decoration: const InputDecoration(
                             prefixIcon: Icon(
@@ -63,7 +64,9 @@ class RouteConfigPanel extends HookConsumerWidget {
                             ),
                             hintText: "Start location",
                             border: InputBorder.none),
-                        onTap: model.openPlacePickerView,
+                        onTap: () => model.openPlacePickerView(
+                          isForStartLoc: true,
+                        ),
                       ),
                       const Divider(
                         color: Colors.white,
@@ -72,13 +75,16 @@ class RouteConfigPanel extends HookConsumerWidget {
                       ),
                       TextField(
                         controller: model.tecEndLoc,
+                        readOnly: true,
                         textAlign: TextAlign.start,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(CupertinoIcons.location),
                           hintText: "End location",
                           border: InputBorder.none,
                         ),
-                        onTap: model.openPlacePickerView,
+                        onTap: () => model.openPlacePickerView(
+                          isForStartLoc: false,
+                        ),
                       ),
                     ],
                   ),

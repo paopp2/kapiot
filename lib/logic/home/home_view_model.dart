@@ -111,8 +111,10 @@ class HomeViewModel extends ViewModel {
     }
   }
 
-  void openPlacePickerView() =>
-      AppRouter.instance.navigateTo(Routes.placePickerView);
+  void openPlacePickerView({required bool isForStartLoc}) {
+    read(isForStartLocProvider).state = isForStartLoc;
+    AppRouter.instance.navigateTo(Routes.placePickerView);
+  }
 
   Future<void> pushRouteConfig() async {
     assert(currentUser != null);

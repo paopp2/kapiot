@@ -14,4 +14,7 @@ final placeSuggestionsProvider =
 final routeCoordinatesProvider =
     StateProvider.autoDispose<List<LatLng>?>((ref) => null);
 
-final isForStartLocProvider = StateProvider.autoDispose<bool>((ref) => true);
+final isForStartLocProvider = StateProvider.autoDispose<bool>((ref) {
+  ref.maintainState = true;
+  return true;
+});
