@@ -19,7 +19,7 @@ import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
-final homeViewModelProvider = Provider.autoDispose(
+final homeViewModel = Provider.autoDispose(
   (ref) => HomeViewModel(
     read: ref.read,
     riderRepo: ref.watch(riderRepositoryProvider),
