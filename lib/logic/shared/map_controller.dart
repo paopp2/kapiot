@@ -56,27 +56,18 @@ abstract class MapController {
   }
 
   Future<void> showRoute({
-    required KapiotLocation start,
-    required KapiotLocation end,
+    required KapiotLocation startLocation,
+    required KapiotLocation endLocation,
     required List<LatLng> routeCoordinates,
   }) async {
     read(markersProvider).state = {};
-    addMarker(markerId: "start_location", location: start);
-    addMarker(markerId: "end_location", location: end);
+    addMarker(markerId: "start_location", location: startLocation);
+    addMarker(markerId: "end_location", location: endLocation);
     drawPolyLine(routeCoordinates);
-    gmapController.animateCamera(
-      CameraUpdate.newLatLngBounds(
-        (start.lat <= end.lat)
-            ? LatLngBounds(
-                southwest: LatLng(start.lat, start.lng),
-                northeast: LatLng(end.lat, end.lng),
-              )
-            : LatLngBounds(
-                southwest: LatLng(end.lat, end.lng),
-                northeast: LatLng(start.lat, start.lng),
-              ),
-        latLngBoundsPadding,
-      ),
+
+    animateToRoute(
+      startLocation: startLocation,
+      endLocation: endLocation,
     );
   }
 
@@ -104,6 +95,16 @@ abstract class MapController {
     );
     drawPolyLine(decodedRoute);
 
+    animateToRoute(
+      startLocation: startLocation,
+      endLocation: endLocation,
+    );
+  }
+
+  Future<void> animateToRoute({
+    required KapiotLocation startLocation,
+    required KapiotLocation endLocation,
+  }) async {
     // Determine correct LatLngBounds for Google map camera animation
     double northEastLat, southWestLat;
     double northEastLng, southWestLng;
@@ -178,8 +179,8 @@ abstract class MapController {
         end: endLocation,
       );
       showRoute(
-        start: startLocation,
-        end: endLocation,
+        startLocation: startLocation,
+        endLocation: endLocation,
         routeCoordinates: routeCoordinates,
       );
       if (onRouteCalculated != null) {
