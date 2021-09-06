@@ -16,56 +16,104 @@ class LoginView extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SafeArea(
-          child: Scaffold(
-            body: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: constraints.maxHeight * 0.04),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  const Image(
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scaffold(
+            body: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: constraints.maxHeight * 0.15),
+                  child: const Image(
                     image: AssetImage('lib/ui/assets/images/usc_logo.png'),
                     width: 70,
                   ),
-                  const Text(
-                    'kapiot',
-                    style: TextStyle(
-                        fontSize: 84,
-                        fontFamily: 'Sanz',
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 7,
-                        color: Color(0xff5eab53)),
-                  ),
-                  SizedBox(
-                    height: constraints.maxHeight * 0.01,
-                  ),
-                  const Center(
-                    child: Text(
-                      'University of San Carlos',
-                      style: TextStyle(
-                        letterSpacing: 3.5,
-                        fontSize: 18,
-                        fontFamily: 'Vegur',
-                        color: Colors.grey,
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.1),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'kapiot',
+                        style: TextStyle(
+                            fontSize: 84,
+                            fontFamily: 'Sanz',
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 7,
+                            color: Color(0xffffc901)),
+                        // color: Color(0xff5eab53)),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
+                      SizedBox(
+                        height: constraints.maxHeight * 0.01,
+                      ),
+                      const Center(
+                        child: Text(
+                          'University of San Carlos',
+                          style: TextStyle(
+                            letterSpacing: 3.5,
+                            fontSize: 18,
+                            fontFamily: 'Vegur',
+                            color: Colors.grey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
-                  const Spacer(flex: 2),
-                  GoogleAuthWidget(model: model),
-                  const Spacer(),
-                ],
-              ),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      ClipPath(
+                        clipper: BackgroundClipper(),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [
+                                Color(0xffffc901),
+                                Color(0xffffd94e)
+                              ],
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topRight)),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: constraints.maxWidth * 0.05),
+                          child: GoogleAuthWidget(model: model),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
+  }
+}
+
+class BackgroundClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+
+    path.moveTo(0, size.height * 0.8);
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+
+    // path.lineTo(x, y)
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
   }
 }

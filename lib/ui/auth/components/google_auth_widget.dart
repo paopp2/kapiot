@@ -29,13 +29,18 @@ class GoogleAuthWidget extends StatelessWidget {
         ),
         onPressed: model.signInWithGoogle,
         style: ButtonStyle(
+          elevation: MaterialStateProperty.all(0),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           ),
+          side: MaterialStateProperty.all(
+              BorderSide(color: Colors.grey.shade300)),
+          shadowColor: MaterialStateProperty.all(Colors.white),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(28),
-              side: const BorderSide(color: Colors.black),
+              side: const BorderSide(color: Color(0xffffc90e)),
             ),
           ),
         ),
