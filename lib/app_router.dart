@@ -35,10 +35,10 @@ class AppRouter {
 class Routes {
   static const portalView = 'portalView';
   static const homeView = 'home/home_view';
+  static const placePickerView = 'home/components/place_picker_view';
   static const loginView = 'auth/login_view';
   static const riderManagerView = 'driver/rider_manager_view';
   static const stopPointsView = 'driver/stop_points_view';
   static const requestDriversView = 'rider/request_drivers_view';
   static const requestAcceptedView = 'rider/request_accepted_view';
-  static const placePickerView = 'home/components/place_picker_view';
 }
