@@ -61,6 +61,5 @@ class PortalViewModel {
       _router.navigateTo(Routes.requestDriversView);
   void gotoRequestAcceptedView() =>
       _router.navigateTo(Routes.requestAcceptedView);
-  void gotoPlaceSuggestionsView() =>
-      _router.navigateTo(Routes.placeSuggestionsView);
+  void gotoPlaceSuggestionsView() => _router.navigateTo(Routes.placePickerView);
 }

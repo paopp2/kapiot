@@ -120,8 +120,8 @@ class HomeViewModel extends ViewModel {
     }
   }
 
-  void openPlaceSuggestionsView() =>
-      AppRouter.instance.navigateTo(Routes.placeSuggestionsView);
+  void openPlacePickerView() =>
+      AppRouter.instance.navigateTo(Routes.placePickerView);
 
   void expandSuggestions({required bool forStartLoc}) {
     if (forStartLoc) {

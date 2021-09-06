@@ -15,12 +15,12 @@ class AppRouter {
   final Map<String, Widget Function(BuildContext)> routesList = {
     Routes.portalView: (context) => const PortalView(),
     Routes.homeView: (context) => const HomeView(),
+    Routes.placePickerView: (context) => const PlacePickerView(),
     Routes.loginView: (context) => const LoginView(),
     Routes.riderManagerView: (context) => const RiderManagerView(),
     Routes.stopPointsView: (context) => const StopPointsView(),
     Routes.requestDriversView: (context) => const RequestDriversView(),
     Routes.requestAcceptedView: (context) => const RequestAcceptedView(),
-    Routes.placeSuggestionsView: (context) => const PlacePickerView(),
   };
 
   Future<dynamic>? navigateTo(String route) =>
@@ -40,5 +40,5 @@ class Routes {
   static const stopPointsView = 'driver/stop_points_view';
   static const requestDriversView = 'rider/request_drivers_view';
   static const requestAcceptedView = 'rider/request_accepted_view';
-  static const placeSuggestionsView = 'home/components/place_suggestions_view';
+  static const placePickerView = 'home/components/place_picker_view';
 }

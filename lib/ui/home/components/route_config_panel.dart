@@ -67,7 +67,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                             hintText: "Start location",
                             border: InputBorder.none),
                         onChanged: model.updateSuggestions,
-                        onTap: model.openPlaceSuggestionsView,
+                        onTap: model.openPlacePickerView,
                       ),
                       Visibility(
                         child: SizedBox(
@@ -101,7 +101,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                             prefixIcon: Icon(CupertinoIcons.location),
                             hintText: "End location",
                             border: InputBorder.none),
-                        onTap: model.openPlaceSuggestionsView,
+                        onTap: model.openPlacePickerView,
                       ),
                       Visibility(
                         child: SizedBox(
