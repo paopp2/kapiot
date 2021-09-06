@@ -59,6 +59,15 @@ class PlaceSuggestionsView extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: Text("ListTile #$index"),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               )),
