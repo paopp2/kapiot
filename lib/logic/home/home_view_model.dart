@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
@@ -53,13 +51,6 @@ class HomeViewModel extends ViewModel {
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
-
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  static List<Map<String, String?>> _autocompleteSuggestionMaps = [];
-
-  /// Caches routeCoordinates. Required when pushing a driverConfig
-  List<LatLng> _routeCoordinates = [];
 
   @override
   Future<void> initState() async {
@@ -123,65 +114,6 @@ class HomeViewModel extends ViewModel {
   void openPlacePickerView() =>
       AppRouter.instance.navigateTo(Routes.placePickerView);
 
-  void expandSuggestions({required bool forStartLoc}) {
-    if (forStartLoc) {
-      // Highlight all text within the startLoc TextField
-      tecStartLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecStartLoc.text.length,
-      );
-      read(isStartLocFocusedProvider).state = true;
-      read(isEndLocFocusedProvider).state = false;
-    } else {
-      // Highlight all text within the endLoc TextField
-      tecEndLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecEndLoc.text.length,
-      );
-      read(isEndLocFocusedProvider).state = true;
-      read(isStartLocFocusedProvider).state = false;
-    }
-  }
-
-  void updateSuggestions(String? value) async {
-    final suggestions = await googleMapsApiServices.places
-        .getAutocompleteSuggestions(value ?? '');
-    _autocompleteSuggestionMaps = suggestions;
-    read(placeSuggestionsProvider).state =
-        suggestions.map((s) => s["address"]).toList();
-  }
-
-  Future<void> pickSuggestion({
-    required String pickedSuggestion,
-    required bool forStartLoc,
-  }) async {
-    final pickedSuggestionMap = _autocompleteSuggestionMaps.firstWhere(
-      (s) => s["address"] == pickedSuggestion,
-    );
-    final placeId = pickedSuggestionMap["id"] as String;
-    final location =
-        await googleMapsApiServices.places.getLocFromPlaceId(placeId);
-    if (forStartLoc) {
-      tecStartLoc.text = pickedSuggestion;
-      mapController.setStartLocation(
-        location?.copyWith(address: pickedSuggestion),
-      );
-      read(isStartLocFocusedProvider).state = false;
-    } else {
-      tecEndLoc.text = pickedSuggestion;
-      mapController.setEndLocation(
-        location?.copyWith(address: pickedSuggestion),
-      );
-      read(isEndLocFocusedProvider).state = false;
-    }
-
-    mapController.showRouteIfBothLocationsSet(
-      onRouteCalculated: (routeCoordinates) =>
-          _routeCoordinates = routeCoordinates,
-    );
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
-  }
-
   Future<void> pushRouteConfig() async {
     assert(currentUser != null);
     final isRider = read(isRiderProvider).state;
@@ -200,9 +132,10 @@ class HomeViewModel extends ViewModel {
       read(currentRouteConfigProvider).state = riderConfig;
       AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
-      assert(_routeCoordinates.isNotEmpty);
+      final routeCoordinates = read(routeCoordinatesProvider).state!;
+      assert(routeCoordinates.isNotEmpty);
       final encodedRoute =
-          await googleMapsApiServices.utils.encodeRoute(_routeCoordinates);
+          await googleMapsApiServices.utils.encodeRoute(routeCoordinates);
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,

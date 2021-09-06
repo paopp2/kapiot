@@ -20,9 +20,6 @@ class RouteConfigPanel extends HookConsumerWidget {
     final isRider = ref.watch(isRiderProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
-    final isStartLocFocused = ref.watch(isStartLocFocusedProvider).state;
-    final isEndLocFocused = ref.watch(isEndLocFocusedProvider).state;
-    final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
 
     return Expanded(
       child: SizedBox(
@@ -66,27 +63,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                             ),
                             hintText: "Start location",
                             border: InputBorder.none),
-                        onChanged: model.updateSuggestions,
                         onTap: model.openPlacePickerView,
-                      ),
-                      Visibility(
-                        child: SizedBox(
-                          height: constraints.maxHeight * 0.25,
-                          child: ListView.builder(
-                            itemCount: placeSuggestions.length,
-                            itemBuilder: (context, index) {
-                              final suggestion = placeSuggestions[index] ?? "";
-                              return ListTile(
-                                title: Text(suggestion),
-                                onTap: () => model.pickSuggestion(
-                                  pickedSuggestion: suggestion,
-                                  forStartLoc: true,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        visible: isStartLocFocused,
                       ),
                       const Divider(
                         color: Colors.white,
@@ -95,32 +72,13 @@ class RouteConfigPanel extends HookConsumerWidget {
                       ),
                       TextField(
                         controller: model.tecEndLoc,
-                        onChanged: model.updateSuggestions,
                         textAlign: TextAlign.start,
                         decoration: const InputDecoration(
-                            prefixIcon: Icon(CupertinoIcons.location),
-                            hintText: "End location",
-                            border: InputBorder.none),
-                        onTap: model.openPlacePickerView,
-                      ),
-                      Visibility(
-                        child: SizedBox(
-                          height: constraints.maxHeight * 0.25,
-                          child: ListView.builder(
-                            itemCount: placeSuggestions.length,
-                            itemBuilder: (context, index) {
-                              final suggestion = placeSuggestions[index] ?? "";
-                              return ListTile(
-                                title: Text(suggestion),
-                                onTap: () => model.pickSuggestion(
-                                  pickedSuggestion: suggestion,
-                                  forStartLoc: false,
-                                ),
-                              );
-                            },
-                          ),
+                          prefixIcon: Icon(CupertinoIcons.location),
+                          hintText: "End location",
+                          border: InputBorder.none,
                         ),
-                        visible: isEndLocFocused,
+                        onTap: model.openPlacePickerView,
                       ),
                     ],
                   ),
@@ -158,8 +116,10 @@ class RouteConfigPanel extends HookConsumerWidget {
                                 elevation: 0,
                                 shape: const CircleBorder(),
                                 onPressed: model.incRiderCount,
-                                child:
-                                    const Icon(Icons.add, color: Colors.white),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           )
@@ -167,7 +127,8 @@ class RouteConfigPanel extends HookConsumerWidget {
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(
-                            vertical: constraints.maxHeight * 0.03),
+                          vertical: constraints.maxHeight * 0.03,
+                        ),
                         child: const Divider(
                           color: Colors.grey,
                           thickness: 1,
