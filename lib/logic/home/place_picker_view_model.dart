@@ -65,7 +65,7 @@ class PlacePickerViewModel extends ViewModel {
   /// from "address"
   static List<Map<String, String?>> _autocompleteSuggestionMaps = [];
 
-  void expandSuggestions({required bool isForStartLoc}) {
+  void editPlaceAddress({required bool isForStartLoc}) {
     if (isForStartLoc) {
       // Highlight all text within the startLoc TextField
       tecStartLoc.selection = TextSelection(
@@ -105,6 +105,7 @@ class PlacePickerViewModel extends ViewModel {
       );
       endLocFocusNode.unfocus();
     }
+    read(placeSuggestionsProvider).state = [];
   }
 
   void updateSuggestions(String? value) async {

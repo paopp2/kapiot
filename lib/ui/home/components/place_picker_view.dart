@@ -55,7 +55,7 @@ class PlacePickerView extends HookConsumerWidget {
                           controller: model.tecStartLoc,
                           focusNode: model.startLocFocusNode,
                           textAlign: TextAlign.start,
-                          onTap: () => model.expandSuggestions(
+                          onTap: () => model.editPlaceAddress(
                             isForStartLoc: true,
                           ),
                           onChanged: model.updateSuggestions,
@@ -75,7 +75,7 @@ class PlacePickerView extends HookConsumerWidget {
                           controller: model.tecEndLoc,
                           focusNode: model.endLocFocusNode,
                           textAlign: TextAlign.start,
-                          onTap: () => model.expandSuggestions(
+                          onTap: () => model.editPlaceAddress(
                             isForStartLoc: false,
                           ),
                           onChanged: model.updateSuggestions,
