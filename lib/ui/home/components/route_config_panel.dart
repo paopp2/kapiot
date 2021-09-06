@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:jiffy/jiffy.dart';
 
 class RouteConfigPanel extends HookConsumerWidget {
   const RouteConfigPanel({
@@ -53,7 +54,7 @@ class RouteConfigPanel extends HookConsumerWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: constraints.maxWidth * 0.05),
                   margin: EdgeInsets.symmetric(
-                      vertical: constraints.maxHeight * 0.02),
+                      vertical: constraints.maxHeight * 0.01),
                   child: Column(
                     children: [
                       TextField(
@@ -126,22 +127,56 @@ class RouteConfigPanel extends HookConsumerWidget {
                   ),
                 ),
                 TextButton(
-                  child: Text("$dateTime"),
+                  child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
                   onPressed: () => model.getDateTime(context),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    OutlinedButton(
-                      onPressed: model.decRiderCount,
-                      child: const Icon(Icons.remove),
-                    ),
-                    Text("$riderCount"),
-                    OutlinedButton(
-                      onPressed: model.incRiderCount,
-                      child: const Icon(Icons.add),
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth * 0.05),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Icon(
+                            CupertinoIcons.person_3,
+                            size: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              RawMaterialButton(
+                                fillColor: Colors.blue,
+                                elevation: 0,
+                                shape: const CircleBorder(),
+                                onPressed: model.decRiderCount,
+                                child: const Icon(Icons.remove,
+                                    color: Colors.white),
+                              ),
+                              Text("$riderCount"),
+                              RawMaterialButton(
+                                fillColor: Colors.blue,
+                                elevation: 0,
+                                shape: const CircleBorder(),
+                                onPressed: model.incRiderCount,
+                                child:
+                                    const Icon(Icons.add, color: Colors.white),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            vertical: constraints.maxHeight * 0.03),
+                        child: const Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                          height: 0.05,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 ElevatedButton(
                   child: const Text("Next"),
