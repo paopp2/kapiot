@@ -66,12 +66,6 @@ class HomeViewModel extends ViewModel {
     }
   }
 
-  @override
-  void dispose() {
-    tecStartLoc.clear();
-    tecEndLoc.clear();
-  }
-
   Future<void> signOut() async => await authService.signOutGoogle();
 
   void toggleIsRider(bool valueHasChanged) {
