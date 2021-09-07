@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
@@ -105,6 +106,13 @@ class PlacePickerViewModel extends ViewModel {
       );
       endLocFocusNode.unfocus();
     }
+
+    final isStartLocSet = (read(startLocProvider).state != null);
+    final isEndLocSet = (read(endLocProvider).state != null);
+    if (isStartLocSet && isEndLocSet) {
+      AppRouter.instance.popView();
+    }
+
     read(placeSuggestionsProvider).state = [];
   }
 
