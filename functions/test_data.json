@@ -7,7 +7,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-29T06:47:07.099561",
             "user": {
-                "displayName": "Charles Jr. Ausejo (0)",
+                "displayName": "Charles Jr. Ausejo",
                 "email": "16100938@usc.edu.ph",
                 "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
                 "phoneNumber": "",
@@ -21,7 +21,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
-                "displayName": "Christian Benedict Gonzales (1)",
+                "displayName": "Christian Benedict Gonzales",
                 "email": "18105024@gmail.com",
                 "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
                 "phoneNumber": "",
@@ -35,7 +35,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-29T06:47:07.099561",
             "user": {
-                "displayName": "Baby Driver (2)",
+                "displayName": "Baby Driver",
                 "email": "babydriver@email.com",
                 "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
                 "phoneNumber": "",
@@ -49,7 +49,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T12:41:39.580591",
             "user": {
-                "displayName": "Dominic Toretto (3)",
+                "displayName": "Dominic Toretto",
                 "email": "fastnfurious4eva@usc.com",
                 "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
                 "phoneNumber": "",
@@ -63,7 +63,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
-                "displayName": "Mad Max (4)",
+                "displayName": "Mad Max",
                 "email": "mad_max69@gmail.com",
                 "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
                 "phoneNumber": "",
@@ -77,7 +77,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
-                "displayName": "Omni Man (5)",
+                "displayName": "Omni Man",
                 "email": "omni_man_420@gmail.com",
                 "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
                 "phoneNumber": "",
@@ -91,7 +91,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
-                "displayName": "The Invincible (6)",
+                "displayName": "The Invincible",
                 "email": "the_invincible_20@gmail.com",
                 "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
                 "phoneNumber": "",
@@ -105,7 +105,7 @@
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
             "user": {
-                "displayName": "Jon Snow (7)",
+                "displayName": "Jon Snow",
                 "email": "jon_snow_12@gmail.com",
                 "id": "w4m3pz8p1pjfcjvn65hb8wugcalr",
                 "phoneNumber": "",
@@ -116,7 +116,7 @@
             "id":"njZvKhumuBwVcBruGOTT1kUwh5p6",
             "user":{
                 "id":"njZvKhumuBwVcBruGOTT1kUwh5p6",
-                "displayName":"Billy Butcher (8)",
+                "displayName":"Billy Butcher",
                 "email":"billybutcher@usc.edu.ph",
                 "phoneNumber":"",
                 "photoUrl":"https://www.looper.com/img/gallery/this-is-the-worst-thing-billy-butcher-has-done-on-the-boys/intro-1616676416.jpg"
@@ -130,7 +130,7 @@
             "id":"oEMIyKdPlsgJh7vk42FhMD7EG418",
             "user":{
                 "id":"oEMIyKdPlsgJh7vk42FhMD7EG418",
-                "displayName":"Hughie Campbell (9)",
+                "displayName":"Hughie Campbell",
                 "email":"hughiecampbell@usc.edu.ph",
                 "phoneNumber":"",
                 "photoUrl":"https://static.wikia.nocookie.net/amazons-the-boys/images/9/90/Hughie_Campbell_S2.jpg/revision/latest?cb=20200906153928"
@@ -144,7 +144,7 @@
             "id":"MyuLyfz42jzjomzNj6pfsAo7sX7x",
             "user":{
                "id":"MyuLyfz42jzjomzNj6pfsAo7sX7x",
-               "displayName":"Skeleton Jack (10)",
+               "displayName":"Skeleton Jack",
                "email":"jskeleton@usc.edu.ph",
                "phoneNumber":"",
                "photoUrl":"https://static.wikia.nocookie.net/disney/images/0/06/Profile_-_Jack_Skellington.jpeg/revision/latest?cb=20190316145716"
@@ -158,7 +158,7 @@
             "id":"X83R3O1cWgdP9znc28WkMUWZ7ORg",
             "user":{
                "id":"X83R3O1cWgdP9znc28WkMUWZ7ORg",
-               "displayName":"Rick Sanchez (11)",
+               "displayName":"Rick Sanchez",
                "email":"ricksanchez@usc.edu.ph",
                "phoneNumber":"",
                "photoUrl":"https://static.wikia.nocookie.net/rickandmorty/images/3/3c/Untitled117.png/revision/latest/top-crop/width/360/height/360?cb=20190519213632"
@@ -187,7 +187,7 @@
             },
             "timeOfTrip": "2021-08-27T20:02:56.483457",
             "user": {
-                "displayName": "Charles Jr. Ausejo (0)",
+                "displayName": "Charles Jr. Ausejo",
                 "email": "16100938@usc.edu.ph",
                 "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
                 "phoneNumber": "",
@@ -211,7 +211,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Christian Benedict Gonzales (1)",
+                "displayName": "Christian Benedict Gonzales",
                 "email": "18105024@usc.edu.ph",
                 "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
                 "phoneNumber": "",
@@ -235,7 +235,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Nicolas Paolo Pepito (2)",
+                "displayName": "Nicolas Paolo Pepito",
                 "email": "16100825@usc.edu.ph",
                 "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
                 "phoneNumber": "",
@@ -259,7 +259,7 @@
             },
             "timeOfTrip": "2021-08-27T20:02:56.483457",
             "user": {
-                "displayName": "Aurora Lane (3)",
+                "displayName": "Aurora Lane",
                 "email": "auroralane@rider.com",
                 "id": "hWU1ZYSi82KhFfF8x7z32e0UZz64",
                 "phoneNumber": "",
@@ -283,7 +283,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Jim Preston (4)",
+                "displayName": "Jim Preston",
                 "email": "jimpreston@rider.com",
                 "id": "ji89ti6ie104O4j0YZcPSKFk5GS9",
                 "phoneNumber": "",
@@ -307,7 +307,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Arthur (5)",
+                "displayName": "Arthur",
                 "email": "arthur@robot.com",
                 "id": "rJFY8bzVgabltKJ5glwvwDeKX765",
                 "phoneNumber": "",
@@ -331,7 +331,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Robot (6)",
+                "displayName": "Robot",
                 "email": "robot@robot.com",
                 "id": "QVeUtU6YxWjGkkOulRU3gG5xyAmT",
                 "phoneNumber": "",
@@ -355,7 +355,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Rex Splosive (7)",
+                "displayName": "Rex Splosive",
                 "email": "rex_splosive@email.com",
                 "id": "yEWNzz8ExMC7NJxVjV6555jm8pkg",
                 "phoneNumber": "",
@@ -379,7 +379,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Atom Eve (8)",
+                "displayName": "Atom Eve",
                 "email": "atom_eve_23@email.com",
                 "id": "33fGEjWCLdu6CMvXOF8WJOAb0sUh",
                 "phoneNumber": "",
@@ -403,7 +403,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "The Immortal (9)",
+                "displayName": "The Immortal",
                 "email": "the_immortal_35@email.com",
                 "id": "mLqb9RxMhDpsnk9ygmXKa7XffiNx",
                 "phoneNumber": "",
@@ -427,7 +427,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Dupli-Kate (10)",
+                "displayName": "Dupli-Kate",
                 "email": "dupli_cate_30@email.com",
                 "id": "XSA0DNCgIMECX4juiI16h1Qy8Bdm",
                 "phoneNumber": "",
@@ -451,7 +451,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Cecil (11)",
+                "displayName": "Cecil",
                 "email": "cecil_38@email.com",
                 "id": "bmnIgkNSPz0P4eBgx2vpL8bAO9zG",
                 "phoneNumber": "",
@@ -475,7 +475,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Black Samson (12)",
+                "displayName": "Black Samson",
                 "email": "black_samson_10@email.com",
                 "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZG",
                 "phoneNumber": "",
@@ -499,7 +499,7 @@
             },
             "timeOfTrip": "2021-08-29T06:45:22.819077",
             "user": {
-                "displayName": "Titan (13)",
+                "displayName": "Titan",
                 "email": "titan_gel_4200@email.com",
                 "id": "LPRde2OpOF101T42uHSWAc6tvDci",
                 "phoneNumber": "",
@@ -510,7 +510,7 @@
             "id":"b1z36iHozN6agFZEdEzoTHuyjCCX",
             "user":{
                 "id":"b1z36iHozN6agFZEdEzoTHuyjCCX",
-                "displayName":"Mother's Milk (14)",
+                "displayName":"Mother's Milk",
                 "email":"mothersmilk@usc.edu.ph",
                 "phoneNumber":"",
                 "photoUrl":"https://static.wikia.nocookie.net/amazons-the-boys/images/c/ce/Mothers_Milk_S2.jpg/revision/latest?cb=20200906145235"
@@ -534,7 +534,7 @@
             "id":"6Q689yg2kYzYMOVt5ye86R9YgKx7",
             "user":{
                 "id":"6Q689yg2kYzYMOVt5ye86R9YgKx7",
-                "displayName":"Frenchie (15)",
+                "displayName":"Frenchie",
                 "email":"frenchie@usc.edu.ph",
                 "phoneNumber":"",
                 "photoUrl":"https://static.wikia.nocookie.net/amazons-the-boys/images/1/14/Frenchie_S2.jpg/revision/latest?cb=20200911125421"
@@ -558,7 +558,7 @@
             "id":"AOviPSkbLzRJjHLZ6RtEejiYJCbj",
             "user":{
                 "id":"AOviPSkbLzRJjHLZ6RtEejiYJCbj",
-                "displayName":"Kimiko Miyashiro (16)",
+                "displayName":"Kimiko Miyashiro",
                 "email":"kimikomiyashiro@usc.edu.ph",
                 "phoneNumber":"",
                 "photoUrl":"https://www.denofgeek.com/wp-content/uploads/2019/07/the-boys-kimiko-the-female-karen-fukuhara-amazon-prime-video.jpg?resize=768%2C432"
@@ -582,7 +582,7 @@
             "id":"TewUSY31IUM2b0wZZkk28BDb00fH",
             "user":{
                 "id":"TewUSY31IUM2b0wZZkk28BDb00fH",
-                "displayName":"Annie January (17)",
+                "displayName":"Annie January",
                 "email":"anniejanuary@usc.edu.ph",
                 "phoneNumber":"",
                 "photoUrl":"https://static.wikia.nocookie.net/amazons-the-boys/images/f/f0/Startlight_S2.jpg/revision/latest?cb=20200808192418"
@@ -606,7 +606,7 @@
             "id":"X0I9jA4Tzpms5ksF99WV3YLta62f",
             "user":{
                "id":"X0I9jA4Tzpms5ksF99WV3YLta62f",
-               "displayName":"Oogie Boogie (18)",
+               "displayName":"Oogie Boogie",
                "email":"oogboog@usc.edu.ph",
                "phoneNumber":"",
                "photoUrl":"https://2.bp.blogspot.com/-FXSlUbMPu3k/WeZy7wjlnLI/AAAAAAAAeaQ/gDzNqkl8pBc6_9bAg-SQ3cCgJ98S6MdQQCEwYBhgL/s1600/IMG_3284.JPG"
@@ -630,7 +630,7 @@
             "id": "vl9DiX20vX83bs1UwwOVX0795DQ4",
             "user":{
                "id":"vl9DiX20vX83bs1UwwOVX0795DQ4",
-               "displayName":"Morty Smith (19)",
+               "displayName":"Morty Smith",
                "email":"mortydrug@usc.edu.ph",
                "phoneNumber":"",
                "photoUrl":"https://w7.pngwing.com/pngs/856/256/png-transparent-rick-sanchez-morty-smith-pocket-mortys-rick-child-face-hand.png"
@@ -654,7 +654,7 @@
              "id":"1bOaOPhWO8ZG422efIvTNys7xgU7",
             "user":{
                "id":"1bOaOPhWO8ZG422efIvTNys7xgU7",
-               "displayName":"Walter White (20)",
+               "displayName":"Walter White",
                "email":"walterwhite@usc.edu.ph",
                "phoneNumber":"",
                "photoUrl":"https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg"
@@ -678,7 +678,7 @@
             "id":"9Yoz7H8J30YPxGaIerZYEN2w0rwp",
             "user":{
                "id":"9Yoz7H8J30YPxGaIerZYEN2w0rwp",
-               "displayName":"Jesse Pinkman (21)",
+               "displayName":"Jesse Pinkman",
                "email":"jessepinkman@usc.edu.ph",
                "phoneNumber":"",
                "photoUrl":"https://nofilmschool.com/sites/default/files/styles/article_wide/public/imrs.jpg?itok=-J9hUxs8"

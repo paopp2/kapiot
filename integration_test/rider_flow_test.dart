@@ -20,7 +20,7 @@ Future<void> main() async {
         isAnonymous: false,
         uid: 'b1z36iHozN6agFZEdEzoTHuyjCCX',
         email: 'mothersmilk@usc.edu.ph',
-        displayName: "Mother's Milk (14)",
+        displayName: "Mother's Milk",
       );
       await tester.pumpWidget(ProviderScope(
         overrides: [
@@ -108,11 +108,11 @@ Future<void> main() async {
       // Tapping on a DriverCard should animate their route on the map
       final domDriverCard = find.widgetWithText(
         DriverCard,
-        "Dominic Toretto (3)",
+        "Dominic Toretto",
       );
       final billyDriverCard = find.widgetWithText(
         DriverCard,
-        "Billy Butcher (8)",
+        "Billy Butcher",
       );
       await tester.tap(domDriverCard);
       await tester.pumpAndSettle();
@@ -143,7 +143,7 @@ Future<void> main() async {
       // @RequestAcceptedView
       // At RequestAcceptedView the correct accepting driver's name should be
       // shown on the screen
-      expect(find.text("Billy Butcher (8)"), findsOneWidget);
+      expect(find.text("Billy Butcher"), findsOneWidget);
 
       // Adding accepted riders should show up as coriders on the screen. With
       // this, adding n number of riders should show up (n+1) CircleAvatars, the
