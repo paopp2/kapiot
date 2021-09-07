@@ -133,7 +133,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       CloudFunctionsApi.acceptRider(
         riderIdx: 14,
-        driverIdx: 8,
+        driverIdx: 7,
       ); // Rider[14] is Mother's Milk (currentUser), Driver[8] is Billy Butcher
       while (findsNothing.matches(find.byType(RequestAcceptedView), {})) {
         await tester.pumpAndSettle();
@@ -148,16 +148,16 @@ Future<void> main() async {
       // Adding accepted riders should show up as coriders on the screen. With
       // this, adding n number of riders should show up (n+1) CircleAvatars, the
       // additional one is the acceptingDriver's
-      CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 8);
-      CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 8);
-      CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 8);
+      CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 7);
+      CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 7);
+      CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 7);
       while (!(findsNWidgets(4).matches(find.byType(CircleAvatar), {}))) {
         await tester.pumpAndSettle();
       }
       expect(find.byType(CircleAvatar), findsNWidgets(4));
 
       // Dropping off the currentUser brings back the app to the HomeView
-      CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 8);
+      CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 7);
       while (findsNothing.matches(find.byType(HomeView), {})) {
         await tester.pumpAndSettle();
       }
