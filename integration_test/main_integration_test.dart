@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'rider_flow_test.dart' as rider_flow_test;
+import 'driver_flow_test.dart' as driver_flow_test;
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -17,4 +18,5 @@ Future<void> main() async {
   );
 
   rider_flow_test.main();
+  driver_flow_test.main();
 }
