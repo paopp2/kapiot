@@ -1,30 +1,18 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:kapiot/data/core_providers/firebase_providers.dart';
 import 'package:kapiot/main.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
+import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/driver_card.dart';
 import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
+import 'cloud_functions_api.dart';
 
 Future<void> main() async {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';
-  FirebaseFirestore.instance.settings = Settings(
-    host: '$localHostString:8080',
-    sslEnabled: false,
-    persistenceEnabled: false,
-  );
-
   testWidgets(
     "Rider Flow Test 1",
     (WidgetTester tester) async {
@@ -42,6 +30,9 @@ Future<void> main() async {
         ],
         child: const MyApp(),
       ));
+
+      // Populate Firestore data
+      CloudFunctionsApi.populateAll();
 
       // @HomeView
       // App initializes map showing a CircularProgressIndicator initially
@@ -110,104 +101,67 @@ Future<void> main() async {
       expect(find.byType(RequestDriversView), findsOneWidget);
 
       // @RequestDriversView
-      // At RequestDriversView, three DriverCards should be available
+      // At RequestDriversView, two DriverCards should be available
+      await tester.pumpAndSettle();
       expect(find.byType(DriverCard), findsNWidgets(2));
 
       // Tapping on a DriverCard should animate their route on the map
       final domDriverCard = find.widgetWithText(
         DriverCard,
-        "Dominic Toretto (4)",
+        "Dominic Toretto (3)",
       );
       final billyDriverCard = find.widgetWithText(
         DriverCard,
-        "Billy Butcher (9)",
+        "Billy Butcher (8)",
       );
       await tester.tap(domDriverCard);
       await tester.pumpAndSettle();
       await tester.tap(billyDriverCard);
       await tester.pumpAndSettle();
 
-      print("Stop here");
+      // Pressing on a DriverCard's "Hail Ride" button requests that certain
+      // driver. A rider can request as many drivers as they want. When a
+      // certain driver accepts, the app should navigate to the
+      // RequestAcceptedView
+      final domHailRide = find.descendant(
+          of: domDriverCard, matching: find.byType(ElevatedButton));
+      final billyHailRide = find.descendant(
+          of: billyDriverCard, matching: find.byType(ElevatedButton));
+      await tester.tap(domHailRide);
+      await tester.pumpAndSettle();
+      await tester.tap(billyHailRide);
+      await tester.pumpAndSettle();
+      CloudFunctionsApi.acceptRider(
+        riderIdx: 14,
+        driverIdx: 8,
+      ); // Rider[14] is Mother's Milk (currentUser), Driver[8] is Billy Butcher
+      while (findsNothing.matches(find.byType(RequestAcceptedView), {})) {
+        await tester.pumpAndSettle();
+      }
+      expect(find.byType(RequestAcceptedView), findsOneWidget);
+
+      // @RequestAcceptedView
+      // At RequestAcceptedView the correct accepting driver's name should be
+      // shown on the screen
+      expect(find.text("Billy Butcher (8)"), findsOneWidget);
+
+      // Adding accepted riders should show up as coriders on the screen. With
+      // this, adding n number of riders should show up (n+1) CircleAvatars, the
+      // additional one is the acceptingDriver's
+      CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 8);
+      CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 8);
+      CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 8);
+      while (!(findsNWidgets(4).matches(find.byType(CircleAvatar), {}))) {
+        await tester.pumpAndSettle();
+      }
+      expect(find.byType(CircleAvatar), findsNWidgets(4));
+
+      // Dropping off the currentUser brings back the app to the HomeView
+      CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 8);
+      while (findsNothing.matches(find.byType(HomeView), {})) {
+        await tester.pumpAndSettle();
+      }
+      expect(find.byType(HomeView), findsOneWidget);
     },
   );
 }
-
-// Future<void> main() async {
-//   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';
-//   FirebaseFirestore.instance.settings = Settings(
-//     host: '$localHostString:8080',
-//     sslEnabled: false,
-//     persistenceEnabled: false,
-//   );
-
-//   testWidgets("Rider flow test", (WidgetTester tester) async {
-//     await tester.pumpWidget(const ProviderScope(child: MyApp()));
-//     expect(find.byType(CircularProgressIndicator), findsOneWidget);
-
-//     await tester.pumpAndSettle();
-
-//     final endLocField = find.widgetWithText(TextField, "End location");
-//     await tester.tap(endLocField);
-//     tester.testTextInput.enterText("our lady of fatima basak ");
-
-//     await tester.pumpAndSettle();
-
-//     final firstSuggestion = find.widgetWithText(ListTile,
-//         "Our Lady of Fatima Basak Mandaue, Mandaue City, Cebu, Philippines");
-
-//     while (findsNothing.matches(firstSuggestion, {})) {
-//       await tester.pump();
-//     }
-
-//     await tester.tap(firstSuggestion);
-
-//     while (findsOneWidget.matches(firstSuggestion, {})) {
-//       await tester.pump();
-//     }
-
-//     final nextButton = find.widgetWithText(ElevatedButton, "Next");
-//     await tester.tap(nextButton);
-
-//     await tester.pumpAndSettle();
-
-//     await CloudFunctionsApi.populateAll();
-
-//     while (findsNothing.matches(find.byType(DriverCard), {})) {
-//       await tester.pump();
-//     }
-
-//     expect(find.byType(DriverCard), findsNWidgets(2));
-//     final hailRideFromDom = find.descendant(
-//       of: find.widgetWithText(DriverCard, "Dominic Toretto (4)"),
-//       matching: find.byType(ElevatedButton),
-//     );
-
-//     await tester.tap(hailRideFromDom);
-
-//     // await CloudFunctionsApi.acceptRider(0);
-//     // await CloudFunctionsApi.acceptRider(1);
-//     await CloudFunctionsApi.acceptRider(2);
-
-//     while (findsNothing.matches(find.text("Ride Information"), {})) {
-//       await tester.pump();
-//     }
-
-//     await tester.pumpAndSettle();
-
-//     await CloudFunctionsApi.acceptRider(4);
-//     await CloudFunctionsApi.acceptRider(5);
-
-//     await tester.pumpAndSettle();
-
-//     final coRiderAvatar = find.descendant(
-//       of: find.byType(Container),
-//       matching: find.byType(CircleAvatar),
-//     );
-
-//     while (findsNothing.matches(coRiderAvatar, {})) {
-//       await tester.pump();
-//     }
-//   });
-// }
