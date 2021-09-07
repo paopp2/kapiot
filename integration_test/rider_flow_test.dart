@@ -12,6 +12,8 @@ import 'package:kapiot/data/core_providers/firebase_providers.dart';
 import 'package:kapiot/main.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
+import 'package:kapiot/ui/rider/request_drivers/components/driver_card.dart';
+import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +43,7 @@ Future<void> main() async {
         child: const MyApp(),
       ));
 
+      // @HomeView
       // App initializes map showing a CircularProgressIndicator initially
       final loadingWidget = find.byType(CircularProgressIndicator);
       expect(loadingWidget, findsOneWidget);
@@ -76,8 +79,8 @@ Future<void> main() async {
       expect(startLocAddress, findsOneWidget);
 
       // Tapping then typing on endLocTextField should show place suggestions.
-      // Then, similar with startLocTextField, tapping on the correct ListTile
-      // should set the address to the TextField
+      // Pressing on a suggestion should return the app to the HomeView as the
+      // app should return once both locations are set
       final endLocTextFieldPlacePicker =
           find.widgetWithIcon(TextField, CupertinoIcons.location);
       await tester.tap(endLocTextFieldPlacePicker);
@@ -95,16 +98,36 @@ Future<void> main() async {
       while (findsNothing.matches(endLocAddress, {})) {
         await tester.pumpAndSettle();
       }
-      expect(endLocAddress, findsOneWidget);
-
-      // Tapping on the back button should return the app to the HomeView with
-      // the TextFields correctly set
-      final backButton = find.byType(IconButton);
-      await tester.tap(backButton);
-      await tester.pumpAndSettle();
       expect(find.byType(HomeView), findsOneWidget);
       expect(startLocAddress, findsOneWidget);
       expect(endLocAddress, findsOneWidget);
+
+      // Rider ChoiceChip should already be selected by default therefore
+      // pressing on next should navigate the app to the RequestDriversView
+      final nextButton = find.widgetWithText(ElevatedButton, "Next");
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect(find.byType(RequestDriversView), findsOneWidget);
+
+      // @RequestDriversView
+      // At RequestDriversView, three DriverCards should be available
+      expect(find.byType(DriverCard), findsNWidgets(2));
+
+      // Tapping on a DriverCard should animate their route on the map
+      final domDriverCard = find.widgetWithText(
+        DriverCard,
+        "Dominic Toretto (4)",
+      );
+      final billyDriverCard = find.widgetWithText(
+        DriverCard,
+        "Billy Butcher (9)",
+      );
+      await tester.tap(domDriverCard);
+      await tester.pumpAndSettle();
+      await tester.tap(billyDriverCard);
+      await tester.pumpAndSettle();
+
+      print("Stop here");
     },
   );
 }
