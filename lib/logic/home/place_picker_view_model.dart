@@ -107,13 +107,13 @@ class PlacePickerViewModel extends ViewModel {
       endLocFocusNode.unfocus();
     }
 
+    read(placeSuggestionsProvider).state = [];
+
     final isStartLocSet = (read(startLocProvider).state != null);
     final isEndLocSet = (read(endLocProvider).state != null);
     if (isStartLocSet && isEndLocSet) {
       AppRouter.instance.popView();
     }
-
-    read(placeSuggestionsProvider).state = [];
   }
 
   void updateSuggestions(String? value) async {
