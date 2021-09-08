@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class KapiotSlidingPanel extends StatelessWidget {
@@ -33,6 +34,7 @@ class KapiotSlidingPanel extends StatelessWidget {
       ),
       panelBuilder: (controller) {
         return Container(
+          width: constraints.maxWidth,
           padding: EdgeInsets.zero,
           child: Column(
             children: [

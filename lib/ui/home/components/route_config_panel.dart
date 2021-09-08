@@ -5,6 +5,7 @@ import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RouteConfigPanel extends HookConsumerWidget {
   const RouteConfigPanel({
@@ -25,83 +26,139 @@ class RouteConfigPanel extends HookConsumerWidget {
     final endAddress = ref.watch(endLocProvider).state?.address ?? '';
 
     return Expanded(
-      child: SizedBox(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: PageView(
+        children: [
+          RuntimeType(
+              isRider: isRider,
+              model: model,
+              constraints: constraints,
+              startAddress: startAddress,
+              endAddress: endAddress,
+              dateTime: dateTime,
+              riderCount: riderCount),
+          RuntimeType(
+              isRider: !isRider,
+              model: model,
+              constraints: constraints,
+              startAddress: startAddress,
+              endAddress: endAddress,
+              dateTime: dateTime,
+              riderCount: riderCount)
+        ],
+      ),
+    );
+  }
+}
+
+class RuntimeType extends StatelessWidget {
+  const RuntimeType({
+    Key? key,
+    required this.isRider,
+    required this.model,
+    required this.constraints,
+    required this.startAddress,
+    required this.endAddress,
+    required this.dateTime,
+    required this.riderCount,
+  }) : super(key: key);
+
+  final bool isRider;
+  final HomeViewModel model;
+  final BoxConstraints constraints;
+  final String startAddress;
+  final String endAddress;
+  final DateTime dateTime;
+  final int riderCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(15),
+      color: isRider ? Colors.grey[300] : Colors.grey[200],
+      child: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ChoiceChip(
+              //       label: const Text("Driver"),
+              //       selected: !isRider,
+              //       onSelected: model.toggleIsRider,
+              //     ),
+              //     ChoiceChip(
+              //       label: const Text("Rider"),
+              //       selected: isRider,
+              //       onSelected: model.toggleIsRider,
+              //     ),
+              //   ],
+              // ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: constraints.maxHeight * 0.01),
+                padding: EdgeInsets.only(left: constraints.maxWidth * 0.02),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(isRider ? 'Rider' : 'Driver',
+                      style: GoogleFonts.rubik(fontSize: 34, letterSpacing: 2)),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0XFFE7DFE0)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth * 0.05),
+                margin: EdgeInsets.symmetric(
+                    vertical: constraints.maxHeight * 0.01),
+                child: Column(
                   children: [
-                    ChoiceChip(
-                      label: const Text("Driver"),
-                      selected: !isRider,
-                      onSelected: model.toggleIsRider,
+                    TextField(
+                      controller: model.tecStartLoc..text = startAddress,
+                      readOnly: true,
+                      textAlign: TextAlign.start,
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(
+                            CupertinoIcons.smallcircle_circle,
+                          ),
+                          hintText: "Start location",
+                          border: InputBorder.none),
+                      onTap: () => model.openPlacePickerView(
+                        isForStartLoc: true,
+                      ),
                     ),
-                    ChoiceChip(
-                      label: const Text("Rider"),
-                      selected: isRider,
-                      onSelected: model.toggleIsRider,
+                    const Divider(
+                      color: Colors.white,
+                      thickness: 1,
+                      height: 0.05,
+                    ),
+                    TextField(
+                      controller: model.tecEndLoc..text = endAddress,
+                      readOnly: true,
+                      textAlign: TextAlign.start,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(CupertinoIcons.location),
+                        hintText: "End location",
+                        border: InputBorder.none,
+                      ),
+                      onTap: () => model.openPlacePickerView(
+                        isForStartLoc: false,
+                      ),
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0XFFE7DFE0)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: constraints.maxWidth * 0.05),
-                  margin: EdgeInsets.symmetric(
-                      vertical: constraints.maxHeight * 0.01),
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: model.tecStartLoc..text = startAddress,
-                        readOnly: true,
-                        textAlign: TextAlign.start,
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              CupertinoIcons.smallcircle_circle,
-                            ),
-                            hintText: "Start location",
-                            border: InputBorder.none),
-                        onTap: () => model.openPlacePickerView(
-                          isForStartLoc: true,
-                        ),
-                      ),
-                      const Divider(
-                        color: Colors.white,
-                        thickness: 1,
-                        height: 0.05,
-                      ),
-                      TextField(
-                        controller: model.tecEndLoc..text = endAddress,
-                        readOnly: true,
-                        textAlign: TextAlign.start,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(CupertinoIcons.location),
-                          hintText: "End location",
-                          border: InputBorder.none,
-                        ),
-                        onTap: () => model.openPlacePickerView(
-                          isForStartLoc: false,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                TextButton(
-                  child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
-                  onPressed: () => model.getDateTime(context),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: constraints.maxWidth * 0.05),
-                  child: Column(
-                    children: [
-                      Row(
+              ),
+              TextButton(
+                child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
+                onPressed: () => model.getDateTime(context),
+              ),
+              !isRider
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.05),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Icon(
@@ -134,27 +191,39 @@ class RouteConfigPanel extends HookConsumerWidget {
                           )
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: constraints.maxHeight * 0.03,
-                        ),
-                        child: const Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                          height: 0.05,
-                        ),
-                      ),
-                    ],
+                    )
+                  : const SizedBox(),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    vertical: constraints.maxHeight * 0.03,
+                  ),
+                  child: const Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                    height: 0.05,
                   ),
                 ),
-                ElevatedButton(
-                  child: const Text("Next"),
-                  onPressed: model.pushRouteConfig,
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: constraints.maxWidth * 0.05,
+                      bottom: constraints.maxHeight * 0.01),
+                  child: ElevatedButton(
+                    child: Text(isRider ? "Book Now" : "Start Trip"),
+                    onPressed: model.pushRouteConfig,
+                  ),
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
