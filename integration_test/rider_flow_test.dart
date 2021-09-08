@@ -54,7 +54,7 @@ Future<void> main() async {
           find.widgetWithIcon(TextField, CupertinoIcons.smallcircle_circle);
       await tester.tap(startLocTextFieldPlacePicker);
       await tester.pumpAndSettle();
-      tester.testTextInput.enterText("7/11 lamac ");
+      tester.testTextInput.enterText("7/11 lamac consolacion");
       await tester.pumpAndSettle();
       final correctStartSuggestion =
           find.widgetWithText(ListTile, "7/11 Lamac");
