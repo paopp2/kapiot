@@ -8,7 +8,7 @@ import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RouteConfigPanel extends HookConsumerWidget {
-  const RouteConfigPanel({
+  RouteConfigPanel({
     Key? key,
     required this.constraints,
     required this.model,
@@ -16,6 +16,7 @@ class RouteConfigPanel extends HookConsumerWidget {
 
   final BoxConstraints constraints;
   final HomeViewModel model;
+  final PageController pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,8 +28,11 @@ class RouteConfigPanel extends HookConsumerWidget {
 
     return Expanded(
       child: PageView(
+        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           RuntimeType(
+              pageController: pageController,
               isRider: isRider,
               model: model,
               constraints: constraints,
@@ -37,6 +41,7 @@ class RouteConfigPanel extends HookConsumerWidget {
               dateTime: dateTime,
               riderCount: riderCount),
           RuntimeType(
+              pageController: pageController,
               isRider: !isRider,
               model: model,
               constraints: constraints,
@@ -53,6 +58,7 @@ class RouteConfigPanel extends HookConsumerWidget {
 class RuntimeType extends StatelessWidget {
   const RuntimeType({
     Key? key,
+    required this.pageController,
     required this.isRider,
     required this.model,
     required this.constraints,
@@ -62,6 +68,7 @@ class RuntimeType extends StatelessWidget {
     required this.riderCount,
   }) : super(key: key);
 
+  final PageController pageController;
   final bool isRider;
   final HomeViewModel model;
   final BoxConstraints constraints;
@@ -194,6 +201,21 @@ class RuntimeType extends StatelessWidget {
                     )
                   : const SizedBox(),
             ],
+          ),
+          Align(
+            alignment: isRider ? Alignment.centerRight : Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(top: constraints.maxHeight * 0.1),
+              child: IconButton(
+                icon: Icon(
+                    isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios),
+                onPressed: () {
+                  pageController.animateToPage(isRider ? 1 : 0,
+                      duration: const Duration(milliseconds: 1000),
+                      curve: Curves.linearToEaseOut);
+                },
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
