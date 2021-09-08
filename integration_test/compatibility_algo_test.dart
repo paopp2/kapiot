@@ -51,6 +51,61 @@ Future<void> main() async {
             "University of Cebu - Banilad Campus, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines",
         expectedDrivers: ["Rick Sanchez"],
       );
+
+      await verifyCompatibility(
+        tester: tester,
+        startAddress:
+            "88th Avenue, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines",
+        endAddress:
+            "Phoenix Banilad / Kasambagan, Paradise Village Road, Cebu City, Cebu, Philippines",
+        expectedDrivers: ["Skeleton Jack", "Rick Sanchez"],
+      );
+
+      await verifyCompatibility(
+        tester: tester,
+        startAddress: "7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines",
+        endAddress: "Basak Elementary School, Mandaue City, Cebu, Philippines",
+        expectedDrivers: ["Dominic Toretto", "Billy Butcher"],
+      );
+
+      await verifyCompatibility(
+        tester: tester,
+        startAddress:
+            "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines",
+        endAddress:
+            "Toyota Mandaue North Cebu, Inc., Central Nautical Highway, Mandaue City, Cebu, Philippines",
+        expectedDrivers: ["Dominic Toretto", "Hughie Campbell"],
+      );
+
+      await verifyCompatibility(
+        tester: tester,
+        startAddress:
+            "Pike The Pet Supply Store Consolacion Branch, Consolacion, Cebu, Philippines",
+        endAddress:
+            "Yasco Motor Parts Corporation, North Road, Mandaue City, Cebu, Philippines",
+        expectedDrivers: [
+          "Dominic Toretto",
+          "Billy Butcher",
+          "Hughie Campbell",
+        ],
+      );
+
+      await verifyCompatibility(
+        tester: tester,
+        startAddress:
+            "Savemore Market Maribago, Maribago, Lapu-Lapu City, Cebu, Philippines",
+        endAddress: "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
+        expectedDrivers: ["The Invincible"],
+      );
+
+      await verifyCompatibility(
+        tester: tester,
+        startAddress:
+            "Soltana Nature Residences, Lapu-Lapu City, Cebu, Philippines",
+        endAddress:
+            "Gaisano Grandmall Basak, Grandmall, Lapu-Lapu City, Cebu, Philippines",
+        expectedDrivers: ["Omni Man"],
+      );
     },
   );
 }
@@ -70,7 +125,7 @@ Future<void> verifyCompatibility({
   String startAddrInput, startAddrSuggestion;
   if (startAddrSplit.length > 2) {
     final partialAddr = "${startAddrSplit[0]}, ${startAddrSplit[1]}";
-    startAddrInput = partialAddr.toLowerCase();
+    startAddrInput = partialAddr.toLowerCase() + " ";
     startAddrSuggestion = startAddrSplit.first;
   } else {
     startAddrInput = startAddrSplit.first.toLowerCase() + " ";
@@ -81,7 +136,7 @@ Future<void> verifyCompatibility({
   String endAddrInput, endAddrSuggestion;
   if (endAddrSplit.length > 2) {
     final partialAddr = "${endAddrSplit[0]}, ${endAddrSplit[1]}";
-    endAddrInput = partialAddr.toLowerCase();
+    endAddrInput = partialAddr.toLowerCase() + " ";
     endAddrSuggestion = endAddrSplit.first;
   } else {
     endAddrInput = endAddrSplit.first.toLowerCase() + " ";
@@ -108,7 +163,7 @@ Future<void> verifyCompatibility({
   while (findsNothing.matches(correctStartSuggestion, {})) {
     await tester.pumpAndSettle();
   }
-  await tester.tap(correctStartSuggestion);
+  await tester.tap(correctStartSuggestion.first);
   final startLocAddress = find.ancestor(
     of: find.textContaining(startAddress),
     matching: find.byType(TextField),
@@ -127,17 +182,16 @@ Future<void> verifyCompatibility({
   await tester.pumpAndSettle();
   tester.testTextInput.enterText(endAddrInput);
   await tester.pumpAndSettle();
-  final correctEndSuggestion = find.text(endAddrSuggestion);
+  final correctEndSuggestion = find.widgetWithText(ListTile, endAddrSuggestion);
   while (findsNothing.matches(correctEndSuggestion, {})) {
     await tester.pumpAndSettle();
   }
   await tester.tap(correctEndSuggestion.first);
-  // final endLocAddress = find.text(endAddrComplete);
   final endLocAddress = find.ancestor(
     of: find.textContaining(endAddress),
     matching: find.byType(TextField),
   );
-  while (findsNothing.matches(endLocAddress, {})) {
+  while (findsNothing.matches(find.byType(HomeView), {})) {
     await tester.pumpAndSettle();
   }
   expect(find.byType(HomeView), findsOneWidget);
@@ -155,11 +209,15 @@ Future<void> verifyCompatibility({
   // At RequestDriversView, verify that there are the correct number of shown
   // (compatible) drivers
   await tester.pumpAndSettle();
-  expect(find.byType(DriverCard), findsNWidgets(expectedDrivers.length));
+  expect(
+    find.byType(DriverCard, skipOffstage: false),
+    findsNWidgets(expectedDrivers.length),
+  );
 
   // Tapping on each DriverCard should animate their route on the map
   for (var driver in expectedDrivers) {
     var driverCard = find.widgetWithText(DriverCard, driver);
+    await tester.ensureVisible(driverCard);
     await tester.tap(driverCard);
     await tester.pumpAndSettle();
   }
