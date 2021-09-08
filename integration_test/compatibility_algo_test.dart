@@ -65,7 +65,11 @@ Future<void> main() async {
         tester: tester,
         startAddress: "7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines",
         endAddress: "Basak Elementary School, Mandaue City, Cebu, Philippines",
-        expectedDrivers: ["Dominic Toretto", "Billy Butcher"],
+        expectedDrivers: [
+          "Dominic Toretto",
+          "Nicolas Paolo Pepito",
+          "Billy Butcher",
+        ],
       );
 
       await verifyCompatibility(
@@ -74,7 +78,11 @@ Future<void> main() async {
             "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines",
         endAddress:
             "Toyota Mandaue North Cebu, Inc., Central Nautical Highway, Mandaue City, Cebu, Philippines",
-        expectedDrivers: ["Dominic Toretto", "Hughie Campbell"],
+        expectedDrivers: [
+          "Dominic Toretto",
+          "Nicolas Paolo Pepito",
+          "Hughie Campbell"
+        ],
       );
 
       await verifyCompatibility(
@@ -85,6 +93,7 @@ Future<void> main() async {
             "Yasco Motor Parts Corporation, North Road, Mandaue City, Cebu, Philippines",
         expectedDrivers: [
           "Dominic Toretto",
+          "Nicolas Paolo Pepito",
           "Billy Butcher",
           "Hughie Campbell",
         ],
@@ -206,12 +215,11 @@ Future<void> verifyCompatibility({
   expect(find.byType(RequestDriversView), findsOneWidget);
 
   // @RequestDriversView
-  // At RequestDriversView, verify that there are the correct number of shown
-  // (compatible) drivers
+  // At RequestDriversView, verify that DriverCards are shown in the widget tree
   await tester.pumpAndSettle();
   expect(
     find.byType(DriverCard, skipOffstage: false),
-    findsNWidgets(expectedDrivers.length),
+    findsWidgets,
   );
 
   // Tapping on each DriverCard should animate their route on the map

@@ -19,6 +19,6 @@ Future<void> main() async {
   );
 
   rider_flow_test.main();
-  // driver_flow_test.main();
+  driver_flow_test.main();
   compatibility_algo_test.main();
 }

@@ -5,22 +5,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/firebase_providers.dart';
 import 'package:kapiot/main.dart';
+import 'package:kapiot/ui/driver/components/stop_point_panel.dart';
+import 'package:kapiot/ui/driver/rider_manager_view.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
-import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
-import 'package:kapiot/ui/rider/request_drivers/components/driver_card.dart';
-import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
 import 'cloud_functions_api.dart';
 
 Future<void> main() async {
   testWidgets(
-    "Rider Flow Test 1",
+    "Driver Flow Test 1",
     (WidgetTester tester) async {
+      // Driver[6] : Omni Man
       final user = MockUser(
         isAnonymous: false,
-        uid: 'b1z36iHozN6agFZEdEzoTHuyjCCX',
-        email: 'mothersmilk@usc.edu.ph',
-        displayName: "Mother's Milk (14)",
+        uid: 's26b3o1rpuiw1lzebv88llz7zt2m',
+        email: 'omni_man_420@gmail.com',
+        displayName: "Omni Man",
       );
       await tester.pumpWidget(ProviderScope(
         overrides: [
@@ -33,6 +33,11 @@ Future<void> main() async {
 
       // Populate Firestore data
       CloudFunctionsApi.populateAll();
+      // dropRider calls here make sure that there are no residual riders
+      // accepted from previous tests
+      CloudFunctionsApi.dropRider(riderIdx: 5, driverIdx: 6);
+      CloudFunctionsApi.dropRider(riderIdx: 4, driverIdx: 6);
+      CloudFunctionsApi.dropRider(riderIdx: 2, driverIdx: 6);
 
       // @HomeView
       // App initializes map showing a CircularProgressIndicator initially
@@ -54,16 +59,16 @@ Future<void> main() async {
           find.widgetWithIcon(TextField, CupertinoIcons.smallcircle_circle);
       await tester.tap(startLocTextFieldPlacePicker);
       await tester.pumpAndSettle();
-      tester.testTextInput.enterText("7/11 lamac ");
+      tester.testTextInput.enterText("vito pepito compound ");
       await tester.pumpAndSettle();
       final correctStartSuggestion =
-          find.widgetWithText(ListTile, "7/11 Lamac");
+          find.widgetWithText(ListTile, "Vito Pepito Compound");
       while (findsNothing.matches(correctStartSuggestion, {})) {
         await tester.pumpAndSettle();
       }
       await tester.tap(correctStartSuggestion);
-      final startLocAddress =
-          find.text("7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines");
+      final startLocAddress = find.text(
+          "Vito Pepito Compound, Cebu North Road, Pitogo, Consolacion, Cebu, Philippines");
       while (findsNothing.matches(startLocAddress, {})) {
         await tester.pumpAndSettle();
       }
@@ -76,92 +81,104 @@ Future<void> main() async {
           find.widgetWithIcon(TextField, CupertinoIcons.location);
       await tester.tap(endLocTextFieldPlacePicker);
       await tester.pumpAndSettle();
-      tester.testTextInput.enterText("basak elementary school mandaue ");
+      tester.testTextInput.enterText("pacific mall mandaue ");
       await tester.pumpAndSettle();
       final correctEndSuggestion =
-          find.widgetWithText(ListTile, "Basak Elementary School");
+          find.widgetWithText(ListTile, "Pacific Mall Mandaue");
       while (findsNothing.matches(correctEndSuggestion, {})) {
         await tester.pumpAndSettle();
       }
       await tester.tap(correctEndSuggestion.first);
-      final endLocAddress =
-          find.text("Basak Elementary School, Mandaue City, Cebu, Philippines");
-      while (findsNothing.matches(endLocAddress, {})) {
+      final endLocAddress = find.text(
+          "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu, Philippines");
+      while (findsNothing.matches(find.byType(HomeView), {})) {
         await tester.pumpAndSettle();
       }
       expect(find.byType(HomeView), findsOneWidget);
       expect(startLocAddress, findsOneWidget);
       expect(endLocAddress, findsOneWidget);
+      await tester.pumpAndSettle();
 
-      // Rider ChoiceChip should already be selected by default therefore
-      // pressing on next should navigate the app to the RequestDriversView
+      // Tap Driver ChoiceChip then hit the "Next" button to navigate to the
+      // RiderManagerView
+      final driverChip = find.widgetWithText(ChoiceChip, "Driver");
       final nextButton = find.widgetWithText(ElevatedButton, "Next");
+      await tester.tap(driverChip);
+      await tester.pumpAndSettle();
       await tester.tap(nextButton);
       await tester.pumpAndSettle();
-      expect(find.byType(RequestDriversView), findsOneWidget);
+      expect(find.byType(RiderManagerView), findsOneWidget);
 
-      // @RequestDriversView
-      // At RequestDriversView, two DriverCards should be available
-      await tester.pumpAndSettle();
-      expect(find.byType(DriverCard), findsNWidgets(2));
-
-      // Tapping on a DriverCard should animate their route on the map
-      final domDriverCard = find.widgetWithText(
-        DriverCard,
-        "Dominic Toretto (3)",
-      );
-      final billyDriverCard = find.widgetWithText(
-        DriverCard,
-        "Billy Butcher (8)",
-      );
-      await tester.tap(domDriverCard);
-      await tester.pumpAndSettle();
-      await tester.tap(billyDriverCard);
-      await tester.pumpAndSettle();
-
-      // Pressing on a DriverCard's "Hail Ride" button requests that certain
-      // driver. A rider can request as many drivers as they want. When a
-      // certain driver accepts, the app should navigate to the
-      // RequestAcceptedView
-      final domHailRide = find.descendant(
-          of: domDriverCard, matching: find.byType(ElevatedButton));
-      final billyHailRide = find.descendant(
-          of: billyDriverCard, matching: find.byType(ElevatedButton));
-      await tester.tap(domHailRide);
-      await tester.pumpAndSettle();
-      await tester.tap(billyHailRide);
-      await tester.pumpAndSettle();
-      CloudFunctionsApi.acceptRider(
-        riderIdx: 14,
-        driverIdx: 8,
-      ); // Rider[14] is Mother's Milk (currentUser), Driver[8] is Billy Butcher
-      while (findsNothing.matches(find.byType(RequestAcceptedView), {})) {
-        await tester.pumpAndSettle();
+      // @RiderManagerView
+      // When riders request a driver, they show up as a list on the screen.
+      // There should be no stop points yet when the driver has not pressed on
+      // any requesting driver
+      CloudFunctionsApi.requestDriver(riderIdx: 5, driverIdx: 6);
+      CloudFunctionsApi.requestDriver(riderIdx: 4, driverIdx: 6);
+      CloudFunctionsApi.requestDriver(riderIdx: 2, driverIdx: 6);
+      while (!(findsNWidgets(3).matches(find.byType(ListTile), {}))) {
+        await tester.pump();
       }
-      expect(find.byType(RequestAcceptedView), findsOneWidget);
+      final paoRider = find.widgetWithText(ListTile, "Nicolas Paolo Pepito");
+      final jimRider = find.widgetWithText(ListTile, "Jim Preston");
+      final arthurRider = find.widgetWithText(ListTile, "Arthur");
+      expect(paoRider, findsOneWidget);
+      expect(jimRider, findsOneWidget);
+      expect(arthurRider, findsOneWidget);
+      expect(find.byType(StopPointPanel), findsNothing);
 
-      // @RequestAcceptedView
-      // At RequestAcceptedView the correct accepting driver's name should be
-      // shown on the screen
-      expect(find.text("Billy Butcher (8)"), findsOneWidget);
-
-      // Adding accepted riders should show up as coriders on the screen. With
-      // this, adding n number of riders should show up (n+1) CircleAvatars, the
-      // additional one is the acceptingDriver's
-      CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 8);
-      CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 8);
-      CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 8);
-      while (!(findsNWidgets(4).matches(find.byType(CircleAvatar), {}))) {
-        await tester.pumpAndSettle();
+      // When riders are tapped. The StopPoint panel should now be visible and
+      // requests panel should now be empty
+      await tester.tap(paoRider);
+      await tester.pump();
+      await tester.tap(jimRider);
+      await tester.pump();
+      await tester.tap(arthurRider);
+      await tester.pump();
+      while (findsNothing.matches(find.byType(StopPointPanel), {})) {
+        await tester.pump();
       }
-      expect(find.byType(CircleAvatar), findsNWidgets(4));
-
-      // Dropping off the currentUser brings back the app to the HomeView
-      CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 8);
-      while (findsNothing.matches(find.byType(HomeView), {})) {
-        await tester.pumpAndSettle();
+      expect(find.byType(StopPointPanel), findsOneWidget);
+      while (findsWidgets.matches(find.byType(ListTile), {})) {
+        await tester.pump();
       }
-      expect(find.byType(HomeView), findsOneWidget);
+      expect(find.byType(ListTile), findsNothing);
+
+      // Stored StopPoints should be in correct order.
+      final doneButton = find.widgetWithText(ElevatedButton, "Done");
+      await tester.pump(const Duration(seconds: 2));
+      final stopPointRidersList = [
+        "Nicolas Paolo Pepito",
+        "Arthur",
+        "Nicolas Paolo Pepito",
+        "Jim Preston",
+        "Arthur",
+        "Jim Preston"
+      ];
+
+      final stopPointActionList = [
+        "Pick up",
+        "Pick up",
+        "Drop off",
+        "Pick up",
+        "Drop off",
+        "Drop off",
+      ];
+
+      int i = 0;
+      while (findsWidgets.matches(doneButton, {})) {
+        final rider = find.textContaining(stopPointRidersList[i]);
+        while (findsNothing.matches(rider, {})) {}
+        expect(find.textContaining(stopPointRidersList[i]), findsOneWidget);
+        expect(find.textContaining(stopPointActionList[i]), findsOneWidget);
+        await tester.tap(doneButton);
+        await tester.pump(const Duration(milliseconds: 500));
+        i++;
+      }
+      while (findsWidgets.matches(find.byType(StopPointPanel), {})) {
+        await tester.pump();
+      }
+      expect(find.byType(StopPointPanel), findsNothing);
     },
   );
 }
