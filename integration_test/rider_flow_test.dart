@@ -105,7 +105,12 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(DriverCard), findsNWidgets(2));
 
-      // Tapping on a DriverCard should animate their route on the map
+      // Tapping on a DriverCard should animate their route on the map.
+      // Pressing on a DriverCard's "Hail Ride" button requests that certain
+      // driver. A rider can request as many drivers as they want. When a
+      // certain driver accepts, the app should navigate to the
+      // RequestAcceptedView
+
       final domDriverCard = find.widgetWithText(
         DriverCard,
         "Dominic Toretto",
@@ -114,26 +119,37 @@ Future<void> main() async {
         DriverCard,
         "Billy Butcher",
       );
-      await tester.tap(domDriverCard);
-      await tester.pumpAndSettle();
-      await tester.tap(billyDriverCard);
-      await tester.pumpAndSettle();
+      final paoDriverCard = find.widgetWithText(
+        DriverCard,
+        "Nicolas Paolo Pepito",
+      );
 
-      // Pressing on a DriverCard's "Hail Ride" button requests that certain
-      // driver. A rider can request as many drivers as they want. When a
-      // certain driver accepts, the app should navigate to the
-      // RequestAcceptedView
       final domHailRide = find.descendant(
           of: domDriverCard, matching: find.byType(ElevatedButton));
+      final paoHailRide = find.descendant(
+          of: paoDriverCard, matching: find.byType(ElevatedButton));
       final billyHailRide = find.descendant(
           of: billyDriverCard, matching: find.byType(ElevatedButton));
+
+      await tester.ensureVisible(domDriverCard);
+      await tester.tap(domDriverCard);
+      await tester.pumpAndSettle();
       await tester.tap(domHailRide);
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(paoDriverCard);
+      await tester.tap(paoDriverCard);
+      await tester.pumpAndSettle();
+      await tester.tap(paoHailRide);
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(billyDriverCard);
+      await tester.tap(billyDriverCard);
       await tester.pumpAndSettle();
       await tester.tap(billyHailRide);
       await tester.pumpAndSettle();
+
       CloudFunctionsApi.acceptRider(
         riderIdx: 14,
-        driverIdx: 7,
+        driverIdx: 8,
       ); // Rider[14] is Mother's Milk (currentUser), Driver[8] is Billy Butcher
       while (findsNothing.matches(find.byType(RequestAcceptedView), {})) {
         await tester.pumpAndSettle();
@@ -148,16 +164,16 @@ Future<void> main() async {
       // Adding accepted riders should show up as coriders on the screen. With
       // this, adding n number of riders should show up (n+1) CircleAvatars, the
       // additional one is the acceptingDriver's
-      CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 7);
-      CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 7);
-      CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 7);
+      CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 8);
+      CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 8);
+      CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 8);
       while (!(findsNWidgets(4).matches(find.byType(CircleAvatar), {}))) {
         await tester.pumpAndSettle();
       }
       expect(find.byType(CircleAvatar), findsNWidgets(4));
 
       // Dropping off the currentUser brings back the app to the HomeView
-      CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 7);
+      CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 8);
       while (findsNothing.matches(find.byType(HomeView), {})) {
         await tester.pumpAndSettle();
       }
