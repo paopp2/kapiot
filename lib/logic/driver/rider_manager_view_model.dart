@@ -47,11 +47,6 @@ class RiderManagerViewModel extends ViewModel {
     });
   }
 
-  @override
-  void dispose() {
-    read(currentRouteConfigProvider).dispose();
-  }
-
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
       driverRepo.getRequestingRidersStream(currentUser!);
 
