@@ -24,12 +24,12 @@ class AppRouter {
   };
 
   Future<dynamic>? navigateTo(String route) =>
-      navigationKey.currentState?.pushNamed(route);
+      navigationKey.currentState!.pushNamed(route);
 
-  void popView() => navigationKey.currentState?.pop();
+  void popView() => navigationKey.currentState!.pop();
 
   void popAllThenNavigateTo(String route) =>
-      navigationKey.currentState?.pushNamedAndRemoveUntil(route, (_) => false);
+      navigationKey.currentState!.pushNamedAndRemoveUntil(route, (_) => false);
 }
 
 class Routes {
