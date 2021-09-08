@@ -24,4 +24,13 @@ class CloudFunctionsApi {
         "http://10.0.2.2:5001/kapiot-46cbc/us-central1/dropRider?r=$riderIdx&d=$driverIdx");
     await http.get(url);
   }
+
+  static Future<void> requestDriver({
+    required int riderIdx,
+    required int driverIdx,
+  }) async {
+    final url = Uri.parse(
+        "http://10.0.2.2:5001/kapiot-46cbc/us-central1/requestDriver?r=$riderIdx&d=$driverIdx");
+    await http.get(url);
+  }
 }
