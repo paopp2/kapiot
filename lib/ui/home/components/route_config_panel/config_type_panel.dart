@@ -159,6 +159,8 @@ class ConfigTypePanel extends HookConsumerWidget {
                   child: ElevatedButton(
                     child: Text(isRider ? "Book Now" : "Start Trip"),
                     onPressed: () => model.pushRouteConfig(isRider),
+                    // TODO: Remove method below on production
+                    onLongPress: () => model.pushReadyMadeConfig(isRider),
                   ),
                 ),
               ],

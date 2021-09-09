@@ -14,6 +14,7 @@ import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
@@ -129,6 +130,42 @@ class HomeViewModel extends ViewModel {
         timeOfTrip: read(dateTimeProvider).state,
         riderCount: read(riderCountProvider).state,
         encodedRoute: encodedRoute,
+      );
+      driverRepo.pushDriverConfig(driverConfig);
+      read(currentRouteConfigProvider).state = driverConfig;
+      AppRouter.instance.navigateTo(Routes.riderManagerView);
+    }
+  }
+
+  // TODO: Assert no calls to this method in production
+  void pushReadyMadeConfig(bool isRider) {
+    if (isRider) {
+      final riderConfig = RouteConfig.rider(
+        user: currentUser!,
+        timeOfTrip: DateTime.now(),
+        riderCount: 1,
+        startLocation: const KapiotLocation(
+          lat: 10.3763113,
+          lng: 123.9598846,
+          address: "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines",
+        ),
+        endLocation: const KapiotLocation(
+          lat: 10.353185,
+          lng: 123.949506,
+          address:
+              "Yasco Motor Parts Corporation, North Road, Mandaue City, Cebu, Philippines",
+        ),
+      );
+      riderRepo.pushRiderConfig(riderConfig);
+      read(currentRouteConfigProvider).state = riderConfig;
+      AppRouter.instance.navigateTo(Routes.requestDriversView);
+    } else {
+      final driverConfig = RouteConfig.driver(
+        user: currentUser!,
+        timeOfTrip: DateTime.now(),
+        riderCount: 3,
+        encodedRoute:
+            "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
       );
       driverRepo.pushDriverConfig(driverConfig);
       read(currentRouteConfigProvider).state = driverConfig;
