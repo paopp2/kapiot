@@ -65,6 +65,8 @@ class GoogleAuthWidget extends StatelessWidget {
                 )
               ],
             ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(34)),
             elevation: 0,
           ),
         ),
