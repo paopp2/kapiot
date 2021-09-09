@@ -105,25 +105,15 @@ class ConfigTypePanel extends HookConsumerWidget {
                     vertical: constraints.maxHeight * 0.01),
                 child: Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.025,
-                          vertical: constraints.maxHeight * 0.015),
-                      child: Row(
-                        children: [
-                          const Icon(CupertinoIcons.smallcircle_circle,
-                              color: Colors.blue),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: constraints.maxWidth * 0.03),
-                            child: Text(
-                              startAddress ?? 'Start Location',
-                              style: const TextStyle(fontSize: 17),
-                            ),
-                          ),
-                        ],
-                      ),
+                    LocationInputContainer(
+                        constraints: constraints, isStart: true),
+                    const Divider(
+                      color: Colors.white,
+                      thickness: 1,
+                      height: 0.05,
                     ),
+                    LocationInputContainer(
+                        constraints: constraints, isStart: false),
 
                     // TextField(
                     //   // controller: model.tecStartLoc..text = startAddress,
@@ -139,30 +129,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                     //     isForStartLoc: true,
                     //   ),
                     // ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 1,
-                      height: 0.05,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.025,
-                          vertical: constraints.maxHeight * 0.015),
-                      child: Row(
-                        children: [
-                          const Icon(CupertinoIcons.location,
-                              color: Colors.blue),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: constraints.maxWidth * 0.03),
-                            child: Text(
-                              endAddress ?? 'End Location',
-                              style: const TextStyle(fontSize: 17),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     // TextField(
                     //   // controller: model.tecEndLoc..text = endAddress,
                     //   readOnly: true,
@@ -266,6 +232,43 @@ class ConfigTypePanel extends HookConsumerWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LocationInputContainer extends StatelessWidget {
+  const LocationInputContainer({
+    Key? key,
+    required this.constraints,
+    required this.isStart,
+  }) : super(key: key);
+
+  final BoxConstraints constraints;
+  final bool isStart;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: constraints.maxWidth * 0.025,
+        vertical: constraints.maxHeight * 0.015,
+      ),
+      child: Row(
+        children: [
+          Icon(
+              isStart
+                  ? CupertinoIcons.smallcircle_circle
+                  : CupertinoIcons.location,
+              color: Colors.blue),
+          Padding(
+            padding: EdgeInsets.only(left: constraints.maxWidth * 0.03),
+            child: Text(
+              isStart ? 'Start Location' : 'End Location',
+              style: const TextStyle(fontSize: 17),
             ),
           ),
         ],
