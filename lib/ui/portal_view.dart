@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
@@ -14,7 +15,10 @@ class PortalView extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // Call any methods to run/test here
-              RealtimeDbHelper.instance.setData();
+              RealtimeDbHelper.instance.setData(
+                "trial/path",
+                {"hello": "update"},
+              );
             },
           ),
           body: Center(
@@ -48,6 +52,14 @@ class PortalView extends StatelessWidget {
                 ElevatedButton(
                   onPressed: model.gotoPlaceSuggestionsView,
                   child: const Text("PlaceSuggestionsView"),
+                ),
+                StreamBuilder(
+                  stream: RealtimeDbHelper.instance.documentStream(),
+                  builder: (context, snapshot) {
+                    final event = snapshot.data as Event;
+                    print(event.snapshot.value);
+                    return const SizedBox();
+                  },
                 ),
               ],
             ),

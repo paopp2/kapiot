@@ -17,15 +17,19 @@ class RealtimeDbHelper {
     dbRef.child(path).set(data);
   }
 
-  Stream<T> documentStream<T>({
-    required String path,
-    // required T Function(Map<String, dynamic> data, String documentID) builder,
-  }) {
-    final ref = dbRef.child(path).onValue();
+  // Stream<T> documentStream<T>({
+  //   required String path,
+  //   // required T Function(Map<String, dynamic> data, String documentID) builder,
+  // }) {
+  //   final ref = dbRef.child(path).onValue();
 
-    // final Stream<DataSnapshot> snapshots = Stream.fromFuture(dataSnapshot);
-    // return snapshots.map((snapshot) =>
-    //     builder(snapshot.key as Map<String, dynamic>, snapshot.value));
-  }
+  //   // final Stream<DataSnapshot> snapshots = Stream.fromFuture(dataSnapshot);
+  //   // return snapshots.map((snapshot) =>
+  //   //     builder(snapshot.key as Map<String, dynamic>, snapshot.value));
+  // }
   // DocumentStream
+
+  Stream<Event> documentStream() {
+    return dbRef.child('trial/path/').onValue;
+  }
 }
