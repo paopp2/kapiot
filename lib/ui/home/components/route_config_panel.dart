@@ -105,38 +105,77 @@ class ConfigTypePanel extends HookConsumerWidget {
                     vertical: constraints.maxHeight * 0.01),
                 child: Column(
                   children: [
-                    TextField(
-                      controller: model.tecStartLoc..text = startAddress,
-                      readOnly: true,
-                      textAlign: TextAlign.start,
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(
-                            CupertinoIcons.smallcircle_circle,
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.025,
+                          vertical: constraints.maxHeight * 0.015),
+                      child: Row(
+                        children: [
+                          const Icon(CupertinoIcons.smallcircle_circle,
+                              color: Colors.blue),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: constraints.maxWidth * 0.03),
+                            child: const Text(
+                              'Start Location',
+                              style: TextStyle(fontSize: 17),
+                            ),
                           ),
-                          hintText: "Start location",
-                          border: InputBorder.none),
-                      onTap: () => model.openPlacePickerView(
-                        isForStartLoc: true,
+                        ],
                       ),
                     ),
+
+                    // TextField(
+                    //   // controller: model.tecStartLoc..text = startAddress,
+                    //   readOnly: true,
+                    //   textAlign: TextAlign.start,
+                    //   decoration: const InputDecoration(
+                    //       prefixIcon: Icon(
+                    //         CupertinoIcons.smallcircle_circle,
+                    //       ),
+                    //       hintText: "Start location",
+                    //       border: InputBorder.none),
+                    //   onTap: () => model.openPlacePickerView(
+                    //     isForStartLoc: true,
+                    //   ),
+                    // ),
                     const Divider(
                       color: Colors.white,
                       thickness: 1,
                       height: 0.05,
                     ),
-                    TextField(
-                      controller: model.tecEndLoc..text = endAddress,
-                      readOnly: true,
-                      textAlign: TextAlign.start,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(CupertinoIcons.location),
-                        hintText: "End location",
-                        border: InputBorder.none,
-                      ),
-                      onTap: () => model.openPlacePickerView(
-                        isForStartLoc: false,
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.025,
+                          vertical: constraints.maxHeight * 0.015),
+                      child: Row(
+                        children: [
+                          const Icon(CupertinoIcons.location,
+                              color: Colors.blue),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: constraints.maxWidth * 0.03),
+                            child: const Text(
+                              'End Location',
+                              style: TextStyle(fontSize: 17),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    // TextField(
+                    //   // controller: model.tecEndLoc..text = endAddress,
+                    //   readOnly: true,
+                    //   textAlign: TextAlign.start,
+                    //   decoration: const InputDecoration(
+                    //     prefixIcon: Icon(CupertinoIcons.location),
+                    //     hintText: "End location",
+                    //     border: InputBorder.none,
+                    //   ),
+                    //   onTap: () => model.openPlacePickerView(
+                    //     isForStartLoc: false,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
