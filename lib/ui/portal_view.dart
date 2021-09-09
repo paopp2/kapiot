@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/helpers/realtime_db_helper.dart';
 
 class PortalView extends StatelessWidget {
   const PortalView({Key? key}) : super(key: key);
@@ -10,6 +11,12 @@ class PortalView extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Call any methods to run/test here
+              RealtimeDbHelper.instance.setData();
+            },
+          ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
