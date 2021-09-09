@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class KapiotSlidingPanel extends StatelessWidget {
@@ -27,19 +28,18 @@ class KapiotSlidingPanel extends StatelessWidget {
         color: const Color(0xfff8f9fa),
         child: Column(
           children: [
-            SizedBox(height: constraints.maxHeight * 0.83, child: map),
+            SizedBox(height: constraints.maxHeight * 0.9, child: map),
           ],
         ),
       ),
       panelBuilder: (controller) {
         return Container(
+          width: constraints.maxWidth,
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              SizedBox(
-                height: constraints.maxHeight * 0.02,
-              ),
               Container(
+                margin: EdgeInsets.only(top: constraints.maxHeight * 0.02),
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(
@@ -49,7 +49,7 @@ class KapiotSlidingPanel extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.04),
+                    vertical: constraints.maxHeight * 0.03),
                 child: Text(title),
               ),
               panel,
