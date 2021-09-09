@@ -45,10 +45,10 @@ Future<void> main() async {
       expect(loadingWidget, findsOneWidget);
       await tester.pumpAndSettle();
 
-      // Tapping on the startLoc TextField @HomeView opens the PlacePickerView
-      final startLocTextFieldHome =
-          find.widgetWithText(TextField, "Start location");
-      await tester.tap(startLocTextFieldHome);
+      // Tapping on the startLoc Text @HomeView opens the PlacePickerView
+      final startLocFieldHome =
+          find.widgetWithIcon(Row, CupertinoIcons.smallcircle_circle);
+      await tester.tap(startLocFieldHome);
       await tester.pumpAndSettle();
       expect(find.byType(PlacePickerView), findsOneWidget);
 
@@ -99,13 +99,16 @@ Future<void> main() async {
       expect(endLocAddress, findsOneWidget);
       await tester.pumpAndSettle();
 
-      // Tap Driver ChoiceChip then hit the "Next" button to navigate to the
-      // RiderManagerView
-      final driverChip = find.widgetWithText(ChoiceChip, "Driver");
-      final nextButton = find.widgetWithText(ElevatedButton, "Next");
-      await tester.tap(driverChip);
+      // Tap Left-arrow icon to config as Driver then hit the Start Trip button
+      // to navigate to the RiderManagerView
+      final arrowLeftButton = find.widgetWithIcon(
+        IconButton,
+        Icons.arrow_back_ios,
+      );
+      await tester.tap(arrowLeftButton);
       await tester.pumpAndSettle();
-      await tester.tap(nextButton);
+      final startTripButton = find.widgetWithText(ElevatedButton, "Start Trip");
+      await tester.tap(startTripButton);
       await tester.pumpAndSettle();
       expect(find.byType(RiderManagerView), findsOneWidget);
 

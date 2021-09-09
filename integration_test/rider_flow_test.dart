@@ -40,10 +40,10 @@ Future<void> main() async {
       expect(loadingWidget, findsOneWidget);
       await tester.pumpAndSettle();
 
-      // Tapping on the startLoc TextField @HomeView opens the PlacePickerView
-      final startLocTextFieldHome =
-          find.widgetWithText(TextField, "Start location");
-      await tester.tap(startLocTextFieldHome);
+      // Tapping on the startLoc Text @HomeView opens the PlacePickerView
+      final startLocFieldHome =
+          find.widgetWithIcon(Row, CupertinoIcons.smallcircle_circle);
+      await tester.tap(startLocFieldHome);
       await tester.pumpAndSettle();
       expect(find.byType(PlacePickerView), findsOneWidget);
 
@@ -93,10 +93,11 @@ Future<void> main() async {
       expect(startLocAddress, findsOneWidget);
       expect(endLocAddress, findsOneWidget);
 
-      // Rider ChoiceChip should already be selected by default therefore
-      // pressing on next should navigate the app to the RequestDriversView
-      final nextButton = find.widgetWithText(ElevatedButton, "Next");
-      await tester.tap(nextButton);
+      // Rider should already be selected by default therefore
+      // pressing on the "Book Now" button should navigate the app to the
+      // RequestDriversView
+      final bookNowButton = find.widgetWithText(ElevatedButton, "Book Now");
+      await tester.tap(bookNowButton);
       await tester.pumpAndSettle();
       expect(find.byType(RequestDriversView), findsOneWidget);
 
