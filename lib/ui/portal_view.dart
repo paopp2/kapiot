@@ -15,8 +15,8 @@ class PortalView extends StatelessWidget {
             onPressed: () {
               // Call any methods to run/test here
               RealtimeDbHelper.instance.setData(
-                "trial/path",
-                {"hello": UniqueKey().toString()},
+                path: "trial/path",
+                data: {"hello": UniqueKey().toString()},
               );
             },
           ),

@@ -10,7 +10,10 @@ class RealtimeDbHelper {
   late final DatabaseReference dbRef = realtimeDb?.reference() ??
       FirebaseDatabase(databaseURL: realtimeDbUrl).reference();
 
-  Future<void> setData(String path, Map<String, dynamic> data) async {
+  Future<void> setData({
+    required String path,
+    required Map<String, dynamic> data,
+  }) async {
     dbRef.child(path).set(data);
   }
 
