@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/helpers/realtime_db_helper.dart';
 import 'package:kapiot/root_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
@@ -23,6 +25,9 @@ void main() async {
       host: '$localHostString:8080',
       sslEnabled: false,
       persistenceEnabled: false,
+    );
+    RealtimeDbHelper.instance.realtimeDb = FirebaseDatabase(
+      databaseURL: 'http://$localHostString:9000?ns=kapiot-46cbc',
     );
   }
 
