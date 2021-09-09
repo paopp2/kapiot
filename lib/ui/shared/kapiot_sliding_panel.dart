@@ -49,7 +49,8 @@ class KapiotSlidingPanel extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.03),
+                  vertical: constraints.maxHeight * 0.03,
+                ),
                 child: Text(title),
               ),
               panel,

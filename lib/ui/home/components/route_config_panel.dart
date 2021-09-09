@@ -44,13 +44,13 @@ class RouteConfigPanel extends HookConsumerWidget {
 }
 
 class ConfigTypePanel extends HookConsumerWidget {
-  const ConfigTypePanel(
-      {Key? key,
-      required this.pageController,
-      required this.isRider,
-      required this.model,
-      required this.constraints})
-      : super(key: key);
+  const ConfigTypePanel({
+    Key? key,
+    required this.pageController,
+    required this.isRider,
+    required this.model,
+    required this.constraints,
+  }) : super(key: key);
 
   final PageController pageController;
   final bool isRider;
@@ -64,16 +64,6 @@ class ConfigTypePanel extends HookConsumerWidget {
 
     return Container(
       padding: const EdgeInsets.all(15),
-      // color: isRider ? Colors.grey[300] : Colors.grey[200],
-      // decoration: BoxDecoration(
-      //   gradient: LinearGradient(
-      //       begin: Alignment.bottomCenter,
-      //       end: Alignment.topCenter,
-      //       colors: [
-      //         isRider ? Color(0xff92E728) : Color(0xffffc901),
-      //         Colors.white
-      //       ]),
-      // ),
       child: Stack(
         children: [
           Column(
@@ -114,34 +104,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                       constraints: constraints,
                       isStart: false,
                     ),
-
-                    // TextField(
-                    //   // controller: model.tecStartLoc..text = startAddress,
-                    //   readOnly: true,
-                    //   textAlign: TextAlign.start,
-                    //   decoration: const InputDecoration(
-                    //       prefixIcon: Icon(
-                    //         CupertinoIcons.smallcircle_circle,
-                    //       ),
-                    //       hintText: "Start location",
-                    //       border: InputBorder.none),
-                    //   onTap: () => model.openPlacePickerView(
-                    //     isForStartLoc: true,
-                    //   ),
-                    // ),
-                    // TextField(
-                    //   // controller: model.tecEndLoc..text = endAddress,
-                    //   readOnly: true,
-                    //   textAlign: TextAlign.start,
-                    //   decoration: const InputDecoration(
-                    //     prefixIcon: Icon(CupertinoIcons.location),
-                    //     hintText: "End location",
-                    //     border: InputBorder.none,
-                    //   ),
-                    //   onTap: () => model.openPlacePickerView(
-                    //     isForStartLoc: false,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
