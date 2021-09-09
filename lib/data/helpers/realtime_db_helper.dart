@@ -11,12 +11,9 @@ class RealtimeDbHelper {
   late final DatabaseReference dbRef = realtimeDb?.reference() ??
       FirebaseDatabase(databaseURL: realtimeDbUrl).reference();
 
-  Future<void> setData() async {
-    const location = KapiotLocation(
-      lat: 69,
-      lng: 69,
-    );
-    dbRef.child('retry2/id').set(location.toJson());
+  Future<void> setData(
+      {required String path, required Map<String, dynamic> data}) async {
+    dbRef.child(path).set(data);
   }
 
   // DocumentStream
