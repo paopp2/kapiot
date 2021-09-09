@@ -61,8 +61,6 @@ class ConfigTypePanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
-    final startAddress = ref.watch(startLocProvider).state?.address;
-    final endAddress = ref.watch(endLocProvider).state?.address;
 
     return Container(
       padding: const EdgeInsets.all(15),
@@ -240,7 +238,7 @@ class ConfigTypePanel extends HookConsumerWidget {
   }
 }
 
-class LocationInputContainer extends StatelessWidget {
+class LocationInputContainer extends HookConsumerWidget {
   const LocationInputContainer({
     Key? key,
     required this.constraints,
@@ -251,7 +249,9 @@ class LocationInputContainer extends StatelessWidget {
   final bool isStart;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final startAddress = ref.watch(startLocProvider).state?.address;
+    final endAddress = ref.watch(endLocProvider).state?.address;
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: constraints.maxWidth * 0.025,
@@ -267,7 +267,9 @@ class LocationInputContainer extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: constraints.maxWidth * 0.03),
             child: Text(
-              isStart ? 'Start Location' : 'End Location',
+              isStart
+                  ? (startAddress ?? 'Start Location')
+                  : (endAddress ?? 'End Location'),
               style: const TextStyle(fontSize: 17),
             ),
           ),
