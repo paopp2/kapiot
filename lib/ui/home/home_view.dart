@@ -44,7 +44,7 @@ class HomeView extends HookConsumerWidget {
                 Container(
                   margin: const EdgeInsets.only(top: 10, right: 10),
                   decoration: BoxDecoration(
-                    color: Color(0x3f808080),
+                    color: const Color(0x3f808080),
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: IconButton(
