@@ -12,7 +12,7 @@ import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 
-// Set to false when in production
+// TODO: Set to false in production
 const bool useFirebaseEmulator = true;
 
 void main() async {
