@@ -17,10 +17,7 @@ class KapiotSlidingPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color panelColor;
-
     return SlidingUpPanel(
-      // color: panelColor,
       defaultPanelState: PanelState.OPEN,
       parallaxEnabled: true,
       parallaxOffset: 0.5,
