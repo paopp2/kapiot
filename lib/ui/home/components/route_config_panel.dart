@@ -259,18 +259,29 @@ class LocationInputContainer extends HookConsumerWidget {
       ),
       child: Row(
         children: [
-          Icon(
+          Container(
+            margin: EdgeInsets.only(right: constraints.maxWidth * 0.03),
+            child: Icon(
               isStart
                   ? CupertinoIcons.smallcircle_circle
                   : CupertinoIcons.location,
-              color: Colors.blue),
-          Padding(
-            padding: EdgeInsets.only(left: constraints.maxWidth * 0.03),
-            child: Text(
-              isStart
-                  ? (startAddress ?? 'Start Location')
-                  : (endAddress ?? 'End Location'),
-              style: const TextStyle(fontSize: 17),
+              color: Colors.blue,
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(
+                isStart
+                    ? (startAddress ?? 'Start Location')
+                    : (endAddress ?? 'End Location'),
+                style: TextStyle(
+                  fontSize: 17,
+                  color: isStart
+                      ? ((startAddress != null) ? Colors.black : Colors.grey)
+                      : ((endAddress != null) ? Colors.black : Colors.grey),
+                ),
+              ),
             ),
           ),
         ],
