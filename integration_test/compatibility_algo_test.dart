@@ -152,10 +152,10 @@ Future<void> verifyCompatibility({
     endAddrSuggestion = endAddrSplit.first;
   }
 
-  // Tapping on the startLoc TextField @HomeView opens the PlacePickerView
-  final startLocTextFieldHome =
-      find.widgetWithText(TextField, "Start location");
-  await tester.tap(startLocTextFieldHome);
+  // Tapping on the startLoc Text @HomeView opens the PlacePickerView
+  final startLocFieldHome =
+      find.widgetWithIcon(Row, CupertinoIcons.smallcircle_circle);
+  await tester.tap(startLocFieldHome);
   await tester.pumpAndSettle();
 
   // StartLoc TextField should be highlighted when PlacePickerView is pumped.
@@ -173,10 +173,7 @@ Future<void> verifyCompatibility({
     await tester.pumpAndSettle();
   }
   await tester.tap(correctStartSuggestion.first);
-  final startLocAddress = find.ancestor(
-    of: find.textContaining(startAddress),
-    matching: find.byType(TextField),
-  );
+  final startLocAddress = find.textContaining(startAddress);
   while (findsNothing.matches(startLocAddress, {})) {
     await tester.pumpAndSettle();
   }
@@ -185,8 +182,7 @@ Future<void> verifyCompatibility({
   // Tapping then typing on endLocTextField should show place suggestions.
   // Pressing on a suggestion should return the app to the HomeView as the
   // app should return once both locations are set
-  final endLocTextFieldPlacePicker =
-      find.widgetWithIcon(TextField, CupertinoIcons.location);
+  final endLocTextFieldPlacePicker = find.byIcon(CupertinoIcons.location);
   await tester.tap(endLocTextFieldPlacePicker);
   await tester.pumpAndSettle();
   tester.testTextInput.enterText(endAddrInput);
@@ -196,10 +192,7 @@ Future<void> verifyCompatibility({
     await tester.pumpAndSettle();
   }
   await tester.tap(correctEndSuggestion.first);
-  final endLocAddress = find.ancestor(
-    of: find.textContaining(endAddress),
-    matching: find.byType(TextField),
-  );
+  final endLocAddress = find.textContaining(endAddress);
   while (findsNothing.matches(find.byType(HomeView), {})) {
     await tester.pumpAndSettle();
   }
@@ -207,10 +200,11 @@ Future<void> verifyCompatibility({
   expect(startLocAddress, findsOneWidget);
   expect(endLocAddress, findsOneWidget);
 
-  // Rider ChoiceChip should already be selected by default therefore
-  // pressing on next should navigate the app to the RequestDriversView
-  final nextButton = find.widgetWithText(ElevatedButton, "Next");
-  await tester.tap(nextButton);
+  // Rider should already be selected by default therefore
+  // pressing on the "Book Now" button should navigate the app to the
+  // RequestDriversView
+  final bookNowButton = find.widgetWithText(ElevatedButton, "Book Now");
+  await tester.tap(bookNowButton);
   await tester.pumpAndSettle();
   expect(find.byType(RequestDriversView), findsOneWidget);
 
