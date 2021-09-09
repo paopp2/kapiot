@@ -27,7 +27,12 @@ class GoogleAuthWidget extends StatelessWidget {
           width: 25,
           height: 25,
         ),
-        onPressed: model.signInWithGoogle,
+        onPressed: () => model.signInWithGoogle(
+          context: context,
+          nonUscEmailDialog: const AlertDialog(
+            title: Text("Please use USC email"),
+          ),
+        ),
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(0),
           backgroundColor: MaterialStateProperty.all(Colors.white),

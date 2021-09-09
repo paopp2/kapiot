@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/auth_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
@@ -17,14 +18,21 @@ class LoginViewModel extends ViewModel {
   }) : super(read);
   final AuthService authService;
 
-  Future<void> signInWithGoogle() async {
-    // Returns credentials when signed in successfully, null if otherwise
+  Future<void> signInWithGoogle({
+    required BuildContext context,
+    required Widget nonUscEmailDialog,
+  }) async {
     final authCreds = await authService.signInWithGoogle();
-    if (authCreds != null) {
+    authCreds.fold(
+      // The email used to sign-in is not part of the USC organization
+      (notUscEmail) => showDialog(
+        context: context,
+        builder: (context) => nonUscEmailDialog,
+      ),
       // Ensure shared map state is reset before building the HomeView
       // This is required to avoid errors such as the map's initialCameraPosition
       // is already set before the starting location is retrieved
-      MapController.reset(read);
-    }
+      (successfulSignIn) => MapController.reset(read),
+    );
   }
 }

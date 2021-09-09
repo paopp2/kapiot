@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,42 +16,33 @@ class AuthService {
   final Reader read;
   final GoogleSignIn googleSignIn;
 
-  Future<UserCredential?> signInWithGoogle() async {
-    AuthCredential? googleAuthCreds = await googleCredentials();
-    if (googleAuthCreds == null) {
-      return null;
+  Future<Either<Exception, UserCredential?>> signInWithGoogle() async {
+    try {
+      AuthCredential googleAuthCreds = await googleCredentials();
+      final signedInUserCreds =
+          await read(fireauthProvider).signInWithCredential(googleAuthCreds);
+      return Right(signedInUserCreds);
+    } catch (e) {
+      return Left(e as Exception);
     }
-    final signedInUserCreds =
-        await read(fireauthProvider).signInWithCredential(googleAuthCreds);
-    return signedInUserCreds;
   }
 
   Future<void> signOutGoogle() async {
-    try {
-      await googleSignIn.disconnect();
-    } catch (e) {
-      print(e);
-    }
     await googleSignIn.signOut();
     await read(fireauthProvider).signOut();
   }
 
-  Future<AuthCredential?> googleCredentials() async {
-    try {
-      final googleSignInAcc = await googleSignIn.signIn();
-      final googleSignInAuth = await googleSignInAcc?.authentication;
-      if (googleSignInAcc!.email.split("@")[1] == 'usc.edu.ph') {
-        return GoogleAuthProvider.credential(
-          accessToken: googleSignInAuth?.accessToken,
-          idToken: googleSignInAuth?.idToken,
-        );
-      } else {
-        signOutGoogle();
-        throw Exception('Not USC Email');
-      }
-    } catch (e) {
-      print(e);
-      return null;
+  Future<AuthCredential> googleCredentials() async {
+    final googleSignInAcc = await googleSignIn.signIn();
+    if (googleSignInAcc!.email.split("@")[1] == 'usc.edu.ph') {
+      final googleSignInAuth = await googleSignInAcc.authentication;
+      return GoogleAuthProvider.credential(
+        accessToken: googleSignInAuth.accessToken,
+        idToken: googleSignInAuth.idToken,
+      );
+    } else {
+      signOutGoogle();
+      throw Exception('Not USC Email');
     }
   }
 }
