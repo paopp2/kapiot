@@ -1,5 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
+import 'package:kapiot/data/helpers/realtime_db_path.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final locationRepository = Provider.autoDispose(
   (ref) => LocationRepository(
@@ -10,4 +12,18 @@ final locationRepository = Provider.autoDispose(
 class LocationRepository {
   LocationRepository({required this.realtimeDbHelper});
   final RealtimeDbHelper realtimeDbHelper;
+
+  Future<void> updateLocation(String userId, KapiotLocation location) async {
+    realtimeDbHelper.setData(
+      path: RealtimeDbPath.userRealtimeLocation(userId),
+      data: location.toJson(),
+    );
+  }
+
+  Stream<KapiotLocation> getRealtimeLocation(String userId) {
+    return realtimeDbHelper.documentStream(
+      path: RealtimeDbPath.userRealtimeLocation(userId),
+      builder: (data) => KapiotLocation.fromJson(data),
+    );
+  }
 }
