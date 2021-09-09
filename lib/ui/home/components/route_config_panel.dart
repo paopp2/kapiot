@@ -20,8 +20,6 @@ class RouteConfigPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRider = ref.watch(isRiderProvider).state;
-
     return Expanded(
       child: PageView(
         controller: pageController,
@@ -29,13 +27,13 @@ class RouteConfigPanel extends HookConsumerWidget {
         children: [
           RuntimeType(
             pageController: pageController,
-            isRider: isRider,
+            isRider: true,
             model: model,
             constraints: constraints,
           ),
           RuntimeType(
             pageController: pageController,
-            isRider: !isRider,
+            isRider: false,
             model: model,
             constraints: constraints,
           )
@@ -100,18 +98,22 @@ class RuntimeType extends HookConsumerWidget {
               // ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.01),
+                  vertical: constraints.maxHeight * 0.01,
+                ),
                 padding: EdgeInsets.only(left: constraints.maxWidth * 0.02),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: Text(isRider ? 'Rider' : 'Driver',
-                      style: GoogleFonts.rubik(fontSize: 34, letterSpacing: 2)),
+                  child: Text(
+                    isRider ? 'Rider' : 'Driver',
+                    style: GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
+                  ),
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0XFFE7DFE0)),
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color(0XFFE7DFE0),
+                ),
                 padding: EdgeInsets.symmetric(
                     horizontal: constraints.maxWidth * 0.05),
                 margin: EdgeInsets.symmetric(
@@ -160,7 +162,8 @@ class RuntimeType extends HookConsumerWidget {
               !isRider
                   ? Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.05),
+                        horizontal: constraints.maxWidth * 0.05,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -176,8 +179,10 @@ class RuntimeType extends HookConsumerWidget {
                                 elevation: 0,
                                 shape: const CircleBorder(),
                                 onPressed: model.decRiderCount,
-                                child: const Icon(Icons.remove,
-                                    color: Colors.white),
+                                child: const Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
                               ),
                               Text("$riderCount"),
                               RawMaterialButton(
@@ -206,11 +211,14 @@ class RuntimeType extends HookConsumerWidget {
               children: [
                 IconButton(
                   icon: Icon(
-                      isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios),
+                    isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+                  ),
                   onPressed: () {
-                    pageController.animateToPage(isRider ? 1 : 0,
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.linearToEaseOut);
+                    pageController.animateToPage(
+                      isRider ? 1 : 0,
+                      duration: const Duration(milliseconds: 1000),
+                      curve: Curves.linearToEaseOut,
+                    );
                   },
                 ),
                 Container(
@@ -225,11 +233,12 @@ class RuntimeType extends HookConsumerWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      right: constraints.maxWidth * 0.05,
-                      bottom: constraints.maxHeight * 0.01),
+                    right: constraints.maxWidth * 0.05,
+                    bottom: constraints.maxHeight * 0.01,
+                  ),
                   child: ElevatedButton(
                     child: Text(isRider ? "Book Now" : "Start Trip"),
-                    onPressed: model.pushRouteConfig,
+                    onPressed: () => model.pushRouteConfig(isRider),
                   ),
                 ),
               ],
