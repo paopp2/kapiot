@@ -82,7 +82,10 @@ class LoginView extends HookConsumerWidget {
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: constraints.maxWidth * 0.05),
-                          child: GoogleAuthWidget(model: model),
+                          child: GoogleAuthWidget(
+                            model: model,
+                            constraints: constraints,
+                          ),
                         ),
                       ),
                     ],

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kapiot/logic/auth/login_view_model.dart';
 
 class GoogleAuthWidget extends StatelessWidget {
-  const GoogleAuthWidget({
-    Key? key,
-    required this.model,
-  }) : super(key: key);
+  const GoogleAuthWidget(
+      {Key? key, required this.model, required this.constraints})
+      : super(key: key);
   final LoginViewModel model;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,41 @@ class GoogleAuthWidget extends StatelessWidget {
         ),
         onPressed: () => model.signInWithGoogle(
           context: context,
-          nonUscEmailDialog: const AlertDialog(
-            title: Text("Please use USC email"),
+          nonUscEmailDialog: AlertDialog(
+            title: const Text(
+              "Oops!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffffc901),
+              ),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'lib/ui/assets/images/error_non_usc_email.png',
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: constraints.maxHeight * 0.05,
+                      bottom: constraints.maxHeight * 0.02),
+                  child: const Text(
+                    'Something went wrong',
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const Text(
+                  'It seems like the account used is not affiliated with the USC community.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey),
+                )
+              ],
+            ),
+            elevation: 0,
           ),
         ),
         style: ButtonStyle(
