@@ -94,7 +94,10 @@ class ConfigTypePanel extends HookConsumerWidget {
                 child: Column(
                   children: [
                     LocationInputContainer(
-                        constraints: constraints, isStart: true),
+                      constraints: constraints,
+                      isStart: true,
+                      model: model,
+                    ),
                     const Divider(
                       color: Colors.white,
                       thickness: 1,
@@ -103,6 +106,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                     LocationInputContainer(
                       constraints: constraints,
                       isStart: false,
+                      model: model,
                     ),
                   ],
                 ),
@@ -207,10 +211,12 @@ class LocationInputContainer extends HookConsumerWidget {
     Key? key,
     required this.constraints,
     required this.isStart,
+    required this.model,
   }) : super(key: key);
 
   final BoxConstraints constraints;
   final bool isStart;
+  final HomeViewModel model;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -222,9 +228,7 @@ class LocationInputContainer extends HookConsumerWidget {
         vertical: constraints.maxHeight * 0.015,
       ),
       child: GestureDetector(
-        onTap: () {
-          print('row tapped');
-        },
+        onTap: () => model.openPlacePickerView(isForStartLoc: isStart),
         child: Row(
           children: [
             Container(
