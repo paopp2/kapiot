@@ -44,13 +44,13 @@ class RouteConfigPanel extends HookConsumerWidget {
 }
 
 class ConfigTypePanel extends HookConsumerWidget {
-  const ConfigTypePanel({
-    Key? key,
-    required this.pageController,
-    required this.isRider,
-    required this.model,
-    required this.constraints,
-  }) : super(key: key);
+  const ConfigTypePanel(
+      {Key? key,
+      required this.pageController,
+      required this.isRider,
+      required this.model,
+      required this.constraints})
+      : super(key: key);
 
   final PageController pageController;
   final bool isRider;
@@ -111,7 +111,9 @@ class ConfigTypePanel extends HookConsumerWidget {
                       height: 0.05,
                     ),
                     LocationInputContainer(
-                        constraints: constraints, isStart: false),
+                      constraints: constraints,
+                      isStart: false,
+                    ),
 
                     // TextField(
                     //   // controller: model.tecStartLoc..text = startAddress,
@@ -257,34 +259,39 @@ class LocationInputContainer extends HookConsumerWidget {
         horizontal: constraints.maxWidth * 0.025,
         vertical: constraints.maxHeight * 0.015,
       ),
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(right: constraints.maxWidth * 0.03),
-            child: Icon(
-              isStart
-                  ? CupertinoIcons.smallcircle_circle
-                  : CupertinoIcons.location,
-              color: Colors.blue,
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(
+      child: GestureDetector(
+        onTap: () {
+          print('row tapped');
+        },
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: constraints.maxWidth * 0.03),
+              child: Icon(
                 isStart
-                    ? (startAddress ?? 'Start Location')
-                    : (endAddress ?? 'End Location'),
-                style: TextStyle(
-                  fontSize: 17,
-                  color: isStart
-                      ? ((startAddress != null) ? Colors.black : Colors.grey)
-                      : ((endAddress != null) ? Colors.black : Colors.grey),
+                    ? CupertinoIcons.smallcircle_circle
+                    : CupertinoIcons.location,
+                color: Colors.blue,
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  isStart
+                      ? (startAddress ?? 'Start Location')
+                      : (endAddress ?? 'End Location'),
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: isStart
+                        ? ((startAddress != null) ? Colors.black : Colors.grey)
+                        : ((endAddress != null) ? Colors.black : Colors.grey),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
