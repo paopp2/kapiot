@@ -12,10 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  # Core / State management
+  # Core (State management, error handling, etc.)
   hooks_riverpod: ^1.0.0-dev.6
   flutter_hooks: ^0.18.0
   freezed_annotation: ^0.14.3
+  dartz: ^0.10.0
   # Firebase-related
   cloud_firestore: ^2.5.0
   firebase_auth: ^3.0.2
