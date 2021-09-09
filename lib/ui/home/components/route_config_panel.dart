@@ -25,13 +25,13 @@ class RouteConfigPanel extends HookConsumerWidget {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          RuntimeType(
+          ConfigTypePanel(
             pageController: pageController,
             isRider: true,
             model: model,
             constraints: constraints,
           ),
-          RuntimeType(
+          ConfigTypePanel(
             pageController: pageController,
             isRider: false,
             model: model,
@@ -43,8 +43,8 @@ class RouteConfigPanel extends HookConsumerWidget {
   }
 }
 
-class RuntimeType extends HookConsumerWidget {
-  const RuntimeType({
+class ConfigTypePanel extends HookConsumerWidget {
+  const ConfigTypePanel({
     Key? key,
     required this.pageController,
     required this.isRider,
@@ -81,21 +81,6 @@ class RuntimeType extends HookConsumerWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     ChoiceChip(
-              //       label: const Text("Driver"),
-              //       selected: !isRider,
-              //       onSelected: model.toggleIsRider,
-              //     ),
-              //     ChoiceChip(
-              //       label: const Text("Rider"),
-              //       selected: isRider,
-              //       onSelected: model.toggleIsRider,
-              //     ),
-              //   ],
-              // ),
               Container(
                 margin: EdgeInsets.symmetric(
                   vertical: constraints.maxHeight * 0.01,
