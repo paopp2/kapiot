@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
-import 'package:kapiot/ui/shared/loading_widget.dart';
 
 const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
