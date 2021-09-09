@@ -17,7 +17,10 @@ class KapiotSlidingPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color panelColor;
+
     return SlidingUpPanel(
+      // color: panelColor,
       defaultPanelState: PanelState.OPEN,
       parallaxEnabled: true,
       parallaxOffset: 0.5,
@@ -38,10 +41,8 @@ class KapiotSlidingPanel extends StatelessWidget {
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              SizedBox(
-                height: constraints.maxHeight * 0.02,
-              ),
               Container(
+                margin: EdgeInsets.only(top: constraints.maxHeight * 0.02),
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(
@@ -51,7 +52,7 @@ class KapiotSlidingPanel extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.04),
+                    vertical: constraints.maxHeight * 0.03),
                 child: Text(title),
               ),
               panel,

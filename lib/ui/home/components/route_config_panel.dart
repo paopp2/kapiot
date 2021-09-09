@@ -21,10 +21,6 @@ class RouteConfigPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isRider = ref.watch(isRiderProvider).state;
-    final riderCount = ref.watch(riderCountProvider).state;
-    final dateTime = ref.watch(dateTimeProvider).state;
-    final startAddress = ref.watch(startLocProvider).state?.address ?? '';
-    final endAddress = ref.watch(endLocProvider).state?.address ?? '';
 
     return Expanded(
       child: PageView(
@@ -32,56 +28,56 @@ class RouteConfigPanel extends HookConsumerWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           RuntimeType(
-              pageController: pageController,
-              isRider: isRider,
-              model: model,
-              constraints: constraints,
-              startAddress: startAddress,
-              endAddress: endAddress,
-              dateTime: dateTime,
-              riderCount: riderCount),
+            pageController: pageController,
+            isRider: isRider,
+            model: model,
+            constraints: constraints,
+          ),
           RuntimeType(
-              pageController: pageController,
-              isRider: !isRider,
-              model: model,
-              constraints: constraints,
-              startAddress: startAddress,
-              endAddress: endAddress,
-              dateTime: dateTime,
-              riderCount: riderCount)
+            pageController: pageController,
+            isRider: !isRider,
+            model: model,
+            constraints: constraints,
+          )
         ],
       ),
     );
   }
 }
 
-class RuntimeType extends StatelessWidget {
+class RuntimeType extends HookConsumerWidget {
   const RuntimeType({
     Key? key,
     required this.pageController,
     required this.isRider,
     required this.model,
     required this.constraints,
-    required this.startAddress,
-    required this.endAddress,
-    required this.dateTime,
-    required this.riderCount,
   }) : super(key: key);
 
   final PageController pageController;
   final bool isRider;
   final HomeViewModel model;
   final BoxConstraints constraints;
-  final String startAddress;
-  final String endAddress;
-  final DateTime dateTime;
-  final int riderCount;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final riderCount = ref.watch(riderCountProvider).state;
+    final dateTime = ref.watch(dateTimeProvider).state;
+    final startAddress = ref.watch(startLocProvider).state?.address ?? '';
+    final endAddress = ref.watch(endLocProvider).state?.address ?? '';
+
     return Container(
       padding: const EdgeInsets.all(15),
-      color: isRider ? Colors.grey[300] : Colors.grey[200],
+      // color: isRider ? Colors.grey[300] : Colors.grey[200],
+      // decoration: BoxDecoration(
+      //   gradient: LinearGradient(
+      //       begin: Alignment.bottomCenter,
+      //       end: Alignment.topCenter,
+      //       colors: [
+      //         isRider ? Color(0xff92E728) : Color(0xffffc901),
+      //         Colors.white
+      //       ]),
+      // ),
       child: Stack(
         children: [
           Column(
@@ -203,29 +199,23 @@ class RuntimeType extends StatelessWidget {
             ],
           ),
           Align(
-            alignment: isRider ? Alignment.centerRight : Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(top: constraints.maxHeight * 0.1),
-              child: IconButton(
-                icon: Icon(
-                    isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios),
-                onPressed: () {
-                  pageController.animateToPage(isRider ? 1 : 0,
-                      duration: const Duration(milliseconds: 1000),
-                      curve: Curves.linearToEaseOut);
-                },
-              ),
-            ),
-          ),
-          Align(
             alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                IconButton(
+                  icon: Icon(
+                      isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios),
+                  onPressed: () {
+                    pageController.animateToPage(isRider ? 1 : 0,
+                        duration: const Duration(milliseconds: 1000),
+                        curve: Curves.linearToEaseOut);
+                  },
+                ),
                 Container(
                   margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.03,
+                    vertical: constraints.maxHeight * 0.02,
                   ),
                   child: const Divider(
                     color: Colors.grey,
