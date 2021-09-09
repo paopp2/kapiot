@@ -68,13 +68,6 @@ class HomeViewModel extends ViewModel {
 
   Future<void> signOut() async => await authService.signOutGoogle();
 
-  void toggleIsRider(bool valueHasChanged) {
-    if (valueHasChanged) {
-      final isRider = read(isRiderProvider).state;
-      read(isRiderProvider).state = !isRider;
-    }
-  }
-
   void incRiderCount() => read(riderCountProvider).state++;
 
   void decRiderCount() {
@@ -110,9 +103,8 @@ class HomeViewModel extends ViewModel {
     AppRouter.instance.navigateTo(Routes.placePickerView);
   }
 
-  Future<void> pushRouteConfig() async {
+  Future<void> pushRouteConfig(bool isRider) async {
     assert(currentUser != null);
-    final isRider = read(isRiderProvider).state;
     final startLoc = read(startLocProvider).state;
     final endLoc = read(endLocProvider).state;
     if (startLoc == null || endLoc == null) return;
@@ -120,7 +112,7 @@ class HomeViewModel extends ViewModel {
       final riderConfig = RouteConfig.rider(
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,
-        riderCount: read(riderCountProvider).state,
+        riderCount: 1, // Rider can only book for themselves
         startLocation: startLoc,
         endLocation: endLoc,
       );
