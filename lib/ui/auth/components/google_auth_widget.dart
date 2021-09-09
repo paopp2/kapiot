@@ -4,9 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:kapiot/logic/auth/login_view_model.dart';
 
 class GoogleAuthWidget extends StatelessWidget {
-  const GoogleAuthWidget(
-      {Key? key, required this.model, required this.constraints})
-      : super(key: key);
+  const GoogleAuthWidget({
+    Key? key,
+    required this.model,
+    required this.constraints,
+  }) : super(key: key);
   final LoginViewModel model;
   final BoxConstraints constraints;
 
@@ -51,8 +53,9 @@ class GoogleAuthWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: constraints.maxHeight * 0.05,
-                      bottom: constraints.maxHeight * 0.02),
+                    top: constraints.maxHeight * 0.05,
+                    bottom: constraints.maxHeight * 0.02,
+                  ),
                   child: const Text(
                     'Something went wrong',
                     style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
@@ -65,8 +68,9 @@ class GoogleAuthWidget extends StatelessWidget {
                 )
               ],
             ),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(34)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(34),
+            ),
             elevation: 0,
           ),
         ),
