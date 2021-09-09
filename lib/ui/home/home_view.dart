@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/ui/home/components/route_config_panel.dart';
@@ -13,6 +14,7 @@ class HomeView extends HookConsumerWidget {
   @override
   Widget build(context, ref) {
     final model = ref.watch(homeViewModel);
+    final currentUser = ref.watch(currentUserProvider);
     final resetKey = ref.watch(resetKeyProvider).state;
 
     useEffect(() {
@@ -28,9 +30,10 @@ class HomeView extends HookConsumerWidget {
             appBar: AppBar(
               leading: Container(
                 margin: const EdgeInsets.only(top: 10, left: 10),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: 5,
-                  backgroundColor: Color(0xffffc901),
+                  backgroundColor: const Color(0xffffc901),
+                  backgroundImage: NetworkImage(currentUser?.photoUrl ?? ''),
                 ),
               ),
               backgroundColor: Colors.transparent,
