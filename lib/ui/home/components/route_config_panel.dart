@@ -61,8 +61,8 @@ class ConfigTypePanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
-    final startAddress = ref.watch(startLocProvider).state?.address ?? '';
-    final endAddress = ref.watch(endLocProvider).state?.address ?? '';
+    final startAddress = ref.watch(startLocProvider).state?.address;
+    final endAddress = ref.watch(endLocProvider).state?.address;
 
     return Container(
       padding: const EdgeInsets.all(15),
@@ -116,9 +116,9 @@ class ConfigTypePanel extends HookConsumerWidget {
                           Padding(
                             padding: EdgeInsets.only(
                                 left: constraints.maxWidth * 0.03),
-                            child: const Text(
-                              'Start Location',
-                              style: TextStyle(fontSize: 17),
+                            child: Text(
+                              startAddress ?? 'Start Location',
+                              style: const TextStyle(fontSize: 17),
                             ),
                           ),
                         ],
@@ -155,9 +155,9 @@ class ConfigTypePanel extends HookConsumerWidget {
                           Padding(
                             padding: EdgeInsets.only(
                                 left: constraints.maxWidth * 0.03),
-                            child: const Text(
-                              'End Location',
-                              style: TextStyle(fontSize: 17),
+                            child: Text(
+                              endAddress ?? 'End Location',
+                              style: const TextStyle(fontSize: 17),
                             ),
                           ),
                         ],
