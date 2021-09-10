@@ -1,19 +1,13 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const cors = require('cors');
+const polyUtil = require('./polyline_helpers');
 const test_data = require("./test_data.json");
 admin.initializeApp();
 const db = admin.firestore();
+const rtdb = admin.database();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
-
-var driverIdDict = {
-    "3WO9ATwspsMwYCRCgdbXnfpp5r83" : [],
-    "TNZyDLzIrLhS4Bklz5yG1rCoDoF2" : [],
-    "HV9BcFRIKMYrQOYzd2gStGqErW12" : [],
-    "" : [],
-    "" : [],
-    "" : []
-}; 
 
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await ridersRef.get();
@@ -109,3 +103,43 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
     .catch(err => res.statusMessage(400).json('Error: ' + err));
 });
 
+
+exports.getRoute = functions.https.onRequest(async (req, res) =>  {
+    cors()(req,res, () => {
+        const driver = test_data.driversList[parseInt(req.query.d,10)];
+        const encodedRoute = driver.encodedRoute;
+        const decodedRoute = polyUtil.decode(encodedRoute);
+        res.send(decodedRoute);
+    });
+    // const path = '/realtime_locations/' + driver.id;
+    // for(var i = 0; i < decodedRoute.length; i ++ ){
+    //     var json = {
+    //         lat : decodedRoute[i][0],
+    //         lng: decodedRoute[i][1]
+    //     };
+    //     setTimeout(setData,5000,json);
+    // }
+
+    // async function setData(json){
+    //     await rtdb.ref(path).set(json);
+    // }
+    
+});
+
+exports.setRoute = functions.https.onRequest(async (req, res) =>  {
+    cors()(req,res, () => {
+        const driver = test_data.driversList[parseInt(req.query.d,10)];
+        const lat = parseFloat(req.query.lat);
+        const lng = parseFloat(req.query.lng);
+        const path = '/realtime_locations/' + driver.id;
+        const json = {
+            lat: lat,
+            lng: lng 
+        };
+        setTimeout(setData,1000,json);
+        async function setData(json){
+            await rtdb.ref(path).update(json);
+        }
+        res.send(json);
+    });
+});
