@@ -4,6 +4,7 @@ const polyUtil = require('./polyline_helpers');
 const test_data = require("./test_data.json");
 admin.initializeApp();
 const db = admin.firestore();
+const rtdb = admin.database();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
 
@@ -105,5 +106,13 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
 exports.routeListener = functions.https.onRequest(async (req, res) =>  {
     const driver = test_data.driversList[parseInt(req.query.d,10)];
     const encodedRoute = driver.encodedRoute;
-    res.send(polyUtil.decode(encodedRoute));
+    const decodedRoute = polyUtil.decode(encodedRoute);
+    for(var i = 0; i < decodedRoute.length; i ++ ){
+        pushLoc(decodedRoute[i]);
+    }
+
+    async function pushLoc(route) {
+        await rtdb.ref('/realtime_locations').set(route);
+    }
+    res.send(polyUtil.decode(decodedRoute));
 });
