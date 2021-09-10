@@ -7,15 +7,6 @@ const db = admin.firestore();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
 
-var driverIdDict = {
-    "3WO9ATwspsMwYCRCgdbXnfpp5r83" : [],
-    "TNZyDLzIrLhS4Bklz5yG1rCoDoF2" : [],
-    "HV9BcFRIKMYrQOYzd2gStGqErW12" : [],
-    "" : [],
-    "" : [],
-    "" : []
-}; 
-
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await ridersRef.get();
     res.send(snapshot.docs.map(doc => doc.data()))
