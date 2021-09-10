@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const cors = require('cors');
 const polyUtil = require('./polyline_helpers');
 const test_data = require("./test_data.json");
 admin.initializeApp();
@@ -104,9 +105,12 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
 
 
 exports.getRoute = functions.https.onRequest(async (req, res) =>  {
-    const driver = test_data.driversList[parseInt(req.query.d,10)];
-    const encodedRoute = driver.encodedRoute;
-    const decodedRoute = polyUtil.decode(encodedRoute);
+    cors()(req,res, () => {
+        const driver = test_data.driversList[parseInt(req.query.d,10)];
+        const encodedRoute = driver.encodedRoute;
+        const decodedRoute = polyUtil.decode(encodedRoute);
+        res.send(decodedRoute);
+    });
     // const path = '/realtime_locations/' + driver.id;
     // for(var i = 0; i < decodedRoute.length; i ++ ){
     //     var json = {
@@ -120,5 +124,22 @@ exports.getRoute = functions.https.onRequest(async (req, res) =>  {
     //     await rtdb.ref(path).set(json);
     // }
     
-    res.send(decodedRoute);
+});
+
+exports.setRoute = functions.https.onRequest(async (req, res) =>  {
+    cors()(req,res, () => {
+        const driver = test_data.driversList[parseInt(req.query.d,10)];
+        const lat = parseFloat(req.query.lat);
+        const lng = parseFloat(req.query.lng);
+        const path = '/realtime_locations/' + driver.id;
+        const json = {
+            lat: lat,
+            lng: lng 
+        };
+        setTimeout(setData,1000,json);
+        async function setData(json){
+            await rtdb.ref(path).update(json);
+        }
+        res.send(json);
+    });
 });
