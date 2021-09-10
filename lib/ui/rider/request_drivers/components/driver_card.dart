@@ -22,8 +22,7 @@ class DriverCard extends StatelessWidget {
         color: Colors.grey[100],
         margin: const EdgeInsets.all(10),
         child: InkWell(
-          onTap: () =>
-              model.mapController.showSelectedDriverRoute(driverConfig),
+          onTap: () => model.previewDriverInfoAndLocation(driverConfig),
           splashColor: Colors.black,
           child: Column(
             children: [
@@ -38,8 +37,9 @@ class DriverCard extends StatelessWidget {
                 ),
               ),
               SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Text(driverConfig.user.displayName ?? 'No name')),
+                scrollDirection: Axis.horizontal,
+                child: Text(driverConfig.user.displayName ?? 'No name'),
+              ),
               SizedBox(height: constraints.maxHeight * 0.15),
               ElevatedButton(
                 onPressed: () => model.requestDriver(driverConfig.user.id),
