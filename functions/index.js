@@ -103,16 +103,22 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
 });
 
 
-exports.routeListener = functions.https.onRequest(async (req, res) =>  {
+exports.getRoute = functions.https.onRequest(async (req, res) =>  {
     const driver = test_data.driversList[parseInt(req.query.d,10)];
     const encodedRoute = driver.encodedRoute;
     const decodedRoute = polyUtil.decode(encodedRoute);
-    for(var i = 0; i < decodedRoute.length; i ++ ){
-        pushLoc(decodedRoute[i]);
-    }
+    // const path = '/realtime_locations/' + driver.id;
+    // for(var i = 0; i < decodedRoute.length; i ++ ){
+    //     var json = {
+    //         lat : decodedRoute[i][0],
+    //         lng: decodedRoute[i][1]
+    //     };
+    //     setTimeout(setData,5000,json);
+    // }
 
-    async function pushLoc(route) {
-        await rtdb.ref('/realtime_locations').set(route);
-    }
-    res.send(polyUtil.decode(decodedRoute));
+    // async function setData(json){
+    //     await rtdb.ref(path).set(json);
+    // }
+    
+    res.send(decodedRoute);
 });
