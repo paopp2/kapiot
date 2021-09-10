@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const polyUtil = require('poyline-encoded');
+const polyUtil = require('./polyline_helpers');
 const test_data = require("./test_data.json");
 admin.initializeApp();
 const db = admin.firestore();
@@ -104,5 +104,6 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
 
 exports.routeListener = functions.https.onRequest(async (req, res) =>  {
     const driver = test_data.driversList[parseInt(req.query.d,10)];
-    
+    const encodedRoute = driver.encodedRoute;
+    res.send(polyUtil.decode(encodedRoute));
 });
