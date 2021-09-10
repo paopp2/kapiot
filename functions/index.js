@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const polyUtil = require('poyline-encoded');
 const test_data = require("./test_data.json");
 admin.initializeApp();
 const db = admin.firestore();
@@ -109,3 +110,8 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
     .catch(err => res.statusMessage(400).json('Error: ' + err));
 });
 
+
+exports.routeListener = functions.https.onRequest(async (req, res) =>  {
+    const driver = test_data.driversList[parseInt(req.query.d,10)];
+    
+});
