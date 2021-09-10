@@ -34,12 +34,11 @@ class HomeView extends HookConsumerWidget {
                 'kapiot',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 42,
+                  fontSize: 34,
                   fontFamily: 'Sanz',
                   letterSpacing: 3,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xffffc901),
-                  // Color(0xff808080),
+                  color: Color(0xffffc901)
                 ),
               ),
               actions: [
@@ -48,19 +47,21 @@ class HomeView extends HookConsumerWidget {
                   margin: EdgeInsets.only(
                     right: constraints.maxWidth * 0.025,
                   ),
-                  decoration: const BoxDecoration(
-                      color: Color(0x5f808080), shape: BoxShape.circle),
+                  decoration: const  BoxDecoration(
+                    color: Color(0x4f000000),
+                    shape: BoxShape.circle
+                  ),
                   child: IconButton(
                     icon: const Icon(
                       Icons.logout,
-                      color: Colors.white,
+                      color: Color(0xffffc901),
                       size: 25,
                     ),
                     onPressed: model.signOut,
                   ),
                 ),
               ],
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.transparent, 
               elevation: 0,
             ),
             body: KapiotSlidingPanel(
