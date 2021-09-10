@@ -3,7 +3,7 @@ import 'package:kapiot/data/helpers/realtime_db_helper.dart';
 import 'package:kapiot/data/helpers/realtime_db_path.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
-final locationRepository = Provider.autoDispose(
+final locationRepositoryProvider = Provider.autoDispose(
   (ref) => LocationRepository(
     realtimeDbHelper: RealtimeDbHelper.instance,
   ),

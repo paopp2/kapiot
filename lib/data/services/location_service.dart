@@ -46,4 +46,16 @@ class LocationService {
     final p = placemarks[0];
     return "${p.name}, ${p.locality}, ${p.subAdministrativeArea}, ${p.administrativeArea}, ${p.country}";
   }
+
+  Stream<KapiotLocation> getLocationStream() {
+    final positionStream = Geolocator.getPositionStream(
+      distanceFilter: 5,
+    );
+    return positionStream.map(
+      (pos) => KapiotLocation(
+        lat: pos.latitude,
+        lng: pos.longitude,
+      ),
+    );
+  }
 }
