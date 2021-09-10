@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
@@ -15,6 +16,7 @@ final requestDriversViewModel = Provider.autoDispose(
     read: ref.read,
     riderRepo: ref.watch(riderRepositoryProvider),
     locationService: ref.watch(locationServiceProvider),
+    locationRepo: ref.watch(locationRepositoryProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     mapController: ref.watch(requestDriversMapController),
   ),
@@ -25,13 +27,18 @@ class RequestDriversViewModel extends ViewModel {
     required Reader read,
     required this.riderRepo,
     required this.locationService,
+    required this.locationRepo,
     required this.googleMapsApiServices,
     required this.mapController,
   }) : super(read);
   final RiderRepository riderRepo;
   final RequestDriversMapController mapController;
   final LocationService locationService;
+  final LocationRepository locationRepo;
   final GoogleMapsApiServices googleMapsApiServices;
+
+  StreamSubscription? _previewedDriverLocationSub;
+  StreamSubscription? _acceptingDriverConfigSub;
 
   @override
   Future<void> initState() async {
@@ -58,20 +65,37 @@ class RequestDriversViewModel extends ViewModel {
     return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
   }
 
+  Future<void> previewDriverInfoAndLocation(RouteConfig driverConfig) async {
+    await mapController.showSelectedDriverRoute(driverConfig);
+    // Cancel the last chosen driver's location stream subscription and
+    // subscribe to the new one
+    _previewedDriverLocationSub?.cancel();
+    _previewedDriverLocationSub =
+        locationRepo.getRealtimeLocation(driverConfig.user.id).listen(
+      (driverLoc) {
+        mapController.addMarker(
+          markerId: "chosen_driver_location",
+          location: driverLoc,
+        );
+      },
+    );
+  }
+
   /// Listen to when a driver accepts and respond accordingly
   Future<void> respondWhenDriverAccepts(
     Stream<RouteConfig?> acceptingDriverConfig,
   ) async {
     final currentRiderConfig = read(currentRouteConfigProvider).state;
     assert(currentRiderConfig != null);
-    StreamSubscription? streamSub;
-    streamSub = acceptingDriverConfig.listen((driverConfig) {
+    _acceptingDriverConfigSub = acceptingDriverConfig.listen((driverConfig) {
       if (driverConfig != null) {
         final riderId = currentRiderConfig!.user.id;
         riderRepo.deletePendingRequests(riderId);
         read(acceptingDriverConfigProvider).state = driverConfig;
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);
-        streamSub!.cancel();
+        // Cancel all stream subscriptions
+        _acceptingDriverConfigSub?.cancel();
+        _previewedDriverLocationSub?.cancel();
       }
     });
   }

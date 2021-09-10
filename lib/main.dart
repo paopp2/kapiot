@@ -27,7 +27,7 @@ void main() async {
       persistenceEnabled: false,
     );
     RealtimeDbHelper.instance.realtimeDb = FirebaseDatabase(
-      databaseURL: 'http://$localHostString:9000?ns=kapiot-46cbc',
+      databaseURL: 'http://$localHostString:9000?ns=kapiot-46cbc-default-rtdb',
     );
   }
 

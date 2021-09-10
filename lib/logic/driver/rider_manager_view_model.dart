@@ -1,33 +1,46 @@
+import 'dart:async';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
+import 'package:kapiot/data/repositories/location_repository.dart';
+import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
 
-final riderManagerViewModel =
-    Provider.autoDispose((ref) => RiderManagerViewModel(
-          read: ref.read,
-          driverRepo: ref.watch(driverRepositoryProvider),
-          currentUser: ref.watch(currentUserProvider),
-        ));
+final riderManagerViewModel = Provider.autoDispose(
+  (ref) => RiderManagerViewModel(
+    read: ref.read,
+    driverRepo: ref.watch(driverRepositoryProvider),
+    locationRepo: ref.watch(locationRepositoryProvider),
+    locationService: ref.watch(locationServiceProvider),
+    currentUser: ref.watch(currentUserProvider),
+  ),
+);
 
 class RiderManagerViewModel extends ViewModel {
   RiderManagerViewModel({
     required Reader read,
     required this.driverRepo,
+    required this.locationRepo,
+    required this.locationService,
     required this.currentUser,
   }) : super(read);
   final DriverRepository driverRepo;
+  final LocationRepository locationRepo;
+  final LocationService locationService;
   final KapiotUser? currentUser;
   static final List<StopPoint> _finishedStopPoints = [];
+  late final StreamSubscription stopPointsSub;
+  late final StreamSubscription realtimeLocSub;
 
   @override
   void initState() {
     final stopPointsStream = getStopPointsStream();
-    stopPointsStream.listen((stopPointsList) {
+    stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
       if (stopPointsList.isNotEmpty) {
         if (_finishedStopPoints.isEmpty) {
@@ -45,6 +58,17 @@ class RiderManagerViewModel extends ViewModel {
         read(nextStopProvider).state = null;
       }
     });
+
+    realtimeLocSub = locationService.getLocationStream().listen((loc) {
+      assert(currentUser != null);
+      locationRepo.updateLocation(currentUser!.id, loc);
+    });
+  }
+
+  @override
+  void dispose() {
+    stopPointsSub.cancel();
+    realtimeLocSub.cancel();
   }
 
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
