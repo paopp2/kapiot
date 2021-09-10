@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
@@ -18,6 +19,7 @@ final requestAcceptedViewModel = Provider.autoDispose(
     read: ref.read,
     riderRepo: ref.watch(riderRepositoryProvider),
     currentUser: ref.watch(currentUserProvider),
+    locationRepo: ref.watch(locationRepositoryProvider),
     locationService: ref.watch(locationServiceProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     mapController: ref.watch(requestAcceptedMapController),
@@ -30,14 +32,18 @@ class RequestAcceptedViewModel extends ViewModel {
     required this.riderRepo,
     required this.currentUser,
     required this.locationService,
+    required this.locationRepo,
     required this.googleMapsApiServices,
     required this.mapController,
   }) : super(read);
   final RiderRepository riderRepo;
   final KapiotUser? currentUser;
   final RequestAcceptedMapController mapController;
+  final LocationRepository locationRepo;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
+  late final StreamSubscription isDroppedOffStreamSub;
+  late final StreamSubscription driverLocStreamSub;
 
   @override
   Future<void> initState() async {
@@ -52,19 +58,37 @@ class RequestAcceptedViewModel extends ViewModel {
     await Future.delayed(const Duration(milliseconds: 50));
     mapController.showAcceptingDriverRoute();
 
-    StreamSubscription? streamSub;
-    streamSub = isDroppedOffStream().listen((isDroppedOff) {
+    final acceptingDriver = read(acceptingDriverConfigProvider).state!;
+    final driverId = acceptingDriver.user.id;
+
+    // StreamSub that listens to the Stream that emits the accepting driver's
+    // realtime location
+    driverLocStreamSub = locationRepo.getRealtimeLocation(driverId).listen(
+      (driverLoc) {
+        mapController.addMarker(
+          markerId: "accepting_driver_location",
+          location: driverLoc,
+        );
+      },
+    );
+
+    // StreamSub that listens to the Stream that emits when this current rider
+    // has been 'dropped off'
+    isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
         MapController.reset(read);
-
         // Set a new resetKey; notifies the HomeView that it should reset
         read(resetKeyProvider).state = UniqueKey();
-        streamSub!.cancel();
-
         // Remove all Views then navigate to HomeView
         AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
       }
     });
+  }
+
+  @override
+  void dispose() {
+    isDroppedOffStreamSub.cancel();
+    driverLocStreamSub.cancel();
   }
 
   /// Remaps the stream containing all riders that have been accepted by the
