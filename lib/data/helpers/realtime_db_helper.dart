@@ -21,7 +21,10 @@ class RealtimeDbHelper {
     required String path,
     required T Function(Map<String, dynamic> data) builder,
   }) {
-    final Stream<Event> events = dbRef.child(path).onValue;
+    // Filter stream (sometimes Firebase RTDB emits null events)
+    final Stream<Event> events =
+        dbRef.child(path).onValue.where((e) => (e.snapshot.value != null));
+    // Remap values at event stream into JSON (Map) data
     final Stream<Map<String, dynamic>> snapshots = events.map(
       (e) => (Map<String, dynamic>.from(e.snapshot.value)),
     );

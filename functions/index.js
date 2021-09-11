@@ -28,6 +28,14 @@ exports.populateAll = functions.https.onRequest(async (req, res) =>  {
     test_data.driversList.forEach(addDriver);
     async function addDriver(driver) {
         await driversRef.doc(driver.id).set(driver);
+        var path = '/realtime_locations/' + driver.id;
+        var encodedRoute = driver.encodedRoute;
+        var decodedRoute = polyUtil.decode(encodedRoute);
+        var json = {
+            lat: decodedRoute[0][0],
+            lng: decodedRoute[0][1]
+        };
+        await rtdb.ref(path).set(json);
     }
     res.json({result: "Populated drivers and riders'"});
 });
@@ -111,19 +119,6 @@ exports.getRoute = functions.https.onRequest(async (req, res) =>  {
         const decodedRoute = polyUtil.decode(encodedRoute);
         res.send(decodedRoute);
     });
-    // const path = '/realtime_locations/' + driver.id;
-    // for(var i = 0; i < decodedRoute.length; i ++ ){
-    //     var json = {
-    //         lat : decodedRoute[i][0],
-    //         lng: decodedRoute[i][1]
-    //     };
-    //     setTimeout(setData,5000,json);
-    // }
-
-    // async function setData(json){
-    //     await rtdb.ref(path).set(json);
-    // }
-    
 });
 
 exports.setRoute = functions.https.onRequest(async (req, res) =>  {
