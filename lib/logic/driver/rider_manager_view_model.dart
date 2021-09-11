@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/location_service.dart';

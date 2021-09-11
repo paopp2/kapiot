@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/data/core_providers/firebase_providers.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/main.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';

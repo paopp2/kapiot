@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
-import 'package:kapiot/data/core_providers/firebase_providers.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/main.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/driver_card.dart';

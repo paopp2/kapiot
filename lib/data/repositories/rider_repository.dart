@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/data/core_algorithms.dart';
+import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';

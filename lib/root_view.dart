@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 
 class RootView extends HookConsumerWidget {
   const RootView({

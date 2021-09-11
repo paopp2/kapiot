@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
-import 'package:kapiot/data/core_providers/auth_providers.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';

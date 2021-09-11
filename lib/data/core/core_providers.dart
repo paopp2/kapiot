@@ -1,6 +1,5 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/data/core_providers/firebase_providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final authStateChangesProvider = StreamProvider<User?>(
@@ -20,3 +19,5 @@ final currentUserProvider = Provider.autoDispose<KapiotUser?>((ref) {
     return null;
   }
 });
+
+final fireauthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
