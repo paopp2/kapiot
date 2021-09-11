@@ -31,9 +31,8 @@ class RootView extends HookConsumerWidget {
   }
 
   Widget _data(BuildContext context, User? user) {
-    if (user != null) {
-      return loggedInBuilder(context);
-    }
-    return loggedOutBuilder(context);
+    return (user != null)
+        ? loggedInBuilder(context)
+        : loggedOutBuilder(context);
   }
 }
