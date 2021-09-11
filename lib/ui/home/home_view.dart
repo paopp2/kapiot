@@ -28,7 +28,6 @@ class HomeView extends HookConsumerWidget {
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               toolbarHeight: constraints.maxHeight * 0.08,
-              centerTitle: true,
               title: const Text(
                 'kapiot',
                 textAlign: TextAlign.center,
@@ -37,7 +36,8 @@ class HomeView extends HookConsumerWidget {
                     fontFamily: 'Sanz',
                     letterSpacing: 3,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xffffc901)),
+                    color: Colors.black,
+                    )
               ),
               actions: [
                 Container(
@@ -46,11 +46,12 @@ class HomeView extends HookConsumerWidget {
                     right: constraints.maxWidth * 0.025,
                   ),
                   decoration: const BoxDecoration(
-                      color: Color(0x4f000000), shape: BoxShape.circle),
+                      color: Color(0xbfffffff), 
+                      shape: BoxShape.circle),
                   child: IconButton(
                     icon: const Icon(
                       Icons.logout,
-                      color: Color(0xffffc901),
+                      color: Colors.black,
                       size: 25,
                     ),
                     onPressed: model.signOut,
