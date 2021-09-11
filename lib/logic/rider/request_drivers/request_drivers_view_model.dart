@@ -92,7 +92,11 @@ class RequestDriversViewModel extends ViewModel {
         final riderId = currentRiderConfig!.user.id;
         riderRepo.deletePendingRequests(riderId);
         read(acceptingDriverConfigProvider).state = driverConfig;
+
+        // Clear map before reusing at the next View
+        mapController.clearMap();
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);
+
         // Cancel all stream subscriptions
         _acceptingDriverConfigSub?.cancel();
         _previewedDriverLocationSub?.cancel();
