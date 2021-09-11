@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/data/core_providers/auth_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/ui/home/components/route_config_panel.dart';
@@ -34,12 +33,11 @@ class HomeView extends HookConsumerWidget {
                 'kapiot',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 34,
-                  fontFamily: 'Sanz',
-                  letterSpacing: 3,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffffc901)
-                ),
+                    fontSize: 34,
+                    fontFamily: 'Sanz',
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffffc901)),
               ),
               actions: [
                 Container(
@@ -47,10 +45,8 @@ class HomeView extends HookConsumerWidget {
                   margin: EdgeInsets.only(
                     right: constraints.maxWidth * 0.025,
                   ),
-                  decoration: const  BoxDecoration(
-                    color: Color(0x4f000000),
-                    shape: BoxShape.circle
-                  ),
+                  decoration: const BoxDecoration(
+                      color: Color(0x4f000000), shape: BoxShape.circle),
                   child: IconButton(
                     icon: const Icon(
                       Icons.logout,
@@ -61,7 +57,7 @@ class HomeView extends HookConsumerWidget {
                   ),
                 ),
               ],
-              backgroundColor: Colors.transparent, 
+              backgroundColor: Colors.transparent,
               elevation: 0,
             ),
             body: KapiotSlidingPanel(
