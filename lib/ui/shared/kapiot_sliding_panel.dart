@@ -28,7 +28,7 @@ class KapiotSlidingPanel extends StatelessWidget {
         color: const Color(0xfff8f9fa),
         child: Column(
           children: [
-            SizedBox(height: constraints.maxHeight * 0.83, child: map),
+            SizedBox(height: constraints.maxHeight * 0.9, child: map),
           ],
         ),
       ),

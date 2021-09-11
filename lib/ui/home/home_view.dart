@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,13 +25,42 @@ class HomeView extends HookConsumerWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Scaffold(
+            extendBodyBehindAppBar: true,
             appBar: AppBar(
+              toolbarHeight: constraints.maxHeight * 0.08,
+              title: const Text(
+                'kapiot',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 34,
+                  fontFamily: 'Sanz',
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               actions: [
-                IconButton(
-                  icon: const Icon(Icons.logout),
-                  onPressed: model.signOut,
-                )
+                Container(
+                  width: 50,
+                  margin: EdgeInsets.only(
+                    right: constraints.maxWidth * 0.025,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Color(0xbfffffff),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.logout,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    onPressed: model.signOut,
+                  ),
+                ),
               ],
+              backgroundColor: Colors.transparent,
+              elevation: 0,
             ),
             body: KapiotSlidingPanel(
               constraints: constraints,
