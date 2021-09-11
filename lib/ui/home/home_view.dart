@@ -32,12 +32,12 @@ class HomeView extends HookConsumerWidget {
                 'kapiot',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 34,
-                    fontFamily: 'Sanz',
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    )
+                  fontSize: 34,
+                  fontFamily: 'Sanz',
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
               actions: [
                 Container(
@@ -46,8 +46,9 @@ class HomeView extends HookConsumerWidget {
                     right: constraints.maxWidth * 0.025,
                   ),
                   decoration: const BoxDecoration(
-                      color: Color(0xbfffffff), 
-                      shape: BoxShape.circle),
+                    color: Color(0xbfffffff),
+                    shape: BoxShape.circle,
+                  ),
                   child: IconButton(
                     icon: const Icon(
                       Icons.logout,
