@@ -7,7 +7,7 @@ import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
 import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
-import 'package:kapiot/ui/shared/missing_service_view.dart';
+import 'package:kapiot/ui/shared/service_error_view.dart';
 
 class AppRouter {
   AppRouter._();
