@@ -68,8 +68,11 @@ class ServiceErrorHandler {
   }
 
   Stream<bool> isRequiredServicesEnabled() async* {
+    // Get initial status of services
     var currentNetStatus = await Connectivity().checkConnectivity();
-    ServiceStatus? currentLocStatus;
+    var currentLocStatus = await (Geolocator.isLocationServiceEnabled())
+        ? ServiceStatus.enabled
+        : ServiceStatus.disabled;
     final mergedServiceStream = StreamGroup.merge([
       locServiceStatus,
       netServiceStatus,

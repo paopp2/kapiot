@@ -25,11 +25,7 @@ class LocationService {
 
   Future<Either<Exception, KapiotLocation>> getLocation() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      Geolocator.openAppSettings();
-    } else {
-      serviceStatusController.add(ServiceStatus.enabled);
-    }
+    if (!serviceEnabled) Geolocator.openAppSettings();
     try {
       final position = await Geolocator.getCurrentPosition();
       return Right(KapiotLocation(
