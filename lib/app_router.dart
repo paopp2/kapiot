@@ -7,6 +7,7 @@ import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
 import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
+import 'package:kapiot/ui/shared/missing_service_view.dart';
 
 class AppRouter {
   AppRouter._();
@@ -14,6 +15,7 @@ class AppRouter {
   final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
   final Map<String, Widget Function(BuildContext)> routesList = {
     Routes.portalView: (context) => const PortalView(),
+    Routes.missingServiceView: (context) => const MissingServiceView(),
     Routes.homeView: (context) => const HomeView(),
     Routes.placePickerView: (context) => const PlacePickerView(),
     Routes.loginView: (context) => const LoginView(),
@@ -33,7 +35,8 @@ class AppRouter {
 }
 
 class Routes {
-  static const portalView = 'portalView';
+  static const portalView = 'portal_view';
+  static const missingServiceView = 'missing_service_view';
   static const homeView = 'home/home_view';
   static const placePickerView = 'home/components/place_picker_view';
   static const loginView = 'auth/login_view';
