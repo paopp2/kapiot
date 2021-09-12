@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final homeMapController = Provider.autoDispose(
   (ref) => HomeMapController(
@@ -24,8 +25,7 @@ class HomeMapController extends MapController {
         );
   final LocationService locationService;
 
-  Future<void> initializeHomeMap() async {
-    final currentLoc = await locationService.getLocation();
+  Future<void> initializeHomeMap(KapiotLocation currentLoc) async {
     super.initializeMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(currentLoc.lat, currentLoc.lng),

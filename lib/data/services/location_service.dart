@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,35 +8,29 @@ final locationServiceProvider =
     Provider.autoDispose((ref) => LocationService());
 
 class LocationService {
-  Future<KapiotLocation> getLocation() async {
+  Future<Either<Exception, KapiotLocation>> getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-    // TODO: Handle when Location services are disabled
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      Geolocator.openAppSettings();
     }
 
-    // TODO: Handle when Location permission denied
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
     }
 
-    // TODO: Handle when Location permission denied forever
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+    try {
+      final position = await Geolocator.getCurrentPosition();
+      return Right(KapiotLocation(
+        lat: position.latitude,
+        lng: position.longitude,
+      ));
+    } catch (e) {
+      return Left(e as Exception);
     }
-    final position = await Geolocator.getCurrentPosition();
-    return KapiotLocation(
-      lat: position.latitude,
-      lng: position.longitude,
-    );
   }
 
   Future<String?> getAddressFromLocation(KapiotLocation location) async {

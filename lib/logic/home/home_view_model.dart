@@ -55,16 +55,22 @@ class HomeViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
-    await mapController.initializeHomeMap();
-    final startLocation = read(startLocProvider).state;
-    if (startLocation != null) {
-      final currentPlace =
-          await locationService.getAddressFromLocation(startLocation);
-      tecStartLoc.text = currentPlace ?? '';
-      mapController.setStartLocation(
-        startLocation.copyWith(address: currentPlace),
-      );
-    }
+    final getLocAttempt = await locationService.getLocation();
+    getLocAttempt.fold(
+      (error) => null,
+      (currentLoc) async {
+        await mapController.initializeHomeMap(currentLoc);
+        final startLocation = read(startLocProvider).state;
+        if (startLocation != null) {
+          final currentPlace =
+              await locationService.getAddressFromLocation(startLocation);
+          tecStartLoc.text = currentPlace ?? '';
+          mapController.setStartLocation(
+            startLocation.copyWith(address: currentPlace),
+          );
+        }
+      },
+    );
   }
 
   Future<void> signOut() async => await authService.signOutGoogle();
