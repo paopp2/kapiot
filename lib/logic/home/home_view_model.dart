@@ -60,15 +60,13 @@ class HomeViewModel extends ViewModel {
       (error) => null,
       (currentLoc) async {
         await mapController.initializeHomeMap(currentLoc);
-        final startLocation = read(startLocProvider).state;
-        if (startLocation != null) {
-          final currentPlace =
-              await locationService.getAddressFromLocation(startLocation);
-          tecStartLoc.text = currentPlace ?? '';
-          mapController.setStartLocation(
-            startLocation.copyWith(address: currentPlace),
-          );
-        }
+        final startLocation = read(startLocProvider).state!;
+        final currentPlace =
+            await locationService.getAddressFromLocation(startLocation);
+        tecStartLoc.text = currentPlace ?? '';
+        mapController.setStartLocation(
+          startLocation.copyWith(address: currentPlace),
+        );
       },
     );
   }
