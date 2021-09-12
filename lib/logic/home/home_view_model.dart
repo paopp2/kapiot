@@ -57,7 +57,7 @@ class HomeViewModel extends ViewModel {
   Future<void> initState() async {
     final getLocAttempt = await locationService.getLocation();
     getLocAttempt.fold(
-      (error) => null,
+      (error) => null, // TODO: Handle when getLocAttempt fails
       (currentLoc) async {
         await mapController.initializeHomeMap(currentLoc);
         final startLocation = read(startLocProvider).state!;

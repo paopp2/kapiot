@@ -64,7 +64,7 @@ class ServiceErrorHandler {
 
   void dispose() {
     _isServicesEnabledSub.cancel();
-    _isServicesEnabledSub.cancel();
+    _locPermissionSub.cancel();
   }
 
   Stream<bool> isRequiredServicesEnabled() async* {

@@ -58,7 +58,6 @@ class PortalView extends StatelessWidget {
                     builder: (data) => data,
                   ),
                   builder: (context, snapshot) {
-                    print(snapshot.data);
                     return const SizedBox();
                   },
                 ),
