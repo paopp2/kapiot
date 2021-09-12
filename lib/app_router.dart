@@ -15,7 +15,7 @@ class AppRouter {
   final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
   final Map<String, Widget Function(BuildContext)> routesList = {
     Routes.portalView: (context) => const PortalView(),
-    Routes.missingServiceView: (context) => const MissingServiceView(),
+    Routes.serviceErrorView: (context) => const ServiceErrorView(),
     Routes.homeView: (context) => const HomeView(),
     Routes.placePickerView: (context) => const PlacePickerView(),
     Routes.loginView: (context) => const LoginView(),
@@ -36,7 +36,7 @@ class AppRouter {
 
 class Routes {
   static const portalView = 'portal_view';
-  static const missingServiceView = 'missing_service_view';
+  static const serviceErrorView = 'service_error_view';
   static const homeView = 'home/home_view';
   static const placePickerView = 'home/components/place_picker_view';
   static const loginView = 'auth/login_view';
