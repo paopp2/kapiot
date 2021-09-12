@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
+import 'package:kapiot/logic/shared/service_error_handler.dart';
 
 class RootView extends HookConsumerWidget {
   const RootView({
@@ -15,6 +17,13 @@ class RootView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authStateChanges = ref.watch(authStateChangesProvider);
+    final serviceErrorHandler = ref.watch(serviceErrorHandlerProvider);
+
+    useEffect(() {
+      serviceErrorHandler.initialize();
+      return serviceErrorHandler.dispose;
+    }, []);
+
     return authStateChanges.when(
       data: (user) => _data(context, user),
       loading: () => const Scaffold(
