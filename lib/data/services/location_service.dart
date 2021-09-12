@@ -5,23 +5,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final locationServiceProvider =
-    Provider.autoDispose((ref) => LocationService());
+    Provider.autoDispose((ref) => LocationService(ref.read));
 
 class LocationService {
+  LocationService(this.read);
+  final Reader read;
   Future<Either<Exception, KapiotLocation>> getLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-    if (!serviceEnabled) {
-      Geolocator.openAppSettings();
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) Geolocator.openAppSettings();
     try {
       final position = await Geolocator.getCurrentPosition();
       return Right(KapiotLocation(
@@ -29,7 +20,14 @@ class LocationService {
         lng: position.longitude,
       ));
     } catch (e) {
-      return Left(e as Exception);
+      e as Exception;
+      switch (e.runtimeType) {
+        case LocationServiceDisabledException:
+          break;
+        case PermissionDeniedException:
+          break;
+      }
+      return Left(e);
     }
   }
 
