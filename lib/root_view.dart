@@ -26,16 +26,8 @@ class RootView extends HookConsumerWidget {
 
     return authStateChanges.when(
       data: (user) => _data(context, user),
-      loading: () => const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-      error: (_, __) => const Scaffold(
-        body: Center(
-          child: Text('error'),
-        ),
-      ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, __) => Center(child: Text('Error: $e')),
     );
   }
 
