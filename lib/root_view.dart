@@ -21,7 +21,6 @@ class RootView extends HookConsumerWidget {
 
     useEffect(() {
       serviceErrorHandler.initialize();
-      return serviceErrorHandler.dispose;
     }, []);
 
     return authStateChanges.when(

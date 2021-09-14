@@ -35,13 +35,11 @@ class ServiceErrorHandler {
   final Stream<LocationPermission> locPermissionStatus;
   final Stream<ConnectivityResult> netServiceStatus =
       Connectivity().onConnectivityChanged;
-  late final StreamSubscription _isServicesEnabledSub;
-  late final StreamSubscription _locPermissionSub;
   final _appRouter = AppRouter.instance;
 
   void initialize() {
     bool atServiceErrorView = false;
-    _isServicesEnabledSub = isRequiredServicesEnabled().listen((isEnabled) {
+    isRequiredServicesEnabled().listen((isEnabled) {
       if (!isEnabled && !atServiceErrorView) {
         _appRouter.navigateTo(Routes.serviceErrorView);
         atServiceErrorView = true;
@@ -52,7 +50,7 @@ class ServiceErrorHandler {
       }
     });
 
-    _locPermissionSub = locPermissionStatus.listen((status) {
+    locPermissionStatus.listen((status) {
       final permissionDenied = (status == LocationPermission.denied ||
           status == LocationPermission.deniedForever);
       if (permissionDenied) {
@@ -60,11 +58,6 @@ class ServiceErrorHandler {
         _appRouter.popAllThenNavigateTo(Routes.serviceErrorView);
       }
     });
-  }
-
-  void dispose() {
-    _isServicesEnabledSub.cancel();
-    _locPermissionSub.cancel();
   }
 
   Stream<bool> isRequiredServicesEnabled() async* {
