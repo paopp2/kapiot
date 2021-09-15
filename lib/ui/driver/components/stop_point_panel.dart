@@ -22,7 +22,6 @@ class StopPointPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rider = nextStop.rider;
-    double panelHeight = constraints.maxHeight * 0.25;
 
     return Flexible(
       child: Container(
@@ -85,8 +84,7 @@ class StopPointPanel extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: const Text("Cancel"),
                 ),
                 ElevatedButton(

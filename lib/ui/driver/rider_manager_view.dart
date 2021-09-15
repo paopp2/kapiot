@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +10,8 @@ import 'components/stop_point_panel.dart';
 
 class RiderManagerView extends HookConsumerWidget {
   const RiderManagerView({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,30 +25,26 @@ class RiderManagerView extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
+    // print('flag is $flag');
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          (nextStop != null)
-              ? height = constraints.maxHeight * 0.15
-              : height = constraints.maxHeight * 0.4;
+          (nextStop == null)
+              ? height = constraints.maxHeight * 0.4
+              : height = constraints.maxHeight * 0.15;
           return Scaffold(
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {},
-              label: const Text("Map View"),
-              icon: const Icon(Icons.map),
-            ),
             body: Container(
-              color: const Color(0x7679ADFf),
+              color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  (nextStop != null)
-                      ? StopPointPanel(
+                  (nextStop == null)
+                      ? const SizedBox() 
+                      : StopPointPanel(
                           model: model,
                           constraints: constraints,
                           nextStop: nextStop,
-                        )
-                      : const SizedBox(),
+                        ),
                   Container(
                     height: constraints.maxHeight * 0.6,
                     width: constraints.maxWidth,
