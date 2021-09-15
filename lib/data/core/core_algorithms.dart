@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
@@ -7,63 +8,71 @@ import 'package:kapiot/model/stop_point/stop_point.dart';
 final coreAlgorithmsProvider = Provider.autoDispose(
   (ref) => CoreAlgorithms(
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+    locationRepo: ref.watch(locationRepositoryProvider),
   ),
 );
 
 class CoreAlgorithms {
-  CoreAlgorithms({required this.googleMapsApiServices});
+  CoreAlgorithms({
+    required this.googleMapsApiServices,
+    required this.locationRepo,
+  });
   final GoogleMapsApiServices googleMapsApiServices;
+  final LocationRepository locationRepo;
 
-  /// Retrieves compatible drivers from [driverConfigs] based on the [riderConfig]
+  /// Gets compatible drivers from the driverConfigs in [driverConfigsStream]
+  /// (along with the drivers' realtime locations) based on the [riderConfig]
   ///
   /// Better alternative: Build this as a Cloud Function to avoid having to
   /// retrieve all active_drivers and filtering them in-app
-  Future<List<RouteConfig>> getCompatibleDrivers({
+  Stream<List<RouteConfig>> getCompatibleDrivers({
     required RouteConfig riderConfig,
-    required List<RouteConfig> driverConfigs,
-  }) async {
+    required Stream<List<RouteConfig>> driverConfigsStream,
+  }) async* {
     riderConfig as ForRider;
-    List<RouteConfig> compatibleDrivers = [];
     final utils = googleMapsApiServices.utils;
 
-    // For each driverConfig, check if both the start and end locations of a
-    // rider lie along the driverConfig's route
-    for (var driverConfig in driverConfigs) {
-      driverConfig as ForDriver;
-      final decodedRoute = await utils.decodeRoute(driverConfig.encodedRoute);
-      final driverStartLocation = KapiotLocation(
-        lat: decodedRoute.first.latitude,
-        lng: decodedRoute.first.longitude,
-      );
-
-      final distFromDriverStartToRiderStart = utils.calculateDistance(
-        pointA: driverStartLocation,
-        pointB: riderConfig.startLocation,
-      );
-
-      final distFromDriverStartToRiderEnd = utils.calculateDistance(
-        pointA: driverStartLocation,
-        pointB: riderConfig.endLocation,
-      );
-
-      bool isGoingTheSameDirection =
-          (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
-
-      if (isGoingTheSameDirection) {
-        bool riderStartCompatible = await utils.isLocationAlongRoute(
-          location: riderConfig.startLocation,
-          decodedRoute: decodedRoute,
+    await for (final driverConfigs in driverConfigsStream) {
+      final List<RouteConfig> compatibleDrivers = [];
+      // For each driverConfig, check if both the start and end locations of a
+      // rider lie along the driverConfig's route
+      for (final driverConfig in driverConfigs) {
+        driverConfig as ForDriver;
+        final decodedRoute = await utils.decodeRoute(driverConfig.encodedRoute);
+        final driverStartLocation = KapiotLocation(
+          lat: decodedRoute.first.latitude,
+          lng: decodedRoute.first.longitude,
         );
-        bool riderEndCompatible = await utils.isLocationAlongRoute(
-          location: riderConfig.endLocation,
-          decodedRoute: decodedRoute,
+
+        final distFromDriverStartToRiderStart = utils.calculateDistance(
+          pointA: driverStartLocation,
+          pointB: riderConfig.startLocation,
         );
-        if (riderStartCompatible && riderEndCompatible) {
-          compatibleDrivers.add(driverConfig);
+
+        final distFromDriverStartToRiderEnd = utils.calculateDistance(
+          pointA: driverStartLocation,
+          pointB: riderConfig.endLocation,
+        );
+
+        bool isGoingTheSameDirection =
+            (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
+
+        if (isGoingTheSameDirection) {
+          bool riderStartCompatible = await utils.isLocationAlongRoute(
+            location: riderConfig.startLocation,
+            decodedRoute: decodedRoute,
+          );
+          bool riderEndCompatible = await utils.isLocationAlongRoute(
+            location: riderConfig.endLocation,
+            decodedRoute: decodedRoute,
+          );
+          if (riderStartCompatible && riderEndCompatible) {
+            compatibleDrivers.add(driverConfig);
+          }
         }
       }
+      yield compatibleDrivers;
     }
-    return compatibleDrivers;
   }
 
   Future<List<StopPoint>> sortStopPoints({

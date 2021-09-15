@@ -2,25 +2,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
-import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final riderRepositoryProvider = Provider.autoDispose((ref) => RiderRepository(
       firestoreHelper: FirestoreHelper.instance,
       coreAlgorithms: ref.watch(coreAlgorithmsProvider),
-      locationRepo: ref.watch(locationRepositoryProvider),
     ));
 
 class RiderRepository {
   RiderRepository({
     required this.firestoreHelper,
     required this.coreAlgorithms,
-    required this.locationRepo,
   });
   final FirestoreHelper firestoreHelper;
   final CoreAlgorithms coreAlgorithms;
-  final LocationRepository locationRepo;
 
   static final List<String> _driverIdList = [];
 
@@ -51,18 +47,15 @@ class RiderRepository {
 
   Stream<List<RouteConfig>> getCompatibleDriverConfigsAsStream(
     RouteConfig riderConfig,
-  ) async* {
-    final allDriversStream = firestoreHelper.collectionStream(
+  ) {
+    final driverConfigsStream = firestoreHelper.collectionStream(
       path: FirestorePath.colActiveDrivers(),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-    await for (var driverConfigs in allDriversStream) {
-      final compatibleDriverConfigs = await coreAlgorithms.getCompatibleDrivers(
-        riderConfig: riderConfig,
-        driverConfigs: driverConfigs,
-      );
-      yield compatibleDriverConfigs;
-    }
+    return coreAlgorithms.getCompatibleDrivers(
+      riderConfig: riderConfig,
+      driverConfigsStream: driverConfigsStream,
+    );
   }
 
   Stream<RouteConfig?> getAcceptingDriverConfigAsStream(String riderId) {
