@@ -17,7 +17,7 @@ class DriverCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 240,
+      width: constraints.maxWidth * 0.6,
       child: Card(
         color: Colors.grey[100],
         margin: const EdgeInsets.all(10),
@@ -40,7 +40,7 @@ class DriverCard extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Text(driverConfig.user.displayName ?? 'No name'),
               ),
-              SizedBox(height: constraints.maxHeight * 0.15),
+              SizedBox(height: constraints.maxHeight * 0.05),
               ElevatedButton(
                 onPressed: () => model.requestDriver(driverConfig.user.id),
                 child: const Text('Hail Ride'),
