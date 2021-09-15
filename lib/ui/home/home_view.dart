@@ -32,9 +32,9 @@ class HomeView extends HookConsumerWidget {
                 'kapiot',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 34,
+                  fontSize: 18,
                   fontFamily: 'Sanz',
-                  letterSpacing: 3,
+                  letterSpacing: 0.5,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
