@@ -8,12 +8,10 @@ class KapiotSlidingPanel extends StatelessWidget {
     required this.map,
     required this.panel,
     required this.constraints,
-    required this.title,
   }) : super(key: key);
   final Widget map;
   final Widget panel;
   final BoxConstraints constraints;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +21,7 @@ class KapiotSlidingPanel extends StatelessWidget {
       parallaxOffset: 0.5,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       minHeight: constraints.maxHeight * 0.1,
+      maxHeight: constraints.maxHeight * 0.5,
       body: Container(
         height: constraints.maxHeight,
         color: const Color(0xfff8f9fa),
@@ -46,12 +45,6 @@ class KapiotSlidingPanel extends StatelessWidget {
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(12),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: constraints.maxHeight * 0.03,
-                ),
-                child: Text(title),
               ),
               panel,
             ],

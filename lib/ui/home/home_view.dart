@@ -64,7 +64,6 @@ class HomeView extends HookConsumerWidget {
             ),
             body: KapiotSlidingPanel(
               constraints: constraints,
-              title: "Route Configuration",
               map: HomeViewMap(model: model),
               panel: RouteConfigPanel(
                 constraints: constraints,

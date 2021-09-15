@@ -34,9 +34,6 @@ class ConfigTypePanel extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: constraints.maxHeight * 0.01,
-                ),
                 padding: EdgeInsets.only(left: constraints.maxWidth * 0.02),
                 child: Align(
                   alignment: Alignment.topLeft,
