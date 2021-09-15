@@ -24,7 +24,6 @@ class RequestAcceptedView extends HookConsumerWidget {
           child: Scaffold(
             body: KapiotSlidingPanel(
               constraints: constraints,
-              title: 'Ride Information',
               map: Center(
                 child: RequestAcceptedViewMap(model: model),
               ),

@@ -24,7 +24,6 @@ class RequestDriversView extends HookConsumerWidget {
           child: Scaffold(
             body: KapiotSlidingPanel(
               constraints: constraints,
-              title: "We found n drivers for your request",
               map: Center(
                 child: RequestDriversViewMap(model: model),
               ),
