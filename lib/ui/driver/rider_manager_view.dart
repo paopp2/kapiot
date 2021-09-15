@@ -26,8 +26,8 @@ class RiderManagerView extends HookConsumerWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           (nextStop != null)
-              ? height = constraints.maxHeight * 0.5
-              : height = constraints.maxHeight * 0.95;
+              ? height = constraints.maxHeight * 0.15
+              : height = constraints.maxHeight * 0.4;
           return Scaffold(
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {},
@@ -36,27 +36,28 @@ class RiderManagerView extends HookConsumerWidget {
             ),
             body: Container(
               color: const Color(0x7679ADFf),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth * 0.05,
-                    vertical: constraints.maxHeight * 0.025),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    (nextStop != null)
-                        ? StopPointPanel(
-                            model: model,
-                            constraints: constraints,
-                            nextStop: nextStop,
-                          )
-                        : const SizedBox(),
-                    RequestingRidersPanel(
-                      model: model,
-                      constraints: constraints,
-                      height: height,
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  (nextStop != null)
+                      ? StopPointPanel(
+                          model: model,
+                          constraints: constraints,
+                          nextStop: nextStop,
+                        )
+                      : const SizedBox(),
+                  Container(
+                    height: constraints.maxHeight * 0.6,
+                    width: constraints.maxWidth,
+                    color: Colors.amber,
+                    child: const Center(child: Text('Map here')),
+                  ),
+                  RequestingRidersPanel(
+                    model: model,
+                    constraints: constraints,
+                    height: height,
+                  ),
+                ],
               ),
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
 import 'package:marquee/marquee.dart';
@@ -6,7 +7,7 @@ import 'package:marquee/marquee.dart';
 const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
-class StopPointPanel extends StatelessWidget {
+class StopPointPanel extends HookConsumerWidget {
   const StopPointPanel({
     Key? key,
     required this.model,
@@ -19,29 +20,27 @@ class StopPointPanel extends StatelessWidget {
   final StopPoint nextStop;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final rider = nextStop.rider;
+    double panelHeight = constraints.maxHeight * 0.25;
 
     return Flexible(
       child: Container(
-        margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
         padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: Colors.white,
-        ),
+        color: Colors.white,
         child: ListView(
           children: [
-            Container(
-              margin:
-                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.03),
+            SizedBox(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(rider.photoUrl ?? uscLogo),
+                  Container(
+                    margin: EdgeInsets.only(left: constraints.maxWidth * 0.1),
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(rider.photoUrl ?? uscLogo),
+                    ),
                   ),
                   SizedBox(
                     width: constraints.maxWidth * 0.6,
@@ -74,7 +73,7 @@ class StopPointPanel extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: constraints.maxHeight * 0.06,
               child: Marquee(
                 text: (nextStop.stopLocation.address ?? ""),
                 style: const TextStyle(fontSize: 17, color: Colors.grey),
@@ -82,22 +81,19 @@ class StopPointPanel extends StatelessWidget {
                 pauseAfterRound: const Duration(seconds: 2),
               ),
             ),
-            Container(
-              margin:
-                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Cancel"),
-                  ),
-                  ElevatedButton(
-                    onPressed: model.updateNextStop,
-                    child: const Text("Done"),
-                  )
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                  },
+                  child: const Text("Cancel"),
+                ),
+                ElevatedButton(
+                  onPressed: model.updateNextStop,
+                  child: const Text("Done"),
+                )
+              ],
             ),
           ],
         ),

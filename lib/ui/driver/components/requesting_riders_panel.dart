@@ -24,10 +24,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
       duration: const Duration(seconds: 1),
       curve: Curves.fastOutSlowIn,
       height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: Colors.white,
-      ),
+      color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -38,34 +35,36 @@ class RequestingRidersPanel extends HookConsumerWidget {
               style: TextStyle(fontSize: 23),
             ),
           ),
-          Container(
-            child: requestingRidersStream.when(
-              error: (_, __) => const Center(
-                child: Text('Error'),
-              ),
-              loading: () =>
-                  const LoadingWidget(text: 'Fetching ride requests...'),
-              data: (requestingRiders) => ListView.builder(
-                shrinkWrap: true,
-                itemCount: requestingRiders.length,
-                itemBuilder: (context, index) {
-                  final rider = requestingRiders[index];
-                  return Card(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                    child: ListTile(
-                      onTap: () => model.acceptRider(rider.id),
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(rider.photoUrl!),
+          Expanded(
+            child: Container(
+              child: requestingRidersStream.when(
+                error: (_, __) => const Center(
+                  child: Text('Error'),
+                ),
+                loading: () =>
+                    const LoadingWidget(text: 'Fetching ride requests...'),
+                data: (requestingRiders) => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: requestingRiders.length,
+                  itemBuilder: (context, index) {
+                    final rider = requestingRiders[index];
+                    return Card(
+                      margin:
+                          const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                      child: ListTile(
+                        onTap: () => model.acceptRider(rider.id),
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(rider.photoUrl!),
+                        ),
+                        title: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(rider.displayName ?? 'No Name',
+                              style: const TextStyle(fontSize: 20.0)),
+                        ),
                       ),
-                      title: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Text(rider.displayName ?? 'No Name',
-                            style: const TextStyle(fontSize: 20.0)),
-                      ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ),
