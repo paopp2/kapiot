@@ -4,6 +4,8 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
+import 'package:stream_transform/stream_transform.dart';
+import 'package:collection/collection.dart';
 
 final coreAlgorithmsProvider = Provider.autoDispose(
   (ref) => CoreAlgorithms(
@@ -20,8 +22,8 @@ class CoreAlgorithms {
   final GoogleMapsApiServices googleMapsApiServices;
   final LocationRepository locationRepo;
 
-  /// Gets compatible drivers from the driverConfigs in [driverConfigsStream]
-  /// (along with the drivers' realtime locations) based on the [riderConfig]
+  /// Gets compatible drivers from the [driverConfigsStream] (along with their
+  /// corresponding realtime locations) based on the [riderConfig]
   ///
   /// Better alternative: Build this as a Cloud Function to avoid having to
   /// retrieve all active_drivers and filtering them in-app
@@ -33,46 +35,75 @@ class CoreAlgorithms {
     riderConfig as ForRider;
     final utils = googleMapsApiServices.utils;
 
-    await for (final driverConfigs in driverConfigsStream) {
-      final List<RouteConfig> compatibleDrivers = [];
-      // For each driverConfig, check if both the start and end locations of a
-      // rider lie along the driverConfig's route
-      for (final driverConfig in driverConfigs) {
-        driverConfig as ForDriver;
-        final decodedRoute = await utils.decodeRoute(driverConfig.encodedRoute);
-        final driverStartLocation = KapiotLocation(
-          lat: decodedRoute.first.latitude,
-          lng: decodedRoute.first.longitude,
-        );
-
-        final distFromDriverStartToRiderStart = utils.calculateDistance(
-          pointA: driverStartLocation,
-          pointB: riderConfig.startLocation,
-        );
-
-        final distFromDriverStartToRiderEnd = utils.calculateDistance(
-          pointA: driverStartLocation,
-          pointB: riderConfig.endLocation,
-        );
-
-        bool isGoingTheSameDirection =
-            (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
-
-        if (isGoingTheSameDirection) {
-          bool riderStartCompatible = await utils.isLocationAlongRoute(
-            location: riderConfig.startLocation,
-            decodedRoute: decodedRoute,
+    // A stream of a rider's compatible drivers derived from the merged
+    // drivers' configs stream (Firestore) and drivers' currentLoc stream (RTDB)
+    final compatibleDriversStream = driverConfigsStream
+        .combineLatest<List<Map<String, KapiotLocation>>, List<RouteConfig>>(
+      driverLocsStream,
+      (driverConfigs, driverLocs) async {
+        final List<RouteConfig> compatibleDrivers = [];
+        for (final driverConfig in driverConfigs) {
+          driverConfig as ForDriver;
+          final decodedRoute =
+              await utils.decodeRoute(driverConfig.encodedRoute);
+          final driverStartLocation = KapiotLocation(
+            lat: decodedRoute.first.latitude,
+            lng: decodedRoute.first.longitude,
           );
-          bool riderEndCompatible = await utils.isLocationAlongRoute(
-            location: riderConfig.endLocation,
-            decodedRoute: decodedRoute,
+
+          final distFromDriverStartToRiderStart = utils.calculateDistance(
+            pointA: driverStartLocation,
+            pointB: riderConfig.startLocation,
           );
-          if (riderStartCompatible && riderEndCompatible) {
-            compatibleDrivers.add(driverConfig);
+
+          final distFromDriverStartToRiderEnd = utils.calculateDistance(
+            pointA: driverStartLocation,
+            pointB: riderConfig.endLocation,
+          );
+
+          bool isGoingTheSameDirection =
+              (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
+
+          if (isGoingTheSameDirection) {
+            bool riderStartCompatible = await utils.isLocationAlongRoute(
+              location: riderConfig.startLocation,
+              decodedRoute: decodedRoute,
+            );
+            bool riderEndCompatible = await utils.isLocationAlongRoute(
+              location: riderConfig.endLocation,
+              decodedRoute: decodedRoute,
+            );
+            if (riderStartCompatible && riderEndCompatible) {
+              // Obtain the current location of this driverConfig from the
+              // driverLocs stream
+              final driverCurrentLocMap = driverLocs.singleWhere(
+                (map) => (map.keys.first == driverConfig.user.id),
+              );
+              final distFromDriverStartToCurrent = utils.calculateDistance(
+                pointA: driverStartLocation,
+                pointB: driverCurrentLocMap.values.first, // Driver's currentLoc
+              );
+              bool driverHasPassedRider = distFromDriverStartToRiderStart <
+                  distFromDriverStartToCurrent;
+              if (!driverHasPassedRider) compatibleDrivers.add(driverConfig);
+            }
           }
         }
+        return compatibleDrivers;
+      },
+    );
+
+    // To avoid unnecessary rebuilds to listeners (eg. StreamBuilders), only
+    // emit data that is not equal to the last one (directly returning
+    // the stream above (compatibleDriversStream) emits data everytime
+    // driverStartLoc stream has updates)
+    List<RouteConfig> lastDataEmitted = [];
+    Function isListsEqual = const ListEquality().equals;
+    await for (final data in compatibleDriversStream) {
+      if (!isListsEqual(lastDataEmitted, data)) {
+        lastDataEmitted = data;
+        yield data;
       }
-      yield compatibleDrivers;
     }
   }
 
