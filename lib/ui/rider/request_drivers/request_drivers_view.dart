@@ -18,10 +18,10 @@ class RequestDriversView extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SafeArea(
-          child: Scaffold(
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scaffold(
             body: KapiotSlidingPanel(
               constraints: constraints,
               map: Center(
@@ -38,9 +38,9 @@ class RequestDriversView extends HookConsumerWidget {
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
