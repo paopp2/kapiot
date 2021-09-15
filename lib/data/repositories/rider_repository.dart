@@ -2,20 +2,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
+import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final riderRepositoryProvider = Provider.autoDispose((ref) => RiderRepository(
       firestoreHelper: FirestoreHelper.instance,
+      locationRepo: ref.watch(locationRepositoryProvider),
       coreAlgorithms: ref.watch(coreAlgorithmsProvider),
     ));
 
 class RiderRepository {
   RiderRepository({
     required this.firestoreHelper,
+    required this.locationRepo,
     required this.coreAlgorithms,
   });
   final FirestoreHelper firestoreHelper;
+  final LocationRepository locationRepo;
   final CoreAlgorithms coreAlgorithms;
 
   static final List<String> _driverIdList = [];
@@ -52,9 +56,11 @@ class RiderRepository {
       path: FirestorePath.colActiveDrivers(),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
+    final driverLocsStream = locationRepo.getAllRealtimeLocations();
     return coreAlgorithms.getCompatibleDrivers(
       riderConfig: riderConfig,
       driverConfigsStream: driverConfigsStream,
+      driverLocsStream: driverLocsStream,
     );
   }
 

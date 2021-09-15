@@ -28,6 +28,7 @@ class CoreAlgorithms {
   Stream<List<RouteConfig>> getCompatibleDrivers({
     required RouteConfig riderConfig,
     required Stream<List<RouteConfig>> driverConfigsStream,
+    required Stream<List<Map<String, KapiotLocation>>> driverLocsStream,
   }) async* {
     riderConfig as ForRider;
     final utils = googleMapsApiServices.utils;
