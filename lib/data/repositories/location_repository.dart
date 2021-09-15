@@ -26,4 +26,11 @@ class LocationRepository {
       builder: (data) => KapiotLocation.fromJson(data),
     );
   }
+
+  Stream<List<Map<String, KapiotLocation>>> getAllRealtimeLocations() {
+    return realtimeDbHelper.collectionStream(
+      path: RealtimeDbPath.allRealtimeLocations(),
+      builder: (data, id) => {id: KapiotLocation.fromJson(data)},
+    );
+  }
 }
