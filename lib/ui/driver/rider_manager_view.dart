@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
@@ -45,8 +45,17 @@ class RiderManagerView extends HookConsumerWidget {
                         SizedBox(
                           height: constraints.maxHeight * 0.8,
                           // color: Colors.amber,
-                          child: const Center(
-                            child: Text('Map Here'),
+                          // child: const Center(
+                          //   child: Text('Map Here'),
+                          // ),
+                          child: const GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(
+                                10.367889719519498,
+                                123.91382842505321,
+                              ),
+                              zoom: 20,
+                            ),
                           ),
                         ),
                         Align(
