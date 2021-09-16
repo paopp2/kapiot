@@ -16,25 +16,31 @@ class AuthService {
   final Reader read;
   final GoogleSignIn googleSignIn;
 
-  Future<Either<Exception, UserCredential?>> signInWithGoogle() async {
+  Future<Either<Exception, UserCredential?>> signInWithUscEmail() async {
     try {
-      AuthCredential googleAuthCreds = await googleCredentials();
-      final signedInUserCreds =
-          await read(fireauthProvider).signInWithCredential(googleAuthCreds);
-      return Right(signedInUserCreds);
+      final googleSignInAcc = await getGoogleSignInAcc();
+      if (googleSignInAcc != null) {
+        final googleAuthCreds = await uscAuthCredentials(googleSignInAcc);
+        final signedInUserCreds =
+            await read(fireauthProvider).signInWithCredential(googleAuthCreds);
+        return Right(signedInUserCreds);
+      } else {
+        // Cancelled sign-in
+        return const Right(null);
+      }
     } catch (e) {
       return Left(e as Exception);
     }
   }
 
-  Future<void> signOutGoogle() async {
-    await googleSignIn.signOut();
-    await read(fireauthProvider).signOut();
+  Future<GoogleSignInAccount?> getGoogleSignInAcc() async {
+    return await googleSignIn.signIn();
   }
 
-  Future<AuthCredential> googleCredentials() async {
-    final googleSignInAcc = await googleSignIn.signIn();
-    if (googleSignInAcc!.email.split("@")[1] == 'usc.edu.ph') {
+  Future<AuthCredential> uscAuthCredentials(
+    GoogleSignInAccount googleSignInAcc,
+  ) async {
+    if (googleSignInAcc.email.split("@")[1] == 'usc.edu.ph') {
       final googleSignInAuth = await googleSignInAcc.authentication;
       return GoogleAuthProvider.credential(
         accessToken: googleSignInAuth.accessToken,
@@ -44,5 +50,10 @@ class AuthService {
       signOutGoogle();
       throw Exception('Not USC Email');
     }
+  }
+
+  Future<void> signOutGoogle() async {
+    await googleSignIn.signOut();
+    await read(fireauthProvider).signOut();
   }
 }

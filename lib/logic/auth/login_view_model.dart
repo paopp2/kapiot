@@ -22,7 +22,7 @@ class LoginViewModel extends ViewModel {
     required BuildContext context,
     required Widget nonUscEmailDialog,
   }) async {
-    final authCreds = await authService.signInWithGoogle();
+    final authCreds = await authService.signInWithUscEmail();
     authCreds.fold(
       // The email used to sign-in is not part of the USC organization
       (notUscEmail) => showDialog(
@@ -32,7 +32,11 @@ class LoginViewModel extends ViewModel {
       // Ensure shared map state is reset before building the HomeView
       // This is required to avoid errors such as the map's initialCameraPosition
       // is already set before the starting location is retrieved
-      (successfulSignIn) => MapController.reset(read),
+      (creds) {
+        // Sign-in process may have been cancelled by user. In which case,
+        // credentials are null
+        if (creds != null) MapController.reset(read);
+      },
     );
   }
 }
