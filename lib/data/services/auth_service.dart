@@ -18,7 +18,11 @@ class AuthService {
 
   Future<Either<Exception, UserCredential?>> signInWithGoogle() async {
     try {
-      AuthCredential googleAuthCreds = await googleCredentials();
+      AuthCredential? googleAuthCreds = await googleCredentials();
+      // if sign-in cancelled
+      if (googleAuthCreds == null) {
+        return const Right(null);
+      }
       final signedInUserCreds =
           await read(fireauthProvider).signInWithCredential(googleAuthCreds);
       return Right(signedInUserCreds);
@@ -32,9 +36,10 @@ class AuthService {
     await read(fireauthProvider).signOut();
   }
 
-  Future<AuthCredential> googleCredentials() async {
+  Future<AuthCredential?> googleCredentials() async {
     final googleSignInAcc = await googleSignIn.signIn();
-    if (googleSignInAcc!.email.split("@")[1] == 'usc.edu.ph') {
+    if (googleSignInAcc == null) return null; // Sign-in cancelled
+    if (googleSignInAcc.email.split("@")[1] == 'usc.edu.ph') {
       final googleSignInAuth = await googleSignInAcc.authentication;
       return GoogleAuthProvider.credential(
         accessToken: googleSignInAuth.accessToken,
