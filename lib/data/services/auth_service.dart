@@ -16,13 +16,14 @@ class AuthService {
   final Reader read;
   final GoogleSignIn googleSignIn;
 
-  Future<Either<Exception, UserCredential?>> signInWithGoogle() async {
+  Future<Either<Exception, UserCredential?>> signInWithUscEmail() async {
     try {
-      AuthCredential? googleAuthCreds = await googleCredentials();
-      // if sign-in cancelled
-      if (googleAuthCreds == null) {
-        return const Right(null);
-      }
+      AuthCredential? googleAuthCreds = await uscAuthCredentials(
+        await getGoogleSignInAcc(),
+      );
+      // If sign-in cancelled
+      if (googleAuthCreds == null) return const Right(null);
+
       final signedInUserCreds =
           await read(fireauthProvider).signInWithCredential(googleAuthCreds);
       return Right(signedInUserCreds);
@@ -31,13 +32,13 @@ class AuthService {
     }
   }
 
-  Future<void> signOutGoogle() async {
-    await googleSignIn.signOut();
-    await read(fireauthProvider).signOut();
+  Future<GoogleSignInAccount?> getGoogleSignInAcc() async {
+    return await googleSignIn.signIn();
   }
 
-  Future<AuthCredential?> googleCredentials() async {
-    final googleSignInAcc = await googleSignIn.signIn();
+  Future<AuthCredential?> uscAuthCredentials(
+    GoogleSignInAccount? googleSignInAcc,
+  ) async {
     if (googleSignInAcc == null) return null; // Sign-in cancelled
     if (googleSignInAcc.email.split("@")[1] == 'usc.edu.ph') {
       final googleSignInAuth = await googleSignInAcc.authentication;
@@ -49,5 +50,10 @@ class AuthService {
       signOutGoogle();
       throw Exception('Not USC Email');
     }
+  }
+
+  Future<void> signOutGoogle() async {
+    await googleSignIn.signOut();
+    await read(fireauthProvider).signOut();
   }
 }
