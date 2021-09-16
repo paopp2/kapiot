@@ -1,70 +1,88 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
-import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
-import 'package:kapiot/ui/shared/loading_widget.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-class RequestingRidersPanel extends HookConsumerWidget {
-  const RequestingRidersPanel(
-      {Key? key,
-      required this.model,
-      required this.constraints,
-      required this.height})
+class RequestingRidersPanel extends StatelessWidget {
+  const RequestingRidersPanel({Key? key, required this.constraints})
       : super(key: key);
 
-  final RiderManagerViewModel model;
   final BoxConstraints constraints;
-  final double height;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
-
-    return AnimatedContainer(
-      duration: const Duration(seconds: 1),
-      curve: Curves.fastOutSlowIn,
-      height: height,
-      color: Colors.white,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 15),
-            child: const Text(
-              "REQUESTING RIDERS",
-              style: TextStyle(fontSize: 23),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              child: requestingRidersStream.when(
-                error: (_, __) => const Center(
-                  child: Text('Error'),
-                ),
-                loading: () =>
-                    const LoadingWidget(text: 'Fetching ride requests...'),
-                data: (requestingRiders) => ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: requestingRiders.length,
-                  itemBuilder: (context, index) {
-                    final rider = requestingRiders[index];
-                    return Card(
-                      margin:
-                          const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                      child: ListTile(
-                        onTap: () => model.acceptRider(rider.id),
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(rider.photoUrl!),
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: constraints.maxHeight * 0.18,
+      width: constraints.maxWidth,
+      child: CarouselSlider(
+        options: CarouselOptions(enlargeCenterPage: true),
+        items: [
+          Center(
+            child: SizedBox(
+              width: constraints.maxWidth * 0.8,
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(9),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 7)
+                      ],
+                    ),
+                    height: constraints.maxHeight * 0.13,
+                    width: constraints.maxWidth * 0.8,
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: constraints.maxWidth * 0.02),
+                          height: constraints.maxHeight * 0.09,
+                          width: constraints.maxWidth * 0.2,
+                          color: Colors.amber,
                         ),
-                        title: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(rider.displayName ?? 'No Name',
-                              style: const TextStyle(fontSize: 20.0)),
+                        Container(
+                          margin: EdgeInsets.only(
+                              right: constraints.maxWidth * 0.02),
+                          height: constraints.maxHeight * 0.09,
+                          width: constraints.maxWidth * 0.54,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'time of booking here',
+                              ),
+                              Text(
+                                'Name of rider',
+                                style: TextStyle(
+                                    fontSize: 19, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: InkWell(
+                      onTap: () {
+                        print('rider has been accepted');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(9),
+                          color: Colors.grey,
                         ),
+                        height: constraints.maxHeight * 0.06,
+                        width: constraints.maxWidth * 0.4,
+                        child: Center(child: Text('Accept')),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),

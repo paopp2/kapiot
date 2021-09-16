@@ -1,98 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
-import 'package:kapiot/model/stop_point/stop_point.dart';
 import 'package:marquee/marquee.dart';
 
-const uscLogo =
-    'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
-
-class StopPointPanel extends HookConsumerWidget {
+class StopPointPanel extends StatelessWidget {
   const StopPointPanel({
     Key? key,
-    required this.model,
     required this.constraints,
-    required this.nextStop,
   }) : super(key: key);
 
-  final RiderManagerViewModel model;
   final BoxConstraints constraints;
-  final StopPoint nextStop;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final rider = nextStop.rider;
-
-    return Flexible(
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topCenter,
       child: Container(
-        padding: const EdgeInsets.all(15),
-        color: Colors.white,
-        child: ListView(
+        decoration: BoxDecoration(
+            color: Color(0x8fffffff),
+            borderRadius: BorderRadiusDirectional.circular(24)),
+        margin: EdgeInsets.only(top: constraints.maxHeight * 0.025),
+        padding: EdgeInsets.all(constraints.maxWidth * 0.025),
+        height: 130,
+        width: constraints.maxWidth * 0.8,
+        child: Column(
           children: [
             SizedBox(
+              width: constraints.maxWidth * 0.75,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: constraints.maxWidth * 0.1),
-                    child: CircleAvatar(
+                    margin:
+                        EdgeInsets.only(right: constraints.maxWidth * 0.025),
+                    child: const CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(rider.photoUrl ?? uscLogo),
+                      backgroundColor: Colors.amber,
                     ),
                   ),
-                  SizedBox(
-                    width: constraints.maxWidth * 0.6,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(
-                            rider.displayName ?? 'No name',
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: Column(
+                        // mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              'Name',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(
-                            "ACTION: " +
-                                ((nextStop.isPickUp) ? "Pick up" : "Drop off"),
+                          SizedBox(
+                            height: 25,
+                            child: Marquee(
+                              text:
+                                  'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City',
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.grey),
+                              blankSpace: 90,
+                              pauseAfterRound: const Duration(seconds: 2),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(
-              height: constraints.maxHeight * 0.06,
-              child: Marquee(
-                text: (nextStop.stopLocation.address ?? ""),
-                style: const TextStyle(fontSize: 17, color: Colors.grey),
-                blankSpace: 90,
-                pauseAfterRound: const Duration(seconds: 2),
-              ),
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Cancel"),
+                const Text(
+                  "ACTION: ",
+                  style: TextStyle(fontSize: 14),
                 ),
                 ElevatedButton(
-                  onPressed: model.updateNextStop,
+                  onPressed: () {
+                    print('next stop point');
+                  },
                   child: const Text("Done"),
                 )
               ],
-            ),
+            )
           ],
         ),
       ),
