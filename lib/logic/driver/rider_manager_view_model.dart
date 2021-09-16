@@ -1,15 +1,20 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
 
 final riderManagerViewModel = Provider.autoDispose(
@@ -42,7 +47,7 @@ class RiderManagerViewModel extends ViewModel {
   late final StreamSubscription realtimeLocSub;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -63,9 +68,35 @@ class RiderManagerViewModel extends ViewModel {
       }
     });
 
-    realtimeLocSub = locationService.getLocationStream().listen((loc) {
+    // Obtain current driver's end location
+    final utils = googleMapsApiServices.utils;
+    final routeConfig = read(currentRouteConfigProvider).state as ForDriver;
+    final encodedRoute = routeConfig.encodedRoute;
+    final decodedRoute = await utils.decodeRoute(encodedRoute);
+    final driverEndLocation = KapiotLocation(
+      lat: decodedRoute.last.latitude,
+      lng: decodedRoute.last.longitude,
+    );
+
+    // Push changes to this driver's location and return to HomeView once
+    // this driver arrives at destination / end location
+    realtimeLocSub = locationService.getLocationStream().listen((currentLoc) {
       assert(currentUser != null);
-      locationRepo.updateLocation(currentUser!.id, loc);
+      final distToDriverEnd = utils.calculateDistance(
+        pointA: currentLoc,
+        pointB: driverEndLocation,
+      );
+
+      // If driver is less than 50m away from destination (arriving)
+      if (distToDriverEnd < 0.050) {
+        MapController.reset(read);
+        // Set a new resetKey; notifies the HomeView that it should reset
+        read(resetKeyProvider).state = UniqueKey();
+        // Remove all Views then navigate to HomeView
+        AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
+      } else {
+        locationRepo.updateLocation(currentUser!.id, currentLoc);
+      }
     });
   }
 
