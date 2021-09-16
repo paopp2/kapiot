@@ -40,6 +40,7 @@ dependencies:
   marquee: ^2.2.0
   jiffy: ^4.1.0
   google_fonts: ^2.1.0
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   build_runner: ^2.1.1
