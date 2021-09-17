@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/model/dist_matrix_element/dist_matrix_element.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmaps;
 import 'package:maps_toolkit/maps_toolkit.dart' as utils;
+import 'package:http/http.dart' as http;
 import 'dart:math' show cos, sqrt, asin;
 
 // TODO: Exposed API key! Hide in production
@@ -13,6 +17,7 @@ final googleMapsApiServicesProvider = Provider.autoDispose(
   (ref) => GoogleMapsApiServices(
     places: PlacesService.instance,
     directions: DirectionsService.instance,
+    distMatrix: DistanceMatrixService.instance,
     utils: MapsUtils.instance,
   ),
 );
@@ -22,9 +27,11 @@ class GoogleMapsApiServices {
     required this.places,
     required this.directions,
     required this.utils,
+    required this.distMatrix,
   });
   final PlacesService places;
   final DirectionsService directions;
+  final DistanceMatrixService distMatrix;
   final MapsUtils utils;
 }
 
@@ -84,6 +91,43 @@ class DirectionsService {
     return result.points
         .map((p) => gmaps.LatLng(p.latitude, p.longitude))
         .toList();
+  }
+}
+
+class DistanceMatrixService {
+  DistanceMatrixService._();
+  static final instance = DistanceMatrixService._();
+
+  Future<DistMatrixElement> getDistMatrixElement(
+    KapiotLocation pointA,
+    KapiotLocation pointB,
+  ) async {
+    final latPointA = pointA.lat;
+    final lngPointA = pointA.lng;
+    final latPointB = pointB.lat;
+    final lngPointB = pointB.lng;
+
+    final url = Uri.parse(
+        "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
+    final result = await http.get(url);
+
+    Map<String, dynamic> decodedResult = jsonDecode(result.body);
+
+    final distanceText =
+        decodedResult["rows"][0]["elements"][0]["distance"]["text"];
+    final distanceValue =
+        decodedResult["rows"][0]["elements"][0]["distance"]["value"];
+    final durationText =
+        decodedResult["rows"][0]["elements"][0]["duration"]["text"];
+    final durationValue =
+        decodedResult["rows"][0]["elements"][0]["duration"]["value"];
+
+    return DistMatrixElement(
+      distanceText: distanceText,
+      distanceValue: distanceValue.toDouble(),
+      durationText: durationText,
+      durationValue: durationValue.toDouble(),
+    );
   }
 }
 
