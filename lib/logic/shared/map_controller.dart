@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
@@ -60,8 +61,8 @@ abstract class MapController {
     required KapiotLocation endLocation,
     required List<LatLng> routeCoordinates,
   }) async {
-    addMarker(markerId: "start_location", location: startLocation);
-    addMarker(markerId: "end_location", location: endLocation);
+    addMarker(marker: Markers.startLoc, location: startLocation);
+    addMarker(marker: Markers.endLoc, location: endLocation);
     drawPolyLine(routeCoordinates);
 
     animateToRoute(
@@ -83,14 +84,8 @@ abstract class MapController {
     );
     setStartLocation(startLocation);
     setEndLocation(endLocation);
-    addMarker(
-      markerId: "start_location",
-      location: startLocation,
-    );
-    addMarker(
-      markerId: "end_location",
-      location: endLocation,
-    );
+    addMarker(marker: Markers.startLoc, location: startLocation);
+    addMarker(marker: Markers.endLoc, location: endLocation);
     drawPolyLine(decodedRoute);
 
     animateToRoute(
@@ -146,13 +141,15 @@ abstract class MapController {
     read(polylinesProvider).state = polylines;
   }
 
-  void addMarker({required String markerId, required KapiotLocation location}) {
+  void addMarker({
+    required Marker marker,
+    required KapiotLocation location,
+  }) {
     final markers = read(markersProvider).state;
+    markers.removeWhere((m) => (m.markerId == marker.markerId));
     markers.add(
-      Marker(
-        markerId: MarkerId(markerId),
-        position: LatLng(location.lat, location.lng),
-        icon: BitmapDescriptor.defaultMarker,
+      marker.copyWith(
+        positionParam: LatLng(location.lat, location.lng),
       ),
     );
     read(markersProvider).state = markers;

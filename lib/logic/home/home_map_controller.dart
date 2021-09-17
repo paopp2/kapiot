@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
@@ -34,7 +35,7 @@ class HomeMapController extends MapController {
     );
     setStartLocation(currentLoc);
     addMarker(
-      markerId: "start_location",
+      marker: Markers.currentUserLoc,
       location: currentLoc,
     );
   }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -66,7 +67,7 @@ class RequestAcceptedViewModel extends ViewModel {
     driverLocStreamSub = locationRepo.getRealtimeLocation(driverId).listen(
       (driverLoc) {
         mapController.addMarker(
-          markerId: "accepting_driver_location",
+          marker: Markers.driverLoc,
           location: driverLoc,
         );
       },
