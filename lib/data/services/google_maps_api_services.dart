@@ -160,28 +160,28 @@ class DistanceMatrixService {
     final latPointA = pointA.lat;
     final lngPointA = pointA.lng;
     final latPointB = pointB.lat;
-    final lngPointB = pointB.lat;
+    final lngPointB = pointB.lng;
 
     final url = Uri.parse(
         "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
     final result = await http.get(url);
 
     Map<String, dynamic> decodedResult = jsonDecode(result.body);
-
+    print(decodedResult);
     final distanceText =
-        decodedResult['rows'][0]['elements'][0]['distance']['text'];
+        decodedResult["rows"][0]["elements"][0]["distance"]["text"];
     final distanceValue =
-        decodedResult['rows'][0]['elements'][0]['distance']['value'];
+        decodedResult["rows"][0]["elements"][0]["distance"]["value"];
     final durationText =
-        decodedResult['rows'][0]['elements'][0]['duration']['text'];
+        decodedResult["rows"][0]["elements"][0]["duration"]["text"];
     final durationValue =
-        decodedResult['rows'][0]['elements'][0]['duration']['value'];
+        decodedResult["rows"][0]["elements"][0]["duration"]["value"];
 
     final distMatrix = DistMatrixElement(
         distanceText: distanceText,
-        distanceValue: distanceValue,
+        distanceValue: distanceValue.toDouble(),
         durationText: durationText,
-        durationValue: durationValue);
+        durationValue: durationValue.toDouble());
     print(distMatrix);
     return distMatrix;
   }
