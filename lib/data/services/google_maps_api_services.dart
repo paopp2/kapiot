@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmaps;
 import 'package:maps_toolkit/maps_toolkit.dart' as utils;
+import 'package:http/http.dart' as http;
 import 'dart:math' show cos, sqrt, asin;
 
 // TODO: Exposed API key! Hide in production
@@ -124,6 +127,22 @@ class MapsUtils {
       true,
       tolerance: 100,
     );
+  }
+
+  DistMatrixElement getDistMatrixElement(
+      KapiotLocation pointA, KapiotLocation pointB) async {
+    final latPointA = pointA.lat;
+    final lngPointA = pointA.lng;
+    final latPointB = pointB.lat;
+    final lngPointB = pointB.lat;
+    final url = Uri.parse(
+        "https://maps.googleapiyss.com/maps/api/distancematrix/json?destinations=$latPointA,$lngPointA&origins=$latPointB,$lngPointB&key=$googleApiKey");
+    final result = await http.get(url);
+
+    // final distance =
+    // final matrixResult = DistMatrixElement(
+
+    // );
   }
 
   /// Calculates distance between two points using the Haversine formula and
