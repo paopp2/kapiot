@@ -75,17 +75,20 @@ class CoreAlgorithms {
             );
             if (riderStartCompatible && riderEndCompatible) {
               // Obtain the current location of this driverConfig from the
-              // driverLocs stream
-              final driverCurrentLocMap = driverLocs.singleWhere(
+              // driverLocs stream (if none found, return null)
+              final driverCurrentLocMap = driverLocs.singleWhereOrNull(
                 (map) => (map.keys.first == driverConfig.user.id),
               );
-              final distFromDriverStartToCurrent = utils.calculateDistance(
-                pointA: driverStartLocation,
-                pointB: driverCurrentLocMap.values.first, // Driver's currentLoc
-              );
-              bool driverHasPassedRider = distFromDriverStartToRiderStart <
-                  distFromDriverStartToCurrent;
-              if (!driverHasPassedRider) compatibleDrivers.add(driverConfig);
+              if (driverCurrentLocMap != null) {
+                final distFromDriverStartToCurrent = utils.calculateDistance(
+                  pointA: driverStartLocation,
+                  pointB:
+                      driverCurrentLocMap.values.first, // Driver's currentLoc
+                );
+                bool driverHasPassedRider = distFromDriverStartToRiderStart <
+                    distFromDriverStartToCurrent;
+                if (!driverHasPassedRider) compatibleDrivers.add(driverConfig);
+              }
             }
           }
         }
