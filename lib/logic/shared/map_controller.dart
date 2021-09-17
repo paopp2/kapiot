@@ -6,7 +6,7 @@ import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
-const double latLngBoundsPadding = 50.0;
+const double latLngBoundsPadding = 150.0;
 
 final startLocProvider = StateProvider<KapiotLocation?>((ref) => null);
 
