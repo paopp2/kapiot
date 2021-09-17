@@ -163,15 +163,19 @@ class DistanceMatrixService {
     final lngPointB = pointB.lat;
 
     final url = Uri.parse(
-        "https://maps.googleapiyss.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
+        "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
     final result = await http.get(url);
 
     Map<String, dynamic> decodedResult = jsonDecode(result.body);
 
-    final distanceText = decodedResult['rows'][0]['elements'][0]['text'];
-    final distanceValue = decodedResult['rows'][0]['elements'][0]['value'];
-    final durationText = decodedResult['rows'][0]['elements'][1]['text'];
-    final durationValue = decodedResult['rows'][0]['elements'][1]['value'];
+    final distanceText =
+        decodedResult['rows'][0]['elements'][0]['distance']['text'];
+    final distanceValue =
+        decodedResult['rows'][0]['elements'][0]['distance']['value'];
+    final durationText =
+        decodedResult['rows'][0]['elements'][0]['duration']['text'];
+    final durationValue =
+        decodedResult['rows'][0]['elements'][0]['duration']['value'];
 
     final distMatrix = DistMatrixElement(
         distanceText: distanceText,
