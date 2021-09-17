@@ -16,7 +16,7 @@ class Markers {
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
   );
 
-  static final riderLoc = Marker(
+  static final riderEndLoc = Marker(
     markerId: const MarkerId('rider_loc_marker'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
   );

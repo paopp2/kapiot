@@ -45,7 +45,13 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
     assert(read(currentRouteConfigProvider).state != null);
-    final routeConfig = read(currentRouteConfigProvider).state!;
+    final routeConfig = read(currentRouteConfigProvider).state! as ForRider;
+
+    mapController.addMarker(
+      marker: Markers.currentUserLoc,
+      location: routeConfig.startLocation,
+    );
+
     final driverConfigStream = riderRepo.getAcceptingDriverConfigAsStream(
       routeConfig.user.id,
     );
