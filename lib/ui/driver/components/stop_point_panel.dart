@@ -15,7 +15,11 @@ class StopPointPanel extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0x8fffffff),
+            // color: Color(0x8fffffff),
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.white, Color(0xafffffff), Color(0x00ffffff)]),
             borderRadius: BorderRadiusDirectional.circular(24)),
         margin: EdgeInsets.only(top: constraints.maxHeight * 0.025),
         padding: EdgeInsets.all(constraints.maxWidth * 0.025),
