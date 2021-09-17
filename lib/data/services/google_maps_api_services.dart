@@ -163,7 +163,7 @@ class DistanceMatrixService {
     final lngPointB = pointB.lat;
 
     final url = Uri.parse(
-        "https://maps.googleapiyss.com/maps/api/distancematrix/json?destinations=$latPointA,$lngPointA&origins=$latPointB,$lngPointB&key=$googleApiKey");
+        "https://maps.googleapiyss.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
     final result = await http.get(url);
 
     Map<String, dynamic> decodedResult = jsonDecode(result.body);
@@ -178,7 +178,7 @@ class DistanceMatrixService {
         distanceValue: distanceValue,
         durationText: durationText,
         durationValue: durationValue);
-
+    print(distMatrix);
     return distMatrix;
   }
 }
