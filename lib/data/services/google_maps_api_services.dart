@@ -130,24 +130,6 @@ class MapsUtils {
     );
   }
 
-  Future<DistMatrixElement> getDistMatrixElement(
-    KapiotLocation pointA,
-    KapiotLocation pointB,
-  ) async {
-    final latPointA = pointA.lat;
-    final lngPointA = pointA.lng;
-    final latPointB = pointB.lat;
-    final lngPointB = pointB.lat;
-    final url = Uri.parse(
-        "https://maps.googleapiyss.com/maps/api/distancematrix/json?destinations=$latPointA,$lngPointA&origins=$latPointB,$lngPointB&key=$googleApiKey");
-    final result = await http.get(url);
-
-    // final distance =
-    // final matrixResult = DistMatrixElement(
-
-    // );
-  }
-
   /// Calculates distance between two points using the Haversine formula and
   /// returns the result in km
   double calculateDistance({
@@ -164,5 +146,39 @@ class MapsUtils {
         c((lat2 - lat1) * p) / 2 +
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
+  }
+}
+
+class DistanceMatrixService {
+  DistanceMatrixService._();
+  static final instance = DistanceMatrixService._();
+
+  Future<DistMatrixElement> getDistMatrixElement(
+    KapiotLocation pointA,
+    KapiotLocation pointB,
+  ) async {
+    final latPointA = pointA.lat;
+    final lngPointA = pointA.lng;
+    final latPointB = pointB.lat;
+    final lngPointB = pointB.lat;
+
+    final url = Uri.parse(
+        "https://maps.googleapiyss.com/maps/api/distancematrix/json?destinations=$latPointA,$lngPointA&origins=$latPointB,$lngPointB&key=$googleApiKey");
+    final result = await http.get(url);
+
+    Map<String, dynamic> matrixResult = jsonDecode(result.body);
+
+    final distanceText = matrixResult['rows'][0]['elements'][0]['text'];
+    final distanceValue = matrixResult['rows'][0]['elements'][0]['value'];
+    final durationText = matrixResult['rows'][0]['elements'][1]['text'];
+    final durationValue = matrixResult['rows'][0]['elements'][1]['value'];
+
+    final distMatrix = DistMatrixElement(
+        distanceText: distanceText,
+        distanceValue: distanceValue,
+        durationText: durationText,
+        durationValue: durationValue);
+
+    return distMatrix;
   }
 }
