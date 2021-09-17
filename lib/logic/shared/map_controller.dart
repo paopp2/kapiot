@@ -60,7 +60,6 @@ abstract class MapController {
     required KapiotLocation endLocation,
     required List<LatLng> routeCoordinates,
   }) async {
-    read(markersProvider).state = {};
     addMarker(markerId: "start_location", location: startLocation);
     addMarker(markerId: "end_location", location: endLocation);
     drawPolyLine(routeCoordinates);
@@ -74,7 +73,6 @@ abstract class MapController {
   Future<void> showRouteFromEncoded({required String encodedRoute}) async {
     final decodedRoute =
         await googleMapsApiServices.utils.decodeRoute(encodedRoute);
-    read(markersProvider).state = {};
     final startLocation = KapiotLocation(
       lat: decodedRoute.first.latitude,
       lng: decodedRoute.first.longitude,
