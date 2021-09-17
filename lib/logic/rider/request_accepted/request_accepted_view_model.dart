@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -12,6 +13,7 @@ import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 import 'request_accepted_map_controller.dart';
 
 final requestAcceptedViewModel = Provider.autoDispose(
@@ -48,6 +50,7 @@ class RequestAcceptedViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     assert(read(acceptingDriverConfigProvider).state != null);
+    assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
 
     await mapController.initializeRequestAcceptedMap();
@@ -58,15 +61,26 @@ class RequestAcceptedViewModel extends ViewModel {
     await Future.delayed(const Duration(milliseconds: 50));
     mapController.showAcceptingDriverRoute();
 
-    final acceptingDriver = read(acceptingDriverConfigProvider).state!;
-    final driverId = acceptingDriver.user.id;
+    // Add markers for the current rider's start and end loc on the map
+    final routeConfig = read(currentRouteConfigProvider).state! as ForRider;
+    mapController
+      ..addMarker(
+        marker: Markers.currentUserLoc,
+        location: routeConfig.startLocation,
+      )
+      ..addMarker(
+        marker: Markers.riderEndLoc,
+        location: routeConfig.endLocation,
+      );
 
     // StreamSub that listens to the Stream that emits the accepting driver's
     // realtime location
+    final acceptingDriver = read(acceptingDriverConfigProvider).state!;
+    final driverId = acceptingDriver.user.id;
     driverLocStreamSub = locationRepo.getRealtimeLocation(driverId).listen(
       (driverLoc) {
         mapController.addMarker(
-          markerId: "accepting_driver_location",
+          marker: Markers.driverLoc,
           location: driverLoc,
         );
       },

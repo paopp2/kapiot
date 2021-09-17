@@ -139,6 +139,8 @@ class HomeViewModel extends ViewModel {
       read(currentRouteConfigProvider).state = driverConfig;
       AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
+    // Clear map before reusing at the next View
+    mapController.clearMap();
   }
 
   // TODO: Assert no calls to this method in production
@@ -175,5 +177,7 @@ class HomeViewModel extends ViewModel {
       read(currentRouteConfigProvider).state = driverConfig;
       AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
+    // Clear map before reusing at the next View
+    mapController.clearMap();
   }
 }

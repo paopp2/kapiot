@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -44,7 +45,13 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
     assert(read(currentRouteConfigProvider).state != null);
-    final routeConfig = read(currentRouteConfigProvider).state!;
+    final routeConfig = read(currentRouteConfigProvider).state! as ForRider;
+
+    mapController.addMarker(
+      marker: Markers.currentUserLoc,
+      location: routeConfig.startLocation,
+    );
+
     final driverConfigStream = riderRepo.getAcceptingDriverConfigAsStream(
       routeConfig.user.id,
     );
@@ -74,7 +81,7 @@ class RequestDriversViewModel extends ViewModel {
         locationRepo.getRealtimeLocation(driverConfig.user.id).listen(
       (driverLoc) {
         mapController.addMarker(
-          markerId: "chosen_driver_location",
+          marker: Markers.driverLoc,
           location: driverLoc,
         );
       },
