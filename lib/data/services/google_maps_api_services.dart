@@ -167,7 +167,7 @@ class DistanceMatrixService {
     final result = await http.get(url);
 
     Map<String, dynamic> decodedResult = jsonDecode(result.body);
-    print(decodedResult);
+
     final distanceText =
         decodedResult["rows"][0]["elements"][0]["distance"]["text"];
     final distanceValue =
@@ -182,7 +182,7 @@ class DistanceMatrixService {
         distanceValue: distanceValue.toDouble(),
         durationText: durationText,
         durationValue: durationValue.toDouble());
-    print(distMatrix);
+
     return distMatrix;
   }
 }
