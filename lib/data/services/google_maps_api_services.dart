@@ -17,6 +17,7 @@ final googleMapsApiServicesProvider = Provider.autoDispose(
   (ref) => GoogleMapsApiServices(
     places: PlacesService.instance,
     directions: DirectionsService.instance,
+    distMatrix: DistanceMatrixService.instance,
     utils: MapsUtils.instance,
   ),
 );
@@ -26,9 +27,11 @@ class GoogleMapsApiServices {
     required this.places,
     required this.directions,
     required this.utils,
+    required this.distMatrix,
   });
   final PlacesService places;
   final DirectionsService directions;
+  final DistanceMatrixService distMatrix;
   final MapsUtils utils;
 }
 
@@ -91,6 +94,43 @@ class DirectionsService {
   }
 }
 
+class DistanceMatrixService {
+  DistanceMatrixService._();
+  static final instance = DistanceMatrixService._();
+
+  Future<DistMatrixElement> getDistMatrixElement(
+    KapiotLocation pointA,
+    KapiotLocation pointB,
+  ) async {
+    final latPointA = pointA.lat;
+    final lngPointA = pointA.lng;
+    final latPointB = pointB.lat;
+    final lngPointB = pointB.lng;
+
+    final url = Uri.parse(
+        "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
+    final result = await http.get(url);
+
+    Map<String, dynamic> decodedResult = jsonDecode(result.body);
+
+    final distanceText =
+        decodedResult["rows"][0]["elements"][0]["distance"]["text"];
+    final distanceValue =
+        decodedResult["rows"][0]["elements"][0]["distance"]["value"];
+    final durationText =
+        decodedResult["rows"][0]["elements"][0]["duration"]["text"];
+    final durationValue =
+        decodedResult["rows"][0]["elements"][0]["duration"]["value"];
+
+    return DistMatrixElement(
+      distanceText: distanceText,
+      distanceValue: distanceValue.toDouble(),
+      durationText: durationText,
+      durationValue: durationValue.toDouble(),
+    );
+  }
+}
+
 class MapsUtils {
   MapsUtils._();
   static final instance = MapsUtils._();
@@ -146,43 +186,5 @@ class MapsUtils {
         c((lat2 - lat1) * p) / 2 +
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
-  }
-}
-
-class DistanceMatrixService {
-  DistanceMatrixService._();
-  static final instance = DistanceMatrixService._();
-
-  Future<DistMatrixElement> getDistMatrixElement(
-    KapiotLocation pointA,
-    KapiotLocation pointB,
-  ) async {
-    final latPointA = pointA.lat;
-    final lngPointA = pointA.lng;
-    final latPointB = pointB.lat;
-    final lngPointB = pointB.lng;
-
-    final url = Uri.parse(
-        "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
-    final result = await http.get(url);
-
-    Map<String, dynamic> decodedResult = jsonDecode(result.body);
-
-    final distanceText =
-        decodedResult["rows"][0]["elements"][0]["distance"]["text"];
-    final distanceValue =
-        decodedResult["rows"][0]["elements"][0]["distance"]["value"];
-    final durationText =
-        decodedResult["rows"][0]["elements"][0]["duration"]["text"];
-    final durationValue =
-        decodedResult["rows"][0]["elements"][0]["duration"]["value"];
-
-    final distMatrix = DistMatrixElement(
-        distanceText: distanceText,
-        distanceValue: distanceValue.toDouble(),
-        durationText: durationText,
-        durationValue: durationValue.toDouble());
-
-    return distMatrix;
   }
 }
