@@ -6,9 +6,9 @@ part 'dist_matrix_element.freezed.dart';
 @freezed
 class DistMatrixElement with _$DistMatrixElement {
   const factory DistMatrixElement({
-    String? distanceText,
-    double? distanceValue,
-    String? durationText,
-    double? durationValue,
+    required String distanceText,
+    required double distanceValue,
+    required String durationText,
+    required double durationValue,
   }) = _DistMatrixElement;
 }

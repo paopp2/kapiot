@@ -18,10 +18,10 @@ class _$DistMatrixElementTearOff {
   const _$DistMatrixElementTearOff();
 
   _DistMatrixElement call(
-      {String? distanceText,
-      double? distanceValue,
-      String? durationText,
-      double? durationValue}) {
+      {required String distanceText,
+      required double distanceValue,
+      required String durationText,
+      required double durationValue}) {
     return _DistMatrixElement(
       distanceText: distanceText,
       distanceValue: distanceValue,
@@ -36,10 +36,10 @@ const $DistMatrixElement = _$DistMatrixElementTearOff();
 
 /// @nodoc
 mixin _$DistMatrixElement {
-  String? get distanceText => throw _privateConstructorUsedError;
-  double? get distanceValue => throw _privateConstructorUsedError;
-  String? get durationText => throw _privateConstructorUsedError;
-  double? get durationValue => throw _privateConstructorUsedError;
+  String get distanceText => throw _privateConstructorUsedError;
+  double get distanceValue => throw _privateConstructorUsedError;
+  String get durationText => throw _privateConstructorUsedError;
+  double get durationValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DistMatrixElementCopyWith<DistMatrixElement> get copyWith =>
@@ -52,10 +52,10 @@ abstract class $DistMatrixElementCopyWith<$Res> {
           DistMatrixElement value, $Res Function(DistMatrixElement) then) =
       _$DistMatrixElementCopyWithImpl<$Res>;
   $Res call(
-      {String? distanceText,
-      double? distanceValue,
-      String? durationText,
-      double? durationValue});
+      {String distanceText,
+      double distanceValue,
+      String durationText,
+      double durationValue});
 }
 
 /// @nodoc
@@ -78,19 +78,19 @@ class _$DistMatrixElementCopyWithImpl<$Res>
       distanceText: distanceText == freezed
           ? _value.distanceText
           : distanceText // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       distanceValue: distanceValue == freezed
           ? _value.distanceValue
           : distanceValue // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       durationText: durationText == freezed
           ? _value.durationText
           : durationText // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       durationValue: durationValue == freezed
           ? _value.durationValue
           : durationValue // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
     ));
   }
 }
@@ -103,10 +103,10 @@ abstract class _$DistMatrixElementCopyWith<$Res>
       __$DistMatrixElementCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? distanceText,
-      double? distanceValue,
-      String? durationText,
-      double? durationValue});
+      {String distanceText,
+      double distanceValue,
+      String durationText,
+      double durationValue});
 }
 
 /// @nodoc
@@ -131,19 +131,19 @@ class __$DistMatrixElementCopyWithImpl<$Res>
       distanceText: distanceText == freezed
           ? _value.distanceText
           : distanceText // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       distanceValue: distanceValue == freezed
           ? _value.distanceValue
           : distanceValue // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       durationText: durationText == freezed
           ? _value.durationText
           : durationText // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       durationValue: durationValue == freezed
           ? _value.durationValue
           : durationValue // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
     ));
   }
 }
@@ -154,19 +154,19 @@ class _$_DistMatrixElement
     with DiagnosticableTreeMixin
     implements _DistMatrixElement {
   const _$_DistMatrixElement(
-      {this.distanceText,
-      this.distanceValue,
-      this.durationText,
-      this.durationValue});
+      {required this.distanceText,
+      required this.distanceValue,
+      required this.durationText,
+      required this.durationValue});
 
   @override
-  final String? distanceText;
+  final String distanceText;
   @override
-  final double? distanceValue;
+  final double distanceValue;
   @override
-  final String? durationText;
+  final String durationText;
   @override
-  final double? durationValue;
+  final double durationValue;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -218,19 +218,19 @@ class _$_DistMatrixElement
 
 abstract class _DistMatrixElement implements DistMatrixElement {
   const factory _DistMatrixElement(
-      {String? distanceText,
-      double? distanceValue,
-      String? durationText,
-      double? durationValue}) = _$_DistMatrixElement;
+      {required String distanceText,
+      required double distanceValue,
+      required String durationText,
+      required double durationValue}) = _$_DistMatrixElement;
 
   @override
-  String? get distanceText => throw _privateConstructorUsedError;
+  String get distanceText => throw _privateConstructorUsedError;
   @override
-  double? get distanceValue => throw _privateConstructorUsedError;
+  double get distanceValue => throw _privateConstructorUsedError;
   @override
-  String? get durationText => throw _privateConstructorUsedError;
+  String get durationText => throw _privateConstructorUsedError;
   @override
-  double? get durationValue => throw _privateConstructorUsedError;
+  double get durationValue => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DistMatrixElementCopyWith<_DistMatrixElement> get copyWith =>
