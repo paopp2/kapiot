@@ -87,8 +87,9 @@ class RideInfoPanel extends HookConsumerWidget {
                                             .split(' ')
                                             .last,
                                     style: const TextStyle(
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.bold),
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -113,7 +114,8 @@ class RideInfoPanel extends HookConsumerWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        right: constraints.maxWidth * 0.02),
+                                      right: constraints.maxWidth * 0.02,
+                                    ),
                                     child: const Icon(
                                       Icons.location_on,
                                       color: Colors.grey,
@@ -191,7 +193,8 @@ class RideInfoPanel extends HookConsumerWidget {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: constraints.maxWidth * 0.05),
+                            left: constraints.maxWidth * 0.05,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -200,17 +203,22 @@ class RideInfoPanel extends HookConsumerWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        bottom: constraints.maxHeight * 0.005),
-                                    child: const Text('home',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        )),
+                                      bottom: constraints.maxHeight * 0.005,
+                                    ),
+                                    child: const Text(
+                                      'home',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                   const Text(
                                     'Pick-up Location',
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -222,12 +230,14 @@ class RideInfoPanel extends HookConsumerWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        bottom: constraints.maxHeight * 0.005),
+                                      bottom: constraints.maxHeight * 0.005,
+                                    ),
                                     child: const Text(
                                       'destination',
                                       style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   const Text(
@@ -301,14 +311,15 @@ class RideInfoPanel extends HookConsumerWidget {
                         EdgeInsets.only(right: constraints.maxWidth * 0.015),
                     child: const Text(
                       'Ride Reward',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(color: Colors.grey),
                     ),
                   ),
                   const Text(
                     '3.43 points',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),
