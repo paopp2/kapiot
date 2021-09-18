@@ -15,13 +15,17 @@ class StopPointPanel extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: Container(
         decoration: BoxDecoration(
-            // color: Color(0x8fffffff),
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.white, Color(0xafffffff), Color(0x00ffffff)]),
-            borderRadius: BorderRadiusDirectional.circular(24)),
-        margin: EdgeInsets.only(top: constraints.maxHeight * 0.025),
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white,
+              Color(0xafffffff),
+              Color(0x00ffffff),
+            ],
+          ),
+          borderRadius: BorderRadiusDirectional.circular(5),
+        ),
         padding: EdgeInsets.all(constraints.maxWidth * 0.025),
         height: 130,
         width: constraints.maxWidth * 0.8,
@@ -43,7 +47,6 @@ class StopPointPanel extends StatelessWidget {
                     child: SizedBox(
                       height: 60,
                       child: Column(
-                        // mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -52,7 +55,9 @@ class StopPointPanel extends StatelessWidget {
                             child: Text(
                               'Name',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -61,9 +66,13 @@ class StopPointPanel extends StatelessWidget {
                               text:
                                   'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City',
                               style: const TextStyle(
-                                  fontSize: 16, color: Colors.grey),
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
                               blankSpace: 90,
-                              pauseAfterRound: const Duration(seconds: 2),
+                              pauseAfterRound: const Duration(
+                                seconds: 2,
+                              ),
                             ),
                           ),
                         ],

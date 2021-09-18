@@ -23,7 +23,7 @@ class RequestingRidersPanel extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(9),
+                      borderRadius: BorderRadius.circular(5),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
@@ -50,7 +50,7 @@ class RequestingRidersPanel extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 'time of booking here',
                               ),
@@ -73,12 +73,12 @@ class RequestingRidersPanel extends StatelessWidget {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(9),
+                          borderRadius: BorderRadius.circular(5),
                           color: Colors.grey,
                         ),
                         height: constraints.maxHeight * 0.06,
                         width: constraints.maxWidth * 0.4,
-                        child: Center(child: Text('Accept')),
+                        child: const Center(child: Text('Accept')),
                       ),
                     ),
                   )
