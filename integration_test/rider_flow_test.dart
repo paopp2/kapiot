@@ -163,15 +163,14 @@ Future<void> main() async {
       expect(find.text("Billy Butcher"), findsOneWidget);
 
       // Adding accepted riders should show up as coriders on the screen. With
-      // this, adding n number of riders should show up (n+1) CircleAvatars, the
-      // additional one is the acceptingDriver's
+      // this, adding n number of riders should show up n CircleAvatars
       CloudFunctionsApi.acceptRider(riderIdx: 5, driverIdx: 8);
       CloudFunctionsApi.acceptRider(riderIdx: 6, driverIdx: 8);
       CloudFunctionsApi.acceptRider(riderIdx: 7, driverIdx: 8);
-      while (!(findsNWidgets(4).matches(find.byType(CircleAvatar), {}))) {
+      while (!(findsNWidgets(3).matches(find.byType(CircleAvatar), {}))) {
         await tester.pumpAndSettle();
       }
-      expect(find.byType(CircleAvatar), findsNWidgets(4));
+      expect(find.byType(CircleAvatar), findsNWidgets(3));
 
       // Dropping off the currentUser brings back the app to the HomeView
       CloudFunctionsApi.dropRider(riderIdx: 14, driverIdx: 8);
