@@ -53,7 +53,7 @@ class RideInfoPanel extends HookConsumerWidget {
                       borderRadius: BorderRadius.circular(9),
                       image: DecorationImage(
                         image: NetworkImage(acceptingDriver.photoUrl!),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                       boxShadow: const [
                         BoxShadow(
@@ -317,7 +317,7 @@ class RideInfoPanel extends HookConsumerWidget {
                     ),
                   ),
                   const Text(
-                    '3.43 points',
+                    '10.0 points',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
