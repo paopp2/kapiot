@@ -282,8 +282,9 @@ class RideInfoPanel extends HookConsumerWidget {
                             itemBuilder: (context, index) {
                               final coRider = coRidersList[index];
                               return Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 5),
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
                                 child: CircleAvatar(
                                   radius: 30,
                                   backgroundColor: Colors.blue,
@@ -307,8 +308,9 @@ class RideInfoPanel extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin:
-                        EdgeInsets.only(right: constraints.maxWidth * 0.015),
+                    margin: EdgeInsets.only(
+                      right: constraints.maxWidth * 0.015,
+                    ),
                     child: const Text(
                       'Ride Reward',
                       style: TextStyle(color: Colors.grey),
