@@ -41,305 +41,200 @@ class RideInfoPanel extends HookConsumerWidget {
               ),
             ),
             DividerWidget(constraints: constraints),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      margin:
-                          EdgeInsets.only(right: constraints.maxWidth * 0.02),
+            Container(
+              padding:
+                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.025),
+              // color: Colors.amber,
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: constraints.maxWidth * 0.02),
+                    child: Material(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 2.5,
                       child: Container(
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(9),
                           image: DecorationImage(
                             image: NetworkImage(acceptingDriver.photoUrl!),
                             fit: BoxFit.fill,
                           ),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.white54,
-                              blurRadius: 10,
-                            )
-                          ],
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: SizedBox(
-                        height: 60,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 21,
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Text(
-                                        (acceptingDriver.displayName!
-                                                    .split(' ')
-                                                    .first +
-                                                ' ' +
-                                                acceptingDriver.displayName!
-                                                    .split(' ')
-                                                    .last)
-                                            .toUpperCase(),
-                                        style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 21,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      (acceptingDriver.displayName!
+                                                  .split(' ')
+                                                  .first +
+                                              ' ' +
+                                              acceptingDriver.displayName!
+                                                  .split(' ')
+                                                  .last)
+                                          .toUpperCase(),
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
-                                  const Text(
-                                    'Suzuki Ertiga',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: constraints.maxWidth * 0.2,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          right: constraints.maxWidth * 0.02,
-                                        ),
-                                        child: const Icon(
-                                          Icons.location_on,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      const Text(
-                                        '9 mins',
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    ],
+                                ),
+                                const Text(
+                                  'Suzuki Ertiga',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          right: constraints.maxWidth * 0.02,
-                                        ),
-                                        child: const Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                        ),
-                                      ),
-                                      const Text(
-                                        '4.8',
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            width: constraints.maxWidth * 0.2,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        right: constraints.maxWidth * 0.02,
+                                      ),
+                                      child: const Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                    ),
+                                    const Text(
+                                      '4.8',
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        right: constraints.maxWidth * 0.02,
+                                      ),
+                                      child: const Icon(
+                                        Icons.location_on,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    const Text(
+                                      '9 mins',
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    )
+                    ),
+                  )
+                ],
+              ),
+            ),
+            DividerWidget(constraints: constraints),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
+                  child: const Text(
+                    'PASSENGERS',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 70,
+                      child: coRidersStream.when(
+                        error: (e, __) => Center(child: Text(e.toString())),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        data: (coRidersList) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: coRidersList.length,
+                            itemBuilder: (context, index) {
+                              final coRider = coRidersList[index];
+                              return Align(
+                                widthFactor: 0.8,
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.white,
+                                  child: CircleAvatar(
+                                    radius: 25,
+                                    backgroundImage: NetworkImage(
+                                      coRider.photoUrl ?? uscLogo,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Text(
+                      'You and n other people',
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ],
                 ),
               ],
             ),
             DividerWidget(constraints: constraints),
-            // Column(
-            //   children: [
-            //     Row(
-            //       children: [
-            //         Column(
-            //           children: [
-            //             const Icon(
-            //               Icons.circle,
-            //               size: 15,
-            //               color: Colors.blue,
-            //             ),
-            //             DottedLine(
-            //               direction: Axis.vertical,
-            //               lineLength: constraints.maxHeight * 0.055,
-            //               dashColor: Colors.blue,
-            //               dashLength: 3,
-            //               dashRadius: 3,
-            //               lineThickness: 3,
-            //               dashGapLength: 2,
-            //             ),
-            //             const Icon(
-            //               Icons.location_on_rounded,
-            //               size: 20,
-            //               color: Colors.blue,
-            //             )
-            //           ],
-            //         ),
-            //         Expanded(
-            //           child: Padding(
-            //             padding: EdgeInsets.only(
-            //               left: constraints.maxWidth * 0.05,
-            //             ),
-            //             child: Column(
-            //               crossAxisAlignment: CrossAxisAlignment.start,
-            //               children: [
-            //                 Column(
-            //                   crossAxisAlignment: CrossAxisAlignment.start,
-            //                   children: [
-            //                     Container(
-            //                       margin: EdgeInsets.only(
-            //                         bottom: constraints.maxHeight * 0.005,
-            //                       ),
-            //                       child: const Text(
-            //                         'home',
-            //                         style: TextStyle(
-            //                           fontSize: 18,
-            //                           fontWeight: FontWeight.bold,
-            //                         ),
-            //                       ),
-            //                     ),
-            //                     const Text(
-            //                       'Pick-up Location',
-            //                       style: TextStyle(
-            //                         color: Colors.grey,
-            //                         fontSize: 12,
-            //                       ),
-            //                     ),
-            //                   ],
-            //                 ),
-            //                 SizedBox(
-            //                   height: constraints.maxHeight * 0.025,
-            //                 ),
-            //                 Column(
-            //                   crossAxisAlignment: CrossAxisAlignment.start,
-            //                   children: [
-            //                     Container(
-            //                       margin: EdgeInsets.only(
-            //                         bottom: constraints.maxHeight * 0.005,
-            //                       ),
-            //                       child: const Text(
-            //                         'destination',
-            //                         style: TextStyle(
-            //                           fontSize: 18,
-            //                           fontWeight: FontWeight.bold,
-            //                         ),
-            //                       ),
-            //                     ),
-            //                     const Text(
-            //                       'Destination Location',
-            //                       style: TextStyle(
-            //                         color: Colors.grey,
-            //                         fontSize: 12,
-            //                       ),
-            //                     )
-            //                   ],
-            //                 )
-            //               ],
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ],
-            // ),
-            // DividerWidget(constraints: constraints),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin:
-                        EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
-                    child: const Text(
-                      'PASSENGERS',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 70,
-                        color: Colors.amber,
-                        // width: constraints.maxWidth * 0.6,
-                        // padding: const EdgeInsets.only(left: 5),
-                        child: coRidersStream.when(
-                          error: (e, __) => Center(child: Text(e.toString())),
-                          loading: () =>
-                              const Center(child: CircularProgressIndicator()),
-                          data: (coRidersList) {
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: coRidersList.length,
-                              itemBuilder: (context, index) {
-                                final coRider = coRidersList[index];
-                                return Align(
-                                  widthFactor: 0.8,
-                                  child: CircleAvatar(
-                                    radius: 30,
-                                    backgroundColor: Colors.white,
-                                    child: CircleAvatar(
-                                      radius: 25,
-                                      backgroundImage: NetworkImage(
-                                        coRider.photoUrl ?? uscLogo,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.015),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        bottom: constraints.maxHeight * 0.005,
+                      ),
+                      child: const Text(
+                        '3.43 points',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        'You and n other people',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            DividerWidget(constraints: constraints),
-            Spacer(),
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.015),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    // margin: EdgeInsets.only(
-                    //   right: constraints.maxWidth * 0.015,
-                    // ),
-                    child: const Text(
+                    ),
+                    const Text(
                       'Ride Reward',
                       style: TextStyle(color: Colors.grey),
                     ),
-                  ),
-                  const Text(
-                    '3.43 points',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
+                  ],
+                ),
               ),
             ),
           ],
