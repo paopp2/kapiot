@@ -127,7 +127,7 @@ class RiderManagerViewModel extends ViewModel {
     );
   }
 
-  void updateNextStop() {
+  Future<void> updateNextStop() async {
     final currentStop = read(nextStopProvider).state!;
     _finishedStopPoints.add(currentStop);
     if (currentStop.isPickUp) {
@@ -140,6 +140,15 @@ class RiderManagerViewModel extends ViewModel {
         currentDriverConfig.user.id,
         currentStop.riderConfig.user.id,
       );
+      await updateDriverPoints(currentStop.riderConfig);
     }
+  }
+
+  Future<void> updateDriverPoints(RouteConfig riderConfig) async {
+    riderConfig as ForRider;
+    final currentDriverPoints = read(driverPointsProvider).state;
+    final pointsToAdd =
+        await coreAlgorithms.calculateDriverPointsFromRider(riderConfig);
+    read(driverPointsProvider).state = currentDriverPoints + pointsToAdd;
   }
 }

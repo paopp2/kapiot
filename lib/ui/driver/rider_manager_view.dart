@@ -87,7 +87,9 @@ class RiderManagerView extends HookConsumerWidget {
                               ),
                               Text(
                                 driverPoints.toStringAsFixed(2),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
