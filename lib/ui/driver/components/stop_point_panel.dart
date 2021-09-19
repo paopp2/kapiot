@@ -21,85 +21,84 @@ class StopPointPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rider = nextStop.rider;
-
-    return Flexible(
-      child: Container(
-        margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: Colors.white,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Material(
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: ListView(
-          children: [
-            Container(
-              margin:
-                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.03),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(rider.photoUrl ?? uscLogo),
-                  ),
-                  SizedBox(
-                    width: constraints.maxWidth * 0.6,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(
-                            rider.displayName ?? 'No name',
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(
-                            "ACTION: " +
-                                ((nextStop.isPickUp) ? "Pick up" : "Drop off"),
-                          ),
-                        ),
-                      ],
+        child: Container(
+          padding: EdgeInsets.all(constraints.maxWidth * 0.025),
+          height: 130,
+          width: constraints.maxWidth * 0.8,
+          child: Column(
+            children: [
+              SizedBox(
+                width: constraints.maxWidth * 0.75,
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: constraints.maxWidth * 0.025,
+                      ),
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage:
+                            NetworkImage(rider.photoUrl ?? uscLogo),
+                      ),
                     ),
-                  )
-                ],
+                    Expanded(
+                      child: SizedBox(
+                        height: 60,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                rider.displayName ?? 'No name',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25,
+                              child: Marquee(
+                                text: nextStop.stopLocation.address ?? '',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                                blankSpace: 90,
+                                pauseAfterRound: const Duration(seconds: 2),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 40,
-              child: Marquee(
-                text: (nextStop.stopLocation.address ?? ""),
-                style: const TextStyle(fontSize: 17, color: Colors.grey),
-                blankSpace: 90,
-                pauseAfterRound: const Duration(seconds: 2),
-              ),
-            ),
-            Container(
-              margin:
-                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.05),
-              child: Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Cancel"),
+                  Text(
+                    (nextStop.isPickUp) ? "Pick-up" : "Drop-off",
+                    style: const TextStyle(fontSize: 14),
                   ),
                   ElevatedButton(
                     onPressed: model.updateNextStop,
-                    child: const Text("Done"),
+                    child: const Text("Next stop"),
                   )
                 ],
-              ),
-            ),
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
