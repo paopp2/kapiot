@@ -16,7 +16,6 @@ class RiderManagerView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
     final nextStop = ref.watch(nextStopProvider).state;
-    final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
 
     useEffect(() {
       model.initState();
@@ -45,7 +44,6 @@ class RiderManagerView extends HookConsumerWidget {
                       },
                       blendMode: BlendMode.dstIn,
                       child: const GoogleMap(
-                        myLocationButtonEnabled: true,
                         initialCameraPosition: CameraPosition(
                           target: LatLng(
                             10.367889719519498,
