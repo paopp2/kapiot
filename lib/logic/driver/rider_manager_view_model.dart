@@ -134,7 +134,7 @@ class RiderManagerViewModel extends ViewModel {
       final currentDriverConfig = read(currentRouteConfigProvider).state!;
       driverRepo.removeRiderFromAccepted(
         currentDriverConfig.user.id,
-        currentStop.rider.id,
+        currentStop.riderConfig.user.id,
       );
     }
   }

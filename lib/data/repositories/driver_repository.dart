@@ -64,7 +64,7 @@ class DriverRepository {
       final List<StopPoint> unsortedStopPoints = rcList.expand<StopPoint>((rc) {
         rc as ForRider;
         final pickUpPoint = StopPoint(
-          rider: rc.user,
+          riderConfig: rc,
           stopLocation: rc.startLocation,
           isPickUp: true,
         );
