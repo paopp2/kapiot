@@ -24,12 +24,15 @@ class RequestDriversView extends HookConsumerWidget {
           return Scaffold(
             body: KapiotSlidingPanel(
               constraints: constraints,
+              panelHeight: constraints.maxHeight * 0.5,
               map: Center(
                 child: RequestDriversViewMap(model: model),
               ),
               panel: Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.05),
+                  padding: EdgeInsets.symmetric(
+                    vertical: constraints.maxHeight * 0.05,
+                  ),
                   width: double.infinity,
                   child: DriverCardStream(
                     model: model,

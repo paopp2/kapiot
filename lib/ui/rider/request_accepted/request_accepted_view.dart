@@ -24,6 +24,7 @@ class RequestAcceptedView extends HookConsumerWidget {
           return Scaffold(
             body: KapiotSlidingPanel(
               constraints: constraints,
+              panelHeight: constraints.maxHeight * 0.7,
               map: Center(
                 child: RequestAcceptedViewMap(model: model),
               ),
