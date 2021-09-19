@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
@@ -24,6 +25,7 @@ final riderManagerViewModel = Provider.autoDispose(
     locationRepo: ref.watch(locationRepositoryProvider),
     locationService: ref.watch(locationServiceProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+    coreAlgorithms: ref.watch(coreAlgorithmsProvider),
     currentUser: ref.watch(currentUserProvider),
   ),
 );
@@ -35,12 +37,14 @@ class RiderManagerViewModel extends ViewModel {
     required this.locationRepo,
     required this.locationService,
     required this.googleMapsApiServices,
+    required this.coreAlgorithms,
     required this.currentUser,
   }) : super(read);
   final DriverRepository driverRepo;
   final LocationRepository locationRepo;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
+  final CoreAlgorithms coreAlgorithms;
   final KapiotUser? currentUser;
   static final List<StopPoint> _finishedStopPoints = [];
   late final StreamSubscription stopPointsSub;
