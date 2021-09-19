@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
+const uscLogo =
+    'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
+
 class DriverCard extends StatelessWidget {
   const DriverCard(
       {Key? key,
@@ -33,7 +36,9 @@ class DriverCard extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.blue,
-                  backgroundImage: NetworkImage(driverConfig.user.photoUrl!),
+                  backgroundImage: NetworkImage(
+                    driverConfig.user.photoUrl ?? uscLogo,
+                  ),
                 ),
               ),
               SingleChildScrollView(
