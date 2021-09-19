@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
+import 'package:kapiot/logic/driver/rider_manager_map_controller.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
@@ -26,6 +28,7 @@ final riderManagerViewModel = Provider.autoDispose(
     locationService: ref.watch(locationServiceProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     coreAlgorithms: ref.watch(coreAlgorithmsProvider),
+    mapController: ref.watch(riderManagerMapController),
     currentUser: ref.watch(currentUserProvider),
   ),
 );
@@ -38,6 +41,7 @@ class RiderManagerViewModel extends ViewModel {
     required this.locationService,
     required this.googleMapsApiServices,
     required this.coreAlgorithms,
+    required this.mapController,
     required this.currentUser,
   }) : super(read);
   final DriverRepository driverRepo;
@@ -45,6 +49,7 @@ class RiderManagerViewModel extends ViewModel {
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
   final CoreAlgorithms coreAlgorithms;
+  final RiderManagerMapController mapController;
   final KapiotUser? currentUser;
   static final List<StopPoint> _finishedStopPoints = [];
   late final StreamSubscription stopPointsSub;
@@ -52,6 +57,7 @@ class RiderManagerViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
+    await mapController.initializeRiderManagerMap();
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -72,18 +78,31 @@ class RiderManagerViewModel extends ViewModel {
       }
     });
 
-    // Obtain current driver's end location
+    // Show the current driver's route on the map
     final utils = googleMapsApiServices.utils;
     final routeConfig = read(currentRouteConfigProvider).state as ForDriver;
     final encodedRoute = routeConfig.encodedRoute;
+    await mapController.showRouteFromEncoded(encodedRoute: encodedRoute);
+
+    // Show the current next stop on the map (if any)
+    read(nextStopProvider).stream.listen((nextStop) {
+      if (nextStop != null) {
+        mapController.addMarker(
+          marker: Markers.nextStopPoint,
+          location: nextStop.stopLocation,
+        );
+      } else {
+        mapController.removeMarker(Markers.nextStopPoint);
+      }
+    });
+
+    // Push changes to this driver's location and return to HomeView once
+    // this driver arrives at destination / end location
     final decodedRoute = await utils.decodeRoute(encodedRoute);
     final driverEndLocation = KapiotLocation(
       lat: decodedRoute.last.latitude,
       lng: decodedRoute.last.longitude,
     );
-
-    // Push changes to this driver's location and return to HomeView once
-    // this driver arrives at destination / end location
     realtimeLocSub = locationService.getLocationStream().listen((currentLoc) {
       assert(currentUser != null);
       final distToDriverEnd = utils.calculateDistance(

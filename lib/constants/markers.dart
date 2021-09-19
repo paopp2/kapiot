@@ -25,4 +25,9 @@ class Markers {
     markerId: const MarkerId('current_user_marker'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
   );
+
+  static final nextStopPoint = Marker(
+    markerId: const MarkerId('next_stop_point'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+  );
 }
