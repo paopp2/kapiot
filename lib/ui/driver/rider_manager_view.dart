@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -28,104 +26,102 @@ class RiderManagerView extends HookConsumerWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Scaffold(
-            // extendBodyBehindAppBar: true,
-            // appBar: AppBar(
-            //   // iconTheme: const IconThemeData(color: Colors.black),
-            //   // toolbarHeight: constraints.maxHeight * 0.8,
-            //   backgroundColor: Colors.transparent,
-            //   title: Text('Points'),
-            //   centerTitle: true,
-            //   elevation: 0,
-            //   automaticallyImplyLeading: false,
-            // ),
             body: Container(
               color: Colors.white,
-              child: Column(
+              child: Stack(
                 children: [
-                  Stack(
-                    children: [
-                      SizedBox(
-                        height: constraints.maxHeight * 0.8,
-                        child: const GoogleMap(
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(
-                              10.367889719519498,
-                              123.91382842505321,
-                            ),
-                            zoom: 20,
+                  SizedBox(
+                    height: constraints.maxHeight,
+                    child: ShaderMask(
+                      shaderCallback: (rect) {
+                        return const LinearGradient(
+                          begin: Alignment.center,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.black, Colors.transparent],
+                        ).createShader(
+                          Rect.fromLTRB(0, 0, rect.width, rect.height),
+                        );
+                      },
+                      blendMode: BlendMode.dstIn,
+                      child: const GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            10.367889719519498,
+                            123.91382842505321,
                           ),
+                          zoom: 20,
                         ),
+                        zoomControlsEnabled: false,
                       ),
-                      SizedBox(
-                        height: constraints.maxHeight * 0.25,
-                        child: NotificationListener<
-                            OverscrollIndicatorNotification>(
-                          onNotification: (overScroll) {
-                            overScroll.disallowGlow();
-                            return true;
-                          },
-                          child: CustomScrollView(
-                            slivers: [
-                              SliverAppBar(
-                                toolbarHeight: constraints.maxHeight * 0.075,
-                                snap: true,
-                                floating: true,
-                                backgroundColor: Colors.transparent,
-                                title: Container(
-                                  height: constraints.maxHeight * 0.055,
-                                  width: constraints.maxWidth * 0.3,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.25,
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverAppBar(
+                          toolbarHeight: constraints.maxHeight * 0.075,
+                          snap: true,
+                          floating: true,
+                          backgroundColor: Colors.transparent,
+                          title: Container(
+                            height: constraints.maxHeight * 0.055,
+                            width: constraints.maxWidth * 0.3,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    right: constraints.maxWidth * 0.01,
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          right: constraints.maxWidth * 0.01,
-                                        ),
-                                        child: Image.asset(
-                                          'lib/ui/assets/icons/assist_points.png',
-                                          color: Colors.white,
-                                          width: 20,
-                                          height: 20,
-                                        ),
-                                      ),
-                                      const Text(
-                                        '6.78',
-                                      ),
-                                    ],
+                                  child: Image.asset(
+                                    'lib/ui/assets/icons/assist_points.png',
+                                    color: Colors.white,
+                                    width: 20,
+                                    height: 20,
                                   ),
                                 ),
-                                centerTitle: true,
-                                elevation: 0,
-                                automaticallyImplyLeading: false,
+                                const Text(
+                                  '6.78',
+                                ),
+                              ],
+                            ),
+                          ),
+                          centerTitle: true,
+                          elevation: 0,
+                          automaticallyImplyLeading: false,
+                        ),
+                        SliverToBoxAdapter(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(
+                                height: constraints.maxHeight * 0.02,
                               ),
-                              SliverToBoxAdapter(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
-                                    StopPointPanel(constraints: constraints),
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.05,
+                              (nextStop != null)
+                                  ? StopPointPanel(
+                                      model: model,
+                                      constraints: constraints,
+                                      nextStop: nextStop,
                                     )
-                                  ],
-                                ),
-                              )
+                                  : const SizedBox()
                             ],
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                  RequestingRidersPanel(
-                    constraints: constraints,
+                  Positioned(
+                    bottom: constraints.maxHeight * 0.025,
+                    child: RequestingRidersPanel(
+                      model: model,
+                      constraints: constraints,
+                    ),
                   ),
                 ],
               ),

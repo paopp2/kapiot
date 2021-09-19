@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
+import 'package:kapiot/model/stop_point/stop_point.dart';
 import 'package:marquee/marquee.dart';
+
+const uscLogo =
+    'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
 class StopPointPanel extends StatelessWidget {
   const StopPointPanel({
     Key? key,
+    required this.model,
     required this.constraints,
+    required this.nextStop,
   }) : super(key: key);
 
+  final RiderManagerViewModel model;
   final BoxConstraints constraints;
+  final StopPoint nextStop;
 
   @override
   Widget build(BuildContext context) {
+    final rider = nextStop.rider;
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
@@ -36,11 +46,12 @@ class StopPointPanel extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    margin:
-                        EdgeInsets.only(right: constraints.maxWidth * 0.025),
-                    child: const CircleAvatar(
+                    margin: EdgeInsets.only(
+                      right: constraints.maxWidth * 0.025,
+                    ),
+                    child: CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.amber,
+                      backgroundImage: NetworkImage(rider.photoUrl ?? uscLogo),
                     ),
                   ),
                   Expanded(
@@ -50,11 +61,11 @@ class StopPointPanel extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SingleChildScrollView(
+                          SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Text(
-                              'Name',
-                              style: TextStyle(
+                              rider.displayName ?? 'No name',
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -63,16 +74,13 @@ class StopPointPanel extends StatelessWidget {
                           SizedBox(
                             height: 25,
                             child: Marquee(
-                              text:
-                                  'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City',
+                              text: nextStop.stopLocation.address ?? '',
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
                               ),
                               blankSpace: 90,
-                              pauseAfterRound: const Duration(
-                                seconds: 2,
-                              ),
+                              pauseAfterRound: const Duration(seconds: 2),
                             ),
                           ),
                         ],
@@ -85,15 +93,13 @@ class StopPointPanel extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text(
-                  "ACTION: ",
-                  style: TextStyle(fontSize: 14),
+                Text(
+                  (nextStop.isPickUp) ? "Pick-up" : "Drop-off",
+                  style: const TextStyle(fontSize: 14),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    print('next stop point');
-                  },
-                  child: const Text("Done"),
+                  onPressed: model.updateNextStop,
+                  child: const Text("Next stop"),
                 )
               ],
             )
