@@ -26,10 +26,8 @@ class Markers {
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
   );
 
-  static Marker stopPoint(String id) {
-    return Marker(
-      markerId: MarkerId('StopPoint: $id'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-    );
-  }
+  static final nextStopPoint = Marker(
+    markerId: const MarkerId('next_stop_point'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+  );
 }
