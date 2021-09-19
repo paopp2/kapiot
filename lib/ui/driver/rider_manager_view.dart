@@ -32,15 +32,27 @@ class RiderManagerView extends HookConsumerWidget {
                 children: [
                   SizedBox(
                     height: constraints.maxHeight,
-                    child: const GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(
-                          10.367889719519498,
-                          123.91382842505321,
+                    child: ShaderMask(
+                      shaderCallback: (rect) {
+                        return const LinearGradient(
+                          begin: Alignment.center,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.black, Colors.transparent],
+                        ).createShader(
+                          Rect.fromLTRB(0, 0, rect.width, rect.height),
+                        );
+                      },
+                      blendMode: BlendMode.dstIn,
+                      child: const GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            10.367889719519498,
+                            123.91382842505321,
+                          ),
+                          zoom: 20,
                         ),
-                        zoom: 20,
+                        zoomControlsEnabled: false,
                       ),
-                      zoomControlsEnabled: false,
                     ),
                   ),
                   SizedBox(
