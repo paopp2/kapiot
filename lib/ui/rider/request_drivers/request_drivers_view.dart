@@ -31,7 +31,8 @@ class RequestDriversView extends HookConsumerWidget {
               panel: Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                      vertical: constraints.maxHeight * 0.05),
+                    vertical: constraints.maxHeight * 0.05,
+                  ),
                   width: double.infinity,
                   child: DriverCardStream(
                     model: model,

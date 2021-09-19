@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
-import 'package:dotted_line/dotted_line.dart';
+import 'package:kapiot/ui/rider/request_accepted/components/divider_widget.dart';
 
 const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
@@ -23,6 +23,7 @@ class RideInfoPanel extends HookConsumerWidget {
     final acceptingDriverConfig =
         ref.watch(acceptingDriverConfigProvider).state!;
     final acceptingDriver = acceptingDriverConfig.user;
+    final driverNameSplit = acceptingDriver.displayName!.split(' ');
     final coRidersStream = ref.watch(coRidersStreamProvider);
     return Expanded(
       child: Container(
@@ -33,7 +34,7 @@ class RideInfoPanel extends HookConsumerWidget {
               alignment: Alignment.bottomCenter,
               height: constraints.maxHeight * 0.05,
               child: Text(
-                '${acceptingDriver.displayName!.split(' ')[0]} is arriving in (time)',
+                '${driverNameSplit.first} is arriving in 9 mins',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -42,9 +43,9 @@ class RideInfoPanel extends HookConsumerWidget {
             ),
             DividerWidget(constraints: constraints),
             Container(
-              padding:
-                  EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.025),
-              // color: Colors.amber,
+              padding: EdgeInsets.symmetric(
+                vertical: constraints.maxHeight * 0.025,
+              ),
               child: Row(
                 children: [
                   Container(
@@ -81,14 +82,7 @@ class RideInfoPanel extends HookConsumerWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Text(
-                                      (acceptingDriver.displayName!
-                                                  .split(' ')
-                                                  .first +
-                                              ' ' +
-                                              acceptingDriver.displayName!
-                                                  .split(' ')
-                                                  .last)
-                                          .toUpperCase(),
+                                      '${driverNameSplit.first} ${driverNameSplit.last}',
                                       style: const TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
@@ -175,8 +169,9 @@ class RideInfoPanel extends HookConsumerWidget {
                       height: 70,
                       child: coRidersStream.when(
                         error: (e, __) => Center(child: Text(e.toString())),
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                         data: (coRidersList) {
                           return ListView.builder(
                             shrinkWrap: true,
@@ -239,27 +234,6 @@ class RideInfoPanel extends HookConsumerWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class DividerWidget extends StatelessWidget {
-  const DividerWidget({
-    Key? key,
-    required this.constraints,
-  }) : super(key: key);
-
-  final BoxConstraints constraints;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.025),
-      child: const Divider(
-        color: Colors.grey,
-        thickness: 0.5,
-        height: 0.05,
       ),
     );
   }
