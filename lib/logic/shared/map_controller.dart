@@ -155,6 +155,12 @@ abstract class MapController {
     read(markersProvider).state = markers;
   }
 
+  void removeMarker(Marker marker) {
+    final markers = read(markersProvider).state;
+    markers.removeWhere((m) => (m.markerId == marker.markerId));
+    read(markersProvider).state = markers;
+  }
+
   void setStartLocation(KapiotLocation? startLocation) {
     read(startLocProvider).state = startLocation;
   }
