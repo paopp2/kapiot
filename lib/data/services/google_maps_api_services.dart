@@ -98,10 +98,10 @@ class DistanceMatrixService {
   DistanceMatrixService._();
   static final instance = DistanceMatrixService._();
 
-  Future<DistMatrixElement> getDistMatrixElement(
-    KapiotLocation pointA,
-    KapiotLocation pointB,
-  ) async {
+  Future<DistMatrixElement> getDistMatrixElement({
+    required KapiotLocation pointA,
+    required KapiotLocation pointB,
+  }) async {
     final latPointA = pointA.lat;
     final lngPointA = pointA.lng;
     final latPointB = pointB.lat;

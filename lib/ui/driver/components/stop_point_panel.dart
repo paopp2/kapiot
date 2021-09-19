@@ -20,7 +20,7 @@ class StopPointPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rider = nextStop.rider;
+    final rider = nextStop.riderConfig.user;
     return Align(
       alignment: Alignment.topCenter,
       child: Material(

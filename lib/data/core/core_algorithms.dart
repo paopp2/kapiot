@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
+import 'package:kapiot/model/dist_matrix_element/dist_matrix_element.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
@@ -144,5 +145,26 @@ class CoreAlgorithms {
     return stopPointMapList
         .map((spMap) => spMap["stopPoint"] as StopPoint)
         .toList();
+  }
+
+  /// Calculates the points a driver gets from one rider given
+  /// that rider's [riderConfig]
+  Future<double> calculateDriverPointsFromRider(
+    RouteConfig riderConfig,
+  ) async {
+    final distMatrix = googleMapsApiServices.distMatrix;
+    riderConfig as ForRider;
+    final distMatrixElement = await distMatrix.getDistMatrixElement(
+      pointA: riderConfig.startLocation,
+      pointB: riderConfig.endLocation,
+    );
+    // Estimated distance in meters
+    final distance = distMatrixElement.distanceValue;
+    // Estimated duration of travel in seconds
+    final duration = distMatrixElement.durationValue;
+
+    // Four (4) points per 300 meters traveled and another
+    // two (2) points per 60 seconds of travel
+    return (distance / 75) + (duration / 30);
   }
 }
