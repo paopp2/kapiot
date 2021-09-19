@@ -39,10 +39,12 @@ class RequestingRidersPanel extends HookConsumerWidget {
                   children: [
                     Material(
                       elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
                         ),
                         height: constraints.maxHeight * 0.13,
                         width: constraints.maxWidth * 0.8,
@@ -52,8 +54,8 @@ class RequestingRidersPanel extends HookConsumerWidget {
                               margin: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.02,
                               ),
-                              height: constraints.maxHeight * 0.09,
-                              width: constraints.maxWidth * 0.2,
+                              height: 60,
+                              width: 60,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(rider.photoUrl!),

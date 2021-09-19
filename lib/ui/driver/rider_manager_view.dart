@@ -16,6 +16,7 @@ class RiderManagerView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
     final nextStop = ref.watch(nextStopProvider).state;
+    final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
 
     useEffect(() {
       model.initState();
@@ -37,13 +38,14 @@ class RiderManagerView extends HookConsumerWidget {
                         return const LinearGradient(
                           begin: Alignment.center,
                           end: Alignment.bottomCenter,
-                          colors: [Colors.black, Colors.transparent],
+                          colors: [Colors.white, Colors.transparent],
                         ).createShader(
                           Rect.fromLTRB(0, 0, rect.width, rect.height),
                         );
                       },
                       blendMode: BlendMode.dstIn,
                       child: const GoogleMap(
+                        myLocationButtonEnabled: true,
                         initialCameraPosition: CameraPosition(
                           target: LatLng(
                             10.367889719519498,
@@ -56,63 +58,48 @@ class RiderManagerView extends HookConsumerWidget {
                     ),
                   ),
                   SizedBox(
-                    height: constraints.maxHeight * 0.25,
-                    child: CustomScrollView(
-                      slivers: [
-                        SliverAppBar(
-                          toolbarHeight: constraints.maxHeight * 0.075,
-                          snap: true,
-                          floating: true,
-                          backgroundColor: Colors.transparent,
-                          title: Container(
-                            height: constraints.maxHeight * 0.055,
-                            width: constraints.maxWidth * 0.3,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                    right: constraints.maxWidth * 0.01,
-                                  ),
-                                  child: Image.asset(
-                                    'lib/ui/assets/icons/assist_points.png',
-                                    color: Colors.white,
-                                    width: 20,
-                                    height: 20,
-                                  ),
-                                ),
-                                const Text(
-                                  '6.78',
-                                ),
-                              ],
-                            ),
+                    width: constraints.maxWidth,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            vertical: constraints.maxHeight * 0.015,
                           ),
-                          centerTitle: true,
-                          elevation: 0,
-                          automaticallyImplyLeading: false,
-                        ),
-                        SliverToBoxAdapter(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                          height: constraints.maxHeight * 0.055,
+                          width: constraints.maxWidth * 0.3,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                height: constraints.maxHeight * 0.02,
+                              Container(
+                                margin: EdgeInsets.only(
+                                  right: constraints.maxWidth * 0.01,
+                                ),
+                                child: Image.asset(
+                                  'lib/ui/assets/icons/assist_points.png',
+                                  color: Colors.white,
+                                  width: 20,
+                                  height: 20,
+                                ),
                               ),
-                              (nextStop != null)
-                                  ? StopPointPanel(
-                                      model: model,
-                                      constraints: constraints,
-                                      nextStop: nextStop,
-                                    )
-                                  : const SizedBox()
+                              const Text(
+                                '6.78',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ],
                           ),
-                        )
+                        ),
+                        (nextStop != null)
+                            ? StopPointPanel(
+                                model: model,
+                                constraints: constraints,
+                                nextStop: nextStop,
+                              )
+                            : const SizedBox()
                       ],
                     ),
                   ),
