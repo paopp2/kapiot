@@ -37,8 +37,4 @@ class RiderManagerMapController extends MapController {
       clearMap: true,
     );
   }
-
-  Future<void> showMyRoute(String encodedRoute) async {
-    await showRouteFromEncoded(encodedRoute: encodedRoute);
-  }
 }
