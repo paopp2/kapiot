@@ -16,6 +16,7 @@ class RiderManagerView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
     final nextStop = ref.watch(nextStopProvider).state;
+    final driverPoints = ref.watch(driverPointsProvider).state;
 
     useEffect(() {
       model.initState();
@@ -84,9 +85,9 @@ class RiderManagerView extends HookConsumerWidget {
                                   height: 20,
                                 ),
                               ),
-                              const Text(
-                                '6.78',
-                                style: TextStyle(color: Colors.white),
+                              Text(
+                                driverPoints.toStringAsFixed(2),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ],
                           ),

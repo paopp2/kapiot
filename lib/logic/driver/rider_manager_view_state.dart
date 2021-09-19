@@ -15,3 +15,5 @@ final stopPointsProvider = StateProvider.autoDispose<List<StopPoint>>((ref) {
   ref.maintainState = true;
   return [];
 });
+
+final driverPointsProvider = StateProvider.autoDispose<double>((ref) => 0);
