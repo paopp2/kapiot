@@ -149,7 +149,7 @@ class CoreAlgorithms {
 
   /// Calculates the points a driver gets from one rider given
   /// that rider's [riderConfig]
-  Future<double> calculateDriverPointsForRider(
+  Future<double> calculateDriverPointsFromRider(
     RouteConfig riderConfig,
   ) async {
     final distMatrix = googleMapsApiServices.distMatrix;
