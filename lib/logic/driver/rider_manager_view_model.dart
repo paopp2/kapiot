@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/driver_repository.dart';
@@ -81,17 +82,27 @@ class RiderManagerViewModel extends ViewModel {
     final utils = googleMapsApiServices.utils;
     final routeConfig = read(currentRouteConfigProvider).state as ForDriver;
     final encodedRoute = routeConfig.encodedRoute;
-    await mapController.showMyRoute(encodedRoute);
+    await mapController.showRouteFromEncoded(encodedRoute: encodedRoute);
 
-    // Obtain current driver's end location
+    // Show the current next stop on the map (if any)
+    read(nextStopProvider).stream.listen((nextStop) {
+      if (nextStop != null) {
+        mapController.addMarker(
+          marker: Markers.nextStopPoint,
+          location: nextStop.stopLocation,
+        );
+      } else {
+        mapController.removeMarker(Markers.nextStopPoint);
+      }
+    });
+
+    // Push changes to this driver's location and return to HomeView once
+    // this driver arrives at destination / end location
     final decodedRoute = await utils.decodeRoute(encodedRoute);
     final driverEndLocation = KapiotLocation(
       lat: decodedRoute.last.latitude,
       lng: decodedRoute.last.longitude,
     );
-
-    // Push changes to this driver's location and return to HomeView once
-    // this driver arrives at destination / end location
     realtimeLocSub = locationService.getLocationStream().listen((currentLoc) {
       assert(currentUser != null);
       final distToDriverEnd = utils.calculateDistance(
