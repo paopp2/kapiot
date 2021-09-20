@@ -70,7 +70,7 @@ class RiderManagerView extends HookConsumerWidget {
                                   right: constraints.maxWidth * 0.01,
                                 ),
                                 child: Image.asset(
-                                  'lib/ui/assets/icons/assist_points.png',
+                                  'assets/icons/assist_points.png',
                                   color: Colors.white,
                                   width: 20,
                                   height: 20,
