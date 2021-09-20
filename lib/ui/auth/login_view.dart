@@ -25,7 +25,7 @@ class LoginView extends HookConsumerWidget {
                 Container(
                   margin: EdgeInsets.only(top: constraints.maxHeight * 0.15),
                   child: const Image(
-                    image: AssetImage('lib/ui/assets/images/usc_logo.png'),
+                    image: AssetImage('assets/images/usc_logo.png'),
                     width: 70,
                   ),
                 ),
