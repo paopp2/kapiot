@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
-import 'package:kapiot/model/dist_matrix_element/dist_matrix_element.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
