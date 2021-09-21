@@ -9,6 +9,25 @@ const rtdb = admin.database();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
 
+exports.recursiveDelete = functions
+  .runWith({
+    timeoutSeconds: 540,
+    memory: '2GB'
+  })
+  .https.onRequest(async (data, context) => {
+
+    const path = 'active_riders';
+    await firebase_tools.firestore
+      .delete(path, {
+        project: process.env.GCLOUD_PROJECT,
+        recursive: true,
+        yes: true,
+        token: functions.config().fb.token
+      });
+
+      res.json({ result: 'Delete successful' });
+});
+
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await ridersRef.get();
     res.send(snapshot.docs.map(doc => doc.data()))
