@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const firebase_tools = require('firebase-tools');
 const cors = require('cors');
 const polyUtil = require('./polyline_helpers');
 const test_data = require("./test_data.json");
@@ -12,20 +13,32 @@ const ridersRef = db.collection('active_riders');
 exports.recursiveDelete = functions
   .runWith({
     timeoutSeconds: 540,
-    memory: '2GB'
+    memory: '512MB'
   })
-  .https.onRequest(async (data, context) => {
-
-    const path = 'active_riders';
+  .https.onRequest(async (data, context, res) => {
+    const cred = admin.app().options.credential;
+    if (!cred) {
+      throw new Error('Admin credential was undefined');
+    }
+    const access_token = (await cred.getAccessToken()).access_token;
+    
+    const rider_path = 'active_riders';
     await firebase_tools.firestore
-      .delete(path, {
+      .delete(rider_path, {
         project: process.env.GCLOUD_PROJECT,
         recursive: true,
         yes: true,
-        token: functions.config().fb.token
+        token: access_token
       });
 
-      res.json({ result: 'Delete successful' });
+    const driver_path = 'active_drivers';
+    await firebase_tools.firestore
+      .delete(driver_path, {
+        project: process.env.GCLOUD_PROJECT,
+        recursive: true,
+        yes: true,
+        token: access_token
+      });
 });
 
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
