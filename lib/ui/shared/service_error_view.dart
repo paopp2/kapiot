@@ -42,7 +42,11 @@ class ServiceErrorView extends HookConsumerWidget {
                       bottom: constraints.maxHeight * 0.005,
                     ),
                     child: Text(
-                      !internetEnabled ? 'No Connection' : 'we lost you.',
+                      tempVar
+                          ? 'welp.'
+                          : !internetEnabled
+                              ? 'no connection'
+                              : 'we lost you.',
                       style: GoogleFonts.poppins(
                         fontSize: 34,
                         fontWeight: FontWeight.bold,
@@ -52,9 +56,9 @@ class ServiceErrorView extends HookConsumerWidget {
                   ),
                   Text(
                     tempVar
-                        ? ''
+                        ? 'no internet connection. location disabled. location not shared.\nWe wish to help you, but there\'s nothing we really can do for now.'
                         : !internetEnabled
-                            ? 'There seems to be a problem with your\nnetwork connection.'
+                            ? 'We know how you feel.\n It\'s just that you lost your internet connection.'
                             : !locationEnabled
                                 ? 'Enable your GPS and we\'ll find you in no time.'
                                 : !hasPermission
@@ -64,12 +68,9 @@ class ServiceErrorView extends HookConsumerWidget {
                     style: GoogleFonts.montserrat(
                       fontSize: 12,
                       color: Color(0xff666666),
+                      height: 1.5,
                     ),
                   ),
-                  // Text("Internet enabled: $internetEnabled"),
-                  // Text("Location enabled: $locationEnabled"),
-                  // Text("Has location permission: $hasPermission"),
-                  // Text('all three: $tempVar')
                 ],
               ),
             ),
