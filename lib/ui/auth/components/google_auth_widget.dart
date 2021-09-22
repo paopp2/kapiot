@@ -47,7 +47,7 @@ class GoogleAuthWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
-                  'assets/images/error_non_usc_email.png',
+                  'assets/images/error/non_usc_email.png',
                   height: 200,
                   fit: BoxFit.cover,
                 ),
