@@ -90,16 +90,21 @@ class RequestingRidersPanel extends HookConsumerWidget {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: InkWell(
-                        onTap: () => model.acceptRider(rider.id),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.grey,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey,
+                        ),
+                        height: constraints.maxHeight * 0.06,
+                        width: constraints.maxWidth * 0.4,
+                        child: ElevatedButton(
+                          onPressed: () => model.acceptRider(rider.id),
+                          child: const Text('Accept'),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              Colors.grey,
+                            ),
                           ),
-                          height: constraints.maxHeight * 0.06,
-                          width: constraints.maxWidth * 0.4,
-                          child: const Center(child: Text('Accept')),
                         ),
                       ),
                     )
