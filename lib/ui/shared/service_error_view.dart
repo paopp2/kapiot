@@ -34,7 +34,7 @@ class ServiceErrorView extends HookConsumerWidget {
 
     String getErrorSubText() {
       if (!hasPermission && !internetEnabled && !locationEnabled) {
-        return 'No internet connection. location disabled. location not shared.\nWe wish to help you, but there\'s nothing we really can do for now.';
+        return 'No internet connection.\nLocation disabled.\nLocation not shared.\n\nWe wish to help you, but there\'s nothing we really can do for now.';
       }
       if (!hasPermission) {
         return 'Allow us access to your location and we\'ll take you back.';
