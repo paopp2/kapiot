@@ -19,18 +19,17 @@ class ServiceErrorView extends HookConsumerWidget {
       if (!hasPermission) return 'assets/images/error/no_permission.png';
       if (!internetEnabled) return 'assets/images/error/no_connection.png';
       if (!locationEnabled) return 'assets/images/error/no_location.png';
-      return 'assets/images/error/no_resource.png';
+      return 'assets/images/error/error_catch.png';
     }
 
     String getErrorText() {
       if (!hasPermission && !internetEnabled && !locationEnabled) {
         return 'welp';
       }
-      if (!hasPermission) return 'insufficient permissions';
+      if (!hasPermission) return 'need permission';
       if (!internetEnabled) return 'no connection';
       if (!locationEnabled) return 'we lost you';
-      // TODO: Kani pd chan
-      return 'Alrights';
+      return '';
     }
 
     String getErrorSubText() {
@@ -38,8 +37,7 @@ class ServiceErrorView extends HookConsumerWidget {
         return 'No internet connection. location disabled. location not shared.\nWe wish to help you, but there\'s nothing we really can do for now.';
       }
       if (!hasPermission) {
-        // TODO: Palihug ko ani pud chan
-        return 'Share us your location and we\'ll take you back.';
+        return 'Allow us access to your location and we\'ll take you back.';
       }
       if (!internetEnabled) {
         return 'We know how you feel.\n It\'s just that you lost your internet connection.';
@@ -47,8 +45,7 @@ class ServiceErrorView extends HookConsumerWidget {
       if (!locationEnabled) {
         return 'Enable your GPS and we\'ll find you in no time.';
       }
-      // TODO: Kani pd chan
-      return 'Alrights';
+      return '';
     }
 
     return LayoutBuilder(builder: (context, constraints) {
