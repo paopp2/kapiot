@@ -16,8 +16,7 @@ class ServiceErrorView extends HookConsumerWidget {
       if (!hasPermission && !internetEnabled && !locationEnabled) {
         return 'assets/images/error/no_resource.png';
       }
-      // TODO: Change image for 'permission denied' case
-      if (!hasPermission) return 'assets/images/error/no_resource.png';
+      if (!hasPermission) return 'assets/images/error/no_permission.png';
       if (!internetEnabled) return 'assets/images/error/no_connection.png';
       if (!locationEnabled) return 'assets/images/error/no_location.png';
       return 'assets/images/error/no_resource.png';
@@ -27,8 +26,7 @@ class ServiceErrorView extends HookConsumerWidget {
       if (!hasPermission && !internetEnabled && !locationEnabled) {
         return 'welp';
       }
-      // TODO: Change error text for 'permission denied' case
-      if (!hasPermission) return 'welp.';
+      if (!hasPermission) return 'insufficient permissions';
       if (!internetEnabled) return 'no connection';
       if (!locationEnabled) return 'we lost you';
       return 'Alrights';
@@ -74,6 +72,7 @@ class ServiceErrorView extends HookConsumerWidget {
                     ),
                     child: Text(
                       getErrorText(),
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 34,
                         fontWeight: FontWeight.bold,
