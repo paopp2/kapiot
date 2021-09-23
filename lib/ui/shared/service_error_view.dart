@@ -29,6 +29,7 @@ class ServiceErrorView extends HookConsumerWidget {
       if (!hasPermission) return 'insufficient permissions';
       if (!internetEnabled) return 'no connection';
       if (!locationEnabled) return 'we lost you';
+      // TODO: Kani pd chan
       return 'Alrights';
     }
 
@@ -37,6 +38,7 @@ class ServiceErrorView extends HookConsumerWidget {
         return 'No internet connection. location disabled. location not shared.\nWe wish to help you, but there\'s nothing we really can do for now.';
       }
       if (!hasPermission) {
+        // TODO: Palihug ko ani pud chan
         return 'Share us your location and we\'ll take you back.';
       }
       if (!internetEnabled) {
@@ -45,6 +47,7 @@ class ServiceErrorView extends HookConsumerWidget {
       if (!locationEnabled) {
         return 'Enable your GPS and we\'ll find you in no time.';
       }
+      // TODO: Kani pd chan
       return 'Alrights';
     }
 
