@@ -37,10 +37,6 @@ class PortalView extends StatelessWidget {
                   child: const Text("RiderManagerView"),
                 ),
                 ElevatedButton(
-                  onPressed: model.gotoStopPointsView,
-                  child: const Text("StopPointsView"),
-                ),
-                ElevatedButton(
                   onPressed: model.gotoRequestDriversView,
                   child: const Text("RequestDriversView"),
                 ),
@@ -75,7 +71,6 @@ class PortalViewModel {
   void gotoHomeView() => _router.navigateTo(Routes.homeView);
   void gotoLoginView() => _router.navigateTo(Routes.loginView);
   void gotoRiderManagerView() => _router.navigateTo(Routes.riderManagerView);
-  void gotoStopPointsView() => _router.navigateTo(Routes.stopPointsView);
   void gotoRequestDriversView() =>
       _router.navigateTo(Routes.requestDriversView);
   void gotoRequestAcceptedView() =>

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
-import 'package:kapiot/ui/driver/stop_points_view.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
@@ -20,7 +19,6 @@ class AppRouter {
     Routes.placePickerView: (context) => const PlacePickerView(),
     Routes.loginView: (context) => const LoginView(),
     Routes.riderManagerView: (context) => const RiderManagerView(),
-    Routes.stopPointsView: (context) => const StopPointsView(),
     Routes.requestDriversView: (context) => const RequestDriversView(),
     Routes.requestAcceptedView: (context) => const RequestAcceptedView(),
   };
@@ -41,7 +39,6 @@ class Routes {
   static const placePickerView = 'home/components/place_picker_view';
   static const loginView = 'auth/login_view';
   static const riderManagerView = 'driver/rider_manager_view';
-  static const stopPointsView = 'driver/stop_points_view';
   static const requestDriversView = 'rider/request_drivers_view';
   static const requestAcceptedView = 'rider/request_accepted_view';
 }
