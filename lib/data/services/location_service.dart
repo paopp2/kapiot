@@ -46,21 +46,27 @@ class LocationService {
     }
   }
 
-  // TODO: Error-handling for getAddressFromLocation
-  Future<String?> getAddressFromLocation(KapiotLocation location) async {
-    final placemarks = await placemarkFromCoordinates(
-      location.lat,
-      location.lng,
-    );
-    final p = placemarks[0];
-    return "${p.name}, ${p.locality}, ${p.subAdministrativeArea}, ${p.administrativeArea}, ${p.country}";
+  Future<Either<Exception, String>> getAddressFromLocation(
+    KapiotLocation location,
+  ) async {
+    try {
+      final placemarks = await placemarkFromCoordinates(
+        location.lat,
+        location.lng,
+      );
+      final p = placemarks[0];
+      return Right(
+        "${p.name}, ${p.locality}, ${p.subAdministrativeArea}, ${p.administrativeArea}, ${p.country}",
+      );
+    } catch (e) {
+      e as Exception;
+      return Left(e);
+    }
   }
 
   // TODO: Error-handling for getLocationStream
   Stream<KapiotLocation> getLocationStream() {
-    final positionStream = Geolocator.getPositionStream(
-      distanceFilter: 5,
-    );
+    final positionStream = Geolocator.getPositionStream(distanceFilter: 5);
     return positionStream.map(
       (pos) => KapiotLocation(
         lat: pos.latitude,
