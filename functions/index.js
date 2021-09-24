@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const firebase_tools = require('firebase-tools');
 const cors = require('cors');
 const polyUtil = require('./polyline_helpers');
 const test_data = require("./test_data.json");
@@ -8,6 +9,34 @@ const db = admin.firestore();
 const rtdb = admin.database();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
+require('dotenv').config();
+
+exports.recursiveDelete = functions
+  .runWith({
+    timeoutSeconds: 540,
+    memory: '512MB'
+  })
+  .https.onRequest(async (data, context, req, res) => {
+    const access_token = process.env.ACCESS_TOKEN;
+    const rider_path = 'active_riders';
+    const driver_path = 'active_drivers';
+    const project_ID = process.env.PROJECT_ID;
+
+    await firebase_tools.firestore
+      .delete(rider_path, {
+        project: project_ID,
+        recursive: true,
+        yes: true,
+        token: access_token
+      });
+    await firebase_tools.firestore
+      .delete(driver_path, {
+        project: project_ID,
+        recursive: true,
+        yes: true,
+        token: access_token
+      });
+});
 
 exports.getActiveRiders = functions.https.onRequest(async (req, res) =>  {
     const snapshot = await ridersRef.get();
