@@ -98,8 +98,6 @@ class RiderRepository {
       path: FirestorePath.colAcceptedRiders(driver.id),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
-    return acceptedRidersConfigStream.map(
-      (rcList) => rcList.toList(),
-    );
+    return acceptedRidersConfigStream;
   }
 }
