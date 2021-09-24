@@ -31,32 +31,6 @@ class PostTripSummaryViewModel extends ViewModel {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
-    getRiderRouteConfigs();
-    final riders = read(ridersRouteConfigs).state;
-    //final riders = getRiderRouteConfigs();
-    final acceptingDriver = read(acceptingDriverConfigProvider).state!;
-    final currentUserId = currentUser!.id;
-    //final transaction = Transaction(currentUserId: currentUserId, driver: acceptingDriver, riders: riders, points: points, startTime: startTime, endTime: endTime, distance: distance)
-  }
-
-  Stream<List<RouteConfig>>? getRiderRouteConfigs() {
-    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
-    final allRidersStream = riderRepo.getRiderConfigsStream(
-      driver: acceptingDriverConfig.user,
-    );
-    List<RouteConfig> ridersList = [];
-    if (currentUser is ForDriver) {
-      allRidersStream.forEach((riders) {
-        ridersList.addAll(riders);
-      });
-      read(ridersRouteConfigs).state = ridersList;
-    } else if (currentUser is ForRider) {
-      allRidersStream.forEach((riders) {
-        ridersList
-            .addAll(riders.where((rider) => rider.user.id != currentUser!.id));
-      });
-      read(ridersRouteConfigs).state = ridersList;
-    }
   }
 
   @override
