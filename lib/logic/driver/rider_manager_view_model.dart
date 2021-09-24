@@ -118,6 +118,10 @@ class RiderManagerViewModel extends ViewModel {
         // Remove all Views then navigate to HomeView
         AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
       } else {
+        mapController.addMarker(
+          marker: Markers.driverLoc,
+          location: currentLoc,
+        );
         locationRepo.updateLocation(currentUser!.id, currentLoc);
       }
     });
