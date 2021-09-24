@@ -9,32 +9,29 @@ const db = admin.firestore();
 const rtdb = admin.database();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
+require('dotenv').config();
 
 exports.recursiveDelete = functions
   .runWith({
     timeoutSeconds: 540,
     memory: '512MB'
   })
-  .https.onRequest(async (data, context, res) => {
-    const cred = admin.app().options.credential;
-    if (!cred) {
-      throw new Error('Admin credential was undefined');
-    }
-    const access_token = (await cred.getAccessToken()).access_token;
-    
+  .https.onRequest(async (data, context, req, res) => {
+    const access_token = process.env.ACCESS_TOKEN;
     const rider_path = 'active_riders';
+    const driver_path = 'active_drivers';
+    const project_ID = process.env.PROJECT_ID;
+
     await firebase_tools.firestore
       .delete(rider_path, {
-        project: process.env.GCLOUD_PROJECT,
+        project: project_ID,
         recursive: true,
         yes: true,
         token: access_token
       });
-
-    const driver_path = 'active_drivers';
     await firebase_tools.firestore
       .delete(driver_path, {
-        project: process.env.GCLOUD_PROJECT,
+        project: project_ID,
         recursive: true,
         yes: true,
         token: access_token
