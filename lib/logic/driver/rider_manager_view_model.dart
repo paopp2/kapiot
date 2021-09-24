@@ -159,10 +159,13 @@ class RiderManagerViewModel extends ViewModel {
       read(nextStopProvider).state = stopPointsList[currentIndex + 1];
     } else {
       final currentDriverConfig = read(currentRouteConfigProvider).state!;
+      final riderConfigList = read(riderConfigListProvider).state;
       driverRepo.removeRiderFromAccepted(
         currentDriverConfig.user.id,
         currentStop.riderConfig.user.id,
       );
+      riderConfigList.add(currentStop.riderConfig);
+      read(riderConfigListProvider).state = riderConfigList;
       await updateDriverPoints(currentStop.riderConfig);
     }
   }
