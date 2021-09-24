@@ -15,4 +15,10 @@ final acceptingDriverConfigProvider =
   return null;
 });
 
+final riderConfigListProvider =
+    StateProvider.autoDispose<List<RouteConfig>>((ref) {
+  ref.maintainState = true;
+  return [];
+});
+
 final resetKeyProvider = StateProvider.autoDispose((ref) => UniqueKey());
