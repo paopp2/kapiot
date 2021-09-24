@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kapiot/logic/shared/post_trip_summary_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
@@ -21,6 +22,7 @@ class AppRouter {
     Routes.riderManagerView: (context) => const RiderManagerView(),
     Routes.requestDriversView: (context) => const RequestDriversView(),
     Routes.requestAcceptedView: (context) => const RequestAcceptedView(),
+    Routes.postTripSummaryView: (context) => const PostTripSummaryView(),
   };
 
   Future<dynamic>? navigateTo(String route) =>
@@ -41,4 +43,5 @@ class Routes {
   static const riderManagerView = 'driver/rider_manager_view';
   static const requestDriversView = 'rider/request_drivers_view';
   static const requestAcceptedView = 'rider/request_accepted_view';
+  static const postTripSummaryView = 'post_trip_summary_view';
 }
