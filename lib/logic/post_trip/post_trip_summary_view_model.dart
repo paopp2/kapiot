@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
@@ -41,6 +42,12 @@ class PostTripSummaryViewModel extends ViewModel {
       final riders = read(riderConfigListProvider).state;
       final decodedRoute = await googleMapsApiServices.utils
           .decodeRoute(currentRouteConfig.encodedRoute);
+      final LatLng startLoc = decodedRoute[0];
+      final LatLng endLoc = decodedRoute[decodedRoute.length - 1];
+      final KapiotLocation pointA =
+          KapiotLocation(lat: startLoc.latitude, lng: startLoc.longitude);
+      final KapiotLocation pointB =
+          KapiotLocation(lat: endLoc.latitude, lng: endLoc.longitude);
     }
   }
 
