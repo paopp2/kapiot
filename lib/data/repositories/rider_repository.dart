@@ -89,4 +89,15 @@ class RiderRepository {
       (rcList) => rcList.map((rc) => rc.user).toList(),
     );
   }
+
+  /// Returns all riders that have been accepted by [driver] as Stream of RouteConfigs
+  Stream<List<RouteConfig>> getRiderConfigsStream({
+    required KapiotUser driver,
+  }) {
+    final acceptedRidersConfigStream = firestoreHelper.collectionStream(
+      path: FirestorePath.colAcceptedRiders(driver.id),
+      builder: (data, docID) => RouteConfig.fromJson(data),
+    );
+    return acceptedRidersConfigStream;
+  }
 }
