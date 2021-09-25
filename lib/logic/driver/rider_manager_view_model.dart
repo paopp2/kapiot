@@ -58,6 +58,8 @@ class RiderManagerViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
+    read(startTimeProvider).state = DateTime.now();
+    print(read(startTimeProvider).state);
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -112,6 +114,8 @@ class RiderManagerViewModel extends ViewModel {
 
       // If driver is less than 50m away from destination (arriving)
       if (distToDriverEnd < 0.050) {
+        read(endTimeProvider).state = DateTime.now();
+        print(read(endTimeProvider).state);
         MapController.reset(read);
         // Set a new resetKey; notifies the HomeView that it should reset
         read(resetKeyProvider).state = UniqueKey();
