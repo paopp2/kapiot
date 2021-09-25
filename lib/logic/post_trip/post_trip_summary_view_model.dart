@@ -1,5 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -18,6 +19,7 @@ final postTripSummaryViewModel = Provider.autoDispose(
     riderRepo: ref.watch(riderRepositoryProvider),
     currentUser: ref.watch(currentUserProvider),
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+    coreAlgorithms: ref.watch(coreAlgorithmsProvider),
   ),
 );
 
@@ -27,10 +29,12 @@ class PostTripSummaryViewModel extends ViewModel {
     required this.riderRepo,
     required this.currentUser,
     required this.googleMapsApiServices,
+    required this.coreAlgorithms,
   }) : super(read);
   final RiderRepository riderRepo;
   final KapiotUser? currentUser;
   final GoogleMapsApiServices googleMapsApiServices;
+  final CoreAlgorithms coreAlgorithms;
 
   @override
   Future<void> initState() async {
@@ -50,8 +54,9 @@ class PostTripSummaryViewModel extends ViewModel {
           KapiotLocation(lat: startLoc.latitude, lng: startLoc.longitude);
       final KapiotLocation pointB =
           KapiotLocation(lat: endLoc.latitude, lng: endLoc.longitude);
-      final double = await googleMapsApiServices.distMatrix
+      final double distance = await googleMapsApiServices.distMatrix
           .getDistanceValue(pointA: pointA, pointB: pointB);
+      final int points = read(driverPointsProvider).state.toInt();
     }
   }
 
