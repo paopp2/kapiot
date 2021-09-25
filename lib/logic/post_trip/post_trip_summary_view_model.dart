@@ -38,6 +38,8 @@ class PostTripSummaryViewModel extends ViewModel {
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state;
+    final currentUserId = currentUser!.id;
+    // TODO: Refactor
     if (currentRouteConfig is ForDriver) {
       final riders = read(riderConfigListProvider).state;
       final decodedRoute = await googleMapsApiServices.utils
@@ -48,6 +50,8 @@ class PostTripSummaryViewModel extends ViewModel {
           KapiotLocation(lat: startLoc.latitude, lng: startLoc.longitude);
       final KapiotLocation pointB =
           KapiotLocation(lat: endLoc.latitude, lng: endLoc.longitude);
+      final double = await googleMapsApiServices.distMatrix
+          .getDistanceValue(pointA: pointA, pointB: pointB);
     }
   }
 
