@@ -57,6 +57,17 @@ class PostTripSummaryViewModel extends ViewModel {
       final double distance = await googleMapsApiServices.distMatrix
           .getDistanceValue(pointA: pointA, pointB: pointB);
       final int points = read(driverPointsProvider).state.toInt();
+      final DateTime startTime = read(startTimeProvider).state;
+      final DateTime endTime = read(endTimeProvider).state;
+
+      final Transaction transaction = Transaction(
+          currentUserId: currentUserId,
+          driver: currentRouteConfig,
+          riders: riders,
+          points: points,
+          startTime: startTime,
+          endTime: endTime,
+          distance: distance);
     }
   }
 
