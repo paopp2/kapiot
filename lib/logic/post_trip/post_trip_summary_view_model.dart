@@ -6,6 +6,7 @@ import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/post_trip/post_trip_summary_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/transaction/transaction.dart';
@@ -36,8 +37,10 @@ class PostTripSummaryViewModel extends ViewModel {
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state;
-    if (currentUser is ForDriver) {
+    if (currentRouteConfig is ForDriver) {
       final riders = read(riderConfigListProvider).state;
+      final decodedRoute = await googleMapsApiServices.utils
+          .decodeRoute(currentRouteConfig.encodedRoute);
     }
   }
 
