@@ -129,6 +129,27 @@ class DistanceMatrixService {
       durationValue: durationValue.toDouble(),
     );
   }
+
+  Future<double> getDistanceValue({
+    required KapiotLocation pointA,
+    required KapiotLocation pointB,
+  }) async {
+    final latPointA = pointA.lat;
+    final lngPointA = pointA.lng;
+    final latPointB = pointB.lat;
+    final lngPointB = pointB.lng;
+
+    final url = Uri.parse(
+        "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=$latPointB,$lngPointB&origins=$latPointA,$lngPointA&key=$googleApiKey");
+    final result = await http.get(url);
+
+    Map<String, dynamic> decodedResult = jsonDecode(result.body);
+
+    final distanceValue =
+        decodedResult["rows"][0]["elements"][0]["distance"]["value"];
+
+    return distanceValue.toDouble();
+  }
 }
 
 class MapsUtils {
