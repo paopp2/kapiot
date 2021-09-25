@@ -31,4 +31,9 @@ final endTimeProvider = StateProvider.autoDispose<DateTime>((ref) {
   return DateTime(0);
 });
 
+final driverPointsProvider = StateProvider.autoDispose<double>((ref) {
+  ref.maintainState = true;
+  return 0;
+});
+
 final resetKeyProvider = StateProvider.autoDispose((ref) => UniqueKey());
