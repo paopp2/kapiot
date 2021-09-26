@@ -21,6 +21,8 @@ class _$TransactionTearOff {
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
       double? points,
       DateTime? startTime,
       DateTime? endTime,
@@ -29,6 +31,8 @@ class _$TransactionTearOff {
       currentUserId: currentUserId,
       driver: driver,
       riders: riders,
+      startLocation: startLocation,
+      endLocation: endLocation,
       points: points,
       startTime: startTime,
       endTime: endTime,
@@ -45,6 +49,8 @@ mixin _$Transaction {
   String? get currentUserId => throw _privateConstructorUsedError;
   RouteConfig? get driver => throw _privateConstructorUsedError;
   List<RouteConfig>? get riders => throw _privateConstructorUsedError;
+  KapiotLocation? get startLocation => throw _privateConstructorUsedError;
+  KapiotLocation? get endLocation => throw _privateConstructorUsedError;
   double? get points => throw _privateConstructorUsedError;
   DateTime? get startTime => throw _privateConstructorUsedError;
   DateTime? get endTime => throw _privateConstructorUsedError;
@@ -64,12 +70,16 @@ abstract class $TransactionCopyWith<$Res> {
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
       double? points,
       DateTime? startTime,
       DateTime? endTime,
       double? distance});
 
   $RouteConfigCopyWith<$Res>? get driver;
+  $KapiotLocationCopyWith<$Res>? get startLocation;
+  $KapiotLocationCopyWith<$Res>? get endLocation;
 }
 
 /// @nodoc
@@ -85,6 +95,8 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
     Object? currentUserId = freezed,
     Object? driver = freezed,
     Object? riders = freezed,
+    Object? startLocation = freezed,
+    Object? endLocation = freezed,
     Object? points = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
@@ -103,6 +115,14 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<RouteConfig>?,
+      startLocation: startLocation == freezed
+          ? _value.startLocation
+          : startLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
+      endLocation: endLocation == freezed
+          ? _value.endLocation
+          : endLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -132,6 +152,28 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
       return _then(_value.copyWith(driver: value));
     });
   }
+
+  @override
+  $KapiotLocationCopyWith<$Res>? get startLocation {
+    if (_value.startLocation == null) {
+      return null;
+    }
+
+    return $KapiotLocationCopyWith<$Res>(_value.startLocation!, (value) {
+      return _then(_value.copyWith(startLocation: value));
+    });
+  }
+
+  @override
+  $KapiotLocationCopyWith<$Res>? get endLocation {
+    if (_value.endLocation == null) {
+      return null;
+    }
+
+    return $KapiotLocationCopyWith<$Res>(_value.endLocation!, (value) {
+      return _then(_value.copyWith(endLocation: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -145,6 +187,8 @@ abstract class _$TransactionCopyWith<$Res>
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
       double? points,
       DateTime? startTime,
       DateTime? endTime,
@@ -152,6 +196,10 @@ abstract class _$TransactionCopyWith<$Res>
 
   @override
   $RouteConfigCopyWith<$Res>? get driver;
+  @override
+  $KapiotLocationCopyWith<$Res>? get startLocation;
+  @override
+  $KapiotLocationCopyWith<$Res>? get endLocation;
 }
 
 /// @nodoc
@@ -169,6 +217,8 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
     Object? currentUserId = freezed,
     Object? driver = freezed,
     Object? riders = freezed,
+    Object? startLocation = freezed,
+    Object? endLocation = freezed,
     Object? points = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
@@ -187,6 +237,14 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<RouteConfig>?,
+      startLocation: startLocation == freezed
+          ? _value.startLocation
+          : startLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
+      endLocation: endLocation == freezed
+          ? _value.endLocation
+          : endLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -214,6 +272,8 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
       {this.currentUserId,
       this.driver,
       this.riders,
+      this.startLocation,
+      this.endLocation,
       this.points,
       this.startTime,
       this.endTime,
@@ -226,6 +286,10 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
   @override
   final List<RouteConfig>? riders;
   @override
+  final KapiotLocation? startLocation;
+  @override
+  final KapiotLocation? endLocation;
+  @override
   final double? points;
   @override
   final DateTime? startTime;
@@ -236,7 +300,7 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Transaction(currentUserId: $currentUserId, driver: $driver, riders: $riders, points: $points, startTime: $startTime, endTime: $endTime, distance: $distance)';
+    return 'Transaction(currentUserId: $currentUserId, driver: $driver, riders: $riders, startLocation: $startLocation, endLocation: $endLocation, points: $points, startTime: $startTime, endTime: $endTime, distance: $distance)';
   }
 
   @override
@@ -247,6 +311,8 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
       ..add(DiagnosticsProperty('currentUserId', currentUserId))
       ..add(DiagnosticsProperty('driver', driver))
       ..add(DiagnosticsProperty('riders', riders))
+      ..add(DiagnosticsProperty('startLocation', startLocation))
+      ..add(DiagnosticsProperty('endLocation', endLocation))
       ..add(DiagnosticsProperty('points', points))
       ..add(DiagnosticsProperty('startTime', startTime))
       ..add(DiagnosticsProperty('endTime', endTime))
@@ -264,6 +330,12 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
                 const DeepCollectionEquality().equals(other.driver, driver)) &&
             (identical(other.riders, riders) ||
                 const DeepCollectionEquality().equals(other.riders, riders)) &&
+            (identical(other.startLocation, startLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.startLocation, startLocation)) &&
+            (identical(other.endLocation, endLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.endLocation, endLocation)) &&
             (identical(other.points, points) ||
                 const DeepCollectionEquality().equals(other.points, points)) &&
             (identical(other.startTime, startTime) ||
@@ -283,6 +355,8 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
       const DeepCollectionEquality().hash(currentUserId) ^
       const DeepCollectionEquality().hash(driver) ^
       const DeepCollectionEquality().hash(riders) ^
+      const DeepCollectionEquality().hash(startLocation) ^
+      const DeepCollectionEquality().hash(endLocation) ^
       const DeepCollectionEquality().hash(points) ^
       const DeepCollectionEquality().hash(startTime) ^
       const DeepCollectionEquality().hash(endTime) ^
@@ -299,6 +373,8 @@ abstract class _Transaction implements Transaction {
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
       double? points,
       DateTime? startTime,
       DateTime? endTime,
@@ -310,6 +386,10 @@ abstract class _Transaction implements Transaction {
   RouteConfig? get driver => throw _privateConstructorUsedError;
   @override
   List<RouteConfig>? get riders => throw _privateConstructorUsedError;
+  @override
+  KapiotLocation? get startLocation => throw _privateConstructorUsedError;
+  @override
+  KapiotLocation? get endLocation => throw _privateConstructorUsedError;
   @override
   double? get points => throw _privateConstructorUsedError;
   @override
