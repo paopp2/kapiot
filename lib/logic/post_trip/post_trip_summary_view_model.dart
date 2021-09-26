@@ -42,7 +42,7 @@ class PostTripSummaryViewModel extends ViewModel {
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state;
-    getTransaction(currentRouteConfig, currentUser);
+    await getTransaction(currentRouteConfig, currentUser);
   }
 
   // TODO: Transaction for Rider
