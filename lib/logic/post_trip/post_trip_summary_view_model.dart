@@ -61,7 +61,7 @@ class PostTripSummaryViewModel extends ViewModel {
           KapiotLocation(lat: endLoc.latitude, lng: endLoc.longitude);
       final double distance = await googleMapsApiServices.distMatrix
           .getDistanceValue(pointA: pointA, pointB: pointB);
-      read(transactionProvider).state.copyWith(
+      read(transactionProvider).state = transaction.copyWith(
           currentUserId: userId, driver: routeConfig, distance: distance);
     }
   }
