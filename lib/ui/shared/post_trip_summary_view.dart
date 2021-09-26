@@ -1,302 +1,31 @@
+import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:confetti/confetti.dart';
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 
-class PostTripSummaryView extends StatefulWidget {
+class PostTripSummaryView extends StatelessWidget {
   const PostTripSummaryView({Key? key}) : super(key: key);
 
   @override
-  _PostTripSummaryViewState createState() => _PostTripSummaryViewState();
-}
-
-class _PostTripSummaryViewState extends State<PostTripSummaryView> {
-  late ConfettiController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = ConfettiController(duration: Duration(seconds: 3));
-    controller.play();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    bool isDriver = false; // set panel type here
+
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Scaffold(
             body: Center(
-              child: Stack(
-                children: [
-                  Container(
-                    height: constraints.maxHeight * 0.35,
-                    width: constraints.maxWidth,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: constraints.maxWidth * 0.05,
+              child: isDriver
+                  ? PostTripPanel(
+                      constraints: constraints,
+                      isDriver: isDriver,
+                    )
+                  : PostTripPanel(
+                      constraints: constraints,
+                      isDriver: isDriver,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'You have arrived at your destination.',
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            color: const Color(0xff333333),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          '69',
-                          style: GoogleFonts.poppins(
-                            fontSize: 81,
-                            color: const Color(0xff333333),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'Points earned',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            color: const Color(
-                              0xff666666,
-                            ),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: constraints.maxHeight * 0.65,
-                      color: Colors.transparent,
-                      child: Container(
-                        width: constraints.maxWidth,
-                        padding: EdgeInsets.only(
-                          top: 50,
-                          left: constraints.maxWidth * 0.05,
-                          right: constraints.maxWidth * 0.05,
-                        ),
-                        decoration: BoxDecoration(
-                          // color: Color(0xffdbb3d4),
-                          border: Border.all(
-                            color: const Color(0xff666666),
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: constraints.maxWidth,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Christian G.',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 24,
-                                      color: Color(0xff333333),
-                                    ),
-                                  ),
-                                  Text(
-                                    '18105024',
-                                    style: GoogleFonts.poppins(
-                                      height: 1,
-                                      fontSize: 14,
-                                      color: Color(0xff666666),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                top: constraints.maxHeight * 0.025,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Eskina Japan',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 16,
-                                      color: Color(0xff574754),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Eskina Singapore',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 28,
-                                      color: Color(0xff574754),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                vertical: constraints.maxHeight * 0.025,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InfoBlockWidget(
-                                      constraints: constraints,
-                                      value: '6.9',
-                                      type: 'km'),
-                                  InfoBlockWidget(
-                                      constraints: constraints,
-                                      value: '6',
-                                      type: 'minutes'),
-                                  InfoBlockWidget(
-                                      constraints: constraints,
-                                      value: '96',
-                                      type: 'total points'),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              // color: Colors.amber,
-                              width: constraints.maxWidth,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Text(
-                                  //   'Passengers',
-                                  //   style: GoogleFonts.poppins(
-                                  //     fontSize: 16,
-                                  //     color: Color(0xff574754),
-                                  //   ),
-                                  // ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        height: constraints.maxHeight * 0.1,
-                                        child: ListView(
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          children: const [
-                                            Align(
-                                              widthFactor: 0.8,
-                                              child: CircleAvatar(
-                                                radius: 30,
-                                                backgroundColor: Colors.white,
-                                                child: CircleAvatar(
-                                                  radius: 27,
-                                                  backgroundColor:
-                                                      Colors.purple,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              widthFactor: 0.8,
-                                              child: CircleAvatar(
-                                                radius: 30,
-                                                backgroundColor: Colors.white,
-                                                child: CircleAvatar(
-                                                  radius: 27,
-                                                  backgroundColor:
-                                                      Colors.purple,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              widthFactor: 0.8,
-                                              child: CircleAvatar(
-                                                radius: 30,
-                                                backgroundColor: Colors.white,
-                                                child: CircleAvatar(
-                                                  radius: 27,
-                                                  backgroundColor:
-                                                      Colors.purple,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        'You and n others',
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 14,
-                                          color: const Color(
-                                            0xff666666,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'home',
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 14,
-                                    color: const Color(
-                                      0xff666666,
-                                    ),
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                    fixedSize: const Size(110, 50),
-                                    side: const BorderSide(
-                                        color: Color(0xffdbb3d4)),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                    primary: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: (constraints.maxHeight * 0.35) - 40,
-                    left: (constraints.maxWidth / 2) - 40,
-                    child: Material(
-                      elevation: 8,
-                      borderRadius: BorderRadius.circular(40),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 40,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.purple,
-                          radius: 37,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: constraints.maxHeight * 0.175,
-                    left: constraints.maxWidth / 2,
-                    child: ConfettiWidget(
-                      confettiController: controller,
-                      blastDirectionality: BlastDirectionality.explosive,
-                      numberOfParticles: 20,
-                      colors: [Color(0xffdbb3d4), Color(0xffe5d392)],
-                    ),
-                  ),
-                ],
-              ),
             ),
           );
         },
@@ -305,279 +34,355 @@ class _PostTripSummaryViewState extends State<PostTripSummaryView> {
   }
 }
 
-// class PostTripSummaryView extends StatefulWidget {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: LayoutBuilder(
-//         builder: (context, constraints) {
-//           return Scaffold(
-//             // backgroundColor: Color(0xffdbb3d4),
-//             body: Center(
-//               child: Stack(
-//                 children: [
-//                   ConfettiWidget(confettiController: controller),
-//                   Container(
-//                     height: constraints.maxHeight * 0.35,
-//                     width: constraints.maxWidth,
-//                     padding: EdgeInsets.symmetric(
-//                       horizontal: constraints.maxWidth * 0.05,
-//                     ),
-//                     child: Column(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       children: [
-//                         Text(
-//                           'You have arrived at your destination.',
-//                           style: GoogleFonts.poppins(
-//                             fontSize: 18,
-//                             color: const Color(0xff333333),
-//                           ),
-//                           textAlign: TextAlign.center,
-//                         ),
-//                         Text(
-//                           '69',
-//                           style: GoogleFonts.poppins(
-//                             fontSize: 81,
-//                             color: const Color(0xff333333),
-//                           ),
-//                           textAlign: TextAlign.center,
-//                         ),
-//                         Text(
-//                           'Points earned',
-//                           style: GoogleFonts.montserrat(
-//                             fontSize: 14,
-//                             color: const Color(
-//                               0xff666666,
-//                             ),
-//                           ),
-//                           textAlign: TextAlign.center,
-//                         ),
-//                         const SizedBox(
-//                           height: 10,
-//                         )
-//                       ],
-//                     ),
-//                   ),
-
-//                   Align(
-//                     alignment: Alignment.bottomCenter,
-//                     child: Container(
-//                       height: constraints.maxHeight * 0.65,
-//                       color: Colors.transparent,
-//                       child: Container(
-//                         width: constraints.maxWidth,
-//                         padding: EdgeInsets.only(
-//                           top: 50,
-//                           left: constraints.maxWidth * 0.05,
-//                           right: constraints.maxWidth * 0.05,
-//                         ),
-//                         decoration: BoxDecoration(
-//                           // color: Color(0xffdbb3d4),
-//                           border: Border.all(
-//                             color: const Color(0xff666666),
-//                           ),
-//                           borderRadius: const BorderRadius.only(
-//                             topLeft: Radius.circular(24),
-//                             topRight: Radius.circular(24),
-//                           ),
-//                         ),
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Container(
-//                               width: constraints.maxWidth,
-//                               child: Column(
-//                                 children: [
-//                                   Text(
-//                                     'Christian G.',
-//                                     style: GoogleFonts.poppins(
-//                                       fontSize: 24,
-//                                       color: Color(0xff333333),
-//                                     ),
-//                                   ),
-//                                   Text(
-//                                     '18105024',
-//                                     style: GoogleFonts.poppins(
-//                                       height: 1,
-//                                       fontSize: 14,
-//                                       color: Color(0xff666666),
-//                                     ),
-//                                   )
-//                                 ],
-//                               ),
-//                             ),
-//                             Container(
-//                               margin: EdgeInsets.only(
-//                                 top: constraints.maxHeight * 0.025,
-//                               ),
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: [
-//                                   Text(
-//                                     'Eskina Japan',
-//                                     style: GoogleFonts.poppins(
-//                                       fontSize: 16,
-//                                       color: Color(0xff574754),
-//                                     ),
-//                                   ),
-//                                   Text(
-//                                     'Eskina Singapore',
-//                                     style: GoogleFonts.poppins(
-//                                       fontSize: 28,
-//                                       color: Color(0xff574754),
-//                                       fontWeight: FontWeight.w500,
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                             Container(
-//                               margin: EdgeInsets.symmetric(
-//                                 vertical: constraints.maxHeight * 0.025,
-//                               ),
-//                               child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   InfoBlockWidget(
-//                                       constraints: constraints,
-//                                       value: '6.9',
-//                                       type: 'km'),
-//                                   InfoBlockWidget(
-//                                       constraints: constraints,
-//                                       value: '6',
-//                                       type: 'minutes'),
-//                                   InfoBlockWidget(
-//                                       constraints: constraints,
-//                                       value: '96',
-//                                       type: 'total points'),
-//                                 ],
-//                               ),
-//                             ),
-//                             Container(
-//                               // color: Colors.amber,
-//                               width: constraints.maxWidth,
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: [
-//                                   Text(
-//                                     'Passengers',
-//                                     style: GoogleFonts.poppins(
-//                                       fontSize: 16,
-//                                       color: Color(0xff574754),
-//                                     ),
-//                                   ),
-//                                   Row(
-//                                     mainAxisAlignment:
-//                                         MainAxisAlignment.spaceBetween,
-//                                     children: [
-//                                       SizedBox(
-//                                         height: constraints.maxHeight * 0.1,
-//                                         child: ListView(
-//                                           shrinkWrap: true,
-//                                           scrollDirection: Axis.horizontal,
-//                                           children: const [
-//                                             Align(
-//                                               widthFactor: 0.8,
-//                                               child: CircleAvatar(
-//                                                 radius: 30,
-//                                                 backgroundColor: Colors.white,
-//                                                 child: CircleAvatar(
-//                                                   radius: 27,
-//                                                   backgroundColor:
-//                                                       Colors.purple,
-//                                                 ),
-//                                               ),
-//                                             ),
-//                                             Align(
-//                                               widthFactor: 0.8,
-//                                               child: CircleAvatar(
-//                                                 radius: 30,
-//                                                 backgroundColor: Colors.white,
-//                                                 child: CircleAvatar(
-//                                                   radius: 27,
-//                                                   backgroundColor:
-//                                                       Colors.purple,
-//                                                 ),
-//                                               ),
-//                                             ),
-//                                             Align(
-//                                               widthFactor: 0.8,
-//                                               child: CircleAvatar(
-//                                                 radius: 30,
-//                                                 backgroundColor: Colors.white,
-//                                                 child: CircleAvatar(
-//                                                   radius: 27,
-//                                                   backgroundColor:
-//                                                       Colors.purple,
-//                                                 ),
-//                                               ),
-//                                             ),
-//                                           ],
-//                                         ),
-//                                       ),
-//                                       Text(
-//                                         'You and n others',
-//                                         style: GoogleFonts.montserrat(
-//                                           fontSize: 14,
-//                                           color: const Color(
-//                                             0xff666666,
-//                                           ),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   )
-//                                 ],
-//                               ),
-//                             )
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                   Positioned(
-//                     top: (constraints.maxHeight * 0.35) - 40,
-//                     left: (constraints.maxWidth / 2) - 40,
-//                     child: Material(
-//                       elevation: 8,
-//                       borderRadius: BorderRadius.circular(40),
-//                       child: const CircleAvatar(
-//                         backgroundColor: Colors.white,
-//                         radius: 40,
-//                         child: CircleAvatar(
-//                           backgroundColor: Colors.purple,
-//                           radius: 37,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-
-//                   // ElevatedButton(
-//                   //   onPressed: () {},
-//                   //   child: const Text('Back to HomeView'),
-//                   // ),
-//                 ],
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
-class InfoBlockWidget extends StatelessWidget {
-  InfoBlockWidget({
+class PostTripPanel extends StatefulWidget {
+  const PostTripPanel({
     Key? key,
     required this.constraints,
-    required this.value,
+    required this.isDriver,
+  }) : super(key: key);
+
+  final BoxConstraints constraints;
+  final bool isDriver;
+
+  @override
+  State<PostTripPanel> createState() => _PostTripPanelState();
+}
+
+class _PostTripPanelState extends State<PostTripPanel> {
+  late ConfettiController controller;
+
+  double points = 0;
+  double numKm = 0;
+  double numMin = 0;
+  double numTotal = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ConfettiController(duration: const Duration(seconds: 4));
+
+    Future.delayed(const Duration(milliseconds: 10)).then((value) {
+      setState(() {
+        points = 33;
+      });
+    });
+
+    Future.delayed(const Duration(milliseconds: 2000)).then((value) {
+      setState(() {
+        numKm = 5.8;
+        numMin = 17;
+        numTotal = 47;
+      });
+    });
+
+    Future.delayed(const Duration(milliseconds: 3000)).then((value) {
+      setState(() {
+        controller.play();
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Entry(
+          yOffset: (widget.constraints.maxHeight / 2) -
+              (widget.constraints.maxHeight * 0.35 / 2),
+          delay: const Duration(milliseconds: 1500),
+          duration: const Duration(milliseconds: 1000),
+          curve: Curves.easeInToLinear,
+          child: Container(
+            height: widget.constraints.maxHeight * 0.35,
+            width: widget.constraints.maxWidth,
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.constraints.maxWidth * 0.05,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'You have arrived at your destination.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    color: const Color(0xff333333),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                AnimatedFlipCounter(
+                  value: points,
+                  duration: const Duration(milliseconds: 3500),
+                  curve: Curves.linearToEaseOut,
+                  textStyle: GoogleFonts.poppins(
+                    fontSize: 81,
+                    color: const Color(0xff333333),
+                  ),
+                ),
+                Text(
+                  'Points earned',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    color: const Color(0xff666666),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10)
+              ],
+            ),
+          ),
+        ),
+        Entry(
+          yOffset: 1000,
+          delay: const Duration(milliseconds: 1000),
+          duration: const Duration(milliseconds: 1500),
+          curve: Curves.easeInToLinear,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: widget.constraints.maxHeight * 0.65,
+              color: Colors.transparent,
+              child: Container(
+                width: widget.constraints.maxWidth,
+                padding: EdgeInsets.only(
+                  left: widget.constraints.maxWidth * 0.05,
+                  right: widget.constraints.maxWidth * 0.05,
+                  bottom: widget.constraints.maxHeight * 0.025,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color(0xff666666),
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.isDriver
+                        ? const SizedBox()
+                        : Container(
+                            padding: const EdgeInsets.only(top: 50),
+                            width: widget.constraints.maxWidth,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Christian G.',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 24,
+                                    color: Color(0xff333333),
+                                  ),
+                                ),
+                                Text(
+                                  '18105024',
+                                  style: GoogleFonts.poppins(
+                                    height: 1,
+                                    fontSize: 14,
+                                    color: Color(0xff666666),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: widget.constraints.maxHeight * 0.025,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Eskina Japan',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              color: const Color(0xff574754),
+                            ),
+                          ),
+                          Text(
+                            'Eskina Singapore',
+                            style: GoogleFonts.poppins(
+                              fontSize: 28,
+                              color: const Color(0xff574754),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: widget.constraints.maxHeight * 0.025,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InfoBlockWidget(
+                              constraints: widget.constraints,
+                              number: numKm,
+                              type: 'km'),
+                          InfoBlockWidget(
+                              constraints: widget.constraints,
+                              number: numMin,
+                              type: 'minutes'),
+                          InfoBlockWidget(
+                              constraints: widget.constraints,
+                              number: numTotal,
+                              type: 'total points'),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: widget.constraints.maxWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          widget.isDriver
+                              ? Text(
+                                  'Passengers',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: const Color(0xff574754),
+                                  ),
+                                )
+                              : const SizedBox(),
+                          SizedBox(
+                            width: widget.constraints.maxWidth * 0.85,
+                            height: widget.constraints.maxHeight * 0.1,
+                            child: Center(
+                              child: ListView(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                children: const [
+                                  Align(
+                                    widthFactor: 0.8,
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.purple,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    widthFactor: 0.8,
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.purple,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    widthFactor: 0.8,
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.purple,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    Entry(
+                      xOffset: -1000,
+                      delay: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 1500),
+                      curve: Curves.easeInToLinear,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'home',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 14,
+                              color: const Color(
+                                0xff666666,
+                              ),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(110, 50),
+                              side: const BorderSide(
+                                color: Color(0xffdbb3d4),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              primary: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        widget.isDriver
+            ? const SizedBox()
+            : Positioned(
+                top: (widget.constraints.maxHeight * 0.35) - 40,
+                left: (widget.constraints.maxWidth / 2) - 40,
+                child: Entry.scale(
+                  delay: const Duration(milliseconds: 2000),
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.easeInToLinear,
+                  child: Material(
+                    elevation: 8,
+                    borderRadius: BorderRadius.circular(40),
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 40,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.purple,
+                        radius: 37,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+        Positioned(
+          top: widget.constraints.maxHeight * 0.175,
+          left: widget.constraints.maxWidth / 2,
+          child: ConfettiWidget(
+            confettiController: controller,
+            blastDirectionality: BlastDirectionality.explosive,
+            numberOfParticles: 20,
+            colors: const [
+              Color(0xffdbb3d4),
+              Color(0xffe5d392),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class InfoBlockWidget extends StatelessWidget {
+  const InfoBlockWidget({
+    Key? key,
+    required this.constraints,
+    required this.number,
     required this.type,
   }) : super(key: key);
 
-  BoxConstraints constraints;
-  String value;
-  String type;
+  final BoxConstraints constraints;
+  final double number;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -589,19 +394,21 @@ class InfoBlockWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Color(0xffedd9e9),
+        color: const Color(0xffedd9e9),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            value,
-            style: GoogleFonts.poppins(
+          AnimatedFlipCounter(
+            value: number,
+            fractionDigits: (type == 'km') ? 1 : 0,
+            duration: const Duration(milliseconds: 3500),
+            curve: Curves.linearToEaseOut,
+            textStyle: GoogleFonts.poppins(
               fontSize: 28,
               fontWeight: FontWeight.w500,
-              color: Color(0xff574754),
-              // color: Color(0xff333333),
+              color: const Color(0xff574754),
             ),
           ),
           Text(
@@ -609,8 +416,7 @@ class InfoBlockWidget extends StatelessWidget {
             style: GoogleFonts.poppins(
               height: 0.5,
               fontSize: 12,
-              color: Color(0xff997d94),
-              // color: Color(0xff666666),
+              color: const Color(0xff997d94),
             ),
           ),
         ],
