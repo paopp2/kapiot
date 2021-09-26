@@ -10,7 +10,7 @@ class Transaction with _$Transaction {
     String? currentUserId,
     RouteConfig? driver,
     List<RouteConfig>? riders,
-    int? points,
+    double? points,
     DateTime? startTime,
     DateTime? endTime,
     double? distance,

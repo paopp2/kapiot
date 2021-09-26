@@ -21,7 +21,7 @@ class _$TransactionTearOff {
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
-      int? points,
+      double? points,
       DateTime? startTime,
       DateTime? endTime,
       double? distance}) {
@@ -45,7 +45,7 @@ mixin _$Transaction {
   String? get currentUserId => throw _privateConstructorUsedError;
   RouteConfig? get driver => throw _privateConstructorUsedError;
   List<RouteConfig>? get riders => throw _privateConstructorUsedError;
-  int? get points => throw _privateConstructorUsedError;
+  double? get points => throw _privateConstructorUsedError;
   DateTime? get startTime => throw _privateConstructorUsedError;
   DateTime? get endTime => throw _privateConstructorUsedError;
   double? get distance => throw _privateConstructorUsedError;
@@ -64,7 +64,7 @@ abstract class $TransactionCopyWith<$Res> {
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
-      int? points,
+      double? points,
       DateTime? startTime,
       DateTime? endTime,
       double? distance});
@@ -106,7 +106,7 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -145,7 +145,7 @@ abstract class _$TransactionCopyWith<$Res>
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
-      int? points,
+      double? points,
       DateTime? startTime,
       DateTime? endTime,
       double? distance});
@@ -190,7 +190,7 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -226,7 +226,7 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
   @override
   final List<RouteConfig>? riders;
   @override
-  final int? points;
+  final double? points;
   @override
   final DateTime? startTime;
   @override
@@ -299,7 +299,7 @@ abstract class _Transaction implements Transaction {
       {String? currentUserId,
       RouteConfig? driver,
       List<RouteConfig>? riders,
-      int? points,
+      double? points,
       DateTime? startTime,
       DateTime? endTime,
       double? distance}) = _$_Transaction;
@@ -311,7 +311,7 @@ abstract class _Transaction implements Transaction {
   @override
   List<RouteConfig>? get riders => throw _privateConstructorUsedError;
   @override
-  int? get points => throw _privateConstructorUsedError;
+  double? get points => throw _privateConstructorUsedError;
   @override
   DateTime? get startTime => throw _privateConstructorUsedError;
   @override
