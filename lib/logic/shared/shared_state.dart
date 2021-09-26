@@ -22,16 +22,6 @@ final riderConfigListProvider =
   return [];
 });
 
-final startTimeProvider = StateProvider.autoDispose<DateTime>((ref) {
-  ref.maintainState = true;
-  return DateTime(0);
-});
-
-final endTimeProvider = StateProvider.autoDispose<DateTime>((ref) {
-  ref.maintainState = true;
-  return DateTime(0);
-});
-
 final driverPointsProvider = StateProvider.autoDispose<double>((ref) {
   ref.maintainState = true;
   return 0;
