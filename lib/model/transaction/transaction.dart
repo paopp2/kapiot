@@ -7,12 +7,12 @@ part 'transaction.freezed.dart';
 @freezed
 class Transaction with _$Transaction {
   const factory Transaction({
-    required String currentUserId,
-    required RouteConfig driver,
-    required List<RouteConfig> riders,
-    required int points,
-    required DateTime startTime,
-    required DateTime endTime,
-    required double distance,
+    String? currentUserId,
+    RouteConfig? driver,
+    List<RouteConfig>? riders,
+    int? points,
+    DateTime? startTime,
+    DateTime? endTime,
+    double? distance,
   }) = _Transaction;
 }

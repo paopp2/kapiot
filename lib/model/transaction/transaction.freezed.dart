@@ -18,13 +18,13 @@ class _$TransactionTearOff {
   const _$TransactionTearOff();
 
   _Transaction call(
-      {required String currentUserId,
-      required RouteConfig driver,
-      required List<RouteConfig> riders,
-      required int points,
-      required DateTime startTime,
-      required DateTime endTime,
-      required double distance}) {
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      int? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance}) {
     return _Transaction(
       currentUserId: currentUserId,
       driver: driver,
@@ -42,13 +42,13 @@ const $Transaction = _$TransactionTearOff();
 
 /// @nodoc
 mixin _$Transaction {
-  String get currentUserId => throw _privateConstructorUsedError;
-  RouteConfig get driver => throw _privateConstructorUsedError;
-  List<RouteConfig> get riders => throw _privateConstructorUsedError;
-  int get points => throw _privateConstructorUsedError;
-  DateTime get startTime => throw _privateConstructorUsedError;
-  DateTime get endTime => throw _privateConstructorUsedError;
-  double get distance => throw _privateConstructorUsedError;
+  String? get currentUserId => throw _privateConstructorUsedError;
+  RouteConfig? get driver => throw _privateConstructorUsedError;
+  List<RouteConfig>? get riders => throw _privateConstructorUsedError;
+  int? get points => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  double? get distance => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionCopyWith<Transaction> get copyWith =>
@@ -61,15 +61,15 @@ abstract class $TransactionCopyWith<$Res> {
           Transaction value, $Res Function(Transaction) then) =
       _$TransactionCopyWithImpl<$Res>;
   $Res call(
-      {String currentUserId,
-      RouteConfig driver,
-      List<RouteConfig> riders,
-      int points,
-      DateTime startTime,
-      DateTime endTime,
-      double distance});
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      int? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance});
 
-  $RouteConfigCopyWith<$Res> get driver;
+  $RouteConfigCopyWith<$Res>? get driver;
 }
 
 /// @nodoc
@@ -94,37 +94,41 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
       currentUserId: currentUserId == freezed
           ? _value.currentUserId
           : currentUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       driver: driver == freezed
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
-              as RouteConfig,
+              as RouteConfig?,
       riders: riders == freezed
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
-              as List<RouteConfig>,
+              as List<RouteConfig>?,
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       distance: distance == freezed
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 
   @override
-  $RouteConfigCopyWith<$Res> get driver {
-    return $RouteConfigCopyWith<$Res>(_value.driver, (value) {
+  $RouteConfigCopyWith<$Res>? get driver {
+    if (_value.driver == null) {
+      return null;
+    }
+
+    return $RouteConfigCopyWith<$Res>(_value.driver!, (value) {
       return _then(_value.copyWith(driver: value));
     });
   }
@@ -138,16 +142,16 @@ abstract class _$TransactionCopyWith<$Res>
       __$TransactionCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String currentUserId,
-      RouteConfig driver,
-      List<RouteConfig> riders,
-      int points,
-      DateTime startTime,
-      DateTime endTime,
-      double distance});
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      int? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance});
 
   @override
-  $RouteConfigCopyWith<$Res> get driver;
+  $RouteConfigCopyWith<$Res>? get driver;
 }
 
 /// @nodoc
@@ -174,31 +178,31 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
       currentUserId: currentUserId == freezed
           ? _value.currentUserId
           : currentUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       driver: driver == freezed
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
-              as RouteConfig,
+              as RouteConfig?,
       riders: riders == freezed
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
-              as List<RouteConfig>,
+              as List<RouteConfig>?,
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       distance: distance == freezed
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -207,28 +211,28 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
 
 class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
   const _$_Transaction(
-      {required this.currentUserId,
-      required this.driver,
-      required this.riders,
-      required this.points,
-      required this.startTime,
-      required this.endTime,
-      required this.distance});
+      {this.currentUserId,
+      this.driver,
+      this.riders,
+      this.points,
+      this.startTime,
+      this.endTime,
+      this.distance});
 
   @override
-  final String currentUserId;
+  final String? currentUserId;
   @override
-  final RouteConfig driver;
+  final RouteConfig? driver;
   @override
-  final List<RouteConfig> riders;
+  final List<RouteConfig>? riders;
   @override
-  final int points;
+  final int? points;
   @override
-  final DateTime startTime;
+  final DateTime? startTime;
   @override
-  final DateTime endTime;
+  final DateTime? endTime;
   @override
-  final double distance;
+  final double? distance;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -292,28 +296,28 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
 
 abstract class _Transaction implements Transaction {
   const factory _Transaction(
-      {required String currentUserId,
-      required RouteConfig driver,
-      required List<RouteConfig> riders,
-      required int points,
-      required DateTime startTime,
-      required DateTime endTime,
-      required double distance}) = _$_Transaction;
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      int? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance}) = _$_Transaction;
 
   @override
-  String get currentUserId => throw _privateConstructorUsedError;
+  String? get currentUserId => throw _privateConstructorUsedError;
   @override
-  RouteConfig get driver => throw _privateConstructorUsedError;
+  RouteConfig? get driver => throw _privateConstructorUsedError;
   @override
-  List<RouteConfig> get riders => throw _privateConstructorUsedError;
+  List<RouteConfig>? get riders => throw _privateConstructorUsedError;
   @override
-  int get points => throw _privateConstructorUsedError;
+  int? get points => throw _privateConstructorUsedError;
   @override
-  DateTime get startTime => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
   @override
-  DateTime get endTime => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
   @override
-  double get distance => throw _privateConstructorUsedError;
+  double? get distance => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TransactionCopyWith<_Transaction> get copyWith =>
