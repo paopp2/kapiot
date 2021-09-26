@@ -42,11 +42,11 @@ class PostTripSummaryViewModel extends ViewModel {
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state;
-    await getTransaction(currentRouteConfig, currentUser);
+    await setTransaction(currentRouteConfig, currentUser);
   }
 
   // TODO: Transaction for Rider
-  Future<Transaction> getTransaction(
+  Future<void> setTransaction(
       RouteConfig? routeConfig, KapiotUser? user) async {
     final userId = user!.id;
     final transaction = read(transactionProvider).state;
@@ -61,10 +61,9 @@ class PostTripSummaryViewModel extends ViewModel {
           KapiotLocation(lat: endLoc.latitude, lng: endLoc.longitude);
       final double distance = await googleMapsApiServices.distMatrix
           .getDistanceValue(pointA: pointA, pointB: pointB);
-      transaction.copyWith(
+      read(transactionProvider).state.copyWith(
           currentUserId: userId, driver: routeConfig, distance: distance);
     }
-    return transaction;
   }
 
   @override
