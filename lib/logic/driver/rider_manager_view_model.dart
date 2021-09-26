@@ -116,8 +116,12 @@ class RiderManagerViewModel extends ViewModel {
 
       // If driver is less than 50m away from destination (arriving)
       if (distToDriverEnd < 0.050) {
+        final points = read(driverPointsProvider).state;
         final transaction = read(transactionProvider).state;
-        transaction.copyWith(endTime: DateTime.now(), riders: _riderConfigList);
+        transaction.copyWith(
+            endTime: DateTime.now(),
+            riders: _riderConfigList,
+            points: points.toInt());
         read(transactionProvider).state = transaction;
         MapController.reset(read);
         // Set a new resetKey; notifies the HomeView that it should reset
