@@ -42,12 +42,17 @@ class PostTripSummaryViewModel extends ViewModel {
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state;
-    final currentUserId = currentUser!.id;
-    // TODO: Refactor
-    if (currentRouteConfig is ForDriver) {
-      final riders = read(riderConfigListProvider).state;
+    getTransaction(currentRouteConfig, currentUser);
+  }
+
+  // TODO: Transaction for Rider
+  Future<Transaction> getTransaction(
+      RouteConfig? routeConfig, KapiotUser? user) async {
+    final userId = user!.id;
+    final transaction = read(transactionProvider).state;
+    if (routeConfig is ForDriver) {
       final decodedRoute = await googleMapsApiServices.utils
-          .decodeRoute(currentRouteConfig.encodedRoute);
+          .decodeRoute(routeConfig.encodedRoute);
       final LatLng startLoc = decodedRoute[0];
       final LatLng endLoc = decodedRoute[decodedRoute.length - 1];
       final KapiotLocation pointA =
@@ -56,19 +61,10 @@ class PostTripSummaryViewModel extends ViewModel {
           KapiotLocation(lat: endLoc.latitude, lng: endLoc.longitude);
       final double distance = await googleMapsApiServices.distMatrix
           .getDistanceValue(pointA: pointA, pointB: pointB);
-      final int points = read(driverPointsProvider).state.toInt();
-      final DateTime startTime = read(startTimeProvider).state;
-      final DateTime endTime = read(endTimeProvider).state;
-
-      final Transaction transaction = Transaction(
-          currentUserId: currentUserId,
-          driver: currentRouteConfig,
-          riders: riders,
-          points: points,
-          startTime: startTime,
-          endTime: endTime,
-          distance: distance);
+      transaction.copyWith(
+          currentUserId: userId, driver: routeConfig, distance: distance);
     }
+    return transaction;
   }
 
   @override
