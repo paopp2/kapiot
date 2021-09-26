@@ -54,11 +54,14 @@ class RiderManagerViewModel extends ViewModel {
   static final List<StopPoint> _finishedStopPoints = [];
   late final StreamSubscription stopPointsSub;
   late final StreamSubscription realtimeLocSub;
+  static final List<RouteConfig> _riderConfigList = [];
 
   @override
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
-    read(startTimeProvider).state = DateTime.now();
+    final transaction = read(transactionProvider).state;
+    transaction.copyWith(startTime: DateTime.now());
+    read(transactionProvider).state = transaction;
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -113,7 +116,9 @@ class RiderManagerViewModel extends ViewModel {
 
       // If driver is less than 50m away from destination (arriving)
       if (distToDriverEnd < 0.050) {
-        read(endTimeProvider).state = DateTime.now();
+        final transaction = read(transactionProvider).state;
+        transaction.copyWith(endTime: DateTime.now(), riders: _riderConfigList);
+        read(transactionProvider).state = transaction;
         MapController.reset(read);
         // Set a new resetKey; notifies the HomeView that it should reset
         read(resetKeyProvider).state = UniqueKey();
@@ -161,13 +166,11 @@ class RiderManagerViewModel extends ViewModel {
       read(nextStopProvider).state = stopPointsList[currentIndex + 1];
     } else {
       final currentDriverConfig = read(currentRouteConfigProvider).state!;
-      final riderConfigList = read(riderConfigListProvider).state;
       driverRepo.removeRiderFromAccepted(
         currentDriverConfig.user.id,
         currentStop.riderConfig.user.id,
       );
-      riderConfigList.add(currentStop.riderConfig);
-      read(riderConfigListProvider).state = riderConfigList;
+      _riderConfigList.add(currentStop.riderConfig);
       await updateDriverPoints(currentStop.riderConfig);
     }
   }
