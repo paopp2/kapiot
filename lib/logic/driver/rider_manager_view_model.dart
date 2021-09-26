@@ -60,8 +60,8 @@ class RiderManagerViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
     final transaction = read(transactionProvider).state;
-    transaction.copyWith(startTime: DateTime.now());
-    read(transactionProvider).state = transaction;
+    read(transactionProvider).state =
+        transaction.copyWith(startTime: DateTime.now());
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -118,11 +118,11 @@ class RiderManagerViewModel extends ViewModel {
       if (distToDriverEnd < 0.050) {
         final points = read(driverPointsProvider).state;
         final transaction = read(transactionProvider).state;
-        transaction.copyWith(
+        read(transactionProvider).state = transaction.copyWith(
             endTime: DateTime.now(),
             riders: _riderConfigList,
             points: points.toInt());
-        read(transactionProvider).state = transaction;
+        print(read(transactionProvider).state);
         MapController.reset(read);
         // Set a new resetKey; notifies the HomeView that it should reset
         read(resetKeyProvider).state = UniqueKey();
