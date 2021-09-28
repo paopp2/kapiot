@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -12,7 +11,6 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/driver/rider_manager_map_controller.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
-import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
@@ -54,10 +52,15 @@ class RiderManagerViewModel extends ViewModel {
   static final List<StopPoint> _finishedStopPoints = [];
   late final StreamSubscription stopPointsSub;
   late final StreamSubscription realtimeLocSub;
+  static final List<RouteConfig> _riderConfigList = [];
 
   @override
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
+    final transaction = read(transactionProvider).state;
+    read(transactionProvider).state = transaction.copyWith(
+      startTime: DateTime.now(),
+    );
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -112,11 +115,15 @@ class RiderManagerViewModel extends ViewModel {
 
       // If driver is less than 50m away from destination (arriving)
       if (distToDriverEnd < 0.050) {
-        MapController.reset(read);
-        // Set a new resetKey; notifies the HomeView that it should reset
-        read(resetKeyProvider).state = UniqueKey();
-        // Remove all Views then navigate to HomeView
-        AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
+        final points = read(driverPointsProvider).state;
+        final transaction = read(transactionProvider).state;
+        read(transactionProvider).state = transaction.copyWith(
+          endTime: DateTime.now(),
+          riders: _riderConfigList,
+          points: points,
+        );
+        realtimeLocSub.cancel();
+        AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       } else {
         mapController.addMarker(
           marker: Markers.driverLoc,
@@ -163,6 +170,7 @@ class RiderManagerViewModel extends ViewModel {
         currentDriverConfig.user.id,
         currentStop.riderConfig.user.id,
       );
+      _riderConfigList.add(currentStop.riderConfig);
       await updateDriverPoints(currentStop.riderConfig);
     }
   }

@@ -18,17 +18,21 @@ class _$TransactionTearOff {
   const _$TransactionTearOff();
 
   _Transaction call(
-      {required String currentUserId,
-      required RouteConfig driver,
-      required List<RouteConfig> riders,
-      required int points,
-      required DateTime startTime,
-      required DateTime endTime,
-      required double distance}) {
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
+      double? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance}) {
     return _Transaction(
       currentUserId: currentUserId,
       driver: driver,
       riders: riders,
+      startLocation: startLocation,
+      endLocation: endLocation,
       points: points,
       startTime: startTime,
       endTime: endTime,
@@ -42,13 +46,15 @@ const $Transaction = _$TransactionTearOff();
 
 /// @nodoc
 mixin _$Transaction {
-  String get currentUserId => throw _privateConstructorUsedError;
-  RouteConfig get driver => throw _privateConstructorUsedError;
-  List<RouteConfig> get riders => throw _privateConstructorUsedError;
-  int get points => throw _privateConstructorUsedError;
-  DateTime get startTime => throw _privateConstructorUsedError;
-  DateTime get endTime => throw _privateConstructorUsedError;
-  double get distance => throw _privateConstructorUsedError;
+  String? get currentUserId => throw _privateConstructorUsedError;
+  RouteConfig? get driver => throw _privateConstructorUsedError;
+  List<RouteConfig>? get riders => throw _privateConstructorUsedError;
+  KapiotLocation? get startLocation => throw _privateConstructorUsedError;
+  KapiotLocation? get endLocation => throw _privateConstructorUsedError;
+  double? get points => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  double? get distance => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionCopyWith<Transaction> get copyWith =>
@@ -61,15 +67,19 @@ abstract class $TransactionCopyWith<$Res> {
           Transaction value, $Res Function(Transaction) then) =
       _$TransactionCopyWithImpl<$Res>;
   $Res call(
-      {String currentUserId,
-      RouteConfig driver,
-      List<RouteConfig> riders,
-      int points,
-      DateTime startTime,
-      DateTime endTime,
-      double distance});
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
+      double? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance});
 
-  $RouteConfigCopyWith<$Res> get driver;
+  $RouteConfigCopyWith<$Res>? get driver;
+  $KapiotLocationCopyWith<$Res>? get startLocation;
+  $KapiotLocationCopyWith<$Res>? get endLocation;
 }
 
 /// @nodoc
@@ -85,6 +95,8 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
     Object? currentUserId = freezed,
     Object? driver = freezed,
     Object? riders = freezed,
+    Object? startLocation = freezed,
+    Object? endLocation = freezed,
     Object? points = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
@@ -94,38 +106,72 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
       currentUserId: currentUserId == freezed
           ? _value.currentUserId
           : currentUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       driver: driver == freezed
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
-              as RouteConfig,
+              as RouteConfig?,
       riders: riders == freezed
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
-              as List<RouteConfig>,
+              as List<RouteConfig>?,
+      startLocation: startLocation == freezed
+          ? _value.startLocation
+          : startLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
+      endLocation: endLocation == freezed
+          ? _value.endLocation
+          : endLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       distance: distance == freezed
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 
   @override
-  $RouteConfigCopyWith<$Res> get driver {
-    return $RouteConfigCopyWith<$Res>(_value.driver, (value) {
+  $RouteConfigCopyWith<$Res>? get driver {
+    if (_value.driver == null) {
+      return null;
+    }
+
+    return $RouteConfigCopyWith<$Res>(_value.driver!, (value) {
       return _then(_value.copyWith(driver: value));
+    });
+  }
+
+  @override
+  $KapiotLocationCopyWith<$Res>? get startLocation {
+    if (_value.startLocation == null) {
+      return null;
+    }
+
+    return $KapiotLocationCopyWith<$Res>(_value.startLocation!, (value) {
+      return _then(_value.copyWith(startLocation: value));
+    });
+  }
+
+  @override
+  $KapiotLocationCopyWith<$Res>? get endLocation {
+    if (_value.endLocation == null) {
+      return null;
+    }
+
+    return $KapiotLocationCopyWith<$Res>(_value.endLocation!, (value) {
+      return _then(_value.copyWith(endLocation: value));
     });
   }
 }
@@ -138,16 +184,22 @@ abstract class _$TransactionCopyWith<$Res>
       __$TransactionCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String currentUserId,
-      RouteConfig driver,
-      List<RouteConfig> riders,
-      int points,
-      DateTime startTime,
-      DateTime endTime,
-      double distance});
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
+      double? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance});
 
   @override
-  $RouteConfigCopyWith<$Res> get driver;
+  $RouteConfigCopyWith<$Res>? get driver;
+  @override
+  $KapiotLocationCopyWith<$Res>? get startLocation;
+  @override
+  $KapiotLocationCopyWith<$Res>? get endLocation;
 }
 
 /// @nodoc
@@ -165,6 +217,8 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
     Object? currentUserId = freezed,
     Object? driver = freezed,
     Object? riders = freezed,
+    Object? startLocation = freezed,
+    Object? endLocation = freezed,
     Object? points = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
@@ -174,31 +228,39 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
       currentUserId: currentUserId == freezed
           ? _value.currentUserId
           : currentUserId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       driver: driver == freezed
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
-              as RouteConfig,
+              as RouteConfig?,
       riders: riders == freezed
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
-              as List<RouteConfig>,
+              as List<RouteConfig>?,
+      startLocation: startLocation == freezed
+          ? _value.startLocation
+          : startLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
+      endLocation: endLocation == freezed
+          ? _value.endLocation
+          : endLocation // ignore: cast_nullable_to_non_nullable
+              as KapiotLocation?,
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       distance: distance == freezed
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -207,32 +269,38 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
 
 class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
   const _$_Transaction(
-      {required this.currentUserId,
-      required this.driver,
-      required this.riders,
-      required this.points,
-      required this.startTime,
-      required this.endTime,
-      required this.distance});
+      {this.currentUserId,
+      this.driver,
+      this.riders,
+      this.startLocation,
+      this.endLocation,
+      this.points,
+      this.startTime,
+      this.endTime,
+      this.distance});
 
   @override
-  final String currentUserId;
+  final String? currentUserId;
   @override
-  final RouteConfig driver;
+  final RouteConfig? driver;
   @override
-  final List<RouteConfig> riders;
+  final List<RouteConfig>? riders;
   @override
-  final int points;
+  final KapiotLocation? startLocation;
   @override
-  final DateTime startTime;
+  final KapiotLocation? endLocation;
   @override
-  final DateTime endTime;
+  final double? points;
   @override
-  final double distance;
+  final DateTime? startTime;
+  @override
+  final DateTime? endTime;
+  @override
+  final double? distance;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Transaction(currentUserId: $currentUserId, driver: $driver, riders: $riders, points: $points, startTime: $startTime, endTime: $endTime, distance: $distance)';
+    return 'Transaction(currentUserId: $currentUserId, driver: $driver, riders: $riders, startLocation: $startLocation, endLocation: $endLocation, points: $points, startTime: $startTime, endTime: $endTime, distance: $distance)';
   }
 
   @override
@@ -243,6 +311,8 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
       ..add(DiagnosticsProperty('currentUserId', currentUserId))
       ..add(DiagnosticsProperty('driver', driver))
       ..add(DiagnosticsProperty('riders', riders))
+      ..add(DiagnosticsProperty('startLocation', startLocation))
+      ..add(DiagnosticsProperty('endLocation', endLocation))
       ..add(DiagnosticsProperty('points', points))
       ..add(DiagnosticsProperty('startTime', startTime))
       ..add(DiagnosticsProperty('endTime', endTime))
@@ -260,6 +330,12 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
                 const DeepCollectionEquality().equals(other.driver, driver)) &&
             (identical(other.riders, riders) ||
                 const DeepCollectionEquality().equals(other.riders, riders)) &&
+            (identical(other.startLocation, startLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.startLocation, startLocation)) &&
+            (identical(other.endLocation, endLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.endLocation, endLocation)) &&
             (identical(other.points, points) ||
                 const DeepCollectionEquality().equals(other.points, points)) &&
             (identical(other.startTime, startTime) ||
@@ -279,6 +355,8 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
       const DeepCollectionEquality().hash(currentUserId) ^
       const DeepCollectionEquality().hash(driver) ^
       const DeepCollectionEquality().hash(riders) ^
+      const DeepCollectionEquality().hash(startLocation) ^
+      const DeepCollectionEquality().hash(endLocation) ^
       const DeepCollectionEquality().hash(points) ^
       const DeepCollectionEquality().hash(startTime) ^
       const DeepCollectionEquality().hash(endTime) ^
@@ -292,28 +370,34 @@ class _$_Transaction with DiagnosticableTreeMixin implements _Transaction {
 
 abstract class _Transaction implements Transaction {
   const factory _Transaction(
-      {required String currentUserId,
-      required RouteConfig driver,
-      required List<RouteConfig> riders,
-      required int points,
-      required DateTime startTime,
-      required DateTime endTime,
-      required double distance}) = _$_Transaction;
+      {String? currentUserId,
+      RouteConfig? driver,
+      List<RouteConfig>? riders,
+      KapiotLocation? startLocation,
+      KapiotLocation? endLocation,
+      double? points,
+      DateTime? startTime,
+      DateTime? endTime,
+      double? distance}) = _$_Transaction;
 
   @override
-  String get currentUserId => throw _privateConstructorUsedError;
+  String? get currentUserId => throw _privateConstructorUsedError;
   @override
-  RouteConfig get driver => throw _privateConstructorUsedError;
+  RouteConfig? get driver => throw _privateConstructorUsedError;
   @override
-  List<RouteConfig> get riders => throw _privateConstructorUsedError;
+  List<RouteConfig>? get riders => throw _privateConstructorUsedError;
   @override
-  int get points => throw _privateConstructorUsedError;
+  KapiotLocation? get startLocation => throw _privateConstructorUsedError;
   @override
-  DateTime get startTime => throw _privateConstructorUsedError;
+  KapiotLocation? get endLocation => throw _privateConstructorUsedError;
   @override
-  DateTime get endTime => throw _privateConstructorUsedError;
+  double? get points => throw _privateConstructorUsedError;
   @override
-  double get distance => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  @override
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  @override
+  double? get distance => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TransactionCopyWith<_Transaction> get copyWith =>

@@ -105,20 +105,25 @@ class RequestAcceptedViewModel extends ViewModel {
     driverLocStreamSub.cancel();
   }
 
-  /// Remaps the stream containing all riders that have been accepted by the
-  /// current rider's acceptingDriver except for the current rider
-  Stream<List<KapiotUser>> getMyCoRidersStream() {
+  /// Remaps the stream containing all riderConfigs that have been accepted by
+  /// the current rider's acceptingDriver except for the current rider
+  Stream<List<KapiotUser>> getMyCoRidersStream() async* {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
-    final allCoRidersStream = riderRepo.getAllCoRidersStream(
+    final allCoRiderConfigsStream = riderRepo.getAllCoRiderConfigsStream(
       driver: acceptingDriverConfig.user,
     );
-    return allCoRidersStream.map(
+    // Filter out current rider's RouteConfig
+    final myCoRiderConfigsStream = allCoRiderConfigsStream.map(
       (riderList) {
         return riderList
-            .where((rider) => (rider.id != currentUser!.id))
+            .where((rider) => (rider.user.id != currentUser!.id))
             .toList();
       },
     );
+    // Emit only the users from the co-riders' RouteConfigs
+    await for (final coRiderConfigs in myCoRiderConfigsStream) {
+      yield coRiderConfigs.map((rc) => rc.user).toList();
+    }
   }
 
   /// Stream that listens whether this rider has already been "dropped off"
@@ -128,12 +133,12 @@ class RequestAcceptedViewModel extends ViewModel {
   /// signifies the app as to when this rider is dropped off.
   Stream<bool> isDroppedOffStream() async* {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
-    final allCoRidersStream = riderRepo.getAllCoRidersStream(
+    final allCoRiderConfigsStream = riderRepo.getAllCoRiderConfigsStream(
       driver: acceptingDriverConfig.user,
     );
-    await for (var coRidersList in allCoRidersStream) {
+    await for (final coRidersList in allCoRiderConfigsStream) {
       final hasRider = coRidersList.any(
-        (rider) => (rider.id == currentUser!.id),
+        (rider) => (rider.user.id == currentUser!.id),
       );
       yield !hasRider;
     }
