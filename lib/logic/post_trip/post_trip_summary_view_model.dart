@@ -67,10 +67,20 @@ class PostTripSummaryViewModel extends ViewModel {
         endLocation: endLoc,
       );
     } else if (routeConfig is ForRider) {
+      assert(read(acceptingDriverConfigProvider).state != null);
       final startLoc = routeConfig.startLocation;
       final endLoc = routeConfig.endLocation;
+      final driver = read(acceptingDriverConfigProvider).state;
       final double distance =
           utils.calculateDistance(pointA: startLoc, pointB: endLoc);
+      read(transactionProvider).state = transaction.copyWith(
+        currentUserId: userId,
+        driver: driver,
+        distance: distance,
+        startLocation: startLoc,
+        endLocation: endLoc,
+        points: 10,
+      );
     }
   }
 
