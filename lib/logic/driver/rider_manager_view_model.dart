@@ -57,8 +57,10 @@ class RiderManagerViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
+    final routeConfig = read(currentRouteConfigProvider).state as ForDriver;
     final transaction = read(transactionProvider).state;
     read(transactionProvider).state = transaction.copyWith(
+      driver: routeConfig,
       startTime: DateTime.now(),
     );
     final stopPointsStream = getStopPointsStream();
@@ -83,7 +85,6 @@ class RiderManagerViewModel extends ViewModel {
 
     // Show the current driver's route on the map
     final utils = googleMapsApiServices.utils;
-    final routeConfig = read(currentRouteConfigProvider).state as ForDriver;
     final encodedRoute = routeConfig.encodedRoute;
     await mapController.showRouteFromEncoded(encodedRoute: encodedRoute);
 
