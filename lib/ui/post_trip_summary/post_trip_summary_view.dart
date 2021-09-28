@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:confetti/confetti.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/ui/post_trip_summary/info_block_widget.dart';
 
 class PostTripSummaryView extends StatelessWidget {
@@ -30,8 +31,8 @@ class PostTripSummaryView extends StatelessWidget {
   }
 }
 
-class PostTripPanel extends StatefulWidget {
-  const PostTripPanel({
+class PostTripPanel extends HookConsumerWidget {
+  PostTripPanel({
     Key? key,
     required this.constraints,
     required this.isDriver,
@@ -40,61 +41,62 @@ class PostTripPanel extends StatefulWidget {
   final BoxConstraints constraints;
   final bool isDriver;
 
+//   @override
+//   State<PostTripPanel> createState() => _PostTripPanelState();
+// }
+
+// class _PostTripPanelState extends State<PostTripPanel> {
+//   late ConfettiController controller;
+
+  final double points = 0;
+  final double numKm = 0;
+  final double numMin = 0;
+  final double numTotal = 0;
+  final controller = ConfettiController(duration: const Duration(seconds: 2));
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller = ConfettiController(duration: const Duration(seconds: 2));
+
+  //   Future.delayed(const Duration(milliseconds: 10)).then((value) {
+  //     setState(() {
+  //       points = 33;
+  //     });
+  //   });
+
+  //   Future.delayed(const Duration(milliseconds: 2000)).then((value) {
+  //     setState(() {
+  //       numKm = 5.8;
+  //       numMin = 17;
+  //       numTotal = 47;
+  //     });
+  //   });
+
+  //   Future.delayed(const Duration(milliseconds: 3000)).then((value) {
+  //     setState(() {
+  //       controller.play();
+  //     });
+  //   });
+  // }
+
   @override
-  State<PostTripPanel> createState() => _PostTripPanelState();
-}
-
-class _PostTripPanelState extends State<PostTripPanel> {
-  late ConfettiController controller;
-
-  double points = 0;
-  double numKm = 0;
-  double numMin = 0;
-  double numTotal = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = ConfettiController(duration: const Duration(seconds: 2));
-
-    Future.delayed(const Duration(milliseconds: 10)).then((value) {
-      setState(() {
-        points = 33;
-      });
-    });
-
-    Future.delayed(const Duration(milliseconds: 2000)).then((value) {
-      setState(() {
-        numKm = 5.8;
-        numMin = 17;
-        numTotal = 47;
-      });
-    });
-
-    Future.delayed(const Duration(milliseconds: 3000)).then((value) {
-      setState(() {
-        controller.play();
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
         Column(
           children: [
             Entry(
-              yOffset: (widget.constraints.maxHeight / 2) -
-                  (widget.constraints.maxHeight * 0.35 / 2),
+              yOffset: (constraints.maxHeight / 2) -
+                  (constraints.maxHeight * 0.35 / 2),
               delay: const Duration(milliseconds: 1500),
               duration: const Duration(milliseconds: 1000),
               curve: Curves.easeInToLinear,
               child: Container(
-                height: widget.constraints.maxHeight * 0.35,
-                width: widget.constraints.maxWidth,
+                height: constraints.maxHeight * 0.35,
+                width: constraints.maxWidth,
                 padding: EdgeInsets.symmetric(
-                  horizontal: widget.constraints.maxWidth * 0.05,
+                  horizontal: constraints.maxWidth * 0.05,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -135,11 +137,11 @@ class _PostTripPanelState extends State<PostTripPanel> {
               duration: const Duration(milliseconds: 1500),
               curve: Curves.easeInToLinear,
               child: Container(
-                height: widget.constraints.maxHeight * 0.65,
-                width: widget.constraints.maxWidth,
+                height: constraints.maxHeight * 0.65,
+                width: constraints.maxWidth,
                 padding: EdgeInsets.symmetric(
-                  horizontal: widget.constraints.maxWidth * 0.05,
-                  vertical: widget.constraints.maxHeight * 0.025,
+                  horizontal: constraints.maxWidth * 0.05,
+                  vertical: constraints.maxHeight * 0.025,
                 ),
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -154,10 +156,10 @@ class _PostTripPanelState extends State<PostTripPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    widget.isDriver
+                    isDriver
                         ? Container(
                             padding: const EdgeInsets.only(top: 25),
-                            width: widget.constraints.maxWidth,
+                            width: constraints.maxWidth,
                             child: Column(
                               children: [
                                 Text(
@@ -195,7 +197,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
                               Expanded(
                                 child: Container(
                                   margin: EdgeInsets.only(
-                                    left: widget.constraints.maxWidth * 0.025,
+                                    left: constraints.maxWidth * 0.025,
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -265,29 +267,29 @@ class _PostTripPanelState extends State<PostTripPanel> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InfoBlockWidget(
-                          constraints: widget.constraints,
+                          constraints: constraints,
                           number: numKm,
                           type: 'km',
                         ),
                         InfoBlockWidget(
-                          constraints: widget.constraints,
+                          constraints: constraints,
                           number: numMin,
                           type: 'minutes',
                         ),
                         InfoBlockWidget(
-                          constraints: widget.constraints,
+                          constraints: constraints,
                           number: numTotal,
                           type: 'total points',
                         ),
                       ],
                     ),
                     SizedBox(
-                      width: widget.constraints.maxWidth,
+                      width: constraints.maxWidth,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Visibility(
-                            visible: widget.isDriver,
+                            visible: isDriver,
                             child: Text(
                               'Passengers',
                               style: GoogleFonts.poppins(
@@ -297,8 +299,8 @@ class _PostTripPanelState extends State<PostTripPanel> {
                             ),
                           ),
                           SizedBox(
-                            width: widget.constraints.maxWidth * 0.85,
-                            height: widget.constraints.maxHeight * 0.1,
+                            width: constraints.maxWidth * 0.85,
+                            height: constraints.maxHeight * 0.1,
                             child: Center(
                               child: ListView(
                                 shrinkWrap: true,
@@ -364,8 +366,8 @@ class _PostTripPanelState extends State<PostTripPanel> {
                           ),
                           style: ElevatedButton.styleFrom(
                             fixedSize: Size(
-                              widget.constraints.maxWidth * 0.25,
-                              widget.constraints.maxHeight * 0.06,
+                              constraints.maxWidth * 0.25,
+                              constraints.maxHeight * 0.06,
                             ),
                             side: const BorderSide(
                               color: Color(0xffdbb3d4),
@@ -385,10 +387,10 @@ class _PostTripPanelState extends State<PostTripPanel> {
           ],
         ),
         Visibility(
-          visible: widget.isDriver,
+          visible: isDriver,
           child: Positioned(
-            top: (widget.constraints.maxHeight * 0.35) - 40,
-            left: (widget.constraints.maxWidth / 2) - 40,
+            top: (constraints.maxHeight * 0.35) - 40,
+            left: (constraints.maxWidth / 2) - 40,
             child: Entry.scale(
               delay: const Duration(milliseconds: 2000),
               duration: const Duration(milliseconds: 1000),
@@ -409,8 +411,8 @@ class _PostTripPanelState extends State<PostTripPanel> {
           ),
         ),
         Positioned(
-          top: widget.constraints.maxHeight * 0.175,
-          left: widget.constraints.maxWidth / 2,
+          top: constraints.maxHeight * 0.175,
+          left: constraints.maxWidth / 2,
           child: ConfettiWidget(
             confettiController: controller,
             blastDirectionality: BlastDirectionality.explosive,
