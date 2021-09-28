@@ -286,15 +286,16 @@ class _PostTripPanelState extends State<PostTripPanel> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          widget.isDriver
-                              ? Text(
-                                  'Passengers',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    color: const Color(0xff574754),
-                                  ),
-                                )
-                              : const SizedBox(),
+                          Visibility(
+                            visible: widget.isDriver,
+                            child: Text(
+                              'Passengers',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: const Color(0xff574754),
+                              ),
+                            ),
+                          ),
                           SizedBox(
                             width: widget.constraints.maxWidth * 0.85,
                             height: widget.constraints.maxHeight * 0.1,
@@ -362,17 +363,18 @@ class _PostTripPanelState extends State<PostTripPanel> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                              fixedSize: Size(
-                                widget.constraints.maxWidth * 0.25,
-                                widget.constraints.maxHeight * 0.06,
-                              ),
-                              side: const BorderSide(
-                                color: Color(0xffdbb3d4),
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              primary: Colors.white),
+                            fixedSize: Size(
+                              widget.constraints.maxWidth * 0.25,
+                              widget.constraints.maxHeight * 0.06,
+                            ),
+                            side: const BorderSide(
+                              color: Color(0xffdbb3d4),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            primary: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -382,29 +384,30 @@ class _PostTripPanelState extends State<PostTripPanel> {
             ),
           ],
         ),
-        widget.isDriver
-            ? Positioned(
-                top: (widget.constraints.maxHeight * 0.35) - 40,
-                left: (widget.constraints.maxWidth / 2) - 40,
-                child: Entry.scale(
-                  delay: const Duration(milliseconds: 2000),
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.easeInToLinear,
-                  child: Material(
-                    elevation: 8,
-                    borderRadius: BorderRadius.circular(40),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 40,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.purple,
-                        radius: 37,
-                      ),
-                    ),
+        Visibility(
+          visible: widget.isDriver,
+          child: Positioned(
+            top: (widget.constraints.maxHeight * 0.35) - 40,
+            left: (widget.constraints.maxWidth / 2) - 40,
+            child: Entry.scale(
+              delay: const Duration(milliseconds: 2000),
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeInToLinear,
+              child: Material(
+                elevation: 8,
+                borderRadius: BorderRadius.circular(40),
+                child: const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 40,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.purple,
+                    radius: 37,
                   ),
                 ),
-              )
-            : const SizedBox(),
+              ),
+            ),
+          ),
+        ),
         Positioned(
           top: widget.constraints.maxHeight * 0.175,
           left: widget.constraints.maxWidth / 2,
