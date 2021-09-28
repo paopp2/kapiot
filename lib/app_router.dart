@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kapiot/ui/shared/post_trip_summary_view.dart';
+import 'package:kapiot/ui/post_trip_summary/post_trip_summary_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
 import 'package:kapiot/ui/home/components/place_picker_view.dart';
