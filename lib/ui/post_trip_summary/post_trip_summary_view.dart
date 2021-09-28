@@ -18,15 +18,10 @@ class PostTripSummaryView extends StatelessWidget {
         builder: (context, constraints) {
           return Scaffold(
             body: Center(
-              child: isDriver
-                  ? PostTripPanel(
-                      constraints: constraints,
-                      isDriver: isDriver,
-                    )
-                  : PostTripPanel(
-                      constraints: constraints,
-                      isDriver: isDriver,
-                    ),
+              child: PostTripPanel(
+                constraints: constraints,
+                isDriver: isDriver,
+              ),
             ),
           );
         },
@@ -169,7 +164,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
                                   'Christian G.',
                                   style: GoogleFonts.poppins(
                                     fontSize: 24,
-                                    color: Color(0xff333333),
+                                    color: const Color(0xff333333),
                                   ),
                                 ),
                                 Text(
@@ -177,7 +172,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
                                   style: GoogleFonts.poppins(
                                     height: 1,
                                     fontSize: 14,
-                                    color: Color(0xff666666),
+                                    color: const Color(0xff666666),
                                   ),
                                 )
                               ],
@@ -214,14 +209,14 @@ class _PostTripPanelState extends State<PostTripPanel> {
                                             'Christian G.',
                                             style: GoogleFonts.poppins(
                                               fontSize: 24,
-                                              color: Color(0xff333333),
+                                              color: const Color(0xff333333),
                                             ),
                                           ),
                                           Text(
                                             'FAG 169',
                                             style: GoogleFonts.poppins(
                                               fontSize: 14,
-                                              color: Color(0xff666666),
+                                              color: const Color(0xff666666),
                                             ),
                                           ),
                                         ],
@@ -231,7 +226,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
                                         style: GoogleFonts.poppins(
                                           height: 1,
                                           fontSize: 14,
-                                          color: Color(0xff666666),
+                                          color: const Color(0xff666666),
                                         ),
                                       ),
                                     ],
