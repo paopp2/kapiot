@@ -117,6 +117,7 @@ class RequestAcceptedViewModel extends ViewModel {
 
   @override
   void dispose() {
+    coRiderConfigSub.cancel();
     isDroppedOffStreamSub.cancel();
     driverLocStreamSub.cancel();
   }
