@@ -33,6 +33,7 @@ class PostTripSummaryViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
+    await Future.delayed(const Duration(milliseconds: 10));
     assert(read(currentRouteConfigProvider).state != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state!;
     await setTransaction(currentRouteConfig);
@@ -70,12 +71,10 @@ class PostTripSummaryViewModel extends ViewModel {
       assert(read(acceptingDriverConfigProvider).state != null);
       final startLoc = routeConfig.startLocation;
       final endLoc = routeConfig.endLocation;
-      final driver = read(acceptingDriverConfigProvider).state;
       final double distance =
           utils.calculateDistance(pointA: startLoc, pointB: endLoc);
       read(transactionProvider).state = transaction.copyWith(
         currentUserId: userId,
-        driver: driver,
         distance: distance,
         startLocation: startLoc,
         endLocation: endLoc,
