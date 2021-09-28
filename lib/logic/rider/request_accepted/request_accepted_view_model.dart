@@ -52,10 +52,6 @@ class RequestAcceptedViewModel extends ViewModel {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
-    final transaction = read(transactionProvider).state;
-    read(transactionProvider).state = transaction.copyWith(
-      startTime: DateTime.now(),
-    );
     await mapController.initializeRequestAcceptedMap();
     // This delay of arbitrary duration allows the map to finish initializing
     // before showing the acceptingDriver's route. Removing this delay seems to
@@ -98,9 +94,16 @@ class RequestAcceptedViewModel extends ViewModel {
           endTime: DateTime.now(),
           points: 10,
         );
+        print(read(transactionProvider).state);
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
     });
+    final transaction = read(transactionProvider).state;
+    final driver = read(acceptingDriverConfigProvider).state;
+    read(transactionProvider).state = transaction.copyWith(
+      startTime: DateTime.now(),
+      driver: driver,
+    );
   }
 
   @override
