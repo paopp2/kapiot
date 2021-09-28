@@ -71,8 +71,10 @@ class PostTripSummaryViewModel extends ViewModel {
       assert(read(acceptingDriverConfigProvider).state != null);
       final startLoc = routeConfig.startLocation;
       final endLoc = routeConfig.endLocation;
-      final double distance =
-          utils.calculateDistance(pointA: startLoc, pointB: endLoc);
+      final double distance = utils.calculateDistance(
+        pointA: startLoc,
+        pointB: endLoc,
+      );
       read(transactionProvider).state = transaction.copyWith(
         currentUserId: userId,
         distance: distance,
