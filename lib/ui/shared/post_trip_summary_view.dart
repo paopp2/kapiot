@@ -160,8 +160,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     widget.isDriver
-                        ? const SizedBox()
-                        : Container(
+                        ? Container(
                             padding: const EdgeInsets.only(top: 50),
                             width: widget.constraints.maxWidth,
                             child: Column(
@@ -183,23 +182,89 @@ class _PostTripPanelState extends State<PostTripPanel> {
                                 )
                               ],
                             ),
+                          )
+                        : const SizedBox(),
+                    widget.isDriver
+                        ? const SizedBox()
+                        : Row(
+                            children: [
+                              Material(
+                                elevation: 2,
+                                borderRadius: BorderRadius.circular(9),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber,
+                                    borderRadius: BorderRadius.circular(9),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: widget.constraints.maxWidth * 0.025,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Christian G.',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 24,
+                                              color: Color(0xff333333),
+                                            ),
+                                          ),
+                                          Text(
+                                            'FAG 169',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: Color(0xff666666),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        '18105024',
+                                        style: GoogleFonts.poppins(
+                                          height: 1,
+                                          fontSize: 14,
+                                          color: Color(0xff666666),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Eskina Japan',
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            color: const Color(0xff574754),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            'Eskina Japan',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              color: const Color(0xff574754),
+                            ),
                           ),
                         ),
-                        Text(
-                          'Eskina Singapore',
-                          style: GoogleFonts.poppins(
-                            fontSize: 28,
-                            color: const Color(0xff574754),
-                            fontWeight: FontWeight.w500,
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            'Eskina Singapore',
+                            style: GoogleFonts.poppins(
+                              fontSize: 28,
+                              color: const Color(0xff574754),
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ],
@@ -323,8 +388,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
           ],
         ),
         widget.isDriver
-            ? const SizedBox()
-            : Positioned(
+            ? Positioned(
                 top: (widget.constraints.maxHeight * 0.35) - 40,
                 left: (widget.constraints.maxWidth / 2) - 40,
                 child: Entry.scale(
@@ -344,7 +408,8 @@ class _PostTripPanelState extends State<PostTripPanel> {
                     ),
                   ),
                 ),
-              ),
+              )
+            : const SizedBox(),
         Positioned(
           top: widget.constraints.maxHeight * 0.175,
           left: widget.constraints.maxWidth / 2,
