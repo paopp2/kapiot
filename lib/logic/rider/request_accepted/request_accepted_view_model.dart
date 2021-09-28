@@ -52,7 +52,10 @@ class RequestAcceptedViewModel extends ViewModel {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
-
+    final transaction = read(transactionProvider).state;
+    read(transactionProvider).state = transaction.copyWith(
+      startTime: DateTime.now(),
+    );
     await mapController.initializeRequestAcceptedMap();
     // This delay of arbitrary duration allows the map to finish initializing
     // before showing the acceptingDriver's route. Removing this delay seems to
@@ -90,11 +93,12 @@ class RequestAcceptedViewModel extends ViewModel {
     // has been 'dropped off'
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
-        MapController.reset(read);
-        // Set a new resetKey; notifies the HomeView that it should reset
-        read(resetKeyProvider).state = UniqueKey();
-        // Remove all Views then navigate to HomeView
-        AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
+        final transaction = read(transactionProvider).state;
+        read(transactionProvider).state = transaction.copyWith(
+          endTime: DateTime.now(),
+          points: 10,
+        );
+        AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
     });
   }
