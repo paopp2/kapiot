@@ -18,7 +18,7 @@ class PostTripSummaryView extends HookConsumerWidget {
     final transaction = ref.watch(transactionProvider).state;
     final model = ref.watch(postTripSummaryViewModel);
     final isDriver = ref.watch(isDriverProvider);
-    final driver = transaction.driver?.user;
+    final driver = transaction.driver!.user;
 
     useEffect(() {
       model.initState();
@@ -40,7 +40,7 @@ class PostTripSummaryView extends HookConsumerWidget {
                         constraints: constraints,
                         transaction: transaction,
                         isDriver: isDriver,
-                        driver: driver!,
+                        driver: driver,
                       ),
                     ],
                   ),
