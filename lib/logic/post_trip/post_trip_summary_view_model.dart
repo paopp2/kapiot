@@ -33,6 +33,7 @@ class PostTripSummaryViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
+    // TODO: Remove delay after refactoring RouteConfig for driver
     await Future.delayed(const Duration(milliseconds: 10));
     assert(read(currentRouteConfigProvider).state != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state!;

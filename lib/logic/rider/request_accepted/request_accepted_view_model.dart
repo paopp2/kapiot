@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
-import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -52,6 +50,7 @@ class RequestAcceptedViewModel extends ViewModel {
     assert(read(acceptingDriverConfigProvider).state != null);
     assert(read(currentRouteConfigProvider).state != null);
     assert(currentUser != null);
+
     await mapController.initializeRequestAcceptedMap();
     // This delay of arbitrary duration allows the map to finish initializing
     // before showing the acceptingDriver's route. Removing this delay seems to
@@ -85,6 +84,12 @@ class RequestAcceptedViewModel extends ViewModel {
       },
     );
 
+    final transaction = read(transactionProvider).state;
+    read(transactionProvider).state = transaction.copyWith(
+      startTime: DateTime.now(),
+      driver: acceptingDriver,
+    );
+
     // StreamSub that listens to the Stream that emits when this current rider
     // has been 'dropped off'
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
@@ -93,17 +98,11 @@ class RequestAcceptedViewModel extends ViewModel {
         read(transactionProvider).state = transaction.copyWith(
           endTime: DateTime.now(),
           points: 10,
+          riders: [],
         );
-        print(read(transactionProvider).state);
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
     });
-    final transaction = read(transactionProvider).state;
-    final driver = read(acceptingDriverConfigProvider).state;
-    read(transactionProvider).state = transaction.copyWith(
-      startTime: DateTime.now(),
-      driver: driver,
-    );
   }
 
   @override
