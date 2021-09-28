@@ -44,6 +44,9 @@ class PostTripSummaryViewModel extends ViewModel {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;
     final transaction = read(transactionProvider).state;
+    double? distance;
+    KapiotLocation? startLoc;
+    KapiotLocation? endLoc;
     if (routeConfig is ForDriver) {
       final decodedRoute = await utils.decodeRoute(routeConfig.encodedRoute);
       final LatLng start = decodedRoute.first;
@@ -56,35 +59,28 @@ class PostTripSummaryViewModel extends ViewModel {
         lat: end.latitude,
         lng: end.longitude,
       );
-      final double distance = utils.calculateDistance(
+      distance = utils.calculateDistance(
         pointA: startLoc,
         pointB: endLoc,
-      );
-      read(transactionProvider).state = transaction.copyWith(
-        currentUserId: userId,
-        driver: routeConfig,
-        distance: distance,
-        startLocation: startLoc,
-        endLocation: endLoc,
       );
     } else if (routeConfig is ForRider) {
-      assert(read(acceptingDriverConfigProvider).state != null);
-      final startLoc = routeConfig.startLocation;
-      final endLoc = routeConfig.endLocation;
-      final double distance = utils.calculateDistance(
+      startLoc = routeConfig.startLocation;
+      endLoc = routeConfig.endLocation;
+      distance = utils.calculateDistance(
         pointA: startLoc,
         pointB: endLoc,
       );
-      read(transactionProvider).state = transaction.copyWith(
-        currentUserId: userId,
-        distance: distance,
-        startLocation: startLoc,
-        endLocation: endLoc,
-      );
     }
+    read(transactionProvider).state = transaction.copyWith(
+      currentUserId: userId,
+      distance: distance,
+      startLocation: startLoc,
+      endLocation: endLoc,
+    );
   }
 
   void resetToHomeView() {
+    // Clear shared Map state
     MapController.reset(read);
     // Set a new resetKey; notifies the HomeView that it should reset
     read(resetKeyProvider).state = UniqueKey();
