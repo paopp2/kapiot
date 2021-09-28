@@ -40,7 +40,6 @@ class PostTripSummaryViewModel extends ViewModel {
     await setTransaction(currentRouteConfig);
   }
 
-  // TODO: Transaction for Rider
   Future<void> setTransaction(RouteConfig routeConfig) async {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;

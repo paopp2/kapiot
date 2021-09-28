@@ -42,8 +42,10 @@ class RequestAcceptedViewModel extends ViewModel {
   final LocationRepository locationRepo;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
+  static final List<RouteConfig> _riderList = [];
   late final StreamSubscription isDroppedOffStreamSub;
   late final StreamSubscription driverLocStreamSub;
+  late final StreamSubscription coRiderConfigSub;
 
   @override
   Future<void> initState() async {
@@ -90,6 +92,14 @@ class RequestAcceptedViewModel extends ViewModel {
       driver: acceptingDriver,
     );
 
+    // StreamSub that listens to the Stream that emits the current rider's
+    // co-riders to be added to the current Transaction's [riders]
+    coRiderConfigSub = getMyCoRiderConfigsStream().listen((rcList) {
+      final newCoRiders =
+          rcList.where((rc) => (!_riderList.contains(rc))).toList();
+      _riderList.addAll(newCoRiders);
+    });
+
     // StreamSub that listens to the Stream that emits when this current rider
     // has been 'dropped off'
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
@@ -98,7 +108,7 @@ class RequestAcceptedViewModel extends ViewModel {
         read(transactionProvider).state = transaction.copyWith(
           endTime: DateTime.now(),
           points: 10,
-          riders: [],
+          riders: _riderList,
         );
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
@@ -113,23 +123,19 @@ class RequestAcceptedViewModel extends ViewModel {
 
   /// Remaps the stream containing all riderConfigs that have been accepted by
   /// the current rider's acceptingDriver except for the current rider
-  Stream<List<KapiotUser>> getMyCoRidersStream() async* {
+  Stream<List<RouteConfig>> getMyCoRiderConfigsStream() {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
     final allCoRiderConfigsStream = riderRepo.getAllCoRiderConfigsStream(
       driver: acceptingDriverConfig.user,
     );
     // Filter out current rider's RouteConfig
-    final myCoRiderConfigsStream = allCoRiderConfigsStream.map(
+    return allCoRiderConfigsStream.map(
       (riderList) {
         return riderList
             .where((rider) => (rider.user.id != currentUser!.id))
             .toList();
       },
     );
-    // Emit only the users from the co-riders' RouteConfigs
-    await for (final coRiderConfigs in myCoRiderConfigsStream) {
-      yield coRiderConfigs.map((rc) => rc.user).toList();
-    }
   }
 
   /// Stream that listens whether this rider has already been "dropped off"
