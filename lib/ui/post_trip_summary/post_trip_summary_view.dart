@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:confetti/confetti.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
+import 'package:kapiot/ui/post_trip_summary/info_block_widget.dart';
 
 class PostTripSummaryView extends StatelessWidget {
   const PostTripSummaryView({Key? key}) : super(key: key);
@@ -269,17 +270,20 @@ class _PostTripPanelState extends State<PostTripPanel> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InfoBlockWidget(
-                            constraints: widget.constraints,
-                            number: numKm,
-                            type: 'km'),
+                          constraints: widget.constraints,
+                          number: numKm,
+                          type: 'km',
+                        ),
                         InfoBlockWidget(
-                            constraints: widget.constraints,
-                            number: numMin,
-                            type: 'minutes'),
+                          constraints: widget.constraints,
+                          number: numMin,
+                          type: 'minutes',
+                        ),
                         InfoBlockWidget(
-                            constraints: widget.constraints,
-                            number: numTotal,
-                            type: 'total points'),
+                          constraints: widget.constraints,
+                          number: numTotal,
+                          type: 'total points',
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -420,59 +424,6 @@ class _PostTripPanelState extends State<PostTripPanel> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class InfoBlockWidget extends StatelessWidget {
-  const InfoBlockWidget({
-    Key? key,
-    required this.constraints,
-    required this.number,
-    required this.type,
-  }) : super(key: key);
-
-  final BoxConstraints constraints;
-  final double number;
-  final String type;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: constraints.maxWidth * 0.275,
-      width: constraints.maxWidth * 0.275,
-      padding: EdgeInsets.symmetric(
-        horizontal: constraints.maxWidth * 0.04,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: const Color(0xffedd9e9),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AnimatedFlipCounter(
-            value: number,
-            fractionDigits: (type == 'km') ? 1 : 0,
-            duration: const Duration(milliseconds: 3500),
-            curve: Curves.linearToEaseOut,
-            textStyle: GoogleFonts.poppins(
-              fontSize: 28,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xff574754),
-            ),
-          ),
-          Text(
-            type,
-            style: GoogleFonts.poppins(
-              height: 0.5,
-              fontSize: 12,
-              color: const Color(0xff997d94),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
