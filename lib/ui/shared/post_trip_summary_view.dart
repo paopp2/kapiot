@@ -10,7 +10,7 @@ class PostTripSummaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDriver = false; // set panel type here
+    bool isDriver = true; // set panel type here
 
     return SafeArea(
       child: LayoutBuilder(
@@ -141,10 +141,9 @@ class _PostTripPanelState extends State<PostTripPanel> {
               child: Container(
                 height: widget.constraints.maxHeight * 0.65,
                 width: widget.constraints.maxWidth,
-                padding: EdgeInsets.only(
-                  left: widget.constraints.maxWidth * 0.05,
-                  right: widget.constraints.maxWidth * 0.05,
-                  bottom: widget.constraints.maxHeight * 0.025,
+                padding: EdgeInsets.symmetric(
+                  horizontal: widget.constraints.maxWidth * 0.05,
+                  vertical: widget.constraints.maxHeight * 0.025,
                 ),
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -161,7 +160,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
                   children: [
                     widget.isDriver
                         ? Container(
-                            padding: const EdgeInsets.only(top: 50),
+                            padding: const EdgeInsets.only(top: 25),
                             width: widget.constraints.maxWidth,
                             child: Column(
                               children: [
@@ -183,9 +182,6 @@ class _PostTripPanelState extends State<PostTripPanel> {
                               ],
                             ),
                           )
-                        : const SizedBox(),
-                    widget.isDriver
-                        ? const SizedBox()
                         : Row(
                             children: [
                               Material(
