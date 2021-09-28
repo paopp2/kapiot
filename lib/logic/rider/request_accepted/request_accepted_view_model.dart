@@ -104,22 +104,23 @@ class RequestAcceptedViewModel extends ViewModel {
     // has been 'dropped off'
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
+        // Update current transaction data
         final transaction = read(transactionProvider).state;
         read(transactionProvider).state = transaction.copyWith(
           endTime: DateTime.now(),
           points: 10,
           riders: _riderList,
         );
+
+        // Cancel all StreamSubs at RequestAcceptedView
+        coRiderConfigSub.cancel();
+        isDroppedOffStreamSub.cancel();
+        driverLocStreamSub.cancel();
+
+        // Navigate to PostTripSummaryView
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
     });
-  }
-
-  @override
-  void dispose() {
-    coRiderConfigSub.cancel();
-    isDroppedOffStreamSub.cancel();
-    driverLocStreamSub.cancel();
   }
 
   /// Remaps the stream containing all riderConfigs that have been accepted by
