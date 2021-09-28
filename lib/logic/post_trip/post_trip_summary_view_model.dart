@@ -79,7 +79,6 @@ class PostTripSummaryViewModel extends ViewModel {
         distance: distance,
         startLocation: startLoc,
         endLocation: endLoc,
-        points: 10,
       );
     }
   }
