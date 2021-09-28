@@ -66,6 +66,11 @@ class PostTripSummaryViewModel extends ViewModel {
         startLocation: startLoc,
         endLocation: endLoc,
       );
+    } else if (routeConfig is ForRider) {
+      final startLoc = routeConfig.startLocation;
+      final endLoc = routeConfig.endLocation;
+      final double distance =
+          utils.calculateDistance(pointA: startLoc, pointB: endLoc);
     }
   }
 
