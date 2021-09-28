@@ -10,7 +10,7 @@ class PostTripSummaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDriver = true; // set panel type here
+    bool isDriver = false; // set panel type here
 
     return SafeArea(
       child: LayoutBuilder(
@@ -59,7 +59,7 @@ class _PostTripPanelState extends State<PostTripPanel> {
   @override
   void initState() {
     super.initState();
-    controller = ConfettiController(duration: const Duration(seconds: 4));
+    controller = ConfettiController(duration: const Duration(seconds: 2));
 
     Future.delayed(const Duration(milliseconds: 10)).then((value) {
       setState(() {
@@ -140,196 +140,183 @@ class _PostTripPanelState extends State<PostTripPanel> {
               curve: Curves.easeInToLinear,
               child: Container(
                 height: widget.constraints.maxHeight * 0.65,
-                color: Colors.transparent,
-                child: Container(
-                  width: widget.constraints.maxWidth,
-                  padding: EdgeInsets.only(
-                    left: widget.constraints.maxWidth * 0.05,
-                    right: widget.constraints.maxWidth * 0.05,
-                    bottom: widget.constraints.maxHeight * 0.025,
+                width: widget.constraints.maxWidth,
+                padding: EdgeInsets.only(
+                  left: widget.constraints.maxWidth * 0.05,
+                  right: widget.constraints.maxWidth * 0.05,
+                  bottom: widget.constraints.maxHeight * 0.025,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color(0xff666666),
                   ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xff666666),
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      widget.isDriver
-                          ? const SizedBox()
-                          : Container(
-                              padding: const EdgeInsets.only(top: 50),
-                              width: widget.constraints.maxWidth,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Christian G.',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 24,
-                                      color: Color(0xff333333),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    widget.isDriver
+                        ? const SizedBox()
+                        : Container(
+                            padding: const EdgeInsets.only(top: 50),
+                            width: widget.constraints.maxWidth,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Christian G.',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 24,
+                                    color: Color(0xff333333),
+                                  ),
+                                ),
+                                Text(
+                                  '18105024',
+                                  style: GoogleFonts.poppins(
+                                    height: 1,
+                                    fontSize: 14,
+                                    color: Color(0xff666666),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Eskina Japan',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: const Color(0xff574754),
+                          ),
+                        ),
+                        Text(
+                          'Eskina Singapore',
+                          style: GoogleFonts.poppins(
+                            fontSize: 28,
+                            color: const Color(0xff574754),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InfoBlockWidget(
+                            constraints: widget.constraints,
+                            number: numKm,
+                            type: 'km'),
+                        InfoBlockWidget(
+                            constraints: widget.constraints,
+                            number: numMin,
+                            type: 'minutes'),
+                        InfoBlockWidget(
+                            constraints: widget.constraints,
+                            number: numTotal,
+                            type: 'total points'),
+                      ],
+                    ),
+                    SizedBox(
+                      width: widget.constraints.maxWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          widget.isDriver
+                              ? Text(
+                                  'Passengers',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: const Color(0xff574754),
+                                  ),
+                                )
+                              : const SizedBox(),
+                          SizedBox(
+                            width: widget.constraints.maxWidth * 0.85,
+                            height: widget.constraints.maxHeight * 0.1,
+                            child: Center(
+                              child: ListView(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                children: const [
+                                  Align(
+                                    widthFactor: 0.8,
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.purple,
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    '18105024',
-                                    style: GoogleFonts.poppins(
-                                      height: 1,
-                                      fontSize: 14,
-                                      color: Color(0xff666666),
+                                  Align(
+                                    widthFactor: 0.8,
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.purple,
+                                      ),
                                     ),
-                                  )
+                                  ),
+                                  Align(
+                                    widthFactor: 0.8,
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.purple,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: widget.constraints.maxHeight * 0.025,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Eskina Japan',
-                              style: GoogleFonts.poppins(
-                                fontSize: 16,
-                                color: const Color(0xff574754),
+                          )
+                        ],
+                      ),
+                    ),
+                    Entry(
+                      xOffset: -1000,
+                      delay: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 1500),
+                      curve: Curves.easeInToLinear,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'home',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 14,
+                              color: const Color(
+                                0xff666666,
                               ),
                             ),
-                            Text(
-                              'Eskina Singapore',
-                              style: GoogleFonts.poppins(
-                                fontSize: 28,
-                                color: const Color(0xff574754),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: widget.constraints.maxHeight * 0.025,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InfoBlockWidget(
-                                constraints: widget.constraints,
-                                number: numKm,
-                                type: 'km'),
-                            InfoBlockWidget(
-                                constraints: widget.constraints,
-                                number: numMin,
-                                type: 'minutes'),
-                            InfoBlockWidget(
-                                constraints: widget.constraints,
-                                number: numTotal,
-                                type: 'total points'),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: widget.constraints.maxWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            widget.isDriver
-                                ? Text(
-                                    'Passengers',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 16,
-                                      color: const Color(0xff574754),
-                                    ),
-                                  )
-                                : const SizedBox(),
-                            SizedBox(
-                              width: widget.constraints.maxWidth * 0.85,
-                              height: widget.constraints.maxHeight * 0.1,
-                              child: Center(
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  children: const [
-                                    Align(
-                                      widthFactor: 0.8,
-                                      child: CircleAvatar(
-                                        radius: 30,
-                                        backgroundColor: Colors.white,
-                                        child: CircleAvatar(
-                                          radius: 27,
-                                          backgroundColor: Colors.purple,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      widthFactor: 0.8,
-                                      child: CircleAvatar(
-                                        radius: 30,
-                                        backgroundColor: Colors.white,
-                                        child: CircleAvatar(
-                                          radius: 27,
-                                          backgroundColor: Colors.purple,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      widthFactor: 0.8,
-                                      child: CircleAvatar(
-                                        radius: 30,
-                                        backgroundColor: Colors.white,
-                                        child: CircleAvatar(
-                                          radius: 27,
-                                          backgroundColor: Colors.purple,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      Entry(
-                        xOffset: -1000,
-                        delay: const Duration(milliseconds: 1000),
-                        duration: const Duration(milliseconds: 1500),
-                        curve: Curves.easeInToLinear,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text(
-                              'home',
-                              style: GoogleFonts.montserrat(
-                                fontSize: 14,
-                                color: const Color(
-                                  0xff666666,
-                                ),
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(
-                                  widget.constraints.maxWidth * 0.25,
-                                  widget.constraints.maxHeight * 0.06,
-                                ),
-                                side: const BorderSide(
-                                  color: Color(0xffdbb3d4),
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                primary: Colors.white),
                           ),
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(
+                                widget.constraints.maxWidth * 0.25,
+                                widget.constraints.maxHeight * 0.06,
+                              ),
+                              side: const BorderSide(
+                                color: Color(0xffdbb3d4),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              primary: Colors.white),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
