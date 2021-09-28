@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
-import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -44,8 +42,10 @@ class RequestAcceptedViewModel extends ViewModel {
   final LocationRepository locationRepo;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
+  static final List<RouteConfig> _riderList = [];
   late final StreamSubscription isDroppedOffStreamSub;
   late final StreamSubscription driverLocStreamSub;
+  late final StreamSubscription coRiderConfigSub;
 
   @override
   Future<void> initState() async {
@@ -86,44 +86,58 @@ class RequestAcceptedViewModel extends ViewModel {
       },
     );
 
+    final transaction = read(transactionProvider).state;
+    read(transactionProvider).state = transaction.copyWith(
+      startTime: DateTime.now(),
+      driver: acceptingDriver,
+    );
+
+    // StreamSub that listens to the Stream that emits the current rider's
+    // co-riders to be added to the current Transaction's [riders]
+    coRiderConfigSub = getMyCoRiderConfigsStream().listen((rcList) {
+      final newCoRiders =
+          rcList.where((rc) => (!_riderList.contains(rc))).toList();
+      _riderList.addAll(newCoRiders);
+    });
+
     // StreamSub that listens to the Stream that emits when this current rider
     // has been 'dropped off'
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
-        MapController.reset(read);
-        // Set a new resetKey; notifies the HomeView that it should reset
-        read(resetKeyProvider).state = UniqueKey();
-        // Remove all Views then navigate to HomeView
-        AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
+        // Update current transaction data
+        final transaction = read(transactionProvider).state;
+        read(transactionProvider).state = transaction.copyWith(
+          endTime: DateTime.now(),
+          points: 10,
+          riders: _riderList,
+        );
+
+        // Cancel all StreamSubs at RequestAcceptedView
+        coRiderConfigSub.cancel();
+        isDroppedOffStreamSub.cancel();
+        driverLocStreamSub.cancel();
+
+        // Navigate to PostTripSummaryView
+        AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
     });
   }
 
-  @override
-  void dispose() {
-    isDroppedOffStreamSub.cancel();
-    driverLocStreamSub.cancel();
-  }
-
   /// Remaps the stream containing all riderConfigs that have been accepted by
   /// the current rider's acceptingDriver except for the current rider
-  Stream<List<KapiotUser>> getMyCoRidersStream() async* {
+  Stream<List<RouteConfig>> getMyCoRiderConfigsStream() {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
     final allCoRiderConfigsStream = riderRepo.getAllCoRiderConfigsStream(
       driver: acceptingDriverConfig.user,
     );
     // Filter out current rider's RouteConfig
-    final myCoRiderConfigsStream = allCoRiderConfigsStream.map(
+    return allCoRiderConfigsStream.map(
       (riderList) {
         return riderList
             .where((rider) => (rider.user.id != currentUser!.id))
             .toList();
       },
     );
-    // Emit only the users from the co-riders' RouteConfigs
-    await for (final coRiderConfigs in myCoRiderConfigsStream) {
-      yield coRiderConfigs.map((rc) => rc.user).toList();
-    }
   }
 
   /// Stream that listens whether this rider has already been "dropped off"

@@ -24,7 +24,7 @@ class RideInfoPanel extends HookConsumerWidget {
         ref.watch(acceptingDriverConfigProvider).state!;
     final acceptingDriver = acceptingDriverConfig.user;
     final driverNameSplit = acceptingDriver.displayName!.split(' ');
-    final coRidersStream = ref.watch(coRidersStreamProvider);
+    final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
     return Expanded(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
@@ -167,18 +167,18 @@ class RideInfoPanel extends HookConsumerWidget {
                   children: [
                     SizedBox(
                       height: 70,
-                      child: coRidersStream.when(
+                      child: coRiderConfigsStream.when(
                         error: (e, __) => Center(child: Text(e.toString())),
                         loading: () => const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        data: (coRidersList) {
+                        data: (coRiderConfigsList) {
                           return ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: coRidersList.length,
+                            itemCount: coRiderConfigsList.length,
                             itemBuilder: (context, index) {
-                              final coRider = coRidersList[index];
+                              final coRider = coRiderConfigsList[index].user;
                               return Align(
                                 widthFactor: 0.8,
                                 child: CircleAvatar(

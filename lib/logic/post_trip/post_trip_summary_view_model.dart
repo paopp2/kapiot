@@ -33,12 +33,13 @@ class PostTripSummaryViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
+    // TODO: Remove delay after refactoring RouteConfig for driver
+    await Future.delayed(const Duration(milliseconds: 10));
     assert(read(currentRouteConfigProvider).state != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state!;
     await setTransaction(currentRouteConfig);
   }
 
-  // TODO: Transaction for Rider
   Future<void> setTransaction(RouteConfig routeConfig) async {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;
@@ -62,6 +63,20 @@ class PostTripSummaryViewModel extends ViewModel {
       read(transactionProvider).state = transaction.copyWith(
         currentUserId: userId,
         driver: routeConfig,
+        distance: distance,
+        startLocation: startLoc,
+        endLocation: endLoc,
+      );
+    } else if (routeConfig is ForRider) {
+      assert(read(acceptingDriverConfigProvider).state != null);
+      final startLoc = routeConfig.startLocation;
+      final endLoc = routeConfig.endLocation;
+      final double distance = utils.calculateDistance(
+        pointA: startLoc,
+        pointB: endLoc,
+      );
+      read(transactionProvider).state = transaction.copyWith(
+        currentUserId: userId,
         distance: distance,
         startLocation: startLoc,
         endLocation: endLoc,
