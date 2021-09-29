@@ -11,8 +11,10 @@ final pointsProvider = Provider.autoDispose<double>((ref) {
 
 final distanceInKmProvider = Provider.autoDispose<double>((ref) {
   final transaction = ref.watch(transactionProvider).state;
-  Future.delayed(const Duration(seconds: 2))
-      .then((_) => (ref.state = transaction.distance!));
+  Future.delayed(
+    const Duration(seconds: 2),
+    () => (ref.state = transaction.distance!),
+  );
   return 0;
 });
 
@@ -22,13 +24,15 @@ final timeInMinsProvider = Provider.autoDispose<double>((ref) {
   final endTime = transaction.endTime!;
   // TODO: Change [inSeconds] to [inMinutes]
   final duration = endTime.difference(startTime).inSeconds;
-  Future.delayed(const Duration(seconds: 2))
-      .then((_) => (ref.state = duration.toDouble()));
+  Future.delayed(
+    const Duration(seconds: 2),
+    () => (ref.state = duration.toDouble()),
+  );
   return 0;
 });
 
 final totalPointsProvider = Provider.autoDispose<double>((ref) {
-  Future.delayed(const Duration(seconds: 2)).then((_) => (ref.state = 100));
+  Future.delayed(const Duration(seconds: 2), () => (ref.state = 100));
   return 0;
 });
 
