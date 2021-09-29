@@ -6,6 +6,16 @@
             "riderCount": 2,
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-29T06:47:07.099561",
+            "startLocation": {
+                "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu",
+                "lat": 10.30058,
+                "lng": 123.96239 
+            },
+            "endLocation": {
+                "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu",
+                "lat": 10.29103,
+                "lng": 123.96105 
+            },
             "user": {
                 "displayName": "Charles Jr. Ausejo",
                 "email": "16100938@usc.edu.ph",
@@ -58,6 +68,16 @@
             "riderCount": 2,
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-29T06:47:07.099561",
+            "startLocation": {
+                "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu",
+                "lat": 10.30058,
+                "lng": 123.96239 
+            },
+            "endLocation": {
+                "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu",
+                "lat": 10.29103,
+                "lng": 123.96105 
+            },
             "user": {
                 "displayName": "Baby Driver",
                 "email": "babydriver@email.com",
@@ -110,6 +130,16 @@
             "riderCount": 1,
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
+            "startLocation": {
+                "address": "Marigondon, Lapu-Lapu City, Cebu",
+                "lat": 10.275770,
+                "lng": 123.977480
+            },
+            "endLocation": {
+                "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+                "lat": 10.29983,
+                "lng": 123.95174
+            },
             "user": {
                 "displayName": "Omni Man",
                 "email": "omni_man_420@gmail.com",
@@ -124,6 +154,16 @@
             "riderCount": 1,
             "runtimeType": "driver",
             "timeOfTrip": "2021-08-30T13:45:35.234433",
+            "startLocation": {
+                "address": "Mactan, Lapu-Lapu City, Cebu",
+                "lat": 10.30545,
+                "lng": 124.01095
+            },
+            "endLocation": {
+                "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+                "lat": 10.27405,
+                "lng": 123.94571
+            },
             "user": {
                 "displayName": "The Invincible",
                 "email": "the_invincible_20@gmail.com",
