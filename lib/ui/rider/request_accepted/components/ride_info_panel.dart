@@ -25,6 +25,7 @@ class RideInfoPanel extends HookConsumerWidget {
     final acceptingDriver = acceptingDriverConfig.user;
     final driverNameSplit = acceptingDriver.displayName!.split(' ');
     final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
+    final coRiderCount = ref.watch(coRiderCountProvider);
     return Expanded(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
@@ -197,9 +198,9 @@ class RideInfoPanel extends HookConsumerWidget {
                         },
                       ),
                     ),
-                    const Text(
-                      'You and n other people',
-                      style: TextStyle(color: Colors.grey),
+                    Text(
+                      'You and $coRiderCount other people',
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
