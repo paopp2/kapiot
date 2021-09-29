@@ -74,7 +74,7 @@ class DriverRepository {
         );
         return [pickUpPoint, dropOffPoint];
       }).toList();
-      final sortedStopPoints = await coreAlgorithms.sortStopPoints(
+      final sortedStopPoints = coreAlgorithms.sortStopPoints(
         driverConfig: driverConfig,
         stopPoints: unsortedStopPoints,
       );

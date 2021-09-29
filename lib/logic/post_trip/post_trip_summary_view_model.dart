@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
@@ -8,7 +7,6 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
-import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final postTripSummaryViewModel = Provider.autoDispose(
@@ -33,49 +31,24 @@ class PostTripSummaryViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
-    // TODO: Remove delay after refactoring RouteConfig for driver
-    await Future.delayed(const Duration(milliseconds: 10));
     assert(read(currentRouteConfigProvider).state != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state!;
-    await setTransaction(currentRouteConfig);
+    completeTransaction(currentRouteConfig);
   }
 
-  Future<void> setTransaction(RouteConfig routeConfig) async {
+  void completeTransaction(RouteConfig routeConfig) {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;
     final transaction = read(transactionProvider).state;
-    double? distance;
-    KapiotLocation? startLoc;
-    KapiotLocation? endLoc;
-    if (routeConfig is ForDriver) {
-      final decodedRoute = await utils.decodeRoute(routeConfig.encodedRoute);
-      final LatLng start = decodedRoute.first;
-      final LatLng end = decodedRoute.last;
-      final startLoc = KapiotLocation(
-        lat: start.latitude,
-        lng: start.longitude,
-      );
-      final endLoc = KapiotLocation(
-        lat: end.latitude,
-        lng: end.longitude,
-      );
-      distance = utils.calculateDistance(
-        pointA: startLoc,
-        pointB: endLoc,
-      );
-    } else if (routeConfig is ForRider) {
-      startLoc = routeConfig.startLocation;
-      endLoc = routeConfig.endLocation;
-      distance = utils.calculateDistance(
-        pointA: startLoc,
-        pointB: endLoc,
-      );
-    }
+    final distance = utils.calculateDistance(
+      pointA: routeConfig.startLocation,
+      pointB: routeConfig.endLocation,
+    );
     read(transactionProvider).state = transaction.copyWith(
       currentUserId: userId,
       distance: distance,
-      startLocation: startLoc,
-      endLocation: endLoc,
+      startLocation: routeConfig.startLocation,
+      endLocation: routeConfig.endLocation,
     );
   }
 
