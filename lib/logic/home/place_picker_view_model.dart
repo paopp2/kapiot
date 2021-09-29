@@ -64,7 +64,7 @@ class PlacePickerViewModel extends ViewModel {
 
   /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
   /// from "address"
-  static List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
 
   void editPlaceAddress({required bool isForStartLoc}) {
     if (isForStartLoc) {

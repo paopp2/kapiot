@@ -49,10 +49,10 @@ class RiderManagerViewModel extends ViewModel {
   final CoreAlgorithms coreAlgorithms;
   final RiderManagerMapController mapController;
   final KapiotUser? currentUser;
-  static final List<StopPoint> _finishedStopPoints = [];
+  final List<StopPoint> _finishedStopPoints = [];
+  final List<RouteConfig> _riderConfigList = [];
   late final StreamSubscription stopPointsSub;
   late final StreamSubscription realtimeLocSub;
-  static final List<RouteConfig> _riderConfigList = [];
 
   @override
   Future<void> initState() async {

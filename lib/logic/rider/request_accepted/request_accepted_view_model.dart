@@ -42,7 +42,7 @@ class RequestAcceptedViewModel extends ViewModel {
   final LocationRepository locationRepo;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
-  static final List<RouteConfig> _riderList = [];
+  final List<RouteConfig> _riderList = [];
   late final StreamSubscription isDroppedOffStreamSub;
   late final StreamSubscription driverLocStreamSub;
   late final StreamSubscription coRiderConfigSub;

@@ -16,17 +16,6 @@ final acceptingDriverConfigProvider =
   return null;
 });
 
-final riderConfigListProvider =
-    StateProvider.autoDispose<List<RouteConfig>>((ref) {
-  ref.maintainState = true;
-  return [];
-});
-
-final driverPointsProvider = StateProvider.autoDispose<double>((ref) {
-  ref.maintainState = true;
-  return 0;
-});
-
 final transactionProvider = StateProvider.autoDispose<Transaction>((ref) {
   ref.maintainState = true;
   return const Transaction();
