@@ -21,6 +21,8 @@ class RouteConfig with _$RouteConfig {
     required KapiotUser user,
     required DateTime timeOfTrip,
     required int riderCount,
+    required KapiotLocation startLocation,
+    required KapiotLocation endLocation,
     required String encodedRoute,
   }) = ForDriver;
 

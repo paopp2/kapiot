@@ -138,6 +138,8 @@ class HomeViewModel extends ViewModel {
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,
         riderCount: read(riderCountProvider).state,
+        startLocation: startLoc,
+        endLocation: endLoc,
         encodedRoute: encodedRoute,
       );
       driverRepo.pushDriverConfig(driverConfig);
@@ -175,6 +177,17 @@ class HomeViewModel extends ViewModel {
         user: currentUser!,
         timeOfTrip: DateTime.now(),
         riderCount: 3,
+        startLocation: const KapiotLocation(
+          lat: 10.382435524276756,
+          lng: 123.9716686421716,
+          address:
+              "Vito Pepito Compound, Cebu North Road, Pitogo, Consolacion, Cebu",
+        ),
+        endLocation: const KapiotLocation(
+          lat: 10.341169565590683,
+          lng: 123.94750715566467,
+          address: "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu",
+        ),
         encodedRoute:
             "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
       );
