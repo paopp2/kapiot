@@ -30,7 +30,7 @@ class PostTripSummaryViewModel extends ViewModel {
   final CoreAlgorithms coreAlgorithms;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     assert(read(currentRouteConfigProvider).state != null);
     final currentRouteConfig = read(currentRouteConfigProvider).state!;
     completeTransaction(currentRouteConfig);
@@ -44,12 +44,15 @@ class PostTripSummaryViewModel extends ViewModel {
       pointA: routeConfig.startLocation,
       pointB: routeConfig.endLocation,
     );
-    read(transactionProvider).state = transaction.copyWith(
-      currentUserId: userId,
-      distance: distance,
-      startLocation: routeConfig.startLocation,
-      endLocation: routeConfig.endLocation,
-    );
+    // Asynchronously update transactionProvider to avoid premature rebuilding
+    Future.delayed(Duration.zero, () {
+      read(transactionProvider).state = transaction.copyWith(
+        currentUserId: userId,
+        distance: distance,
+        startLocation: routeConfig.startLocation,
+        endLocation: routeConfig.endLocation,
+      );
+    });
   }
 
   void resetToHomeView() {
