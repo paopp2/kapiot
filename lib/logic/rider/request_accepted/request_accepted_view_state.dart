@@ -11,3 +11,6 @@ final coRiderCountProvider = Provider.autoDispose<int>((ref) {
   });
   return 0;
 });
+
+final driverArrivalTimeProvider =
+    StateProvider.autoDispose<String>((ref) => '...');
