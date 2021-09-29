@@ -24,6 +24,7 @@ class RideInfoPanel extends HookConsumerWidget {
         ref.watch(acceptingDriverConfigProvider).state!;
     final acceptingDriver = acceptingDriverConfig.user;
     final driverNameSplit = acceptingDriver.displayName!.split(' ');
+    final estTimeArrival = ref.watch(driverArrivalTimeProvider).state;
     final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
     final coRiderCount = ref.watch(coRiderCountProvider);
     return Expanded(
@@ -35,7 +36,7 @@ class RideInfoPanel extends HookConsumerWidget {
               alignment: Alignment.bottomCenter,
               height: constraints.maxHeight * 0.05,
               child: Text(
-                '${driverNameSplit.first} is arriving in 9 mins',
+                '${driverNameSplit.first} is arriving in $estTimeArrival',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

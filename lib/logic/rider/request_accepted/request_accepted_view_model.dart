@@ -6,6 +6,7 @@ import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
+import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -78,11 +79,19 @@ class RequestAcceptedViewModel extends ViewModel {
     final acceptingDriver = read(acceptingDriverConfigProvider).state!;
     final driverId = acceptingDriver.user.id;
     driverLocStreamSub = locationRepo.getRealtimeLocation(driverId).listen(
-      (driverLoc) {
+      (driverLoc) async {
+        // Show the driver's marker on the map
         mapController.addMarker(
           marker: Markers.driverLoc,
           location: driverLoc,
         );
+        // Update driver's estimated time of arrival
+        final distMatrix = googleMapsApiServices.distMatrix;
+        final distMatrixResult = await distMatrix.getDistMatrixElement(
+          pointA: routeConfig.startLocation,
+          pointB: driverLoc,
+        );
+        read(driverArrivalTimeProvider).state = distMatrixResult.durationText;
       },
     );
 
