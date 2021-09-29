@@ -63,6 +63,12 @@ class RiderManagerViewModel extends ViewModel {
       driver: routeConfig,
       startTime: DateTime.now(),
     );
+
+    // Show the current driver's route on the map
+    final encodedRoute = routeConfig.encodedRoute;
+    await mapController.showRouteFromEncoded(encodedRoute: encodedRoute);
+
+    // Stream of current driver's stop points (pickup/dropoff locations)
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider).state = stopPointsList;
@@ -83,11 +89,6 @@ class RiderManagerViewModel extends ViewModel {
       }
     });
 
-    // Show the current driver's route on the map
-    final utils = googleMapsApiServices.utils;
-    final encodedRoute = routeConfig.encodedRoute;
-    await mapController.showRouteFromEncoded(encodedRoute: encodedRoute);
-
     // Show the current next stop on the map (if any)
     read(nextStopProvider).stream.listen((nextStop) {
       if (nextStop != null) {
@@ -102,6 +103,7 @@ class RiderManagerViewModel extends ViewModel {
 
     // Push changes to this driver's location and return to HomeView once
     // this driver arrives at destination / end location
+    final utils = googleMapsApiServices.utils;
     final decodedRoute = await utils.decodeRoute(encodedRoute);
     final driverEndLocation = KapiotLocation(
       lat: decodedRoute.last.latitude,
