@@ -22,7 +22,7 @@ class RiderRepository {
   final LocationRepository locationRepo;
   final CoreAlgorithms coreAlgorithms;
 
-  static final List<String> _driverIdList = [];
+  final List<String> _driverIdList = [];
 
   void pushRiderConfig(RouteConfig riderConfig) async {
     assert(riderConfig is ForRider);
