@@ -44,20 +44,13 @@ class CoreAlgorithms {
         final List<RouteConfig> compatibleDrivers = [];
         for (final driverConfig in driverConfigs) {
           driverConfig as ForDriver;
-          final decodedRoute =
-              await utils.decodeRoute(driverConfig.encodedRoute);
-          final driverStartLocation = KapiotLocation(
-            lat: decodedRoute.first.latitude,
-            lng: decodedRoute.first.longitude,
-          );
-
           final distFromDriverStartToRiderStart = utils.calculateDistance(
-            pointA: driverStartLocation,
+            pointA: driverConfig.startLocation,
             pointB: riderConfig.startLocation,
           );
 
           final distFromDriverStartToRiderEnd = utils.calculateDistance(
-            pointA: driverStartLocation,
+            pointA: driverConfig.startLocation,
             pointB: riderConfig.endLocation,
           );
 
@@ -65,6 +58,9 @@ class CoreAlgorithms {
               (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
 
           if (isGoingTheSameDirection) {
+            final decodedRoute = await utils.decodeRoute(
+              driverConfig.encodedRoute,
+            );
             bool riderStartCompatible = await utils.isLocationAlongRoute(
               location: riderConfig.startLocation,
               decodedRoute: decodedRoute,
@@ -81,9 +77,10 @@ class CoreAlgorithms {
               );
               if (driverCurrentLocMap != null) {
                 final distFromDriverStartToCurrent = utils.calculateDistance(
-                  pointA: driverStartLocation,
-                  pointB:
-                      driverCurrentLocMap.values.first, // Driver's currentLoc
+                  // Driver's starting location
+                  pointA: driverConfig.startLocation,
+                  // Driver's current location
+                  pointB: driverCurrentLocMap.values.first,
                 );
                 bool driverHasPassedRider = distFromDriverStartToRiderStart <
                     distFromDriverStartToCurrent;
@@ -110,25 +107,19 @@ class CoreAlgorithms {
     }
   }
 
-  Future<List<StopPoint>> sortStopPoints({
+  List<StopPoint> sortStopPoints({
     required RouteConfig driverConfig,
     required List<StopPoint> stopPoints,
-  }) async {
+  }) {
     final gmapsUtils = googleMapsApiServices.utils;
     driverConfig as ForDriver;
-    final decodedRoute =
-        await gmapsUtils.decodeRoute(driverConfig.encodedRoute);
-    final startPoint = KapiotLocation(
-      lat: decodedRoute.first.latitude,
-      lng: decodedRoute.first.longitude,
-    );
     // Remap the [stopPoints] as a list of Maps containing the StopPoint itself,
     // and its distance from the startPoint. This allows sorting them along the
-    // route based on how far they are from the startPoint. Much room for
-    // improvement, I know, but it'll do for the moment
+    // route based on how far they are from the driver's startLocation. Much
+    // room for improvement but this'll do for now
     List<Map<String, dynamic>> stopPointMapList = stopPoints.map((stopPoint) {
       final distanceFromStart = gmapsUtils.calculateDistance(
-        pointA: startPoint,
+        pointA: driverConfig.startLocation,
         pointB: stopPoint.stopLocation,
       );
       return {

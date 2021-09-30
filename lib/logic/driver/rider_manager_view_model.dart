@@ -13,7 +13,6 @@ import 'package:kapiot/logic/driver/rider_manager_map_controller.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
-import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
@@ -103,17 +102,12 @@ class RiderManagerViewModel extends ViewModel {
 
     // Push changes to this driver's location and return to HomeView once
     // this driver arrives at destination / end location
-    final utils = googleMapsApiServices.utils;
-    final decodedRoute = await utils.decodeRoute(encodedRoute);
-    final driverEndLocation = KapiotLocation(
-      lat: decodedRoute.last.latitude,
-      lng: decodedRoute.last.longitude,
-    );
     realtimeLocSub = locationService.getLocationStream().listen((currentLoc) {
       assert(currentUser != null);
+      final utils = googleMapsApiServices.utils;
       final distToDriverEnd = utils.calculateDistance(
         pointA: currentLoc,
-        pointB: driverEndLocation,
+        pointB: routeConfig.endLocation,
       );
 
       // If driver is less than 50m away from destination (arriving)
