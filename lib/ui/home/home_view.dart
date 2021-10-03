@@ -27,7 +27,7 @@ class HomeView extends HookConsumerWidget {
         builder: (context, constraints) {
           return Scaffold(
             extendBodyBehindAppBar: true,
-            drawer: const UserInfoDrawer(),
+            drawer: UserInfoDrawer(model: model),
             appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black),
               toolbarHeight: constraints.maxHeight * 0.08,

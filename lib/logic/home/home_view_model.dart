@@ -76,6 +76,12 @@ class HomeViewModel extends ViewModel {
     );
   }
 
+  void gotoEditUserInfoView() =>
+      AppRouter.instance.navigateTo(Routes.editUserInfoView);
+
+  void gotoDriverRegisterView() =>
+      AppRouter.instance.navigateTo(Routes.driverRegisterView);
+
   Future<void> signOut() async => await authService.signOutGoogle();
 
   void incRiderCount() => read(riderCountProvider).state++;

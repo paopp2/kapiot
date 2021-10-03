@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kapiot/logic/home/home_view_model.dart';
 
 class UserInfoDrawer extends StatelessWidget {
   const UserInfoDrawer({
     Key? key,
+    required this.model,
   }) : super(key: key);
+
+  final HomeViewModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class UserInfoDrawer extends StatelessWidget {
           const Text('-----IF NOT DRIVER-----'),
           TextButton(
             child: const Text('Register as Driver'),
-            onPressed: () {},
+            onPressed: model.gotoDriverRegisterView,
           ),
           const Text('-----IF DRIVER-----'),
           const Text('Rating: 4.5'),
@@ -29,7 +33,7 @@ class UserInfoDrawer extends StatelessWidget {
           const Spacer(),
           TextButton(
             child: const Text('Edit user info'),
-            onPressed: () {},
+            onPressed: model.gotoEditUserInfoView,
           ),
         ],
       ),
