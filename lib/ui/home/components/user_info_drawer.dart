@@ -15,6 +15,7 @@ class UserInfoDrawer extends StatelessWidget {
       child: Column(
         children: [
           const DrawerHeader(child: Text('Kapiot (Drawer Header)')),
+          const Text('Total CES: 69'),
           const Text('Email: email@usc.edu.ph'),
           const Text('Course and year: BS CPE 3'),
           const Text('Default start: Aldea Del Sol Bankal Lapu-lapu'),

@@ -7,9 +7,26 @@ class DriverRegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return const Scaffold(
+        return Scaffold(
           body: Center(
-            child: Text('driver register view'),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                TextField(
+                  decoration: InputDecoration(hintText: 'License plate'),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Car make and model (eg. Suzuki Ertiga)',
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Car type (Sedan, Pickup, Hatchback, SUV, etc.)',
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
