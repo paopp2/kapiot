@@ -15,12 +15,14 @@ class UserInfoDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isRider = false;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       child: Drawer(
         child: Stack(
           children: [
             Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   width: constraints.maxWidth * 0.85,
@@ -29,7 +31,7 @@ class UserInfoDrawer extends StatelessWidget {
                   color: Colors.purple,
                 ),
                 SizedBox(
-                  height: constraints.maxHeight * 0.075,
+                  height: constraints.maxHeight * 0.08,
                   child: Column(
                     children: [
                       Text(
@@ -41,7 +43,7 @@ class UserInfoDrawer extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '18105024',
+                        '18105024 | BS CpE 3',
                         style: GoogleFonts.poppins(
                           fontSize: constraints.maxWidth * 0.03,
                           color: const Color(0xff666666),
@@ -52,44 +54,53 @@ class UserInfoDrawer extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: constraints.maxWidth * 0.23,
-                      width: constraints.maxWidth * 0.23,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: const Color(0xffedd9e9),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            CupertinoIcons.star_fill,
-                            size: constraints.maxHeight * 0.05,
-                            color: Color(0xff574754),
-                          ),
-                          Text(
-                            '4.8',
-                            style: GoogleFonts.poppins(
-                              fontSize: constraints.maxHeight * 0.03,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xff574754),
+                    Visibility(
+                      visible: !isRider,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.025,
+                        ),
+                        height: constraints.maxWidth * 0.23,
+                        width: constraints.maxWidth * 0.23,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: const Color(0xffedd9e9),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              CupertinoIcons.star_fill,
+                              size: constraints.maxHeight * 0.05,
+                              color: Color(0xff574754),
                             ),
-                          ),
-                          Text(
-                            'Rating',
-                            style: GoogleFonts.poppins(
-                              height: 0.5,
-                              fontSize: constraints.maxHeight * 0.015,
-                              color: const Color(0xff997d94),
+                            Text(
+                              '4.8',
+                              style: GoogleFonts.poppins(
+                                fontSize: constraints.maxHeight * 0.03,
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xff574754),
+                              ),
                             ),
-                          ),
-                        ],
+                            Text(
+                              'Rating',
+                              style: GoogleFonts.poppins(
+                                height: 0.5,
+                                fontSize: constraints.maxHeight * 0.015,
+                                color: const Color(0xff997d94),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: constraints.maxWidth * 0.025,
+                      ),
                       height: constraints.maxWidth * 0.23,
                       width: constraints.maxWidth * 0.23,
                       decoration: BoxDecoration(
@@ -125,6 +136,9 @@ class UserInfoDrawer extends StatelessWidget {
                       ),
                     ),
                     Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: constraints.maxWidth * 0.025,
+                      ),
                       height: constraints.maxWidth * 0.23,
                       width: constraints.maxWidth * 0.23,
                       decoration: BoxDecoration(
@@ -136,7 +150,9 @@ class UserInfoDrawer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(
-                            CupertinoIcons.car_detailed,
+                            isRider
+                                ? CupertinoIcons.car_detailed
+                                : CupertinoIcons.group_solid,
                             size: constraints.maxHeight * 0.05,
                             color: Color(0xff574754),
                           ),
@@ -149,7 +165,7 @@ class UserInfoDrawer extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Kapiot Rides',
+                            isRider ? 'Kapiot Rides' : 'Passengers',
                             style: GoogleFonts.poppins(
                               height: 0.5,
                               fontSize: constraints.maxHeight * 0.015,
@@ -160,8 +176,131 @@ class UserInfoDrawer extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
-
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: constraints.maxHeight * 0.015,
+                  ),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                            vertical: constraints.maxHeight * 0.015,
+                          ),
+                          child: Text('Bookmarks'),
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth * 0.025,
+                              ),
+                              width: constraints.maxWidth * 0.35,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Home'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth * 0.025,
+                              ),
+                              width: constraints.maxWidth * 0.35,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Work'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth * 0.025,
+                              ),
+                              width: constraints.maxWidth * 0.35,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('School'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: constraints.maxHeight * 0.015,
+                  ),
+                  child: isRider
+                      ? Center(
+                          child: TextButton(
+                            child: const Text('Register as Driver'),
+                            onPressed: model.gotoDriverRegisterView,
+                          ),
+                        )
+                      : Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                  vertical: constraints.maxHeight * 0.015,
+                                ),
+                                child: Text('Vehicle'),
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: constraints.maxWidth * 0.025,
+                                    ),
+                                    height: constraints.maxHeight * 0.2,
+                                    width: constraints.maxWidth * 0.4,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.purple[200],
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Icon(CupertinoIcons.car),
+                                        Text('FAG 164'),
+                                        Text('Suzuki Ertiga'),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                ),
                 // cover photo
                 // edit profile inlay with cover photo
                 // profile photo
@@ -169,7 +308,6 @@ class UserInfoDrawer extends StatelessWidget {
                 // user id
                 // infoblock widget - rating, total number of passenger hitch, total ces points
                 // course and year
-
                 // const DrawerHeader(child: Text('Kapiot (Drawer Header)')),
                 // const Text('Total CES: 69'),
                 // const Text('Email: email@usc.edu.ph'),
@@ -183,7 +321,7 @@ class UserInfoDrawer extends StatelessWidget {
                 //   onPressed: model.gotoDriverRegisterView,
                 // ),
                 // const Text('-----IF DRIVER-----'),
-                // // const Text('Rating: 4.5'),
+                // const Text('Rating: 4.5'),
                 // const Text('License plate: ABC 069'),
                 // const Text('Car make and model: Suzuki Ertiga'),
                 // const Text('Car type: AUV'),
@@ -201,7 +339,10 @@ class UserInfoDrawer extends StatelessWidget {
                 radius: 60,
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
-                  backgroundColor: Colors.amber,
+                  // backgroundColor: Colors.amber,
+                  backgroundImage: NetworkImage(
+                    'https://i1.rgstatic.net/ii/profile.image/696306007810054-1543023697440_Q512/Rosana-Ferolin-2.jpg',
+                  ),
                   radius: 58,
                 ),
               ),
