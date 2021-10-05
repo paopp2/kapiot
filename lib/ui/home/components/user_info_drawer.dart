@@ -21,7 +21,7 @@ class UserInfoDrawer extends HookConsumerWidget {
     final username = currentUser.email!.split('@').first;
     // User is a student if username can be parsed as int (ID number)
     final isStudent = (int.tryParse(username) != null);
-    bool isRegisteredDriver = true;
+    bool isRegisteredDriver = false;
 
     return SizedBox(
       width: constraints.maxWidth * 0.85,
