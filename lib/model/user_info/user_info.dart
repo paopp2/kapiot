@@ -4,6 +4,7 @@ import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 part 'user_info.freezed.dart';
+part 'user_info.g.dart';
 
 @freezed
 class UserInfo with _$UserInfo {
@@ -17,4 +18,7 @@ class UserInfo with _$UserInfo {
   }) = _UserInfo;
 
   bool get isRegisteredDriver => (driverInfo != null);
+
+  factory UserInfo.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoFromJson(json);
 }

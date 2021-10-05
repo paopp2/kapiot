@@ -13,6 +13,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
+  return _UserInfo.fromJson(json);
+}
+
 /// @nodoc
 class _$UserInfoTearOff {
   const _$UserInfoTearOff();
@@ -31,6 +35,10 @@ class _$UserInfoTearOff {
       driverInfo: driverInfo,
     );
   }
+
+  UserInfo fromJson(Map<String, Object> json) {
+    return UserInfo.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -45,6 +53,7 @@ mixin _$UserInfo {
       throw _privateConstructorUsedError;
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserInfoCopyWith<UserInfo> get copyWith =>
       throw _privateConstructorUsedError;
@@ -175,7 +184,7 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   const _$_UserInfo(
       {required this.points,
@@ -184,6 +193,9 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
       required this.savedLocations,
       this.driverInfo})
       : super._();
+
+  factory _$_UserInfo.fromJson(Map<String, dynamic> json) =>
+      _$$_UserInfoFromJson(json);
 
   @override
   final double points;
@@ -244,6 +256,11 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   @override
   _$UserInfoCopyWith<_UserInfo> get copyWith =>
       __$UserInfoCopyWithImpl<_UserInfo>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserInfoToJson(this);
+  }
 }
 
 abstract class _UserInfo extends UserInfo {
@@ -254,6 +271,8 @@ abstract class _UserInfo extends UserInfo {
       required List<Map<String, KapiotLocation>> savedLocations,
       DriverInfo? driverInfo}) = _$_UserInfo;
   const _UserInfo._() : super._();
+
+  factory _UserInfo.fromJson(Map<String, dynamic> json) = _$_UserInfo.fromJson;
 
   @override
   double get points => throw _privateConstructorUsedError;
