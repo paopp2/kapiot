@@ -15,14 +15,13 @@ class UserInfoDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isRider = false;
+    bool isRegisteredDriver = true;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       child: Drawer(
         child: Stack(
           children: [
             Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   width: constraints.maxWidth * 0.85,
@@ -57,7 +56,7 @@ class UserInfoDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: !isRider,
+                      visible: isRegisteredDriver,
                       child: Container(
                         margin: EdgeInsets.symmetric(
                           horizontal: constraints.maxWidth * 0.025,
@@ -75,7 +74,7 @@ class UserInfoDrawer extends StatelessWidget {
                             Icon(
                               CupertinoIcons.star_fill,
                               size: constraints.maxHeight * 0.05,
-                              color: Color(0xff574754),
+                              color: const Color(0xff574754),
                             ),
                             Text(
                               '4.8',
@@ -114,7 +113,7 @@ class UserInfoDrawer extends StatelessWidget {
                           Icon(
                             Icons.hail_rounded,
                             size: constraints.maxHeight * 0.05,
-                            color: Color(0xff574754),
+                            color: const Color(0xff574754),
                           ),
                           Text(
                             '88',
@@ -150,11 +149,11 @@ class UserInfoDrawer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(
-                            isRider
-                                ? CupertinoIcons.car_detailed
-                                : CupertinoIcons.group_solid,
+                            isRegisteredDriver
+                                ? CupertinoIcons.group_solid
+                                : CupertinoIcons.car_detailed,
                             size: constraints.maxHeight * 0.05,
-                            color: Color(0xff574754),
+                            color: const Color(0xff574754),
                           ),
                           Text(
                             '23',
@@ -165,7 +164,7 @@ class UserInfoDrawer extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            isRider ? 'Kapiot Rides' : 'Passengers',
+                            isRegisteredDriver ? 'Passengers' : 'Kapiot Rides',
                             style: GoogleFonts.poppins(
                               height: 0.5,
                               fontSize: constraints.maxHeight * 0.015,
@@ -189,7 +188,7 @@ class UserInfoDrawer extends StatelessWidget {
                           margin: EdgeInsets.symmetric(
                             vertical: constraints.maxHeight * 0.015,
                           ),
-                          child: Text('Bookmarks'),
+                          child: const Text('Bookmarks'),
                         ),
                       ),
                       SingleChildScrollView(
@@ -251,14 +250,8 @@ class UserInfoDrawer extends StatelessWidget {
                   margin: EdgeInsets.only(
                     top: constraints.maxHeight * 0.015,
                   ),
-                  child: isRider
-                      ? Center(
-                          child: TextButton(
-                            child: const Text('Register as Driver'),
-                            onPressed: model.gotoDriverRegisterView,
-                          ),
-                        )
-                      : Column(
+                  child: isRegisteredDriver
+                      ? Column(
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
@@ -266,7 +259,7 @@ class UserInfoDrawer extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(
                                   vertical: constraints.maxHeight * 0.015,
                                 ),
-                                child: Text('Vehicle'),
+                                child: const Text('Vehicle'),
                               ),
                             ),
                             SingleChildScrollView(
@@ -299,37 +292,14 @@ class UserInfoDrawer extends StatelessWidget {
                               ),
                             ),
                           ],
+                        )
+                      : Center(
+                          child: TextButton(
+                            child: const Text('Register as Driver'),
+                            onPressed: model.gotoDriverRegisterView,
+                          ),
                         ),
                 ),
-                // cover photo
-                // edit profile inlay with cover photo
-                // profile photo
-                // complete name
-                // user id
-                // infoblock widget - rating, total number of passenger hitch, total ces points
-                // course and year
-                // const DrawerHeader(child: Text('Kapiot (Drawer Header)')),
-                // const Text('Total CES: 69'),
-                // const Text('Email: email@usc.edu.ph'),
-                // const Text('Course and year: BS CPE 3'),
-                // const Text('Default start: Aldea Del Sol Bankal Lapu-lapu'),
-                // const Text('Default end: Sunny Hills Talamban'),
-                // const SizedBox(height: 20),
-                // const Text('-----IF NOT DRIVER-----'),
-                // TextButton(
-                //   child: const Text('Register as Driver'),
-                //   onPressed: model.gotoDriverRegisterView,
-                // ),
-                // const Text('-----IF DRIVER-----'),
-                // const Text('Rating: 4.5'),
-                // const Text('License plate: ABC 069'),
-                // const Text('Car make and model: Suzuki Ertiga'),
-                // const Text('Car type: AUV'),
-                // const Spacer(),
-                // TextButton(
-                //   child: const Text('Edit user info'),
-                //   onPressed: model.gotoEditUserInfoView,
-                // ),
               ],
             ),
             Positioned(
