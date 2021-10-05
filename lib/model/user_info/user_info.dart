@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 part 'user_info.freezed.dart';
 part 'user_info.g.dart';
@@ -14,6 +15,8 @@ class UserInfo with _$UserInfo {
     required String course,
     required int year,
     required List<Map<String, KapiotLocation>> savedLocations,
+    required UserType userType,
+    required int rideCount,
     DriverInfo? driverInfo,
   }) = _UserInfo;
 

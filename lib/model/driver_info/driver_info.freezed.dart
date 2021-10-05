@@ -24,10 +24,12 @@ class _$DriverInfoTearOff {
   _DriverInfo call(
       {required String licensePlateNum,
       required List<Car> registeredCars,
+      required int passengerCount,
       double? rating}) {
     return _DriverInfo(
       licensePlateNum: licensePlateNum,
       registeredCars: registeredCars,
+      passengerCount: passengerCount,
       rating: rating,
     );
   }
@@ -44,6 +46,7 @@ const $DriverInfo = _$DriverInfoTearOff();
 mixin _$DriverInfo {
   String get licensePlateNum => throw _privateConstructorUsedError;
   List<Car> get registeredCars => throw _privateConstructorUsedError;
+  int get passengerCount => throw _privateConstructorUsedError;
   double? get rating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,7 +60,11 @@ abstract class $DriverInfoCopyWith<$Res> {
   factory $DriverInfoCopyWith(
           DriverInfo value, $Res Function(DriverInfo) then) =
       _$DriverInfoCopyWithImpl<$Res>;
-  $Res call({String licensePlateNum, List<Car> registeredCars, double? rating});
+  $Res call(
+      {String licensePlateNum,
+      List<Car> registeredCars,
+      int passengerCount,
+      double? rating});
 }
 
 /// @nodoc
@@ -72,6 +79,7 @@ class _$DriverInfoCopyWithImpl<$Res> implements $DriverInfoCopyWith<$Res> {
   $Res call({
     Object? licensePlateNum = freezed,
     Object? registeredCars = freezed,
+    Object? passengerCount = freezed,
     Object? rating = freezed,
   }) {
     return _then(_value.copyWith(
@@ -83,6 +91,10 @@ class _$DriverInfoCopyWithImpl<$Res> implements $DriverInfoCopyWith<$Res> {
           ? _value.registeredCars
           : registeredCars // ignore: cast_nullable_to_non_nullable
               as List<Car>,
+      passengerCount: passengerCount == freezed
+          ? _value.passengerCount
+          : passengerCount // ignore: cast_nullable_to_non_nullable
+              as int,
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -97,7 +109,11 @@ abstract class _$DriverInfoCopyWith<$Res> implements $DriverInfoCopyWith<$Res> {
           _DriverInfo value, $Res Function(_DriverInfo) then) =
       __$DriverInfoCopyWithImpl<$Res>;
   @override
-  $Res call({String licensePlateNum, List<Car> registeredCars, double? rating});
+  $Res call(
+      {String licensePlateNum,
+      List<Car> registeredCars,
+      int passengerCount,
+      double? rating});
 }
 
 /// @nodoc
@@ -114,6 +130,7 @@ class __$DriverInfoCopyWithImpl<$Res> extends _$DriverInfoCopyWithImpl<$Res>
   $Res call({
     Object? licensePlateNum = freezed,
     Object? registeredCars = freezed,
+    Object? passengerCount = freezed,
     Object? rating = freezed,
   }) {
     return _then(_DriverInfo(
@@ -125,6 +142,10 @@ class __$DriverInfoCopyWithImpl<$Res> extends _$DriverInfoCopyWithImpl<$Res>
           ? _value.registeredCars
           : registeredCars // ignore: cast_nullable_to_non_nullable
               as List<Car>,
+      passengerCount: passengerCount == freezed
+          ? _value.passengerCount
+          : passengerCount // ignore: cast_nullable_to_non_nullable
+              as int,
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -139,6 +160,7 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
   const _$_DriverInfo(
       {required this.licensePlateNum,
       required this.registeredCars,
+      required this.passengerCount,
       this.rating});
 
   factory _$_DriverInfo.fromJson(Map<String, dynamic> json) =>
@@ -149,11 +171,13 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
   @override
   final List<Car> registeredCars;
   @override
+  final int passengerCount;
+  @override
   final double? rating;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DriverInfo(licensePlateNum: $licensePlateNum, registeredCars: $registeredCars, rating: $rating)';
+    return 'DriverInfo(licensePlateNum: $licensePlateNum, registeredCars: $registeredCars, passengerCount: $passengerCount, rating: $rating)';
   }
 
   @override
@@ -163,6 +187,7 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
       ..add(DiagnosticsProperty('type', 'DriverInfo'))
       ..add(DiagnosticsProperty('licensePlateNum', licensePlateNum))
       ..add(DiagnosticsProperty('registeredCars', registeredCars))
+      ..add(DiagnosticsProperty('passengerCount', passengerCount))
       ..add(DiagnosticsProperty('rating', rating));
   }
 
@@ -176,6 +201,9 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
             (identical(other.registeredCars, registeredCars) ||
                 const DeepCollectionEquality()
                     .equals(other.registeredCars, registeredCars)) &&
+            (identical(other.passengerCount, passengerCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.passengerCount, passengerCount)) &&
             (identical(other.rating, rating) ||
                 const DeepCollectionEquality().equals(other.rating, rating)));
   }
@@ -185,6 +213,7 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(licensePlateNum) ^
       const DeepCollectionEquality().hash(registeredCars) ^
+      const DeepCollectionEquality().hash(passengerCount) ^
       const DeepCollectionEquality().hash(rating);
 
   @JsonKey(ignore: true)
@@ -202,6 +231,7 @@ abstract class _DriverInfo implements DriverInfo {
   const factory _DriverInfo(
       {required String licensePlateNum,
       required List<Car> registeredCars,
+      required int passengerCount,
       double? rating}) = _$_DriverInfo;
 
   factory _DriverInfo.fromJson(Map<String, dynamic> json) =
@@ -211,6 +241,8 @@ abstract class _DriverInfo implements DriverInfo {
   String get licensePlateNum => throw _privateConstructorUsedError;
   @override
   List<Car> get registeredCars => throw _privateConstructorUsedError;
+  @override
+  int get passengerCount => throw _privateConstructorUsedError;
   @override
   double? get rating => throw _privateConstructorUsedError;
   @override

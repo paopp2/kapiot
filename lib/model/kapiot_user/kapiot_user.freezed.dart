@@ -26,13 +26,15 @@ class _$KapiotUserTearOff {
       String? displayName,
       String? email,
       String? phoneNumber,
-      String? photoUrl}) {
+      String? photoUrl,
+      UserType? userType}) {
     return _KapiotUser(
       id: id,
       displayName: displayName,
       email: email,
       phoneNumber: phoneNumber,
       photoUrl: photoUrl,
+      userType: userType,
     );
   }
 
@@ -51,6 +53,7 @@ mixin _$KapiotUser {
   String? get email => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
+  UserType? get userType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,7 +71,8 @@ abstract class $KapiotUserCopyWith<$Res> {
       String? displayName,
       String? email,
       String? phoneNumber,
-      String? photoUrl});
+      String? photoUrl,
+      UserType? userType});
 }
 
 /// @nodoc
@@ -86,6 +90,7 @@ class _$KapiotUserCopyWithImpl<$Res> implements $KapiotUserCopyWith<$Res> {
     Object? email = freezed,
     Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
+    Object? userType = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -108,6 +113,10 @@ class _$KapiotUserCopyWithImpl<$Res> implements $KapiotUserCopyWith<$Res> {
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      userType: userType == freezed
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType?,
     ));
   }
 }
@@ -123,7 +132,8 @@ abstract class _$KapiotUserCopyWith<$Res> implements $KapiotUserCopyWith<$Res> {
       String? displayName,
       String? email,
       String? phoneNumber,
-      String? photoUrl});
+      String? photoUrl,
+      UserType? userType});
 }
 
 /// @nodoc
@@ -143,6 +153,7 @@ class __$KapiotUserCopyWithImpl<$Res> extends _$KapiotUserCopyWithImpl<$Res>
     Object? email = freezed,
     Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
+    Object? userType = freezed,
   }) {
     return _then(_KapiotUser(
       id: id == freezed
@@ -165,6 +176,10 @@ class __$KapiotUserCopyWithImpl<$Res> extends _$KapiotUserCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      userType: userType == freezed
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType?,
     ));
   }
 }
@@ -177,7 +192,8 @@ class _$_KapiotUser with DiagnosticableTreeMixin implements _KapiotUser {
       this.displayName,
       this.email,
       this.phoneNumber,
-      this.photoUrl});
+      this.photoUrl,
+      this.userType});
 
   factory _$_KapiotUser.fromJson(Map<String, dynamic> json) =>
       _$$_KapiotUserFromJson(json);
@@ -192,10 +208,12 @@ class _$_KapiotUser with DiagnosticableTreeMixin implements _KapiotUser {
   final String? phoneNumber;
   @override
   final String? photoUrl;
+  @override
+  final UserType? userType;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'KapiotUser(id: $id, displayName: $displayName, email: $email, phoneNumber: $phoneNumber, photoUrl: $photoUrl)';
+    return 'KapiotUser(id: $id, displayName: $displayName, email: $email, phoneNumber: $phoneNumber, photoUrl: $photoUrl, userType: $userType)';
   }
 
   @override
@@ -207,7 +225,8 @@ class _$_KapiotUser with DiagnosticableTreeMixin implements _KapiotUser {
       ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
-      ..add(DiagnosticsProperty('photoUrl', photoUrl));
+      ..add(DiagnosticsProperty('photoUrl', photoUrl))
+      ..add(DiagnosticsProperty('userType', userType));
   }
 
   @override
@@ -226,7 +245,10 @@ class _$_KapiotUser with DiagnosticableTreeMixin implements _KapiotUser {
                     .equals(other.phoneNumber, phoneNumber)) &&
             (identical(other.photoUrl, photoUrl) ||
                 const DeepCollectionEquality()
-                    .equals(other.photoUrl, photoUrl)));
+                    .equals(other.photoUrl, photoUrl)) &&
+            (identical(other.userType, userType) ||
+                const DeepCollectionEquality()
+                    .equals(other.userType, userType)));
   }
 
   @override
@@ -236,7 +258,8 @@ class _$_KapiotUser with DiagnosticableTreeMixin implements _KapiotUser {
       const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
-      const DeepCollectionEquality().hash(photoUrl);
+      const DeepCollectionEquality().hash(photoUrl) ^
+      const DeepCollectionEquality().hash(userType);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +278,8 @@ abstract class _KapiotUser implements KapiotUser {
       String? displayName,
       String? email,
       String? phoneNumber,
-      String? photoUrl}) = _$_KapiotUser;
+      String? photoUrl,
+      UserType? userType}) = _$_KapiotUser;
 
   factory _KapiotUser.fromJson(Map<String, dynamic> json) =
       _$_KapiotUser.fromJson;
@@ -270,6 +294,8 @@ abstract class _KapiotUser implements KapiotUser {
   String? get phoneNumber => throw _privateConstructorUsedError;
   @override
   String? get photoUrl => throw _privateConstructorUsedError;
+  @override
+  UserType? get userType => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$KapiotUserCopyWith<_KapiotUser> get copyWith =>

@@ -26,12 +26,16 @@ class _$UserInfoTearOff {
       required String course,
       required int year,
       required List<Map<String, KapiotLocation>> savedLocations,
+      required UserType userType,
+      required int rideCount,
       DriverInfo? driverInfo}) {
     return _UserInfo(
       points: points,
       course: course,
       year: year,
       savedLocations: savedLocations,
+      userType: userType,
+      rideCount: rideCount,
       driverInfo: driverInfo,
     );
   }
@@ -51,6 +55,8 @@ mixin _$UserInfo {
   int get year => throw _privateConstructorUsedError;
   List<Map<String, KapiotLocation>> get savedLocations =>
       throw _privateConstructorUsedError;
+  UserType get userType => throw _privateConstructorUsedError;
+  int get rideCount => throw _privateConstructorUsedError;
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,6 +74,8 @@ abstract class $UserInfoCopyWith<$Res> {
       String course,
       int year,
       List<Map<String, KapiotLocation>> savedLocations,
+      UserType userType,
+      int rideCount,
       DriverInfo? driverInfo});
 
   $DriverInfoCopyWith<$Res>? get driverInfo;
@@ -87,6 +95,8 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
     Object? course = freezed,
     Object? year = freezed,
     Object? savedLocations = freezed,
+    Object? userType = freezed,
+    Object? rideCount = freezed,
     Object? driverInfo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -106,6 +116,14 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
           ? _value.savedLocations
           : savedLocations // ignore: cast_nullable_to_non_nullable
               as List<Map<String, KapiotLocation>>,
+      userType: userType == freezed
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType,
+      rideCount: rideCount == freezed
+          ? _value.rideCount
+          : rideCount // ignore: cast_nullable_to_non_nullable
+              as int,
       driverInfo: driverInfo == freezed
           ? _value.driverInfo
           : driverInfo // ignore: cast_nullable_to_non_nullable
@@ -135,6 +153,8 @@ abstract class _$UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res> {
       String course,
       int year,
       List<Map<String, KapiotLocation>> savedLocations,
+      UserType userType,
+      int rideCount,
       DriverInfo? driverInfo});
 
   @override
@@ -156,6 +176,8 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
     Object? course = freezed,
     Object? year = freezed,
     Object? savedLocations = freezed,
+    Object? userType = freezed,
+    Object? rideCount = freezed,
     Object? driverInfo = freezed,
   }) {
     return _then(_UserInfo(
@@ -175,6 +197,14 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
           ? _value.savedLocations
           : savedLocations // ignore: cast_nullable_to_non_nullable
               as List<Map<String, KapiotLocation>>,
+      userType: userType == freezed
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType,
+      rideCount: rideCount == freezed
+          ? _value.rideCount
+          : rideCount // ignore: cast_nullable_to_non_nullable
+              as int,
       driverInfo: driverInfo == freezed
           ? _value.driverInfo
           : driverInfo // ignore: cast_nullable_to_non_nullable
@@ -191,6 +221,8 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
       required this.course,
       required this.year,
       required this.savedLocations,
+      required this.userType,
+      required this.rideCount,
       this.driverInfo})
       : super._();
 
@@ -206,11 +238,15 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   @override
   final List<Map<String, KapiotLocation>> savedLocations;
   @override
+  final UserType userType;
+  @override
+  final int rideCount;
+  @override
   final DriverInfo? driverInfo;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfo(points: $points, course: $course, year: $year, savedLocations: $savedLocations, driverInfo: $driverInfo)';
+    return 'UserInfo(points: $points, course: $course, year: $year, savedLocations: $savedLocations, userType: $userType, rideCount: $rideCount, driverInfo: $driverInfo)';
   }
 
   @override
@@ -222,6 +258,8 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('course', course))
       ..add(DiagnosticsProperty('year', year))
       ..add(DiagnosticsProperty('savedLocations', savedLocations))
+      ..add(DiagnosticsProperty('userType', userType))
+      ..add(DiagnosticsProperty('rideCount', rideCount))
       ..add(DiagnosticsProperty('driverInfo', driverInfo));
   }
 
@@ -238,6 +276,12 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
             (identical(other.savedLocations, savedLocations) ||
                 const DeepCollectionEquality()
                     .equals(other.savedLocations, savedLocations)) &&
+            (identical(other.userType, userType) ||
+                const DeepCollectionEquality()
+                    .equals(other.userType, userType)) &&
+            (identical(other.rideCount, rideCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.rideCount, rideCount)) &&
             (identical(other.driverInfo, driverInfo) ||
                 const DeepCollectionEquality()
                     .equals(other.driverInfo, driverInfo)));
@@ -250,6 +294,8 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(course) ^
       const DeepCollectionEquality().hash(year) ^
       const DeepCollectionEquality().hash(savedLocations) ^
+      const DeepCollectionEquality().hash(userType) ^
+      const DeepCollectionEquality().hash(rideCount) ^
       const DeepCollectionEquality().hash(driverInfo);
 
   @JsonKey(ignore: true)
@@ -269,6 +315,8 @@ abstract class _UserInfo extends UserInfo {
       required String course,
       required int year,
       required List<Map<String, KapiotLocation>> savedLocations,
+      required UserType userType,
+      required int rideCount,
       DriverInfo? driverInfo}) = _$_UserInfo;
   const _UserInfo._() : super._();
 
@@ -283,6 +331,10 @@ abstract class _UserInfo extends UserInfo {
   @override
   List<Map<String, KapiotLocation>> get savedLocations =>
       throw _privateConstructorUsedError;
+  @override
+  UserType get userType => throw _privateConstructorUsedError;
+  @override
+  int get rideCount => throw _privateConstructorUsedError;
   @override
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
   @override
