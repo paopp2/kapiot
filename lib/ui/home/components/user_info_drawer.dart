@@ -19,6 +19,8 @@ class UserInfoDrawer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider)!;
     final username = currentUser.email!.split('@').first;
+    // User is a student if username can be parsed as int (ID number)
+    final isStudent = (int.tryParse(username) != null);
     bool isRegisteredDriver = true;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
@@ -181,6 +183,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                   ],
                 ),
                 Container(
+                  height: constraints.maxHeight * 0.11,
                   margin: EdgeInsets.only(
                     top: constraints.maxHeight * 0.015,
                   ),
@@ -195,9 +198,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                           child: const Text('Bookmarks'),
                         ),
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
+                      Expanded(
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
                           children: [
                             Container(
                               margin: EdgeInsets.symmetric(
@@ -221,7 +224,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                               width: constraints.maxWidth * 0.35,
                               child: ElevatedButton(
                                 onPressed: () {},
-                                child: const Text('Work'),
+                                child: Text(isStudent ? 'School' : 'Work'),
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(24),
@@ -236,8 +239,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                               width: constraints.maxWidth * 0.35,
                               child: ElevatedButton(
                                 onPressed: () {},
-                                child: const Text('School'),
+                                child: const Icon(Icons.add),
                                 style: ElevatedButton.styleFrom(
+                                  primary: Colors.grey[400],
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(24),
                                   ),
