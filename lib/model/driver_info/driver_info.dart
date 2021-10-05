@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:kapiot/model/car/car.dart';
 
 part 'driver_info.freezed.dart';
+part 'driver_info.g.dart';
 
 @freezed
 class DriverInfo with _$DriverInfo {
@@ -12,4 +13,7 @@ class DriverInfo with _$DriverInfo {
     required List<Car> registeredCars,
     double? rating,
   }) = _DriverInfo;
+
+  factory DriverInfo.fromJson(Map<String, dynamic> json) =>
+      _$DriverInfoFromJson(json);
 }

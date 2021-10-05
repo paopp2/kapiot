@@ -13,6 +13,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+DriverInfo _$DriverInfoFromJson(Map<String, dynamic> json) {
+  return _DriverInfo.fromJson(json);
+}
+
 /// @nodoc
 class _$DriverInfoTearOff {
   const _$DriverInfoTearOff();
@@ -27,6 +31,10 @@ class _$DriverInfoTearOff {
       rating: rating,
     );
   }
+
+  DriverInfo fromJson(Map<String, Object> json) {
+    return DriverInfo.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -38,6 +46,7 @@ mixin _$DriverInfo {
   List<Car> get registeredCars => throw _privateConstructorUsedError;
   double? get rating => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $DriverInfoCopyWith<DriverInfo> get copyWith =>
       throw _privateConstructorUsedError;
@@ -125,12 +134,15 @@ class __$DriverInfoCopyWithImpl<$Res> extends _$DriverInfoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
   const _$_DriverInfo(
       {required this.licensePlateNum,
       required this.registeredCars,
       this.rating});
+
+  factory _$_DriverInfo.fromJson(Map<String, dynamic> json) =>
+      _$$_DriverInfoFromJson(json);
 
   @override
   final String licensePlateNum;
@@ -179,6 +191,11 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
   @override
   _$DriverInfoCopyWith<_DriverInfo> get copyWith =>
       __$DriverInfoCopyWithImpl<_DriverInfo>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DriverInfoToJson(this);
+  }
 }
 
 abstract class _DriverInfo implements DriverInfo {
@@ -186,6 +203,9 @@ abstract class _DriverInfo implements DriverInfo {
       {required String licensePlateNum,
       required List<Car> registeredCars,
       double? rating}) = _$_DriverInfo;
+
+  factory _DriverInfo.fromJson(Map<String, dynamic> json) =
+      _$_DriverInfo.fromJson;
 
   @override
   String get licensePlateNum => throw _privateConstructorUsedError;
