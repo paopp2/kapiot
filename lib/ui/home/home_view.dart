@@ -7,6 +7,7 @@ import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/ui/home/components/route_config_panel/route_config_panel.dart';
 import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 import 'components/home_view_map.dart';
+import 'components/user_info_drawer.dart';
 
 class HomeView extends HookConsumerWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -26,7 +27,9 @@ class HomeView extends HookConsumerWidget {
         builder: (context, constraints) {
           return Scaffold(
             extendBodyBehindAppBar: true,
+            drawer: UserInfoDrawer(model: model, constraints: constraints),
             appBar: AppBar(
+              iconTheme: const IconThemeData(color: Colors.black),
               toolbarHeight: constraints.maxHeight * 0.08,
               title: const Text(
                 'kapiot',
@@ -52,7 +55,6 @@ class HomeView extends HookConsumerWidget {
                   child: IconButton(
                     icon: const Icon(
                       Icons.logout,
-                      color: Colors.black,
                       size: 25,
                     ),
                     onPressed: model.signOut,
