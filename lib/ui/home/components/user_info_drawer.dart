@@ -22,6 +22,7 @@ class UserInfoDrawer extends HookConsumerWidget {
     // User is a student if username can be parsed as int (ID number)
     final isStudent = (int.tryParse(username) != null);
     bool isRegisteredDriver = true;
+
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       child: Drawer(
@@ -270,11 +271,10 @@ class UserInfoDrawer extends HookConsumerWidget {
                                 child: const Text('Vehicle'),
                               ),
                             ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                            SizedBox(
+                              height: constraints.maxHeight * 0.22,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
                                 children: [
                                   Container(
                                     margin: EdgeInsets.symmetric(
@@ -296,9 +296,21 @@ class UserInfoDrawer extends HookConsumerWidget {
                                       ],
                                     ),
                                   ),
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: constraints.maxWidth * 0.025,
+                                    ),
+                                    height: constraints.maxHeight * 0.2,
+                                    width: constraints.maxWidth * 0.4,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.grey[400],
+                                    ),
+                                    child: const Icon(Icons.add),
+                                  ),
                                 ],
                               ),
-                            ),
+                            )
                           ],
                         )
                       : Center(
