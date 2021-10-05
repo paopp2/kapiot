@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 
-class UserInfoDrawer extends StatelessWidget {
+class UserInfoDrawer extends HookConsumerWidget {
   const UserInfoDrawer({
     Key? key,
     required this.model,
@@ -14,7 +16,9 @@ class UserInfoDrawer extends StatelessWidget {
   final BoxConstraints constraints;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentUserProvider)!;
+    final username = currentUser.email!.split('@').first;
     bool isRegisteredDriver = true;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
@@ -34,7 +38,7 @@ class UserInfoDrawer extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Christian Benedict C. Gonzales',
+                        currentUser.displayName!,
                         style: GoogleFonts.poppins(
                           fontSize: constraints.maxWidth * 0.045,
                           color: const Color(0xff333333),
@@ -42,7 +46,7 @@ class UserInfoDrawer extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '18105024 | BS CpE 3',
+                        '$username | BS CPE 3',
                         style: GoogleFonts.poppins(
                           fontSize: constraints.maxWidth * 0.03,
                           color: const Color(0xff666666),
@@ -305,14 +309,11 @@ class UserInfoDrawer extends StatelessWidget {
             Positioned(
               top: (constraints.maxHeight * 0.25) - 60,
               left: ((constraints.maxWidth * 0.85) / 2) - 60,
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 60,
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
-                  // backgroundColor: Colors.amber,
-                  backgroundImage: NetworkImage(
-                    'https://i1.rgstatic.net/ii/profile.image/696306007810054-1543023697440_Q512/Rosana-Ferolin-2.jpg',
-                  ),
+                  backgroundImage: NetworkImage(currentUser.photoUrl!),
                   radius: 58,
                 ),
               ),
