@@ -21,7 +21,7 @@ class UserInfoDrawer extends HookConsumerWidget {
     final username = currentUser.email!.split('@').first;
     // User is a student if username can be parsed as int (ID number)
     final isStudent = (int.tryParse(username) != null);
-    bool isRegisteredDriver = false;
+    bool isRegisteredDriver = true;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       child: Drawer(
@@ -29,7 +29,7 @@ class UserInfoDrawer extends HookConsumerWidget {
           children: [
             Container(
               width: constraints.maxWidth * 0.85,
-              height: constraints.maxHeight * 0.25,
+              height: constraints.maxHeight * 0.3,
               color: const Color(0xffdbb3d4),
               padding: EdgeInsets.only(
                 left: constraints.maxWidth * 0.05,
@@ -105,13 +105,14 @@ class UserInfoDrawer extends HookConsumerWidget {
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(
                             vertical: constraints.maxHeight * 0.025,
+                            horizontal: constraints.maxWidth * 0.025,
                           ),
                           children: [
                             Container(
                               margin: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.025,
                               ),
-                              width: constraints.maxWidth * 0.35,
+                              width: constraints.maxWidth * 0.3,
                               child: ElevatedButton(
                                 onPressed: () {},
                                 child: const Text('Home'),
@@ -126,7 +127,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                               margin: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.025,
                               ),
-                              width: constraints.maxWidth * 0.35,
+                              width: constraints.maxWidth * 0.3,
                               child: ElevatedButton(
                                 onPressed: () {},
                                 child: Text(isStudent ? 'School' : 'Work'),
@@ -141,7 +142,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                               margin: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.025,
                               ),
-                              width: constraints.maxWidth * 0.35,
+                              width: constraints.maxWidth * 0.3,
                               child: ElevatedButton(
                                 onPressed: () {},
                                 child: const Icon(Icons.add),
