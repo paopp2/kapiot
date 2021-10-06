@@ -22,315 +22,206 @@ class UserInfoDrawer extends HookConsumerWidget {
     // User is a student if username can be parsed as int (ID number)
     final isStudent = (int.tryParse(username) != null);
     bool isRegisteredDriver = false;
-
     return SizedBox(
       width: constraints.maxWidth * 0.85,
+      height: constraints.maxHeight,
       child: Drawer(
-        child: Stack(
+        child: Column(
           children: [
-            Column(
-              children: [
-                Container(
-                  width: constraints.maxWidth * 0.85,
-                  height: constraints.maxHeight * 0.25,
-                  margin: const EdgeInsets.only(bottom: 60),
-                  color: Colors.purple,
-                ),
-                SizedBox(
-                  height: constraints.maxHeight * 0.08,
-                  child: Column(
-                    children: [
-                      Text(
-                        currentUser.displayName!,
-                        style: GoogleFonts.poppins(
-                          fontSize: constraints.maxWidth * 0.045,
-                          color: const Color(0xff333333),
-                          fontWeight: FontWeight.w500,
+            Container(
+              width: constraints.maxWidth * 0.85,
+              height: constraints.maxHeight * 0.3,
+              color: const Color(0xffdbb3d4),
+              padding: EdgeInsets.only(
+                left: constraints.maxWidth * 0.05,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      bottom: constraints.maxHeight * 0.015,
+                    ),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 53,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 50,
+                        child: CircleAvatar(
+                          radius: 48,
+                          backgroundImage: NetworkImage(currentUser.photoUrl!),
                         ),
                       ),
-                      Text(
-                        '$username | BS CPE 3',
-                        style: GoogleFonts.poppins(
-                          fontSize: constraints.maxWidth * 0.03,
-                          color: const Color(0xff666666),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  Text(
+                    currentUser.displayName!,
+                    style: GoogleFonts.poppins(
+                      fontSize: constraints.maxWidth * 0.045,
+                      color: const Color(0xff333333),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    username,
+                    style: GoogleFonts.poppins(
+                      fontSize: constraints.maxWidth * 0.03,
+                      color: const Color(0xff666666),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: constraints.maxWidth * 0.85,
+              height: constraints.maxHeight * 0.7,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Visibility(
                       visible: isRegisteredDriver,
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.025,
+                      child: const ListTile(
+                        title: Text('Rating'),
+                        leading: Icon(
+                          Icons.star,
+                          color: Colors.amber,
                         ),
-                        height: constraints.maxWidth * 0.23,
-                        width: constraints.maxWidth * 0.23,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: const Color(0xffedd9e9),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.star_fill,
-                              size: constraints.maxHeight * 0.05,
-                              color: const Color(0xff574754),
-                            ),
-                            Text(
-                              '4.8',
-                              style: GoogleFonts.poppins(
-                                fontSize: constraints.maxHeight * 0.03,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xff574754),
-                              ),
-                            ),
-                            Text(
-                              'Rating',
-                              style: GoogleFonts.poppins(
-                                height: 0.5,
-                                fontSize: constraints.maxHeight * 0.015,
-                                color: const Color(0xff997d94),
-                              ),
-                            ),
-                          ],
-                        ),
+                        trailing: Text('4.8'),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: constraints.maxWidth * 0.025,
-                      ),
-                      height: constraints.maxWidth * 0.23,
-                      width: constraints.maxWidth * 0.23,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: const Color(0xffedd9e9),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.hail_rounded,
-                            size: constraints.maxHeight * 0.05,
-                            color: const Color(0xff574754),
-                          ),
-                          Text(
-                            '88',
-                            style: GoogleFonts.poppins(
-                              fontSize: constraints.maxHeight * 0.03,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xff574754),
-                            ),
-                          ),
-                          Text(
-                            'Points',
-                            style: GoogleFonts.poppins(
-                              height: 0.5,
-                              fontSize: constraints.maxHeight * 0.015,
-                              color: const Color(0xff997d94),
-                            ),
-                          ),
-                        ],
-                      ),
+                    const ListTile(
+                      title: Text('Points'),
+                      leading: Icon(Icons.score),
+                      trailing: Text('58'),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: constraints.maxWidth * 0.025,
-                      ),
-                      height: constraints.maxWidth * 0.23,
-                      width: constraints.maxWidth * 0.23,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: const Color(0xffedd9e9),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            isRegisteredDriver
-                                ? CupertinoIcons.group_solid
-                                : CupertinoIcons.car_detailed,
-                            size: constraints.maxHeight * 0.05,
-                            color: const Color(0xff574754),
-                          ),
-                          Text(
-                            '23',
-                            style: GoogleFonts.poppins(
-                              fontSize: constraints.maxHeight * 0.03,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xff574754),
+                    ExpansionTile(
+                      title: const Text('My Locations'),
+                      leading: const Icon(Icons.map),
+                      children: [
+                        SizedBox(
+                          height: constraints.maxHeight * 0.1,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.symmetric(
+                              vertical: constraints.maxHeight * 0.025,
+                              horizontal: constraints.maxWidth * 0.025,
                             ),
-                          ),
-                          Text(
-                            isRegisteredDriver ? 'Passengers' : 'Kapiot Rides',
-                            style: GoogleFonts.poppins(
-                              height: 0.5,
-                              fontSize: constraints.maxHeight * 0.015,
-                              color: const Color(0xff997d94),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.11,
-                  margin: EdgeInsets.only(
-                    top: constraints.maxHeight * 0.015,
-                  ),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                            vertical: constraints.maxHeight * 0.015,
-                          ),
-                          child: const Text('Bookmarks'),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: constraints.maxWidth * 0.025,
-                              ),
-                              width: constraints.maxWidth * 0.35,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('Home'),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: constraints.maxWidth * 0.025,
-                              ),
-                              width: constraints.maxWidth * 0.35,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Text(isStudent ? 'School' : 'Work'),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: constraints.maxWidth * 0.025,
-                              ),
-                              width: constraints.maxWidth * 0.35,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Icon(Icons.add),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.grey[400],
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: constraints.maxHeight * 0.015,
-                  ),
-                  child: isRegisteredDriver
-                      ? Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
+                            children: [
+                              Container(
                                 margin: EdgeInsets.symmetric(
-                                  vertical: constraints.maxHeight * 0.015,
+                                  horizontal: constraints.maxWidth * 0.025,
                                 ),
-                                child: const Text('Vehicle'),
+                                width: constraints.maxWidth * 0.3,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: const Text('Home'),
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: constraints.maxWidth * 0.025,
+                                ),
+                                width: constraints.maxWidth * 0.3,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text(isStudent ? 'School' : 'Work'),
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: constraints.maxWidth * 0.025,
+                                ),
+                                width: constraints.maxWidth * 0.3,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: const Icon(Icons.add),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.grey[400],
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    isRegisteredDriver
+                        ? ExpansionTile(
+                            leading: const Icon(Icons.drive_eta),
+                            title: const Text(
+                              'Owned Cars',
+                            ),
+                            children: [
+                              SizedBox(
+                                height: constraints.maxHeight * 0.25,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal:
+                                              constraints.maxWidth * 0.025,
+                                        ),
+                                        height: constraints.maxHeight * 0.2,
+                                        width: constraints.maxWidth * 0.3,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.purple[200],
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: const [
+                                            Icon(CupertinoIcons.car),
+                                            Text('FAG 164'),
+                                            Text('Suzuki Ertiga'),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : GestureDetector(
+                            onTap: model.gotoDriverRegisterView,
+                            child: const ListTile(
+                              leading: Icon(Icons.drive_eta),
+                              title: Text(
+                                'Register as Driver',
+                                style: TextStyle(color: Colors.blue),
                               ),
                             ),
-                            SizedBox(
-                              height: constraints.maxHeight * 0.22,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: constraints.maxWidth * 0.025,
-                                    ),
-                                    height: constraints.maxHeight * 0.2,
-                                    width: constraints.maxWidth * 0.4,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: Colors.purple[200],
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Icon(CupertinoIcons.car),
-                                        Text('FAG 164'),
-                                        Text('Suzuki Ertiga'),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: constraints.maxWidth * 0.025,
-                                    ),
-                                    height: constraints.maxHeight * 0.2,
-                                    width: constraints.maxWidth * 0.4,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: Colors.grey[400],
-                                    ),
-                                    child: const Icon(Icons.add),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        )
-                      : Center(
-                          child: TextButton(
-                            child: const Text('Register as Driver'),
-                            onPressed: model.gotoDriverRegisterView,
                           ),
-                        ),
-                ),
-              ],
-            ),
-            Positioned(
-              top: (constraints.maxHeight * 0.25) - 60,
-              left: ((constraints.maxWidth * 0.85) / 2) - 60,
-              child: CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.white,
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(currentUser.photoUrl!),
-                  radius: 58,
+                    GestureDetector(
+                      onTap: model.signOut,
+                      child: const ListTile(
+                        title: Text('Logout'),
+                        leading: Icon(Icons.logout_outlined),
+                      ),
+                    )
+                  ],
                 ),
               ),
             )
