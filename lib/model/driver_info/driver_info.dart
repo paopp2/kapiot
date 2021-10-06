@@ -9,9 +9,7 @@ part 'driver_info.g.dart';
 @freezed
 class DriverInfo with _$DriverInfo {
   const factory DriverInfo({
-    required String licensePlateNum,
     required List<Car> registeredCars,
-    required int passengerCount,
     double? rating,
   }) = _DriverInfo;
 

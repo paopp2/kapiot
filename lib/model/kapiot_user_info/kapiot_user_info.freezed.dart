@@ -25,13 +25,11 @@ class _$KapiotUserInfoTearOff {
       {required double points,
       required List<Map<String, KapiotLocation>> savedLocations,
       required UserType userType,
-      required int rideCount,
       DriverInfo? driverInfo}) {
     return _KapiotUserInfo(
       points: points,
       savedLocations: savedLocations,
       userType: userType,
-      rideCount: rideCount,
       driverInfo: driverInfo,
     );
   }
@@ -50,7 +48,6 @@ mixin _$KapiotUserInfo {
   List<Map<String, KapiotLocation>> get savedLocations =>
       throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
-  int get rideCount => throw _privateConstructorUsedError;
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,7 +65,6 @@ abstract class $KapiotUserInfoCopyWith<$Res> {
       {double points,
       List<Map<String, KapiotLocation>> savedLocations,
       UserType userType,
-      int rideCount,
       DriverInfo? driverInfo});
 
   $DriverInfoCopyWith<$Res>? get driverInfo;
@@ -88,7 +84,6 @@ class _$KapiotUserInfoCopyWithImpl<$Res>
     Object? points = freezed,
     Object? savedLocations = freezed,
     Object? userType = freezed,
-    Object? rideCount = freezed,
     Object? driverInfo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,10 +99,6 @@ class _$KapiotUserInfoCopyWithImpl<$Res>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-      rideCount: rideCount == freezed
-          ? _value.rideCount
-          : rideCount // ignore: cast_nullable_to_non_nullable
-              as int,
       driverInfo: driverInfo == freezed
           ? _value.driverInfo
           : driverInfo // ignore: cast_nullable_to_non_nullable
@@ -138,7 +129,6 @@ abstract class _$KapiotUserInfoCopyWith<$Res>
       {double points,
       List<Map<String, KapiotLocation>> savedLocations,
       UserType userType,
-      int rideCount,
       DriverInfo? driverInfo});
 
   @override
@@ -161,7 +151,6 @@ class __$KapiotUserInfoCopyWithImpl<$Res>
     Object? points = freezed,
     Object? savedLocations = freezed,
     Object? userType = freezed,
-    Object? rideCount = freezed,
     Object? driverInfo = freezed,
   }) {
     return _then(_KapiotUserInfo(
@@ -177,10 +166,6 @@ class __$KapiotUserInfoCopyWithImpl<$Res>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-      rideCount: rideCount == freezed
-          ? _value.rideCount
-          : rideCount // ignore: cast_nullable_to_non_nullable
-              as int,
       driverInfo: driverInfo == freezed
           ? _value.driverInfo
           : driverInfo // ignore: cast_nullable_to_non_nullable
@@ -196,7 +181,6 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
       {required this.points,
       required this.savedLocations,
       required this.userType,
-      required this.rideCount,
       this.driverInfo})
       : super._();
 
@@ -210,13 +194,11 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
   @override
   final UserType userType;
   @override
-  final int rideCount;
-  @override
   final DriverInfo? driverInfo;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'KapiotUserInfo(points: $points, savedLocations: $savedLocations, userType: $userType, rideCount: $rideCount, driverInfo: $driverInfo)';
+    return 'KapiotUserInfo(points: $points, savedLocations: $savedLocations, userType: $userType, driverInfo: $driverInfo)';
   }
 
   @override
@@ -227,7 +209,6 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('points', points))
       ..add(DiagnosticsProperty('savedLocations', savedLocations))
       ..add(DiagnosticsProperty('userType', userType))
-      ..add(DiagnosticsProperty('rideCount', rideCount))
       ..add(DiagnosticsProperty('driverInfo', driverInfo));
   }
 
@@ -243,9 +224,6 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
             (identical(other.userType, userType) ||
                 const DeepCollectionEquality()
                     .equals(other.userType, userType)) &&
-            (identical(other.rideCount, rideCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.rideCount, rideCount)) &&
             (identical(other.driverInfo, driverInfo) ||
                 const DeepCollectionEquality()
                     .equals(other.driverInfo, driverInfo)));
@@ -257,7 +235,6 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(points) ^
       const DeepCollectionEquality().hash(savedLocations) ^
       const DeepCollectionEquality().hash(userType) ^
-      const DeepCollectionEquality().hash(rideCount) ^
       const DeepCollectionEquality().hash(driverInfo);
 
   @JsonKey(ignore: true)
@@ -276,7 +253,6 @@ abstract class _KapiotUserInfo extends KapiotUserInfo {
       {required double points,
       required List<Map<String, KapiotLocation>> savedLocations,
       required UserType userType,
-      required int rideCount,
       DriverInfo? driverInfo}) = _$_KapiotUserInfo;
   const _KapiotUserInfo._() : super._();
 
@@ -290,8 +266,6 @@ abstract class _KapiotUserInfo extends KapiotUserInfo {
       throw _privateConstructorUsedError;
   @override
   UserType get userType => throw _privateConstructorUsedError;
-  @override
-  int get rideCount => throw _privateConstructorUsedError;
   @override
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
   @override

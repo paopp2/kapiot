@@ -16,7 +16,6 @@ _$_KapiotUserInfo _$$_KapiotUserInfoFromJson(Map<String, dynamic> json) =>
               ))
           .toList(),
       userType: _$enumDecode(_$UserTypeEnumMap, json['userType']),
-      rideCount: json['rideCount'] as int,
       driverInfo: json['driverInfo'] == null
           ? null
           : DriverInfo.fromJson(json['driverInfo'] as Map<String, dynamic>),
@@ -29,7 +28,6 @@ Map<String, dynamic> _$$_KapiotUserInfoToJson(_$_KapiotUserInfo instance) =>
           .map((e) => e.map((k, e) => MapEntry(k, e.toJson())))
           .toList(),
       'userType': _$UserTypeEnumMap[instance.userType],
-      'rideCount': instance.rideCount,
       'driverInfo': instance.driverInfo?.toJson(),
     };
 

@@ -14,7 +14,6 @@ class KapiotUserInfo with _$KapiotUserInfo {
     required double points,
     required List<Map<String, KapiotLocation>> savedLocations,
     required UserType userType,
-    required int rideCount,
     DriverInfo? driverInfo,
   }) = _KapiotUserInfo;
 
