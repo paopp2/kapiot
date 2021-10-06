@@ -123,6 +123,7 @@ class VehicleType extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        model.setCarType(carType);
         print(carType);
         print('highlight ' + vehicleLabel);
       },
