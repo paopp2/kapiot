@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
 
-class PortalView extends StatelessWidget {
+class PortalView extends HookConsumerWidget {
   const PortalView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final model = PortalViewModel();
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
