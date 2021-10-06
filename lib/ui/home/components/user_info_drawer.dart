@@ -19,9 +19,9 @@ class UserInfoDrawer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider)!;
     final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final savedLocations = currentUserInfo?.savedLocations;
     final username = currentUser.email!.split('@').first;
     // User is a student if username can be parsed as int (ID number)
-    final isStudent = (int.tryParse(username) != null);
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       height: constraints.maxHeight,
@@ -110,14 +110,17 @@ class UserInfoDrawer extends HookConsumerWidget {
                             children: [
                               SizedBox(
                                 height: constraints.maxHeight * 0.1,
-                                child: ListView(
+                                child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   padding: EdgeInsets.symmetric(
                                     vertical: constraints.maxHeight * 0.025,
                                     horizontal: constraints.maxWidth * 0.025,
                                   ),
-                                  children: [
-                                    Container(
+                                  itemCount: savedLocations!.length + 1,
+                                  itemBuilder: (context, index) {
+                                    final isEndOfList =
+                                        (index == savedLocations.length);
+                                    return Container(
                                       margin: EdgeInsets.symmetric(
                                         horizontal:
                                             constraints.maxWidth * 0.025,
@@ -125,52 +128,25 @@ class UserInfoDrawer extends HookConsumerWidget {
                                       width: constraints.maxWidth * 0.3,
                                       child: ElevatedButton(
                                         onPressed: () {},
-                                        child: const Text('Home'),
+                                        child: (isEndOfList)
+                                            ? const Icon(Icons.add)
+                                            : Text(
+                                                savedLocations[index]
+                                                    .keys
+                                                    .first,
+                                              ),
                                         style: ElevatedButton.styleFrom(
+                                          primary: (isEndOfList)
+                                              ? Colors.grey[400]
+                                              : null,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(24),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal:
-                                            constraints.maxWidth * 0.025,
-                                      ),
-                                      width: constraints.maxWidth * 0.3,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child:
-                                            Text(isStudent ? 'School' : 'Work'),
-                                        style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(24),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal:
-                                            constraints.maxWidth * 0.025,
-                                      ),
-                                      width: constraints.maxWidth * 0.3,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Icon(Icons.add),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.grey[400],
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(24),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                    );
+                                  },
                                 ),
                               )
                             ],
