@@ -23,16 +23,12 @@ class _$UserInfoTearOff {
 
   _UserInfo call(
       {required double points,
-      required String course,
-      required int year,
       required List<Map<String, KapiotLocation>> savedLocations,
       required UserType userType,
       required int rideCount,
       DriverInfo? driverInfo}) {
     return _UserInfo(
       points: points,
-      course: course,
-      year: year,
       savedLocations: savedLocations,
       userType: userType,
       rideCount: rideCount,
@@ -51,8 +47,6 @@ const $UserInfo = _$UserInfoTearOff();
 /// @nodoc
 mixin _$UserInfo {
   double get points => throw _privateConstructorUsedError;
-  String get course => throw _privateConstructorUsedError;
-  int get year => throw _privateConstructorUsedError;
   List<Map<String, KapiotLocation>> get savedLocations =>
       throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
@@ -71,8 +65,6 @@ abstract class $UserInfoCopyWith<$Res> {
       _$UserInfoCopyWithImpl<$Res>;
   $Res call(
       {double points,
-      String course,
-      int year,
       List<Map<String, KapiotLocation>> savedLocations,
       UserType userType,
       int rideCount,
@@ -92,8 +84,6 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
   @override
   $Res call({
     Object? points = freezed,
-    Object? course = freezed,
-    Object? year = freezed,
     Object? savedLocations = freezed,
     Object? userType = freezed,
     Object? rideCount = freezed,
@@ -104,14 +94,6 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as double,
-      course: course == freezed
-          ? _value.course
-          : course // ignore: cast_nullable_to_non_nullable
-              as String,
-      year: year == freezed
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
       savedLocations: savedLocations == freezed
           ? _value.savedLocations
           : savedLocations // ignore: cast_nullable_to_non_nullable
@@ -150,8 +132,6 @@ abstract class _$UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res> {
   @override
   $Res call(
       {double points,
-      String course,
-      int year,
       List<Map<String, KapiotLocation>> savedLocations,
       UserType userType,
       int rideCount,
@@ -173,8 +153,6 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? points = freezed,
-    Object? course = freezed,
-    Object? year = freezed,
     Object? savedLocations = freezed,
     Object? userType = freezed,
     Object? rideCount = freezed,
@@ -185,14 +163,6 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as double,
-      course: course == freezed
-          ? _value.course
-          : course // ignore: cast_nullable_to_non_nullable
-              as String,
-      year: year == freezed
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
       savedLocations: savedLocations == freezed
           ? _value.savedLocations
           : savedLocations // ignore: cast_nullable_to_non_nullable
@@ -218,8 +188,6 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
 class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   const _$_UserInfo(
       {required this.points,
-      required this.course,
-      required this.year,
       required this.savedLocations,
       required this.userType,
       required this.rideCount,
@@ -232,10 +200,6 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   @override
   final double points;
   @override
-  final String course;
-  @override
-  final int year;
-  @override
   final List<Map<String, KapiotLocation>> savedLocations;
   @override
   final UserType userType;
@@ -246,7 +210,7 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfo(points: $points, course: $course, year: $year, savedLocations: $savedLocations, userType: $userType, rideCount: $rideCount, driverInfo: $driverInfo)';
+    return 'UserInfo(points: $points, savedLocations: $savedLocations, userType: $userType, rideCount: $rideCount, driverInfo: $driverInfo)';
   }
 
   @override
@@ -255,8 +219,6 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'UserInfo'))
       ..add(DiagnosticsProperty('points', points))
-      ..add(DiagnosticsProperty('course', course))
-      ..add(DiagnosticsProperty('year', year))
       ..add(DiagnosticsProperty('savedLocations', savedLocations))
       ..add(DiagnosticsProperty('userType', userType))
       ..add(DiagnosticsProperty('rideCount', rideCount))
@@ -269,10 +231,6 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
         (other is _UserInfo &&
             (identical(other.points, points) ||
                 const DeepCollectionEquality().equals(other.points, points)) &&
-            (identical(other.course, course) ||
-                const DeepCollectionEquality().equals(other.course, course)) &&
-            (identical(other.year, year) ||
-                const DeepCollectionEquality().equals(other.year, year)) &&
             (identical(other.savedLocations, savedLocations) ||
                 const DeepCollectionEquality()
                     .equals(other.savedLocations, savedLocations)) &&
@@ -291,8 +249,6 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(points) ^
-      const DeepCollectionEquality().hash(course) ^
-      const DeepCollectionEquality().hash(year) ^
       const DeepCollectionEquality().hash(savedLocations) ^
       const DeepCollectionEquality().hash(userType) ^
       const DeepCollectionEquality().hash(rideCount) ^
@@ -312,8 +268,6 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
 abstract class _UserInfo extends UserInfo {
   const factory _UserInfo(
       {required double points,
-      required String course,
-      required int year,
       required List<Map<String, KapiotLocation>> savedLocations,
       required UserType userType,
       required int rideCount,
@@ -324,10 +278,6 @@ abstract class _UserInfo extends UserInfo {
 
   @override
   double get points => throw _privateConstructorUsedError;
-  @override
-  String get course => throw _privateConstructorUsedError;
-  @override
-  int get year => throw _privateConstructorUsedError;
   @override
   List<Map<String, KapiotLocation>> get savedLocations =>
       throw _privateConstructorUsedError;
