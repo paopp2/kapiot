@@ -18,6 +18,7 @@ class UserInfoDrawer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider)!;
+    final currentUserInfoStream = ref.watch(currentUserInfoProvider);
     final username = currentUser.email!.split('@').first;
     // User is a student if username can be parsed as int (ID number)
     final isStudent = (int.tryParse(username) != null);
@@ -26,206 +27,225 @@ class UserInfoDrawer extends HookConsumerWidget {
       width: constraints.maxWidth * 0.85,
       height: constraints.maxHeight,
       child: Drawer(
-        child: Column(
-          children: [
-            Container(
-              width: constraints.maxWidth * 0.85,
-              height: constraints.maxHeight * 0.3,
-              color: const Color(0xffdbb3d4),
-              padding: EdgeInsets.only(
-                left: constraints.maxWidth * 0.05,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      bottom: constraints.maxHeight * 0.015,
-                    ),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 53,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        radius: 50,
-                        child: CircleAvatar(
-                          radius: 48,
-                          backgroundImage: NetworkImage(currentUser.photoUrl!),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    currentUser.displayName!,
-                    style: GoogleFonts.poppins(
-                      fontSize: constraints.maxWidth * 0.045,
-                      color: const Color(0xff333333),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Text(
-                    username,
-                    style: GoogleFonts.poppins(
-                      fontSize: constraints.maxWidth * 0.03,
-                      color: const Color(0xff666666),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: constraints.maxWidth * 0.85,
-              height: constraints.maxHeight * 0.7,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: currentUserInfoStream.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, __) => Center(child: Text('Error: $e')),
+          data: (userInfo) => (userInfo == null)
+              ? const Center(
+                  child: Text("No user info set"),
+                )
+              : Column(
                   children: [
-                    Visibility(
-                      visible: isRegisteredDriver,
-                      child: const ListTile(
-                        title: Text('Rating'),
-                        leading: Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        trailing: Text('4.8'),
+                    Container(
+                      width: constraints.maxWidth * 0.85,
+                      height: constraints.maxHeight * 0.3,
+                      color: const Color(0xffdbb3d4),
+                      padding: EdgeInsets.only(
+                        left: constraints.maxWidth * 0.05,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: constraints.maxHeight * 0.015,
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 53,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                radius: 50,
+                                child: CircleAvatar(
+                                  radius: 48,
+                                  backgroundImage:
+                                      NetworkImage(currentUser.photoUrl!),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            currentUser.displayName!,
+                            style: GoogleFonts.poppins(
+                              fontSize: constraints.maxWidth * 0.045,
+                              color: const Color(0xff333333),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            username,
+                            style: GoogleFonts.poppins(
+                              fontSize: constraints.maxWidth * 0.03,
+                              color: const Color(0xff666666),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const ListTile(
-                      title: Text('Points'),
-                      leading: Icon(Icons.score),
-                      trailing: Text('58'),
-                    ),
-                    ExpansionTile(
-                      title: const Text('My Locations'),
-                      leading: const Icon(Icons.map),
-                      children: [
-                        SizedBox(
-                          height: constraints.maxHeight * 0.1,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            padding: EdgeInsets.symmetric(
-                              vertical: constraints.maxHeight * 0.025,
-                              horizontal: constraints.maxWidth * 0.025,
+                    SizedBox(
+                      width: constraints.maxWidth * 0.85,
+                      height: constraints.maxHeight * 0.7,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Visibility(
+                              visible: isRegisteredDriver,
+                              child: const ListTile(
+                                title: Text('Rating'),
+                                leading: Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                trailing: Text('4.8'),
+                              ),
                             ),
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: constraints.maxWidth * 0.025,
-                                ),
-                                width: constraints.maxWidth * 0.3,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('Home'),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: constraints.maxWidth * 0.025,
-                                ),
-                                width: constraints.maxWidth * 0.3,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text(isStudent ? 'School' : 'Work'),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: constraints.maxWidth * 0.025,
-                                ),
-                                width: constraints.maxWidth * 0.3,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Icon(Icons.add),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.grey[400],
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    isRegisteredDriver
-                        ? ExpansionTile(
-                            leading: const Icon(Icons.drive_eta),
-                            title: const Text(
-                              'Owned Cars',
+                            ListTile(
+                              title: const Text('Points'),
+                              leading: const Icon(Icons.score),
+                              trailing: Text('${userInfo.points.toInt()}'),
                             ),
-                            children: [
-                              SizedBox(
-                                height: constraints.maxHeight * 0.25,
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
+                            ExpansionTile(
+                              title: const Text('My Locations'),
+                              leading: const Icon(Icons.map),
+                              children: [
+                                SizedBox(
+                                  height: constraints.maxHeight * 0.1,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: constraints.maxHeight * 0.025,
+                                      horizontal: constraints.maxWidth * 0.025,
+                                    ),
                                     children: [
                                       Container(
                                         margin: EdgeInsets.symmetric(
                                           horizontal:
                                               constraints.maxWidth * 0.025,
                                         ),
-                                        height: constraints.maxHeight * 0.2,
                                         width: constraints.maxWidth * 0.3,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          color: Colors.purple[200],
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: const Text('Home'),
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                          ),
                                         ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: const [
-                                            Icon(CupertinoIcons.car),
-                                            Text('FAG 164'),
-                                            Text('Suzuki Ertiga'),
-                                          ],
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal:
+                                              constraints.maxWidth * 0.025,
+                                        ),
+                                        width: constraints.maxWidth * 0.3,
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                              isStudent ? 'School' : 'Work'),
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal:
+                                              constraints.maxWidth * 0.025,
+                                        ),
+                                        width: constraints.maxWidth * 0.3,
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: const Icon(Icons.add),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.grey[400],
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : GestureDetector(
-                            onTap: model.gotoDriverRegisterView,
-                            child: const ListTile(
-                              leading: Icon(Icons.drive_eta),
-                              title: Text(
-                                'Register as Driver',
-                                style: TextStyle(color: Colors.blue),
-                              ),
+                                )
+                              ],
                             ),
-                          ),
-                    GestureDetector(
-                      onTap: model.signOut,
-                      child: const ListTile(
-                        title: Text('Logout'),
-                        leading: Icon(Icons.logout_outlined),
+                            isRegisteredDriver
+                                ? ExpansionTile(
+                                    leading: const Icon(Icons.drive_eta),
+                                    title: const Text(
+                                      'Owned Cars',
+                                    ),
+                                    children: [
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.25,
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      constraints.maxWidth *
+                                                          0.025,
+                                                ),
+                                                height:
+                                                    constraints.maxHeight * 0.2,
+                                                width:
+                                                    constraints.maxWidth * 0.3,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  color: Colors.purple[200],
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: const [
+                                                    Icon(CupertinoIcons.car),
+                                                    Text('FAG 164'),
+                                                    Text('Suzuki Ertiga'),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : GestureDetector(
+                                    onTap: model.gotoDriverRegisterView,
+                                    child: const ListTile(
+                                      leading: Icon(Icons.drive_eta),
+                                      title: Text(
+                                        'Register as Driver',
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                    ),
+                                  ),
+                            GestureDetector(
+                              onTap: model.signOut,
+                              child: const ListTile(
+                                title: Text('Logout'),
+                                leading: Icon(Icons.logout_outlined),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
                 ),
-              ),
-            )
-          ],
         ),
       ),
     );
