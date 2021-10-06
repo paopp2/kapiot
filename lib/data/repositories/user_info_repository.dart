@@ -23,7 +23,7 @@ class UserInfoRepository {
     );
   }
 
-  Stream<KapiotUserInfo> getUserInfoStream(String userId) {
+  Stream<KapiotUserInfo?> getUserInfoStream(String userId) {
     return firestoreHelper.documentStream(
       path: FirestorePath.docUserInfo(userId),
       builder: (data, _) => KapiotUserInfo.fromJson(data),
