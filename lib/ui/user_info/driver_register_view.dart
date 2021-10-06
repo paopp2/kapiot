@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/driver_register/driver_register_view_model.dart';
+import 'package:kapiot/model/car/car.dart';
 
-class DriverRegisterView extends StatelessWidget {
+class DriverRegisterView extends HookConsumerWidget {
   const DriverRegisterView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(driverRegisterViewModel);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -49,31 +53,43 @@ class DriverRegisterView extends StatelessWidget {
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'Sedan',
+                          carType: CarType.sedan,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'Hatchback',
+                          carType: CarType.hatchback,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'Pickup',
+                          carType: CarType.truck,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'SUV',
+                          carType: CarType.suv,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'AUV',
+                          carType: CarType.auv,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'Van',
+                          carType: CarType.van,
+                          model: model,
                         ),
                       ],
                     ),
@@ -93,17 +109,21 @@ class VehicleType extends StatelessWidget {
       {Key? key,
       required this.constraints,
       required this.vehicleIcon,
-      required this.vehicleLabel})
+      required this.vehicleLabel,
+      required this.model,
+      required this.carType})
       : super(key: key);
 
-  BoxConstraints constraints;
-  Icon vehicleIcon;
-  String vehicleLabel;
-
+  final BoxConstraints constraints;
+  final Icon vehicleIcon;
+  final String vehicleLabel;
+  final CarType carType;
+  final DriverRegisterViewModel model;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        print(carType);
         print('highlight ' + vehicleLabel);
       },
       child: Container(
