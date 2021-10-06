@@ -47,5 +47,10 @@ class DriverRegisterViewModel extends ViewModel {
     return null;
   }
 
-  void dispose() {}
+  @override
+  void dispose() {
+    tecLicensePlateField.dispose();
+    tecLicensePlateField.dispose();
+    tecCarMakeField.dispose();
+  }
 }
