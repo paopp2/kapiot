@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'user_info.dart';
+part of 'kapiot_user_info.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,21 +13,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
-  return _UserInfo.fromJson(json);
+KapiotUserInfo _$KapiotUserInfoFromJson(Map<String, dynamic> json) {
+  return _KapiotUserInfo.fromJson(json);
 }
 
 /// @nodoc
-class _$UserInfoTearOff {
-  const _$UserInfoTearOff();
+class _$KapiotUserInfoTearOff {
+  const _$KapiotUserInfoTearOff();
 
-  _UserInfo call(
+  _KapiotUserInfo call(
       {required double points,
       required List<Map<String, KapiotLocation>> savedLocations,
       required UserType userType,
       required int rideCount,
       DriverInfo? driverInfo}) {
-    return _UserInfo(
+    return _KapiotUserInfo(
       points: points,
       savedLocations: savedLocations,
       userType: userType,
@@ -36,16 +36,16 @@ class _$UserInfoTearOff {
     );
   }
 
-  UserInfo fromJson(Map<String, Object> json) {
-    return UserInfo.fromJson(json);
+  KapiotUserInfo fromJson(Map<String, Object> json) {
+    return KapiotUserInfo.fromJson(json);
   }
 }
 
 /// @nodoc
-const $UserInfo = _$UserInfoTearOff();
+const $KapiotUserInfo = _$KapiotUserInfoTearOff();
 
 /// @nodoc
-mixin _$UserInfo {
+mixin _$KapiotUserInfo {
   double get points => throw _privateConstructorUsedError;
   List<Map<String, KapiotLocation>> get savedLocations =>
       throw _privateConstructorUsedError;
@@ -55,14 +55,15 @@ mixin _$UserInfo {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserInfoCopyWith<UserInfo> get copyWith =>
+  $KapiotUserInfoCopyWith<KapiotUserInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserInfoCopyWith<$Res> {
-  factory $UserInfoCopyWith(UserInfo value, $Res Function(UserInfo) then) =
-      _$UserInfoCopyWithImpl<$Res>;
+abstract class $KapiotUserInfoCopyWith<$Res> {
+  factory $KapiotUserInfoCopyWith(
+          KapiotUserInfo value, $Res Function(KapiotUserInfo) then) =
+      _$KapiotUserInfoCopyWithImpl<$Res>;
   $Res call(
       {double points,
       List<Map<String, KapiotLocation>> savedLocations,
@@ -74,12 +75,13 @@ abstract class $UserInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
-  _$UserInfoCopyWithImpl(this._value, this._then);
+class _$KapiotUserInfoCopyWithImpl<$Res>
+    implements $KapiotUserInfoCopyWith<$Res> {
+  _$KapiotUserInfoCopyWithImpl(this._value, this._then);
 
-  final UserInfo _value;
+  final KapiotUserInfo _value;
   // ignore: unused_field
-  final $Res Function(UserInfo) _then;
+  final $Res Function(KapiotUserInfo) _then;
 
   @override
   $Res call({
@@ -126,9 +128,11 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res> {
-  factory _$UserInfoCopyWith(_UserInfo value, $Res Function(_UserInfo) then) =
-      __$UserInfoCopyWithImpl<$Res>;
+abstract class _$KapiotUserInfoCopyWith<$Res>
+    implements $KapiotUserInfoCopyWith<$Res> {
+  factory _$KapiotUserInfoCopyWith(
+          _KapiotUserInfo value, $Res Function(_KapiotUserInfo) then) =
+      __$KapiotUserInfoCopyWithImpl<$Res>;
   @override
   $Res call(
       {double points,
@@ -142,13 +146,15 @@ abstract class _$UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
-    implements _$UserInfoCopyWith<$Res> {
-  __$UserInfoCopyWithImpl(_UserInfo _value, $Res Function(_UserInfo) _then)
-      : super(_value, (v) => _then(v as _UserInfo));
+class __$KapiotUserInfoCopyWithImpl<$Res>
+    extends _$KapiotUserInfoCopyWithImpl<$Res>
+    implements _$KapiotUserInfoCopyWith<$Res> {
+  __$KapiotUserInfoCopyWithImpl(
+      _KapiotUserInfo _value, $Res Function(_KapiotUserInfo) _then)
+      : super(_value, (v) => _then(v as _KapiotUserInfo));
 
   @override
-  _UserInfo get _value => super._value as _UserInfo;
+  _KapiotUserInfo get _value => super._value as _KapiotUserInfo;
 
   @override
   $Res call({
@@ -158,7 +164,7 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
     Object? rideCount = freezed,
     Object? driverInfo = freezed,
   }) {
-    return _then(_UserInfo(
+    return _then(_KapiotUserInfo(
       points: points == freezed
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -185,8 +191,8 @@ class __$UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
-  const _$_UserInfo(
+class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
+  const _$_KapiotUserInfo(
       {required this.points,
       required this.savedLocations,
       required this.userType,
@@ -194,8 +200,8 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
       this.driverInfo})
       : super._();
 
-  factory _$_UserInfo.fromJson(Map<String, dynamic> json) =>
-      _$$_UserInfoFromJson(json);
+  factory _$_KapiotUserInfo.fromJson(Map<String, dynamic> json) =>
+      _$$_KapiotUserInfoFromJson(json);
 
   @override
   final double points;
@@ -210,14 +216,14 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfo(points: $points, savedLocations: $savedLocations, userType: $userType, rideCount: $rideCount, driverInfo: $driverInfo)';
+    return 'KapiotUserInfo(points: $points, savedLocations: $savedLocations, userType: $userType, rideCount: $rideCount, driverInfo: $driverInfo)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'UserInfo'))
+      ..add(DiagnosticsProperty('type', 'KapiotUserInfo'))
       ..add(DiagnosticsProperty('points', points))
       ..add(DiagnosticsProperty('savedLocations', savedLocations))
       ..add(DiagnosticsProperty('userType', userType))
@@ -228,7 +234,7 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UserInfo &&
+        (other is _KapiotUserInfo &&
             (identical(other.points, points) ||
                 const DeepCollectionEquality().equals(other.points, points)) &&
             (identical(other.savedLocations, savedLocations) ||
@@ -256,25 +262,26 @@ class _$_UserInfo extends _UserInfo with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  _$UserInfoCopyWith<_UserInfo> get copyWith =>
-      __$UserInfoCopyWithImpl<_UserInfo>(this, _$identity);
+  _$KapiotUserInfoCopyWith<_KapiotUserInfo> get copyWith =>
+      __$KapiotUserInfoCopyWithImpl<_KapiotUserInfo>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserInfoToJson(this);
+    return _$$_KapiotUserInfoToJson(this);
   }
 }
 
-abstract class _UserInfo extends UserInfo {
-  const factory _UserInfo(
+abstract class _KapiotUserInfo extends KapiotUserInfo {
+  const factory _KapiotUserInfo(
       {required double points,
       required List<Map<String, KapiotLocation>> savedLocations,
       required UserType userType,
       required int rideCount,
-      DriverInfo? driverInfo}) = _$_UserInfo;
-  const _UserInfo._() : super._();
+      DriverInfo? driverInfo}) = _$_KapiotUserInfo;
+  const _KapiotUserInfo._() : super._();
 
-  factory _UserInfo.fromJson(Map<String, dynamic> json) = _$_UserInfo.fromJson;
+  factory _KapiotUserInfo.fromJson(Map<String, dynamic> json) =
+      _$_KapiotUserInfo.fromJson;
 
   @override
   double get points => throw _privateConstructorUsedError;
@@ -289,6 +296,6 @@ abstract class _UserInfo extends UserInfo {
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserInfoCopyWith<_UserInfo> get copyWith =>
+  _$KapiotUserInfoCopyWith<_KapiotUserInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_info.dart';
+part of 'kapiot_user_info.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserInfo _$$_UserInfoFromJson(Map<String, dynamic> json) => _$_UserInfo(
+_$_KapiotUserInfo _$$_KapiotUserInfoFromJson(Map<String, dynamic> json) =>
+    _$_KapiotUserInfo(
       points: (json['points'] as num).toDouble(),
       savedLocations: (json['savedLocations'] as List<dynamic>)
           .map((e) => (e as Map<String, dynamic>).map(
@@ -21,7 +22,7 @@ _$_UserInfo _$$_UserInfoFromJson(Map<String, dynamic> json) => _$_UserInfo(
           : DriverInfo.fromJson(json['driverInfo'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_UserInfoToJson(_$_UserInfo instance) =>
+Map<String, dynamic> _$$_KapiotUserInfoToJson(_$_KapiotUserInfo instance) =>
     <String, dynamic>{
       'points': instance.points,
       'savedLocations': instance.savedLocations
