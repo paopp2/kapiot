@@ -12,8 +12,6 @@ class UserInfo with _$UserInfo {
   const UserInfo._();
   const factory UserInfo({
     required double points,
-    required String course,
-    required int year,
     required List<Map<String, KapiotLocation>> savedLocations,
     required UserType userType,
     required int rideCount,

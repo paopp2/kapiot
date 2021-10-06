@@ -8,6 +8,7 @@ class FirestorePath {
       'active_drivers/$driverId/requests';
   static String colAcceptedRiders(String driverId) =>
       'active_drivers/$driverId/accepted';
+  static String colUserInfo() => 'user_info';
 
   // DOCUMENT paths
   static String docActiveDriver(String driverId) => 'active_drivers/$driverId';
@@ -16,4 +17,5 @@ class FirestorePath {
       'active_drivers/$driverId/requests/$riderId';
   static String docActiveDriverAccepted(String driverId, String riderId) =>
       'active_drivers/$driverId/accepted/$riderId';
+  static String docUserInfo(String userId) => 'user_info/$userId';
 }
