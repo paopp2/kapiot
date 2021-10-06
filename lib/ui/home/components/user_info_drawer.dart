@@ -21,7 +21,7 @@ class UserInfoDrawer extends HookConsumerWidget {
     final username = currentUser.email!.split('@').first;
     // User is a student if username can be parsed as int (ID number)
     final isStudent = (int.tryParse(username) != null);
-    bool isRegisteredDriver = true;
+    bool isRegisteredDriver = false;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       height: constraints.maxHeight,
@@ -165,7 +165,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                     ),
                     isRegisteredDriver
                         ? ExpansionTile(
-                            leading: Icon(Icons.drive_eta),
+                            leading: const Icon(Icons.drive_eta),
                             title: const Text(
                               'Owned Cars',
                             ),
@@ -206,9 +206,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                           )
                         : GestureDetector(
                             onTap: model.gotoDriverRegisterView,
-                            child: ListTile(
+                            child: const ListTile(
                               leading: Icon(Icons.drive_eta),
-                              title: const Text(
+                              title: Text(
                                 'Register as Driver',
                                 style: TextStyle(color: Colors.blue),
                               ),
@@ -216,7 +216,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                           ),
                     GestureDetector(
                       onTap: model.signOut,
-                      child: ListTile(
+                      child: const ListTile(
                         title: Text('Logout'),
                         leading: Icon(Icons.logout_outlined),
                       ),
