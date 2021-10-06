@@ -16,8 +16,26 @@ class DriverRegisterViewModel extends ViewModel {
     required this.userInfoRepo,
   }) : super(read);
   final UserInfoRepository userInfoRepo;
+  final licensePlateKey = GlobalKey<FormState>();
+  final carMakeKey = GlobalKey<FormState>();
+  final carModelKey = GlobalKey<FormState>();
+  final tecLicensePlateField = TextEditingController();
+  final tecCarMakeField = TextEditingController();
+  final tecCarModelField = TextEditingController();
 
   @override
   void initState() {}
+
+  Future<void> pushDriverInfo() async {
+    assert(licensePlateKey.currentState != null);
+    assert(carMakeKey.currentState != null);
+    assert(carModelKey.currentState != null);
+    if (licensePlateKey.currentState!.validate() &&
+        licensePlateKey.currentState!.validate() &&
+        licensePlateKey.currentState!.validate()) {
+      //TODO: Push Driver Info
+    }
+  }
+
   void dispose() {}
 }
