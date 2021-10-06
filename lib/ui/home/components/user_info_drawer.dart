@@ -76,6 +76,7 @@ class UserInfoDrawer extends HookConsumerWidget {
             ),
             SizedBox(
               width: constraints.maxWidth * 0.85,
+              height: constraints.maxHeight * 0.7,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -209,6 +210,14 @@ class UserInfoDrawer extends HookConsumerWidget {
                             ),
                           ),
                         ),
+                  Spacer(),
+                  GestureDetector(
+                    onTap: model.signOut,
+                    child: ListTile(
+                      title: Text('Logout'),
+                      leading: Icon(Icons.logout_outlined),
+                    ),
+                  )
                 ],
               ),
             )

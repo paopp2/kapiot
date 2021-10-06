@@ -42,25 +42,6 @@ class HomeView extends HookConsumerWidget {
                   color: Colors.black,
                 ),
               ),
-              actions: [
-                Container(
-                  width: 50,
-                  margin: EdgeInsets.only(
-                    right: constraints.maxWidth * 0.025,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0xbfffffff),
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.logout,
-                      size: 25,
-                    ),
-                    onPressed: model.signOut,
-                  ),
-                ),
-              ],
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
