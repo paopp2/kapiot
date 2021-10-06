@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 
-class UserInfoDrawer extends StatelessWidget {
+class UserInfoDrawer extends HookConsumerWidget {
   const UserInfoDrawer({
     Key? key,
     required this.model,
@@ -16,13 +16,16 @@ class UserInfoDrawer extends StatelessWidget {
   final BoxConstraints constraints;
 
   @override
-  Widget build(BuildContext context) {
-    bool isRider = true;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentUserProvider)!;
+    final username = currentUser.email!.split('@').first;
+    // User is a student if username can be parsed as int (ID number)
+    final isStudent = (int.tryParse(username) != null);
+    bool isRegisteredDriver = false;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       child: Drawer(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               width: constraints.maxWidth * 0.85,
@@ -39,21 +42,21 @@ class UserInfoDrawer extends StatelessWidget {
                     margin: EdgeInsets.only(
                       bottom: constraints.maxHeight * 0.015,
                     ),
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 53,
                       child: CircleAvatar(
                         backgroundColor: Colors.grey,
                         radius: 50,
                         child: CircleAvatar(
-                          backgroundColor: Colors.amber,
                           radius: 48,
+                          backgroundImage: NetworkImage(currentUser.photoUrl!),
                         ),
                       ),
                     ),
                   ),
                   Text(
-                    'Christian Benedict C. Gonzales',
+                    currentUser.displayName!,
                     style: GoogleFonts.poppins(
                       fontSize: constraints.maxWidth * 0.045,
                       color: const Color(0xff333333),
@@ -61,7 +64,7 @@ class UserInfoDrawer extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '18105024',
+                    username,
                     style: GoogleFonts.poppins(
                       fontSize: constraints.maxWidth * 0.03,
                       color: const Color(0xff666666),
@@ -115,64 +118,73 @@ class UserInfoDrawer extends StatelessWidget {
                   //   ],
                   // ),
                   ExpansionTile(
-                      title: Text('My Locations'),
-                      leading: Icon(Icons.map),
-                      children: [
-                        SingleChildScrollView(
+                    title: const Text('My Locations'),
+                    leading: const Icon(Icons.map),
+                    children: [
+                      Expanded(
+                        child: ListView(
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: constraints.maxWidth * 0.025,
-                                ),
-                                width: constraints.maxWidth * 0.35,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('Home'),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth * 0.025,
+                              ),
+                              width: constraints.maxWidth * 0.35,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Home'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: constraints.maxWidth * 0.025,
-                                ),
-                                width: constraints.maxWidth * 0.35,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('Work'),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth * 0.025,
+                              ),
+                              width: constraints.maxWidth * 0.35,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: Text(isStudent ? 'School' : 'Work'),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: constraints.maxWidth * 0.025,
-                                ),
-                                width: constraints.maxWidth * 0.35,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('School'),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth * 0.025,
+                              ),
+                              width: constraints.maxWidth * 0.35,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Icon(Icons.add),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.grey[400],
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ]),
-                  isRider
-                      ? GestureDetector(
+                      )
+                    ],
+                  ),
+                  isRegisteredDriver
+                      ? const ExpansionTile(
+                          leading: Icon(Icons.drive_eta),
+                          title: const Text(
+                            'Owned Cars',
+                          ),
+                          children: [],
+                        )
+                      : GestureDetector(
                           onTap: model.gotoDriverRegisterView,
                           child: ListTile(
                             leading: Icon(Icons.drive_eta),
@@ -181,13 +193,6 @@ class UserInfoDrawer extends StatelessWidget {
                               style: TextStyle(color: Colors.blue),
                             ),
                           ),
-                        )
-                      : ExpansionTile(
-                          leading: Icon(Icons.drive_eta),
-                          title: const Text(
-                            'Owned Cars',
-                          ),
-                          children: [],
                         ),
                 ],
               ),
