@@ -31,10 +31,20 @@ class DriverRegisterViewModel extends ViewModel {
     assert(carMakeKey.currentState != null);
     assert(carModelKey.currentState != null);
     if (licensePlateKey.currentState!.validate() &&
-        licensePlateKey.currentState!.validate() &&
-        licensePlateKey.currentState!.validate()) {
+        carMakeKey.currentState!.validate() &&
+        carModelKey.currentState!.validate()) {
       //TODO: Push Driver Info
+      tecLicensePlateField.clear();
+      tecCarMakeField.clear();
+      tecCarModelField.clear();
     }
+  }
+
+  String? driverRegisterValidator(String? value) {
+    if (value == '') {
+      return "This field can't be empty";
+    }
+    return null;
   }
 
   void dispose() {}
