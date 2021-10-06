@@ -79,51 +79,33 @@ class UserInfoDrawer extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ListTile(
-                    title: Text('Rating'),
-                    leading: Icon(
-                      Icons.star,
-                      color: Colors.amber,
+                  Visibility(
+                    visible: isRegisteredDriver,
+                    child: const ListTile(
+                      title: Text('Rating'),
+                      leading: Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      trailing: Text('4.8'),
                     ),
-                    trailing: Text('4.8'),
                   ),
                   const ListTile(
                     title: Text('Points'),
                     leading: Icon(Icons.score),
                     trailing: Text('58'),
                   ),
-                  // ExpansionTile(
-                  //   title: Text('Stats'),
-                  //   leading: Icon(Icons.hail),
-                  //   children: [
-                  //     SizedBox(
-                  //       width: constraints.maxWidth * 0.75,
-                  //       child: ListTile(
-                  //         title: Text('Rating'),
-                  //         leading: Icon(
-                  //           Icons.star,
-                  //           color: Colors.amber,
-                  //         ),
-                  //         trailing: Text('4.8'),
-                  //       ),
-                  //     ),
-                  //     SizedBox(
-                  //       width: constraints.maxWidth * 0.75,
-                  //       child: ListTile(
-                  //         title: Text('Points'),
-                  //         leading: Icon(Icons.score),
-                  //         trailing: Text('58'),
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
                   ExpansionTile(
                     title: const Text('My Locations'),
                     leading: const Icon(Icons.map),
                     children: [
-                      Expanded(
+                      SizedBox(
+                        height: constraints.maxHeight * 0.1,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
+                          padding: EdgeInsets.symmetric(
+                            vertical: constraints.maxHeight * 0.025,
+                          ),
                           children: [
                             Container(
                               margin: EdgeInsets.symmetric(
@@ -177,12 +159,44 @@ class UserInfoDrawer extends HookConsumerWidget {
                     ],
                   ),
                   isRegisteredDriver
-                      ? const ExpansionTile(
+                      ? ExpansionTile(
                           leading: Icon(Icons.drive_eta),
                           title: const Text(
                             'Owned Cars',
                           ),
-                          children: [],
+                          children: [
+                            SizedBox(
+                              height: constraints.maxHeight * 0.25,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal:
+                                            constraints.maxWidth * 0.025,
+                                      ),
+                                      height: constraints.maxHeight * 0.2,
+                                      width: constraints.maxWidth * 0.3,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.purple[200],
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Icon(CupertinoIcons.car),
+                                          Text('FAG 164'),
+                                          Text('Suzuki Ertiga'),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         )
                       : GestureDetector(
                           onTap: model.gotoDriverRegisterView,
