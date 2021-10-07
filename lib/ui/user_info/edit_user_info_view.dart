@@ -6,22 +6,18 @@ import 'package:kapiot/logic/user_info/edit_user_info_state.dart';
 import 'package:kapiot/logic/user_info/edit_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
-final indexProvider = StateProvider((ref) => 0);
-
 class EditUserInfoView extends HookConsumerWidget {
   const EditUserInfoView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.watch(indexProvider).state;
+    final pageIndex = ref.watch(pageIndexProvider).state;
     final selectedUserType = ref.watch(userTypeProvider).state;
     final model = ref.watch(editUserInfoViewModel);
+
     useEffect(() {
-      Future.delayed(Duration.zero, () => ref.read(indexProvider).state++);
-      Future.delayed(
-        const Duration(seconds: 3),
-        () => ref.read(indexProvider).state++,
-      );
+      model.initState();
+      return model.dispose;
     }, []);
 
     return LayoutBuilder(builder: (context, constraints) {
@@ -29,7 +25,6 @@ class EditUserInfoView extends HookConsumerWidget {
         const SizedBox(),
         Text(
           'To which association do you belong?',
-          key: ValueKey('userTypeQuestionPrompt'),
           style: Styles.middleSizeText,
         ),
         Stack(
@@ -74,7 +69,7 @@ class EditUserInfoView extends HookConsumerWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
                 child: TextButton(
-                  onPressed: () => ref.read(indexProvider).state++,
+                  onPressed: () => ref.read(pageIndexProvider).state++,
                   child: const Text('Submit'),
                 ),
               ),
@@ -121,7 +116,7 @@ class EditUserInfoView extends HookConsumerWidget {
             duration: const Duration(seconds: 1),
             switchInCurve: Curves.easeInBack,
             switchOutCurve: Curves.easeInBack,
-            child: pageList[index],
+            child: pageList[pageIndex],
           ),
         ),
       );
