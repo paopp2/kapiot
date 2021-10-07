@@ -37,6 +37,9 @@ class DriverRegisterViewModel extends ViewModel {
         carMakeKey.currentState!.validate() &&
         carModelKey.currentState!.validate()) {
       //TODO: Push Driver Info
+      //* Read current state of userInfo
+      //* copyWith driverInf
+      //* Push updated userInfo
       tecLicensePlateField.clear();
       tecCarMakeField.clear();
       tecCarModelField.clear();
