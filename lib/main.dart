@@ -43,16 +43,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRouter = AppRouter.instance;
     return MaterialApp(
-      title: 'Kapiot',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      navigatorKey: appRouter.navigationKey,
-      routes: appRouter.routesList,
-      home: RootView(
-        loggedInBuilder: (_) => const HomeView(),
-        loggedOutBuilder: (_) => const LoginView(),
-      ),
-    );
+        title: 'Kapiot',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        navigatorKey: appRouter.navigationKey,
+        routes: appRouter.routesList,
+        home: PortalView()
+        // RootView(
+        //   loggedInBuilder: (_) => const HomeView(),
+        //   loggedOutBuilder: (_) => const LoginView(),
+        // ),
+        );
   }
 }
