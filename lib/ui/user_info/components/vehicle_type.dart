@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver_register/driver_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
 
-// TODO: Move to relative 'components' directory
 class VehicleType extends StatelessWidget {
   VehicleType(
       {Key? key,
