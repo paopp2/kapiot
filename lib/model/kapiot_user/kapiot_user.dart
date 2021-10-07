@@ -7,7 +7,7 @@ part 'kapiot_user.g.dart';
 enum UserType {
   student,
   faculty,
-  personnel,
+  staff,
 }
 
 @freezed

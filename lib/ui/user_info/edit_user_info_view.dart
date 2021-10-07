@@ -1,25 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final indexProvider = StateProvider((ref) => 0);
+import 'package:kapiot/logic/user_info/edit_user_info_state.dart';
+import 'package:kapiot/logic/user_info/edit_user_info_view_model.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 class EditUserInfoView extends HookConsumerWidget {
   const EditUserInfoView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int index = ref.watch(indexProvider).state;
-    int selectedIndex = 0;
+    final model = ref.watch(editUserInfoViewModel);
+    final pageIndex = ref.watch(pageIndexProvider).state;
+    final selectedUserType = ref.watch(userTypeProvider).state;
+    final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
+    final isForHomeLoc = ref.watch(isForHomeLocProvider).state;
 
     useEffect(() {
-      Future.delayed(Duration.zero, () => ref.read(indexProvider).state++);
-      Future.delayed(
-        const Duration(seconds: 3),
-        () => ref.read(indexProvider).state++,
-      );
+      model.initState();
+      return model.dispose;
     }, []);
 
     return LayoutBuilder(builder: (context, constraints) {
@@ -27,7 +28,6 @@ class EditUserInfoView extends HookConsumerWidget {
         const SizedBox(),
         Text(
           'To which association do you belong?',
-          key: ValueKey('userTypeQuestionPrompt'),
           style: Styles.middleSizeText,
         ),
         Stack(
@@ -38,7 +38,8 @@ class EditUserInfoView extends HookConsumerWidget {
                 spacing: constraints.maxWidth * 0.025,
                 children: [
                   ChoiceChip(
-                    selected: selectedIndex == 0,
+                    onSelected: (_) => model.setUserType(UserType.student),
+                    selected: selectedUserType == UserType.student,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
                       horizontal: 15,
@@ -46,7 +47,8 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Student'),
                   ),
                   ChoiceChip(
-                    selected: selectedIndex == 1,
+                    onSelected: (_) => model.setUserType(UserType.faculty),
+                    selected: selectedUserType == UserType.faculty,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
                       horizontal: 15,
@@ -54,7 +56,8 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Faculty'),
                   ),
                   ChoiceChip(
-                    selected: selectedIndex == 2,
+                    onSelected: (_) => model.setUserType(UserType.staff),
+                    selected: selectedUserType == UserType.staff,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
                       horizontal: 15,
@@ -69,7 +72,7 @@ class EditUserInfoView extends HookConsumerWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
                 child: TextButton(
-                  onPressed: () => ref.read(indexProvider).state++,
+                  onPressed: model.goToNextStep,
                   child: const Text('Submit'),
                 ),
               ),
@@ -92,17 +95,92 @@ class EditUserInfoView extends HookConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: constraints.maxHeight * 0.1,
+                    height: constraints.maxHeight * 0.05,
                   ),
-                  const Text('home'),
-                  const TextField()
+                  TextField(
+                    controller: model.tecHomeLoc,
+                    focusNode: model.homeLocFocusNode,
+                    textAlign: TextAlign.start,
+                    onTap: () => model.editPlaceAddress(
+                      isForStartLoc: true,
+                    ),
+                    onChanged: model.updateSuggestions,
+                    decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.home),
+                        hintText: "Home",
+                        border: InputBorder.none),
+                  ),
+                  const Divider(
+                    color: Colors.white,
+                    thickness: 1,
+                    height: 0.05,
+                  ),
+                  TextField(
+                    controller: model.tecSchoolLoc,
+                    focusNode: model.schoolLocFocusNode,
+                    textAlign: TextAlign.start,
+                    onTap: () => model.editPlaceAddress(
+                      isForStartLoc: false,
+                    ),
+                    onChanged: model.updateSuggestions,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(CupertinoIcons.building_2_fill),
+                      hintText: (selectedUserType == UserType.student)
+                          ? "School"
+                          : "Work",
+                      border: InputBorder.none,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: placeSuggestions.length,
+                      itemBuilder: (context, index) {
+                        final suggestion = placeSuggestions[index] ?? "";
+                        final suggestionSplit = model.splitAddress(suggestion);
+                        return Column(
+                          children: [
+                            ListTile(
+                              dense: true,
+                              title: Text(
+                                suggestionSplit.first,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              subtitle: Text(
+                                suggestionSplit.last,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                              onTap: () => model.pickSuggestion(
+                                pickedSuggestion: suggestion,
+                                forStartLoc: isForHomeLoc,
+                              ),
+                            ),
+                            const Divider(
+                              color: Colors.grey,
+                              thickness: 1,
+                              height: 0.05,
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Skip'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: model.updateUserInfo,
+                      child: const Text('OK'),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -111,12 +189,14 @@ class EditUserInfoView extends HookConsumerWidget {
       ];
       return Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: AnimatedSwitcher(
-            duration: const Duration(seconds: 1),
-            switchInCurve: Curves.easeInBack,
-            switchOutCurve: Curves.easeInBack,
-            child: pageList[index],
+        body: SafeArea(
+          child: Center(
+            child: AnimatedSwitcher(
+              duration: const Duration(seconds: 1),
+              switchInCurve: Curves.easeInBack,
+              switchOutCurve: Curves.easeInBack,
+              child: pageList[pageIndex],
+            ),
           ),
         ),
       );

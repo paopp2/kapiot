@@ -19,16 +19,26 @@ import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final homeViewModel = Provider.autoDispose(
-  (ref) => HomeViewModel(
-    read: ref.read,
-    riderRepo: ref.watch(riderRepositoryProvider),
-    driverRepo: ref.watch(driverRepositoryProvider),
-    currentUser: ref.watch(currentUserProvider),
-    authService: ref.watch(authServiceProvider),
-    locationService: ref.watch(locationServiceProvider),
-    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
-    mapController: ref.watch(homeMapController),
-  ),
+  (ref) {
+    // Push EditUserInfoView when the currentUser has
+    // not set the required user information yet
+    ref.watch(currentUserInfoProvider).whenData((userInfo) {
+      if (userInfo == null) {
+        AppRouter.instance.navigateTo(Routes.editUserInfoView);
+      }
+    });
+
+    return HomeViewModel(
+      read: ref.read,
+      riderRepo: ref.watch(riderRepositoryProvider),
+      driverRepo: ref.watch(driverRepositoryProvider),
+      currentUser: ref.watch(currentUserProvider),
+      authService: ref.watch(authServiceProvider),
+      locationService: ref.watch(locationServiceProvider),
+      googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+      mapController: ref.watch(homeMapController),
+    );
+  },
 );
 
 class HomeViewModel extends ViewModel {

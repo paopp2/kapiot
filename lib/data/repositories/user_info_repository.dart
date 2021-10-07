@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
-import 'package:kapiot/model/user_info/user_info.dart';
+import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 
 final userInfoRepositoryProvider = Provider.autoDispose(
   (ref) => UserInfoRepository(firestoreHelper: FirestoreHelper.instance),
@@ -15,7 +15,7 @@ class UserInfoRepository {
 
   Future<void> pushUserInfo({
     required String userId,
-    required UserInfo userInfo,
+    required KapiotUserInfo userInfo,
   }) async {
     firestoreHelper.setData(
       path: FirestorePath.docUserInfo(userId),
@@ -23,10 +23,10 @@ class UserInfoRepository {
     );
   }
 
-  Stream<UserInfo> getUserInfoStream(String userId) {
+  Stream<KapiotUserInfo?> getUserInfoStream(String userId) {
     return firestoreHelper.documentStream(
       path: FirestorePath.docUserInfo(userId),
-      builder: (data, _) => UserInfo.fromJson(data),
+      builder: (data, _) => KapiotUserInfo.fromJson(data),
     );
   }
 }

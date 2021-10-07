@@ -7,12 +7,14 @@ part of 'car.dart';
 // **************************************************************************
 
 _$_Car _$$_CarFromJson(Map<String, dynamic> json) => _$_Car(
+      licensePlateNum: json['licensePlateNum'] as String,
       make: json['make'] as String,
       model: json['model'] as String,
       type: _$enumDecode(_$CarTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$$_CarToJson(_$_Car instance) => <String, dynamic>{
+      'licensePlateNum': instance.licensePlateNum,
       'make': instance.make,
       'model': instance.model,
       'type': _$CarTypeEnumMap[instance.type],

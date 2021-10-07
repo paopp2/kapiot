@@ -17,6 +17,7 @@ enum CarType {
 class Car with _$Car {
   const Car._();
   const factory Car({
+    required String licensePlateNum,
     required String make,
     required String model,
     required CarType type,

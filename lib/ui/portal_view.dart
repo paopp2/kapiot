@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
+import 'package:kapiot/data/repositories/user_info_repository.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 
-class PortalView extends StatelessWidget {
+class PortalView extends HookConsumerWidget {
   const PortalView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final model = PortalViewModel();
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -14,10 +18,14 @@ class PortalView extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // Call any methods to run/test here
-              RealtimeDbHelper.instance.setData(
-                path: "trial/path",
-                data: {"hello": UniqueKey().toString()},
-              );
+              ref.read(userInfoRepositoryProvider).pushUserInfo(
+                    userId: 'HV9BcFRIKMYrQOYzd2gStGqErW12',
+                    userInfo: const KapiotUserInfo(
+                      points: 10,
+                      savedLocations: [],
+                      userType: UserType.faculty,
+                    ),
+                  );
             },
           ),
           body: Center(

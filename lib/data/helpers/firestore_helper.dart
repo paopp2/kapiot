@@ -66,14 +66,20 @@ class FirestoreHelper {
     });
   }
 
-  Stream<T> documentStream<T>({
+  Stream<T?> documentStream<T>({
     required String path,
     required T Function(Map<String, dynamic> data, String documentID) builder,
   }) {
     final DocumentReference reference = FirebaseFirestore.instance.doc(path);
     final Stream<DocumentSnapshot> snapshots = reference.snapshots();
-    return snapshots.map((snapshot) =>
-        builder(snapshot.data() as Map<String, dynamic>, snapshot.id));
+    return snapshots.map((snapshot) {
+      final data = snapshot.data();
+      if (data != null) {
+        return builder(snapshot.data() as Map<String, dynamic>, snapshot.id);
+      } else {
+        return null;
+      }
+    });
   }
 
   Future<List<T>> collectionToList<T>({
