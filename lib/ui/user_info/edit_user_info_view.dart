@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/user_info/edit_user_info_state.dart';
 import 'package:kapiot/logic/user_info/edit_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
@@ -13,8 +13,8 @@ class EditUserInfoView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int index = ref.watch(indexProvider).state;
-    int selectedIndex = 0;
+    final index = ref.watch(indexProvider).state;
+    final selectedUserType = ref.watch(userTypeProvider).state;
     final model = ref.watch(editUserInfoViewModel);
     useEffect(() {
       Future.delayed(Duration.zero, () => ref.read(indexProvider).state++);
@@ -41,7 +41,7 @@ class EditUserInfoView extends HookConsumerWidget {
                 children: [
                   ChoiceChip(
                     onSelected: (_) => model.setUserType(UserType.student),
-                    selected: selectedIndex == 0,
+                    selected: selectedUserType == UserType.student,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
                       horizontal: 15,
@@ -50,7 +50,7 @@ class EditUserInfoView extends HookConsumerWidget {
                   ),
                   ChoiceChip(
                     onSelected: (_) => model.setUserType(UserType.faculty),
-                    selected: selectedIndex == 1,
+                    selected: selectedUserType == UserType.faculty,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
                       horizontal: 15,
@@ -59,7 +59,7 @@ class EditUserInfoView extends HookConsumerWidget {
                   ),
                   ChoiceChip(
                     onSelected: (_) => model.setUserType(UserType.staff),
-                    selected: selectedIndex == 2,
+                    selected: selectedUserType == UserType.staff,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
                       horizontal: 15,
