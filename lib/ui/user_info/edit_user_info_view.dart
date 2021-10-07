@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/user_info/edit_user_info_view_model.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 final indexProvider = StateProvider((ref) => 0);
 
@@ -13,7 +15,7 @@ class EditUserInfoView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int index = ref.watch(indexProvider).state;
     int selectedIndex = 0;
-
+    final model = ref.watch(editUserInfoViewModel);
     useEffect(() {
       Future.delayed(Duration.zero, () => ref.read(indexProvider).state++);
       Future.delayed(
@@ -38,7 +40,9 @@ class EditUserInfoView extends HookConsumerWidget {
                 spacing: constraints.maxWidth * 0.025,
                 children: [
                   ChoiceChip(
-                    onSelected: (value) {},
+                    onSelected: (value) {
+                      model.setUserType(UserType.student);
+                    },
                     selected: selectedIndex == 0,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
@@ -47,7 +51,9 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Student'),
                   ),
                   ChoiceChip(
-                    onSelected: (value) {},
+                    onSelected: (value) {
+                      model.setUserType(UserType.faculty);
+                    },
                     selected: selectedIndex == 1,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
@@ -56,7 +62,9 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Faculty'),
                   ),
                   ChoiceChip(
-                    onSelected: (value) {},
+                    onSelected: (value) {
+                      model.setUserType(UserType.personnel);
+                    },
                     selected: selectedIndex == 2,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
