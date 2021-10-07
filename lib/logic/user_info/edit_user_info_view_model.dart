@@ -9,7 +9,7 @@ import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 final editUserInfoViewModel = Provider.autoDispose(
   (ref) => EditUserInfoViewModel(
     read: ref.read,
-    currentUser: ref.watch(currentUserProvider),
+    currentUser: ref.watch(currentUserProvider)!,
     userInfoRepo: ref.watch(userInfoRepositoryProvider),
   ),
 );
@@ -20,7 +20,7 @@ class EditUserInfoViewModel extends ViewModel {
     required this.currentUser,
     required this.userInfoRepo,
   }) : super(read);
-  final KapiotUser? currentUser;
+  final KapiotUser currentUser;
   final UserInfoRepository userInfoRepo;
 
   @override
@@ -32,9 +32,12 @@ class EditUserInfoViewModel extends ViewModel {
 
   void updateUserInfo() {
     final userType = read(userTypeProvider).state;
-    final userId = currentUser!.id;
-    final userInfo =
-        KapiotUserInfo(points: 0, savedLocations: [], userType: userType);
+    final userId = currentUser.id;
+    final userInfo = KapiotUserInfo(
+      points: 0,
+      savedLocations: [],
+      userType: userType,
+    );
     userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
   }
 }
