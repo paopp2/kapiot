@@ -30,6 +30,8 @@ class EditUserInfoViewModel extends ViewModel {
     read(userTypeProvider).state = userType;
   }
 
+  void goToNextStep() => read(pageIndexProvider).state++;
+
   void updateUserInfo() {
     final userType = read(userTypeProvider).state;
     final userId = currentUser.id;

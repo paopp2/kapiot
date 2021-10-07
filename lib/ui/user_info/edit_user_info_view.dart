@@ -69,7 +69,7 @@ class EditUserInfoView extends HookConsumerWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
                 child: TextButton(
-                  onPressed: () => model.updateUserInfo(),
+                  onPressed: model.goToNextStep,
                   child: const Text('Submit'),
                 ),
               ),
@@ -92,17 +92,44 @@ class EditUserInfoView extends HookConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: constraints.maxHeight * 0.1,
+                    height: constraints.maxHeight * 0.05,
                   ),
-                  const Text('home'),
-                  const TextField()
+                  const Text('Home'),
+                  const TextField(),
+                  Expanded(
+                    child: ListView.builder(itemBuilder: (context, index) {
+                      return const ListTile(
+                        title: Text('Home suggestions'),
+                      );
+                    }),
+                  ),
+                  Text(
+                    (selectedUserType == UserType.student) ? 'School' : 'Work',
+                  ),
+                  const TextField(),
+                  Expanded(
+                    child: ListView.builder(itemBuilder: (context, index) {
+                      return const ListTile(
+                        title: Text('Work/School suggestions'),
+                      );
+                    }),
+                  ),
                 ],
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Skip'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Skip'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('OK'),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -111,12 +138,14 @@ class EditUserInfoView extends HookConsumerWidget {
       ];
       return Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: AnimatedSwitcher(
-            duration: const Duration(seconds: 1),
-            switchInCurve: Curves.easeInBack,
-            switchOutCurve: Curves.easeInBack,
-            child: pageList[pageIndex],
+        body: SafeArea(
+          child: Center(
+            child: AnimatedSwitcher(
+              duration: const Duration(seconds: 1),
+              switchInCurve: Curves.easeInBack,
+              switchOutCurve: Curves.easeInBack,
+              child: pageList[pageIndex],
+            ),
           ),
         ),
       );
