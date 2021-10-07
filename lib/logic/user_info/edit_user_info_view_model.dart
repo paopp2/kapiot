@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
@@ -32,6 +33,10 @@ class EditUserInfoViewModel extends ViewModel {
   final tecHomeLoc = TextEditingController();
   final tecSchoolLoc = TextEditingController();
 
+  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
+  /// from "address"
+  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+
   @override
   void initState() {
     homeLocFocusNode.requestFocus();
@@ -43,9 +48,7 @@ class EditUserInfoViewModel extends ViewModel {
     schoolLocFocusNode.dispose();
   }
 
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+  void goToNextStep() => read(pageIndexProvider).state++;
 
   void editPlaceAddress({required bool isForStartLoc}) {
     if (isForStartLoc) {
@@ -74,19 +77,21 @@ class EditUserInfoViewModel extends ViewModel {
     final placeId = pickedSuggestionMap["id"] as String;
     final location =
         await googleMapsApiServices.places.getLocFromPlaceId(placeId);
+    String label = 'Home';
     if (forStartLoc) {
       tecHomeLoc.text = pickedSuggestion;
-      read(homeLocProvider).state = location?.copyWith(
-        address: pickedSuggestion,
-      );
       homeLocFocusNode.unfocus();
     } else {
+      label = (read(userTypeProvider).state == UserType.student)
+          ? 'School'
+          : 'Work';
       tecSchoolLoc.text = pickedSuggestion;
-      read(schoolLocProvider).state = location?.copyWith(
-        address: pickedSuggestion,
-      );
       schoolLocFocusNode.unfocus();
     }
+
+    read(savedLocationsProvider).state.add({
+      label: location!.copyWith(address: pickedSuggestion),
+    });
 
     read(placeSuggestionsProvider).state = [];
   }
@@ -115,16 +120,15 @@ class EditUserInfoViewModel extends ViewModel {
     read(userTypeProvider).state = userType;
   }
 
-  void goToNextStep() => read(pageIndexProvider).state++;
-
   void updateUserInfo() {
     final userType = read(userTypeProvider).state;
     final userId = currentUser.id;
     final userInfo = KapiotUserInfo(
       points: 0,
-      savedLocations: [],
+      savedLocations: read(savedLocationsProvider).state,
       userType: userType,
     );
     userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
+    AppRouter.instance.popView();
   }
 }

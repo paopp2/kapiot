@@ -17,6 +17,5 @@ final isForHomeLocProvider = StateProvider.autoDispose<bool>((ref) => true);
 final placeSuggestionsProvider =
     StateProvider.autoDispose<List<String?>>((ref) => []);
 
-final homeLocProvider = StateProvider<KapiotLocation?>((ref) => null);
-
-final schoolLocProvider = StateProvider<KapiotLocation?>((ref) => null);
+final savedLocationsProvider =
+    StateProvider<List<Map<String, KapiotLocation>>>((ref) => []);
