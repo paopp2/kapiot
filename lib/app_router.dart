@@ -1,4 +1,7 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:kapiot/ui/place/place_manager_view.dart';
 import 'package:kapiot/ui/post_trip_summary/post_trip_summary_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
@@ -27,6 +30,7 @@ class AppRouter {
     Routes.requestDriversView: (context) => const RequestDriversView(),
     Routes.requestAcceptedView: (context) => const RequestAcceptedView(),
     Routes.postTripSummaryView: (context) => const PostTripSummaryView(),
+    Routes.placeManagerView: (context) => const PlaceManagerView(),
   };
 
   Future<dynamic>? navigateTo(String route) =>
@@ -50,4 +54,5 @@ class Routes {
   static const requestDriversView = 'rider/request_drivers_view';
   static const requestAcceptedView = 'rider/request_accepted_view';
   static const postTripSummaryView = 'post_trip_summary_view';
+  static const placeManagerView = 'place/place_manager_view';
 }
