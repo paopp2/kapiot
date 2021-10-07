@@ -18,19 +18,28 @@ final currentUserProvider = Provider.autoDispose<KapiotUser?>((ref) {
       email: firebaseUser.email,
       phoneNumber: firebaseUser.phoneNumber,
       photoUrl: firebaseUser.photoURL,
+      userType: ref.watch(_currentUserType),
     );
   } else {
     return null;
   }
 });
 
+/// Private provider that allows currentUserProvider to listen to changes to
+/// currentUserInfoProvider's userType property without having to rebuild when
+/// any other property changes
+final _currentUserType = Provider.autoDispose<UserType?>((ref) {
+  final currentUserType = ref.watch(currentUserInfoProvider).data?.value;
+  return currentUserType?.userType;
+});
+
 final currentUserInfoProvider = StreamProvider.autoDispose<KapiotUserInfo?>(
   (ref) async* {
-    final currentUser = ref.watch(currentUserProvider);
-    if (currentUser != null) {
+    final firebaseUser = ref.watch(fireauthProvider).currentUser;
+    if (firebaseUser != null) {
       final userInfoStream = ref
           .watch(userInfoRepositoryProvider)
-          .getUserInfoStream(currentUser.id);
+          .getUserInfoStream(firebaseUser.uid);
       await for (final userInfo in userInfoStream) {
         yield userInfo;
       }
