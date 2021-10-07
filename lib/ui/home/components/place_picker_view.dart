@@ -38,13 +38,14 @@ class PlacePickerView extends HookConsumerWidget {
             ),
             backgroundColor: Colors.white,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0XFFE7DFE0)),
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0XFFE7DFE0),
+                    ),
                     padding: EdgeInsets.symmetric(
                         horizontal: constraints.maxWidth * 0.05),
                     margin:
@@ -85,6 +86,67 @@ class PlacePickerView extends HookConsumerWidget {
                             border: InputBorder.none,
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 2.5),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth * 0.05,
+                      vertical: 5,
+                    ),
+                    height: 80,
+                    width: constraints.maxWidth,
+                    decoration: BoxDecoration(
+                      color: const Color(0XFFE7DFE0),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Saved Places'),
+                            GestureDetector(
+                              onTap: () {
+                                print('Go to PlaceManagerView');
+                              },
+                              child: Row(
+                                children: const [
+                                  Text('Manage'),
+                                  Icon(Icons.arrow_forward_ios)
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              Wrap(
+                                spacing: 10,
+                                children: const [
+                                  Chip(
+                                    label: Text('Home'),
+                                    backgroundColor: Colors.white,
+                                    shape: StadiumBorder(
+                                      side: BorderSide(),
+                                    ),
+                                  ),
+                                  Chip(
+                                    label: Text('Work'),
+                                    backgroundColor: Colors.white,
+                                    shape: StadiumBorder(
+                                      side: BorderSide(),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
