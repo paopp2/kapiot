@@ -28,6 +28,10 @@ class PlacePickerViewModel extends ViewModel {
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
 
+  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
+  /// from "address"
+  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+
   @override
   void initState() {
     final isForStartLoc = read(isForStartLocProvider).state;
@@ -62,9 +66,8 @@ class PlacePickerViewModel extends ViewModel {
     );
   }
 
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+  void gotoPlaceManagerView() =>
+      AppRouter.instance.navigateTo(Routes.placeManagerView);
 
   void editPlaceAddress({required bool isForStartLoc}) {
     if (isForStartLoc) {

@@ -109,9 +109,7 @@ class PlacePickerView extends HookConsumerWidget {
                           children: [
                             const Text('Saved Places'),
                             GestureDetector(
-                              onTap: () {
-                                print('Go to PlaceManagerView');
-                              },
+                              onTap: model.gotoPlaceManagerView,
                               child: Row(
                                 children: const [
                                   Text('Manage'),
