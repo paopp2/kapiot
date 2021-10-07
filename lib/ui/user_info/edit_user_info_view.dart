@@ -40,9 +40,7 @@ class EditUserInfoView extends HookConsumerWidget {
                 spacing: constraints.maxWidth * 0.025,
                 children: [
                   ChoiceChip(
-                    onSelected: (value) {
-                      model.setUserType(UserType.student);
-                    },
+                    onSelected: (_) => model.setUserType(UserType.student),
                     selected: selectedIndex == 0,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
@@ -51,9 +49,7 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Student'),
                   ),
                   ChoiceChip(
-                    onSelected: (value) {
-                      model.setUserType(UserType.faculty);
-                    },
+                    onSelected: (_) => model.setUserType(UserType.faculty),
                     selected: selectedIndex == 1,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
@@ -62,9 +58,7 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Faculty'),
                   ),
                   ChoiceChip(
-                    onSelected: (value) {
-                      model.setUserType(UserType.personnel);
-                    },
+                    onSelected: (_) => model.setUserType(UserType.staff),
                     selected: selectedIndex == 2,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,

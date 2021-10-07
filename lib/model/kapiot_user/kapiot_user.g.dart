@@ -66,5 +66,5 @@ K? _$enumDecodeNullable<K, V>(
 const _$UserTypeEnumMap = {
   UserType.student: 'student',
   UserType.faculty: 'faculty',
-  UserType.personnel: 'personnel',
+  UserType.staff: 'staff',
 };
