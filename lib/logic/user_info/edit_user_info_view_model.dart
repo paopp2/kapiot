@@ -4,6 +4,7 @@ import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/logic/user_info/edit_user_info_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 
 final editUserInfoViewModel = Provider.autoDispose(
   (ref) => EditUserInfoViewModel(
@@ -27,13 +28,13 @@ class EditUserInfoViewModel extends ViewModel {
 
   void setUserType(UserType userType) {
     read(userTypeProvider).state = userType;
-    print(read(userTypeProvider).state);
   }
 
   void updateUserInfo() {
-    print(read(userTypeProvider).state);
-    final updatedUser =
-        currentUser!.copyWith(userType: read(userTypeProvider).state);
-    print(updatedUser);
+    final userType = read(userTypeProvider).state;
+    final userId = currentUser!.id;
+    final userInfo =
+        KapiotUserInfo(points: 0, savedLocations: [], userType: userType);
+    userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
   }
 }
