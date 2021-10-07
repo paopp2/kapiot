@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:kapiot/ui/place/place_manager_view.dart';
 import 'package:kapiot/ui/post_trip_summary/post_trip_summary_view.dart';
