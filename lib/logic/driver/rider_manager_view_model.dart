@@ -110,8 +110,8 @@ class RiderManagerViewModel extends ViewModel {
         pointB: routeConfig.endLocation,
       );
 
-      // If driver is less than 50m away from destination (arriving)
-      if (distToDriverEnd < 0.050) {
+      // If driver is less than 100m away from destination (arriving)
+      if (distToDriverEnd < 0.100) {
         final points = read(driverPointsProvider).state;
         final transaction = read(transactionProvider).state;
         read(transactionProvider).state = transaction.copyWith(
