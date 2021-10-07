@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
@@ -11,9 +12,11 @@ class EditUserInfoView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(editUserInfoViewModel);
     final pageIndex = ref.watch(pageIndexProvider).state;
     final selectedUserType = ref.watch(userTypeProvider).state;
-    final model = ref.watch(editUserInfoViewModel);
+    final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
+    final isForHomeLoc = ref.watch(isForHomeLocProvider).state;
 
     useEffect(() {
       model.initState();
@@ -94,25 +97,77 @@ class EditUserInfoView extends HookConsumerWidget {
                   SizedBox(
                     height: constraints.maxHeight * 0.05,
                   ),
-                  const Text('Home'),
-                  const TextField(),
-                  Expanded(
-                    child: ListView.builder(itemBuilder: (context, index) {
-                      return const ListTile(
-                        title: Text('Home suggestions'),
-                      );
-                    }),
+                  TextField(
+                    controller: model.tecHomeLoc,
+                    focusNode: model.homeLocFocusNode,
+                    textAlign: TextAlign.start,
+                    onTap: () => model.editPlaceAddress(
+                      isForStartLoc: true,
+                    ),
+                    onChanged: model.updateSuggestions,
+                    decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.home),
+                        hintText: "Home",
+                        border: InputBorder.none),
                   ),
-                  Text(
-                    (selectedUserType == UserType.student) ? 'School' : 'Work',
+                  const Divider(
+                    color: Colors.white,
+                    thickness: 1,
+                    height: 0.05,
                   ),
-                  const TextField(),
+                  TextField(
+                    controller: model.tecSchoolLoc,
+                    focusNode: model.schoolLocFocusNode,
+                    textAlign: TextAlign.start,
+                    onTap: () => model.editPlaceAddress(
+                      isForStartLoc: false,
+                    ),
+                    onChanged: model.updateSuggestions,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(CupertinoIcons.building_2_fill),
+                      hintText: (selectedUserType == UserType.student)
+                          ? "School"
+                          : "Work",
+                      border: InputBorder.none,
+                    ),
+                  ),
                   Expanded(
-                    child: ListView.builder(itemBuilder: (context, index) {
-                      return const ListTile(
-                        title: Text('Work/School suggestions'),
-                      );
-                    }),
+                    child: ListView.builder(
+                      itemCount: placeSuggestions.length,
+                      itemBuilder: (context, index) {
+                        final suggestion = placeSuggestions[index] ?? "";
+                        final suggestionSplit = model.splitAddress(suggestion);
+                        return Column(
+                          children: [
+                            ListTile(
+                              dense: true,
+                              title: Text(
+                                suggestionSplit.first,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              subtitle: Text(
+                                suggestionSplit.last,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                              onTap: () => model.pickSuggestion(
+                                pickedSuggestion: suggestion,
+                                forStartLoc: isForHomeLoc,
+                              ),
+                            ),
+                            const Divider(
+                              color: Colors.grey,
+                              thickness: 1,
+                              height: 0.05,
+                            )
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -122,11 +177,7 @@ class EditUserInfoView extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () {},
-                      child: const Text('Skip'),
-                    ),
-                    TextButton(
-                      onPressed: () {},
+                      onPressed: model.updateUserInfo,
                       child: const Text('OK'),
                     ),
                   ],
