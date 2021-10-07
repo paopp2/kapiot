@@ -69,7 +69,7 @@ class EditUserInfoView extends HookConsumerWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
                 child: TextButton(
-                  onPressed: () => ref.read(pageIndexProvider).state++,
+                  onPressed: () => model.updateUserInfo(),
                   child: const Text('Submit'),
                 ),
               ),
