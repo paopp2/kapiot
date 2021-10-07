@@ -52,6 +52,10 @@ class PortalView extends StatelessWidget {
                   onPressed: model.gotoPostTripSummaryView,
                   child: const Text("PostTripSummaryView"),
                 ),
+                ElevatedButton(
+                  onPressed: model.gotoEditUserInfoView,
+                  child: const Text("EditUserInfoView"),
+                ),
                 StreamBuilder(
                   stream: RealtimeDbHelper.instance.documentStream(
                     path: "trial/path",
@@ -82,4 +86,6 @@ class PortalViewModel {
   void gotoPlaceSuggestionsView() => _router.navigateTo(Routes.placePickerView);
   void gotoPostTripSummaryView() =>
       _router.navigateTo(Routes.postTripSummaryView);
+
+  void gotoEditUserInfoView() => _router.navigateTo(Routes.editUserInfoView);
 }

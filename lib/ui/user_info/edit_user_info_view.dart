@@ -1,37 +1,125 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:kapiot/constants/styles.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EditUserInfoView extends StatelessWidget {
+final indexProvider = StateProvider((ref) => 0);
+
+class EditUserInfoView extends HookConsumerWidget {
   const EditUserInfoView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Course and year (eg. BS CPE 3)',
+  Widget build(BuildContext context, WidgetRef ref) {
+    int index = ref.watch(indexProvider).state;
+    int selectedIndex = 0;
+
+    useEffect(() {
+      Future.delayed(Duration.zero, () => ref.read(indexProvider).state++);
+      Future.delayed(
+        const Duration(seconds: 3),
+        () => ref.read(indexProvider).state++,
+      );
+    }, []);
+
+    return LayoutBuilder(builder: (context, constraints) {
+      final List<Widget> pageList = [
+        const SizedBox(),
+        Text(
+          'To which association do you belong?',
+          key: ValueKey('userTypeQuestionPrompt'),
+          style: Styles.middleSizeText,
+        ),
+        Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Wrap(
+                spacing: constraints.maxWidth * 0.025,
+                children: [
+                  ChoiceChip(
+                    selected: selectedIndex == 0,
+                    labelPadding: const EdgeInsets.symmetric(
+                      vertical: 7,
+                      horizontal: 15,
+                    ),
+                    label: const Text('Student'),
                   ),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Default start location',
+                  ChoiceChip(
+                    selected: selectedIndex == 1,
+                    labelPadding: const EdgeInsets.symmetric(
+                      vertical: 7,
+                      horizontal: 15,
+                    ),
+                    label: const Text('Faculty'),
                   ),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Default end location',
+                  ChoiceChip(
+                    selected: selectedIndex == 2,
+                    labelPadding: const EdgeInsets.symmetric(
+                      vertical: 7,
+                      horizontal: 15,
+                    ),
+                    label: const Text('Staff'),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
+                child: TextButton(
+                  onPressed: () => ref.read(indexProvider).state++,
+                  child: const Text('Submit'),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          height: constraints.maxHeight,
+          width: constraints.maxWidth,
+          padding: EdgeInsets.symmetric(
+            horizontal: constraints.maxWidth * 0.05,
           ),
-        );
-      },
-    );
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'If ganahan ka, pwede ka mosave og location bookmarks daan for later use.',
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.1,
+                  ),
+                  const Text('home'),
+                  const TextField()
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text('Skip'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ];
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: AnimatedSwitcher(
+            duration: const Duration(seconds: 1),
+            switchInCurve: Curves.easeInBack,
+            switchOutCurve: Curves.easeInBack,
+            child: pageList[index],
+          ),
+        ),
+      );
+    });
   }
 }
