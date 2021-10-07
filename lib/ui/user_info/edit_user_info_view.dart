@@ -38,6 +38,7 @@ class EditUserInfoView extends HookConsumerWidget {
                 spacing: constraints.maxWidth * 0.025,
                 children: [
                   ChoiceChip(
+                    onSelected: (value) {},
                     selected: selectedIndex == 0,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
@@ -46,6 +47,7 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Student'),
                   ),
                   ChoiceChip(
+                    onSelected: (value) {},
                     selected: selectedIndex == 1,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
@@ -54,6 +56,7 @@ class EditUserInfoView extends HookConsumerWidget {
                     label: const Text('Faculty'),
                   ),
                   ChoiceChip(
+                    onSelected: (value) {},
                     selected: selectedIndex == 2,
                     labelPadding: const EdgeInsets.symmetric(
                       vertical: 7,
