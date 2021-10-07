@@ -9,87 +9,136 @@ class EditUserInfoView extends StatefulWidget {
 }
 
 class _EditUserInfoViewState extends State<EditUserInfoView> {
-  bool isVisible = false;
+  bool isQuestionVisible = false;
+  bool isChoiceVisible = false;
+  bool optionalView = false;
 
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      if (this.mounted) {
-        setState(() {
-          isVisible =
-              true; //update the variable declare this under your class so its accessible for both your widget build and initState which is located under widget build{}
-        });
-      }
+      setState(() {
+        isQuestionVisible = true;
+      });
+    });
+
+    Future.delayed(const Duration(seconds: 4), () {
+      setState(() {
+        isChoiceVisible = true;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  children: [
-                    !isVisible
-                        ? AnimatedOpacity(
-                            opacity: !isVisible ? 1 : 0,
-                            duration: Duration(seconds: 1),
-                            child: Center(
-                              child: Text('Before anythuings els, unsa ka?'),
-                            ),
-                          )
-                        : AnimatedOpacity(
-                            opacity: isVisible ? 1 : 0,
-                            duration: Duration(seconds: 1),
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  Wrap(
-                                    spacing: constraints.maxWidth * 0.025,
-                                    children: const [
-                                      Chip(
-                                        labelPadding: EdgeInsets.symmetric(
-                                          vertical: 7,
-                                          horizontal: 15,
-                                        ),
-                                        label: Text('Student'),
-                                      ),
-                                      Chip(
-                                        labelPadding: EdgeInsets.symmetric(
-                                          vertical: 7,
-                                          horizontal: 15,
-                                        ),
-                                        label: Text('Faculty'),
-                                      ),
-                                      Chip(
-                                        labelPadding: EdgeInsets.symmetric(
-                                          vertical: 7,
-                                          horizontal: 15,
-                                        ),
-                                        label: Text('Staff'),
-                                      ),
-                                    ],
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text('Submit'),
-                                  ),
-                                ],
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  !optionalView
+                      ? Stack(
+                          children: [
+                            Entry.opacity(
+                              duration: Duration(milliseconds: 750),
+                              child: AnimatedOpacity(
+                                opacity: !isQuestionVisible ? 1 : 0,
+                                duration: Duration(milliseconds: 750),
+                                child: Center(
+                                  child: Text('Before anything else, unsa ka?'),
+                                ),
                               ),
                             ),
+                            AnimatedOpacity(
+                              opacity: isChoiceVisible ? 1 : 0,
+                              duration: Duration(milliseconds: 750),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Wrap(
+                                      spacing: constraints.maxWidth * 0.025,
+                                      children: const [
+                                        Chip(
+                                          labelPadding: EdgeInsets.symmetric(
+                                            vertical: 7,
+                                            horizontal: 15,
+                                          ),
+                                          label: Text('Student'),
+                                        ),
+                                        Chip(
+                                          labelPadding: EdgeInsets.symmetric(
+                                            vertical: 7,
+                                            horizontal: 15,
+                                          ),
+                                          label: Text('Faculty'),
+                                        ),
+                                        Chip(
+                                          labelPadding: EdgeInsets.symmetric(
+                                            vertical: 7,
+                                            horizontal: 15,
+                                          ),
+                                          label: Text('Staff'),
+                                        ),
+                                      ],
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        print('proceed to next view');
+                                        setState(() {
+                                          optionalView = true;
+                                        });
+                                      },
+                                      child: Text('Submit'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(
+                          height: constraints.maxHeight,
+                          width: constraints.maxWidth,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: constraints.maxWidth * 0.05,
                           ),
-                  ],
-                ),
-              ],
+                          child: Stack(
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'If ganahan ka, pwede ka mosave og location bookmarks daan for later use.',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(
+                                    height: constraints.maxHeight * 0.1,
+                                  ),
+                                  Text('home'),
+                                  TextField()
+                                ],
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: TextButton(
+                                  onPressed: () {
+                                    print('Skip this part');
+                                  },
+                                  child: Text('Skip'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
