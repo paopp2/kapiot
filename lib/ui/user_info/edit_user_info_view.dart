@@ -43,18 +43,18 @@ class _EditUserInfoViewState extends State<EditUserInfoView> {
                       ? Stack(
                           children: [
                             Entry.opacity(
-                              duration: Duration(milliseconds: 750),
+                              duration: const Duration(milliseconds: 750),
                               child: AnimatedOpacity(
                                 opacity: !isQuestionVisible ? 1 : 0,
-                                duration: Duration(milliseconds: 750),
-                                child: Center(
+                                duration: const Duration(milliseconds: 750),
+                                child: const Center(
                                   child: Text('Before anything else, unsa ka?'),
                                 ),
                               ),
                             ),
                             AnimatedOpacity(
                               opacity: isChoiceVisible ? 1 : 0,
-                              duration: Duration(milliseconds: 750),
+                              duration: const Duration(milliseconds: 750),
                               child: Center(
                                 child: Column(
                                   children: [
@@ -91,7 +91,7 @@ class _EditUserInfoViewState extends State<EditUserInfoView> {
                                           optionalView = true;
                                         });
                                       },
-                                      child: Text('Submit'),
+                                      child: const Text('Submit'),
                                     ),
                                   ],
                                 ),
@@ -110,15 +110,15 @@ class _EditUserInfoViewState extends State<EditUserInfoView> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'If ganahan ka, pwede ka mosave og location bookmarks daan for later use.',
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(
                                     height: constraints.maxHeight * 0.1,
                                   ),
-                                  Text('home'),
-                                  TextField()
+                                  const Text('home'),
+                                  const TextField()
                                 ],
                               ),
                               Align(
@@ -127,7 +127,7 @@ class _EditUserInfoViewState extends State<EditUserInfoView> {
                                   onPressed: () {
                                     print('Skip this part');
                                   },
-                                  child: Text('Skip'),
+                                  child: const Text('Skip'),
                                 ),
                               ),
                             ],
