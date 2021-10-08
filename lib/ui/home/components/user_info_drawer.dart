@@ -19,17 +19,13 @@ class UserInfoDrawer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider)!;
     final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
-    final savedLocations = currentUserInfo?.savedLocations;
     final username = currentUser.email!.split('@').first;
-    // User is a student if username can be parsed as int (ID number)
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       height: constraints.maxHeight,
       child: Drawer(
         child: (currentUserInfo == null)
-            ? const Center(
-                child: Text("No user info set"),
-              )
+            ? const Center(child: Text("No user info set"))
             : Column(
                 children: [
                   Container(
@@ -104,52 +100,12 @@ class UserInfoDrawer extends HookConsumerWidget {
                             leading: const Icon(Icons.score),
                             trailing: Text('${currentUserInfo.points.toInt()}'),
                           ),
-                          ExpansionTile(
-                            title: const Text('My Locations'),
-                            leading: const Icon(Icons.map),
-                            children: [
-                              SizedBox(
-                                height: constraints.maxHeight * 0.1,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: constraints.maxHeight * 0.025,
-                                    horizontal: constraints.maxWidth * 0.025,
-                                  ),
-                                  itemCount: savedLocations!.length + 1,
-                                  itemBuilder: (context, index) {
-                                    final isEndOfList =
-                                        (index == savedLocations.length);
-                                    return Container(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal:
-                                            constraints.maxWidth * 0.025,
-                                      ),
-                                      width: constraints.maxWidth * 0.3,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: (isEndOfList)
-                                            ? const Icon(Icons.add)
-                                            : Text(
-                                                savedLocations[index]
-                                                    .keys
-                                                    .first,
-                                              ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: (isEndOfList)
-                                              ? Colors.grey[400]
-                                              : null,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(24),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                            ],
+                          GestureDetector(
+                            onTap: model.gotoPlaceManagerView,
+                            child: const ListTile(
+                              title: Text('My Locations'),
+                              leading: Icon(Icons.map),
+                            ),
                           ),
                           currentUserInfo.isRegisteredDriver
                               ? ExpansionTile(
