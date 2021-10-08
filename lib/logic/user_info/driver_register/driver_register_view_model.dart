@@ -1,14 +1,20 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/car/car.dart';
+import 'package:kapiot/model/driver_info/driver_info.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 
 import 'driver_register_state.dart';
 
 final driverRegisterViewModel = Provider.autoDispose(
   (ref) => DriverRegisterViewModel(
     read: ref.read,
+    currentUser: ref.watch(currentUserProvider),
+    currentUserInfo: ref.watch(currentUserInfoProvider).data?.value,
     userInfoRepo: ref.watch(userInfoRepositoryProvider),
   ),
 );
@@ -16,9 +22,13 @@ final driverRegisterViewModel = Provider.autoDispose(
 class DriverRegisterViewModel extends ViewModel {
   DriverRegisterViewModel({
     required Reader read,
+    required this.currentUser,
+    required this.currentUserInfo,
     required this.userInfoRepo,
   }) : super(read);
   final UserInfoRepository userInfoRepo;
+  final KapiotUser? currentUser;
+  final KapiotUserInfo? currentUserInfo;
   final licensePlateKey = GlobalKey<FormState>();
   final carMakeKey = GlobalKey<FormState>();
   final carModelKey = GlobalKey<FormState>();
@@ -30,6 +40,7 @@ class DriverRegisterViewModel extends ViewModel {
   void initState() {}
 
   Future<void> pushDriverInfo() async {
+    assert(currentUserInfo != null);
     assert(licensePlateKey.currentState != null);
     assert(carMakeKey.currentState != null);
     assert(carModelKey.currentState != null);
@@ -37,10 +48,18 @@ class DriverRegisterViewModel extends ViewModel {
     if (licensePlateKey.currentState!.validate() &&
         carMakeKey.currentState!.validate() &&
         carModelKey.currentState!.validate()) {
-      //TODO: Push Driver Info
-      //* Read current state of userInfo
-      //* copyWith driverInf
-      //* Push updated userInfo
+      final userId = currentUser!.id;
+      final carType = read(carTypeProvider).state;
+      final carToAdd = Car(
+          licensePlateNum: tecLicensePlateField.text,
+          make: tecCarMakeField.text,
+          model: tecCarModelField.text,
+          type: carType);
+      final carList = currentUserInfo!.driverInfo!.registeredCars;
+      carList.add(carToAdd);
+      final driverInfo = DriverInfo(registeredCars: carList);
+      final userInfo = currentUserInfo!.copyWith(driverInfo: driverInfo);
+      userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
       tecLicensePlateField.clear();
       tecCarMakeField.clear();
       tecCarModelField.clear();
