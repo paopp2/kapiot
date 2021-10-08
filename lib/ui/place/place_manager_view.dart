@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 
-class PlaceManagerView extends StatelessWidget {
+class PlaceManagerView extends HookConsumerWidget {
   const PlaceManagerView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final savedLocations = currentUserInfo?.savedLocations;
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -37,54 +41,46 @@ class PlaceManagerView extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.white,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      children: [
-                        Column(
-                          children: const [
-                            SizedBox(
-                              height: 80,
-                              child: Center(
-                                child: ListTile(
-                                  leading: Icon(Icons.home),
-                                  title: Text('Home'),
-                                  subtitle: Text(
-                                    'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
-                                    overflow: TextOverflow.ellipsis,
+                      itemCount: savedLocations!.length + 1,
+                      itemBuilder: (context, index) {
+                        final lastIndex = savedLocations.length;
+                        final isLastItem = (index == lastIndex);
+                        if (isLastItem) {
+                          return const SizedBox(
+                            height: 80,
+                            child: Center(
+                              child: ListTile(
+                                leading: Icon(Icons.add),
+                                title: Text('Add New'),
+                              ),
+                            ),
+                          );
+                        } else {
+                          final savedLoc = savedLocations[index];
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 80,
+                                child: Center(
+                                  child: ListTile(
+                                    leading: const Icon(Icons.bookmark),
+                                    title: Text(savedLoc.keys.first),
+                                    subtitle: Text(
+                                      savedLoc.values.first.address!,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    trailing: const Icon(Icons.edit),
                                   ),
-                                  trailing: Icon(Icons.edit),
                                 ),
                               ),
-                            ),
-                            Divider(),
-                          ],
-                        ),
-                        Column(
-                          children: const [
-                            SizedBox(
-                              height: 80,
-                              child: Center(
-                                child: ListTile(
-                                  leading: Icon(Icons.work),
-                                  title: Text('Work'),
-                                  trailing: Icon(Icons.edit),
-                                ),
-                              ),
-                            ),
-                            Divider(),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 80,
-                          child: Center(
-                            child: ListTile(
-                              leading: Icon(Icons.add),
-                              title: Text('Add New'),
-                            ),
-                          ),
-                        ),
-                      ],
+                              const Divider(),
+                            ],
+                          );
+                        }
+                      },
                     ),
                   ),
                   Padding(
