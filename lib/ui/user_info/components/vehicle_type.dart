@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/driver_register/driver_register_view_model.dart';
+import 'package:kapiot/logic/user_info/driver_register/driver_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
 
 class VehicleType extends StatelessWidget {

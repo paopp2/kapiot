@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/user_info/edit_user_info_state.dart';
-import 'package:kapiot/logic/user_info/edit_user_info_view_model.dart';
+import 'package:kapiot/logic/user_info/edit_user_info/edit_user_info_state.dart';
+import 'package:kapiot/logic/user_info/edit_user_info/edit_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 class EditUserInfoView extends HookConsumerWidget {
