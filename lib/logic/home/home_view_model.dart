@@ -92,6 +92,9 @@ class HomeViewModel extends ViewModel {
   void gotoDriverRegisterView() =>
       AppRouter.instance.navigateTo(Routes.driverRegisterView);
 
+  void gotoPlaceManagerView() =>
+      AppRouter.instance.navigateTo(Routes.placeManagerView);
+
   Future<void> signOut() async => await authService.signOutGoogle();
 
   void incRiderCount() => read(riderCountProvider).state++;
