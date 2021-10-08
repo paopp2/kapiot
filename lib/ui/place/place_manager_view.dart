@@ -75,7 +75,7 @@ class PlaceManagerView extends StatelessWidget {
                             Divider(),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 80,
                           child: Center(
                             child: ListTile(
