@@ -67,8 +67,10 @@ class PlacePickerViewModel extends ViewModel {
     );
   }
 
-  void gotoPlaceManagerView() =>
-      AppRouter.instance.navigateTo(Routes.placeManagerView);
+  void gotoPlaceManagerView() {
+    FocusManager.instance.primaryFocus?.unfocus(); // Close keyboard
+    AppRouter.instance.navigateTo(Routes.placeManagerView);
+  }
 
   void editPlaceAddress({required bool isForStartLoc}) {
     if (isForStartLoc) {
