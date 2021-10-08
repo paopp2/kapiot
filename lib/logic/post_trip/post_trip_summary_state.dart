@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
@@ -31,8 +32,15 @@ final timeInMinsProvider = Provider.autoDispose<double>((ref) {
   return 0;
 });
 
+// As currentUserInfo gets updated before totalPoints is shown to the user,
+// totalPointsProvider listens to the currentUserInfoProvider and updates its
+// internal state based from that
 final totalPointsProvider = Provider.autoDispose<double>((ref) {
-  Future.delayed(const Duration(seconds: 2), () => (ref.state = 100));
+  final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+  Future.delayed(
+    const Duration(seconds: 2),
+    () => (ref.state = currentUserInfo?.points ?? 0),
+  );
   return 0;
 });
 
