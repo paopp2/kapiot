@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/home/place_picker_view_model.dart';
 
@@ -15,6 +16,8 @@ class PlacePickerView extends HookConsumerWidget {
     final model = ref.watch(placePickerViewModel);
     final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
     final isForStartLoc = ref.watch(isForStartLocProvider).state;
+    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final savedLocations = currentUserInfo?.savedLocations;
 
     useEffect(() {
       model.initState();
@@ -120,29 +123,25 @@ class PlacePickerView extends HookConsumerWidget {
                           ],
                         ),
                         Expanded(
-                          child: ListView(
+                          child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            children: [
-                              Wrap(
-                                spacing: 10,
-                                children: const [
-                                  Chip(
-                                    label: Text('Home'),
-                                    backgroundColor: Colors.white,
-                                    shape: StadiumBorder(
-                                      side: BorderSide(),
-                                    ),
+                            itemCount: savedLocations!.length,
+                            itemBuilder: (context, index) {
+                              final location = savedLocations[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: ActionChip(
+                                  onPressed: () => model.pickSavedLocation(
+                                    location,
                                   ),
-                                  Chip(
-                                    label: Text('Work'),
-                                    backgroundColor: Colors.white,
-                                    shape: StadiumBorder(
-                                      side: BorderSide(),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
+                                  label: Text(location.keys.first),
+                                  backgroundColor: Colors.white,
+                                  shape: const StadiumBorder(
+                                    side: BorderSide(),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         )
                       ],

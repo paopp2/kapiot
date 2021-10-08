@@ -6,6 +6,7 @@ import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final placePickerViewModel = Provider.autoDispose(
   (ref) => PlacePickerViewModel(
@@ -107,6 +108,28 @@ class PlacePickerViewModel extends ViewModel {
       mapController.setEndLocation(
         location?.copyWith(address: pickedSuggestion),
       );
+      endLocFocusNode.unfocus();
+    }
+
+    read(placeSuggestionsProvider).state = [];
+
+    final isStartLocSet = (read(startLocProvider).state != null);
+    final isEndLocSet = (read(endLocProvider).state != null);
+    if (isStartLocSet && isEndLocSet) {
+      AppRouter.instance.popView();
+    }
+  }
+
+  void pickSavedLocation(Map<String, KapiotLocation> savedLocMap) {
+    final isForStartLoc = read(isForStartLocProvider).state;
+    final pickedSavedLoc = savedLocMap.values.first;
+    if (isForStartLoc) {
+      tecStartLoc.text = pickedSavedLoc.address!;
+      mapController.setStartLocation(pickedSavedLoc);
+      startLocFocusNode.unfocus();
+    } else {
+      tecEndLoc.text = pickedSavedLoc.address!;
+      mapController.setEndLocation(pickedSavedLoc);
       endLocFocusNode.unfocus();
     }
 
