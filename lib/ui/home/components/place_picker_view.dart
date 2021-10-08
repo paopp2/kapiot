@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/home/place_picker_view_model.dart';
 
@@ -15,6 +16,8 @@ class PlacePickerView extends HookConsumerWidget {
     final model = ref.watch(placePickerViewModel);
     final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
     final isForStartLoc = ref.watch(isForStartLocProvider).state;
+    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final savedLocations = currentUserInfo?.savedLocations;
 
     useEffect(() {
       model.initState();
@@ -38,13 +41,14 @@ class PlacePickerView extends HookConsumerWidget {
             ),
             backgroundColor: Colors.white,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0XFFE7DFE0)),
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0XFFE7DFE0),
+                    ),
                     padding: EdgeInsets.symmetric(
                         horizontal: constraints.maxWidth * 0.05),
                     margin:
@@ -85,6 +89,61 @@ class PlacePickerView extends HookConsumerWidget {
                             border: InputBorder.none,
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 2.5),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth * 0.05,
+                      vertical: 5,
+                    ),
+                    height: 80,
+                    width: constraints.maxWidth,
+                    decoration: BoxDecoration(
+                      color: const Color(0XFFE7DFE0),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Saved Places'),
+                            GestureDetector(
+                              onTap: model.gotoPlaceManagerView,
+                              child: Row(
+                                children: const [
+                                  Text('Manage'),
+                                  Icon(Icons.arrow_forward_ios)
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: savedLocations!.length,
+                            itemBuilder: (context, index) {
+                              final location = savedLocations[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: ActionChip(
+                                  onPressed: () => model.pickSavedLocation(
+                                    location,
+                                  ),
+                                  label: Text(location.keys.first),
+                                  backgroundColor: Colors.white,
+                                  shape: const StadiumBorder(
+                                    side: BorderSide(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

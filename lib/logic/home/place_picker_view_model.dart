@@ -6,6 +6,7 @@ import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
 final placePickerViewModel = Provider.autoDispose(
   (ref) => PlacePickerViewModel(
@@ -27,6 +28,10 @@ class PlacePickerViewModel extends ViewModel {
   final endLocFocusNode = FocusNode();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
+
+  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
+  /// from "address"
+  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
 
   @override
   void initState() {
@@ -62,9 +67,10 @@ class PlacePickerViewModel extends ViewModel {
     );
   }
 
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
+  void gotoPlaceManagerView() {
+    FocusManager.instance.primaryFocus?.unfocus(); // Close keyboard
+    AppRouter.instance.navigateTo(Routes.placeManagerView);
+  }
 
   void editPlaceAddress({required bool isForStartLoc}) {
     if (isForStartLoc) {
@@ -104,6 +110,28 @@ class PlacePickerViewModel extends ViewModel {
       mapController.setEndLocation(
         location?.copyWith(address: pickedSuggestion),
       );
+      endLocFocusNode.unfocus();
+    }
+
+    read(placeSuggestionsProvider).state = [];
+
+    final isStartLocSet = (read(startLocProvider).state != null);
+    final isEndLocSet = (read(endLocProvider).state != null);
+    if (isStartLocSet && isEndLocSet) {
+      AppRouter.instance.popView();
+    }
+  }
+
+  void pickSavedLocation(Map<String, KapiotLocation> savedLocMap) {
+    final isForStartLoc = read(isForStartLocProvider).state;
+    final pickedSavedLoc = savedLocMap.values.first;
+    if (isForStartLoc) {
+      tecStartLoc.text = pickedSavedLoc.address!;
+      mapController.setStartLocation(pickedSavedLoc);
+      startLocFocusNode.unfocus();
+    } else {
+      tecEndLoc.text = pickedSavedLoc.address!;
+      mapController.setEndLocation(pickedSavedLoc);
       endLocFocusNode.unfocus();
     }
 
