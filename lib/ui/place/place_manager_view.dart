@@ -37,34 +37,44 @@ class PlaceManagerView extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.white,
-                    child: Column(
-                      children: const [
-                        SizedBox(
-                          height: 80,
-                          child: Center(
-                            child: ListTile(
-                              leading: Icon(Icons.home),
-                              title: Text('Home'),
-                              subtitle: Text(
-                                'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
-                                overflow: TextOverflow.ellipsis,
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      children: [
+                        Column(
+                          children: const [
+                            SizedBox(
+                              height: 80,
+                              child: Center(
+                                child: ListTile(
+                                  leading: Icon(Icons.home),
+                                  title: Text('Home'),
+                                  subtitle: Text(
+                                    'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  trailing: Icon(Icons.edit),
+                                ),
                               ),
-                              trailing: Icon(Icons.edit),
                             ),
-                          ),
+                            Divider(),
+                          ],
                         ),
-                        Divider(),
-                        SizedBox(
-                          height: 80,
-                          child: Center(
-                            child: ListTile(
-                              leading: Icon(Icons.work),
-                              title: Text('Work'),
-                              trailing: Icon(Icons.edit),
+                        Column(
+                          children: const [
+                            SizedBox(
+                              height: 80,
+                              child: Center(
+                                child: ListTile(
+                                  leading: Icon(Icons.work),
+                                  title: Text('Work'),
+                                  trailing: Icon(Icons.edit),
+                                ),
+                              ),
                             ),
-                          ),
+                            Divider(),
+                          ],
                         ),
-                        Divider(),
                         SizedBox(
                           height: 80,
                           child: Center(
@@ -86,19 +96,24 @@ class PlaceManagerView extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.white,
-                    child: const SizedBox(
-                      height: 80,
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(Icons.access_time_rounded),
-                          title: Text('University of San Carlos'),
-                          subtitle: Text(
-                            'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
-                            overflow: TextOverflow.ellipsis,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: const [
+                        SizedBox(
+                          height: 80,
+                          child: Center(
+                            child: ListTile(
+                              leading: Icon(Icons.access_time_rounded),
+                              title: Text('University of San Carlos'),
+                              subtitle: Text(
+                                'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: Icon(Icons.bookmark_outline),
+                            ),
                           ),
-                          trailing: Icon(Icons.bookmark_outline),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
