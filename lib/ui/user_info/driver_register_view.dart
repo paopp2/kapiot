@@ -17,26 +17,39 @@ class DriverRegisterView extends HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextField(
-                  decoration:
-                      InputDecoration(hintText: 'License plate (eg. FAG 134)'),
+                ElevatedButton(
+                  onPressed: model.pushDriverInfo,
+                  child: Text('Submit'),
+                ),
+                Form(
+                  key: model.licensePlateKey,
+                  child: const TextField(
+                    decoration: InputDecoration(
+                        hintText: 'License plate (eg. FAG 134)'),
+                  ),
                 ),
                 SizedBox(
                   height: constraints.maxHeight * 0.1,
                   width: constraints.maxWidth,
                   child: Row(
-                    children: const [
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Car make  (eg. Suzuki)',
+                    children: [
+                      Form(
+                        key: model.carMakeKey,
+                        child: const Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Car make  (eg. Suzuki)',
+                            ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Car model (eg. Ertiga)',
+                      Form(
+                        key: model.carModelKey,
+                        child: const Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Car model (eg. Ertiga)',
+                            ),
                           ),
                         ),
                       ),
