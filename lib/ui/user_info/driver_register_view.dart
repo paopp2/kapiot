@@ -23,8 +23,8 @@ class DriverRegisterView extends HookConsumerWidget {
                 ),
                 Form(
                   key: model.licensePlateKey,
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
                         hintText: 'License plate (eg. FAG 134)'),
                   ),
                 ),
@@ -35,9 +35,9 @@ class DriverRegisterView extends HookConsumerWidget {
                     children: [
                       Form(
                         key: model.carMakeKey,
-                        child: const Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
+                        child: Expanded(
+                          child: TextFormField(
+                            decoration: const InputDecoration(
                               hintText: 'Car make  (eg. Suzuki)',
                             ),
                           ),
@@ -45,9 +45,9 @@ class DriverRegisterView extends HookConsumerWidget {
                       ),
                       Form(
                         key: model.carModelKey,
-                        child: const Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
+                        child: Expanded(
+                          child: TextFormField(
+                            decoration: const InputDecoration(
                               hintText: 'Car model (eg. Ertiga)',
                             ),
                           ),
