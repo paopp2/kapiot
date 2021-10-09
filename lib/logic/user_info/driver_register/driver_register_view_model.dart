@@ -44,7 +44,6 @@ class DriverRegisterViewModel extends ViewModel {
     assert(licensePlateKey.currentState != null);
     assert(carMakeKey.currentState != null);
     assert(carModelKey.currentState != null);
-    assert(read(carTypeProvider).state != null);
     if (licensePlateKey.currentState!.validate() &&
         carMakeKey.currentState!.validate() &&
         carModelKey.currentState!.validate()) {
@@ -55,9 +54,8 @@ class DriverRegisterViewModel extends ViewModel {
           make: tecCarMakeField.text,
           model: tecCarModelField.text,
           type: carType);
-      final carList = currentUserInfo!.driverInfo!.registeredCars;
-      carList.add(carToAdd);
-      final driverInfo = DriverInfo(registeredCars: carList);
+      List<Car> carList = [carToAdd];
+      final driverInfo = DriverInfo(registeredCars: carList, rating: 0.0);
       final userInfo = currentUserInfo!.copyWith(driverInfo: driverInfo);
       userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
       tecLicensePlateField.clear();
