@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/logic/user_info/driver_register/driver_register_view_model.dart';
+import 'package:kapiot/model/car/car.dart';
+import 'components/vehicle_type.dart';
 
-class DriverRegisterView extends StatelessWidget {
+class DriverRegisterView extends HookConsumerWidget {
   const DriverRegisterView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(driverRegisterViewModel);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -12,26 +17,45 @@ class DriverRegisterView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextField(
-                  decoration:
-                      InputDecoration(hintText: 'License plate (eg. FAG 134)'),
+                ElevatedButton(
+                  onPressed: model.pushDriverInfo,
+                  child: const Text('Submit'),
+                ),
+                Form(
+                  key: model.licensePlateKey,
+                  child: TextFormField(
+                    controller: model.tecLicensePlateField,
+                    validator: model.driverRegisterValidator,
+                    decoration: const InputDecoration(
+                        hintText: 'License plate (eg. FAG 134)'),
+                  ),
                 ),
                 SizedBox(
                   height: constraints.maxHeight * 0.1,
                   width: constraints.maxWidth,
                   child: Row(
-                    children: const [
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Car make  (eg. Suzuki)',
+                    children: [
+                      Form(
+                        key: model.carMakeKey,
+                        child: Expanded(
+                          child: TextFormField(
+                            controller: model.tecCarMakeField,
+                            validator: model.driverRegisterValidator,
+                            decoration: const InputDecoration(
+                              hintText: 'Car make  (eg. Suzuki)',
+                            ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Car model (eg. Ertiga)',
+                      Form(
+                        key: model.carModelKey,
+                        child: Expanded(
+                          child: TextFormField(
+                            controller: model.tecCarModelField,
+                            validator: model.driverRegisterValidator,
+                            decoration: const InputDecoration(
+                              hintText: 'Car model (eg. Ertiga)',
+                            ),
                           ),
                         ),
                       ),
@@ -49,31 +73,43 @@ class DriverRegisterView extends StatelessWidget {
                           constraints: constraints,
                           vehicleIcon: Icon(Icons.car_rental),
                           vehicleLabel: 'Sedan',
+                          carType: CarType.sedan,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Hatchback',
+                          carType: CarType.hatchback,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Pickup',
+                          carType: CarType.truck,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'SUV',
+                          carType: CarType.suv,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'AUV',
+                          carType: CarType.auv,
+                          model: model,
                         ),
                         VehicleType(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Van',
+                          carType: CarType.van,
+                          model: model,
                         ),
                       ],
                     ),
@@ -84,46 +120,6 @@ class DriverRegisterView extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class VehicleType extends StatelessWidget {
-  VehicleType(
-      {Key? key,
-      required this.constraints,
-      required this.vehicleIcon,
-      required this.vehicleLabel})
-      : super(key: key);
-
-  BoxConstraints constraints;
-  Icon vehicleIcon;
-  String vehicleLabel;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        print('highlight ' + vehicleLabel);
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: constraints.maxWidth * 0.025,
-        ),
-        height: constraints.maxWidth * 0.3,
-        width: constraints.maxWidth * 0.3,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.purple[200],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            vehicleIcon,
-            Text(vehicleLabel),
-          ],
-        ),
-      ),
     );
   }
 }
