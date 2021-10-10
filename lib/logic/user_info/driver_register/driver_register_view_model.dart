@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
@@ -37,7 +38,11 @@ class DriverRegisterViewModel extends ViewModel {
   final tecCarModelField = TextEditingController();
 
   @override
-  void initState() {}
+  void dispose() {
+    tecLicensePlateField.dispose();
+    tecLicensePlateField.dispose();
+    tecCarMakeField.dispose();
+  }
 
   Future<void> pushDriverInfo() async {
     assert(currentUserInfo != null);
@@ -58,9 +63,7 @@ class DriverRegisterViewModel extends ViewModel {
       final driverInfo = DriverInfo(registeredCars: carList, rating: 0.0);
       final userInfo = currentUserInfo!.copyWith(driverInfo: driverInfo);
       userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
-      tecLicensePlateField.clear();
-      tecCarMakeField.clear();
-      tecCarModelField.clear();
+      AppRouter.instance.popView();
     }
   }
 
@@ -69,16 +72,6 @@ class DriverRegisterViewModel extends ViewModel {
   }
 
   String? driverRegisterValidator(String? value) {
-    if (value == '') {
-      return "This field can't be empty";
-    }
-    return null;
-  }
-
-  @override
-  void dispose() {
-    tecLicensePlateField.dispose();
-    tecLicensePlateField.dispose();
-    tecCarMakeField.dispose();
+    return (value == '') ? "This field can't be empty" : null;
   }
 }

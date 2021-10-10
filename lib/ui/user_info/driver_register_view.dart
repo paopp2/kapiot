@@ -19,7 +19,7 @@ class DriverRegisterView extends HookConsumerWidget {
               children: [
                 ElevatedButton(
                   onPressed: model.pushDriverInfo,
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
                 ),
                 Form(
                   key: model.licensePlateKey,

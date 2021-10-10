@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/user_info/driver_register/driver_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
 
 class VehicleType extends StatelessWidget {
-  VehicleType(
+  const VehicleType(
       {Key? key,
       required this.constraints,
       required this.vehicleIcon,
@@ -22,11 +21,7 @@ class VehicleType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        model.setCarType(carType);
-        print(carType);
-        print('highlight ' + vehicleLabel);
-      },
+      onTap: () => model.setCarType(carType),
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: constraints.maxWidth * 0.025,
