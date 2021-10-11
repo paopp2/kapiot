@@ -59,7 +59,10 @@ class PlaceManagerView extends HookConsumerWidget {
                             ),
                           );
                         } else {
-                          final savedLoc = savedLocations[index];
+                          final sortedKeys = savedLocations.keys.toList()
+                            ..sort();
+                          final locLabel = sortedKeys[index];
+                          final location = savedLocations[locLabel];
                           return Column(
                             children: [
                               SizedBox(
@@ -67,9 +70,9 @@ class PlaceManagerView extends HookConsumerWidget {
                                 child: Center(
                                   child: ListTile(
                                     leading: const Icon(Icons.bookmark),
-                                    title: Text(savedLoc.keys.first),
+                                    title: Text(locLabel),
                                     subtitle: Text(
-                                      savedLoc.values.first.address!,
+                                      location?.address! ?? '',
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     trailing: const Icon(Icons.edit),

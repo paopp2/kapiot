@@ -9,12 +9,10 @@ part of 'kapiot_user_info.dart';
 _$_KapiotUserInfo _$$_KapiotUserInfoFromJson(Map<String, dynamic> json) =>
     _$_KapiotUserInfo(
       points: (json['points'] as num).toDouble(),
-      savedLocations: (json['savedLocations'] as List<dynamic>)
-          .map((e) => (e as Map<String, dynamic>).map(
-                (k, e) => MapEntry(
-                    k, KapiotLocation.fromJson(e as Map<String, dynamic>)),
-              ))
-          .toList(),
+      savedLocations: (json['savedLocations'] as Map<String, dynamic>).map(
+        (k, e) =>
+            MapEntry(k, KapiotLocation.fromJson(e as Map<String, dynamic>)),
+      ),
       userType: _$enumDecode(_$UserTypeEnumMap, json['userType']),
       driverInfo: json['driverInfo'] == null
           ? null
@@ -24,9 +22,8 @@ _$_KapiotUserInfo _$$_KapiotUserInfoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_KapiotUserInfoToJson(_$_KapiotUserInfo instance) =>
     <String, dynamic>{
       'points': instance.points,
-      'savedLocations': instance.savedLocations
-          .map((e) => e.map((k, e) => MapEntry(k, e.toJson())))
-          .toList(),
+      'savedLocations':
+          instance.savedLocations.map((k, e) => MapEntry(k, e.toJson())),
       'userType': _$UserTypeEnumMap[instance.userType],
       'driverInfo': instance.driverInfo?.toJson(),
     };

@@ -127,14 +127,17 @@ class PlacePickerView extends HookConsumerWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: savedLocations!.length,
                             itemBuilder: (context, index) {
-                              final location = savedLocations[index];
+                              final sortedKeys = savedLocations.keys.toList()
+                                ..sort();
+                              final locLabel = sortedKeys[index];
+                              final location = savedLocations[locLabel];
                               return Padding(
                                 padding: const EdgeInsets.all(3.0),
                                 child: ActionChip(
                                   onPressed: () => model.pickSavedLocation(
-                                    location,
+                                    location!,
                                   ),
-                                  label: Text(location.keys.first),
+                                  label: Text(locLabel),
                                   backgroundColor: Colors.white,
                                   shape: const StadiumBorder(
                                     side: BorderSide(),
