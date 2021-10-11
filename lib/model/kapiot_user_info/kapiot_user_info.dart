@@ -12,7 +12,7 @@ class KapiotUserInfo with _$KapiotUserInfo {
   const KapiotUserInfo._();
   const factory KapiotUserInfo({
     required double points,
-    required List<Map<String, KapiotLocation>> savedLocations,
+    required Map<String, KapiotLocation> savedLocations,
     required UserType userType,
     DriverInfo? driverInfo,
   }) = _KapiotUserInfo;

@@ -122,9 +122,8 @@ class PlacePickerViewModel extends ViewModel {
     }
   }
 
-  void pickSavedLocation(Map<String, KapiotLocation> savedLocMap) {
+  void pickSavedLocation(KapiotLocation pickedSavedLoc) {
     final isForStartLoc = read(isForStartLocProvider).state;
-    final pickedSavedLoc = savedLocMap.values.first;
     if (isForStartLoc) {
       tecStartLoc.text = pickedSavedLoc.address!;
       mapController.setStartLocation(pickedSavedLoc);

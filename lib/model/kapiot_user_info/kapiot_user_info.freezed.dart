@@ -23,7 +23,7 @@ class _$KapiotUserInfoTearOff {
 
   _KapiotUserInfo call(
       {required double points,
-      required List<Map<String, KapiotLocation>> savedLocations,
+      required Map<String, KapiotLocation> savedLocations,
       required UserType userType,
       DriverInfo? driverInfo}) {
     return _KapiotUserInfo(
@@ -45,7 +45,7 @@ const $KapiotUserInfo = _$KapiotUserInfoTearOff();
 /// @nodoc
 mixin _$KapiotUserInfo {
   double get points => throw _privateConstructorUsedError;
-  List<Map<String, KapiotLocation>> get savedLocations =>
+  Map<String, KapiotLocation> get savedLocations =>
       throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
   DriverInfo? get driverInfo => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $KapiotUserInfoCopyWith<$Res> {
       _$KapiotUserInfoCopyWithImpl<$Res>;
   $Res call(
       {double points,
-      List<Map<String, KapiotLocation>> savedLocations,
+      Map<String, KapiotLocation> savedLocations,
       UserType userType,
       DriverInfo? driverInfo});
 
@@ -94,7 +94,7 @@ class _$KapiotUserInfoCopyWithImpl<$Res>
       savedLocations: savedLocations == freezed
           ? _value.savedLocations
           : savedLocations // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, KapiotLocation>>,
+              as Map<String, KapiotLocation>,
       userType: userType == freezed
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
@@ -127,7 +127,7 @@ abstract class _$KapiotUserInfoCopyWith<$Res>
   @override
   $Res call(
       {double points,
-      List<Map<String, KapiotLocation>> savedLocations,
+      Map<String, KapiotLocation> savedLocations,
       UserType userType,
       DriverInfo? driverInfo});
 
@@ -161,7 +161,7 @@ class __$KapiotUserInfoCopyWithImpl<$Res>
       savedLocations: savedLocations == freezed
           ? _value.savedLocations
           : savedLocations // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, KapiotLocation>>,
+              as Map<String, KapiotLocation>,
       userType: userType == freezed
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
@@ -190,7 +190,7 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
   @override
   final double points;
   @override
-  final List<Map<String, KapiotLocation>> savedLocations;
+  final Map<String, KapiotLocation> savedLocations;
   @override
   final UserType userType;
   @override
@@ -251,7 +251,7 @@ class _$_KapiotUserInfo extends _KapiotUserInfo with DiagnosticableTreeMixin {
 abstract class _KapiotUserInfo extends KapiotUserInfo {
   const factory _KapiotUserInfo(
       {required double points,
-      required List<Map<String, KapiotLocation>> savedLocations,
+      required Map<String, KapiotLocation> savedLocations,
       required UserType userType,
       DriverInfo? driverInfo}) = _$_KapiotUserInfo;
   const _KapiotUserInfo._() : super._();
@@ -262,7 +262,7 @@ abstract class _KapiotUserInfo extends KapiotUserInfo {
   @override
   double get points => throw _privateConstructorUsedError;
   @override
-  List<Map<String, KapiotLocation>> get savedLocations =>
+  Map<String, KapiotLocation> get savedLocations =>
       throw _privateConstructorUsedError;
   @override
   UserType get userType => throw _privateConstructorUsedError;

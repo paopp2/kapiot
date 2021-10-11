@@ -18,4 +18,4 @@ final placeSuggestionsProvider =
     StateProvider.autoDispose<List<String?>>((ref) => []);
 
 final savedLocationsProvider =
-    StateProvider<List<Map<String, KapiotLocation>>>((ref) => []);
+    StateProvider<Map<String, KapiotLocation>>((ref) => {});

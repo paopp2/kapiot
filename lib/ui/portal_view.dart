@@ -22,7 +22,7 @@ class PortalView extends HookConsumerWidget {
                     userId: 'HV9BcFRIKMYrQOYzd2gStGqErW12',
                     userInfo: const KapiotUserInfo(
                       points: 10,
-                      savedLocations: [],
+                      savedLocations: {},
                       userType: UserType.faculty,
                     ),
                   );
