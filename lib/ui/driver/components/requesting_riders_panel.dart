@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 class RequestingRidersPanel extends HookConsumerWidget {
   const RequestingRidersPanel({
@@ -73,7 +74,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('BS CPE 3'),
+                                  Text(rider.userType!.description),
                                   Text(
                                     rider.displayName ?? 'No name',
                                     style: const TextStyle(
