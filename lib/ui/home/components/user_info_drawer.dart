@@ -86,13 +86,15 @@ class UserInfoDrawer extends HookConsumerWidget {
                         children: [
                           Visibility(
                             visible: currentUserInfo.isRegisteredDriver,
-                            child: const ListTile(
-                              title: Text('Rating'),
-                              leading: Icon(
+                            child: ListTile(
+                              title: const Text('Rating'),
+                              leading: const Icon(
                                 Icons.star,
                                 color: Colors.amber,
                               ),
-                              trailing: Text('4.8'),
+                              trailing: Text(
+                                "${currentUserInfo.driverInfo?.rating ?? 'Unrated'}",
+                              ),
                             ),
                           ),
                           ListTile(

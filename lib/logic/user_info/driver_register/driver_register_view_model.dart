@@ -60,7 +60,7 @@ class DriverRegisterViewModel extends ViewModel {
           model: tecCarModelField.text,
           type: carType);
       List<Car> carList = [carToAdd];
-      final driverInfo = DriverInfo(registeredCars: carList, rating: 0.0);
+      final driverInfo = DriverInfo(registeredCars: carList);
       final userInfo = currentUserInfo!.copyWith(driverInfo: driverInfo);
       userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
       AppRouter.instance.popView();
