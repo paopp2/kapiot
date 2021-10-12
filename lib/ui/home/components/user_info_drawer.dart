@@ -133,7 +133,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                                             onTap: () {
                                               if (isLastItem) {
                                                 AppRouter.instance.navigateTo(
-                                                  Routes.driverRegisterView,
+                                                  Routes.carRegisterView,
                                                 );
                                               }
                                             },

@@ -90,7 +90,7 @@ class HomeViewModel extends ViewModel {
       AppRouter.instance.navigateTo(Routes.editUserInfoView);
 
   void gotoDriverRegisterView() =>
-      AppRouter.instance.navigateTo(Routes.driverRegisterView);
+      AppRouter.instance.navigateTo(Routes.carRegisterView);
 
   void gotoPlaceManagerView() =>
       AppRouter.instance.navigateTo(Routes.placeManagerView);

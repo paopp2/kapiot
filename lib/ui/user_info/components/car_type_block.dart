@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/user_info/driver_register/driver_register_state.dart';
-import 'package:kapiot/logic/user_info/driver_register/driver_register_view_model.dart';
+import 'package:kapiot/logic/user_info/driver_info/car_register_state.dart';
+import 'package:kapiot/logic/user_info/driver_info/car_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
 
 class CarTypeBlock extends HookConsumerWidget {
@@ -18,7 +18,7 @@ class CarTypeBlock extends HookConsumerWidget {
   final Icon vehicleIcon;
   final String vehicleLabel;
   final CarType carType;
-  final DriverRegisterViewModel model;
+  final CarRegisterViewModel model;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
