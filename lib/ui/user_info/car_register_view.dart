@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/user_info/driver_register/driver_register_view_model.dart';
+import 'package:kapiot/logic/user_info/driver_info/car_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
-import 'components/vehicle_type.dart';
+import 'components/car_type_block.dart';
 
-class DriverRegisterView extends HookConsumerWidget {
-  const DriverRegisterView({Key? key}) : super(key: key);
+class CarRegisterView extends HookConsumerWidget {
+  const CarRegisterView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(driverRegisterViewModel);
+    final model = ref.watch(carRegisterViewModel);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -17,17 +17,14 @@ class DriverRegisterView extends HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: model.pushDriverInfo,
-                  child: const Text('Submit'),
-                ),
                 Form(
                   key: model.licensePlateKey,
                   child: TextFormField(
                     controller: model.tecLicensePlateField,
-                    validator: model.driverRegisterValidator,
+                    validator: model.carRegisterValidator,
                     decoration: const InputDecoration(
-                        hintText: 'License plate (eg. FAG 134)'),
+                      hintText: 'License plate (eg. FAG 134)',
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -40,7 +37,7 @@ class DriverRegisterView extends HookConsumerWidget {
                         child: Expanded(
                           child: TextFormField(
                             controller: model.tecCarMakeField,
-                            validator: model.driverRegisterValidator,
+                            validator: model.carRegisterValidator,
                             decoration: const InputDecoration(
                               hintText: 'Car make  (eg. Suzuki)',
                             ),
@@ -52,7 +49,7 @@ class DriverRegisterView extends HookConsumerWidget {
                         child: Expanded(
                           child: TextFormField(
                             controller: model.tecCarModelField,
-                            validator: model.driverRegisterValidator,
+                            validator: model.carRegisterValidator,
                             decoration: const InputDecoration(
                               hintText: 'Car model (eg. Ertiga)',
                             ),
@@ -69,42 +66,42 @@ class DriverRegisterView extends HookConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        VehicleType(
+                        CarTypeBlock(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Sedan',
                           carType: CarType.sedan,
                           model: model,
                         ),
-                        VehicleType(
+                        CarTypeBlock(
                           constraints: constraints,
                           vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Hatchback',
                           carType: CarType.hatchback,
                           model: model,
                         ),
-                        VehicleType(
+                        CarTypeBlock(
                           constraints: constraints,
                           vehicleIcon: const Icon(Icons.car_rental),
-                          vehicleLabel: 'Pickup',
+                          vehicleLabel: 'Truck',
                           carType: CarType.truck,
                           model: model,
                         ),
-                        VehicleType(
+                        CarTypeBlock(
                           constraints: constraints,
                           vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'SUV',
                           carType: CarType.suv,
                           model: model,
                         ),
-                        VehicleType(
+                        CarTypeBlock(
                           constraints: constraints,
                           vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'AUV',
                           carType: CarType.auv,
                           model: model,
                         ),
-                        VehicleType(
+                        CarTypeBlock(
                           constraints: constraints,
                           vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Van',
@@ -114,6 +111,11 @@ class DriverRegisterView extends HookConsumerWidget {
                       ],
                     ),
                   ),
+                ),
+                const SizedBox(height: 69),
+                ElevatedButton(
+                  onPressed: model.registerCar,
+                  child: const Text('Submit'),
                 ),
               ],
             ),
