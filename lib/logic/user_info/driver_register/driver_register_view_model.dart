@@ -44,7 +44,7 @@ class DriverRegisterViewModel extends ViewModel {
     tecCarMakeField.dispose();
   }
 
-  Future<void> pushDriverInfo() async {
+  Future<void> registerCar() async {
     assert(currentUserInfo != null);
     assert(licensePlateKey.currentState != null);
     assert(carMakeKey.currentState != null);
@@ -55,14 +55,23 @@ class DriverRegisterViewModel extends ViewModel {
       final userId = currentUser!.id;
       final carType = read(carTypeProvider).state;
       final carToAdd = Car(
-          licensePlateNum: tecLicensePlateField.text,
-          make: tecCarMakeField.text,
-          model: tecCarModelField.text,
-          type: carType);
-      List<Car> carList = [carToAdd];
-      final driverInfo = DriverInfo(registeredCars: carList);
-      final userInfo = currentUserInfo!.copyWith(driverInfo: driverInfo);
-      userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
+        licensePlateNum: tecLicensePlateField.text,
+        make: tecCarMakeField.text,
+        model: tecCarModelField.text,
+        type: carType,
+      );
+      final currentDriverInfo = currentUserInfo?.driverInfo;
+      KapiotUserInfo? updatedUserInfo;
+      if (currentDriverInfo != null) {
+        final registeredCars = currentDriverInfo.registeredCars;
+        updatedUserInfo = currentUserInfo!.copyWith.driverInfo!(
+          registeredCars: registeredCars..add(carToAdd),
+        );
+      } else {
+        final driverInfo = DriverInfo(registeredCars: [carToAdd]);
+        updatedUserInfo = currentUserInfo!.copyWith(driverInfo: driverInfo);
+      }
+      userInfoRepo.pushUserInfo(userId: userId, userInfo: updatedUserInfo);
       AppRouter.instance.popView();
     }
   }

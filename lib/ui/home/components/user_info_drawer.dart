@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 
@@ -19,6 +20,7 @@ class UserInfoDrawer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider)!;
     final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final ownedCars = currentUserInfo?.driverInfo?.registeredCars;
     final username = currentUser.email!.split('@').first;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
@@ -118,14 +120,30 @@ class UserInfoDrawer extends HookConsumerWidget {
                                   children: [
                                     SizedBox(
                                       height: constraints.maxHeight * 0.25,
-                                      child: SingleChildScrollView(
+                                      child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          children: [
-                                            Container(
+                                        itemCount: ownedCars!.length + 1,
+                                        itemBuilder: (context, index) {
+                                          final isLastItem =
+                                              (index == ownedCars.length);
+                                          final car = (!isLastItem)
+                                              ? ownedCars[index]
+                                              : null;
+                                          return InkWell(
+                                            onTap: () {
+                                              if (isLastItem) {
+                                                AppRouter.instance.navigateTo(
+                                                  Routes.driverRegisterView,
+                                                );
+                                              }
+                                            },
+                                            child: Container(
                                               margin: EdgeInsets.symmetric(
                                                 horizontal:
                                                     constraints.maxWidth *
+                                                        0.025,
+                                                vertical:
+                                                    constraints.maxHeight *
                                                         0.025,
                                               ),
                                               height:
@@ -134,20 +152,31 @@ class UserInfoDrawer extends HookConsumerWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(12),
-                                                color: Colors.purple[200],
+                                                color: (isLastItem)
+                                                    ? Colors.grey[200]
+                                                    : Colors.purple[200],
                                               ),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: const [
-                                                  Icon(CupertinoIcons.car),
-                                                  Text('FAG 164'),
-                                                  Text('Suzuki Ertiga'),
-                                                ],
-                                              ),
+                                              child: (isLastItem)
+                                                  ? const Icon(Icons.add)
+                                                  : Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const Icon(
+                                                          CupertinoIcons.car,
+                                                        ),
+                                                        Text(
+                                                          car!.licensePlateNum,
+                                                        ),
+                                                        Text(
+                                                          '${car.make} ${car.model}',
+                                                        ),
+                                                      ],
+                                                    ),
                                             ),
-                                          ],
-                                        ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ],

@@ -113,7 +113,7 @@ class DriverRegisterView extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 69),
                 ElevatedButton(
-                  onPressed: model.pushDriverInfo,
+                  onPressed: model.registerCar,
                   child: const Text('Submit'),
                 ),
               ],
