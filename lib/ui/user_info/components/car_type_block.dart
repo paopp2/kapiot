@@ -4,8 +4,8 @@ import 'package:kapiot/logic/user_info/driver_register/driver_register_state.dar
 import 'package:kapiot/logic/user_info/driver_register/driver_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
 
-class VehicleType extends HookConsumerWidget {
-  const VehicleType({
+class CarTypeBlock extends HookConsumerWidget {
+  const CarTypeBlock({
     Key? key,
     required this.constraints,
     required this.vehicleIcon,
