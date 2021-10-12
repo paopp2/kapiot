@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/post_trip/post_trip_summary_state.dart';
 import 'package:kapiot/logic/post_trip/post_trip_summary_view_model.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
@@ -22,6 +23,23 @@ class PostTripSummaryView extends HookConsumerWidget {
 
     useEffect(() {
       model.initState();
+      model.showRateDriverDialog(
+        dialog: AlertDialog(
+          title: const Text('Driver Rating'),
+          content: SizedBox(
+            height: 100,
+            child: Column(
+              children: [
+                const TextField(),
+                ElevatedButton(
+                  onPressed: () => AppRouter.instance.popView(),
+                  child: const Text('Submit'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
       return model.dispose;
     }, []);
 

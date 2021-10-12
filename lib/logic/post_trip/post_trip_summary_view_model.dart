@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
@@ -40,6 +42,19 @@ class PostTripSummaryViewModel extends ViewModel {
     final currentRouteConfig = read(currentRouteConfigProvider).state!;
     completeTransaction(currentRouteConfig);
     updateTotalPoints();
+  }
+
+  Future<void> showRateDriverDialog({required Widget dialog}) async {
+    final isRider = (read(currentRouteConfigProvider).state is ForRider);
+    if (isRider) {
+      // Show the dialog only once at the start of the PostTripSummaryView
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        showDialog(
+          context: AppRouter.instance.navigationKey.currentContext!,
+          builder: (context) => dialog,
+        );
+      });
+    }
   }
 
   void completeTransaction(RouteConfig routeConfig) {
