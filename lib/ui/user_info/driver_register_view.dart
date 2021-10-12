@@ -17,10 +17,6 @@ class DriverRegisterView extends HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: model.pushDriverInfo,
-                  child: const Text('Submit'),
-                ),
                 Form(
                   key: model.licensePlateKey,
                   child: TextFormField(
@@ -71,7 +67,7 @@ class DriverRegisterView extends HookConsumerWidget {
                       children: [
                         VehicleType(
                           constraints: constraints,
-                          vehicleIcon: Icon(Icons.car_rental),
+                          vehicleIcon: const Icon(Icons.car_rental),
                           vehicleLabel: 'Sedan',
                           carType: CarType.sedan,
                           model: model,
@@ -86,7 +82,7 @@ class DriverRegisterView extends HookConsumerWidget {
                         VehicleType(
                           constraints: constraints,
                           vehicleIcon: const Icon(Icons.car_rental),
-                          vehicleLabel: 'Pickup',
+                          vehicleLabel: 'Truck',
                           carType: CarType.truck,
                           model: model,
                         ),
@@ -114,6 +110,11 @@ class DriverRegisterView extends HookConsumerWidget {
                       ],
                     ),
                   ),
+                ),
+                const SizedBox(height: 69),
+                ElevatedButton(
+                  onPressed: model.pushDriverInfo,
+                  child: const Text('Submit'),
                 ),
               ],
             ),
