@@ -134,16 +134,4 @@ class PlacePickerViewModel extends ViewModel {
     read(placeSuggestionsProvider).state =
         suggestions.map((s) => s["address"]).toList();
   }
-
-  List<String> splitAddress(String completeAddress) {
-    final index = completeAddress.indexOf(",");
-    if (index != -1) {
-      return [
-        completeAddress.substring(0, index).trim(),
-        completeAddress.substring(index + 1).trim()
-      ];
-    } else {
-      return [completeAddress, "Philippines"];
-    }
-  }
 }
