@@ -8,6 +8,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/home/place_picker_view_model.dart';
+import 'package:kapiot/logic/shared/place_suggester.dart';
 
 class PlacePickerView extends HookConsumerWidget {
   const PlacePickerView({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class PlacePickerView extends HookConsumerWidget {
                           onTap: () => model.editPlaceAddress(
                             isForStartLoc: true,
                           ),
-                          onChanged: model.updateSuggestions,
+                          onChanged: model.placeSuggester.updateSuggestions,
                           decoration: const InputDecoration(
                               prefixIcon: Icon(
                                 CupertinoIcons.smallcircle_circle,
@@ -83,7 +84,7 @@ class PlacePickerView extends HookConsumerWidget {
                           onTap: () => model.editPlaceAddress(
                             isForStartLoc: false,
                           ),
-                          onChanged: model.updateSuggestions,
+                          onChanged: model.placeSuggester.updateSuggestions,
                           decoration: const InputDecoration(
                             prefixIcon: Icon(CupertinoIcons.location),
                             hintText: "End location",

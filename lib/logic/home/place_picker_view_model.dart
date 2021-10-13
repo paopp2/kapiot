@@ -5,6 +5,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/logic/shared/place_suggester.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
@@ -14,6 +15,7 @@ final placePickerViewModel = Provider.autoDispose(
     read: ref.read,
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     mapController: ref.watch(homeMapController),
+    placeSuggester: ref.watch(placeSuggesterProvider),
   ),
 );
 
@@ -22,17 +24,15 @@ class PlacePickerViewModel extends ViewModel {
     required Reader read,
     required this.mapController,
     required this.googleMapsApiServices,
+    required this.placeSuggester,
   }) : super(read);
   final HomeMapController mapController;
   final GoogleMapsApiServices googleMapsApiServices;
+  final PlaceSuggester placeSuggester;
   final startLocFocusNode = FocusNode();
   final endLocFocusNode = FocusNode();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
-
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
 
   @override
   void initState() {
@@ -68,7 +68,6 @@ class PlacePickerViewModel extends ViewModel {
   }
 
   void editPlaceAddress({required bool isForStartLoc}) {
-    // Select the text of the TextField to edit
     (isForStartLoc) ? tecStartLoc.selectText() : tecEndLoc.selectText();
     read(isForStartLocProvider).state = isForStartLoc;
   }
@@ -77,12 +76,7 @@ class PlacePickerViewModel extends ViewModel {
     required String pickedSuggestion,
     required bool forStartLoc,
   }) async {
-    final pickedSuggestionMap = _autocompleteSuggestionMaps.firstWhere(
-      (s) => s["address"] == pickedSuggestion,
-    );
-    final placeId = pickedSuggestionMap["id"] as String;
-    final location =
-        await googleMapsApiServices.places.getLocFromPlaceId(placeId);
+    final location = await placeSuggester.getLocation(pickedSuggestion);
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
       mapController.setStartLocation(
@@ -114,19 +108,11 @@ class PlacePickerViewModel extends ViewModel {
   }
 
   void _returnIfBothLocationsSet() {
-    read(placeSuggestionsProvider).state = [];
+    placeSuggester.clearSuggestions();
     final isStartLocSet = (read(startLocProvider).state != null);
     final isEndLocSet = (read(endLocProvider).state != null);
     if (isStartLocSet && isEndLocSet) {
       AppRouter.instance.popView();
     }
-  }
-
-  void updateSuggestions(String? value) async {
-    final suggestions = await googleMapsApiServices.places
-        .getAutocompleteSuggestions(value ?? '');
-    _autocompleteSuggestionMaps = suggestions;
-    read(placeSuggestionsProvider).state =
-        suggestions.map((s) => s["address"]).toList();
   }
 }
