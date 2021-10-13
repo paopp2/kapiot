@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final pointsProvider = Provider.autoDispose<double>((ref) {
@@ -11,6 +12,9 @@ final pointsProvider = Provider.autoDispose<double>((ref) {
 });
 
 final ratingProvider = StateProvider.autoDispose<int>((ref) => 0);
+
+final acceptingDriverInfoProvider =
+    StateProvider.autoDispose<DriverInfo?>((ref) => null);
 
 final distanceInKmProvider = Provider.autoDispose<double>((ref) {
   final transaction = ref.watch(transactionProvider).state;
