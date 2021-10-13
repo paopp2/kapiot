@@ -24,7 +24,7 @@ final homeViewModel = Provider.autoDispose(
     // not set the required user information yet
     ref.watch(currentUserInfoProvider).whenData((userInfo) {
       if (userInfo == null) {
-        AppRouter.instance.navigateTo(Routes.editUserInfoView);
+        AppRouter.instance.navigateTo(Routes.initUserInfoView);
       }
     });
 
@@ -87,7 +87,7 @@ class HomeViewModel extends ViewModel {
   }
 
   void gotoEditUserInfoView() =>
-      AppRouter.instance.navigateTo(Routes.editUserInfoView);
+      AppRouter.instance.navigateTo(Routes.initUserInfoView);
 
   void gotoDriverRegisterView() =>
       AppRouter.instance.navigateTo(Routes.carRegisterView);

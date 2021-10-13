@@ -4,16 +4,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
-import 'package:kapiot/logic/user_info/edit_user_info/edit_user_info_state.dart';
-import 'package:kapiot/logic/user_info/edit_user_info/edit_user_info_view_model.dart';
+import 'package:kapiot/logic/user_info/edit_user_info/init_user_info_view_model.dart';
+import 'package:kapiot/logic/user_info/init_user_info/init_user_info_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
-class EditUserInfoView extends HookConsumerWidget {
-  const EditUserInfoView({Key? key}) : super(key: key);
+class InitUserInfoView extends HookConsumerWidget {
+  const InitUserInfoView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(editUserInfoViewModel);
+    final model = ref.watch(initUserInfoViewModel);
     final pageIndex = ref.watch(pageIndexProvider).state;
     final selectedUserType = ref.watch(userTypeProvider).state;
     final placeSuggestions = ref.watch(placeSuggestionsProvider).state;

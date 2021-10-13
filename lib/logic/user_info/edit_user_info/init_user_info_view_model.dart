@@ -5,13 +5,13 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/logic/shared/place_suggester.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/logic/user_info/init_user_info/init_user_info_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
-import 'edit_user_info_state.dart';
 
-final editUserInfoViewModel = Provider.autoDispose(
-  (ref) => EditUserInfoViewModel(
+final initUserInfoViewModel = Provider.autoDispose(
+  (ref) => InitUserInfoViewModel(
     read: ref.read,
     currentUser: ref.watch(currentUserProvider)!,
     userInfoRepo: ref.watch(userInfoRepositoryProvider),
@@ -19,8 +19,8 @@ final editUserInfoViewModel = Provider.autoDispose(
   ),
 );
 
-class EditUserInfoViewModel extends ViewModel {
-  EditUserInfoViewModel({
+class InitUserInfoViewModel extends ViewModel {
+  InitUserInfoViewModel({
     required Reader read,
     required this.currentUser,
     required this.userInfoRepo,
