@@ -18,4 +18,6 @@ class FirestorePath {
   static String docActiveDriverAccepted(String driverId, String riderId) =>
       'active_drivers/$driverId/accepted/$riderId';
   static String docUserInfo(String userId) => 'user_info/$userId';
+  static String docDriverInfo(String driverId) =>
+      'user_info/$driverId/driverInfo';
 }
