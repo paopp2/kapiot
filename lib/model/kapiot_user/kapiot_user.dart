@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kapiot/logic/utils/extensions.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 
 part 'kapiot_user.freezed.dart';
 part 'kapiot_user.g.dart';

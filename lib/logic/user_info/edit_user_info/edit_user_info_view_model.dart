@@ -7,7 +7,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
-import 'package:kapiot/logic/utils/extensions.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 import 'edit_user_info_state.dart';
 
 final editUserInfoViewModel = Provider.autoDispose(
