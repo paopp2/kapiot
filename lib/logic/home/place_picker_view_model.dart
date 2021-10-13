@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
-import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
@@ -13,7 +12,6 @@ import 'package:kapiot/logic/shared/extensions.dart';
 final placePickerViewModel = Provider.autoDispose(
   (ref) => PlacePickerViewModel(
     read: ref.read,
-    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     mapController: ref.watch(homeMapController),
     placeSuggester: ref.watch(placeSuggesterProvider),
   ),
@@ -23,11 +21,9 @@ class PlacePickerViewModel extends ViewModel {
   PlacePickerViewModel({
     required Reader read,
     required this.mapController,
-    required this.googleMapsApiServices,
     required this.placeSuggester,
   }) : super(read);
   final HomeMapController mapController;
-  final GoogleMapsApiServices googleMapsApiServices;
   final PlaceSuggester placeSuggester;
   final startLocFocusNode = FocusNode();
   final endLocFocusNode = FocusNode();

@@ -105,7 +105,7 @@ class EditUserInfoView extends HookConsumerWidget {
                     onTap: () => model.editPlaceAddress(
                       isForStartLoc: true,
                     ),
-                    onChanged: model.updateSuggestions,
+                    onChanged: model.placeSuggester.updateSuggestions,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.home),
                         hintText: "Home",
@@ -123,7 +123,7 @@ class EditUserInfoView extends HookConsumerWidget {
                     onTap: () => model.editPlaceAddress(
                       isForStartLoc: false,
                     ),
-                    onChanged: model.updateSuggestions,
+                    onChanged: model.placeSuggester.updateSuggestions,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(CupertinoIcons.building_2_fill),
                       hintText: (selectedUserType == UserType.student)
