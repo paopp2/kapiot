@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
-import 'package:kapiot/logic/extensions.dart';
+import 'package:kapiot/logic/utils/extensions.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/home/place_picker_view_model.dart';
 

@@ -7,7 +7,7 @@ import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
-import 'package:kapiot/logic/extensions.dart';
+import 'package:kapiot/logic/utils/extensions.dart';
 
 final placePickerViewModel = Provider.autoDispose(
   (ref) => PlacePickerViewModel(
