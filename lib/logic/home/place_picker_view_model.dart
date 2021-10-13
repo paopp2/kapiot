@@ -96,14 +96,7 @@ class PlacePickerViewModel extends ViewModel {
       );
       endLocFocusNode.unfocus();
     }
-
-    read(placeSuggestionsProvider).state = [];
-
-    final isStartLocSet = (read(startLocProvider).state != null);
-    final isEndLocSet = (read(endLocProvider).state != null);
-    if (isStartLocSet && isEndLocSet) {
-      AppRouter.instance.popView();
-    }
+    _returnIfBothLocationsSet();
   }
 
   void pickSavedLocation(KapiotLocation pickedSavedLoc) {
@@ -117,9 +110,11 @@ class PlacePickerViewModel extends ViewModel {
       mapController.setEndLocation(pickedSavedLoc);
       endLocFocusNode.unfocus();
     }
+    _returnIfBothLocationsSet();
+  }
 
+  void _returnIfBothLocationsSet() {
     read(placeSuggestionsProvider).state = [];
-
     final isStartLocSet = (read(startLocProvider).state != null);
     final isEndLocSet = (read(endLocProvider).state != null);
     if (isStartLocSet && isEndLocSet) {

@@ -78,11 +78,9 @@ class EditUserInfoViewModel extends ViewModel {
       tecSchoolLoc.text = pickedSuggestion;
       schoolLocFocusNode.unfocus();
     }
-
     read(savedLocationsProvider).state[label] = location!.copyWith(
       address: pickedSuggestion,
     );
-
     read(placeSuggestionsProvider).state = [];
   }
 
