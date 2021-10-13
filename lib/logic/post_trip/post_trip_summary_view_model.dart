@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -37,6 +39,8 @@ class PostTripSummaryViewModel extends ViewModel {
   final GoogleMapsApiServices googleMapsApiServices;
   final CoreAlgorithms coreAlgorithms;
 
+  StreamSubscription? _acceptingDriverInfoSub;
+
   @override
   void initState() {
     assert(read(currentRouteConfigProvider).state != null);
@@ -61,6 +65,27 @@ class PostTripSummaryViewModel extends ViewModel {
   void setRating(int rating) {
     read(ratingProvider).state = rating;
     print(read(ratingProvider).state);
+  }
+
+  Future<void> updateDriverRating() async {
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
+    final driverInfoStream = userInfoRepo.getDriverInfoStream(
+      acceptingDriverConfig!.user.id,
+    );
+    final currentRiderConfig = read(currentRouteConfigProvider).state;
+    assert(currentRiderConfig != null);
+    _acceptingDriverInfoSub = driverInfoStream.listen((driverInfo) {
+      if (driverInfo != null) {
+        read(acceptingDriverInfoProvider).state = driverInfo;
+      }
+    });
+
+    final acceptingDriverInfo = read(acceptingDriverInfoProvider).state;
+    final driverRating = acceptingDriverInfo!.rating;
+
+    //TODO: Calculate rating. May not be possible at the moment.
+
+    _acceptingDriverInfoSub?.cancel();
   }
 
   void completeTransaction(RouteConfig routeConfig) {
