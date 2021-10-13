@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kapiot/logic/utils/extensions.dart';
 
 part 'kapiot_user.freezed.dart';
 part 'kapiot_user.g.dart';
@@ -11,10 +12,7 @@ enum UserType {
 }
 
 extension UserTypeDescription on UserType {
-  String get description {
-    final String d = describeEnum(this);
-    return '${d[0].toUpperCase()}${d.substring(1)}';
-  }
+  String get description => describeEnum(this).capitalize();
 }
 
 @freezed

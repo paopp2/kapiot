@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension TecExtensionMethods on TextEditingController {
+extension TecExtensions on TextEditingController {
   /// Select (highlight) all of this TextEditingController's text
   void selectText() {
     selection = TextSelection(
@@ -10,9 +10,18 @@ extension TecExtensionMethods on TextEditingController {
   }
 }
 
-extension AddressExtensionMethods on String {
-  /// Splits this address into two: the first being the more 'specific',
-  /// the other one the more 'general' (eg. ['USC-TC Talamban', 'Talamban Cebu'])
+extension GenericStringExtensions on String {
+  /// Returns the first name (eg. John Doe -> John)
+  String get firstName => split(' ').first;
+
+  /// Returns the last name (eg. John Doe -> Doe)
+  String get lastName => split(' ').last;
+
+  /// Capitalize this String (eg. hello -> Hello)
+  String capitalize() => '${this[0].toUpperCase()}${substring(1)}';
+
+  /// Splits this String address into two: the first being the more 'specific',
+  /// the other one the more 'general' (eg. ['USC-TC', 'Talamban Cebu'])
   List<String> splitAddress() {
     final index = indexOf(",");
     if (index != -1) {

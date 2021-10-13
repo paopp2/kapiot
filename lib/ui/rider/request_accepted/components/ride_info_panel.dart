@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/logic/utils/extensions.dart';
 import 'package:kapiot/ui/rider/request_accepted/components/divider_widget.dart';
 
 const uscLogo =
@@ -23,7 +24,7 @@ class RideInfoPanel extends HookConsumerWidget {
     final acceptingDriverConfig =
         ref.watch(acceptingDriverConfigProvider).state!;
     final acceptingDriver = acceptingDriverConfig.user;
-    final driverNameSplit = acceptingDriver.displayName!.split(' ');
+    final driverName = acceptingDriver.displayName!;
     final estTimeArrival = ref.watch(driverArrivalTimeProvider).state;
     final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
     final coRiderCount = ref.watch(coRiderCountProvider);
@@ -36,7 +37,7 @@ class RideInfoPanel extends HookConsumerWidget {
               alignment: Alignment.bottomCenter,
               height: constraints.maxHeight * 0.05,
               child: Text(
-                '${driverNameSplit.first} is arriving in $estTimeArrival',
+                '${driverName.firstName} is arriving in $estTimeArrival',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -84,7 +85,7 @@ class RideInfoPanel extends HookConsumerWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Text(
-                                      '${driverNameSplit.first} ${driverNameSplit.last}',
+                                      '${driverName.firstName} ${driverName.lastName}',
                                       style: const TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
