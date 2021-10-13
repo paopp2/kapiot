@@ -28,12 +28,27 @@ class PostTripSummaryView extends HookConsumerWidget {
           title: const Text('Driver Rating'),
           content: SizedBox(
             height: 100,
-            child: Column(
+            child: Row(
               children: [
-                const TextField(),
                 ElevatedButton(
-                  onPressed: () => AppRouter.instance.popView(),
-                  child: const Text('Submit'),
+                  onPressed: () => model.setRating(5),
+                  child: const Text('Five Star'),
+                ),
+                ElevatedButton(
+                  onPressed: () => model.setRating(5),
+                  child: const Text('Four Star'),
+                ),
+                ElevatedButton(
+                  onPressed: () => model.setRating(5),
+                  child: const Text('Three Star'),
+                ),
+                ElevatedButton(
+                  onPressed: () => model.setRating(5),
+                  child: const Text('Two Star'),
+                ),
+                ElevatedButton(
+                  onPressed: () => model.setRating(5),
+                  child: const Text('One Star'),
                 ),
               ],
             ),
