@@ -7,6 +7,7 @@ import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
+import 'package:kapiot/logic/extensions.dart';
 
 final placePickerViewModel = Provider.autoDispose(
   (ref) => PlacePickerViewModel(
@@ -42,16 +43,10 @@ class PlacePickerViewModel extends ViewModel {
     tecEndLoc.text = endAddress ?? '';
     if (isForStartLoc) {
       startLocFocusNode.requestFocus();
-      tecStartLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecStartLoc.text.length,
-      );
+      tecStartLoc.selectText();
     } else {
       endLocFocusNode.requestFocus();
-      tecEndLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecEndLoc.text.length,
-      );
+      tecEndLoc.selectText();
     }
   }
 
@@ -73,19 +68,8 @@ class PlacePickerViewModel extends ViewModel {
   }
 
   void editPlaceAddress({required bool isForStartLoc}) {
-    if (isForStartLoc) {
-      // Highlight all text within the startLoc TextField
-      tecStartLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecStartLoc.text.length,
-      );
-    } else {
-      // Highlight all text within the endLoc TextField
-      tecEndLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecEndLoc.text.length,
-      );
-    }
+    // Select the text of the TextField to edit
+    (isForStartLoc) ? tecStartLoc.selectText() : tecEndLoc.selectText();
     read(isForStartLocProvider).state = isForStartLoc;
   }
 

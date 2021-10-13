@@ -7,6 +7,7 @@ import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
+import 'package:kapiot/logic/extensions.dart';
 import 'edit_user_info_state.dart';
 
 final editUserInfoViewModel = Provider.autoDispose(
@@ -51,19 +52,8 @@ class EditUserInfoViewModel extends ViewModel {
   void goToNextStep() => read(pageIndexProvider).state++;
 
   void editPlaceAddress({required bool isForStartLoc}) {
-    if (isForStartLoc) {
-      // Highlight all text within the startLoc TextField
-      tecHomeLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecHomeLoc.text.length,
-      );
-    } else {
-      // Highlight all text within the endLoc TextField
-      tecSchoolLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecSchoolLoc.text.length,
-      );
-    }
+    // Select the text of the TextField to edit
+    (isForStartLoc) ? tecHomeLoc.selectText() : tecSchoolLoc.selectText();
     read(isForHomeLocProvider).state = isForStartLoc;
   }
 
