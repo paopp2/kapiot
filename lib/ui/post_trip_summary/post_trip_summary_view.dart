@@ -35,19 +35,19 @@ class PostTripSummaryView extends HookConsumerWidget {
                   child: const Text('Five Star'),
                 ),
                 ElevatedButton(
-                  onPressed: () => model.setRating(5),
+                  onPressed: () => model.setRating(4),
                   child: const Text('Four Star'),
                 ),
                 ElevatedButton(
-                  onPressed: () => model.setRating(5),
+                  onPressed: () => model.setRating(3),
                   child: const Text('Three Star'),
                 ),
                 ElevatedButton(
-                  onPressed: () => model.setRating(5),
+                  onPressed: () => model.setRating(2),
                   child: const Text('Two Star'),
                 ),
                 ElevatedButton(
-                  onPressed: () => model.setRating(5),
+                  onPressed: () => model.setRating(1),
                   child: const Text('One Star'),
                 ),
               ],
