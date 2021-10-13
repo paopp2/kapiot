@@ -10,6 +10,8 @@ final pointsProvider = Provider.autoDispose<double>((ref) {
   return 0;
 });
 
+final ratingProvider = StateProvider.autoDispose<int>((ref) => 0);
+
 final distanceInKmProvider = Provider.autoDispose<double>((ref) {
   final transaction = ref.watch(transactionProvider).state;
   Future.delayed(

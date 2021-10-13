@@ -8,6 +8,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
+import 'package:kapiot/logic/post_trip/post_trip_summary_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
@@ -55,6 +56,11 @@ class PostTripSummaryViewModel extends ViewModel {
         );
       });
     }
+  }
+
+  void setRating(int rating) {
+    read(ratingProvider).state = rating;
+    print(read(ratingProvider).state);
   }
 
   void completeTransaction(RouteConfig routeConfig) {
