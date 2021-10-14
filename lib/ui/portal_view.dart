@@ -103,7 +103,7 @@ class PortalViewModel {
   void gotoPostTripSummaryView() =>
       _router.navigateTo(Routes.postTripSummaryView);
 
-  void gotoEditUserInfoView() => _router.navigateTo(Routes.editUserInfoView);
+  void gotoEditUserInfoView() => _router.navigateTo(Routes.initUserInfoView);
   void gotoPlaceManagerView() => _router.navigateTo(Routes.placeManagerView);
   void gotoSavePlaceView() => _router.navigateTo(Routes.savePlaceView);
 }

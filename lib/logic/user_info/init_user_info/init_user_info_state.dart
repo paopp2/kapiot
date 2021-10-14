@@ -14,8 +14,5 @@ final pageIndexProvider = StateProvider((ref) {
 
 final isForHomeLocProvider = StateProvider.autoDispose<bool>((ref) => true);
 
-final placeSuggestionsProvider =
-    StateProvider.autoDispose<List<String?>>((ref) => []);
-
 final savedLocationsProvider =
     StateProvider<Map<String, KapiotLocation>>((ref) => {});

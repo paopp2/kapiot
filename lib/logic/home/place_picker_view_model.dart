@@ -1,18 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
-import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/logic/shared/place_suggester.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 
 final placePickerViewModel = Provider.autoDispose(
   (ref) => PlacePickerViewModel(
     read: ref.read,
-    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     mapController: ref.watch(homeMapController),
+    placeSuggester: ref.watch(placeSuggesterProvider),
   ),
 );
 
@@ -20,18 +21,14 @@ class PlacePickerViewModel extends ViewModel {
   PlacePickerViewModel({
     required Reader read,
     required this.mapController,
-    required this.googleMapsApiServices,
+    required this.placeSuggester,
   }) : super(read);
   final HomeMapController mapController;
-  final GoogleMapsApiServices googleMapsApiServices;
+  final PlaceSuggester placeSuggester;
   final startLocFocusNode = FocusNode();
   final endLocFocusNode = FocusNode();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
-
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
 
   @override
   void initState() {
@@ -42,16 +39,10 @@ class PlacePickerViewModel extends ViewModel {
     tecEndLoc.text = endAddress ?? '';
     if (isForStartLoc) {
       startLocFocusNode.requestFocus();
-      tecStartLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecStartLoc.text.length,
-      );
+      tecStartLoc.selectText();
     } else {
       endLocFocusNode.requestFocus();
-      tecEndLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecEndLoc.text.length,
-      );
+      tecEndLoc.selectText();
     }
   }
 
@@ -73,19 +64,7 @@ class PlacePickerViewModel extends ViewModel {
   }
 
   void editPlaceAddress({required bool isForStartLoc}) {
-    if (isForStartLoc) {
-      // Highlight all text within the startLoc TextField
-      tecStartLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecStartLoc.text.length,
-      );
-    } else {
-      // Highlight all text within the endLoc TextField
-      tecEndLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecEndLoc.text.length,
-      );
-    }
+    (isForStartLoc) ? tecStartLoc.selectText() : tecEndLoc.selectText();
     read(isForStartLocProvider).state = isForStartLoc;
   }
 
@@ -93,12 +72,7 @@ class PlacePickerViewModel extends ViewModel {
     required String pickedSuggestion,
     required bool forStartLoc,
   }) async {
-    final pickedSuggestionMap = _autocompleteSuggestionMaps.firstWhere(
-      (s) => s["address"] == pickedSuggestion,
-    );
-    final placeId = pickedSuggestionMap["id"] as String;
-    final location =
-        await googleMapsApiServices.places.getLocFromPlaceId(placeId);
+    final location = await placeSuggester.getLocation(pickedSuggestion);
     if (forStartLoc) {
       tecStartLoc.text = pickedSuggestion;
       mapController.setStartLocation(
@@ -112,14 +86,7 @@ class PlacePickerViewModel extends ViewModel {
       );
       endLocFocusNode.unfocus();
     }
-
-    read(placeSuggestionsProvider).state = [];
-
-    final isStartLocSet = (read(startLocProvider).state != null);
-    final isEndLocSet = (read(endLocProvider).state != null);
-    if (isStartLocSet && isEndLocSet) {
-      AppRouter.instance.popView();
-    }
+    _returnIfBothLocationsSet();
   }
 
   void pickSavedLocation(KapiotLocation pickedSavedLoc) {
@@ -133,33 +100,15 @@ class PlacePickerViewModel extends ViewModel {
       mapController.setEndLocation(pickedSavedLoc);
       endLocFocusNode.unfocus();
     }
+    _returnIfBothLocationsSet();
+  }
 
-    read(placeSuggestionsProvider).state = [];
-
+  void _returnIfBothLocationsSet() {
+    placeSuggester.clearSuggestions();
     final isStartLocSet = (read(startLocProvider).state != null);
     final isEndLocSet = (read(endLocProvider).state != null);
     if (isStartLocSet && isEndLocSet) {
       AppRouter.instance.popView();
-    }
-  }
-
-  void updateSuggestions(String? value) async {
-    final suggestions = await googleMapsApiServices.places
-        .getAutocompleteSuggestions(value ?? '');
-    _autocompleteSuggestionMaps = suggestions;
-    read(placeSuggestionsProvider).state =
-        suggestions.map((s) => s["address"]).toList();
-  }
-
-  List<String> splitAddress(String completeAddress) {
-    final index = completeAddress.indexOf(",");
-    if (index != -1) {
-      return [
-        completeAddress.substring(0, index).trim(),
-        completeAddress.substring(index + 1).trim()
-      ];
-    } else {
-      return [completeAddress, "Philippines"];
     }
   }
 }

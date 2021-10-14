@@ -3,39 +3,36 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
-import 'package:kapiot/data/services/google_maps_api_services.dart';
+import 'package:kapiot/logic/shared/place_suggester.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/logic/user_info/init_user_info/init_user_info_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
-import 'edit_user_info_state.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 
-final editUserInfoViewModel = Provider.autoDispose(
-  (ref) => EditUserInfoViewModel(
+final initUserInfoViewModel = Provider.autoDispose(
+  (ref) => InitUserInfoViewModel(
     read: ref.read,
     currentUser: ref.watch(currentUserProvider)!,
     userInfoRepo: ref.watch(userInfoRepositoryProvider),
-    googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
+    placeSuggester: ref.watch(placeSuggesterProvider),
   ),
 );
 
-class EditUserInfoViewModel extends ViewModel {
-  EditUserInfoViewModel({
+class InitUserInfoViewModel extends ViewModel {
+  InitUserInfoViewModel({
     required Reader read,
     required this.currentUser,
     required this.userInfoRepo,
-    required this.googleMapsApiServices,
+    required this.placeSuggester,
   }) : super(read);
   final KapiotUser currentUser;
   final UserInfoRepository userInfoRepo;
-  final GoogleMapsApiServices googleMapsApiServices;
+  final PlaceSuggester placeSuggester;
   final homeLocFocusNode = FocusNode();
   final schoolLocFocusNode = FocusNode();
   final tecHomeLoc = TextEditingController();
   final tecSchoolLoc = TextEditingController();
-
-  /// Used to store all autocomplete suggestion Maps in order to obtain the "id"
-  /// from "address"
-  List<Map<String, String?>> _autocompleteSuggestionMaps = [];
 
   @override
   void initState() {
@@ -51,19 +48,7 @@ class EditUserInfoViewModel extends ViewModel {
   void goToNextStep() => read(pageIndexProvider).state++;
 
   void editPlaceAddress({required bool isForStartLoc}) {
-    if (isForStartLoc) {
-      // Highlight all text within the startLoc TextField
-      tecHomeLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecHomeLoc.text.length,
-      );
-    } else {
-      // Highlight all text within the endLoc TextField
-      tecSchoolLoc.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: tecSchoolLoc.text.length,
-      );
-    }
+    (isForStartLoc) ? tecHomeLoc.selectText() : tecSchoolLoc.selectText();
     read(isForHomeLocProvider).state = isForStartLoc;
   }
 
@@ -71,12 +56,7 @@ class EditUserInfoViewModel extends ViewModel {
     required String pickedSuggestion,
     required bool forStartLoc,
   }) async {
-    final pickedSuggestionMap = _autocompleteSuggestionMaps.firstWhere(
-      (s) => s["address"] == pickedSuggestion,
-    );
-    final placeId = pickedSuggestionMap["id"] as String;
-    final location =
-        await googleMapsApiServices.places.getLocFromPlaceId(placeId);
+    final location = await placeSuggester.getLocation(pickedSuggestion);
     String label = 'Home';
     if (forStartLoc) {
       tecHomeLoc.text = pickedSuggestion;
@@ -88,32 +68,10 @@ class EditUserInfoViewModel extends ViewModel {
       tecSchoolLoc.text = pickedSuggestion;
       schoolLocFocusNode.unfocus();
     }
-
     read(savedLocationsProvider).state[label] = location!.copyWith(
       address: pickedSuggestion,
     );
-
-    read(placeSuggestionsProvider).state = [];
-  }
-
-  void updateSuggestions(String? value) async {
-    final suggestions = await googleMapsApiServices.places
-        .getAutocompleteSuggestions(value ?? '');
-    _autocompleteSuggestionMaps = suggestions;
-    read(placeSuggestionsProvider).state =
-        suggestions.map((s) => s["address"]).toList();
-  }
-
-  List<String> splitAddress(String completeAddress) {
-    final index = completeAddress.indexOf(",");
-    if (index != -1) {
-      return [
-        completeAddress.substring(0, index).trim(),
-        completeAddress.substring(index + 1).trim()
-      ];
-    } else {
-      return [completeAddress, "Philippines"];
-    }
+    placeSuggester.clearSuggestions();
   }
 
   void setUserType(UserType userType) {

@@ -6,9 +6,6 @@ final riderCountProvider = StateProvider.autoDispose<int>((ref) => 1);
 final dateTimeProvider =
     StateProvider.autoDispose<DateTime>((ref) => DateTime.now());
 
-final placeSuggestionsProvider =
-    StateProvider.autoDispose<List<String?>>((ref) => []);
-
 final routeCoordinatesProvider = StateProvider.autoDispose<List<LatLng>?>(
   (ref) {
     ref.maintainState = true;
