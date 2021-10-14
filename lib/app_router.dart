@@ -31,8 +31,8 @@ class AppRouter {
     Routes.placeManagerView: (context) => const PlaceManagerView(),
   };
 
-  Future<dynamic>? navigateTo(String route) =>
-      navigationKey.currentState!.pushNamed(route);
+  Future<dynamic>? navigateTo(String route, {Object? args}) =>
+      navigationKey.currentState!.pushNamed(route, arguments: args);
 
   void popView() => navigationKey.currentState!.pop();
 
