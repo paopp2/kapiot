@@ -4,9 +4,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
-import 'package:kapiot/logic/shared/place_suggester.dart';
-import 'package:kapiot/logic/user_info/edit_user_info/init_user_info_view_model.dart';
-import 'package:kapiot/logic/user_info/init_user_info/init_user_info_state.dart';
+import 'package:kapiot/logic/place/place_suggester.dart';
+import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_state.dart';
+import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
 class InitUserInfoView extends HookConsumerWidget {

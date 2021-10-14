@@ -61,8 +61,8 @@ class PortalView extends HookConsumerWidget {
                   child: const Text("PostTripSummaryView"),
                 ),
                 ElevatedButton(
-                  onPressed: model.gotoEditUserInfoView,
-                  child: const Text("EditUserInfoView"),
+                  onPressed: model.gotoInitUserInfoView,
+                  child: const Text("InitUserInfoView"),
                 ),
                 ElevatedButton(
                   onPressed: model.gotoPlaceManagerView,
@@ -99,11 +99,12 @@ class PortalViewModel {
       _router.navigateTo(Routes.requestDriversView);
   void gotoRequestAcceptedView() =>
       _router.navigateTo(Routes.requestAcceptedView);
-  void gotoPlaceSuggestionsView() => _router.navigateTo(Routes.placePickerView);
+  void gotoPlaceSuggestionsView() =>
+      _router.navigateTo(Routes.routePlacePicker);
   void gotoPostTripSummaryView() =>
       _router.navigateTo(Routes.postTripSummaryView);
 
-  void gotoEditUserInfoView() => _router.navigateTo(Routes.initUserInfoView);
+  void gotoInitUserInfoView() => _router.navigateTo(Routes.initUserInfoView);
   void gotoPlaceManagerView() => _router.navigateTo(Routes.placeManagerView);
   void gotoSavePlaceView() => _router.navigateTo(Routes.savePlaceView);
 }

@@ -3,7 +3,7 @@ import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/post_trip/post_trip_summary_state.dart';
+import 'package:kapiot/logic/post_trip/post_trip_summary_view_state.dart';
 
 class RewardPointsBackdrop extends HookConsumerWidget {
   const RewardPointsBackdrop({

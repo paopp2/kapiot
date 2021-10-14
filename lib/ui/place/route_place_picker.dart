@@ -7,15 +7,15 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
-import 'package:kapiot/logic/home/place_picker_view_model.dart';
-import 'package:kapiot/logic/shared/place_suggester.dart';
+import 'package:kapiot/logic/place/route_place_picker_model.dart';
+import 'package:kapiot/logic/place/place_suggester.dart';
 
-class PlacePickerView extends HookConsumerWidget {
-  const PlacePickerView({Key? key}) : super(key: key);
+class RoutePlacePicker extends HookConsumerWidget {
+  const RoutePlacePicker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(placePickerViewModel);
+    final model = ref.watch(routePlacePickerModel);
     final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
     final isForStartLoc = ref.watch(isForStartLocProvider).state;
     final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;

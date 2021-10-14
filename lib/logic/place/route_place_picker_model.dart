@@ -4,21 +4,21 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/home/home_map_controller.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
-import 'package:kapiot/logic/shared/place_suggester.dart';
+import 'package:kapiot/logic/place/place_suggester.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
 
-final placePickerViewModel = Provider.autoDispose(
-  (ref) => PlacePickerViewModel(
+final routePlacePickerModel = Provider.autoDispose(
+  (ref) => RoutePlacePickerModel(
     read: ref.read,
     mapController: ref.watch(homeMapController),
     placeSuggester: ref.watch(placeSuggesterProvider),
   ),
 );
 
-class PlacePickerViewModel extends ViewModel {
-  PlacePickerViewModel({
+class RoutePlacePickerModel extends ViewModel {
+  RoutePlacePickerModel({
     required Reader read,
     required this.mapController,
     required this.placeSuggester,

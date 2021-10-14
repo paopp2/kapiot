@@ -7,7 +7,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/main.dart';
 import 'package:kapiot/ui/driver/components/stop_point_panel.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
-import 'package:kapiot/ui/home/components/place_picker_view.dart';
+import 'package:kapiot/ui/place/route_place_picker.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'cloud_functions_api.dart';
 
@@ -50,7 +50,7 @@ Future<void> main() async {
           find.widgetWithIcon(Row, CupertinoIcons.smallcircle_circle);
       await tester.tap(startLocFieldHome);
       await tester.pumpAndSettle();
-      expect(find.byType(PlacePickerView), findsOneWidget);
+      expect(find.byType(RoutePlacePicker), findsOneWidget);
 
       // StartLoc TextField should be highlighted when PlacePickerView is pumped.
       // Entering text shows place suggestions. Tapping on the correct ListTile

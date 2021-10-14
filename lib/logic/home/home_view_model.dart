@@ -20,7 +20,7 @@ import 'package:kapiot/model/route_config/route_config.dart';
 
 final homeViewModel = Provider.autoDispose(
   (ref) {
-    // Push EditUserInfoView when the currentUser has
+    // Push InitUserInfoView when the currentUser has
     // not set the required user information yet
     ref.watch(currentUserInfoProvider).whenData((userInfo) {
       if (userInfo == null) {
@@ -86,7 +86,7 @@ class HomeViewModel extends ViewModel {
     );
   }
 
-  void gotoEditUserInfoView() =>
+  void gotoInitUserInfoView() =>
       AppRouter.instance.navigateTo(Routes.initUserInfoView);
 
   void gotoDriverRegisterView() =>
@@ -129,7 +129,7 @@ class HomeViewModel extends ViewModel {
 
   void openPlacePickerView({required bool isForStartLoc}) {
     read(isForStartLocProvider).state = isForStartLoc;
-    AppRouter.instance.navigateTo(Routes.placePickerView);
+    AppRouter.instance.navigateTo(Routes.routePlacePicker);
   }
 
   Future<void> pushRouteConfig(bool isRider) async {

@@ -3,12 +3,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
-import 'package:kapiot/logic/shared/place_suggester.dart';
+import 'package:kapiot/logic/place/place_suggester.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
-import 'init_user_info_state.dart';
+import 'init_user_info_view_state.dart';
 
 final initUserInfoViewModel = Provider.autoDispose(
   (ref) => InitUserInfoViewModel(

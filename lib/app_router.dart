@@ -4,14 +4,14 @@ import 'package:kapiot/ui/place/save_place_view.dart';
 import 'package:kapiot/ui/post_trip_summary/post_trip_summary_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
-import 'package:kapiot/ui/home/components/place_picker_view.dart';
+import 'package:kapiot/ui/place/route_place_picker.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
 import 'package:kapiot/ui/rider/request_drivers/request_drivers_view.dart';
 import 'package:kapiot/ui/shared/service_error_view.dart';
-import 'package:kapiot/ui/user_info/car_register_view.dart';
-import 'package:kapiot/ui/user_info/init_user_info_view.dart';
+import 'package:kapiot/ui/user_info/driver_info/car_register_view.dart';
+import 'package:kapiot/ui/user_info/init_user_info/init_user_info_view.dart';
 
 class AppRouter {
   AppRouter._();
@@ -23,7 +23,7 @@ class AppRouter {
     Routes.homeView: (context) => const HomeView(),
     Routes.initUserInfoView: (context) => const InitUserInfoView(),
     Routes.carRegisterView: (context) => const CarRegisterView(),
-    Routes.placePickerView: (context) => const PlacePickerView(),
+    Routes.routePlacePicker: (context) => const RoutePlacePicker(),
     Routes.loginView: (context) => const LoginView(),
     Routes.riderManagerView: (context) => const RiderManagerView(),
     Routes.requestDriversView: (context) => const RequestDriversView(),
@@ -48,7 +48,7 @@ class Routes {
   static const homeView = 'home/home_view';
   static const initUserInfoView = 'home/edit_user_info_view';
   static const carRegisterView = 'home/car_register_view';
-  static const placePickerView = 'home/components/place_picker_view';
+  static const routePlacePicker = 'home/components/route_place_picker';
   static const loginView = 'auth/login_view';
   static const riderManagerView = 'driver/rider_manager_view';
   static const requestDriversView = 'rider/request_drivers_view';

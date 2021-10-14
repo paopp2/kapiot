@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/user_info/driver_info/car_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
+
 import 'components/car_type_block.dart';
 
 class CarRegisterView extends HookConsumerWidget {
