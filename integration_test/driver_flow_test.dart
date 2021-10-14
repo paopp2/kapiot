@@ -7,7 +7,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/main.dart';
 import 'package:kapiot/ui/driver/components/stop_point_panel.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
-import 'package:kapiot/ui/place/route_place_picker.dart';
+import 'package:kapiot/ui/place/components/route_place_picker.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'cloud_functions_api.dart';
 
