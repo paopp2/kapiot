@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
+import 'package:kapiot/logic/place/place_manager_view_model.dart';
 
 class PlaceManagerView extends HookConsumerWidget {
   const PlaceManagerView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(placeManagerViewModel);
     final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
     final savedLocations = currentUserInfo?.savedLocations;
     return SafeArea(
@@ -49,12 +51,13 @@ class PlaceManagerView extends HookConsumerWidget {
                         final lastIndex = savedLocations.length;
                         final isLastItem = (index == lastIndex);
                         if (isLastItem) {
-                          return const SizedBox(
+                          return SizedBox(
                             height: 80,
                             child: Center(
                               child: ListTile(
-                                leading: Icon(Icons.add),
-                                title: Text('Add New'),
+                                onTap: model.openSavePlacePicker,
+                                leading: const Icon(Icons.add),
+                                title: const Text('Add New'),
                               ),
                             ),
                           );
@@ -75,7 +78,11 @@ class PlaceManagerView extends HookConsumerWidget {
                                       location?.address! ?? '',
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    trailing: const Icon(Icons.edit),
+                                    // trailing: const Icon(Icons.edit),
+                                    trailing: IconButton(
+                                      onPressed: model.gotoSavePlaceView,
+                                      icon: const Icon(Icons.edit),
+                                    ),
                                   ),
                                 ),
                               ),
