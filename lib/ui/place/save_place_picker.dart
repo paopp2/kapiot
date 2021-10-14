@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/place/place_manager_view_model.dart';
-import 'package:kapiot/ui/place/base_place_picker.dart';
+import 'package:kapiot/ui/place/components/place_picker_scaffold.dart';
 
 class SavePlacePicker extends HookConsumerWidget {
   const SavePlacePicker({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class SavePlacePicker extends HookConsumerWidget {
       model.saveLocFocusNode.requestFocus();
     }, []);
 
-    return BasePlacePicker(
+    return PlacePickerScaffold(
       onPlaceSuggestionTap: (suggestion) => model.pickSuggestion(
         pickedSuggestion: suggestion,
       ),

@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/place/route_place_picker_model.dart';
-import 'package:kapiot/ui/place/base_place_picker.dart';
+import 'package:kapiot/ui/place/components/place_picker_scaffold.dart';
 
 class RoutePlacePicker extends HookConsumerWidget {
   const RoutePlacePicker({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class RoutePlacePicker extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
-    return BasePlacePicker(
+    return PlacePickerScaffold(
       onPlaceSuggestionTap: (suggestion) {
         model.pickSuggestion(
           pickedSuggestion: suggestion,

@@ -49,11 +49,11 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: appRouter.navigationKey,
       routes: appRouter.routesList,
-      // home: RootView(
-      //   loggedInBuilder: (_) => const HomeView(),
-      //   loggedOutBuilder: (_) => const LoginView(),
-      // ),
-      home: const PortalView(),
+      home: RootView(
+        loggedInBuilder: (_) => const HomeView(),
+        loggedOutBuilder: (_) => const LoginView(),
+      ),
+      // home: const PortalView(),
     );
   }
 }

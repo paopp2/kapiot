@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/ui/place/place_manager_view.dart';
-import 'package:kapiot/ui/place/components/save_place_picker.dart';
+import 'package:kapiot/ui/place/save_place_picker.dart';
 import 'package:kapiot/ui/place/save_place_view.dart';
 import 'package:kapiot/ui/post_trip_summary/post_trip_summary_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/driver/rider_manager_view.dart';
-import 'package:kapiot/ui/place/components/route_place_picker.dart';
+import 'package:kapiot/ui/place/route_place_picker.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/portal_view.dart';
 import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';

@@ -5,8 +5,8 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/place/place_suggester.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
 
-class BasePlacePicker extends HookConsumerWidget {
-  const BasePlacePicker({
+class PlacePickerScaffold extends HookConsumerWidget {
+  const PlacePickerScaffold({
     Key? key,
     required this.header,
     required this.onPlaceSuggestionTap,

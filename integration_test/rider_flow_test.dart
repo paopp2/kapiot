@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/main.dart';
-import 'package:kapiot/ui/place/components/route_place_picker.dart';
+import 'package:kapiot/ui/place/route_place_picker.dart';
 import 'package:kapiot/ui/home/home_view.dart';
 import 'package:kapiot/ui/rider/request_accepted/request_accepted_view.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/driver_card.dart';
