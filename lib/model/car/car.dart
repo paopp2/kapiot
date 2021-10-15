@@ -1,17 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'car.freezed.dart';
 part 'car.g.dart';
-
-enum CarType {
-  sedan,
-  truck,
-  hatchback,
-  suv,
-  auv,
-  van,
-}
 
 @freezed
 class Car with _$Car {
@@ -23,22 +16,59 @@ class Car with _$Car {
     required CarType type,
   }) = _Car;
 
-  int get capacity {
-    switch (type) {
-      case CarType.hatchback:
-        return 2;
-      case CarType.sedan:
-        return 2;
-      case CarType.truck:
-        return 5;
-      case CarType.auv:
-        return 5;
-      case CarType.suv:
-        return 5;
-      case CarType.van:
-        return 8;
-    }
-  }
+  int get capacity => type.meta['capacity'];
 
   factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
+}
+
+enum CarType {
+  sedan,
+  hatchback,
+  truck,
+  suv,
+  auv,
+  van,
+}
+
+extension CarTypeMeta on CarType {
+  Map<String, dynamic> get meta {
+    switch (this) {
+      case CarType.sedan:
+        return {
+          'capacity': 2,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Sedan',
+        };
+      case CarType.hatchback:
+        return {
+          'capacity': 2,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Hatchback',
+        };
+      case CarType.truck:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Truck',
+        };
+      case CarType.auv:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'AUV',
+        };
+      case CarType.suv:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'SUV',
+        };
+      case CarType.van:
+        return {
+          'capacity': 8,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Van',
+        };
+    }
+  }
 }

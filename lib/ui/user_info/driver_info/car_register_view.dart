@@ -14,17 +14,6 @@ class CarRegisterView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(carRegisterViewModel);
-    final carTypes = [
-      [Icon(Icons.car_rental), 'Coupe', '2/4'],
-      [Icon(Icons.car_rental), 'Sedan', '5'],
-      [Icon(Icons.car_rental), 'Hatchback', '5'],
-      [Icon(Icons.car_rental), 'Pickup', '5'],
-      [Icon(Icons.car_rental), 'SUV', '7'],
-      [Icon(Icons.car_rental), 'MPV', '7'],
-      [Icon(Icons.car_rental), 'Wagon', '7'],
-      [Icon(Icons.car_rental), 'Multicab', '11-13'],
-      [Icon(Icons.car_rental), 'Van/Minivan', '8-15'],
-    ];
 
     return SafeArea(
       child: LayoutBuilder(
@@ -66,7 +55,7 @@ class CarRegisterView extends HookConsumerWidget {
                                 horizontal: constraints.maxWidth * 0.03,
                               ),
                               hintText: 'ABC 123',
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                             ),
                             controller: model.tecLicensePlateField,
                             validator: model.carRegisterValidator,
@@ -106,7 +95,7 @@ class CarRegisterView extends HookConsumerWidget {
                                         horizontal: constraints.maxWidth * 0.03,
                                       ),
                                       hintText: 'Toyota',
-                                      border: OutlineInputBorder(),
+                                      border: const OutlineInputBorder(),
                                     ),
                                   ),
                                 ),
@@ -137,7 +126,7 @@ class CarRegisterView extends HookConsumerWidget {
                                         horizontal: constraints.maxWidth * 0.03,
                                       ),
                                       hintText: 'Vios',
-                                      border: OutlineInputBorder(),
+                                      border: const OutlineInputBorder(),
                                     ),
                                   ),
                                 ),
@@ -158,7 +147,7 @@ class CarRegisterView extends HookConsumerWidget {
                           height: 10,
                         ),
                         CarouselSlider.builder(
-                          itemCount: carTypes.length,
+                          itemCount: CarType.values.length,
                           options: CarouselOptions(
                             height: constraints.maxHeight * 0.25,
                             autoPlay: false,
@@ -166,17 +155,17 @@ class CarRegisterView extends HookConsumerWidget {
                             aspectRatio: 16 / 9,
                             viewportFraction: 0.5,
                             initialPage: 0,
+                            onPageChanged: (index, _) {
+                              model.setCarType(CarType.values[index]);
+                            },
                           ),
-                          itemBuilder: (context, index, realIndex) {
-                            final carTypeIcon = carTypes[index][0] as Icon;
-                            final carTypeName = carTypes[index][1] as String;
-                            final carTypeCapacity =
-                                carTypes[index][2] as String;
-                            return VehicleType(
-                                constraints: constraints,
-                                vehicleIcon: carTypeIcon,
-                                vehicleLabel: carTypeName,
-                                seats: carTypeCapacity);
+                          itemBuilder: (context, index, _) {
+                            final carType = CarType.values[index];
+                            return CarTypeBlock(
+                              constraints: constraints,
+                              carType: carType,
+                              model: model,
+                            );
                           },
                         ),
 
@@ -239,60 +228,6 @@ class CarRegisterView extends HookConsumerWidget {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   width: constraints.maxWidth,
-                  //   margin: EdgeInsets.only(top: constraints.maxHeight * 0.025),
-                  //   child: SingleChildScrollView(
-                  //     scrollDirection: Axis.horizontal,
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         CarTypeBlock(
-                  //           constraints: constraints,
-                  //           vehicleIcon: const Icon(Icons.car_rental),
-                  //           vehicleLabel: 'Sedan',
-                  //           carType: CarType.sedan,
-                  //           model: model,
-                  //         ),
-                  //         CarTypeBlock(
-                  //           constraints: constraints,
-                  //           vehicleIcon: const Icon(Icons.car_rental),
-                  //           vehicleLabel: 'Hatchback',
-                  //           carType: CarType.hatchback,
-                  //           model: model,
-                  //         ),
-                  //         CarTypeBlock(
-                  //           constraints: constraints,
-                  //           vehicleIcon: const Icon(Icons.car_rental),
-                  //           vehicleLabel: 'Truck',
-                  //           carType: CarType.truck,
-                  //           model: model,
-                  //         ),
-                  //         CarTypeBlock(
-                  //           constraints: constraints,
-                  //           vehicleIcon: const Icon(Icons.car_rental),
-                  //           vehicleLabel: 'SUV',
-                  //           carType: CarType.suv,
-                  //           model: model,
-                  //         ),
-                  //         CarTypeBlock(
-                  //           constraints: constraints,
-                  //           vehicleIcon: const Icon(Icons.car_rental),
-                  //           vehicleLabel: 'AUV',
-                  //           carType: CarType.auv,
-                  //           model: model,
-                  //         ),
-                  //         CarTypeBlock(
-                  //           constraints: constraints,
-                  //           vehicleIcon: const Icon(Icons.car_rental),
-                  //           vehicleLabel: 'Van',
-                  //           carType: CarType.van,
-                  //           model: model,
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   const SizedBox(height: 69),
                   ElevatedButton(
                     onPressed: model.registerCar,
@@ -308,36 +243,42 @@ class CarRegisterView extends HookConsumerWidget {
   }
 }
 
-class VehicleType extends StatelessWidget {
-  VehicleType({
-    Key? key,
-    required this.constraints,
-    required this.vehicleIcon,
-    required this.vehicleLabel,
-    required this.seats,
-  }) : super(key: key);
+// class VehicleType extends HookConsumerWidget {
+//   const VehicleType({
+//     Key? key,
+//     required this.constraints,
+//     required this.vehicleIcon,
+//     required this.vehicleLabel,
+//     required this.seats,
+//     required this.carType,
+//     required this.isSelected,
+//   }) : super(key: key);
 
-  BoxConstraints constraints;
-  Icon vehicleIcon;
-  String vehicleLabel;
-  String seats;
+//   final BoxConstraints constraints;
+//   final Icon vehicleIcon;
+//   final String vehicleLabel;
+//   final CarType carType;
+//   final String seats;
+//   final bool isSelected;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: constraints.maxWidth * 0.5,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.purple[200],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          vehicleIcon,
-          Text(vehicleLabel),
-          Text(seats + ' seater'),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     // final selectedCarType = ref.watch(carTypeProvider).state;
+//     // final isSelected = (selectedCarType == carType);
+//     return Container(
+//       width: constraints.maxWidth * 0.5,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(12),
+//         color: (isSelected) ? Colors.purple[200] : Colors.grey[200],
+//       ),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           vehicleIcon,
+//           Text(vehicleLabel),
+//           Text(seats + ' seater'),
+//         ],
+//       ),
+//     );
+//   }
+// }

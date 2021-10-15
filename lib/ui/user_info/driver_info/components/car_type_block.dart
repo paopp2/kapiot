@@ -8,15 +8,16 @@ class CarTypeBlock extends HookConsumerWidget {
   const CarTypeBlock({
     Key? key,
     required this.constraints,
-    required this.vehicleIcon,
-    required this.vehicleLabel,
+    // required this.vehicleIcon,
+    // required this.vehicleLabel,
     required this.model,
     required this.carType,
   }) : super(key: key);
 
   final BoxConstraints constraints;
-  final Icon vehicleIcon;
-  final String vehicleLabel;
+  // final int capacity;
+  // final Icon vehicleIcon;
+  // final String vehicleLabel;
   final CarType carType;
   final CarRegisterViewModel model;
 
@@ -24,12 +25,9 @@ class CarTypeBlock extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCarType = ref.watch(carTypeProvider).state;
     final isSelected = (selectedCarType == carType);
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: constraints.maxWidth * 0.025,
-      ),
+    return SizedBox(
       height: constraints.maxWidth * 0.3,
-      width: constraints.maxWidth * 0.3,
+      width: constraints.maxWidth,
       child: ElevatedButton(
         onPressed: () => model.setCarType(carType),
         style: ElevatedButton.styleFrom(
@@ -41,8 +39,9 @@ class CarTypeBlock extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            vehicleIcon,
-            Text(vehicleLabel),
+            carType.meta['icon'],
+            Text(carType.meta['label']),
+            Text("${carType.meta['capacity']}-seater"),
           ],
         ),
       ),
