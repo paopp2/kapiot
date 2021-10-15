@@ -31,6 +31,10 @@ enum CarType {
 }
 
 extension CarTypeMeta on CarType {
+  int get capacity => meta['capacity'];
+  Icon get icon => meta['icon'];
+  String get label => meta['label'];
+
   Map<String, dynamic> get meta {
     switch (this) {
       case CarType.sedan:

@@ -8,16 +8,11 @@ class CarTypeBlock extends HookConsumerWidget {
   const CarTypeBlock({
     Key? key,
     required this.constraints,
-    // required this.vehicleIcon,
-    // required this.vehicleLabel,
     required this.model,
     required this.carType,
   }) : super(key: key);
 
   final BoxConstraints constraints;
-  // final int capacity;
-  // final Icon vehicleIcon;
-  // final String vehicleLabel;
   final CarType carType;
   final CarRegisterViewModel model;
 
@@ -39,9 +34,9 @@ class CarTypeBlock extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            carType.meta['icon'],
-            Text(carType.meta['label']),
-            Text("${carType.meta['capacity']}-seater"),
+            carType.icon,
+            Text(carType.label),
+            Text("${carType.capacity}-seater"),
           ],
         ),
       ),
