@@ -25,183 +25,215 @@ class InitUserInfoView extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
-    return LayoutBuilder(builder: (context, constraints) {
-      final List<Widget> pageList = [
-        const SizedBox(),
-        Text(
-          'To which association do you belong?',
-          style: Styles.middleSizeText,
-        ),
-        Stack(
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Wrap(
-                spacing: constraints.maxWidth * 0.025,
-                children: [
-                  ChoiceChip(
-                    onSelected: (_) => model.setUserType(UserType.student),
-                    selected: selectedUserType == UserType.student,
-                    labelPadding: const EdgeInsets.symmetric(
-                      vertical: 7,
-                      horizontal: 15,
-                    ),
-                    label: const Text('Student'),
-                  ),
-                  ChoiceChip(
-                    onSelected: (_) => model.setUserType(UserType.faculty),
-                    selected: selectedUserType == UserType.faculty,
-                    labelPadding: const EdgeInsets.symmetric(
-                      vertical: 7,
-                      horizontal: 15,
-                    ),
-                    label: const Text('Faculty'),
-                  ),
-                  ChoiceChip(
-                    onSelected: (_) => model.setUserType(UserType.staff),
-                    selected: selectedUserType == UserType.staff,
-                    labelPadding: const EdgeInsets.symmetric(
-                      vertical: 7,
-                      horizontal: 15,
-                    ),
-                    label: const Text('Staff'),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
-                child: TextButton(
-                  onPressed: model.goToNextStep,
-                  child: const Text('Submit'),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          height: constraints.maxHeight,
-          width: constraints.maxWidth,
-          padding: EdgeInsets.symmetric(
-            horizontal: constraints.maxWidth * 0.05,
+    return SafeArea(
+      child: LayoutBuilder(builder: (context, constraints) {
+        final List<Widget> pageList = [
+          const SizedBox(),
+          Text(
+            'To which association do you belong?',
+            style: Styles.middleSizeText,
           ),
-          child: Stack(
+          Stack(
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'If ganahan ka, pwede ka mosave og location bookmarks daan for later use.',
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: constraints.maxHeight * 0.05,
-                  ),
-                  TextField(
-                    controller: model.tecHomeLoc,
-                    focusNode: model.homeLocFocusNode,
-                    textAlign: TextAlign.start,
-                    onTap: () => model.editPlaceAddress(
-                      isForStartLoc: true,
-                    ),
-                    onChanged: model.placeSuggester.updateSuggestions,
-                    decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.home),
-                        hintText: "Home",
-                        border: InputBorder.none),
-                  ),
-                  const Divider(
-                    color: Colors.white,
-                    thickness: 1,
-                    height: 0.05,
-                  ),
-                  TextField(
-                    controller: model.tecSchoolLoc,
-                    focusNode: model.schoolLocFocusNode,
-                    textAlign: TextAlign.start,
-                    onTap: () => model.editPlaceAddress(
-                      isForStartLoc: false,
-                    ),
-                    onChanged: model.placeSuggester.updateSuggestions,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(CupertinoIcons.building_2_fill),
-                      hintText: (selectedUserType == UserType.student)
-                          ? "School"
-                          : "Work",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: placeSuggestions.length,
-                      itemBuilder: (context, index) {
-                        final suggestion = placeSuggestions[index] ?? "";
-                        final suggestionSplit = suggestion.splitAddress();
-                        return Column(
-                          children: [
-                            ListTile(
-                              dense: true,
-                              title: Text(
-                                suggestionSplit.first,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              subtitle: Text(
-                                suggestionSplit.last,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontSize: 13),
-                              ),
-                              onTap: () => model.pickSuggestion(
-                                pickedSuggestion: suggestion,
-                                forStartLoc: isForHomeLoc,
-                              ),
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                              thickness: 1,
-                              height: 0.05,
-                            )
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
               Align(
-                alignment: Alignment.bottomRight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                alignment: Alignment.center,
+                child: Wrap(
+                  spacing: constraints.maxWidth * 0.025,
                   children: [
-                    TextButton(
-                      onPressed: model.updateUserInfo,
-                      child: const Text('OK'),
+                    ChoiceChip(
+                      onSelected: (_) => model.setUserType(UserType.student),
+                      selected: selectedUserType == UserType.student,
+                      labelPadding: const EdgeInsets.symmetric(
+                        vertical: 7,
+                        horizontal: 15,
+                      ),
+                      label: const Text('Student'),
+                    ),
+                    ChoiceChip(
+                      onSelected: (_) => model.setUserType(UserType.faculty),
+                      selected: selectedUserType == UserType.faculty,
+                      labelPadding: const EdgeInsets.symmetric(
+                        vertical: 7,
+                        horizontal: 15,
+                      ),
+                      label: const Text('Faculty'),
+                    ),
+                    ChoiceChip(
+                      onSelected: (_) => model.setUserType(UserType.staff),
+                      selected: selectedUserType == UserType.staff,
+                      labelPadding: const EdgeInsets.symmetric(
+                        vertical: 7,
+                        horizontal: 15,
+                      ),
+                      label: const Text('Staff'),
                     ),
                   ],
                 ),
               ),
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
+                  child: TextButton(
+                    onPressed: model.goToNextStep,
+                    child: const Text('Submit'),
+                  ),
+                ),
+              ),
             ],
           ),
-        ),
-      ];
-      return Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Center(
-            child: AnimatedSwitcher(
-              duration: const Duration(seconds: 1),
-              switchInCurve: Curves.easeInBack,
-              switchOutCurve: Curves.easeInBack,
-              child: pageList[pageIndex],
+          Container(
+            // color: Colors.amber,
+            height: constraints.maxHeight,
+            width: constraints.maxWidth,
+            padding: EdgeInsets.symmetric(
+              vertical: constraints.maxHeight * 0.05,
+              horizontal: constraints.maxWidth * 0.075,
+            ),
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Saved Places',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    SizedBox(
+                      height: constraints.maxHeight * 0.025,
+                    ),
+                    const Text(
+                      'Saved Places helps you to easily set ride configurations.',
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: constraints.maxHeight * 0.05,
+                    ),
+                    TextField(
+                      controller: model.tecHomeLoc,
+                      focusNode: model.homeLocFocusNode,
+                      textAlign: TextAlign.start,
+                      onTap: () => model.editPlaceAddress(
+                        isForStartLoc: true,
+                      ),
+                      onChanged: model.placeSuggester.updateSuggestions,
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.home),
+                          hintText: "Home",
+                          border: InputBorder.none),
+                    ),
+                    const Divider(
+                      color: Colors.white,
+                      thickness: 1,
+                      height: 0.05,
+                    ),
+                    TextField(
+                      controller: model.tecSchoolLoc,
+                      focusNode: model.schoolLocFocusNode,
+                      textAlign: TextAlign.start,
+                      onTap: () => model.editPlaceAddress(
+                        isForStartLoc: false,
+                      ),
+                      onChanged: model.placeSuggester.updateSuggestions,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(CupertinoIcons.building_2_fill),
+                        hintText: (selectedUserType == UserType.student)
+                            ? "School"
+                            : "Work",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    // Expanded(
+                    //   child: ListView.builder(
+                    //     itemCount: placeSuggestions.length,
+                    //     itemBuilder: (context, index) {
+                    //       final suggestion = placeSuggestions[index] ?? "";
+                    //       final suggestionSplit = suggestion.splitAddress();
+                    //       return Column(
+                    //         children: [
+                    //           ListTile(
+                    //             dense: true,
+                    //             title: Text(
+                    //               suggestionSplit.first,
+                    //               style: const TextStyle(
+                    //                 fontSize: 16,
+                    //                 fontWeight: FontWeight.w600,
+                    //               ),
+                    //             ),
+                    //             subtitle: Text(
+                    //               suggestionSplit.last,
+                    //               maxLines: 1,
+                    //               overflow: TextOverflow.ellipsis,
+                    //               style: const TextStyle(fontSize: 13),
+                    //             ),
+                    //             onTap: () => model.pickSuggestion(
+                    //               pickedSuggestion: suggestion,
+                    //               forStartLoc: isForHomeLoc,
+                    //             ),
+                    //           ),
+                    //           const Divider(
+                    //             color: Colors.grey,
+                    //             thickness: 1,
+                    //             height: 0.05,
+                    //           )
+                    //         ],
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 2),
+                        width: constraints.maxWidth * 0.75,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          color: const Color(0xffdbb3d4),
+                        ),
+                        child: TextButton(
+                          onPressed: model.updateUserInfo,
+                          child: const Text(
+                            'Save Configuration',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: model.updateUserInfo,
+                        child: const Text(
+                          'Set Up Later',
+                          style: TextStyle(
+                            color: Color(0xffdbb3d4),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      );
-    });
+        ];
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: Center(
+              child: AnimatedSwitcher(
+                duration: const Duration(seconds: 1),
+                switchInCurve: Curves.easeInBack,
+                switchOutCurve: Curves.easeInBack,
+                child: pageList[pageIndex],
+              ),
+            ),
+          ),
+        );
+      }),
+    );
   }
 }
