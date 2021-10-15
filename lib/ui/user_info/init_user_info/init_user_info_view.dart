@@ -92,118 +92,82 @@ class InitUserInfoView extends HookConsumerWidget {
             ),
             child: Stack(
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Saved Places',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    SizedBox(
-                      height: constraints.maxHeight * 0.025,
-                    ),
-                    const Text(
-                      'Saved Places helps you to easily set ride configurations.',
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: constraints.maxHeight * 0.05,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0XFFE7DFE0),
+                Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Saved Places',
+                        style: TextStyle(fontSize: 24),
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.05),
-                      margin:
-                          EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
-                      child: TextField(
-                        controller: model.tecHomeLoc,
-                        focusNode: model.homeLocFocusNode,
-                        textAlign: TextAlign.start,
-                        onTap: () => model.editPlaceAddress(
-                          isForStartLoc: true,
+                      SizedBox(
+                        height: constraints.maxHeight * 0.025,
+                      ),
+                      const Text(
+                        'Saved Places helps you to easily set ride configurations.',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: constraints.maxHeight * 0.05,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0XFFE7DFE0),
                         ),
-                        onChanged: model.placeSuggester.updateSuggestions,
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.home),
-                            hintText: "Home",
-                            border: InputBorder.none),
-                      ),
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 1,
-                      height: 0.05,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0XFFE7DFE0),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.05),
-                      margin:
-                          EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
-                      child: TextField(
-                        controller: model.tecSchoolLoc,
-                        focusNode: model.schoolLocFocusNode,
-                        textAlign: TextAlign.start,
-                        onTap: () => model.editPlaceAddress(
-                          isForStartLoc: false,
-                        ),
-                        onChanged: model.placeSuggester.updateSuggestions,
-                        decoration: InputDecoration(
-                          prefixIcon:
-                              const Icon(CupertinoIcons.building_2_fill),
-                          hintText: (selectedUserType == UserType.student)
-                              ? "School"
-                              : "Work",
-                          border: InputBorder.none,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: constraints.maxWidth * 0.05),
+                        margin: EdgeInsets.only(
+                            bottom: constraints.maxHeight * 0.01),
+                        child: TextField(
+                          controller: model.tecHomeLoc,
+                          focusNode: model.homeLocFocusNode,
+                          textAlign: TextAlign.start,
+                          onTap: () => model.editPlaceAddress(
+                            isForStartLoc: true,
+                          ),
+                          onChanged: model.placeSuggester.updateSuggestions,
+                          decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.home),
+                              hintText: "Home",
+                              border: InputBorder.none),
                         ),
                       ),
-                    ),
-                    // Expanded(
-                    //   child: ListView.builder(
-                    //     itemCount: placeSuggestions.length,
-                    //     itemBuilder: (context, index) {
-                    //       final suggestion = placeSuggestions[index] ?? "";
-                    //       final suggestionSplit = suggestion.splitAddress();
-                    //       return Column(
-                    //         children: [
-                    //           ListTile(
-                    //             dense: true,
-                    //             title: Text(
-                    //               suggestionSplit.first,
-                    //               style: const TextStyle(
-                    //                 fontSize: 16,
-                    //                 fontWeight: FontWeight.w600,
-                    //               ),
-                    //             ),
-                    //             subtitle: Text(
-                    //               suggestionSplit.last,
-                    //               maxLines: 1,
-                    //               overflow: TextOverflow.ellipsis,
-                    //               style: const TextStyle(fontSize: 13),
-                    //             ),
-                    //             onTap: () => model.pickSuggestion(
-                    //               pickedSuggestion: suggestion,
-                    //               forStartLoc: isForHomeLoc,
-                    //             ),
-                    //           ),
-                    //           const Divider(
-                    //             color: Colors.grey,
-                    //             thickness: 1,
-                    //             height: 0.05,
-                    //           )
-                    //         ],
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
-                  ],
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 1,
+                        height: 0.05,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0XFFE7DFE0),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: constraints.maxWidth * 0.05),
+                        margin: EdgeInsets.only(
+                            bottom: constraints.maxHeight * 0.01),
+                        child: TextField(
+                          controller: model.tecSchoolLoc,
+                          focusNode: model.schoolLocFocusNode,
+                          textAlign: TextAlign.start,
+                          onTap: () => model.editPlaceAddress(
+                            isForStartLoc: false,
+                          ),
+                          onChanged: model.placeSuggester.updateSuggestions,
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                const Icon(CupertinoIcons.building_2_fill),
+                            hintText: (selectedUserType == UserType.student)
+                                ? "School"
+                                : "Work",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -239,6 +203,44 @@ class InitUserInfoView extends HookConsumerWidget {
                     ],
                   ),
                 ),
+                // Expanded(
+                //   child: ListView.builder(
+                //     itemCount: placeSuggestions.length,
+                //     itemBuilder: (context, index) {
+                //       final suggestion = placeSuggestions[index] ?? "";
+                //       final suggestionSplit = suggestion.splitAddress();
+                //       return Column(
+                //         children: [
+                //           ListTile(
+                //             dense: true,
+                //             title: Text(
+                //               suggestionSplit.first,
+                //               style: const TextStyle(
+                //                 fontSize: 16,
+                //                 fontWeight: FontWeight.w600,
+                //               ),
+                //             ),
+                //             subtitle: Text(
+                //               suggestionSplit.last,
+                //               maxLines: 1,
+                //               overflow: TextOverflow.ellipsis,
+                //               style: const TextStyle(fontSize: 13),
+                //             ),
+                //             onTap: () => model.pickSuggestion(
+                //               pickedSuggestion: suggestion,
+                //               forStartLoc: isForHomeLoc,
+                //             ),
+                //           ),
+                //           const Divider(
+                //             color: Colors.grey,
+                //             thickness: 1,
+                //             height: 0.05,
+                //           )
+                //         ],
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
