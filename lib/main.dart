@@ -53,7 +53,6 @@ class MyApp extends StatelessWidget {
         loggedInBuilder: (_) => const HomeView(),
         loggedOutBuilder: (_) => const LoginView(),
       ),
-      // home: const PortalView(),
     );
   }
 }
