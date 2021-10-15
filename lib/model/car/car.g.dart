@@ -47,10 +47,13 @@ K _$enumDecode<K, V>(
 }
 
 const _$CarTypeEnumMap = {
+  CarType.coupe: 'coupe',
   CarType.sedan: 'sedan',
-  CarType.truck: 'truck',
   CarType.hatchback: 'hatchback',
+  CarType.pickup: 'pickup',
   CarType.suv: 'suv',
-  CarType.auv: 'auv',
+  CarType.mpv: 'mpv',
+  CarType.wagon: 'wagon',
+  CarType.multicab: 'multicab',
   CarType.van: 'van',
 };

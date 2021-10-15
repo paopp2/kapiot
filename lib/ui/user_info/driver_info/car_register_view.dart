@@ -14,6 +14,7 @@ class CarRegisterView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(carRegisterViewModel);
+    final controller = CarouselController();
 
     return SafeArea(
       child: LayoutBuilder(
@@ -147,6 +148,7 @@ class CarRegisterView extends HookConsumerWidget {
                           height: 10,
                         ),
                         CarouselSlider.builder(
+                          carouselController: controller,
                           itemCount: CarType.values.length,
                           options: CarouselOptions(
                             height: constraints.maxHeight * 0.25,
@@ -155,6 +157,7 @@ class CarRegisterView extends HookConsumerWidget {
                             aspectRatio: 16 / 9,
                             viewportFraction: 0.5,
                             initialPage: 0,
+                            enableInfiniteScroll: true,
                             onPageChanged: (index, _) {
                               model.setCarType(CarType.values[index]);
                             },
@@ -163,8 +166,10 @@ class CarRegisterView extends HookConsumerWidget {
                             final carType = CarType.values[index];
                             return CarTypeBlock(
                               constraints: constraints,
-                              carType: carType,
                               model: model,
+                              controller: controller,
+                              carType: carType,
+                              index: index,
                             );
                           },
                         ),

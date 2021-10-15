@@ -22,11 +22,14 @@ class Car with _$Car {
 }
 
 enum CarType {
+  coupe,
   sedan,
   hatchback,
-  truck,
+  pickup,
   suv,
-  auv,
+  mpv,
+  wagon,
+  multicab,
   van,
 }
 
@@ -37,6 +40,12 @@ extension CarTypeMeta on CarType {
 
   Map<String, dynamic> get meta {
     switch (this) {
+      case CarType.coupe:
+        return {
+          'capacity': 2,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Coupe',
+        };
       case CarType.sedan:
         return {
           'capacity': 2,
@@ -49,23 +58,35 @@ extension CarTypeMeta on CarType {
           'icon': const Icon(Icons.car_rental),
           'label': 'Hatchback',
         };
-      case CarType.truck:
+      case CarType.pickup:
         return {
           'capacity': 5,
           'icon': const Icon(Icons.car_rental),
-          'label': 'Truck',
-        };
-      case CarType.auv:
-        return {
-          'capacity': 5,
-          'icon': const Icon(Icons.car_rental),
-          'label': 'AUV',
+          'label': 'Pickup',
         };
       case CarType.suv:
         return {
           'capacity': 5,
           'icon': const Icon(Icons.car_rental),
           'label': 'SUV',
+        };
+      case CarType.mpv:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'MPV',
+        };
+      case CarType.wagon:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Wagon',
+        };
+      case CarType.multicab:
+        return {
+          'capacity': 8,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Multicab',
         };
       case CarType.van:
         return {
