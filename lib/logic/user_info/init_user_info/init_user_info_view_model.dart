@@ -35,11 +35,6 @@ class InitUserInfoViewModel extends ViewModel {
   final tecSchoolLoc = TextEditingController();
 
   @override
-  void initState() {
-    homeLocFocusNode.requestFocus();
-  }
-
-  @override
   void dispose() {
     homeLocFocusNode.dispose();
     schoolLocFocusNode.dispose();
@@ -47,9 +42,9 @@ class InitUserInfoViewModel extends ViewModel {
 
   void goToNextStep() => read(pageIndexProvider).state++;
 
-  void editPlaceAddress({required bool isForStartLoc}) {
-    (isForStartLoc) ? tecHomeLoc.selectText() : tecSchoolLoc.selectText();
-    read(isForHomeLocProvider).state = isForStartLoc;
+  void editPlaceAddress({required bool isForHomeLoc}) {
+    (isForHomeLoc) ? tecHomeLoc.selectText() : tecSchoolLoc.selectText();
+    read(isForHomeLocProvider).state = isForHomeLoc;
   }
 
   Future<void> pickSuggestion({
