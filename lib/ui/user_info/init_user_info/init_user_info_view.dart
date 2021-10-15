@@ -110,38 +110,59 @@ class InitUserInfoView extends HookConsumerWidget {
                     SizedBox(
                       height: constraints.maxHeight * 0.05,
                     ),
-                    TextField(
-                      controller: model.tecHomeLoc,
-                      focusNode: model.homeLocFocusNode,
-                      textAlign: TextAlign.start,
-                      onTap: () => model.editPlaceAddress(
-                        isForStartLoc: true,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0XFFE7DFE0),
                       ),
-                      onChanged: model.placeSuggester.updateSuggestions,
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.home),
-                          hintText: "Home",
-                          border: InputBorder.none),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.05),
+                      margin:
+                          EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
+                      child: TextField(
+                        controller: model.tecHomeLoc,
+                        focusNode: model.homeLocFocusNode,
+                        textAlign: TextAlign.start,
+                        onTap: () => model.editPlaceAddress(
+                          isForStartLoc: true,
+                        ),
+                        onChanged: model.placeSuggester.updateSuggestions,
+                        decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.home),
+                            hintText: "Home",
+                            border: InputBorder.none),
+                      ),
                     ),
                     const Divider(
                       color: Colors.white,
                       thickness: 1,
                       height: 0.05,
                     ),
-                    TextField(
-                      controller: model.tecSchoolLoc,
-                      focusNode: model.schoolLocFocusNode,
-                      textAlign: TextAlign.start,
-                      onTap: () => model.editPlaceAddress(
-                        isForStartLoc: false,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0XFFE7DFE0),
                       ),
-                      onChanged: model.placeSuggester.updateSuggestions,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(CupertinoIcons.building_2_fill),
-                        hintText: (selectedUserType == UserType.student)
-                            ? "School"
-                            : "Work",
-                        border: InputBorder.none,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.05),
+                      margin:
+                          EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
+                      child: TextField(
+                        controller: model.tecSchoolLoc,
+                        focusNode: model.schoolLocFocusNode,
+                        textAlign: TextAlign.start,
+                        onTap: () => model.editPlaceAddress(
+                          isForStartLoc: false,
+                        ),
+                        onChanged: model.placeSuggester.updateSuggestions,
+                        decoration: InputDecoration(
+                          prefixIcon:
+                              const Icon(CupertinoIcons.building_2_fill),
+                          hintText: (selectedUserType == UserType.student)
+                              ? "School"
+                              : "Work",
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
                     // Expanded(
@@ -194,7 +215,7 @@ class InitUserInfoView extends HookConsumerWidget {
                         width: constraints.maxWidth * 0.75,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(24),
-                          color: const Color(0xffc5a1be),
+                          color: const Color(0xffdbb3d4),
                         ),
                         child: TextButton(
                           onPressed: model.updateUserInfo,
@@ -211,7 +232,7 @@ class InitUserInfoView extends HookConsumerWidget {
                         child: const Text(
                           'Set Up Later',
                           style: TextStyle(
-                            color: Color(0xffc5a1be),
+                            color: Color(0xffdbb3d4),
                           ),
                         ),
                       ),
