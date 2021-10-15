@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/ui/place/place_manager_view.dart';
+import 'package:kapiot/ui/place/save_place_picker.dart';
 import 'package:kapiot/ui/place/save_place_view.dart';
 import 'package:kapiot/ui/post_trip_summary/post_trip_summary_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
@@ -31,6 +32,7 @@ class AppRouter {
     Routes.postTripSummaryView: (context) => const PostTripSummaryView(),
     Routes.placeManagerView: (context) => const PlaceManagerView(),
     Routes.savePlaceView: (context) => const SavePlaceView(),
+    Routes.savePlacePicker: (context) => const SavePlacePicker(),
   };
 
   Future<dynamic>? navigateTo(String route, {Object? args}) =>
@@ -56,4 +58,5 @@ class Routes {
   static const postTripSummaryView = 'post_trip_summary_view';
   static const placeManagerView = 'place/place_manager_view';
   static const savePlaceView = 'place/save_place_view';
+  static const savePlacePicker = 'place/save_place_picker';
 }

@@ -127,7 +127,7 @@ class HomeViewModel extends ViewModel {
     }
   }
 
-  void openPlacePickerView({required bool isForStartLoc}) {
+  void openRoutePlacePicker({required bool isForStartLoc}) {
     read(isForStartLocProvider).state = isForStartLoc;
     AppRouter.instance.navigateTo(Routes.routePlacePicker);
   }

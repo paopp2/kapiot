@@ -72,6 +72,10 @@ class PortalView extends HookConsumerWidget {
                   onPressed: model.gotoSavePlaceView,
                   child: const Text("SavePlaceView"),
                 ),
+                ElevatedButton(
+                  onPressed: model.gotoSavePlacePicker,
+                  child: const Text("SavePlacePicker"),
+                ),
                 StreamBuilder(
                   stream: RealtimeDbHelper.instance.documentStream(
                     path: "trial/path",
@@ -107,4 +111,5 @@ class PortalViewModel {
   void gotoInitUserInfoView() => _router.navigateTo(Routes.initUserInfoView);
   void gotoPlaceManagerView() => _router.navigateTo(Routes.placeManagerView);
   void gotoSavePlaceView() => _router.navigateTo(Routes.savePlaceView);
+  void gotoSavePlacePicker() => _router.navigateTo(Routes.savePlacePicker);
 }

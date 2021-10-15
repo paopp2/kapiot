@@ -26,7 +26,7 @@ class LocationInputContainer extends HookConsumerWidget {
         vertical: constraints.maxHeight * 0.015,
       ),
       child: GestureDetector(
-        onTap: () => model.openPlacePickerView(isForStartLoc: isStart),
+        onTap: () => model.openRoutePlacePicker(isForStartLoc: isStart),
         child: Row(
           children: [
             Container(
