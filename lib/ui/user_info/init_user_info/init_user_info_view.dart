@@ -194,7 +194,7 @@ class InitUserInfoView extends HookConsumerWidget {
                         width: constraints.maxWidth * 0.75,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(24),
-                          color: const Color(0xffdbb3d4),
+                          color: const Color(0xffc5a1be),
                         ),
                         child: TextButton(
                           onPressed: model.updateUserInfo,
@@ -205,11 +205,13 @@ class InitUserInfoView extends HookConsumerWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: model.updateUserInfo,
+                        onPressed: () {
+                          print('Skip this part');
+                        },
                         child: const Text(
                           'Set Up Later',
                           style: TextStyle(
-                            color: Color(0xffdbb3d4),
+                            color: Color(0xffc5a1be),
                           ),
                         ),
                       ),
