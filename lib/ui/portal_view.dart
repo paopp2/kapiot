@@ -111,6 +111,5 @@ class PortalViewModel {
   void gotoInitUserInfoView() => _router.navigateTo(Routes.initUserInfoView);
   void gotoPlaceManagerView() => _router.navigateTo(Routes.placeManagerView);
   void gotoSavePlaceView() => _router.navigateTo(Routes.savePlaceView);
-
   void gotoSavePlacePicker() => _router.navigateTo(Routes.savePlacePicker);
 }

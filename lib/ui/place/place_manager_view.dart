@@ -78,7 +78,6 @@ class PlaceManagerView extends HookConsumerWidget {
                                       location?.address! ?? '',
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    // trailing: const Icon(Icons.edit),
                                     trailing: IconButton(
                                       onPressed: model.gotoSavePlaceView,
                                       icon: const Icon(Icons.edit),
