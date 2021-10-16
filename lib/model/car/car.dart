@@ -16,7 +16,7 @@ class Car with _$Car {
     required CarType type,
   }) = _Car;
 
-  int get capacity => type.meta['capacity'];
+  int get capacity => type.capacity;
 
   factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
 }

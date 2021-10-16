@@ -157,79 +157,21 @@ class CarRegisterView extends HookConsumerWidget {
                             aspectRatio: 16 / 9,
                             viewportFraction: 0.5,
                             initialPage: 0,
-                            enableInfiniteScroll: true,
+                            enableInfiniteScroll: false,
                             onPageChanged: (index, _) {
                               model.setCarType(CarType.values[index]);
                             },
                           ),
                           itemBuilder: (context, index, _) {
-                            final carType = CarType.values[index];
                             return CarTypeBlock(
                               constraints: constraints,
                               model: model,
                               controller: controller,
-                              carType: carType,
+                              carType: CarType.values[index],
                               index: index,
                             );
                           },
                         ),
-
-                        // [
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Coupe',
-                        //     seats: '2/4',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Sedan',
-                        //     seats: '5',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Hatchback',
-                        //     seats: '5',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Pickup',
-                        //     seats: '5',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'SUV',
-                        //     seats: '7',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'MPV',
-                        //     seats: '7',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Wagon',
-                        //     seats: '7',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Multicab',
-                        //     seats: '11-13',
-                        //   ),
-                        //   VehicleType(
-                        //     constraints: constraints,
-                        //     vehicleIcon: Icon(Icons.car_rental),
-                        //     vehicleLabel: 'Van/Minivan',
-                        //     seats: '8-15',
-                        //   ),
-                        // ],
                       ],
                     ),
                   ),
@@ -247,43 +189,3 @@ class CarRegisterView extends HookConsumerWidget {
     );
   }
 }
-
-// class VehicleType extends HookConsumerWidget {
-//   const VehicleType({
-//     Key? key,
-//     required this.constraints,
-//     required this.vehicleIcon,
-//     required this.vehicleLabel,
-//     required this.seats,
-//     required this.carType,
-//     required this.isSelected,
-//   }) : super(key: key);
-
-//   final BoxConstraints constraints;
-//   final Icon vehicleIcon;
-//   final String vehicleLabel;
-//   final CarType carType;
-//   final String seats;
-//   final bool isSelected;
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     // final selectedCarType = ref.watch(carTypeProvider).state;
-//     // final isSelected = (selectedCarType == carType);
-//     return Container(
-//       width: constraints.maxWidth * 0.5,
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(12),
-//         color: (isSelected) ? Colors.purple[200] : Colors.grey[200],
-//       ),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           vehicleIcon,
-//           Text(vehicleLabel),
-//           Text(seats + ' seater'),
-//         ],
-//       ),
-//     );
-//   }
-// }
