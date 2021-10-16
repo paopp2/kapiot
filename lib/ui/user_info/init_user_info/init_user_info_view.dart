@@ -17,7 +17,6 @@ class InitUserInfoView extends HookConsumerWidget {
     final pageIndex = ref.watch(pageIndexProvider).state;
     final selectedUserType = ref.watch(userTypeProvider).state;
     final homeFieldText = ref.watch(homeFieldTextProvider).state;
-
     final nonHomeFieldText = ref.watch(nonHomeFieldTextProvider).state;
 
     useEffect(() {
@@ -118,7 +117,6 @@ class InitUserInfoView extends HookConsumerWidget {
                           ),
                           padding: EdgeInsets.symmetric(
                             horizontal: constraints.maxWidth * 0.05,
-                            // vertical: constraints.maxHeight * 0.015,
                           ),
                           margin: EdgeInsets.only(
                             bottom: constraints.maxHeight * 0.01,
