@@ -1,17 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'car.freezed.dart';
 part 'car.g.dart';
-
-enum CarType {
-  sedan,
-  truck,
-  hatchback,
-  suv,
-  auv,
-  van,
-}
 
 @freezed
 class Car with _$Car {
@@ -23,22 +16,84 @@ class Car with _$Car {
     required CarType type,
   }) = _Car;
 
-  int get capacity {
-    switch (type) {
-      case CarType.hatchback:
-        return 2;
-      case CarType.sedan:
-        return 2;
-      case CarType.truck:
-        return 5;
-      case CarType.auv:
-        return 5;
-      case CarType.suv:
-        return 5;
-      case CarType.van:
-        return 8;
-    }
-  }
+  int get capacity => type.capacity;
 
   factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
+}
+
+enum CarType {
+  coupe,
+  sedan,
+  hatchback,
+  pickup,
+  suv,
+  mpv,
+  wagon,
+  multicab,
+  van,
+}
+
+extension CarTypeMeta on CarType {
+  int get capacity => meta['capacity'];
+  Icon get icon => meta['icon'];
+  String get label => meta['label'];
+
+  Map<String, dynamic> get meta {
+    switch (this) {
+      case CarType.coupe:
+        return {
+          'capacity': 2,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Coupe',
+        };
+      case CarType.sedan:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Sedan',
+        };
+      case CarType.hatchback:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Hatchback',
+        };
+      case CarType.pickup:
+        return {
+          'capacity': 5,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Pickup',
+        };
+      case CarType.multicab:
+        return {
+          'capacity': 6,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Multicab',
+        };
+      case CarType.suv:
+        return {
+          'capacity': 7,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'SUV',
+        };
+      case CarType.mpv:
+        return {
+          'capacity': 7,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'MPV',
+        };
+      case CarType.wagon:
+        return {
+          'capacity': 7,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Wagon',
+        };
+      case CarType.van:
+        return {
+          'capacity': 12,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Van',
+        };
+    }
+  }
 }

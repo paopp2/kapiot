@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/user_info/driver_info/car_register_state.dart';
@@ -8,32 +9,42 @@ class CarTypeBlock extends HookConsumerWidget {
   const CarTypeBlock({
     Key? key,
     required this.constraints,
-    required this.vehicleIcon,
-    required this.vehicleLabel,
+    required this.controller,
     required this.model,
     required this.carType,
+    required this.index,
   }) : super(key: key);
 
   final BoxConstraints constraints;
-  final Icon vehicleIcon;
-  final String vehicleLabel;
+  final CarouselController controller;
   final CarType carType;
   final CarRegisterViewModel model;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCarType = ref.watch(carTypeProvider).state;
     final isSelected = (selectedCarType == carType);
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: constraints.maxWidth * 0.025,
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      decoration: BoxDecoration(
+        color: (isSelected) ? Colors.purple[200] : Colors.grey[300],
+        borderRadius: BorderRadius.circular(12),
       ),
       height: constraints.maxWidth * 0.3,
-      width: constraints.maxWidth * 0.3,
+      width: constraints.maxWidth,
       child: ElevatedButton(
-        onPressed: () => model.setCarType(carType),
-        style: ElevatedButton.styleFrom(
-          primary: (isSelected) ? Colors.purple[200] : Colors.grey[300],
+        onPressed: () {
+          model.setCarType(carType);
+          controller.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        },
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -41,8 +52,9 @@ class CarTypeBlock extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            vehicleIcon,
-            Text(vehicleLabel),
+            carType.icon,
+            Text(carType.label),
+            Text("${carType.capacity}-seater"),
           ],
         ),
       ),
