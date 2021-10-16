@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
+import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/ui/home/components/route_config_panel/location_input_container.dart';
 
 class ConfigTypePanel extends HookConsumerWidget {
@@ -25,6 +26,8 @@ class ConfigTypePanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
+    final startAddress = ref.watch(startLocProvider).state?.address;
+    final endAddress = ref.watch(endLocProvider).state?.address;
 
     return Container(
       padding: const EdgeInsets.all(15),
@@ -56,8 +59,12 @@ class ConfigTypePanel extends HookConsumerWidget {
                   children: [
                     LocationInputContainer(
                       constraints: constraints,
-                      isStart: true,
-                      model: model,
+                      text: startAddress,
+                      hint: 'Start Location',
+                      leadingIcon: CupertinoIcons.smallcircle_circle,
+                      onPressed: () => model.openRoutePlacePicker(
+                        isForStartLoc: true,
+                      ),
                     ),
                     const Divider(
                       color: Colors.white,
@@ -66,8 +73,12 @@ class ConfigTypePanel extends HookConsumerWidget {
                     ),
                     LocationInputContainer(
                       constraints: constraints,
-                      isStart: false,
-                      model: model,
+                      text: endAddress,
+                      hint: 'End Location',
+                      leadingIcon: CupertinoIcons.location,
+                      onPressed: () => model.openRoutePlacePicker(
+                        isForStartLoc: false,
+                      ),
                     ),
                   ],
                 ),

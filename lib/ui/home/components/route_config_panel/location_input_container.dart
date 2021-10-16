@@ -1,40 +1,37 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:kapiot/logic/home/home_view_model.dart';
-import 'package:kapiot/logic/shared/map_controller.dart';
 
-class LocationInputContainer extends HookConsumerWidget {
+class LocationInputContainer extends StatelessWidget {
   const LocationInputContainer({
     Key? key,
     required this.constraints,
-    required this.isStart,
-    required this.model,
+    required this.onPressed,
+    required this.leadingIcon,
+    required this.text,
+    required this.hint,
   }) : super(key: key);
 
   final BoxConstraints constraints;
-  final bool isStart;
-  final HomeViewModel model;
+  final void Function() onPressed;
+  final IconData leadingIcon;
+  final String? text;
+  final String hint;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final startAddress = ref.watch(startLocProvider).state?.address;
-    final endAddress = ref.watch(endLocProvider).state?.address;
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: constraints.maxWidth * 0.025,
         vertical: constraints.maxHeight * 0.015,
       ),
       child: GestureDetector(
-        onTap: () => model.openRoutePlacePicker(isForStartLoc: isStart),
+        onTap: onPressed,
         child: Row(
           children: [
             Container(
               margin: EdgeInsets.only(right: constraints.maxWidth * 0.03),
               child: Icon(
-                isStart
-                    ? CupertinoIcons.smallcircle_circle
-                    : CupertinoIcons.location,
+                leadingIcon,
                 color: Colors.blue,
               ),
             ),
@@ -42,14 +39,10 @@ class LocationInputContainer extends HookConsumerWidget {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Text(
-                  isStart
-                      ? (startAddress ?? 'Start Location')
-                      : (endAddress ?? 'End Location'),
+                  text ?? hint,
                   style: TextStyle(
                     fontSize: 17,
-                    color: isStart
-                        ? ((startAddress != null) ? Colors.black : Colors.grey)
-                        : ((endAddress != null) ? Colors.black : Colors.grey),
+                    color: (text != null) ? Colors.black : Colors.grey,
                   ),
                 ),
               ),
