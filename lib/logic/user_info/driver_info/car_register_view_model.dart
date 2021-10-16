@@ -29,9 +29,7 @@ class CarRegisterViewModel extends ViewModel {
   final UserInfoRepository userInfoRepo;
   final KapiotUser? currentUser;
   final KapiotUserInfo? currentUserInfo;
-  final licensePlateKey = GlobalKey<FormState>();
-  final carMakeKey = GlobalKey<FormState>();
-  final carModelKey = GlobalKey<FormState>();
+  final carRegisterFormKey = GlobalKey<FormState>();
   final tecLicensePlateField = TextEditingController();
   final tecCarMakeField = TextEditingController();
   final tecCarModelField = TextEditingController();
@@ -45,12 +43,8 @@ class CarRegisterViewModel extends ViewModel {
 
   Future<void> registerCar() async {
     assert(currentUserInfo != null);
-    assert(licensePlateKey.currentState != null);
-    assert(carMakeKey.currentState != null);
-    assert(carModelKey.currentState != null);
-    if (licensePlateKey.currentState!.validate() &&
-        carMakeKey.currentState!.validate() &&
-        carModelKey.currentState!.validate()) {
+    assert(carRegisterFormKey.currentState != null);
+    if (carRegisterFormKey.currentState!.validate()) {
       final userId = currentUser!.id;
       final carType = read(carTypeProvider).state;
       final carToAdd = Car(

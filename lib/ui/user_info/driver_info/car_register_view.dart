@@ -32,25 +32,25 @@ class CarRegisterView extends HookConsumerWidget {
                 ),
               ),
             ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: constraints.maxWidth,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: constraints.maxWidth * 0.025,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('License Plate'),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Form(
-                          key: model.licensePlateKey,
-                          child: TextFormField(
+            body: Form(
+              key: model.carRegisterFormKey,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: constraints.maxWidth,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: constraints.maxWidth * 0.025,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('License Plate'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.03,
@@ -61,33 +61,30 @@ class CarRegisterView extends HookConsumerWidget {
                             controller: model.tecLicensePlateField,
                             validator: model.carRegisterValidator,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: constraints.maxHeight * 0.1,
-                    width: constraints.maxWidth,
-                    margin: EdgeInsets.symmetric(
-                      vertical: constraints.maxHeight * 0.025,
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: constraints.maxWidth * 0.5,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.025,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Make'),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Form(
-                                key: model.carMakeKey,
-                                child: Expanded(
+                    Container(
+                      height: constraints.maxHeight * 0.1,
+                      width: constraints.maxWidth,
+                      margin: EdgeInsets.symmetric(
+                        vertical: constraints.maxHeight * 0.025,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: constraints.maxWidth * 0.5,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: constraints.maxWidth * 0.025,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Make'),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Expanded(
                                   child: TextFormField(
                                     controller: model.tecCarMakeField,
                                     validator: model.carRegisterValidator,
@@ -100,25 +97,22 @@ class CarRegisterView extends HookConsumerWidget {
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: constraints.maxWidth * 0.5,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.025,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Model'),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Form(
-                                key: model.carModelKey,
-                                child: Expanded(
+                          Container(
+                            width: constraints.maxWidth * 0.5,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: constraints.maxWidth * 0.025,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Model'),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Expanded(
                                   child: TextFormField(
                                     controller: model.tecCarModelField,
                                     validator: model.carRegisterValidator,
@@ -131,56 +125,57 @@ class CarRegisterView extends HookConsumerWidget {
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: constraints.maxWidth,
-                    margin: EdgeInsets.only(top: constraints.maxHeight * 0.025),
-                    child: Column(
-                      children: [
-                        const Text('Vehicle Type'),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CarouselSlider.builder(
-                          carouselController: controller,
-                          itemCount: CarType.values.length,
-                          options: CarouselOptions(
-                            height: constraints.maxHeight * 0.25,
-                            autoPlay: false,
-                            enlargeCenterPage: true,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.5,
-                            initialPage: 0,
-                            enableInfiniteScroll: false,
-                            onPageChanged: (index, _) {
-                              model.setCarType(CarType.values[index]);
+                    Container(
+                      width: constraints.maxWidth,
+                      margin:
+                          EdgeInsets.only(top: constraints.maxHeight * 0.025),
+                      child: Column(
+                        children: [
+                          const Text('Vehicle Type'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CarouselSlider.builder(
+                            carouselController: controller,
+                            itemCount: CarType.values.length,
+                            options: CarouselOptions(
+                              height: constraints.maxHeight * 0.25,
+                              autoPlay: false,
+                              enlargeCenterPage: true,
+                              aspectRatio: 16 / 9,
+                              viewportFraction: 0.5,
+                              initialPage: 0,
+                              enableInfiniteScroll: false,
+                              onPageChanged: (index, _) {
+                                model.setCarType(CarType.values[index]);
+                              },
+                            ),
+                            itemBuilder: (context, index, _) {
+                              return CarTypeBlock(
+                                constraints: constraints,
+                                model: model,
+                                controller: controller,
+                                carType: CarType.values[index],
+                                index: index,
+                              );
                             },
                           ),
-                          itemBuilder: (context, index, _) {
-                            return CarTypeBlock(
-                              constraints: constraints,
-                              model: model,
-                              controller: controller,
-                              carType: CarType.values[index],
-                              index: index,
-                            );
-                          },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 69),
-                  ElevatedButton(
-                    onPressed: model.registerCar,
-                    child: const Text('Submit'),
-                  ),
-                ],
+                    const SizedBox(height: 69),
+                    ElevatedButton(
+                      onPressed: model.registerCar,
+                      child: const Text('Submit'),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
