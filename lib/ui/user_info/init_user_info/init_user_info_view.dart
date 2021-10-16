@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_state.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+import 'package:kapiot/ui/shared/location_input_container.dart';
 
 class InitUserInfoView extends HookConsumerWidget {
   const InitUserInfoView({Key? key}) : super(key: key);
@@ -15,11 +16,9 @@ class InitUserInfoView extends HookConsumerWidget {
     final model = ref.watch(initUserInfoViewModel);
     final pageIndex = ref.watch(pageIndexProvider).state;
     final selectedUserType = ref.watch(userTypeProvider).state;
-    final homeFieldText = ref.watch(homeFieldTextProvider).state ?? 'Home';
-    final nonHomeFieldLabel =
-        (selectedUserType == UserType.student) ? 'School' : 'Work';
-    final nonHomeFieldText =
-        ref.watch(nonHomeFieldTextProvider).state ?? nonHomeFieldLabel;
+    final homeFieldText = ref.watch(homeFieldTextProvider).state;
+
+    final nonHomeFieldText = ref.watch(nonHomeFieldTextProvider).state;
 
     useEffect(() {
       model.initState();
@@ -118,38 +117,20 @@ class InitUserInfoView extends HookConsumerWidget {
                             color: const Color(0XFFE7DFE0),
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.075,
-                            vertical: constraints.maxHeight * 0.015,
+                            horizontal: constraints.maxWidth * 0.05,
+                            // vertical: constraints.maxHeight * 0.015,
                           ),
                           margin: EdgeInsets.only(
                             bottom: constraints.maxHeight * 0.01,
                           ),
-                          child: GestureDetector(
-                            onTap: () => model.openSavePlacePicker(
+                          child: LocationInputContainer(
+                            constraints: constraints,
+                            onPressed: () => model.openSavePlacePicker(
                               isForHome: true,
                             ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      right: constraints.maxWidth * 0.03),
-                                  child: const Icon(
-                                    Icons.home,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    homeFieldText,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            leadingIcon: Icons.home,
+                            text: homeFieldText,
+                            hint: 'Home',
                           ),
                         ),
                         const Divider(
@@ -163,38 +144,21 @@ class InitUserInfoView extends HookConsumerWidget {
                             color: const Color(0XFFE7DFE0),
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.075,
-                            vertical: constraints.maxHeight * 0.015,
+                            horizontal: constraints.maxWidth * 0.05,
                           ),
                           margin: EdgeInsets.only(
                             bottom: constraints.maxHeight * 0.01,
                           ),
-                          child: GestureDetector(
-                            onTap: () => model.openSavePlacePicker(
+                          child: LocationInputContainer(
+                            constraints: constraints,
+                            onPressed: () => model.openSavePlacePicker(
                               isForHome: false,
                             ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      right: constraints.maxWidth * 0.03),
-                                  child: const Icon(
-                                    Icons.work,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    nonHomeFieldText,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            leadingIcon: Icons.work,
+                            text: nonHomeFieldText,
+                            hint: (selectedUserType == UserType.student)
+                                ? 'School'
+                                : 'Work',
                           ),
                         ),
                       ],

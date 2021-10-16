@@ -6,7 +6,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
-import 'package:kapiot/ui/home/components/route_config_panel/location_input_container.dart';
+import 'package:kapiot/ui/shared/location_input_container.dart';
 
 class ConfigTypePanel extends HookConsumerWidget {
   const ConfigTypePanel({
