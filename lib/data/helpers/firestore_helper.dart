@@ -1,8 +1,17 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreHelper {
   FirestoreHelper._();
   static final instance = FirestoreHelper._();
+  StreamSubscription? _colStreamSub;
+  StreamSubscription? _docStreamSub;
+
+  void cancelStreams() {
+    _colStreamSub?.cancel();
+    _docStreamSub?.cancel();
+  }
 
   Future<T> getData<T>({
     required String path,
@@ -48,12 +57,13 @@ class FirestoreHelper {
     Query Function(Query query)? queryBuilder,
     int Function(T lhs, T rhs)? sort,
   }) {
+    final streamController = StreamController<List<T>>();
     Query query = FirebaseFirestore.instance.collection(path);
     if (queryBuilder != null) {
       query = queryBuilder(query);
     }
     final Stream<QuerySnapshot> snapshots = query.snapshots();
-    return snapshots.map((snapshot) {
+    _colStreamSub = snapshots.listen((snapshot) {
       final result = snapshot.docs
           .map((snapshot) =>
               builder(snapshot.data() as Map<String, dynamic>, snapshot.id))
@@ -62,24 +72,32 @@ class FirestoreHelper {
       if (sort != null) {
         result.sort(sort);
       }
-      return result;
-    });
+      streamController.add(result);
+    }, cancelOnError: true);
+    streamController.onCancel = streamController.close;
+    return streamController.stream;
   }
 
   Stream<T?> documentStream<T>({
     required String path,
     required T Function(Map<String, dynamic> data, String documentID) builder,
   }) {
+    final streamController = StreamController<T?>();
     final DocumentReference reference = FirebaseFirestore.instance.doc(path);
     final Stream<DocumentSnapshot> snapshots = reference.snapshots();
-    return snapshots.map((snapshot) {
+    _docStreamSub = snapshots.listen((snapshot) {
       final data = snapshot.data();
       if (data != null) {
-        return builder(snapshot.data() as Map<String, dynamic>, snapshot.id);
+        streamController.add(builder(
+          snapshot.data() as Map<String, dynamic>,
+          snapshot.id,
+        ));
       } else {
-        return null;
+        streamController.add(null);
       }
-    });
+    }, cancelOnError: true);
+    streamController.onCancel = streamController.close;
+    return streamController.stream;
   }
 
   Future<List<T>> collectionToList<T>({

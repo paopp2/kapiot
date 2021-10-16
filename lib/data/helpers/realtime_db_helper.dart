@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 
 const realtimeDbUrl =
@@ -9,6 +11,13 @@ class RealtimeDbHelper {
   FirebaseDatabase? realtimeDb;
   late final DatabaseReference dbRef = realtimeDb?.reference() ??
       FirebaseDatabase(databaseURL: realtimeDbUrl).reference();
+  StreamSubscription? _colStreamSub;
+  StreamSubscription? _docStreamSub;
+
+  void cancelStreams() {
+    _colStreamSub?.cancel();
+    _docStreamSub?.cancel();
+  }
 
   Future<void> setData({
     required String path,
@@ -21,6 +30,7 @@ class RealtimeDbHelper {
     required String path,
     required T Function(Map<String, dynamic> data) builder,
   }) {
+    final streamController = StreamController<T>();
     // Filter stream (sometimes Firebase RTDB emits null events)
     final Stream<Event> events =
         dbRef.child(path).onValue.where((e) => (e.snapshot.value != null));
@@ -28,14 +38,19 @@ class RealtimeDbHelper {
     final Stream<Map<String, dynamic>> snapshots = events.map(
       (e) => (Map<String, dynamic>.from(e.snapshot.value)),
     );
-    return snapshots.map((snapshot) => builder(snapshot));
+    _docStreamSub = snapshots.listen((snapshot) {
+      streamController.add(builder(snapshot));
+    }, cancelOnError: true);
+    streamController.onCancel = streamController.close;
+    return streamController.stream;
   }
 
   Stream<List<T>> collectionStream<T>({
     required String path,
     required T Function(Map<String, dynamic> data, String documentID) builder,
     List<String>? keysOfDocsToGet,
-  }) async* {
+  }) {
+    final streamController = StreamController<List<T>>();
     // Filter stream (sometimes Firebase RTDB emits null events)
     final Stream<Event> events =
         dbRef.child(path).onValue.where((e) => (e.snapshot.value != null));
@@ -53,7 +68,7 @@ class RealtimeDbHelper {
     }
     // Convert into a Stream of list of all retrieved 'documents' as JSON,
     // also passing their docID to the builder callback
-    await for (final snapshot in snapshots) {
+    _colStreamSub = snapshots.listen((snapshot) {
       final List<T> tList = [];
       snapshot.forEach(
         (key, value) => tList.add(builder(
@@ -61,7 +76,9 @@ class RealtimeDbHelper {
           key, // document ID
         )),
       );
-      yield tList;
-    }
+      streamController.add(tList);
+    }, cancelOnError: true);
+    streamController.onCancel = streamController.close;
+    return streamController.stream;
   }
 }
