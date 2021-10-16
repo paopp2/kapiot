@@ -38,7 +38,7 @@ class AppRouter {
   Future<dynamic>? navigateTo(String route, {Object? args}) =>
       navigationKey.currentState!.pushNamed(route, arguments: args);
 
-  void popView() => navigationKey.currentState!.pop();
+  void popView([Object? result]) => navigationKey.currentState!.pop(result);
 
   void popAllThenNavigateTo(String route) =>
       navigationKey.currentState!.pushNamedAndRemoveUntil(route, (_) => false);
