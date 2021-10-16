@@ -34,17 +34,19 @@ class InitUserInfoViewModel extends ViewModel {
       args: (isForHome)
           ? read(homeFieldTextProvider).state
           : read(nonHomeFieldTextProvider).state,
-    ) as KapiotLocation;
+    ) as KapiotLocation?;
     String label = 'Home';
     if (isForHome) {
-      read(homeFieldTextProvider).state = location.address;
+      read(homeFieldTextProvider).state = location?.address;
     } else {
       label = (read(userTypeProvider).state == UserType.student)
           ? 'School'
           : 'Work';
-      read(nonHomeFieldTextProvider).state = location.address;
+      read(nonHomeFieldTextProvider).state = location?.address;
     }
-    read(savedLocationsProvider).state[label] = location;
+    if (location != null) {
+      read(savedLocationsProvider).state[label] = location;
+    }
   }
 
   void setUserType(UserType userType) {
