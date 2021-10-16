@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
@@ -25,16 +24,6 @@ class InitUserInfoViewModel extends ViewModel {
   }) : super(read);
   final KapiotUser currentUser;
   final UserInfoRepository userInfoRepo;
-  final homeLocFocusNode = FocusNode();
-  final schoolLocFocusNode = FocusNode();
-  final tecHomeLoc = TextEditingController();
-  final tecSchoolLoc = TextEditingController();
-
-  @override
-  void dispose() {
-    homeLocFocusNode.dispose();
-    schoolLocFocusNode.dispose();
-  }
 
   void goToNextStep() => read(pageIndexProvider).state++;
 
@@ -42,18 +31,18 @@ class InitUserInfoViewModel extends ViewModel {
     final appRouter = AppRouter.instance;
     final location = await appRouter.navigateTo(
       Routes.savePlacePicker,
-      args: (isForHome) ? tecHomeLoc.text : tecSchoolLoc.text,
+      args: (isForHome)
+          ? read(homeFieldTextProvider).state
+          : read(nonHomeFieldTextProvider).state,
     ) as KapiotLocation;
     String label = 'Home';
     if (isForHome) {
-      tecHomeLoc.text = location.address!;
-      homeLocFocusNode.unfocus();
+      read(homeFieldTextProvider).state = location.address;
     } else {
       label = (read(userTypeProvider).state == UserType.student)
           ? 'School'
           : 'Work';
-      tecSchoolLoc.text = location.address!;
-      schoolLocFocusNode.unfocus();
+      read(nonHomeFieldTextProvider).state = location.address;
     }
     read(savedLocationsProvider).state[label] = location;
   }

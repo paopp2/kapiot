@@ -15,6 +15,11 @@ class InitUserInfoView extends HookConsumerWidget {
     final model = ref.watch(initUserInfoViewModel);
     final pageIndex = ref.watch(pageIndexProvider).state;
     final selectedUserType = ref.watch(userTypeProvider).state;
+    final homeFieldText = ref.watch(homeFieldTextProvider).state ?? 'Home';
+    final nonHomeFieldLabel =
+        (selectedUserType == UserType.student) ? 'School' : 'Work';
+    final nonHomeFieldText =
+        ref.watch(nonHomeFieldTextProvider).state ?? nonHomeFieldLabel;
 
     useEffect(() {
       model.initState();
@@ -133,11 +138,11 @@ class InitUserInfoView extends HookConsumerWidget {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: Text(
-                                    'Home',
+                                    homeFieldText,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 17,
                                       color: Colors.grey,
                                     ),
@@ -180,9 +185,7 @@ class InitUserInfoView extends HookConsumerWidget {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    (selectedUserType == UserType.student)
-                                        ? "School"
-                                        : "Work",
+                                    nonHomeFieldText,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       fontSize: 17,
