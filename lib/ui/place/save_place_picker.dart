@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/logic/place/place_manager_view_model.dart';
+import 'package:kapiot/app_router.dart';
+import 'package:kapiot/logic/place/place_suggester.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 import 'package:kapiot/ui/place/components/base_place_picker.dart';
 
 class SavePlacePicker extends HookConsumerWidget {
@@ -10,16 +12,19 @@ class SavePlacePicker extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(placeManagerViewModel);
+    final placeSuggester = ref.watch(placeSuggesterProvider);
+    final initialText = ModalRoute.of(context)?.settings.arguments as String?;
+    final tecSaveLoc = TextEditingController(text: initialText);
 
     useEffect(() {
-      model.saveLocFocusNode.requestFocus();
+      tecSaveLoc.selectText();
     }, []);
 
     return BasePlacePicker(
-      onPlaceSuggestionTap: (suggestion) => model.pickSuggestion(
-        pickedSuggestion: suggestion,
-      ),
+      onPlaceSuggestionTap: (suggestion) async {
+        final suggestedLoc = await placeSuggester.getLocation(suggestion);
+        AppRouter.instance.popView(suggestedLoc!.copyWith(address: suggestion));
+      },
       header: (context, constraints) {
         return [
           Container(
@@ -32,14 +37,13 @@ class SavePlacePicker extends HookConsumerWidget {
             ),
             margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
             child: TextField(
-              controller: model.tecSaveLoc,
-              focusNode: model.saveLocFocusNode,
-              onTap: model.editPlaceAddress,
+              controller: tecSaveLoc,
+              autofocus: true,
               decoration: const InputDecoration(
                 hintText: "Enter Address",
                 border: InputBorder.none,
               ),
-              onChanged: model.placeSuggester.updateSuggestions,
+              onChanged: placeSuggester.updateSuggestions,
             ),
           ),
         ];

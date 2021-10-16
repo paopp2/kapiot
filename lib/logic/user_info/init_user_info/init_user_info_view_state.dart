@@ -14,5 +14,9 @@ final pageIndexProvider = StateProvider((ref) {
 
 final isForHomeLocProvider = StateProvider.autoDispose<bool>((ref) => true);
 
+final homeFieldTextProvider = StateProvider.autoDispose<String?>((ref) => null);
+final nonHomeFieldTextProvider =
+    StateProvider.autoDispose<String?>((ref) => null);
+
 final savedLocationsProvider =
     StateProvider<Map<String, KapiotLocation>>((ref) => {});
