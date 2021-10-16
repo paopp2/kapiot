@@ -55,7 +55,7 @@ class PlaceManagerView extends HookConsumerWidget {
                             height: 80,
                             child: Center(
                               child: ListTile(
-                                onTap: model.openSavePlacePicker,
+                                onTap: model.getLocationToSave,
                                 leading: const Icon(Icons.add),
                                 title: const Text('Add New'),
                               ),
@@ -79,7 +79,10 @@ class PlaceManagerView extends HookConsumerWidget {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     trailing: IconButton(
-                                      onPressed: model.gotoSavePlaceView,
+                                      onPressed: () => model.editSavedLocation(
+                                        locLabel,
+                                        location,
+                                      ),
                                       icon: const Icon(Icons.edit),
                                     ),
                                   ),

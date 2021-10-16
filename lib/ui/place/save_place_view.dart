@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/logic/place/place_manager_view_model.dart';
+import 'package:kapiot/logic/place/place_manager_view_state.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 
-class SavePlaceView extends StatelessWidget {
+class SavePlaceView extends HookConsumerWidget {
   const SavePlaceView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(placeManagerViewModel);
+    final initialLabel = ModalRoute.of(context)?.settings.arguments as String?;
+    final tecLabel = useTextEditingController(text: initialLabel);
+    final locationToSave = ref.watch(locationToSaveProvider).state;
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -41,10 +50,12 @@ class SavePlaceView extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('Name'),
+                          children: [
+                            const Text('Name'),
                             TextField(
-                              decoration: InputDecoration(
+                              controller: tecLabel,
+                              onTap: tecLabel.selectText,
+                              decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'e.g. Gym / Airport',
                               ),
@@ -54,9 +65,7 @@ class SavePlaceView extends StatelessWidget {
                       ),
                       const Divider(),
                       GestureDetector(
-                        onTap: () {
-                          print('Go to place picker');
-                        },
+                        onTap: model.editLocationToSave,
                         child: Container(
                           padding: EdgeInsets.only(
                             top: 5,
@@ -72,8 +81,8 @@ class SavePlaceView extends StatelessWidget {
                               ListTile(
                                 title: Transform.translate(
                                   offset: const Offset(-16, 0),
-                                  child: const Text(
-                                    'Ayala Center Cebu Cardinal Rosales Ave. Entrance, Cebu City',
+                                  child: Text(
+                                    locationToSave?.address ?? 'No location',
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -93,9 +102,7 @@ class SavePlaceView extends StatelessWidget {
                   color: const Color(0xffcccccc),
                   width: constraints.maxWidth * 0.9,
                   child: TextButton(
-                    onPressed: () {
-                      print('Return to PlaceManagerView');
-                    },
+                    onPressed: () => model.saveLocation(label: tecLabel.text),
                     child: const Text(
                       'Submit',
                       style: TextStyle(color: Colors.white),

@@ -14,7 +14,7 @@ class SavePlacePicker extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final placeSuggester = ref.watch(placeSuggesterProvider);
     final initialText = ModalRoute.of(context)?.settings.arguments as String?;
-    final tecSaveLoc = TextEditingController(text: initialText);
+    final tecSaveLoc = useTextEditingController(text: initialText);
 
     useEffect(() {
       tecSaveLoc.selectText();
