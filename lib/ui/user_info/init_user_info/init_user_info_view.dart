@@ -113,22 +113,37 @@ class InitUserInfoView extends HookConsumerWidget {
                             color: const Color(0XFFE7DFE0),
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.05,
+                            horizontal: constraints.maxWidth * 0.075,
+                            vertical: constraints.maxHeight * 0.015,
                           ),
                           margin: EdgeInsets.only(
                             bottom: constraints.maxHeight * 0.01,
                           ),
-                          child: TextField(
-                            controller: model.tecHomeLoc,
-                            focusNode: model.homeLocFocusNode,
-                            textAlign: TextAlign.start,
+                          child: GestureDetector(
                             onTap: () => model.openSavePlacePicker(
                               isForHome: true,
                             ),
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.home),
-                              hintText: "Home",
-                              border: InputBorder.none,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      right: constraints.maxWidth * 0.03),
+                                  child: const Icon(
+                                    Icons.home,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                const Expanded(
+                                  child: Text(
+                                    'Home',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -143,26 +158,39 @@ class InitUserInfoView extends HookConsumerWidget {
                             color: const Color(0XFFE7DFE0),
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.05,
+                            horizontal: constraints.maxWidth * 0.075,
+                            vertical: constraints.maxHeight * 0.015,
                           ),
                           margin: EdgeInsets.only(
                             bottom: constraints.maxHeight * 0.01,
                           ),
-                          child: TextField(
-                            controller: model.tecSchoolLoc,
-                            focusNode: model.schoolLocFocusNode,
-                            textAlign: TextAlign.start,
+                          child: GestureDetector(
                             onTap: () => model.openSavePlacePicker(
                               isForHome: false,
                             ),
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                CupertinoIcons.building_2_fill,
-                              ),
-                              hintText: (selectedUserType == UserType.student)
-                                  ? "School"
-                                  : "Work",
-                              border: InputBorder.none,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      right: constraints.maxWidth * 0.03),
+                                  child: const Icon(
+                                    Icons.work,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    (selectedUserType == UserType.student)
+                                        ? "School"
+                                        : "Work",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
