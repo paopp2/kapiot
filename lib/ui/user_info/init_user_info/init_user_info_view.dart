@@ -122,7 +122,9 @@ class InitUserInfoView extends HookConsumerWidget {
                             controller: model.tecHomeLoc,
                             focusNode: model.homeLocFocusNode,
                             textAlign: TextAlign.start,
-                            onTap: model.openSavePlacePicker,
+                            onTap: () => model.openSavePlacePicker(
+                              isForHome: true,
+                            ),
                             decoration: const InputDecoration(
                               prefixIcon: Icon(Icons.home),
                               hintText: "Home",
@@ -150,7 +152,9 @@ class InitUserInfoView extends HookConsumerWidget {
                             controller: model.tecSchoolLoc,
                             focusNode: model.schoolLocFocusNode,
                             textAlign: TextAlign.start,
-                            onTap: model.openSavePlacePicker,
+                            onTap: () => model.openSavePlacePicker(
+                              isForHome: false,
+                            ),
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 CupertinoIcons.building_2_fill,

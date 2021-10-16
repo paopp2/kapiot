@@ -4,6 +4,7 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 import 'init_user_info_view_state.dart';
@@ -37,8 +38,24 @@ class InitUserInfoViewModel extends ViewModel {
 
   void goToNextStep() => read(pageIndexProvider).state++;
 
-  void openSavePlacePicker() {
-    AppRouter.instance.navigateTo(Routes.savePlacePicker);
+  void openSavePlacePicker({required bool isForHome}) async {
+    final appRouter = AppRouter.instance;
+    final location = await appRouter.navigateTo(
+      Routes.savePlacePicker,
+      args: (isForHome) ? tecHomeLoc.text : tecSchoolLoc.text,
+    ) as KapiotLocation;
+    String label = 'Home';
+    if (isForHome) {
+      tecHomeLoc.text = location.address!;
+      homeLocFocusNode.unfocus();
+    } else {
+      label = (read(userTypeProvider).state == UserType.student)
+          ? 'School'
+          : 'Work';
+      tecSchoolLoc.text = location.address!;
+      schoolLocFocusNode.unfocus();
+    }
+    read(savedLocationsProvider).state[label] = location;
   }
 
   void setUserType(UserType userType) {
