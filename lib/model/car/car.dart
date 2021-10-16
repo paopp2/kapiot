@@ -64,6 +64,12 @@ extension CarTypeMeta on CarType {
           'icon': const Icon(Icons.car_rental),
           'label': 'Pickup',
         };
+      case CarType.multicab:
+        return {
+          'capacity': 6,
+          'icon': const Icon(Icons.car_rental),
+          'label': 'Multicab',
+        };
       case CarType.suv:
         return {
           'capacity': 7,
@@ -81,12 +87,6 @@ extension CarTypeMeta on CarType {
           'capacity': 7,
           'icon': const Icon(Icons.car_rental),
           'label': 'Wagon',
-        };
-      case CarType.multicab:
-        return {
-          'capacity': 13,
-          'icon': const Icon(Icons.car_rental),
-          'label': 'Multicab',
         };
       case CarType.van:
         return {
