@@ -48,13 +48,13 @@ extension CarTypeMeta on CarType {
         };
       case CarType.sedan:
         return {
-          'capacity': 2,
+          'capacity': 5,
           'icon': const Icon(Icons.car_rental),
           'label': 'Sedan',
         };
       case CarType.hatchback:
         return {
-          'capacity': 2,
+          'capacity': 5,
           'icon': const Icon(Icons.car_rental),
           'label': 'Hatchback',
         };
@@ -66,31 +66,31 @@ extension CarTypeMeta on CarType {
         };
       case CarType.suv:
         return {
-          'capacity': 5,
+          'capacity': 7,
           'icon': const Icon(Icons.car_rental),
           'label': 'SUV',
         };
       case CarType.mpv:
         return {
-          'capacity': 5,
+          'capacity': 7,
           'icon': const Icon(Icons.car_rental),
           'label': 'MPV',
         };
       case CarType.wagon:
         return {
-          'capacity': 5,
+          'capacity': 7,
           'icon': const Icon(Icons.car_rental),
           'label': 'Wagon',
         };
       case CarType.multicab:
         return {
-          'capacity': 8,
+          'capacity': 13,
           'icon': const Icon(Icons.car_rental),
           'label': 'Multicab',
         };
       case CarType.van:
         return {
-          'capacity': 8,
+          'capacity': 12,
           'icon': const Icon(Icons.car_rental),
           'label': 'Van',
         };
