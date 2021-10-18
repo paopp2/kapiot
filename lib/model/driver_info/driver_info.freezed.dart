@@ -21,10 +21,14 @@ DriverInfo _$DriverInfoFromJson(Map<String, dynamic> json) {
 class _$DriverInfoTearOff {
   const _$DriverInfoTearOff();
 
-  _DriverInfo call({required List<Car> registeredCars, double? rating}) {
+  _DriverInfo call(
+      {required List<Car> registeredCars,
+      int? ratingResponseCount,
+      int? rateTotal}) {
     return _DriverInfo(
       registeredCars: registeredCars,
-      rating: rating,
+      ratingResponseCount: ratingResponseCount,
+      rateTotal: rateTotal,
     );
   }
 
@@ -39,7 +43,8 @@ const $DriverInfo = _$DriverInfoTearOff();
 /// @nodoc
 mixin _$DriverInfo {
   List<Car> get registeredCars => throw _privateConstructorUsedError;
-  double? get rating => throw _privateConstructorUsedError;
+  int? get ratingResponseCount => throw _privateConstructorUsedError;
+  int? get rateTotal => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +57,8 @@ abstract class $DriverInfoCopyWith<$Res> {
   factory $DriverInfoCopyWith(
           DriverInfo value, $Res Function(DriverInfo) then) =
       _$DriverInfoCopyWithImpl<$Res>;
-  $Res call({List<Car> registeredCars, double? rating});
+  $Res call(
+      {List<Car> registeredCars, int? ratingResponseCount, int? rateTotal});
 }
 
 /// @nodoc
@@ -66,17 +72,22 @@ class _$DriverInfoCopyWithImpl<$Res> implements $DriverInfoCopyWith<$Res> {
   @override
   $Res call({
     Object? registeredCars = freezed,
-    Object? rating = freezed,
+    Object? ratingResponseCount = freezed,
+    Object? rateTotal = freezed,
   }) {
     return _then(_value.copyWith(
       registeredCars: registeredCars == freezed
           ? _value.registeredCars
           : registeredCars // ignore: cast_nullable_to_non_nullable
               as List<Car>,
-      rating: rating == freezed
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double?,
+      ratingResponseCount: ratingResponseCount == freezed
+          ? _value.ratingResponseCount
+          : ratingResponseCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      rateTotal: rateTotal == freezed
+          ? _value.rateTotal
+          : rateTotal // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -87,7 +98,8 @@ abstract class _$DriverInfoCopyWith<$Res> implements $DriverInfoCopyWith<$Res> {
           _DriverInfo value, $Res Function(_DriverInfo) then) =
       __$DriverInfoCopyWithImpl<$Res>;
   @override
-  $Res call({List<Car> registeredCars, double? rating});
+  $Res call(
+      {List<Car> registeredCars, int? ratingResponseCount, int? rateTotal});
 }
 
 /// @nodoc
@@ -103,25 +115,32 @@ class __$DriverInfoCopyWithImpl<$Res> extends _$DriverInfoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? registeredCars = freezed,
-    Object? rating = freezed,
+    Object? ratingResponseCount = freezed,
+    Object? rateTotal = freezed,
   }) {
     return _then(_DriverInfo(
       registeredCars: registeredCars == freezed
           ? _value.registeredCars
           : registeredCars // ignore: cast_nullable_to_non_nullable
               as List<Car>,
-      rating: rating == freezed
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double?,
+      ratingResponseCount: ratingResponseCount == freezed
+          ? _value.ratingResponseCount
+          : ratingResponseCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      rateTotal: rateTotal == freezed
+          ? _value.rateTotal
+          : rateTotal // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
-  const _$_DriverInfo({required this.registeredCars, this.rating});
+class _$_DriverInfo extends _DriverInfo with DiagnosticableTreeMixin {
+  const _$_DriverInfo(
+      {required this.registeredCars, this.ratingResponseCount, this.rateTotal})
+      : super._();
 
   factory _$_DriverInfo.fromJson(Map<String, dynamic> json) =>
       _$$_DriverInfoFromJson(json);
@@ -129,11 +148,13 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
   @override
   final List<Car> registeredCars;
   @override
-  final double? rating;
+  final int? ratingResponseCount;
+  @override
+  final int? rateTotal;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DriverInfo(registeredCars: $registeredCars, rating: $rating)';
+    return 'DriverInfo(registeredCars: $registeredCars, ratingResponseCount: $ratingResponseCount, rateTotal: $rateTotal)';
   }
 
   @override
@@ -142,7 +163,8 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
     properties
       ..add(DiagnosticsProperty('type', 'DriverInfo'))
       ..add(DiagnosticsProperty('registeredCars', registeredCars))
-      ..add(DiagnosticsProperty('rating', rating));
+      ..add(DiagnosticsProperty('ratingResponseCount', ratingResponseCount))
+      ..add(DiagnosticsProperty('rateTotal', rateTotal));
   }
 
   @override
@@ -152,15 +174,20 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
             (identical(other.registeredCars, registeredCars) ||
                 const DeepCollectionEquality()
                     .equals(other.registeredCars, registeredCars)) &&
-            (identical(other.rating, rating) ||
-                const DeepCollectionEquality().equals(other.rating, rating)));
+            (identical(other.ratingResponseCount, ratingResponseCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.ratingResponseCount, ratingResponseCount)) &&
+            (identical(other.rateTotal, rateTotal) ||
+                const DeepCollectionEquality()
+                    .equals(other.rateTotal, rateTotal)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(registeredCars) ^
-      const DeepCollectionEquality().hash(rating);
+      const DeepCollectionEquality().hash(ratingResponseCount) ^
+      const DeepCollectionEquality().hash(rateTotal);
 
   @JsonKey(ignore: true)
   @override
@@ -173,9 +200,12 @@ class _$_DriverInfo with DiagnosticableTreeMixin implements _DriverInfo {
   }
 }
 
-abstract class _DriverInfo implements DriverInfo {
+abstract class _DriverInfo extends DriverInfo {
   const factory _DriverInfo(
-      {required List<Car> registeredCars, double? rating}) = _$_DriverInfo;
+      {required List<Car> registeredCars,
+      int? ratingResponseCount,
+      int? rateTotal}) = _$_DriverInfo;
+  const _DriverInfo._() : super._();
 
   factory _DriverInfo.fromJson(Map<String, dynamic> json) =
       _$_DriverInfo.fromJson;
@@ -183,7 +213,9 @@ abstract class _DriverInfo implements DriverInfo {
   @override
   List<Car> get registeredCars => throw _privateConstructorUsedError;
   @override
-  double? get rating => throw _privateConstructorUsedError;
+  int? get ratingResponseCount => throw _privateConstructorUsedError;
+  @override
+  int? get rateTotal => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DriverInfoCopyWith<_DriverInfo> get copyWith =>

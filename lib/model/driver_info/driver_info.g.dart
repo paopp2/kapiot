@@ -11,11 +11,13 @@ _$_DriverInfo _$$_DriverInfoFromJson(Map<String, dynamic> json) =>
       registeredCars: (json['registeredCars'] as List<dynamic>)
           .map((e) => Car.fromJson(e as Map<String, dynamic>))
           .toList(),
-      rating: (json['rating'] as num?)?.toDouble(),
+      ratingResponseCount: json['ratingResponseCount'] as int?,
+      rateTotal: json['rateTotal'] as int?,
     );
 
 Map<String, dynamic> _$$_DriverInfoToJson(_$_DriverInfo instance) =>
     <String, dynamic>{
       'registeredCars': instance.registeredCars.map((e) => e.toJson()).toList(),
-      'rating': instance.rating,
+      'ratingResponseCount': instance.ratingResponseCount,
+      'rateTotal': instance.rateTotal,
     };
