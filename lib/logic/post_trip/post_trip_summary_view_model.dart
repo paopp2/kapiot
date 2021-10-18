@@ -14,6 +14,7 @@ import 'package:kapiot/logic/post_trip/post_trip_summary_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final postTripSummaryViewModel = Provider.autoDispose(
@@ -64,26 +65,38 @@ class PostTripSummaryViewModel extends ViewModel {
 
   void setRating(int rating) {
     read(ratingProvider).state = rating;
-    print(read(ratingProvider).state);
+    updateDriverRating();
   }
 
   Future<void> updateDriverRating() async {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
-    final driverInfoStream = userInfoRepo.getDriverInfoStream(
-      acceptingDriverConfig!.user.id,
-    );
+    final acceptingDriverId = acceptingDriverConfig!.user.id;
+    final driverInfoStream = userInfoRepo.getUserInfoStream(acceptingDriverId);
     final currentRiderConfig = read(currentRouteConfigProvider).state;
     assert(currentRiderConfig != null);
-    _acceptingDriverInfoSub = driverInfoStream.listen((driverInfo) {
-      if (driverInfo != null) {
-        read(acceptingDriverInfoProvider).state = driverInfo;
+    _acceptingDriverInfoSub = driverInfoStream.listen((userInfo) {
+      if (userInfo != null) {
+        read(acceptingDriverInfoProvider).state = userInfo;
       }
     });
 
     final acceptingDriverInfo = read(acceptingDriverInfoProvider).state;
-    final driverRating = acceptingDriverInfo!.rating;
+    print(acceptingDriverInfo);
+    final rating = read(ratingProvider).state;
+    final driverRateCount =
+        acceptingDriverInfo!.driverInfo!.ratingResponseCount! + 1;
+    final driverRatingTotal =
+        acceptingDriverInfo.driverInfo!.rateTotal! + rating;
 
-    //TODO: Calculate rating. May not be possible at the moment.
+    final driverInfo = acceptingDriverInfo.driverInfo!.copyWith(
+        rateTotal: driverRatingTotal, ratingResponseCount: driverRateCount);
+
+    read(acceptingDriverInfoProvider).state =
+        acceptingDriverInfo.copyWith(driverInfo: driverInfo);
+    userInfoRepo.pushUserInfo(
+      userId: acceptingDriverId,
+      userInfo: read(acceptingDriverInfoProvider).state!,
+    );
 
     _acceptingDriverInfoSub?.cancel();
   }
