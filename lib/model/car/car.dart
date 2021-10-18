@@ -26,16 +26,16 @@ enum CarType {
   sedan,
   hatchback,
   pickup,
+  crossover,
   suv,
   mpv,
   wagon,
-  multicab,
   van,
 }
 
 extension CarTypeMeta on CarType {
   int get capacity => meta['capacity'];
-  Icon get icon => meta['icon'];
+  CarImage get icon => meta['icon'];
   String get label => meta['label'];
 
   Map<String, dynamic> get meta {
@@ -43,57 +43,91 @@ extension CarTypeMeta on CarType {
       case CarType.coupe:
         return {
           'capacity': 2,
-          'icon': const Icon(Icons.car_rental),
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/coupe.png'),
+          ),
           'label': 'Coupe',
         };
       case CarType.sedan:
         return {
           'capacity': 5,
-          'icon': const Icon(Icons.car_rental),
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/sedan.png'),
+          ),
           'label': 'Sedan',
         };
       case CarType.hatchback:
         return {
           'capacity': 5,
-          'icon': const Icon(Icons.car_rental),
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/hatchback.png'),
+          ),
           'label': 'Hatchback',
         };
       case CarType.pickup:
         return {
           'capacity': 5,
-          'icon': const Icon(Icons.car_rental),
-          'label': 'Pickup',
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/pickup.png'),
+          ),
+          'label': 'Pickup Truck',
         };
-      case CarType.multicab:
+      case CarType.crossover:
         return {
-          'capacity': 6,
-          'icon': const Icon(Icons.car_rental),
-          'label': 'Multicab',
+          'capacity': 5,
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/crossover.png'),
+          ),
+          'label': 'Crossover',
         };
       case CarType.suv:
         return {
           'capacity': 7,
-          'icon': const Icon(Icons.car_rental),
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/suv.png'),
+          ),
           'label': 'SUV',
         };
       case CarType.mpv:
         return {
           'capacity': 7,
-          'icon': const Icon(Icons.car_rental),
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/mpv.png'),
+          ),
           'label': 'MPV',
         };
       case CarType.wagon:
         return {
           'capacity': 7,
-          'icon': const Icon(Icons.car_rental),
-          'label': 'Wagon',
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/wagon.png'),
+          ),
+          'label': 'Station Wagon',
         };
       case CarType.van:
         return {
           'capacity': 12,
-          'icon': const Icon(Icons.car_rental),
+          'icon': CarImage(
+            image: const AssetImage('assets/images/car_types/van.png'),
+          ),
           'label': 'Van',
         };
     }
+  }
+}
+
+class CarImage extends StatelessWidget {
+  CarImage({
+    Key? key,
+    required this.image,
+  }) : super(key: key);
+
+  AssetImage image;
+  @override
+  Widget build(BuildContext context) {
+    return Image(
+      image: image,
+      height: 100,
+    );
   }
 }

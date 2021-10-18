@@ -145,7 +145,7 @@ class CarRegisterView extends HookConsumerWidget {
                             carouselController: controller,
                             itemCount: CarType.values.length,
                             options: CarouselOptions(
-                              height: constraints.maxHeight * 0.25,
+                              height: 200,
                               autoPlay: false,
                               enlargeCenterPage: true,
                               aspectRatio: 16 / 9,
@@ -170,9 +170,25 @@ class CarRegisterView extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 69),
-                    ElevatedButton(
-                      onPressed: model.registerCar,
-                      child: const Text('Submit'),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 2),
+                      width: constraints.maxWidth * 0.75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color(0xffdbb3d4),
+                            Color(0xffd09cc7),
+                          ],
+                        ),
+                      ),
+                      child: TextButton(
+                        onPressed: model.registerCar,
+                        child: const Text(
+                          'Register Vehicle',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ],
                 ),
