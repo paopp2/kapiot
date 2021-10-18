@@ -30,11 +30,4 @@ class UserInfoRepository {
       builder: (data, _) => KapiotUserInfo.fromJson(data),
     );
   }
-
-  Stream<DriverInfo?> getDriverInfoStream(String driverId) {
-    return firestoreHelper.documentStream(
-      path: FirestorePath.docDriverInfo(driverId),
-      builder: (data, _) => DriverInfo.fromJson(data),
-    );
-  }
 }
