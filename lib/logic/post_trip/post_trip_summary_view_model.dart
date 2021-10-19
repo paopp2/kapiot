@@ -66,7 +66,7 @@ class PostTripSummaryViewModel extends ViewModel {
   void setRating(int rating) {
     read(ratingProvider).state = rating;
     // Uncomment to test update
-    // updateDriverRating();
+    updateDriverRating();
   }
 
   Future<void> updateDriverRating() async {
