@@ -105,10 +105,15 @@ class PostTripSummaryViewModel extends ViewModel {
     });
   }
 
-  void updateTotalPoints() {
+  Future<void> updateTotalPoints() async {
     final currentUserInfo = read(currentUserInfoProvider).data!.value!;
     final pointsToAdd = read(transactionProvider).state.points!;
     final newTotal = currentUserInfo.points + pointsToAdd;
+    // Delay here serves 2 purposes: (1) to update the provider asynchronously
+    // avoiding premature rebuilding and (2) as a delay for the animation
+    Future.delayed(const Duration(seconds: 2), () {
+      read(totalPointsProvider).state = newTotal;
+    });
     userInfoRepo.pushUserInfo(
       userId: read(currentUserProvider)!.id,
       userInfo: currentUserInfo.copyWith(points: newTotal),
