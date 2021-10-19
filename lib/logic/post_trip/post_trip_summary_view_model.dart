@@ -65,6 +65,7 @@ class PostTripSummaryViewModel extends ViewModel {
 
   void setRating(int rating) {
     read(ratingProvider).state = rating;
+    print(read(ratingProvider).state);
     updateDriverRating();
   }
 
@@ -77,28 +78,30 @@ class PostTripSummaryViewModel extends ViewModel {
     _acceptingDriverInfoSub = driverInfoStream.listen((userInfo) {
       if (userInfo != null) {
         read(acceptingDriverInfoProvider).state = userInfo;
+
+        final acceptingDriverInfo = read(acceptingDriverInfoProvider).state;
+        print(acceptingDriverInfo);
+        final rating = read(ratingProvider).state;
+        final driverRateCount =
+            acceptingDriverInfo!.driverInfo!.ratingResponseCount! + 1;
+        final driverRatingTotal =
+            acceptingDriverInfo.driverInfo!.rateTotal! + rating;
+
+        final driverInfo = acceptingDriverInfo.driverInfo!.copyWith(
+            rateTotal: driverRatingTotal, ratingResponseCount: driverRateCount);
+
+        read(acceptingDriverInfoProvider).state =
+            acceptingDriverInfo.copyWith(driverInfo: driverInfo);
+
+        print(read(acceptingDriverInfoProvider).state);
+        userInfoRepo.pushUserInfo(
+          userId: acceptingDriverId,
+          userInfo: read(acceptingDriverInfoProvider).state!,
+        );
+
+        _acceptingDriverInfoSub?.cancel();
       }
     });
-
-    final acceptingDriverInfo = read(acceptingDriverInfoProvider).state;
-    print(acceptingDriverInfo);
-    final rating = read(ratingProvider).state;
-    final driverRateCount =
-        acceptingDriverInfo!.driverInfo!.ratingResponseCount! + 1;
-    final driverRatingTotal =
-        acceptingDriverInfo.driverInfo!.rateTotal! + rating;
-
-    final driverInfo = acceptingDriverInfo.driverInfo!.copyWith(
-        rateTotal: driverRatingTotal, ratingResponseCount: driverRateCount);
-
-    read(acceptingDriverInfoProvider).state =
-        acceptingDriverInfo.copyWith(driverInfo: driverInfo);
-    userInfoRepo.pushUserInfo(
-      userId: acceptingDriverId,
-      userInfo: read(acceptingDriverInfoProvider).state!,
-    );
-
-    _acceptingDriverInfoSub?.cancel();
   }
 
   void completeTransaction(RouteConfig routeConfig) {
