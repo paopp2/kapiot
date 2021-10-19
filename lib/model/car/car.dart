@@ -44,7 +44,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 2,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/coupe.png'),
+            image: const AssetImage('assets/images/car_two/coupe.png'),
           ),
           'label': 'Coupe',
         };
@@ -52,7 +52,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/sedan.png'),
+            image: const AssetImage('assets/images/car_two/sedan.png'),
           ),
           'label': 'Sedan',
         };
@@ -60,7 +60,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/hatchback.png'),
+            image: const AssetImage('assets/images/car_two/hatchback.png'),
           ),
           'label': 'Hatchback',
         };
@@ -68,7 +68,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/pickup.png'),
+            image: const AssetImage('assets/images/car_two/pickup_truck.png'),
           ),
           'label': 'Pickup Truck',
         };
@@ -76,7 +76,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/crossover.png'),
+            image: const AssetImage('assets/images/car_two/crossover.png'),
           ),
           'label': 'Crossover',
         };
@@ -84,7 +84,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 7,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/suv.png'),
+            image: const AssetImage('assets/images/car_two/suv.png'),
           ),
           'label': 'SUV',
         };
@@ -92,7 +92,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 7,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/mpv.png'),
+            image: const AssetImage('assets/images/car_two/mpv.png'),
           ),
           'label': 'MPV',
         };
@@ -100,7 +100,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 7,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/wagon.png'),
+            image: const AssetImage('assets/images/car_two/station_wagon.png'),
           ),
           'label': 'Station Wagon',
         };
@@ -108,7 +108,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 12,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_types/van.png'),
+            image: const AssetImage('assets/images/car_two/van.png'),
           ),
           'label': 'Van',
         };
