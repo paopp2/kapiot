@@ -127,7 +127,7 @@ class CarImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image(
       image: image,
-      height: 100,
+      height: 120,
     );
   }
 }

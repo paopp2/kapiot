@@ -29,9 +29,20 @@ class CarTypeBlock extends HookConsumerWidget {
       duration: const Duration(milliseconds: 500),
       decoration: BoxDecoration(
         gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: isSelected
-              ? [Color(0xffdbb3d4), Color(0xffd09cc7)]
-              : [Color(0xffeeeeee), Color(0xffeaeaea)],
+              ? [
+                  const Color(0xffdbb3d4),
+                  const Color(0xffe9d1e5),
+                  const Color(0xffffffff),
+                  const Color(0xffe9d1e5),
+                  const Color(0xffaf8fa9),
+                ]
+              : [
+                  const Color(0xffeeeeee),
+                  const Color(0xffeaeaea),
+                ],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
