@@ -24,7 +24,7 @@ class _$DriverInfoTearOff {
   _DriverInfo call(
       {required List<Car> registeredCars,
       int ratingResponseCount = 0,
-      int rateTotal = 0}) {
+      double rateTotal = 0}) {
     return _DriverInfo(
       registeredCars: registeredCars,
       ratingResponseCount: ratingResponseCount,
@@ -44,7 +44,7 @@ const $DriverInfo = _$DriverInfoTearOff();
 mixin _$DriverInfo {
   List<Car> get registeredCars => throw _privateConstructorUsedError;
   int get ratingResponseCount => throw _privateConstructorUsedError;
-  int get rateTotal => throw _privateConstructorUsedError;
+  double get rateTotal => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +57,8 @@ abstract class $DriverInfoCopyWith<$Res> {
   factory $DriverInfoCopyWith(
           DriverInfo value, $Res Function(DriverInfo) then) =
       _$DriverInfoCopyWithImpl<$Res>;
-  $Res call({List<Car> registeredCars, int ratingResponseCount, int rateTotal});
+  $Res call(
+      {List<Car> registeredCars, int ratingResponseCount, double rateTotal});
 }
 
 /// @nodoc
@@ -86,7 +87,7 @@ class _$DriverInfoCopyWithImpl<$Res> implements $DriverInfoCopyWith<$Res> {
       rateTotal: rateTotal == freezed
           ? _value.rateTotal
           : rateTotal // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -97,7 +98,8 @@ abstract class _$DriverInfoCopyWith<$Res> implements $DriverInfoCopyWith<$Res> {
           _DriverInfo value, $Res Function(_DriverInfo) then) =
       __$DriverInfoCopyWithImpl<$Res>;
   @override
-  $Res call({List<Car> registeredCars, int ratingResponseCount, int rateTotal});
+  $Res call(
+      {List<Car> registeredCars, int ratingResponseCount, double rateTotal});
 }
 
 /// @nodoc
@@ -128,7 +130,7 @@ class __$DriverInfoCopyWithImpl<$Res> extends _$DriverInfoCopyWithImpl<$Res>
       rateTotal: rateTotal == freezed
           ? _value.rateTotal
           : rateTotal // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -152,7 +154,7 @@ class _$_DriverInfo extends _DriverInfo with DiagnosticableTreeMixin {
   final int ratingResponseCount;
   @JsonKey(defaultValue: 0)
   @override
-  final int rateTotal;
+  final double rateTotal;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -206,7 +208,7 @@ abstract class _DriverInfo extends DriverInfo {
   const factory _DriverInfo(
       {required List<Car> registeredCars,
       int ratingResponseCount,
-      int rateTotal}) = _$_DriverInfo;
+      double rateTotal}) = _$_DriverInfo;
   const _DriverInfo._() : super._();
 
   factory _DriverInfo.fromJson(Map<String, dynamic> json) =
@@ -217,7 +219,7 @@ abstract class _DriverInfo extends DriverInfo {
   @override
   int get ratingResponseCount => throw _privateConstructorUsedError;
   @override
-  int get rateTotal => throw _privateConstructorUsedError;
+  double get rateTotal => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DriverInfoCopyWith<_DriverInfo> get copyWith =>

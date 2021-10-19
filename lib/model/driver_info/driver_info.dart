@@ -12,7 +12,7 @@ class DriverInfo with _$DriverInfo {
   const factory DriverInfo({
     required List<Car> registeredCars,
     @Default(0) int ratingResponseCount,
-    @Default(0) int rateTotal,
+    @Default(0) double rateTotal,
   }) = _DriverInfo;
 
   double get averageRating => (rateTotal / ratingResponseCount);
