@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/post_trip/post_trip_summary_state.dart';
 import 'package:kapiot/logic/post_trip/post_trip_summary_view_model.dart';
@@ -27,27 +28,25 @@ class PostTripSummaryView extends HookConsumerWidget {
           title: const Text('Driver Rating'),
           content: SizedBox(
             height: 100,
-            child: Row(
+            child: Column(
               children: [
-                ElevatedButton(
-                  onPressed: () => model.setRating(5),
-                  child: const Text('Five Star'),
+                RatingBar.builder(
+                  initialRating: 5,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (_, __) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  updateOnDrag: true,
+                  onRatingUpdate: model.setRating,
                 ),
-                ElevatedButton(
-                  onPressed: () => model.setRating(4),
-                  child: const Text('Four Star'),
-                ),
-                ElevatedButton(
-                  onPressed: () => model.setRating(3),
-                  child: const Text('Three Star'),
-                ),
-                ElevatedButton(
-                  onPressed: () => model.setRating(2),
-                  child: const Text('Two Star'),
-                ),
-                ElevatedButton(
-                  onPressed: () => model.setRating(1),
-                  child: const Text('One Star'),
+                TextButton(
+                  onPressed: model.updateDriverRating,
+                  child: const Text('Ok'),
                 ),
               ],
             ),

@@ -39,8 +39,6 @@ class PostTripSummaryViewModel extends ViewModel {
   final GoogleMapsApiServices googleMapsApiServices;
   final CoreAlgorithms coreAlgorithms;
 
-  StreamSubscription? _acceptingDriverInfoSub;
-
   @override
   void initState() {
     assert(read(currentRouteConfigProvider).state != null);
@@ -50,6 +48,10 @@ class PostTripSummaryViewModel extends ViewModel {
   }
 
   Future<void> showRateDriverDialog({required Widget dialog}) async {
+    Future.delayed(Duration.zero, () {
+      // Initialize rating to 5 stars
+      read(ratingProvider).state = 5.0;
+    });
     final isRider = (read(currentRouteConfigProvider).state is ForRider);
     if (isRider) {
       // Show the dialog only once at the start of the PostTripSummaryView
@@ -62,43 +64,26 @@ class PostTripSummaryViewModel extends ViewModel {
     }
   }
 
-  void setRating(int rating) {
+  void setRating(double rating) {
     read(ratingProvider).state = rating;
-    // Uncomment to test update
-    updateDriverRating();
   }
 
   Future<void> updateDriverRating() async {
+    final rating = read(ratingProvider).state;
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
     final acceptingDriverId = acceptingDriverConfig!.user.id;
     final driverInfoStream = userInfoRepo.getUserInfoStream(acceptingDriverId);
-    final currentRiderConfig = read(currentRouteConfigProvider).state;
-    assert(currentRiderConfig != null);
-    _acceptingDriverInfoSub = driverInfoStream.listen((userInfo) {
-      if (userInfo != null) {
-        read(acceptingDriverInfoProvider).state = userInfo;
+    final driverUserInfo = (await driverInfoStream.first)!;
+    final driverInfo = driverUserInfo.driverInfo!;
 
-        final acceptingDriverInfo = read(acceptingDriverInfoProvider).state;
-        final rating = read(ratingProvider).state;
-        final driverRateCount =
-            acceptingDriverInfo!.driverInfo!.ratingResponseCount! + 1;
-        final driverRatingTotal =
-            acceptingDriverInfo.driverInfo!.rateTotal! + rating;
-
-        final driverInfo = acceptingDriverInfo.driverInfo!.copyWith(
-            rateTotal: driverRatingTotal, ratingResponseCount: driverRateCount);
-
-        read(acceptingDriverInfoProvider).state =
-            acceptingDriverInfo.copyWith(driverInfo: driverInfo);
-
-        userInfoRepo.pushUserInfo(
-          userId: acceptingDriverId,
-          userInfo: read(acceptingDriverInfoProvider).state!,
-        );
-
-        _acceptingDriverInfoSub?.cancel();
-      }
-    });
+    userInfoRepo.pushUserInfo(
+      userId: acceptingDriverId,
+      userInfo: driverUserInfo.copyWith.driverInfo!(
+        rateTotal: driverInfo.rateTotal + rating,
+        ratingResponseCount: driverInfo.ratingResponseCount + 1,
+      ),
+    );
+    AppRouter.instance.popView();
   }
 
   void completeTransaction(RouteConfig routeConfig) {
