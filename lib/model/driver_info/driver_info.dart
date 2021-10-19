@@ -11,11 +11,11 @@ class DriverInfo with _$DriverInfo {
   const DriverInfo._();
   const factory DriverInfo({
     required List<Car> registeredCars,
-    int? ratingResponseCount,
-    int? rateTotal,
+    @Default(0) int ratingResponseCount,
+    @Default(0) int rateTotal,
   }) = _DriverInfo;
 
-  double get averageRating => (rateTotal! / ratingResponseCount!);
+  double get averageRating => (rateTotal / ratingResponseCount);
 
   factory DriverInfo.fromJson(Map<String, dynamic> json) =>
       _$DriverInfoFromJson(json);

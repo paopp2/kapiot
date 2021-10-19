@@ -11,8 +11,8 @@ _$_DriverInfo _$$_DriverInfoFromJson(Map<String, dynamic> json) =>
       registeredCars: (json['registeredCars'] as List<dynamic>)
           .map((e) => Car.fromJson(e as Map<String, dynamic>))
           .toList(),
-      ratingResponseCount: json['ratingResponseCount'] as int?,
-      rateTotal: json['rateTotal'] as int?,
+      ratingResponseCount: json['ratingResponseCount'] as int? ?? 0,
+      rateTotal: json['rateTotal'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_DriverInfoToJson(_$_DriverInfo instance) =>
