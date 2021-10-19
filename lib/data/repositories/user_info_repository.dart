@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
-import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 
 final userInfoRepositoryProvider = Provider.autoDispose(

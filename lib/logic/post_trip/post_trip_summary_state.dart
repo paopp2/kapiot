@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
-import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 

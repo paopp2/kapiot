@@ -14,7 +14,6 @@ import 'package:kapiot/logic/post_trip/post_trip_summary_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
-import 'package:kapiot/model/driver_info/driver_info.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final postTripSummaryViewModel = Provider.autoDispose(
