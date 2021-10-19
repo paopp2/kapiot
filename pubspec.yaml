@@ -45,6 +45,7 @@ dependencies:
   confetti: ^0.6.0
   animated_flip_counter: ^0.1.2
   entry: ^0.0.6
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   build_runner: ^2.1.1
