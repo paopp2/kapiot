@@ -8,10 +8,18 @@ part 'driver_info.g.dart';
 
 @freezed
 class DriverInfo with _$DriverInfo {
+  const DriverInfo._();
   const factory DriverInfo({
     required List<Car> registeredCars,
-    double? rating,
+    @Default(0) int ratingResponseCount,
+    @Default(0) double rateTotal,
   }) = _DriverInfo;
+
+  double? get averageRating {
+    return (rateTotal > 0 || ratingResponseCount > 0)
+        ? (rateTotal / ratingResponseCount)
+        : null;
+  }
 
   factory DriverInfo.fromJson(Map<String, dynamic> json) =>
       _$DriverInfoFromJson(json);

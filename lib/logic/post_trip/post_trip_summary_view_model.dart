@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
@@ -6,6 +10,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/repositories/user_info_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
+import 'package:kapiot/logic/post_trip/post_trip_summary_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
@@ -42,6 +47,45 @@ class PostTripSummaryViewModel extends ViewModel {
     updateTotalPoints();
   }
 
+  Future<void> showRateDriverDialog({required Widget dialog}) async {
+    Future.delayed(Duration.zero, () {
+      // Initialize rating to 5 stars
+      read(ratingProvider).state = 5.0;
+    });
+    final isRider = (read(currentRouteConfigProvider).state is ForRider);
+    if (isRider) {
+      // Show the dialog only once at the start of the PostTripSummaryView
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        showDialog(
+          context: AppRouter.instance.navigationKey.currentContext!,
+          builder: (context) => dialog,
+        );
+      });
+    }
+  }
+
+  void setRating(double rating) {
+    read(ratingProvider).state = rating;
+  }
+
+  Future<void> updateDriverRating() async {
+    final rating = read(ratingProvider).state;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
+    final acceptingDriverId = acceptingDriverConfig!.user.id;
+    final driverInfoStream = userInfoRepo.getUserInfoStream(acceptingDriverId);
+    final driverUserInfo = (await driverInfoStream.first)!;
+    final driverInfo = driverUserInfo.driverInfo!;
+
+    userInfoRepo.pushUserInfo(
+      userId: acceptingDriverId,
+      userInfo: driverUserInfo.copyWith.driverInfo!(
+        rateTotal: driverInfo.rateTotal + rating,
+        ratingResponseCount: driverInfo.ratingResponseCount + 1,
+      ),
+    );
+    AppRouter.instance.popView();
+  }
+
   void completeTransaction(RouteConfig routeConfig) {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;
@@ -61,10 +105,15 @@ class PostTripSummaryViewModel extends ViewModel {
     });
   }
 
-  void updateTotalPoints() {
+  Future<void> updateTotalPoints() async {
     final currentUserInfo = read(currentUserInfoProvider).data!.value!;
     final pointsToAdd = read(transactionProvider).state.points!;
     final newTotal = currentUserInfo.points + pointsToAdd;
+    // Delay here serves 2 purposes: (1) to update the provider asynchronously
+    // avoiding premature rebuilding and (2) as a delay for the animation
+    Future.delayed(const Duration(seconds: 2), () {
+      read(totalPointsProvider).state = newTotal;
+    });
     userInfoRepo.pushUserInfo(
       userId: read(currentUserProvider)!.id,
       userInfo: currentUserInfo.copyWith(points: newTotal),
