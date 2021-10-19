@@ -65,8 +65,8 @@ class PostTripSummaryViewModel extends ViewModel {
 
   void setRating(int rating) {
     read(ratingProvider).state = rating;
-    print(read(ratingProvider).state);
-    updateDriverRating();
+    // Uncomment to test update
+    // updateDriverRating();
   }
 
   Future<void> updateDriverRating() async {
@@ -80,7 +80,6 @@ class PostTripSummaryViewModel extends ViewModel {
         read(acceptingDriverInfoProvider).state = userInfo;
 
         final acceptingDriverInfo = read(acceptingDriverInfoProvider).state;
-        print(acceptingDriverInfo);
         final rating = read(ratingProvider).state;
         final driverRateCount =
             acceptingDriverInfo!.driverInfo!.ratingResponseCount! + 1;
@@ -93,7 +92,6 @@ class PostTripSummaryViewModel extends ViewModel {
         read(acceptingDriverInfoProvider).state =
             acceptingDriverInfo.copyWith(driverInfo: driverInfo);
 
-        print(read(acceptingDriverInfoProvider).state);
         userInfoRepo.pushUserInfo(
           userId: acceptingDriverId,
           userInfo: read(acceptingDriverInfoProvider).state!,
