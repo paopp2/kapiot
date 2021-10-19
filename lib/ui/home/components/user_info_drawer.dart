@@ -119,8 +119,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                                   ),
                                   children: [
                                     SizedBox(
-                                      height: constraints.maxHeight * 0.25,
+                                      height: 210,
                                       child: ListView.builder(
+                                        shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
                                         itemCount: ownedCars!.length + 1,
                                         itemBuilder: (context, index) {
@@ -138,23 +139,44 @@ class UserInfoDrawer extends HookConsumerWidget {
                                               }
                                             },
                                             child: Container(
-                                              margin: EdgeInsets.symmetric(
-                                                horizontal:
-                                                    constraints.maxWidth *
-                                                        0.025,
-                                                vertical:
-                                                    constraints.maxHeight *
-                                                        0.025,
+                                              margin: EdgeInsets.only(
+                                                left: constraints.maxWidth *
+                                                    0.025,
+                                                top: constraints.maxHeight *
+                                                    0.025,
+                                                bottom: constraints.maxHeight *
+                                                    0.025,
                                               ),
-                                              height:
-                                                  constraints.maxHeight * 0.2,
-                                              width: constraints.maxWidth * 0.3,
+                                              // height: 200,
+                                              width: isLastItem
+                                                  ? constraints.maxWidth * 0.15
+                                                  : constraints.maxWidth * 0.3,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(12),
-                                                color: (isLastItem)
-                                                    ? Colors.grey[200]
-                                                    : Colors.purple[200],
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter,
+                                                  colors: isLastItem
+                                                      ? [
+                                                          const Color(
+                                                              0xffeeeeee),
+                                                          const Color(
+                                                              0xffeaeaea),
+                                                        ]
+                                                      : [
+                                                          const Color(
+                                                              0xffdbb3d4),
+                                                          const Color(
+                                                              0xffe9d1e5),
+                                                          const Color(
+                                                              0xffffffff),
+                                                          const Color(
+                                                              0xffe9d1e5),
+                                                          const Color(
+                                                              0xffaf8fa9),
+                                                        ],
+                                                ),
                                               ),
                                               child: (isLastItem)
                                                   ? const Icon(Icons.add)
