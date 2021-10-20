@@ -122,7 +122,6 @@ class UserInfoDrawer extends HookConsumerWidget {
                                     SizedBox(
                                       height: 210,
                                       child: ListView.builder(
-                                        shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
                                         itemCount: ownedCars!.length + 1,
                                         itemBuilder: (context, index) {
@@ -148,10 +147,13 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                 bottom: constraints.maxHeight *
                                                     0.025,
                                               ),
-                                              // height: 200,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                              ),
                                               width: isLastItem
                                                   ? constraints.maxWidth * 0.15
-                                                  : constraints.maxWidth * 0.3,
+                                                  : constraints.maxWidth * 0.35,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(12),
@@ -185,13 +187,35 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         car!.type.icon,
                                                         Text(
-                                                          car.licensePlateNum,
+                                                          car.licensePlateNum
+                                                              .toUpperCase(),
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
                                                         ),
                                                         Text(
                                                           '${car.make.toUpperCase()} ${car.model.toUpperCase()}',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 12,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .fade,
+                                                          ),
+                                                          softWrap: false,
+                                                          maxLines: 1,
                                                         ),
                                                       ],
                                                     ),

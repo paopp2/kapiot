@@ -95,7 +95,7 @@ class CarRegisterView extends HookConsumerWidget {
                                       contentPadding: EdgeInsets.symmetric(
                                         horizontal: constraints.maxWidth * 0.03,
                                       ),
-                                      hintText: 'Toyota',
+                                      hintText: 'TOYOTA',
                                       border: const OutlineInputBorder(),
                                     ),
                                   ),
@@ -125,7 +125,7 @@ class CarRegisterView extends HookConsumerWidget {
                                       contentPadding: EdgeInsets.symmetric(
                                         horizontal: constraints.maxWidth * 0.03,
                                       ),
-                                      hintText: 'Vios',
+                                      hintText: 'VIOS',
                                       border: const OutlineInputBorder(),
                                     ),
                                   ),
