@@ -30,20 +30,45 @@ class ConfigTypePanel extends HookConsumerWidget {
     final endAddress = ref.watch(endLocProvider).state?.address;
 
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: constraints.maxHeight * 0.02,
+      ),
       child: Stack(
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(left: constraints.maxWidth * 0.02),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    isRider ? 'Rider' : 'Driver',
-                    style: GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
-                  ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.02,
+                ),
+                margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.015),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        isRider ? 'Ride' : 'Drive',
+                        style:
+                            GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
+                      ),
+                    ),
+                    isRider
+                        ? SizedBox()
+                        : Column(
+                            children: [
+                              Image(
+                                image: AssetImage(
+                                  'assets/images/car_body_types/coupe.png',
+                                ),
+                                height: 40,
+                              ),
+                              Text('FAG 123')
+                            ],
+                          )
+                  ],
                 ),
               ),
               Container(
@@ -87,8 +112,9 @@ class ConfigTypePanel extends HookConsumerWidget {
                 child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
                 onPressed: () => model.getDateTime(context),
               ),
-              !isRider
-                  ? Padding(
+              isRider
+                  ? const SizedBox()
+                  : Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: constraints.maxWidth * 0.05,
                       ),
@@ -127,8 +153,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                           )
                         ],
                       ),
-                    )
-                  : const SizedBox(),
+                    ),
             ],
           ),
           Align(
@@ -153,11 +178,11 @@ class ConfigTypePanel extends HookConsumerWidget {
                   margin: EdgeInsets.symmetric(
                     vertical: constraints.maxHeight * 0.02,
                   ),
-                  child: const Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                    height: 0.05,
-                  ),
+                  // child: const Divider(
+                  //   color: Colors.grey,
+                  //   thickness: 1,
+                  //   height: 0.05,
+                  // ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
