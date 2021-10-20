@@ -95,7 +95,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                                 color: Colors.amber,
                               ),
                               trailing: Text(
-                                "${currentUserInfo.driverInfo?.averageRating ?? 'Unrated'}",
+                                currentUserInfo.driverInfo!.averageRating,
                               ),
                             ),
                           ),

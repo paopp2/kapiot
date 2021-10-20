@@ -15,10 +15,10 @@ class DriverInfo with _$DriverInfo {
     @Default(0) double rateTotal,
   }) = _DriverInfo;
 
-  double? get averageRating {
+  String get averageRating {
     return (rateTotal > 0 || ratingResponseCount > 0)
-        ? (rateTotal / ratingResponseCount)
-        : null;
+        ? (rateTotal / ratingResponseCount).toStringAsFixed(1)
+        : 'Unrated';
   }
 
   factory DriverInfo.fromJson(Map<String, dynamic> json) =>
