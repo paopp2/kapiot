@@ -191,7 +191,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                           car.licensePlateNum,
                                                         ),
                                                         Text(
-                                                          '${car.make} ${car.model}',
+                                                          '${car.make.toUpperCase()} ${car.model.toUpperCase()}',
                                                         ),
                                                       ],
                                                     ),

@@ -51,6 +51,7 @@ class CarRegisterView extends HookConsumerWidget {
                             height: 10,
                           ),
                           TextFormField(
+                            textCapitalization: TextCapitalization.characters,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.03,
@@ -86,6 +87,8 @@ class CarRegisterView extends HookConsumerWidget {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    textCapitalization:
+                                        TextCapitalization.characters,
                                     controller: model.tecCarMakeField,
                                     validator: model.carRegisterValidator,
                                     decoration: InputDecoration(
@@ -114,6 +117,8 @@ class CarRegisterView extends HookConsumerWidget {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    textCapitalization:
+                                        TextCapitalization.characters,
                                     controller: model.tecCarModelField,
                                     validator: model.carRegisterValidator,
                                     decoration: InputDecoration(
