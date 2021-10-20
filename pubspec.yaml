@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/images/car_body_types/
     - assets/images/error/
+    - assets/images/
     - assets/icons/
   fonts:
     - family: Sanz
