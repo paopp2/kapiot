@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
+import 'package:kapiot/model/car/car.dart';
 
 class UserInfoDrawer extends HookConsumerWidget {
   const UserInfoDrawer({
@@ -185,11 +186,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        const Icon(
-                                                          CupertinoIcons.car,
-                                                        ),
+                                                        car!.type.icon,
                                                         Text(
-                                                          car!.licensePlateNum,
+                                                          car.licensePlateNum,
                                                         ),
                                                         Text(
                                                           '${car.make} ${car.model}',

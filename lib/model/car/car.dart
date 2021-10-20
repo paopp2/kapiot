@@ -44,7 +44,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 2,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/coupe.png'),
+            image: const AssetImage('assets/images/car_body_types/coupe.png'),
           ),
           'label': 'Coupe',
         };
@@ -52,7 +52,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/sedan.png'),
+            image: const AssetImage('assets/images/car_body_types/sedan.png'),
           ),
           'label': 'Sedan',
         };
@@ -60,7 +60,8 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/hatchback.png'),
+            image:
+                const AssetImage('assets/images/car_body_types/hatchback.png'),
           ),
           'label': 'Hatchback',
         };
@@ -68,7 +69,8 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/pickup_truck.png'),
+            image: const AssetImage(
+                'assets/images/car_body_types/pickup_truck.png'),
           ),
           'label': 'Pickup Truck',
         };
@@ -76,7 +78,8 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 5,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/crossover.png'),
+            image:
+                const AssetImage('assets/images/car_body_types/crossover.png'),
           ),
           'label': 'Crossover',
         };
@@ -84,7 +87,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 7,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/suv.png'),
+            image: const AssetImage('assets/images/car_body_types/suv.png'),
           ),
           'label': 'SUV',
         };
@@ -92,7 +95,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 7,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/mpv.png'),
+            image: const AssetImage('assets/images/car_body_types/mpv.png'),
           ),
           'label': 'MPV',
         };
@@ -100,7 +103,8 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 7,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/station_wagon.png'),
+            image: const AssetImage(
+                'assets/images/car_body_types/station_wagon.png'),
           ),
           'label': 'Station Wagon',
         };
@@ -108,7 +112,7 @@ extension CarTypeMeta on CarType {
         return {
           'capacity': 12,
           'icon': CarImage(
-            image: const AssetImage('assets/images/car_two/van.png'),
+            image: const AssetImage('assets/images/car_body_types/van.png'),
           ),
           'label': 'Van',
         };
