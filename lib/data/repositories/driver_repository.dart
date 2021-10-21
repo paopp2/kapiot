@@ -29,7 +29,7 @@ class DriverRepository {
     );
   }
 
-  void acceptRider(String riderId, RouteConfig driverConfig) async {
+  Future<void> acceptRider(String riderId, RouteConfig driverConfig) async {
     assert(driverConfig is ForDriver);
     final driverId = driverConfig.user.id;
     final acceptedRiderConfig = await firestoreHelper.getData(
