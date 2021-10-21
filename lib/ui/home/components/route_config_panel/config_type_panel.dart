@@ -6,6 +6,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/ui/shared/location_input_container.dart';
 
 class ConfigTypePanel extends HookConsumerWidget {
@@ -60,17 +61,17 @@ class ConfigTypePanel extends HookConsumerWidget {
                       visible: !isRider,
                       child: GestureDetector(
                         onTap: model.openUserInfoDrawer,
-                        child: Column(
-                          children: [
-                            const Image(
-                              image: AssetImage(
-                                'assets/images/car_body_types/coupe.png',
-                              ),
-                              height: 40,
-                            ),
-                            Text(chosenCar?.licensePlateNum ?? ''),
-                          ],
-                        ),
+                        child: (chosenCar != null)
+                            ? Column(
+                                children: [
+                                  Image(
+                                    image: chosenCar.type.icon,
+                                    height: 40,
+                                  ),
+                                  Text(chosenCar.licensePlateNum),
+                                ],
+                              )
+                            : const SizedBox(),
                       ),
                     ),
                   ],
