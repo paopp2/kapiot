@@ -171,7 +171,17 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                           const Color(
                                                               0xffeaeaea),
                                                         ]
-                                                      : [
+                                                      :
+                                                      // unselected car color
+                                                      // [
+                                                      //     const Color(
+                                                      //         0xffeeeeee),
+                                                      //     const Color(
+                                                      //         0xffffffff),
+                                                      //     const Color(
+                                                      //         0xffa6a6a6),
+                                                      //   ]
+                                                      [
                                                           const Color(
                                                               0xffdbb3d4),
                                                           const Color(
