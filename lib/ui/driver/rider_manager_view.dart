@@ -82,6 +82,15 @@ class RiderManagerView extends HookConsumerWidget {
                                   color: Colors.white,
                                 ),
                               ),
+                              // TODO: Replace with better design for showing
+                              // current car capacity
+                              const SizedBox(width: 5),
+                              const Text(
+                                '0/5',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ],
                           ),
                         ),
