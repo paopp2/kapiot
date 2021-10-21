@@ -24,7 +24,7 @@ class RiderRepository {
 
   final List<String> _driverIdList = [];
 
-  void pushRiderConfig(RouteConfig riderConfig) async {
+  Future<void> pushRiderConfig(RouteConfig riderConfig) async {
     assert(riderConfig is ForRider);
     await firestoreHelper.setData(
       path: FirestorePath.docActiveRider(riderConfig.user.id),
