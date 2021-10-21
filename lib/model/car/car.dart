@@ -35,7 +35,7 @@ enum CarType {
 
 extension CarTypeMeta on CarType {
   int get capacity => meta['capacity'];
-  AssetImage get icon => meta['icon'];
+  AssetImage get image => meta['image'];
   String get label => meta['label'];
 
   Map<String, dynamic> get meta {
@@ -43,59 +43,59 @@ extension CarTypeMeta on CarType {
       case CarType.coupe:
         return {
           'capacity': 2,
-          'icon': const AssetImage('assets/images/car_body_types/coupe.png'),
+          'image': const AssetImage('assets/images/car_body_types/coupe.png'),
           'label': 'Coupe',
         };
       case CarType.sedan:
         return {
           'capacity': 5,
-          'icon': const AssetImage('assets/images/car_body_types/sedan.png'),
+          'image': const AssetImage('assets/images/car_body_types/sedan.png'),
           'label': 'Sedan',
         };
       case CarType.hatchback:
         return {
           'capacity': 5,
-          'icon':
+          'image':
               const AssetImage('assets/images/car_body_types/hatchback.png'),
           'label': 'Hatchback',
         };
       case CarType.pickup:
         return {
           'capacity': 5,
-          'icon':
+          'image':
               const AssetImage('assets/images/car_body_types/pickup_truck.png'),
           'label': 'Pickup Truck',
         };
       case CarType.crossover:
         return {
           'capacity': 5,
-          'icon':
+          'image':
               const AssetImage('assets/images/car_body_types/crossover.png'),
           'label': 'Crossover',
         };
       case CarType.suv:
         return {
           'capacity': 7,
-          'icon': const AssetImage('assets/images/car_body_types/suv.png'),
+          'image': const AssetImage('assets/images/car_body_types/suv.png'),
           'label': 'SUV',
         };
       case CarType.mpv:
         return {
           'capacity': 7,
-          'icon': const AssetImage('assets/images/car_body_types/mpv.png'),
+          'image': const AssetImage('assets/images/car_body_types/mpv.png'),
           'label': 'MPV',
         };
       case CarType.wagon:
         return {
           'capacity': 7,
-          'icon': const AssetImage(
+          'image': const AssetImage(
               'assets/images/car_body_types/station_wagon.png'),
           'label': 'Station Wagon',
         };
       case CarType.van:
         return {
           'capacity': 12,
-          'icon': const AssetImage('assets/images/car_body_types/van.png'),
+          'image': const AssetImage('assets/images/car_body_types/van.png'),
           'label': 'Van',
         };
     }

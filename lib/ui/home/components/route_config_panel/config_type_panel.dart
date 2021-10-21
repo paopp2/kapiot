@@ -65,7 +65,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                             ? Column(
                                 children: [
                                   Image(
-                                    image: chosenCar.type.icon,
+                                    image: chosenCar.type.image,
                                     height: 40,
                                   ),
                                   Text(chosenCar.licensePlateNum),
@@ -184,11 +184,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                   margin: EdgeInsets.symmetric(
                     vertical: constraints.maxHeight * 0.02,
                   ),
-                  // child: const Divider(
-                  //   color: Colors.grey,
-                  //   thickness: 1,
-                  //   height: 0.05,
-                  // ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(

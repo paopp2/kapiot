@@ -93,7 +93,7 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image(
-                              image: car!.type.icon,
+                              image: car!.type.image,
                             ),
                             Text(
                               car.licensePlateNum.toUpperCase(),

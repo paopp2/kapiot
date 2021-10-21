@@ -69,7 +69,7 @@ class CarTypeBlock extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
-              image: carType.icon,
+              image: carType.image,
               height: 110,
             ),
             Text(
