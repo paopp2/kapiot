@@ -22,14 +22,17 @@ class KapiotSlidingPanel extends StatelessWidget {
       parallaxEnabled: true,
       parallaxOffset: 0.5,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-      minHeight: constraints.maxHeight * 0.1,
+      minHeight: constraints.maxHeight * 0.125,
       maxHeight: panelHeight,
       body: Container(
         height: constraints.maxHeight,
         color: const Color(0xfff8f9fa),
         child: Column(
           children: [
-            SizedBox(height: constraints.maxHeight * 0.9, child: map),
+            SizedBox(
+              height: constraints.maxHeight * 0.875,
+              child: map,
+            ),
           ],
         ),
       ),
@@ -40,7 +43,7 @@ class KapiotSlidingPanel extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: constraints.maxHeight * 0.02),
+                margin: EdgeInsets.only(top: constraints.maxHeight * 0.01),
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(

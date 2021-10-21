@@ -28,10 +28,26 @@ class CarTypeBlock extends HookConsumerWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       decoration: BoxDecoration(
-        color: (isSelected) ? Colors.purple[200] : Colors.grey[300],
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: isSelected
+              ? [
+                  const Color(0xffdbb3d4),
+                  const Color(0xffe9d1e5),
+                  const Color(0xffffffff),
+                  const Color(0xffe9d1e5),
+                  const Color(0xffaf8fa9),
+                ]
+              : [
+                  const Color(0xffeeeeee),
+                  const Color(0xffffffff),
+                  const Color(0xffa6a6a6),
+                ],
+        ),
         borderRadius: BorderRadius.circular(12),
       ),
-      height: constraints.maxWidth * 0.3,
+      height: 200,
       width: constraints.maxWidth,
       child: ElevatedButton(
         onPressed: () {
@@ -52,9 +68,23 @@ class CarTypeBlock extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            carType.icon,
-            Text(carType.label),
-            Text("${carType.capacity}-seater"),
+            Image(
+              image: carType.image,
+              height: 110,
+            ),
+            Text(
+              carType.label,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isSelected ? Colors.white : const Color(0xff333333),
+              ),
+            ),
+            Text(
+              "${carType.capacity}-seater",
+              style: TextStyle(
+                color: isSelected ? Colors.white : const Color(0xff666666),
+              ),
+            ),
           ],
         ),
       ),

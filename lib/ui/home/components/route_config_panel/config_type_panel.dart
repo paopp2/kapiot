@@ -6,6 +6,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
+import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/ui/shared/location_input_container.dart';
 
 class ConfigTypePanel extends HookConsumerWidget {
@@ -24,26 +25,56 @@ class ConfigTypePanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final chosenCar = ref.watch(chosenCarProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
     final startAddress = ref.watch(startLocProvider).state?.address;
     final endAddress = ref.watch(endLocProvider).state?.address;
 
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: constraints.maxHeight * 0.02,
+      ),
       child: Stack(
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(left: constraints.maxWidth * 0.02),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    isRider ? 'Rider' : 'Driver',
-                    style: GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
-                  ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.02,
+                ),
+                margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.015),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        isRider ? 'Ride' : 'Drive',
+                        style:
+                            GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
+                      ),
+                    ),
+                    Visibility(
+                      visible: !isRider,
+                      child: GestureDetector(
+                        onTap: model.openUserInfoDrawer,
+                        child: (chosenCar != null)
+                            ? Column(
+                                children: [
+                                  Image(
+                                    image: chosenCar.type.image,
+                                    height: 40,
+                                  ),
+                                  Text(chosenCar.licensePlateNum),
+                                ],
+                              )
+                            : const SizedBox(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -87,8 +118,9 @@ class ConfigTypePanel extends HookConsumerWidget {
                 child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
                 onPressed: () => model.getDateTime(context),
               ),
-              !isRider
-                  ? Padding(
+              isRider
+                  ? const SizedBox()
+                  : Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: constraints.maxWidth * 0.05,
                       ),
@@ -127,8 +159,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                           )
                         ],
                       ),
-                    )
-                  : const SizedBox(),
+                    ),
             ],
           ),
           Align(
@@ -152,11 +183,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                 Container(
                   margin: EdgeInsets.symmetric(
                     vertical: constraints.maxHeight * 0.02,
-                  ),
-                  child: const Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                    height: 0.05,
                   ),
                 ),
                 Padding(

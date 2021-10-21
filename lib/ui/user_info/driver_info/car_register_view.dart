@@ -51,6 +51,7 @@ class CarRegisterView extends HookConsumerWidget {
                             height: 10,
                           ),
                           TextFormField(
+                            textCapitalization: TextCapitalization.characters,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                 horizontal: constraints.maxWidth * 0.03,
@@ -86,13 +87,15 @@ class CarRegisterView extends HookConsumerWidget {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    textCapitalization:
+                                        TextCapitalization.characters,
                                     controller: model.tecCarMakeField,
                                     validator: model.carRegisterValidator,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.symmetric(
                                         horizontal: constraints.maxWidth * 0.03,
                                       ),
-                                      hintText: 'Toyota',
+                                      hintText: 'TOYOTA',
                                       border: const OutlineInputBorder(),
                                     ),
                                   ),
@@ -114,13 +117,15 @@ class CarRegisterView extends HookConsumerWidget {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    textCapitalization:
+                                        TextCapitalization.characters,
                                     controller: model.tecCarModelField,
                                     validator: model.carRegisterValidator,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.symmetric(
                                         horizontal: constraints.maxWidth * 0.03,
                                       ),
-                                      hintText: 'Vios',
+                                      hintText: 'VIOS',
                                       border: const OutlineInputBorder(),
                                     ),
                                   ),
@@ -145,7 +150,7 @@ class CarRegisterView extends HookConsumerWidget {
                             carouselController: controller,
                             itemCount: CarType.values.length,
                             options: CarouselOptions(
-                              height: constraints.maxHeight * 0.25,
+                              height: 200,
                               autoPlay: false,
                               enlargeCenterPage: true,
                               aspectRatio: 16 / 9,
@@ -170,9 +175,25 @@ class CarRegisterView extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 69),
-                    ElevatedButton(
-                      onPressed: model.registerCar,
-                      child: const Text('Submit'),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 2),
+                      width: constraints.maxWidth * 0.75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color(0xffdbb3d4),
+                            Color(0xffd09cc7),
+                          ],
+                        ),
+                      ),
+                      child: TextButton(
+                        onPressed: model.registerCar,
+                        child: const Text(
+                          'Register Vehicle',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ],
                 ),
