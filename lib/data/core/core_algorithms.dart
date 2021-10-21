@@ -1,4 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/helpers/firestore_helper.dart';
+import 'package:kapiot/data/helpers/firestore_path.dart';
 import 'package:kapiot/data/repositories/location_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
@@ -11,6 +13,7 @@ final coreAlgorithmsProvider = Provider.autoDispose(
   (ref) => CoreAlgorithms(
     googleMapsApiServices: ref.watch(googleMapsApiServicesProvider),
     locationRepo: ref.watch(locationRepositoryProvider),
+    firestoreHelper: FirestoreHelper.instance,
   ),
 );
 
@@ -18,9 +21,11 @@ class CoreAlgorithms {
   CoreAlgorithms({
     required this.googleMapsApiServices,
     required this.locationRepo,
+    required this.firestoreHelper,
   });
   final GoogleMapsApiServices googleMapsApiServices;
   final LocationRepository locationRepo;
+  final FirestoreHelper firestoreHelper;
 
   /// Gets compatible drivers from the [driverConfigsStream] (along with their
   /// corresponding realtime locations) based on the [riderConfig]
@@ -84,7 +89,21 @@ class CoreAlgorithms {
                 );
                 bool driverHasPassedRider = distFromDriverStartToRiderStart <
                     distFromDriverStartToCurrent;
-                if (!driverHasPassedRider) compatibleDrivers.add(driverConfig);
+                if (!driverHasPassedRider) {
+                  compatibleDrivers.add(driverConfig);
+                } else {
+                  // In case the rider has already hailed (requested) this driver
+                  // before becoming unreachable (has passed the rider), this
+                  // deletes any of this rider's pending requests to the driver
+                  // to avoid instances where the driver may erroneously accept
+                  // this unreachable rider (despite having compatible routes)
+                  firestoreHelper.deleteData(
+                    path: FirestorePath.docActiveDriverRequest(
+                      driverConfig.user.id,
+                      riderConfig.user.id,
+                    ),
+                  );
+                }
               }
             }
           }
