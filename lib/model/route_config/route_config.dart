@@ -9,6 +9,7 @@ part 'route_config.g.dart';
 
 @freezed
 class RouteConfig with _$RouteConfig {
+  const RouteConfig._();
   const factory RouteConfig.rider({
     required KapiotUser user,
     required DateTime timeOfTrip,
@@ -28,6 +29,15 @@ class RouteConfig with _$RouteConfig {
     required int maxRiderCount,
     required Car car,
   }) = ForDriver;
+
+  /// Determines whether a driver's car is holding the maximum number of riders
+  ///
+  /// This will only work if the RouteConfig is ForDriver. Otherwise, this
+  /// getter will throw
+  bool get isCarFull {
+    final driverConfig = this as ForDriver;
+    return (driverConfig.maxRiderCount == driverConfig.currentRiderCount);
+  }
 
   factory RouteConfig.fromJson(Map<String, dynamic> json) =>
       _$RouteConfigFromJson(json);

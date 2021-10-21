@@ -330,14 +330,15 @@ class _$ForRiderCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ForRider with DiagnosticableTreeMixin implements ForRider {
+class _$ForRider extends ForRider with DiagnosticableTreeMixin {
   const _$ForRider(
       {required this.user,
       required this.timeOfTrip,
       required this.startLocation,
       required this.endLocation,
       required this.riderCount,
-      this.acceptingDriverConfig});
+      this.acceptingDriverConfig})
+      : super._();
 
   factory _$ForRider.fromJson(Map<String, dynamic> json) =>
       _$$ForRiderFromJson(json);
@@ -531,7 +532,7 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
   }
 }
 
-abstract class ForRider implements RouteConfig {
+abstract class ForRider extends RouteConfig {
   const factory ForRider(
       {required KapiotUser user,
       required DateTime timeOfTrip,
@@ -539,6 +540,7 @@ abstract class ForRider implements RouteConfig {
       required KapiotLocation endLocation,
       required int riderCount,
       RouteConfig? acceptingDriverConfig}) = _$ForRider;
+  const ForRider._() : super._();
 
   factory ForRider.fromJson(Map<String, dynamic> json) = _$ForRider.fromJson;
 
@@ -648,7 +650,7 @@ class _$ForDriverCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
+class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
   const _$ForDriver(
       {required this.user,
       required this.timeOfTrip,
@@ -657,7 +659,8 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
       required this.encodedRoute,
       this.currentRiderCount = 0,
       required this.maxRiderCount,
-      required this.car});
+      required this.car})
+      : super._();
 
   factory _$ForDriver.fromJson(Map<String, dynamic> json) =>
       _$$ForDriverFromJson(json);
@@ -864,7 +867,7 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
   }
 }
 
-abstract class ForDriver implements RouteConfig {
+abstract class ForDriver extends RouteConfig {
   const factory ForDriver(
       {required KapiotUser user,
       required DateTime timeOfTrip,
@@ -874,6 +877,7 @@ abstract class ForDriver implements RouteConfig {
       int currentRiderCount,
       required int maxRiderCount,
       required Car car}) = _$ForDriver;
+  const ForDriver._() : super._();
 
   factory ForDriver.fromJson(Map<String, dynamic> json) = _$ForDriver.fromJson;
 
