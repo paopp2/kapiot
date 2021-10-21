@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
@@ -11,19 +12,21 @@ class RouteConfig with _$RouteConfig {
   const factory RouteConfig.rider({
     required KapiotUser user,
     required DateTime timeOfTrip,
-    required int riderCount,
     required KapiotLocation startLocation,
     required KapiotLocation endLocation,
+    required int riderCount,
     RouteConfig? acceptingDriverConfig,
   }) = ForRider;
 
   const factory RouteConfig.driver({
     required KapiotUser user,
     required DateTime timeOfTrip,
-    required int riderCount,
     required KapiotLocation startLocation,
     required KapiotLocation endLocation,
     required String encodedRoute,
+    @Default(0) int currentRiderCount,
+    required int maxRiderCount,
+    required Car car,
   }) = ForDriver;
 
   factory RouteConfig.fromJson(Map<String, dynamic> json) =>

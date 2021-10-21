@@ -14,6 +14,7 @@ import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
@@ -156,10 +157,16 @@ class HomeViewModel extends ViewModel {
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,
-        riderCount: read(riderCountProvider).state,
+        maxRiderCount: read(riderCountProvider).state,
         startLocation: startLoc,
         endLocation: endLoc,
         encodedRoute: encodedRoute,
+        car: const Car(
+          licensePlateNum: 'ABC 321',
+          make: 'TOYOTA',
+          model: 'FORTUNER',
+          type: CarType.suv,
+        ),
       );
       driverRepo.pushDriverConfig(driverConfig);
       read(currentRouteConfigProvider).state = driverConfig;
@@ -195,7 +202,7 @@ class HomeViewModel extends ViewModel {
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
         timeOfTrip: DateTime.now(),
-        riderCount: 3,
+        maxRiderCount: 3,
         startLocation: const KapiotLocation(
           lat: 10.382435524276756,
           lng: 123.9716686421716,
@@ -209,6 +216,12 @@ class HomeViewModel extends ViewModel {
         ),
         encodedRoute:
             "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+        car: const Car(
+          licensePlateNum: 'ABC 321',
+          make: 'TOYOTA',
+          model: 'FORTUNER',
+          type: CarType.suv,
+        ),
       );
       driverRepo.pushDriverConfig(driverConfig);
       read(currentRouteConfigProvider).state = driverConfig;
