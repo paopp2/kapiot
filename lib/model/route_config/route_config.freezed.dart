@@ -53,6 +53,7 @@ class _$RouteConfigTearOff {
       required KapiotLocation startLocation,
       required KapiotLocation endLocation,
       required String encodedRoute,
+      required String rating,
       int currentRiderCount = 0,
       required int maxRiderCount,
       required Car car}) {
@@ -62,6 +63,7 @@ class _$RouteConfigTearOff {
       startLocation: startLocation,
       endLocation: endLocation,
       encodedRoute: encodedRoute,
+      rating: rating,
       currentRiderCount: currentRiderCount,
       maxRiderCount: maxRiderCount,
       car: car,
@@ -99,6 +101,7 @@ mixin _$RouteConfig {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)
@@ -121,6 +124,7 @@ mixin _$RouteConfig {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)?
@@ -143,6 +147,7 @@ mixin _$RouteConfig {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)?
@@ -430,6 +435,7 @@ class _$ForRider extends ForRider with DiagnosticableTreeMixin {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)
@@ -456,6 +462,7 @@ class _$ForRider extends ForRider with DiagnosticableTreeMixin {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)?
@@ -482,6 +489,7 @@ class _$ForRider extends ForRider with DiagnosticableTreeMixin {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)?
@@ -571,6 +579,7 @@ abstract class $ForDriverCopyWith<$Res> implements $RouteConfigCopyWith<$Res> {
       KapiotLocation startLocation,
       KapiotLocation endLocation,
       String encodedRoute,
+      String rating,
       int currentRiderCount,
       int maxRiderCount,
       Car car});
@@ -600,6 +609,7 @@ class _$ForDriverCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
     Object? startLocation = freezed,
     Object? endLocation = freezed,
     Object? encodedRoute = freezed,
+    Object? rating = freezed,
     Object? currentRiderCount = freezed,
     Object? maxRiderCount = freezed,
     Object? car = freezed,
@@ -624,6 +634,10 @@ class _$ForDriverCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
       encodedRoute: encodedRoute == freezed
           ? _value.encodedRoute
           : encodedRoute // ignore: cast_nullable_to_non_nullable
+              as String,
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as String,
       currentRiderCount: currentRiderCount == freezed
           ? _value.currentRiderCount
@@ -657,6 +671,7 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
       required this.startLocation,
       required this.endLocation,
       required this.encodedRoute,
+      required this.rating,
       this.currentRiderCount = 0,
       required this.maxRiderCount,
       required this.car})
@@ -675,6 +690,8 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
   final KapiotLocation endLocation;
   @override
   final String encodedRoute;
+  @override
+  final String rating;
   @JsonKey(defaultValue: 0)
   @override
   final int currentRiderCount;
@@ -685,7 +702,7 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RouteConfig.driver(user: $user, timeOfTrip: $timeOfTrip, startLocation: $startLocation, endLocation: $endLocation, encodedRoute: $encodedRoute, currentRiderCount: $currentRiderCount, maxRiderCount: $maxRiderCount, car: $car)';
+    return 'RouteConfig.driver(user: $user, timeOfTrip: $timeOfTrip, startLocation: $startLocation, endLocation: $endLocation, encodedRoute: $encodedRoute, rating: $rating, currentRiderCount: $currentRiderCount, maxRiderCount: $maxRiderCount, car: $car)';
   }
 
   @override
@@ -698,6 +715,7 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('startLocation', startLocation))
       ..add(DiagnosticsProperty('endLocation', endLocation))
       ..add(DiagnosticsProperty('encodedRoute', encodedRoute))
+      ..add(DiagnosticsProperty('rating', rating))
       ..add(DiagnosticsProperty('currentRiderCount', currentRiderCount))
       ..add(DiagnosticsProperty('maxRiderCount', maxRiderCount))
       ..add(DiagnosticsProperty('car', car));
@@ -721,6 +739,8 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
             (identical(other.encodedRoute, encodedRoute) ||
                 const DeepCollectionEquality()
                     .equals(other.encodedRoute, encodedRoute)) &&
+            (identical(other.rating, rating) ||
+                const DeepCollectionEquality().equals(other.rating, rating)) &&
             (identical(other.currentRiderCount, currentRiderCount) ||
                 const DeepCollectionEquality()
                     .equals(other.currentRiderCount, currentRiderCount)) &&
@@ -739,6 +759,7 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(startLocation) ^
       const DeepCollectionEquality().hash(endLocation) ^
       const DeepCollectionEquality().hash(encodedRoute) ^
+      const DeepCollectionEquality().hash(rating) ^
       const DeepCollectionEquality().hash(currentRiderCount) ^
       const DeepCollectionEquality().hash(maxRiderCount) ^
       const DeepCollectionEquality().hash(car);
@@ -765,13 +786,14 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)
         driver,
   }) {
     return driver(user, timeOfTrip, startLocation, endLocation, encodedRoute,
-        currentRiderCount, maxRiderCount, car);
+        rating, currentRiderCount, maxRiderCount, car);
   }
 
   @override
@@ -791,13 +813,14 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)?
         driver,
   }) {
     return driver?.call(user, timeOfTrip, startLocation, endLocation,
-        encodedRoute, currentRiderCount, maxRiderCount, car);
+        encodedRoute, rating, currentRiderCount, maxRiderCount, car);
   }
 
   @override
@@ -817,6 +840,7 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
             KapiotLocation startLocation,
             KapiotLocation endLocation,
             String encodedRoute,
+            String rating,
             int currentRiderCount,
             int maxRiderCount,
             Car car)?
@@ -825,7 +849,7 @@ class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
   }) {
     if (driver != null) {
       return driver(user, timeOfTrip, startLocation, endLocation, encodedRoute,
-          currentRiderCount, maxRiderCount, car);
+          rating, currentRiderCount, maxRiderCount, car);
     }
     return orElse();
   }
@@ -874,6 +898,7 @@ abstract class ForDriver extends RouteConfig {
       required KapiotLocation startLocation,
       required KapiotLocation endLocation,
       required String encodedRoute,
+      required String rating,
       int currentRiderCount,
       required int maxRiderCount,
       required Car car}) = _$ForDriver;
@@ -890,6 +915,7 @@ abstract class ForDriver extends RouteConfig {
   @override
   KapiotLocation get endLocation => throw _privateConstructorUsedError;
   String get encodedRoute => throw _privateConstructorUsedError;
+  String get rating => throw _privateConstructorUsedError;
   int get currentRiderCount => throw _privateConstructorUsedError;
   int get maxRiderCount => throw _privateConstructorUsedError;
   Car get car => throw _privateConstructorUsedError;

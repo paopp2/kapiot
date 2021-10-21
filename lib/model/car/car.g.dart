@@ -51,9 +51,9 @@ const _$CarTypeEnumMap = {
   CarType.sedan: 'sedan',
   CarType.hatchback: 'hatchback',
   CarType.pickup: 'pickup',
+  CarType.crossover: 'crossover',
   CarType.suv: 'suv',
   CarType.mpv: 'mpv',
   CarType.wagon: 'wagon',
-  CarType.crossover: 'crossover',
   CarType.van: 'van',
 };

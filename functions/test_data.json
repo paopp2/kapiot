@@ -30,7 +30,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
@@ -62,7 +63,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
@@ -94,7 +96,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
@@ -126,7 +129,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
@@ -158,7 +162,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
@@ -190,7 +195,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
@@ -222,7 +228,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
@@ -254,7 +261,8 @@
         "type": "suv"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5
+      "maxRiderCount": 5,
+      "rating": "4.5"
     },
     {
       "id": "njZvKhumuBwVcBruGOTT1kUwh5p6",
@@ -274,6 +282,7 @@
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
+      "rating": "4.5",
       "timeOfTrip": "2021-09-05T09:20:18.358634",
       "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@k@zC",
       "startLocation": {
@@ -306,6 +315,7 @@
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
+      "rating": "4.5",
       "timeOfTrip": "2021-09-05T09:23:05.430842",
       "encodedRoute": "shj~@{xrsVEXL^DJ`@x@xBmAZl@\\d@bCjDzBhDb@r@hBdFJb@FjAJj@VvCVzDLlBF^Lb@n@pA\\p@b@r@t@t@dC`CdAv@j@ZvFvBxDbBpB`Ab@FTLpAf@v@PT@n@BbBAx@Bl@Dj@LXL~A`AhKjGzHtE~@\\zAT`Kt@xBHfFOlEQpI]fDQnC@`AHlFZtJx@vH`AtFdA~EbArGdApJnAvCb@f@DnAFr@AtBIvBXvBh@|@PbCp@FBDMVgACEk@M",
       "startLocation": {
@@ -338,6 +348,7 @@
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
+      "rating": "4.5",
       "timeOfTrip": "2021-09-05T17:48:17.601548",
       "encodedRoute": "g||}@}sisVmEhDQ?}D}Eg@h@|BxCBNrAhByCjCiB`Bw@d@w@ZaB|@uAp@wC~AcIhE{KzFkCvAeAj@_EnBmDjBwKxFg@X{C`B{@^s@k@]Q}Am@oBo@s@MOAOGqBm@e@QwHeCmDgAoCo@}Do@uIeAmMoAgEe@eCUaAIYGw@KoEc@_E[K@c@E{KkA{BUwK_AiOyAsDe@oHw@qHiAuDq@sDs@m@Kq@UIC[l@a@x@YdA[lBc@?OBIFCFM|@e@bCSr@]v@S\\c@\\k@JuADiBC_DX",
       "startLocation": {
@@ -370,6 +381,7 @@
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
+      "rating": "4.5",
       "timeOfTrip": "2021-09-05T17:48:17.601548",
       "encodedRoute": "_s`~@e~esVTk@CKEEKA{@D[KhC}G^cAdE_KpDyIfDcHLYdA_B|BeDVMXQIKw@o@kAg@qBq@mA]_@CkCy@oDoAkGqBwBk@}Dw@mJmAaHu@_E_@gHu@gDYq@MsEe@eE_@YB]EGGIEo@KqCUoEk@IGMOEKCKXsD@e@A_@COh@iGZ_BBM",
       "startLocation": {

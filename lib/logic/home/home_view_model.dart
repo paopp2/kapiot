@@ -60,7 +60,6 @@ class HomeViewModel extends ViewModel {
   final HomeMapController mapController;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
@@ -99,14 +98,17 @@ class HomeViewModel extends ViewModel {
   void gotoPlaceManagerView() =>
       AppRouter.instance.navigateTo(Routes.placeManagerView);
 
-  void openUserInfoDrawer() => scaffoldKey.currentState!.openDrawer();
-
   void openRoutePlacePicker({required bool isForStartLoc}) {
     read(isForStartLocProvider).state = isForStartLoc;
     AppRouter.instance.navigateTo(Routes.routePlacePicker);
   }
 
-  void incRiderCount() => read(riderCountProvider).state++;
+  void incRiderCount() {
+    final chosenCarCapacity = read(chosenCarProvider).state!.capacity;
+    if (chosenCarCapacity > read(riderCountProvider).state) {
+      read(riderCountProvider).state++;
+    }
+  }
 
   void decRiderCount() {
     if (read(riderCountProvider).state > 1) {
@@ -168,12 +170,12 @@ class HomeViewModel extends ViewModel {
         startLocation: startLoc,
         endLocation: endLoc,
         encodedRoute: encodedRoute,
-        car: const Car(
-          licensePlateNum: 'ABC 321',
-          make: 'TOYOTA',
-          model: 'FORTUNER',
-          type: CarType.suv,
-        ),
+        rating: read(currentUserInfoProvider)
+            .data!
+            .value!
+            .driverInfo!
+            .averageRating,
+        car: read(chosenCarProvider).state!,
       );
       driverRepo.pushDriverConfig(driverConfig);
       read(currentRouteConfigProvider).state = driverConfig;
@@ -223,6 +225,7 @@ class HomeViewModel extends ViewModel {
         ),
         encodedRoute:
             "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+        rating: '4.5',
         car: const Car(
           licensePlateNum: 'ABC 321',
           make: 'TOYOTA',

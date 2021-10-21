@@ -25,6 +25,7 @@ class RouteConfig with _$RouteConfig {
     required KapiotLocation startLocation,
     required KapiotLocation endLocation,
     required String encodedRoute,
+    required String rating,
     @Default(0) int currentRiderCount,
     required int maxRiderCount,
     required Car car,
