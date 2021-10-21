@@ -121,7 +121,10 @@ class UserInfoDrawer extends HookConsumerWidget {
                                     'Owned Cars',
                                   ),
                                   children: [
-                                    SizedBox(
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                              constraints.maxWidth * 0.02),
                                       height: 210,
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
@@ -148,13 +151,13 @@ class UserInfoDrawer extends HookConsumerWidget {
                                             child: AnimatedContainer(
                                               duration: const Duration(
                                                   milliseconds: 500),
-                                              margin: EdgeInsets.only(
-                                                left: constraints.maxWidth *
-                                                    0.025,
-                                                top: constraints.maxHeight *
-                                                    0.025,
-                                                bottom: constraints.maxHeight *
-                                                    0.025,
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal:
+                                                    constraints.maxWidth *
+                                                        0.015,
+                                                vertical:
+                                                    constraints.maxHeight *
+                                                        0.025,
                                               ),
                                               padding:
                                                   const EdgeInsets.symmetric(
