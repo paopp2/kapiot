@@ -4,6 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/driver/components/rider_manager_view_map.dart';
 
 import 'components/requesting_riders_panel.dart';
@@ -15,6 +17,10 @@ class RiderManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
+    final currentDriverConfig =
+        ref.watch(currentRouteConfigProvider).state as ForDriver;
+    final maxRiderCount = currentDriverConfig.maxRiderCount;
+    final currentRiderCount = currentDriverConfig.currentRiderCount;
     final nextStop = ref.watch(nextStopProvider).state;
     final driverPoints = ref.watch(driverPointsProvider).state;
 
@@ -85,9 +91,9 @@ class RiderManagerView extends HookConsumerWidget {
                               // TODO: Replace with better design for showing
                               // current car capacity
                               const SizedBox(width: 5),
-                              const Text(
-                                '0/5',
-                                style: TextStyle(
+                              Text(
+                                '$currentRiderCount/$maxRiderCount',
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                               ),

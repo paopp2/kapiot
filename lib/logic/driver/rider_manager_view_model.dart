@@ -146,12 +146,17 @@ class RiderManagerViewModel extends ViewModel {
   }
 
   void acceptRider(String riderId) {
-    final currentDriverConfig = read(currentRouteConfigProvider).state;
-    assert(currentDriverConfig != null);
-    driverRepo.acceptRider(
-      riderId,
-      currentDriverConfig!,
-    );
+    final driverConfig = read(currentRouteConfigProvider).state;
+    driverConfig as ForDriver;
+    if (driverConfig.currentRiderCount != driverConfig.maxRiderCount) {
+      driverRepo.acceptRider(
+        riderId,
+        driverConfig,
+      );
+      updateRiderCount(increment: true);
+    } else {
+      // TODO: Notify driver that car's full and can't currently accept more riders
+    }
   }
 
   Future<void> updateNextStop() async {
@@ -168,8 +173,21 @@ class RiderManagerViewModel extends ViewModel {
         currentStop.riderConfig.user.id,
       );
       _riderConfigList.add(currentStop.riderConfig);
+      updateRiderCount(increment: false);
       await updateDriverPoints(currentStop.riderConfig);
     }
+  }
+
+  Future<void> updateRiderCount({required bool increment}) async {
+    final driverConfig = read(currentRouteConfigProvider).state as ForDriver;
+    int rideCount = driverConfig.currentRiderCount;
+    final newRiderCount = (increment) ? ++rideCount : --rideCount;
+    read(currentRouteConfigProvider).state = driverConfig.copyWith(
+      currentRiderCount: newRiderCount,
+    );
+    driverRepo.pushDriverConfig(driverConfig.copyWith(
+      currentRiderCount: newRiderCount,
+    ));
   }
 
   Future<void> updateDriverPoints(RouteConfig riderConfig) async {
