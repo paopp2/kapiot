@@ -145,7 +145,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                 );
                                               }
                                             },
-                                            child: Container(
+                                            child: AnimatedContainer(
+                                              duration: const Duration(
+                                                  milliseconds: 500),
                                               margin: EdgeInsets.only(
                                                 left: constraints.maxWidth *
                                                     0.025,
