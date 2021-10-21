@@ -38,6 +38,7 @@ _$ForDriver _$$ForDriverFromJson(Map<String, dynamic> json) => _$ForDriver(
       endLocation:
           KapiotLocation.fromJson(json['endLocation'] as Map<String, dynamic>),
       encodedRoute: json['encodedRoute'] as String,
+      rating: json['rating'] as String,
       currentRiderCount: json['currentRiderCount'] as int? ?? 0,
       maxRiderCount: json['maxRiderCount'] as int,
       car: Car.fromJson(json['car'] as Map<String, dynamic>),
@@ -50,6 +51,7 @@ Map<String, dynamic> _$$ForDriverToJson(_$ForDriver instance) =>
       'startLocation': instance.startLocation.toJson(),
       'endLocation': instance.endLocation.toJson(),
       'encodedRoute': instance.encodedRoute,
+      'rating': instance.rating,
       'currentRiderCount': instance.currentRiderCount,
       'maxRiderCount': instance.maxRiderCount,
       'car': instance.car.toJson(),
