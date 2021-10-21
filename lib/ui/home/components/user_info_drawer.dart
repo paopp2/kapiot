@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
+import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/model/car/car.dart';
 
 class UserInfoDrawer extends HookConsumerWidget {
@@ -22,6 +23,7 @@ class UserInfoDrawer extends HookConsumerWidget {
     final currentUser = ref.watch(currentUserProvider)!;
     final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
     final ownedCars = currentUserInfo?.driverInfo?.registeredCars;
+    final chosenCar = ref.watch(chosenCarProvider).state;
     final username = currentUser.email!.split('@').first;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
@@ -130,6 +132,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                                           final car = (!isLastItem)
                                               ? ownedCars[index]
                                               : null;
+                                          final isChosen = (chosenCar == car);
                                           return InkWell(
                                             onTap: () {
                                               if (isLastItem) {
@@ -171,28 +174,27 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                           const Color(
                                                               0xffeaeaea),
                                                         ]
-                                                      :
-                                                      // unselected car color
-                                                      // [
-                                                      //     const Color(
-                                                      //         0xffeeeeee),
-                                                      //     const Color(
-                                                      //         0xffffffff),
-                                                      //     const Color(
-                                                      //         0xffa6a6a6),
-                                                      //   ]
-                                                      [
-                                                          const Color(
-                                                              0xffdbb3d4),
-                                                          const Color(
-                                                              0xffe9d1e5),
-                                                          const Color(
-                                                              0xffffffff),
-                                                          const Color(
-                                                              0xffe9d1e5),
-                                                          const Color(
-                                                              0xffaf8fa9),
-                                                        ],
+                                                      : (isChosen)
+                                                          ? [
+                                                              const Color(
+                                                                  0xffdbb3d4),
+                                                              const Color(
+                                                                  0xffe9d1e5),
+                                                              const Color(
+                                                                  0xffffffff),
+                                                              const Color(
+                                                                  0xffe9d1e5),
+                                                              const Color(
+                                                                  0xffaf8fa9),
+                                                            ]
+                                                          : [
+                                                              const Color(
+                                                                  0xffeeeeee),
+                                                              const Color(
+                                                                  0xffffffff),
+                                                              const Color(
+                                                                  0xffa6a6a6),
+                                                            ],
                                                 ),
                                               ),
                                               child: (isLastItem)
