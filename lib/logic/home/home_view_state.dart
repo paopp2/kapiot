@@ -3,7 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/model/car/car.dart';
 
-final riderCountProvider = StateProvider.autoDispose<int>((ref) => 1);
+final riderCountProvider = StateProvider.autoDispose<int>((ref) {
+  return ref.watch(chosenCarProvider).state?.capacity ?? 1;
+});
 
 final dateTimeProvider =
     StateProvider.autoDispose<DateTime>((ref) => DateTime.now());

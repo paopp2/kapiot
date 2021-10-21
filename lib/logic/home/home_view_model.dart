@@ -106,7 +106,12 @@ class HomeViewModel extends ViewModel {
     AppRouter.instance.navigateTo(Routes.routePlacePicker);
   }
 
-  void incRiderCount() => read(riderCountProvider).state++;
+  void incRiderCount() {
+    final chosenCarCapacity = read(chosenCarProvider).state!.capacity;
+    if (chosenCarCapacity > read(riderCountProvider).state) {
+      read(riderCountProvider).state++;
+    }
+  }
 
   void decRiderCount() {
     if (read(riderCountProvider).state > 1) {
