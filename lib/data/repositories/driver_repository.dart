@@ -21,7 +21,7 @@ class DriverRepository {
   final FirestoreHelper firestoreHelper;
   final CoreAlgorithms coreAlgorithms;
 
-  void pushDriverConfig(RouteConfig driverConfig) async {
+  Future<void> pushDriverConfig(RouteConfig driverConfig) async {
     assert(driverConfig is ForDriver);
     await firestoreHelper.setData(
       path: FirestorePath.docActiveDriver(driverConfig.user.id),
@@ -29,7 +29,7 @@ class DriverRepository {
     );
   }
 
-  void acceptRider(String riderId, RouteConfig driverConfig) async {
+  Future<void> acceptRider(String riderId, RouteConfig driverConfig) async {
     assert(driverConfig is ForDriver);
     final driverId = driverConfig.user.id;
     final acceptedRiderConfig = await firestoreHelper.getData(

@@ -33,16 +33,16 @@ class _$RouteConfigTearOff {
   ForRider rider(
       {required KapiotUser user,
       required DateTime timeOfTrip,
-      required int riderCount,
       required KapiotLocation startLocation,
       required KapiotLocation endLocation,
+      required int riderCount,
       RouteConfig? acceptingDriverConfig}) {
     return ForRider(
       user: user,
       timeOfTrip: timeOfTrip,
-      riderCount: riderCount,
       startLocation: startLocation,
       endLocation: endLocation,
+      riderCount: riderCount,
       acceptingDriverConfig: acceptingDriverConfig,
     );
   }
@@ -50,17 +50,21 @@ class _$RouteConfigTearOff {
   ForDriver driver(
       {required KapiotUser user,
       required DateTime timeOfTrip,
-      required int riderCount,
       required KapiotLocation startLocation,
       required KapiotLocation endLocation,
-      required String encodedRoute}) {
+      required String encodedRoute,
+      int currentRiderCount = 0,
+      required int maxRiderCount,
+      required Car car}) {
     return ForDriver(
       user: user,
       timeOfTrip: timeOfTrip,
-      riderCount: riderCount,
       startLocation: startLocation,
       endLocation: endLocation,
       encodedRoute: encodedRoute,
+      currentRiderCount: currentRiderCount,
+      maxRiderCount: maxRiderCount,
+      car: car,
     );
   }
 
@@ -76,7 +80,6 @@ const $RouteConfig = _$RouteConfigTearOff();
 mixin _$RouteConfig {
   KapiotUser get user => throw _privateConstructorUsedError;
   DateTime get timeOfTrip => throw _privateConstructorUsedError;
-  int get riderCount => throw _privateConstructorUsedError;
   KapiotLocation get startLocation => throw _privateConstructorUsedError;
   KapiotLocation get endLocation => throw _privateConstructorUsedError;
 
@@ -85,18 +88,20 @@ mixin _$RouteConfig {
     required TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)
         rider,
     required TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)
         driver,
   }) =>
       throw _privateConstructorUsedError;
@@ -105,18 +110,20 @@ mixin _$RouteConfig {
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)?
         rider,
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)?
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)?
         driver,
   }) =>
       throw _privateConstructorUsedError;
@@ -125,18 +132,20 @@ mixin _$RouteConfig {
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)?
         rider,
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)?
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)?
         driver,
     required TResult orElse(),
   }) =>
@@ -174,7 +183,6 @@ abstract class $RouteConfigCopyWith<$Res> {
   $Res call(
       {KapiotUser user,
       DateTime timeOfTrip,
-      int riderCount,
       KapiotLocation startLocation,
       KapiotLocation endLocation});
 
@@ -195,7 +203,6 @@ class _$RouteConfigCopyWithImpl<$Res> implements $RouteConfigCopyWith<$Res> {
   $Res call({
     Object? user = freezed,
     Object? timeOfTrip = freezed,
-    Object? riderCount = freezed,
     Object? startLocation = freezed,
     Object? endLocation = freezed,
   }) {
@@ -208,10 +215,6 @@ class _$RouteConfigCopyWithImpl<$Res> implements $RouteConfigCopyWith<$Res> {
           ? _value.timeOfTrip
           : timeOfTrip // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      riderCount: riderCount == freezed
-          ? _value.riderCount
-          : riderCount // ignore: cast_nullable_to_non_nullable
-              as int,
       startLocation: startLocation == freezed
           ? _value.startLocation
           : startLocation // ignore: cast_nullable_to_non_nullable
@@ -253,9 +256,9 @@ abstract class $ForRiderCopyWith<$Res> implements $RouteConfigCopyWith<$Res> {
   $Res call(
       {KapiotUser user,
       DateTime timeOfTrip,
-      int riderCount,
       KapiotLocation startLocation,
       KapiotLocation endLocation,
+      int riderCount,
       RouteConfig? acceptingDriverConfig});
 
   @override
@@ -280,9 +283,9 @@ class _$ForRiderCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
   $Res call({
     Object? user = freezed,
     Object? timeOfTrip = freezed,
-    Object? riderCount = freezed,
     Object? startLocation = freezed,
     Object? endLocation = freezed,
+    Object? riderCount = freezed,
     Object? acceptingDriverConfig = freezed,
   }) {
     return _then(ForRider(
@@ -294,10 +297,6 @@ class _$ForRiderCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
           ? _value.timeOfTrip
           : timeOfTrip // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      riderCount: riderCount == freezed
-          ? _value.riderCount
-          : riderCount // ignore: cast_nullable_to_non_nullable
-              as int,
       startLocation: startLocation == freezed
           ? _value.startLocation
           : startLocation // ignore: cast_nullable_to_non_nullable
@@ -306,6 +305,10 @@ class _$ForRiderCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
           ? _value.endLocation
           : endLocation // ignore: cast_nullable_to_non_nullable
               as KapiotLocation,
+      riderCount: riderCount == freezed
+          ? _value.riderCount
+          : riderCount // ignore: cast_nullable_to_non_nullable
+              as int,
       acceptingDriverConfig: acceptingDriverConfig == freezed
           ? _value.acceptingDriverConfig
           : acceptingDriverConfig // ignore: cast_nullable_to_non_nullable
@@ -327,14 +330,15 @@ class _$ForRiderCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ForRider with DiagnosticableTreeMixin implements ForRider {
+class _$ForRider extends ForRider with DiagnosticableTreeMixin {
   const _$ForRider(
       {required this.user,
       required this.timeOfTrip,
-      required this.riderCount,
       required this.startLocation,
       required this.endLocation,
-      this.acceptingDriverConfig});
+      required this.riderCount,
+      this.acceptingDriverConfig})
+      : super._();
 
   factory _$ForRider.fromJson(Map<String, dynamic> json) =>
       _$$ForRiderFromJson(json);
@@ -344,17 +348,17 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
   @override
   final DateTime timeOfTrip;
   @override
-  final int riderCount;
-  @override
   final KapiotLocation startLocation;
   @override
   final KapiotLocation endLocation;
+  @override
+  final int riderCount;
   @override
   final RouteConfig? acceptingDriverConfig;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RouteConfig.rider(user: $user, timeOfTrip: $timeOfTrip, riderCount: $riderCount, startLocation: $startLocation, endLocation: $endLocation, acceptingDriverConfig: $acceptingDriverConfig)';
+    return 'RouteConfig.rider(user: $user, timeOfTrip: $timeOfTrip, startLocation: $startLocation, endLocation: $endLocation, riderCount: $riderCount, acceptingDriverConfig: $acceptingDriverConfig)';
   }
 
   @override
@@ -364,9 +368,9 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
       ..add(DiagnosticsProperty('type', 'RouteConfig.rider'))
       ..add(DiagnosticsProperty('user', user))
       ..add(DiagnosticsProperty('timeOfTrip', timeOfTrip))
-      ..add(DiagnosticsProperty('riderCount', riderCount))
       ..add(DiagnosticsProperty('startLocation', startLocation))
       ..add(DiagnosticsProperty('endLocation', endLocation))
+      ..add(DiagnosticsProperty('riderCount', riderCount))
       ..add(
           DiagnosticsProperty('acceptingDriverConfig', acceptingDriverConfig));
   }
@@ -380,15 +384,15 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
             (identical(other.timeOfTrip, timeOfTrip) ||
                 const DeepCollectionEquality()
                     .equals(other.timeOfTrip, timeOfTrip)) &&
-            (identical(other.riderCount, riderCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.riderCount, riderCount)) &&
             (identical(other.startLocation, startLocation) ||
                 const DeepCollectionEquality()
                     .equals(other.startLocation, startLocation)) &&
             (identical(other.endLocation, endLocation) ||
                 const DeepCollectionEquality()
                     .equals(other.endLocation, endLocation)) &&
+            (identical(other.riderCount, riderCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.riderCount, riderCount)) &&
             (identical(other.acceptingDriverConfig, acceptingDriverConfig) ||
                 const DeepCollectionEquality().equals(
                     other.acceptingDriverConfig, acceptingDriverConfig)));
@@ -399,9 +403,9 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(timeOfTrip) ^
-      const DeepCollectionEquality().hash(riderCount) ^
       const DeepCollectionEquality().hash(startLocation) ^
       const DeepCollectionEquality().hash(endLocation) ^
+      const DeepCollectionEquality().hash(riderCount) ^
       const DeepCollectionEquality().hash(acceptingDriverConfig);
 
   @JsonKey(ignore: true)
@@ -415,21 +419,23 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
     required TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)
         rider,
     required TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)
         driver,
   }) {
-    return rider(user, timeOfTrip, riderCount, startLocation, endLocation,
+    return rider(user, timeOfTrip, startLocation, endLocation, riderCount,
         acceptingDriverConfig);
   }
 
@@ -439,21 +445,23 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)?
         rider,
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)?
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)?
         driver,
   }) {
-    return rider?.call(user, timeOfTrip, riderCount, startLocation, endLocation,
+    return rider?.call(user, timeOfTrip, startLocation, endLocation, riderCount,
         acceptingDriverConfig);
   }
 
@@ -463,23 +471,25 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)?
         rider,
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)?
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)?
         driver,
     required TResult orElse(),
   }) {
     if (rider != null) {
-      return rider(user, timeOfTrip, riderCount, startLocation, endLocation,
+      return rider(user, timeOfTrip, startLocation, endLocation, riderCount,
           acceptingDriverConfig);
     }
     return orElse();
@@ -522,14 +532,15 @@ class _$ForRider with DiagnosticableTreeMixin implements ForRider {
   }
 }
 
-abstract class ForRider implements RouteConfig {
+abstract class ForRider extends RouteConfig {
   const factory ForRider(
       {required KapiotUser user,
       required DateTime timeOfTrip,
-      required int riderCount,
       required KapiotLocation startLocation,
       required KapiotLocation endLocation,
+      required int riderCount,
       RouteConfig? acceptingDriverConfig}) = _$ForRider;
+  const ForRider._() : super._();
 
   factory ForRider.fromJson(Map<String, dynamic> json) = _$ForRider.fromJson;
 
@@ -538,11 +549,10 @@ abstract class ForRider implements RouteConfig {
   @override
   DateTime get timeOfTrip => throw _privateConstructorUsedError;
   @override
-  int get riderCount => throw _privateConstructorUsedError;
-  @override
   KapiotLocation get startLocation => throw _privateConstructorUsedError;
   @override
   KapiotLocation get endLocation => throw _privateConstructorUsedError;
+  int get riderCount => throw _privateConstructorUsedError;
   RouteConfig? get acceptingDriverConfig => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -558,10 +568,12 @@ abstract class $ForDriverCopyWith<$Res> implements $RouteConfigCopyWith<$Res> {
   $Res call(
       {KapiotUser user,
       DateTime timeOfTrip,
-      int riderCount,
       KapiotLocation startLocation,
       KapiotLocation endLocation,
-      String encodedRoute});
+      String encodedRoute,
+      int currentRiderCount,
+      int maxRiderCount,
+      Car car});
 
   @override
   $KapiotUserCopyWith<$Res> get user;
@@ -569,6 +581,7 @@ abstract class $ForDriverCopyWith<$Res> implements $RouteConfigCopyWith<$Res> {
   $KapiotLocationCopyWith<$Res> get startLocation;
   @override
   $KapiotLocationCopyWith<$Res> get endLocation;
+  $CarCopyWith<$Res> get car;
 }
 
 /// @nodoc
@@ -584,10 +597,12 @@ class _$ForDriverCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
   $Res call({
     Object? user = freezed,
     Object? timeOfTrip = freezed,
-    Object? riderCount = freezed,
     Object? startLocation = freezed,
     Object? endLocation = freezed,
     Object? encodedRoute = freezed,
+    Object? currentRiderCount = freezed,
+    Object? maxRiderCount = freezed,
+    Object? car = freezed,
   }) {
     return _then(ForDriver(
       user: user == freezed
@@ -598,10 +613,6 @@ class _$ForDriverCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
           ? _value.timeOfTrip
           : timeOfTrip // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      riderCount: riderCount == freezed
-          ? _value.riderCount
-          : riderCount // ignore: cast_nullable_to_non_nullable
-              as int,
       startLocation: startLocation == freezed
           ? _value.startLocation
           : startLocation // ignore: cast_nullable_to_non_nullable
@@ -614,20 +625,42 @@ class _$ForDriverCopyWithImpl<$Res> extends _$RouteConfigCopyWithImpl<$Res>
           ? _value.encodedRoute
           : encodedRoute // ignore: cast_nullable_to_non_nullable
               as String,
+      currentRiderCount: currentRiderCount == freezed
+          ? _value.currentRiderCount
+          : currentRiderCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxRiderCount: maxRiderCount == freezed
+          ? _value.maxRiderCount
+          : maxRiderCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      car: car == freezed
+          ? _value.car
+          : car // ignore: cast_nullable_to_non_nullable
+              as Car,
     ));
+  }
+
+  @override
+  $CarCopyWith<$Res> get car {
+    return $CarCopyWith<$Res>(_value.car, (value) {
+      return _then(_value.copyWith(car: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
+class _$ForDriver extends ForDriver with DiagnosticableTreeMixin {
   const _$ForDriver(
       {required this.user,
       required this.timeOfTrip,
-      required this.riderCount,
       required this.startLocation,
       required this.endLocation,
-      required this.encodedRoute});
+      required this.encodedRoute,
+      this.currentRiderCount = 0,
+      required this.maxRiderCount,
+      required this.car})
+      : super._();
 
   factory _$ForDriver.fromJson(Map<String, dynamic> json) =>
       _$$ForDriverFromJson(json);
@@ -637,17 +670,22 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
   @override
   final DateTime timeOfTrip;
   @override
-  final int riderCount;
-  @override
   final KapiotLocation startLocation;
   @override
   final KapiotLocation endLocation;
   @override
   final String encodedRoute;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int currentRiderCount;
+  @override
+  final int maxRiderCount;
+  @override
+  final Car car;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RouteConfig.driver(user: $user, timeOfTrip: $timeOfTrip, riderCount: $riderCount, startLocation: $startLocation, endLocation: $endLocation, encodedRoute: $encodedRoute)';
+    return 'RouteConfig.driver(user: $user, timeOfTrip: $timeOfTrip, startLocation: $startLocation, endLocation: $endLocation, encodedRoute: $encodedRoute, currentRiderCount: $currentRiderCount, maxRiderCount: $maxRiderCount, car: $car)';
   }
 
   @override
@@ -657,10 +695,12 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
       ..add(DiagnosticsProperty('type', 'RouteConfig.driver'))
       ..add(DiagnosticsProperty('user', user))
       ..add(DiagnosticsProperty('timeOfTrip', timeOfTrip))
-      ..add(DiagnosticsProperty('riderCount', riderCount))
       ..add(DiagnosticsProperty('startLocation', startLocation))
       ..add(DiagnosticsProperty('endLocation', endLocation))
-      ..add(DiagnosticsProperty('encodedRoute', encodedRoute));
+      ..add(DiagnosticsProperty('encodedRoute', encodedRoute))
+      ..add(DiagnosticsProperty('currentRiderCount', currentRiderCount))
+      ..add(DiagnosticsProperty('maxRiderCount', maxRiderCount))
+      ..add(DiagnosticsProperty('car', car));
   }
 
   @override
@@ -672,9 +712,6 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
             (identical(other.timeOfTrip, timeOfTrip) ||
                 const DeepCollectionEquality()
                     .equals(other.timeOfTrip, timeOfTrip)) &&
-            (identical(other.riderCount, riderCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.riderCount, riderCount)) &&
             (identical(other.startLocation, startLocation) ||
                 const DeepCollectionEquality()
                     .equals(other.startLocation, startLocation)) &&
@@ -683,7 +720,15 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
                     .equals(other.endLocation, endLocation)) &&
             (identical(other.encodedRoute, encodedRoute) ||
                 const DeepCollectionEquality()
-                    .equals(other.encodedRoute, encodedRoute)));
+                    .equals(other.encodedRoute, encodedRoute)) &&
+            (identical(other.currentRiderCount, currentRiderCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentRiderCount, currentRiderCount)) &&
+            (identical(other.maxRiderCount, maxRiderCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxRiderCount, maxRiderCount)) &&
+            (identical(other.car, car) ||
+                const DeepCollectionEquality().equals(other.car, car)));
   }
 
   @override
@@ -691,10 +736,12 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(timeOfTrip) ^
-      const DeepCollectionEquality().hash(riderCount) ^
       const DeepCollectionEquality().hash(startLocation) ^
       const DeepCollectionEquality().hash(endLocation) ^
-      const DeepCollectionEquality().hash(encodedRoute);
+      const DeepCollectionEquality().hash(encodedRoute) ^
+      const DeepCollectionEquality().hash(currentRiderCount) ^
+      const DeepCollectionEquality().hash(maxRiderCount) ^
+      const DeepCollectionEquality().hash(car);
 
   @JsonKey(ignore: true)
   @override
@@ -707,22 +754,24 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
     required TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)
         rider,
     required TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)
         driver,
   }) {
-    return driver(
-        user, timeOfTrip, riderCount, startLocation, endLocation, encodedRoute);
+    return driver(user, timeOfTrip, startLocation, endLocation, encodedRoute,
+        currentRiderCount, maxRiderCount, car);
   }
 
   @override
@@ -731,22 +780,24 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)?
         rider,
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)?
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)?
         driver,
   }) {
-    return driver?.call(
-        user, timeOfTrip, riderCount, startLocation, endLocation, encodedRoute);
+    return driver?.call(user, timeOfTrip, startLocation, endLocation,
+        encodedRoute, currentRiderCount, maxRiderCount, car);
   }
 
   @override
@@ -755,24 +806,26 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
+            int riderCount,
             RouteConfig? acceptingDriverConfig)?
         rider,
     TResult Function(
             KapiotUser user,
             DateTime timeOfTrip,
-            int riderCount,
             KapiotLocation startLocation,
             KapiotLocation endLocation,
-            String encodedRoute)?
+            String encodedRoute,
+            int currentRiderCount,
+            int maxRiderCount,
+            Car car)?
         driver,
     required TResult orElse(),
   }) {
     if (driver != null) {
-      return driver(user, timeOfTrip, riderCount, startLocation, endLocation,
-          encodedRoute);
+      return driver(user, timeOfTrip, startLocation, endLocation, encodedRoute,
+          currentRiderCount, maxRiderCount, car);
     }
     return orElse();
   }
@@ -814,14 +867,17 @@ class _$ForDriver with DiagnosticableTreeMixin implements ForDriver {
   }
 }
 
-abstract class ForDriver implements RouteConfig {
+abstract class ForDriver extends RouteConfig {
   const factory ForDriver(
       {required KapiotUser user,
       required DateTime timeOfTrip,
-      required int riderCount,
       required KapiotLocation startLocation,
       required KapiotLocation endLocation,
-      required String encodedRoute}) = _$ForDriver;
+      required String encodedRoute,
+      int currentRiderCount,
+      required int maxRiderCount,
+      required Car car}) = _$ForDriver;
+  const ForDriver._() : super._();
 
   factory ForDriver.fromJson(Map<String, dynamic> json) = _$ForDriver.fromJson;
 
@@ -830,12 +886,13 @@ abstract class ForDriver implements RouteConfig {
   @override
   DateTime get timeOfTrip => throw _privateConstructorUsedError;
   @override
-  int get riderCount => throw _privateConstructorUsedError;
-  @override
   KapiotLocation get startLocation => throw _privateConstructorUsedError;
   @override
   KapiotLocation get endLocation => throw _privateConstructorUsedError;
   String get encodedRoute => throw _privateConstructorUsedError;
+  int get currentRiderCount => throw _privateConstructorUsedError;
+  int get maxRiderCount => throw _privateConstructorUsedError;
+  Car get car => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $ForDriverCopyWith<ForDriver> get copyWith =>
