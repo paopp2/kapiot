@@ -146,12 +146,12 @@ class RiderManagerViewModel extends ViewModel {
   }
 
   void acceptRider(String riderId) {
-    final driverConfig = read(currentRouteConfigProvider).state;
-    driverConfig as ForDriver;
-    if (driverConfig.currentRiderCount != driverConfig.maxRiderCount) {
+    final currentDriverConfig = read(currentRouteConfigProvider).state;
+    currentDriverConfig as ForDriver;
+    if (!currentDriverConfig.isCarFull) {
       driverRepo.acceptRider(
         riderId,
-        driverConfig,
+        currentDriverConfig,
       );
       updateRiderCount(increment: true);
     } else {
