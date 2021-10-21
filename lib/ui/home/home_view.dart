@@ -26,7 +26,6 @@ class HomeView extends HookConsumerWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Scaffold(
-            key: model.scaffoldKey,
             extendBodyBehindAppBar: true,
             drawer: UserInfoDrawer(model: model, constraints: constraints),
             appBar: AppBar(

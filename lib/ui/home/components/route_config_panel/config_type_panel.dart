@@ -59,20 +59,17 @@ class ConfigTypePanel extends HookConsumerWidget {
                     ),
                     Visibility(
                       visible: !isRider,
-                      child: GestureDetector(
-                        onTap: model.openUserInfoDrawer,
-                        child: (chosenCar != null)
-                            ? Column(
-                                children: [
-                                  Image(
-                                    image: chosenCar.type.image,
-                                    height: 40,
-                                  ),
-                                  Text(chosenCar.licensePlateNum),
-                                ],
-                              )
-                            : const SizedBox(),
-                      ),
+                      child: (chosenCar != null)
+                          ? Column(
+                              children: [
+                                Image(
+                                  image: chosenCar.type.image,
+                                  height: 40,
+                                ),
+                                Text(chosenCar.licensePlateNum),
+                              ],
+                            )
+                          : const SizedBox(),
                     ),
                   ],
                 ),

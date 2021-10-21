@@ -60,7 +60,6 @@ class HomeViewModel extends ViewModel {
   final HomeMapController mapController;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
@@ -98,8 +97,6 @@ class HomeViewModel extends ViewModel {
 
   void gotoPlaceManagerView() =>
       AppRouter.instance.navigateTo(Routes.placeManagerView);
-
-  void openUserInfoDrawer() => scaffoldKey.currentState!.openDrawer();
 
   void openRoutePlacePicker({required bool isForStartLoc}) {
     read(isForStartLocProvider).state = isForStartLoc;
