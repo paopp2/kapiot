@@ -102,7 +102,6 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     const driversIdList = test_data.driversList.map(driver => driver.id);
     const riderId = requestingRiderConfig.id;
     const driverId = acceptingDriverConfig.id;
-
     await ridersRef.doc(riderId).update({
         acceptingDriverConfig: acceptingDriverConfig,
     });
@@ -110,6 +109,9 @@ exports.acceptRider = functions.https.onRequest(async (req, res) =>  {
     async function deleteRequests(id){
         await driversRef.doc(id).collection('requests').doc(riderId).delete();
     }
+    await driversRef.doc(driverId).update({
+        riderCount: admin.firestore.FieldValue.increment(1)
+    });
     await driversRef.doc(driverId).collection('accepted').doc(riderId)
     .create(requestingRiderConfig)
     .then(res.json('Accepted: ' + driversIdList))
@@ -134,6 +136,9 @@ exports.dropRider = functions.https.onRequest(async (req, res) =>  {
     const driverId = driver.id;
     const riderId = rider.id; 
     const riderName = rider.user.displayName;
+    await driversRef.doc(driverId).update({
+        riderCount: admin.firestore.FieldValue.increment(-1)
+    });
     await driversRef.doc(driverId).collection('accepted').doc(riderId)
     .delete()
     .then(res.json('Dropped ' + riderName))
