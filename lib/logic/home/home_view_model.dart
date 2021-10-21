@@ -14,6 +14,7 @@ import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
@@ -59,6 +60,7 @@ class HomeViewModel extends ViewModel {
   final HomeMapController mapController;
   final LocationService locationService;
   final GoogleMapsApiServices googleMapsApiServices;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final routeConfigKey = GlobalKey<FormState>();
   final tecStartLoc = TextEditingController();
   final tecEndLoc = TextEditingController();
@@ -86,6 +88,8 @@ class HomeViewModel extends ViewModel {
     );
   }
 
+  Future<void> signOut() async => await authService.signOutGoogle();
+
   void gotoInitUserInfoView() =>
       AppRouter.instance.navigateTo(Routes.initUserInfoView);
 
@@ -95,7 +99,12 @@ class HomeViewModel extends ViewModel {
   void gotoPlaceManagerView() =>
       AppRouter.instance.navigateTo(Routes.placeManagerView);
 
-  Future<void> signOut() async => await authService.signOutGoogle();
+  void openUserInfoDrawer() => scaffoldKey.currentState!.openDrawer();
+
+  void openRoutePlacePicker({required bool isForStartLoc}) {
+    read(isForStartLocProvider).state = isForStartLoc;
+    AppRouter.instance.navigateTo(Routes.routePlacePicker);
+  }
 
   void incRiderCount() => read(riderCountProvider).state++;
 
@@ -103,6 +112,10 @@ class HomeViewModel extends ViewModel {
     if (read(riderCountProvider).state > 1) {
       read(riderCountProvider).state--;
     }
+  }
+
+  void chooseCar(Car car) {
+    read(chosenCarProvider).state = car;
   }
 
   void getDateTime(BuildContext context) async {
@@ -125,11 +138,6 @@ class HomeViewModel extends ViewModel {
         time.minute,
       );
     }
-  }
-
-  void openRoutePlacePicker({required bool isForStartLoc}) {
-    read(isForStartLocProvider).state = isForStartLoc;
-    AppRouter.instance.navigateTo(Routes.routePlacePicker);
   }
 
   Future<void> pushRouteConfig(bool isRider) async {

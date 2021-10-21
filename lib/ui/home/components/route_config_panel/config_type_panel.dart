@@ -24,6 +24,7 @@ class ConfigTypePanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final chosenCar = ref.watch(chosenCarProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
     final startAddress = ref.watch(startLocProvider).state?.address;
@@ -55,19 +56,23 @@ class ConfigTypePanel extends HookConsumerWidget {
                             GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
                       ),
                     ),
-                    isRider
-                        ? SizedBox()
-                        : Column(
-                            children: [
-                              Image(
-                                image: AssetImage(
-                                  'assets/images/car_body_types/coupe.png',
-                                ),
-                                height: 40,
+                    Visibility(
+                      visible: !isRider,
+                      child: GestureDetector(
+                        onTap: model.openUserInfoDrawer,
+                        child: Column(
+                          children: [
+                            const Image(
+                              image: AssetImage(
+                                'assets/images/car_body_types/coupe.png',
                               ),
-                              Text('FAG 123')
-                            ],
-                          )
+                              height: 40,
+                            ),
+                            Text(chosenCar?.licensePlateNum ?? ''),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

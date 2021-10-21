@@ -136,6 +136,10 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                 AppRouter.instance.navigateTo(
                                                   Routes.carRegisterView,
                                                 );
+                                              } else {
+                                                model.chooseCar(
+                                                  ownedCars[index],
+                                                );
                                               }
                                             },
                                             child: Container(
