@@ -191,7 +191,9 @@ class UserInfoDrawer extends HookConsumerWidget {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        car!.type.icon,
+                                                        Image(
+                                                          image: car!.type.icon,
+                                                        ),
                                                         Text(
                                                           car.licensePlateNum
                                                               .toUpperCase(),
