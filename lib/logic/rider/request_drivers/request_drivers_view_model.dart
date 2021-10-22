@@ -74,6 +74,10 @@ class RequestDriversViewModel extends ViewModel {
     return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
   }
 
+  void selectDriver(int index) {
+    read(selectedDriverIndexProvider).state = index;
+  }
+
   Future<void> previewDriverInfoAndLocation(RouteConfig driverConfig) async {
     await mapController.showSelectedDriverRoute(driverConfig);
     // Cancel the last chosen driver's location stream subscription and

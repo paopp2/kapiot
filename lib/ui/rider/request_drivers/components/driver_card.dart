@@ -9,20 +9,23 @@ const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
 class DriverCard extends HookConsumerWidget {
-  const DriverCard(
-      {Key? key,
-      required this.driverConfig,
-      required this.model,
-      required this.constraints})
-      : super(key: key);
+  const DriverCard({
+    Key? key,
+    required this.driverConfig,
+    required this.model,
+    required this.constraints,
+    required this.index,
+  }) : super(key: key);
 
   final ForDriver driverConfig;
   final RequestDriversViewModel model;
   final BoxConstraints constraints;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final driverDistance = ref.watch(driverDistanceProvider).state;
+    final selectedDriverIndex = ref.watch(selectedDriverIndexProvider).state;
     return Container(
       width: constraints.maxWidth * 0.6,
       margin: const EdgeInsets.all(10),
@@ -33,7 +36,9 @@ class DriverCard extends HookConsumerWidget {
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
-          onTap: () => model.previewDriverInfoAndLocation(driverConfig),
+          onTap: () => model
+            ..selectDriver(index)
+            ..previewDriverInfoAndLocation(driverConfig),
           customBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -49,7 +54,7 @@ class DriverCard extends HookConsumerWidget {
                   ),
                 ),
                 child: Visibility(
-                  visible: true,
+                  visible: selectedDriverIndex == index,
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: const BoxDecoration(

@@ -36,6 +36,7 @@ class DriverCardStream extends HookConsumerWidget {
                 driverConfig: driverConfig as ForDriver,
                 model: model,
                 constraints: constraints,
+                index: index,
               );
             },
           );
