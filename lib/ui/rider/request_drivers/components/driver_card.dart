@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
+import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 const uscLogo =
@@ -162,9 +163,7 @@ class DriverCard extends StatelessWidget {
                           Column(
                             children: [
                               Image(
-                                image: const AssetImage(
-                                  'assets/images/car_body_types/crossover.png',
-                                ),
+                                image: driverConfig.car.type.image,
                                 height: constraints.maxHeight * 0.06,
                               ),
                             ],
@@ -175,8 +174,9 @@ class DriverCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () =>
-                                  model.requestDriver(driverConfig.user.id),
+                              onPressed: () => model.requestDriver(
+                                driverConfig.user.id,
+                              ),
                               child: const Text('Hail Ride'),
                             ),
                           ),
