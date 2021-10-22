@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
+import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
 import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
-class DriverCard extends StatelessWidget {
+class DriverCard extends HookConsumerWidget {
   const DriverCard(
       {Key? key,
       required this.driverConfig,
@@ -19,7 +21,8 @@ class DriverCard extends StatelessWidget {
   final BoxConstraints constraints;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final driverDistance = ref.watch(driverDistanceProvider).state;
     return Container(
       width: constraints.maxWidth * 0.6,
       margin: const EdgeInsets.all(10),
@@ -45,10 +48,6 @@ class DriverCard extends StatelessWidget {
                     top: Radius.circular(12),
                   ),
                 ),
-
-                // *****************************************
-                // visibility widget for clicked driver card
-                // *****************************************
                 child: Visibility(
                   visible: true,
                   child: Container(
@@ -63,15 +62,15 @@ class DriverCard extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Icons.location_on_rounded,
                             size: 18,
                             color: Colors.white,
                           ),
                           Text(
-                            '0.5 km',
-                            style: TextStyle(
+                            driverDistance,
+                            style: const TextStyle(
                               fontSize: 12,
                               color: Colors.white,
                             ),
