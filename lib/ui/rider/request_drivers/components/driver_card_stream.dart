@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 
 import 'driver_card.dart';
 
@@ -32,7 +33,7 @@ class DriverCardStream extends HookConsumerWidget {
             itemBuilder: (context, index) {
               final driverConfig = compatibleDriverConfigs[index];
               return DriverCard(
-                driverConfig: driverConfig,
+                driverConfig: driverConfig as ForDriver,
                 model: model,
                 constraints: constraints,
               );

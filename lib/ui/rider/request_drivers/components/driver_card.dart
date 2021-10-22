@@ -13,7 +13,7 @@ class DriverCard extends StatelessWidget {
       required this.constraints})
       : super(key: key);
 
-  final RouteConfig driverConfig;
+  final ForDriver driverConfig;
   final RequestDriversViewModel model;
   final BoxConstraints constraints;
 
@@ -99,14 +99,14 @@ class DriverCard extends StatelessWidget {
                                     style: const TextStyle(fontSize: 15),
                                   ),
                                   Row(
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         Icons.star,
                                         size: 18,
                                       ),
                                       Text(
-                                        '4.6',
-                                        style: TextStyle(
+                                        driverConfig.rating,
+                                        style: const TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
@@ -128,21 +128,26 @@ class DriverCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'SUZUKI ERTIGA',
-                                style: TextStyle(fontSize: 15),
+                              Text(
+                                '${driverConfig.car.make} ${driverConfig.car.model}',
+                                style: const TextStyle(fontSize: 15),
                               ),
                               RichText(
-                                text: const TextSpan(
-                                  style: TextStyle(fontSize: 12),
+                                text: TextSpan(
+                                  style: const TextStyle(fontSize: 12),
                                   children: [
                                     TextSpan(
-                                      text: 'FAG 123 - ',
-                                      style: TextStyle(color: Colors.grey),
+                                      text:
+                                          '${driverConfig.car.licensePlateNum} - ',
+                                      style:
+                                          const TextStyle(color: Colors.grey),
                                     ),
                                     TextSpan(
-                                      text: '4/6',
-                                      style: TextStyle(color: Colors.green),
+                                      text:
+                                          '${driverConfig.currentRiderCount}/${driverConfig.maxRiderCount}',
+                                      style: const TextStyle(
+                                        color: Colors.green,
+                                      ),
                                     )
                                   ],
                                 ),
