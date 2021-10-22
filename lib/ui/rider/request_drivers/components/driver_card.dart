@@ -45,6 +45,10 @@ class DriverCard extends StatelessWidget {
                     top: Radius.circular(12),
                   ),
                 ),
+
+                // *****************************************
+                // visibility widget for clicked driver card
+                // *****************************************
                 child: Visibility(
                   visible: true,
                   child: Container(
@@ -54,7 +58,6 @@ class DriverCard extends StatelessWidget {
                         top: Radius.circular(12),
                       ),
                       color: Color(0xffdbb3d4),
-                      // color: Colors.amber,
                     ),
                     child: Align(
                       alignment: Alignment.centerRight,
