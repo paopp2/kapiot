@@ -19,39 +19,165 @@ class DriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: constraints.maxWidth * 0.6,
-      child: Card(
-        color: Colors.grey[100],
+    return InkWell(
+      onTap: () => model.previewDriverInfoAndLocation(driverConfig),
+      splashColor: Colors.black,
+      child: Container(
+        width: constraints.maxWidth * 0.6,
         margin: const EdgeInsets.all(10),
-        child: InkWell(
-          onTap: () => model.previewDriverInfoAndLocation(driverConfig),
-          splashColor: Colors.black,
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                    top: constraints.maxHeight * 0.04,
-                    bottom: constraints.maxHeight * 0.01),
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.blue,
-                  backgroundImage: NetworkImage(
-                    driverConfig.user.photoUrl ?? uscLogo,
-                  ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.grey[100],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 30,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+                color: Color(0xffdbb3d4),
+              ),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(
+                      Icons.location_on_rounded,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      '3 mins',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Text(driverConfig.user.displayName ?? 'No name'),
+            ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 60,
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              right: constraints.maxWidth * 0.025,
+                            ),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.blue,
+                              backgroundImage: NetworkImage(
+                                driverConfig.user.photoUrl ?? uscLogo,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              height: 60,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    driverConfig.user.displayName ?? 'No name',
+                                    overflow: TextOverflow.fade,
+                                    softWrap: false,
+                                    style: const TextStyle(fontSize: 15),
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.star,
+                                        size: 18,
+                                      ),
+                                      Text(
+                                        '4.6',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      color: Colors.black,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'SUZUKI ERTIGA',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              RichText(
+                                text: const TextSpan(
+                                  style: TextStyle(fontSize: 12),
+                                  children: [
+                                    TextSpan(
+                                      text: 'FAG 123 - ',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    TextSpan(
+                                      text: '4/6',
+                                      style: TextStyle(color: Colors.green),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: const [
+                            Image(
+                              image: AssetImage(
+                                'assets/images/car_body_types/crossover.png',
+                              ),
+                              height: 50,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () =>
+                                model.requestDriver(driverConfig.user.id),
+                            child: const Text('Hail Ride'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: constraints.maxHeight * 0.05),
-              ElevatedButton(
-                onPressed: () => model.requestDriver(driverConfig.user.id),
-                child: const Text('Hail Ride'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
