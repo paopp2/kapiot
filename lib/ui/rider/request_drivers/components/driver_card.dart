@@ -28,41 +28,54 @@ class DriverCard extends StatelessWidget {
       ),
       child: Material(
         color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
         child: InkWell(
           onTap: () => model.previewDriverInfoAndLocation(driverConfig),
-          customBorder:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           splashColor: Colors.black,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 30,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(12),
                   ),
-                  color: Color(0xffdbb3d4),
                 ),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(
-                        Icons.location_on_rounded,
-                        size: 18,
-                        color: Colors.white,
+                child: Visibility(
+                  visible: true,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(12),
                       ),
-                      Text(
-                        '0.5 km',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
+                      color: Color(0xffdbb3d4),
+                      // color: Colors.amber,
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(
+                            Icons.location_on_rounded,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            '0.5 km',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
