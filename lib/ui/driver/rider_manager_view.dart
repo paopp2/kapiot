@@ -26,6 +26,9 @@ class RiderManagerView extends HookConsumerWidget {
     final nextStop = ref.watch(nextStopProvider).state;
     final driverPoints = ref.watch(driverPointsProvider).state;
     final acceptedRidersStream = ref.watch(acceptedRidersStreamProvider);
+
+    final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
+
     final expand = useState(false);
 
     useEffect(() {
@@ -43,10 +46,12 @@ class RiderManagerView extends HookConsumerWidget {
                 children: [
                   ShaderMask(
                     shaderCallback: (rect) {
-                      return const LinearGradient(
+                      return LinearGradient(
                         begin: Alignment(0.0, 0.5),
                         end: Alignment.bottomCenter,
-                        colors: [Colors.white, Colors.transparent],
+                        colors: (requestingRidersStream.data!.value.isEmpty)
+                            ? [Colors.white, Colors.white]
+                            : [Colors.white, Colors.transparent],
                       ).createShader(
                         Rect.fromLTRB(0, 0, rect.width, rect.height),
                       );
