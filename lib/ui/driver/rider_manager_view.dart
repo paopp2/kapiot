@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/driver/components/rider_manager_view_map.dart';
 
@@ -25,6 +25,7 @@ class RiderManagerView extends HookConsumerWidget {
     final currentRiderCount = currentDriverConfig.currentRiderCount;
     final nextStop = ref.watch(nextStopProvider).state;
     final driverPoints = ref.watch(driverPointsProvider).state;
+    final acceptedRidersStream = ref.watch(acceptedRidersStreamProvider);
     final expand = useState(false);
 
     useEffect(() {
@@ -58,9 +59,7 @@ class RiderManagerView extends HookConsumerWidget {
                     child: Column(
                       children: [
                         InkWell(
-                          onTap: () {
-                            expand.value = !expand.value;
-                          },
+                          onTap: () => (expand.value = !expand.value),
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeInToLinear,
@@ -118,27 +117,45 @@ class RiderManagerView extends HookConsumerWidget {
                                 expand.value
                                     ? Expanded(
                                         child: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           height: 100,
-                                          child: ListView.builder(
-                                            scrollDirection: Axis.vertical,
-                                            itemCount: 3,
-                                            itemBuilder: (context, i) {
-                                              return const Card(
-                                                child: ListTile(
-                                                  leading: CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.purple,
-                                                    radius: 20,
-                                                  ),
-                                                  title: Text(
-                                                    'Nicolas Paolo Pepito',
-                                                    overflow: TextOverflow.fade,
-                                                    maxLines: 1,
-                                                    softWrap: false,
-                                                  ),
-                                                  subtitle: Text('Student'),
-                                                ),
+                                          child: acceptedRidersStream.when(
+                                            error: (_, __) => const SizedBox(),
+                                            loading: () => const Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ),
+                                            data: (acceptedRiders) {
+                                              return ListView.builder(
+                                                scrollDirection: Axis.vertical,
+                                                itemCount:
+                                                    acceptedRiders.length,
+                                                itemBuilder: (context, index) {
+                                                  final rider =
+                                                      acceptedRiders[index];
+                                                  return Card(
+                                                    child: ListTile(
+                                                      leading: CircleAvatar(
+                                                        radius: 20,
+                                                        backgroundImage:
+                                                            NetworkImage(
+                                                          rider.photoUrl!,
+                                                        ),
+                                                      ),
+                                                      title: Text(
+                                                        rider.displayName ?? '',
+                                                        overflow:
+                                                            TextOverflow.fade,
+                                                        maxLines: 1,
+                                                        softWrap: false,
+                                                      ),
+                                                      subtitle: Text(
+                                                        rider.userType!
+                                                            .description,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               );
                                             },
                                           ),

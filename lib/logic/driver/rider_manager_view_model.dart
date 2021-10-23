@@ -140,6 +140,10 @@ class RiderManagerViewModel extends ViewModel {
   Stream<List<KapiotUser>> getRequestingRidersStream() =>
       driverRepo.getRequestingRidersStream(currentUser!);
 
+  Stream<List<KapiotUser>> getAcceptedRidersStream() => driverRepo
+      .getAcceptedRidersStream(currentUser!.id)
+      .map((rcList) => rcList.map((rc) => rc.user).toList());
+
   Stream<List<StopPoint>> getStopPointsStream() {
     final currentDriverConfig = read(currentRouteConfigProvider).state!;
     return driverRepo.getStopPointsStream(currentDriverConfig);
