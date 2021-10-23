@@ -9,6 +9,7 @@ import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/driver/components/rider_manager_view_map.dart';
+import 'package:kapiot/ui/shared/loading_widget.dart';
 
 import 'components/requesting_riders_panel.dart';
 import 'components/stop_point_panel.dart';
@@ -44,20 +45,40 @@ class RiderManagerView extends HookConsumerWidget {
               color: Colors.white,
               child: Stack(
                 children: [
-                  ShaderMask(
-                    shaderCallback: (rect) {
-                      return LinearGradient(
-                        begin: Alignment(0.0, 0.5),
-                        end: Alignment.bottomCenter,
-                        colors: (requestingRidersStream.data!.value.isEmpty)
-                            ? [Colors.white, Colors.white]
-                            : [Colors.white, Colors.transparent],
-                      ).createShader(
-                        Rect.fromLTRB(0, 0, rect.width, rect.height),
-                      );
-                    },
-                    blendMode: BlendMode.dstIn,
-                    child: RiderManagerViewMap(model: model),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: constraints.maxHeight * 0.8,
+                        child: ShaderMask(
+                          shaderCallback: (rect) {
+                            return LinearGradient(
+                              begin: const Alignment(0.0, 0.5),
+                              end: Alignment.bottomCenter,
+                              colors:
+                                  // (requestingRidersStream.data!.value.isEmpty)
+                                  // ? [Colors.white, Colors.white]
+                                  // :
+                                  [Colors.white, Colors.transparent],
+                            ).createShader(
+                              Rect.fromLTRB(0, 0, rect.width, rect.height),
+                            );
+                          },
+                          blendMode: BlendMode.dstIn,
+                          child: RiderManagerViewMap(model: model),
+                        ),
+                      ),
+                      (requestingRidersStream.data!.value.isEmpty)
+                          ? SizedBox(
+                              height: constraints.maxHeight * 0.2,
+                              width: constraints.maxWidth,
+                              child: const LoadingWidget(
+                                  text: 'Fetching Requests'),
+                            )
+                          : RequestingRidersPanel(
+                              model: model,
+                              constraints: constraints,
+                            ),
+                    ],
                   ),
                   SizedBox(
                     width: constraints.maxWidth,
@@ -177,17 +198,23 @@ class RiderManagerView extends HookConsumerWidget {
                                 constraints: constraints,
                                 nextStop: nextStop,
                               )
-                            : const SizedBox()
+                            : const SizedBox(),
                       ],
                     ),
                   ),
-                  Positioned(
-                    bottom: constraints.maxHeight * 0.025,
-                    child: RequestingRidersPanel(
-                      model: model,
-                      constraints: constraints,
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: constraints.maxHeight * 0.025,
+                  //   child: (requestingRidersStream.data!.value.isEmpty)
+                  //       ? Container(
+                  //           height: constraints.maxHeight * 0.15,
+                  //           width: constraints.maxWidth,
+                  //           color: Colors.amber,
+                  //         )
+                  //       : RequestingRidersPanel(
+                  //           model: model,
+                  //           constraints: constraints,
+                  //         ),
+                  // ),
                 ],
               ),
             ),

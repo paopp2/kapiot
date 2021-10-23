@@ -19,7 +19,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
     return SizedBox(
-      height: constraints.maxHeight * 0.18,
+      height: constraints.maxHeight * 0.2,
       width: constraints.maxWidth,
       child: requestingRidersStream.when(
         error: (e, _) => Center(child: Text("Error $e")),
@@ -34,7 +34,9 @@ class RequestingRidersPanel extends HookConsumerWidget {
           itemBuilder: (context, index, _) {
             final rider = requestingRiders[index];
             return Center(
-              child: SizedBox(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: constraints.maxHeight * 0.02),
                 width: constraints.maxWidth * 0.8,
                 child: Stack(
                   children: [
@@ -74,7 +76,6 @@ class RequestingRidersPanel extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(rider.userType!.description),
                                   Text(
                                     rider.displayName ?? 'No name',
                                     style: const TextStyle(
@@ -82,6 +83,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  Text(rider.userType!.description),
                                 ],
                               ),
                             )
