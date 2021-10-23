@@ -42,8 +42,8 @@ class RiderManagerView extends HookConsumerWidget {
                 children: [
                   ShaderMask(
                     shaderCallback: (rect) {
-                      return LinearGradient(
-                        begin: Alignment.center,
+                      return const LinearGradient(
+                        begin: Alignment(0.0, 0.5),
                         end: Alignment.bottomCenter,
                         colors: [Colors.white, Colors.transparent],
                       ).createShader(
