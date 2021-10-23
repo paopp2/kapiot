@@ -6,7 +6,6 @@ import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/driver_card_stream.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/request_drivers_view_map.dart';
-import 'package:kapiot/ui/shared/kapiot_sliding_panel.dart';
 
 class RequestDriversView extends HookConsumerWidget {
   const RequestDriversView({Key? key}) : super(key: key);
