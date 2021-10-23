@@ -8,8 +8,10 @@ import 'package:kapiot/data/repositories/rider_repository.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_map_controller.dart';
+import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 final requestDriversViewModel = Provider.autoDispose(
@@ -72,6 +74,10 @@ class RequestDriversViewModel extends ViewModel {
     return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
   }
 
+  void selectDriver(int index) {
+    read(selectedDriverIndexProvider).state = index;
+  }
+
   Future<void> previewDriverInfoAndLocation(RouteConfig driverConfig) async {
     await mapController.showSelectedDriverRoute(driverConfig);
     // Cancel the last chosen driver's location stream subscription and
@@ -80,12 +86,24 @@ class RequestDriversViewModel extends ViewModel {
     _previewedDriverLocationSub =
         locationRepo.getRealtimeLocation(driverConfig.user.id).listen(
       (driverLoc) {
+        updateDriverDistance(driverLoc);
         mapController.addMarker(
           marker: Markers.driverLoc,
           location: driverLoc,
         );
       },
     );
+  }
+
+  void updateDriverDistance(KapiotLocation driverLoc) {
+    final utils = googleMapsApiServices.utils;
+    final currentRouteConfig = read(currentRouteConfigProvider).state!;
+    final riderLoc = currentRouteConfig.startLocation;
+    final distance = utils.calculateDistance(
+      pointA: riderLoc,
+      pointB: driverLoc,
+    );
+    read(driverDistanceProvider).state = '${distance.toStringAsFixed(1)} km';
   }
 
   /// Listen to when a driver accepts and respond accordingly
