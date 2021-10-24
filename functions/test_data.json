@@ -24,10 +24,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "YKS 240",
+        "make": "CHEVROLET",
+        "model": "SPARK",
+        "type": "hatchback"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -123,10 +123,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "YKS 240",
+        "make": "CHEVROLET",
+        "model": "SPARK",
+        "type": "hatchback"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
