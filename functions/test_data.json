@@ -23,14 +23,12 @@
         "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c",
         "userType": "student"
       },
-      "car": [
-        {
+      "car": {
         "licensePlateNum": "YKS 240",
         "make": "CHEVROLET",
         "model": "SPARK",
         "type": "hatchback"
-        }
-      ],
+      },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
@@ -124,14 +122,12 @@
         "photoUrl": "https://i.pinimg.com/originals/94/d3/8c/94d38cd264ea699ef6ce1a067f764611.jpg",
         "userType": "student"
       },
-      "car": [
-        {
+      "car": {
         "licensePlateNum": "YKS 240",
         "make": "CHEVROLET",
         "model": "SPARK",
         "type": "hatchback"
-        }
-      ],
+      },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
@@ -225,20 +221,12 @@
         "photoUrl": "https://cdnb.artstation.com/p/assets/video_clips/images/037/231/373/large/sebastian-montecinos-thumb.jpg?1619826532",
         "userType": "student"
       },
-      "car": [
-        {
-          "licensePlateNum": "GAN 240",
-          "make": "NISSAN",
-          "model": "NAVARA",
-          "type": "pickup"
-        },
-        {
-        "licensePlateNum": "YKS 240",
-        "make": "CHEVROLET",
-        "model": "SPARK",
-        "type": "hatchback"
-        }
-      ],
+      "car": {
+        "licensePlateNum": "GAN 240",
+        "make": "NISSAN",
+        "model": "NAVARA",
+        "type": "pickup"
+      },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
@@ -266,20 +254,12 @@
         "photoUrl": "https://m.media-amazon.com/images/M/MV5BM2NhNmZiZjgtNmEzZi00YjYyLTg4ZDMtOGIyOWYxMmIzYmViXkEyXkFqcGdeQWFybm8@._V1_QL75_UX500_CR0,0,500,281_.jpg",
         "userType": "faculty"
       },
-      "car": [
-        {
-          "licensePlateNum": "GAN 240",
-          "make": "NISSAN",
-          "model": "NAVARA",
-          "type": "pickup"
-        },
-        {
-        "licensePlateNum": "YKS 240",
-        "make": "CHEVROLET",
-        "model": "SPARK",
-        "type": "hatchback"
-        }
-      ],
+      "car": {
+        "licensePlateNum": "GAN 240",
+        "make": "NISSAN",
+        "model": "NAVARA",
+        "type": "pickup"
+      },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
