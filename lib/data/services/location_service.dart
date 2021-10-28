@@ -21,7 +21,8 @@ class LocationService {
   }
   final Reader read;
   final serviceStatusController = StreamController<ServiceStatus>();
-  final permissionStatusController = StreamController<LocationPermission>();
+  final permissionStatusController =
+      StreamController<LocationPermission>.broadcast();
 
   Future<Either<Exception, KapiotLocation>> getLocation() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();

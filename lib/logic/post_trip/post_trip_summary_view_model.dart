@@ -125,7 +125,7 @@ class PostTripSummaryViewModel extends ViewModel {
     MapController.reset(read);
     // Set a new resetKey; notifies the HomeView that it should reset
     read(resetKeyProvider).state = UniqueKey();
-    // Remove all Views then navigate to HomeView
-    AppRouter.instance.popAllThenNavigateTo(Routes.homeView);
+    // Remove all Views then navigate to RootView
+    AppRouter.instance.popAllThenNavigateTo('/');
   }
 }
