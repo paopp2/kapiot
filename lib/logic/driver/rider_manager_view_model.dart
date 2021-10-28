@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -159,7 +160,7 @@ class RiderManagerViewModel extends ViewModel {
       );
       updateRiderCount(increment: true);
     } else {
-      // TODO: Notify driver that car's full and can't currently accept more riders
+      Fluttertoast.showToast(msg: "Car is at full capacity");
     }
   }
 
