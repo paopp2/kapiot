@@ -57,14 +57,14 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "FAG 1401",
+        "make": "SUZUKI",
+        "model": "ERTIGA",
+        "type": "mpv"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
-      "rating": "4.5"
+      "rating": "4.9"
     },
     {
       "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
@@ -189,14 +189,14 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
+        "licensePlateNum": "GAB 1161",
+        "make": "NISSAN",
+        "model": "TERRA",
         "type": "suv"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
-      "rating": "4.5"
+      "rating": "4.8"
     },
     {
       "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
@@ -341,14 +341,14 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "CBG 119",
+        "make": "MAZDA",
+        "model": "3",
+        "type": "hatchback"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5,
-      "rating": "4.5",
+      "maxRiderCount": 3,
+      "rating": "4.7",
       "timeOfTrip": "2021-09-05T17:48:17.601548",
       "encodedRoute": "g||}@}sisVmEhDQ?}D}Eg@h@|BxCBNrAhByCjCiB`Bw@d@w@ZaB|@uAp@wC~AcIhE{KzFkCvAeAj@_EnBmDjBwKxFg@X{C`B{@^s@k@]Q}Am@oBo@s@MOAOGqBm@e@QwHeCmDgAoCo@}Do@uIeAmMoAgEe@eCUaAIYGw@KoEc@_E[K@c@E{KkA{BUwK_AiOyAsDe@oHw@qHiAuDq@sDs@m@Kq@UIC[l@a@x@YdA[lBc@?OBIFCFM|@e@bCSr@]v@S\\c@\\k@JuADiBC_DX",
       "startLocation": {
@@ -374,14 +374,14 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
+        "licensePlateNum": "SEJ 017",
+        "make": "MAZDA",
+        "model": "CX30",
         "type": "suv"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
-      "rating": "4.5",
+      "rating": "4.6",
       "timeOfTrip": "2021-09-05T17:48:17.601548",
       "encodedRoute": "_s`~@e~esVTk@CKEEKA{@D[KhC}G^cAdE_KpDyIfDcHLYdA_B|BeDVMXQIKw@o@kAg@qBq@mA]_@CkCy@oDoAkGqBwBk@}Dw@mJmAaHu@_E_@gHu@gDYq@MsEe@eE_@YB]EGGIEo@KqCUoEk@IGMOEKCKXsD@e@A_@COh@iGZ_BBM",
       "startLocation": {
