@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
@@ -68,14 +69,18 @@ class HomeViewModel extends ViewModel {
   Future<void> initState() async {
     final getLocAttempt = await locationService.getLocation();
     getLocAttempt.fold(
-      (error) => null, // TODO: Handle when getLocAttempt fails
+      (error) => Fluttertoast.showToast(
+        msg: 'Error retrieving current location',
+      ),
       (currentLoc) async {
         await mapController.initializeHomeMap(currentLoc);
         final startLocation = read(startLocProvider).state!;
         final getAddressAttempt =
             await locationService.getAddressFromLocation(startLocation);
         getAddressAttempt.fold(
-          (error) => null, // TODO: Handle when getAddressAttempt fails
+          (error) => Fluttertoast.showToast(
+            msg: 'Error retrieving current address',
+          ),
           (address) {
             tecStartLoc.text = address;
             mapController.setStartLocation(

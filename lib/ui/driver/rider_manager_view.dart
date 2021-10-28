@@ -126,8 +126,6 @@ class RiderManagerView extends HookConsumerWidget {
                                           color: Colors.black,
                                         ),
                                       ),
-                                      // TODO: Replace with better design for showing
-                                      // current car capacity
                                       const SizedBox(width: 5),
                                       Text(
                                         '$currentRiderCount/$maxRiderCount',
