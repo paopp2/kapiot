@@ -54,12 +54,16 @@ class DriverRepository {
     );
   }
 
-  Stream<List<StopPoint>> getStopPointsStream(RouteConfig driverConfig) async* {
-    final driver = driverConfig.user;
-    final acceptedRidersConfigStream = firestoreHelper.collectionStream(
-      path: FirestorePath.colAcceptedRiders(driver.id),
+  Stream<List<RouteConfig>> getAcceptedRidersStream(String driverId) {
+    return firestoreHelper.collectionStream(
+      path: FirestorePath.colAcceptedRiders(driverId),
       builder: (data, docID) => RouteConfig.fromJson(data),
     );
+  }
+
+  Stream<List<StopPoint>> getStopPointsStream(RouteConfig driverConfig) async* {
+    final acceptedRidersConfigStream =
+        getAcceptedRidersStream(driverConfig.user.id);
     await for (var rcList in acceptedRidersConfigStream) {
       final List<StopPoint> unsortedStopPoints = rcList.expand<StopPoint>((rc) {
         rc as ForRider;
