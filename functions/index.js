@@ -179,13 +179,12 @@ exports.sendRating = functions.https.onRequest(async (req, res) =>  {
         const requestedDriver = test_data.driversList[parseInt(req.query.d,10)];  
         const rating = parseInt(req.query.rating,10);
         const driverId = requestedDriver.id; 
-        const getCurrent = await userInfoRef.doc(driverId).get();
-        await userInfoRef.doc(driverId).update({
+        await userInfoRef.doc(driverId).set({
             driverInfo: {
-                rateTotal: admin.firestore.FieldValue.increment(rating),
-                ratingResponseCount: admin.firestore.FieldValue.increment(1),
+                'rateTotal': admin.firestore.FieldValue.increment(rating),
+                'ratingResponseCount': admin.firestore.FieldValue.increment(1),
             }
-        })
+        },{merge:true})
         .then(res.json(driverId))
         .catch(err => res.status(400).json('Error : ' + err));
     });
