@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/shared/service_error_handler.dart';
+import 'package:kapiot/logic/shared/shared_state.dart';
 
 class RootView extends HookConsumerWidget {
   const RootView({
@@ -18,10 +19,12 @@ class RootView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authStateChanges = ref.watch(authStateChangesProvider);
     final serviceErrorHandler = ref.watch(serviceErrorHandlerProvider);
+    final resetKey = ref.watch(resetKeyProvider).state;
 
     useEffect(() {
       serviceErrorHandler.initialize();
-    }, []);
+      return serviceErrorHandler.dispose;
+    }, [resetKey]);
 
     return authStateChanges.when(
       data: (user) => _data(context, user),

@@ -35,11 +35,13 @@ class ServiceErrorHandler {
   final Stream<LocationPermission> locPermissionStatus;
   final Stream<ConnectivityResult> netServiceStatus =
       Connectivity().onConnectivityChanged;
+  late StreamSubscription _reqServicesEnabledSub;
+  late StreamSubscription _locPermissionStatusSub;
   final _appRouter = AppRouter.instance;
 
   void initialize() {
     bool atServiceErrorView = false;
-    isRequiredServicesEnabled().listen((isEnabled) {
+    _reqServicesEnabledSub = isRequiredServicesEnabled().listen((isEnabled) {
       if (!isEnabled && !atServiceErrorView) {
         _appRouter.navigateTo(Routes.serviceErrorView);
         atServiceErrorView = true;
@@ -50,7 +52,7 @@ class ServiceErrorHandler {
       }
     });
 
-    locPermissionStatus.listen((status) {
+    _locPermissionStatusSub = locPermissionStatus.listen((status) {
       final permissionDenied = (status == LocationPermission.denied ||
           status == LocationPermission.deniedForever);
       if (permissionDenied) {
@@ -58,6 +60,11 @@ class ServiceErrorHandler {
         _appRouter.popAllThenNavigateTo(Routes.serviceErrorView);
       }
     });
+  }
+
+  void dispose() {
+    _locPermissionStatusSub.cancel();
+    _reqServicesEnabledSub.cancel();
   }
 
   Stream<bool> isRequiredServicesEnabled() async* {
@@ -69,7 +76,7 @@ class ServiceErrorHandler {
     final mergedServiceStream = StreamGroup.merge([
       locServiceStatus,
       netServiceStatus,
-    ]);
+    ]).asBroadcastStream();
     await for (final statusUpdate in mergedServiceStream) {
       bool? hasInternet, hasLocation;
       if (statusUpdate is ConnectivityResult) currentNetStatus = statusUpdate;
