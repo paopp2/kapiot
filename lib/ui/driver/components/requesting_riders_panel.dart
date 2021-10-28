@@ -36,7 +36,8 @@ class RequestingRidersPanel extends HookConsumerWidget {
             return Center(
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.02),
+                  vertical: constraints.maxHeight * 0.02,
+                ),
                 width: constraints.maxWidth * 0.8,
                 child: Stack(
                   children: [

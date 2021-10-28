@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
 import 'package:kapiot/logic/shared/map_controller.dart';
@@ -25,6 +26,8 @@ class ConfigTypePanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final isRegisteredDriver = currentUserInfo?.isRegisteredDriver;
     final chosenCar = ref.watch(chosenCarProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
     final dateTime = ref.watch(dateTimeProvider).state;
@@ -165,17 +168,20 @@ class ConfigTypePanel extends HookConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                IconButton(
-                  icon: Icon(
-                    isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+                Visibility(
+                  visible: isRegisteredDriver ?? false,
+                  child: IconButton(
+                    icon: Icon(
+                      isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+                    ),
+                    onPressed: () {
+                      pageController.animateToPage(
+                        isRider ? 1 : 0,
+                        duration: const Duration(milliseconds: 1000),
+                        curve: Curves.linearToEaseOut,
+                      );
+                    },
                   ),
-                  onPressed: () {
-                    pageController.animateToPage(
-                      isRider ? 1 : 0,
-                      duration: const Duration(milliseconds: 1000),
-                      curve: Curves.linearToEaseOut,
-                    );
-                  },
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(

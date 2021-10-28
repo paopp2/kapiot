@@ -27,10 +27,8 @@ class RiderManagerView extends HookConsumerWidget {
     final nextStop = ref.watch(nextStopProvider).state;
     final driverPoints = ref.watch(driverPointsProvider).state;
     final acceptedRidersStream = ref.watch(acceptedRidersStreamProvider);
-
     final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
-
-    final expand = useState(false);
+    final _expand = useState(false);
 
     useEffect(() {
       model.initState();
@@ -51,14 +49,10 @@ class RiderManagerView extends HookConsumerWidget {
                         height: constraints.maxHeight * 0.8,
                         child: ShaderMask(
                           shaderCallback: (rect) {
-                            return LinearGradient(
-                              begin: const Alignment(0.0, 0.5),
+                            return const LinearGradient(
+                              begin: Alignment(0.0, 0.5),
                               end: Alignment.bottomCenter,
-                              colors:
-                                  // (requestingRidersStream.data!.value.isEmpty)
-                                  // ? [Colors.white, Colors.white]
-                                  // :
-                                  [Colors.white, Colors.transparent],
+                              colors: [Colors.white, Colors.transparent],
                             ).createShader(
                               Rect.fromLTRB(0, 0, rect.width, rect.height),
                             );
@@ -72,7 +66,8 @@ class RiderManagerView extends HookConsumerWidget {
                               height: constraints.maxHeight * 0.2,
                               width: constraints.maxWidth,
                               child: const LoadingWidget(
-                                  text: 'Fetching Requests'),
+                                text: 'Fetching Requests',
+                              ),
                             )
                           : RequestingRidersPanel(
                               model: model,
@@ -85,7 +80,7 @@ class RiderManagerView extends HookConsumerWidget {
                     child: Column(
                       children: [
                         InkWell(
-                          onTap: () => (expand.value = !expand.value),
+                          onTap: () => (_expand.value = !_expand.value),
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeInToLinear,
@@ -93,9 +88,9 @@ class RiderManagerView extends HookConsumerWidget {
                               vertical: constraints.maxHeight * 0.015,
                             ),
                             height:
-                                expand.value ? constraints.maxHeight * 0.3 : 50,
+                                _expand.value ? constraints.maxHeight * 0.3 : 50,
                             width:
-                                expand.value ? constraints.maxWidth * 0.8 : 120,
+                                _expand.value ? constraints.maxWidth * 0.8 : 120,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(24),
@@ -104,8 +99,9 @@ class RiderManagerView extends HookConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 15),
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 15,
+                                  ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -140,7 +136,7 @@ class RiderManagerView extends HookConsumerWidget {
                                     ],
                                   ),
                                 ),
-                                expand.value
+                                _expand.value
                                     ? Expanded(
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
@@ -202,19 +198,6 @@ class RiderManagerView extends HookConsumerWidget {
                       ],
                     ),
                   ),
-                  // Positioned(
-                  //   bottom: constraints.maxHeight * 0.025,
-                  //   child: (requestingRidersStream.data!.value.isEmpty)
-                  //       ? Container(
-                  //           height: constraints.maxHeight * 0.15,
-                  //           width: constraints.maxWidth,
-                  //           color: Colors.amber,
-                  //         )
-                  //       : RequestingRidersPanel(
-                  //           model: model,
-                  //           constraints: constraints,
-                  //         ),
-                  // ),
                 ],
               ),
             ),
