@@ -42,45 +42,49 @@ class ConfigTypePanel extends HookConsumerWidget {
       child: Stack(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth * 0.02,
-                ),
-                margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.015),
+              SizedBox(
+                height: constraints.maxHeight * 0.08,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        isRider ? 'Ride' : 'Drive',
-                        style:
-                            GoogleFonts.rubik(fontSize: 34, letterSpacing: 2),
+                    Text(
+                      isRider ? 'Ride' : 'Drive',
+                      style: GoogleFonts.poppins(
+                        fontSize: 34,
+                        letterSpacing: 2,
+                        color: const Color(0xff333333),
                       ),
                     ),
                     Visibility(
-                      visible: !isRider,
-                      child: (chosenCar != null)
-                          ? Column(
-                              children: [
-                                Image(
-                                  image: chosenCar.type.image,
-                                  height: 40,
-                                ),
-                                Text(chosenCar.licensePlateNum),
-                              ],
-                            )
-                          : const SizedBox(),
+                      visible: isRegisteredDriver ?? false,
+                      child: IconButton(
+                        icon: Icon(
+                          isRider
+                              ? Icons.arrow_back_ios
+                              : Icons.arrow_forward_ios,
+                        ),
+                        onPressed: () {
+                          pageController.animateToPage(
+                            isRider ? 1 : 0,
+                            duration: const Duration(milliseconds: 1000),
+                            curve: Curves.linearToEaseOut,
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: const Color(0XFFE7DFE0),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: const Color(0xffF2F3F8),
+                    width: 2,
+                  ),
+                  color: const Color(0xffF8F9FD),
                 ),
                 padding: EdgeInsets.symmetric(
                     horizontal: constraints.maxWidth * 0.05),
@@ -92,7 +96,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                       constraints: constraints,
                       text: startAddress,
                       hint: 'Start Location',
-                      leadingIcon: CupertinoIcons.smallcircle_circle,
+                      leadingIcon: CupertinoIcons.smallcircle_fill_circle_fill,
                       onPressed: () => model.openRoutePlacePicker(
                         isForStartLoc: true,
                       ),
@@ -114,95 +118,185 @@ class ConfigTypePanel extends HookConsumerWidget {
                   ],
                 ),
               ),
-              TextButton(
-                child: Text(Jiffy(dateTime).yMMMMEEEEdjm),
-                onPressed: () => model.getDateTime(context),
-              ),
               isRider
                   ? const SizedBox()
-                  : Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: constraints.maxWidth * 0.05,
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        (chosenCar != null)
+                            ? Column(
+                                children: [
+                                  Image(
+                                    image: chosenCar.type.image,
+                                    height: 40,
+                                  ),
+                                  Text(chosenCar.licensePlateNum),
+                                ],
+                              )
+                            : const SizedBox(),
+                        const Icon(
+                          CupertinoIcons.person_3,
+                          size: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            RawMaterialButton(
+                              fillColor: Colors.blue,
+                              elevation: 0,
+                              shape: const CircleBorder(),
+                              onPressed: model.decRiderCount,
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text("$riderCount"),
+                            RawMaterialButton(
+                              fillColor: Colors.blue,
+                              elevation: 0,
+                              shape: const CircleBorder(),
+                              onPressed: model.incRiderCount,
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => model.getDateTime(context),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(
+                        color: Color(0xFF8B80FD),
+                        // const Color(0xFF6F6AFD),
+                        width: 2,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Icon(
-                            CupertinoIcons.person_3,
-                            size: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              RawMaterialButton(
-                                fillColor: Colors.blue,
-                                elevation: 0,
-                                shape: const CircleBorder(),
-                                onPressed: model.decRiderCount,
-                                child: const Icon(
-                                  Icons.remove,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text("$riderCount"),
-                              RawMaterialButton(
-                                fillColor: Colors.blue,
-                                elevation: 0,
-                                shape: const CircleBorder(),
-                                onPressed: model.incRiderCount,
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                      elevation: 0,
+                      fixedSize: Size(constraints.maxWidth * 0.1, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
                       ),
                     ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Visibility(
-                  visible: isRegisteredDriver ?? false,
-                  child: IconButton(
-                    icon: Icon(
-                      isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+                    child: const Icon(
+                      CupertinoIcons.calendar,
+                      color: Color(0xFF716BFD),
                     ),
-                    onPressed: () {
-                      pageController.animateToPage(
-                        isRider ? 1 : 0,
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.linearToEaseOut,
-                      );
-                    },
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.02,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: constraints.maxWidth * 0.05,
-                    bottom: constraints.maxHeight * 0.01,
-                  ),
-                  child: ElevatedButton(
-                    child: Text(isRider ? "Book Now" : "Start Trip"),
+                  ElevatedButton(
                     onPressed: () => model.pushRouteConfig(isRider),
                     // TODO: Remove method below on production
                     onLongPress: () => model.pushReadyMadeConfig(isRider),
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFF716bfd),
+                      side: const BorderSide(
+                        color: Color(0xFF8B80FD),
+                        width: 2,
+                      ),
+                      elevation: 0,
+                      fixedSize: Size(constraints.maxWidth * 0.725, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    child: Text(
+                      isRider ? "Book Now" : "Start Trip",
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 17,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              )
+            ],
           ),
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Column(
+          //     mainAxisSize: MainAxisSize.min,
+          //     crossAxisAlignment: CrossAxisAlignment.end,
+          //     children: [
+          //       // Visibility(
+          //       //   visible: isRegisteredDriver ?? false,
+          //       //   child: IconButton(
+          //       //     icon: Icon(
+          //       //       isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+          //       //     ),
+          //       //     onPressed: () {
+          //       //       pageController.animateToPage(
+          //       //         isRider ? 1 : 0,
+          //       //         duration: const Duration(milliseconds: 1000),
+          //       //         curve: Curves.linearToEaseOut,
+          //       //       );
+          //       //     },
+          //       //   ),
+          //       // ),
+          //       // Container(
+          //       //   margin: EdgeInsets.symmetric(
+          //       //     vertical: constraints.maxHeight * 0.02,
+          //       //   ),
+          //       // ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           ElevatedButton(
+          //             onPressed: () => model.getDateTime(context),
+          //             style: TextButton.styleFrom(
+          //               backgroundColor: Colors.white,
+          //               side: const BorderSide(
+          //                 color: Color(0xFF8B80FD),
+          //                 // const Color(0xFF6F6AFD),
+          //                 width: 2,
+          //               ),
+          //               elevation: 0,
+          //               fixedSize: Size(constraints.maxWidth * 0.1, 50),
+          //               shape: RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.circular(6),
+          //               ),
+          //             ),
+          //             child: const Icon(
+          //               CupertinoIcons.calendar,
+          //               color: Color(0xFF716BFD),
+          //             ),
+          //           ),
+          //           ElevatedButton(
+          //             onPressed: () => model.pushRouteConfig(isRider),
+          //             // TODO: Remove method below on production
+          //             onLongPress: () => model.pushReadyMadeConfig(isRider),
+          //             style: TextButton.styleFrom(
+          //               backgroundColor: const Color(0xFF716bfd),
+          //               side: const BorderSide(
+          //                 color: Color(0xFF8B80FD),
+          //                 width: 2,
+          //               ),
+          //               elevation: 0,
+          //               fixedSize: Size(constraints.maxWidth * 0.725, 50),
+          //               shape: RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.circular(6),
+          //               ),
+          //             ),
+          //             child: Text(
+          //               isRider ? "Book Now" : "Start Trip",
+          //               style: GoogleFonts.montserrat(
+          //                 color: Colors.white,
+          //                 fontSize: 17,
+          //                 letterSpacing: 1.5,
+          //               ),
+          //             ),
+          //           ),
+          //         ],
+          //       )
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LocationInputContainer extends StatelessWidget {
   const LocationInputContainer({
@@ -32,19 +33,21 @@ class LocationInputContainer extends StatelessWidget {
               margin: EdgeInsets.only(right: constraints.maxWidth * 0.03),
               child: Icon(
                 leadingIcon,
-                color: Colors.blue,
+                color: const Color(0xFF716bfd),
+                size: 27,
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Text(
-                  text ?? hint,
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: (text != null) ? Colors.black : Colors.grey,
-                  ),
+              child: Text(
+                text ?? hint,
+                style: GoogleFonts.montserrat(
+                  fontSize: 17,
+                  color: (text != null)
+                      ? const Color(0xff333333)
+                      : const Color(0xffaaaaaa),
                 ),
+                overflow: TextOverflow.fade,
+                softWrap: false,
               ),
             ),
           ],

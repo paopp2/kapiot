@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
@@ -34,8 +35,12 @@ class RoutePlacePicker extends HookConsumerWidget {
         return [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: const Color(0XFFE7DFE0),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: const Color(0xffF2F3F8),
+                width: 2,
+              ),
+              color: const Color(0xffF8F9FD),
             ),
             padding: EdgeInsets.symmetric(
               horizontal: constraints.maxWidth * 0.05,
@@ -51,11 +56,17 @@ class RoutePlacePicker extends HookConsumerWidget {
                     isForStartLoc: true,
                   ),
                   onChanged: model.placeSuggester.updateSuggestions,
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(
-                        CupertinoIcons.smallcircle_circle,
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        CupertinoIcons.smallcircle_fill_circle_fill,
+                        color: Color(0xFF716bfd),
+                        size: 27,
                       ),
-                      hintText: "Start location",
+                      hintText: "Start Location",
+                      hintStyle: GoogleFonts.montserrat(
+                        fontSize: 17,
+                        color: const Color(0xffaaaaaa),
+                      ),
                       border: InputBorder.none),
                 ),
                 const Divider(
@@ -71,9 +82,17 @@ class RoutePlacePicker extends HookConsumerWidget {
                     isForStartLoc: false,
                   ),
                   onChanged: model.placeSuggester.updateSuggestions,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(CupertinoIcons.location),
-                    hintText: "End location",
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(
+                      CupertinoIcons.location,
+                      color: Color(0xFF716bfd),
+                      size: 27,
+                    ),
+                    hintText: "End Location",
+                    hintStyle: GoogleFonts.montserrat(
+                      fontSize: 17,
+                      color: const Color(0xffaaaaaa),
+                    ),
                     border: InputBorder.none,
                   ),
                 ),
@@ -89,51 +108,71 @@ class RoutePlacePicker extends HookConsumerWidget {
             height: 80,
             width: constraints.maxWidth,
             decoration: BoxDecoration(
-              color: const Color(0XFFE7DFE0),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: const Color(0xffF2F3F8),
+                width: 2,
+              ),
+              color: const Color(0xffF8F9FD),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Saved Places'),
+                    Text(
+                      'Saved Places',
+                      style: GoogleFonts.montserrat(fontSize: 18),
+                    ),
                     GestureDetector(
                       onTap: model.gotoPlaceManagerView,
                       child: Row(
-                        children: const [
-                          Text('Manage'),
-                          Icon(Icons.arrow_forward_ios)
+                        children: [
+                          Text(
+                            'Manage',
+                            style: GoogleFonts.montserrat(fontSize: 14),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 14,
+                          )
                         ],
                       ),
                     )
                   ],
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: savedLocations!.length,
-                    itemBuilder: (context, index) {
-                      final sortedKeys = savedLocations.keys.toList()..sort();
-                      final locLabel = sortedKeys[index];
-                      final location = savedLocations[locLabel];
-                      return Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: ActionChip(
-                          onPressed: () => model.pickSavedLocation(
-                            location!,
-                          ),
-                          label: Text(locLabel),
-                          backgroundColor: Colors.white,
-                          shape: const StadiumBorder(
-                            side: BorderSide(),
-                          ),
+                savedLocations!.isEmpty
+                    ? Text(
+                        'Book easier! Trip configuration is faster when places you usually visit are saved.',
+                        style: GoogleFonts.montserrat(fontSize: 14),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: savedLocations.length,
+                          itemBuilder: (context, index) {
+                            final sortedKeys = savedLocations.keys.toList()
+                              ..sort();
+                            final locLabel = sortedKeys[index];
+                            final location = savedLocations[locLabel];
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: ActionChip(
+                                onPressed: () => model.pickSavedLocation(
+                                  location!,
+                                ),
+                                label: Text(locLabel),
+                                backgroundColor: Colors.white,
+                                shape: const StadiumBorder(
+                                  side: BorderSide(),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                )
+                      )
               ],
             ),
           ),
