@@ -90,10 +90,10 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "XYZ 789",
+        "make": "BUGATTI",
+        "model": "VEYRON",
+        "type": "coupe"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -156,9 +156,9 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
+        "licensePlateNum": "DAD 069",
+        "make": "BENTLEY",
+        "model": "BENTAYGA",
         "type": "suv"
       },
       "currentRiderCount": 1,
@@ -275,10 +275,10 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "PEN 150",
+        "make": "AUDI",
+        "model": "R8",
+        "type": "coupe"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -308,10 +308,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "CBA 321",
+        "make": "FORD",
+        "model": "F-150",
+        "type": "pickup"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
