@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
-import 'package:kapiot/data/repositories/user_info_repository.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
-import 'package:kapiot/model/kapiot_user_info/kapiot_user_info.dart';
 
 class PortalView extends HookConsumerWidget {
   const PortalView({Key? key}) : super(key: key);
@@ -18,14 +16,7 @@ class PortalView extends HookConsumerWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // Call any methods to run/test here
-              ref.read(userInfoRepositoryProvider).pushUserInfo(
-                    userId: 'HV9BcFRIKMYrQOYzd2gStGqErW12',
-                    userInfo: const KapiotUserInfo(
-                      points: 10,
-                      savedLocations: {},
-                      userType: UserType.faculty,
-                    ),
-                  );
+              Fluttertoast.showToast(msg: 'Error retrieving address');
             },
           ),
           body: Center(
