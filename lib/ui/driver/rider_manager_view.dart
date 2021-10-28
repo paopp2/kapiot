@@ -61,7 +61,7 @@ class RiderManagerView extends HookConsumerWidget {
                           child: RiderManagerViewMap(model: model),
                         ),
                       ),
-                      (requestingRidersStream.data!.value.isEmpty)
+                      (requestingRidersStream.data?.value.isEmpty ?? true)
                           ? SizedBox(
                               height: constraints.maxHeight * 0.2,
                               width: constraints.maxWidth,
@@ -87,10 +87,12 @@ class RiderManagerView extends HookConsumerWidget {
                             margin: EdgeInsets.symmetric(
                               vertical: constraints.maxHeight * 0.015,
                             ),
-                            height:
-                                _expand.value ? constraints.maxHeight * 0.3 : 50,
-                            width:
-                                _expand.value ? constraints.maxWidth * 0.8 : 120,
+                            height: _expand.value
+                                ? constraints.maxHeight * 0.3
+                                : 50,
+                            width: _expand.value
+                                ? constraints.maxWidth * 0.8
+                                : 120,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(24),
