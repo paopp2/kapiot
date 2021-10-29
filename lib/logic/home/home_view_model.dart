@@ -112,6 +112,8 @@ class HomeViewModel extends ViewModel {
     final chosenCarCapacity = read(chosenCarProvider).state!.capacity;
     if (chosenCarCapacity > read(riderCountProvider).state) {
       read(riderCountProvider).state++;
+    } else {
+      Fluttertoast.showToast(msg: 'Max capacity');
     }
   }
 
