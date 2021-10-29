@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
 import 'package:kapiot/logic/home/home_view_state.dart';
@@ -30,7 +31,6 @@ class ConfigTypePanel extends HookConsumerWidget {
     final isRegisteredDriver = currentUserInfo?.isRegisteredDriver;
     final chosenCar = ref.watch(chosenCarProvider).state;
     final riderCount = ref.watch(riderCountProvider).state;
-    final dateTime = ref.watch(dateTimeProvider).state;
     final startAddress = ref.watch(startLocProvider).state?.address;
     final endAddress = ref.watch(endLocProvider).state?.address;
 
@@ -88,8 +88,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                 ),
                 padding: EdgeInsets.symmetric(
                     horizontal: constraints.maxWidth * 0.05),
-                margin: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.01),
                 child: Column(
                   children: [
                     LocationInputContainer(
@@ -121,49 +119,100 @@ class ConfigTypePanel extends HookConsumerWidget {
               isRider
                   ? const SizedBox()
                   : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Container(
+                          height: 60,
+                          width: constraints.maxWidth * 0.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(
+                              color: const Color(0xffF2F3F8),
+                              width: 2,
+                            ),
+                            color: const Color(0xffF8F9FD),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                width: 50,
+                                child: Icon(
+                                  FontAwesomeIcons.users,
+                                  color: Color(0xFF5F45A4),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 120,
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: model.decRiderCount,
+                                      icon: const Icon(
+                                        CupertinoIcons.minus_circled,
+                                        color: Color(0xFF5F45A4),
+                                        size: 35,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                      child: Center(
+                                        child: Text(
+                                          "$riderCount",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w400,
+                                            color: const Color(0xff333333),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: model.incRiderCount,
+                                      icon: const Icon(
+                                        CupertinoIcons.add_circled,
+                                        color: Color(0xFF5F45A4),
+                                        size: 35,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         (chosenCar != null)
-                            ? Column(
-                                children: [
-                                  Image(
-                                    image: chosenCar.type.image,
-                                    height: 40,
+                            ? Container(
+                                height: 60,
+                                width: constraints.maxWidth * 0.375,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(
+                                    color: const Color(0xffF2F3F8),
+                                    width: 2,
                                   ),
-                                  Text(chosenCar.licensePlateNum),
-                                ],
+                                  color: const Color(0xffF8F9FD),
+                                  // color: Color(0xffE4E1FE),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Image(
+                                      image: chosenCar.type.image,
+                                      height: 40,
+                                    ),
+                                    Text(
+                                      chosenCar.licensePlateNum.toUpperCase(),
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 12,
+                                        letterSpacing: 1.5,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xff333333),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               )
                             : const SizedBox(),
-                        const Icon(
-                          CupertinoIcons.person_3,
-                          size: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            RawMaterialButton(
-                              fillColor: Colors.blue,
-                              elevation: 0,
-                              shape: const CircleBorder(),
-                              onPressed: model.decRiderCount,
-                              child: const Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text("$riderCount"),
-                            RawMaterialButton(
-                              fillColor: Colors.blue,
-                              elevation: 0,
-                              shape: const CircleBorder(),
-                              onPressed: model.incRiderCount,
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     ),
               Row(
@@ -174,8 +223,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
                       side: const BorderSide(
-                        color: Color(0xFF8B80FD),
-                        // const Color(0xFF6F6AFD),
+                        color: Color(0xFF5F45A4),
                         width: 2,
                       ),
                       elevation: 0,
@@ -186,7 +234,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                     ),
                     child: const Icon(
                       CupertinoIcons.calendar,
-                      color: Color(0xFF716BFD),
+                      color: Color(0xFF5F45A4),
                     ),
                   ),
                   ElevatedButton(
@@ -194,11 +242,7 @@ class ConfigTypePanel extends HookConsumerWidget {
                     // TODO: Remove method below on production
                     onLongPress: () => model.pushReadyMadeConfig(isRider),
                     style: TextButton.styleFrom(
-                      backgroundColor: const Color(0xFF716bfd),
-                      side: const BorderSide(
-                        color: Color(0xFF8B80FD),
-                        width: 2,
-                      ),
+                      backgroundColor: const Color(0xFF5F45A4),
                       elevation: 0,
                       fixedSize: Size(constraints.maxWidth * 0.725, 50),
                       shape: RoundedRectangleBorder(
@@ -218,85 +262,6 @@ class ConfigTypePanel extends HookConsumerWidget {
               )
             ],
           ),
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: Column(
-          //     mainAxisSize: MainAxisSize.min,
-          //     crossAxisAlignment: CrossAxisAlignment.end,
-          //     children: [
-          //       // Visibility(
-          //       //   visible: isRegisteredDriver ?? false,
-          //       //   child: IconButton(
-          //       //     icon: Icon(
-          //       //       isRider ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
-          //       //     ),
-          //       //     onPressed: () {
-          //       //       pageController.animateToPage(
-          //       //         isRider ? 1 : 0,
-          //       //         duration: const Duration(milliseconds: 1000),
-          //       //         curve: Curves.linearToEaseOut,
-          //       //       );
-          //       //     },
-          //       //   ),
-          //       // ),
-          //       // Container(
-          //       //   margin: EdgeInsets.symmetric(
-          //       //     vertical: constraints.maxHeight * 0.02,
-          //       //   ),
-          //       // ),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //         children: [
-          //           ElevatedButton(
-          //             onPressed: () => model.getDateTime(context),
-          //             style: TextButton.styleFrom(
-          //               backgroundColor: Colors.white,
-          //               side: const BorderSide(
-          //                 color: Color(0xFF8B80FD),
-          //                 // const Color(0xFF6F6AFD),
-          //                 width: 2,
-          //               ),
-          //               elevation: 0,
-          //               fixedSize: Size(constraints.maxWidth * 0.1, 50),
-          //               shape: RoundedRectangleBorder(
-          //                 borderRadius: BorderRadius.circular(6),
-          //               ),
-          //             ),
-          //             child: const Icon(
-          //               CupertinoIcons.calendar,
-          //               color: Color(0xFF716BFD),
-          //             ),
-          //           ),
-          //           ElevatedButton(
-          //             onPressed: () => model.pushRouteConfig(isRider),
-          //             // TODO: Remove method below on production
-          //             onLongPress: () => model.pushReadyMadeConfig(isRider),
-          //             style: TextButton.styleFrom(
-          //               backgroundColor: const Color(0xFF716bfd),
-          //               side: const BorderSide(
-          //                 color: Color(0xFF8B80FD),
-          //                 width: 2,
-          //               ),
-          //               elevation: 0,
-          //               fixedSize: Size(constraints.maxWidth * 0.725, 50),
-          //               shape: RoundedRectangleBorder(
-          //                 borderRadius: BorderRadius.circular(6),
-          //               ),
-          //             ),
-          //             child: Text(
-          //               isRider ? "Book Now" : "Start Trip",
-          //               style: GoogleFonts.montserrat(
-          //                 color: Colors.white,
-          //                 fontSize: 17,
-          //                 letterSpacing: 1.5,
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

@@ -37,9 +37,8 @@ class KapiotSlidingPanel extends StatelessWidget {
         ),
       ),
       panelBuilder: (controller) {
-        return Container(
+        return SizedBox(
           width: constraints.maxWidth,
-          padding: EdgeInsets.zero,
           child: Column(
             children: [
               Container(
