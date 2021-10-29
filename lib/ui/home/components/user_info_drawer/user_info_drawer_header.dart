@@ -16,9 +16,9 @@ class UserInfoDrawerHeader extends HookConsumerWidget {
     final currentUser = ref.watch(currentUserProvider)!;
     final username = currentUser.email!.split('@').first;
     return Container(
-      width: constraints.maxWidth * 0.85,
       height: constraints.maxHeight * 0.3,
-      color: const Color(0xffdbb3d4),
+      width: constraints.maxWidth * 0.85,
+      color: const Color(0xfff5f5f5),
       padding: EdgeInsets.only(
         left: constraints.maxWidth * 0.05,
       ),
@@ -27,36 +27,33 @@ class UserInfoDrawerHeader extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(
-              bottom: constraints.maxHeight * 0.015,
+            margin: EdgeInsets.symmetric(
+              vertical: constraints.maxHeight * 0.03,
             ),
             child: CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 53,
+              backgroundColor: const Color(0xFF5F45A4),
+              radius: 48,
               child: CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 50,
-                child: CircleAvatar(
-                  radius: 48,
-                  backgroundImage: NetworkImage(currentUser.photoUrl!),
-                ),
+                radius: 45,
+                backgroundImage: NetworkImage(currentUser.photoUrl!),
               ),
             ),
           ),
           Text(
             currentUser.displayName!,
             style: GoogleFonts.poppins(
-              fontSize: constraints.maxWidth * 0.045,
-              color: const Color(0xff333333),
+              fontSize: 18,
+              color: const Color(0xFF404040),
               fontWeight: FontWeight.w500,
             ),
+            overflow: TextOverflow.fade,
+            softWrap: false,
           ),
           Text(
             username,
-            style: GoogleFonts.poppins(
-              fontSize: constraints.maxWidth * 0.03,
-              color: const Color(0xff666666),
-              fontWeight: FontWeight.w500,
+            style: GoogleFonts.montserrat(
+              fontSize: 16,
+              color: const Color(0xFFa4a4a4),
             ),
           ),
         ],
