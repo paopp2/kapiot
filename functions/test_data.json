@@ -24,10 +24,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "YKS 240",
+        "make": "CHEVROLET",
+        "model": "SPARK",
+        "type": "hatchback"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -57,14 +57,14 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "FAG 1401",
+        "make": "SUZUKI",
+        "model": "ERTIGA",
+        "type": "mpv"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
-      "rating": "4.5"
+      "rating": "4.9"
     },
     {
       "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
@@ -90,10 +90,10 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "XYZ 789",
+        "make": "BUGATTI",
+        "model": "VEYRON",
+        "type": "coupe"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -123,10 +123,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "YKS 240",
+        "make": "CHEVROLET",
+        "model": "SPARK",
+        "type": "hatchback"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -156,9 +156,9 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
+        "licensePlateNum": "DAD 069",
+        "make": "BENTLEY",
+        "model": "BENTAYGA",
         "type": "suv"
       },
       "currentRiderCount": 1,
@@ -189,14 +189,14 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
+        "licensePlateNum": "GAB 116",
+        "make": "NISSAN",
+        "model": "TERRA",
         "type": "suv"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
-      "rating": "4.5"
+      "rating": "4.8"
     },
     {
       "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
@@ -222,10 +222,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "GAN 240",
+        "make": "NISSAN",
+        "model": "NAVARA",
+        "type": "pickup"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -255,10 +255,10 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "GAN 240",
+        "make": "NISSAN",
+        "model": "NAVARA",
+        "type": "pickup"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -275,10 +275,10 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "PEN 150",
+        "make": "AUDI",
+        "model": "R8",
+        "type": "coupe"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -308,10 +308,10 @@
         "userType": "student"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "CBA 321",
+        "make": "FORD",
+        "model": "F-150",
+        "type": "pickup"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
@@ -341,14 +341,14 @@
         "userType": "faculty"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
-        "type": "suv"
+        "licensePlateNum": "CBG 119",
+        "make": "MAZDA",
+        "model": "3",
+        "type": "hatchback"
       },
       "currentRiderCount": 1,
-      "maxRiderCount": 5,
-      "rating": "4.5",
+      "maxRiderCount": 3,
+      "rating": "4.7",
       "timeOfTrip": "2021-09-05T17:48:17.601548",
       "encodedRoute": "g||}@}sisVmEhDQ?}D}Eg@h@|BxCBNrAhByCjCiB`Bw@d@w@ZaB|@uAp@wC~AcIhE{KzFkCvAeAj@_EnBmDjBwKxFg@X{C`B{@^s@k@]Q}Am@oBo@s@MOAOGqBm@e@QwHeCmDgAoCo@}Do@uIeAmMoAgEe@eCUaAIYGw@KoEc@_E[K@c@E{KkA{BUwK_AiOyAsDe@oHw@qHiAuDq@sDs@m@Kq@UIC[l@a@x@YdA[lBc@?OBIFCFM|@e@bCSr@]v@S\\c@\\k@JuADiBC_DX",
       "startLocation": {
@@ -374,14 +374,14 @@
         "userType": "staff"
       },
       "car": {
-        "licensePlateNum": "AAA 111",
-        "make": "TOYOTA",
-        "model": "FORTUNER",
+        "licensePlateNum": "SEJ 017",
+        "make": "MAZDA",
+        "model": "CX30",
         "type": "suv"
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
-      "rating": "4.5",
+      "rating": "4.6",
       "timeOfTrip": "2021-09-05T17:48:17.601548",
       "encodedRoute": "_s`~@e~esVTk@CKEEKA{@D[KhC}G^cAdE_KpDyIfDcHLYdA_B|BeDVMXQIKw@o@kAg@qBq@mA]_@CkCy@oDoAkGqBwBk@}Dw@mJmAaHu@_E_@gHu@gDYq@MsEe@eE_@YB]EGGIEo@KqCUoEk@IGMOEKCKXsD@e@A_@COh@iGZ_BBM",
       "startLocation": {
