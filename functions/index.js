@@ -9,6 +9,7 @@ const db = admin.firestore();
 const rtdb = admin.database();
 const driversRef = db.collection('active_drivers');
 const ridersRef = db.collection('active_riders');
+const userInfoRef = db.collection('user_info');
 require('dotenv').config();
 
 exports.recursiveDelete = functions
@@ -170,5 +171,21 @@ exports.setRoute = functions.https.onRequest(async (req, res) =>  {
             await rtdb.ref(path).update(json);
         }
         res.send(json);
+    });
+});
+
+exports.sendRating = functions.https.onRequest(async (req, res) =>  {
+    cors()(req,res, async () => {
+        const requestedDriver = test_data.driversList[parseInt(req.query.d,10)];  
+        const rating = parseInt(req.query.rating,10);
+        const driverId = requestedDriver.id; 
+        await userInfoRef.doc(driverId).set({
+            driverInfo: {
+                'rateTotal': admin.firestore.FieldValue.increment(rating),
+                'ratingResponseCount': admin.firestore.FieldValue.increment(1),
+            }
+        },{merge:true})
+        .then(res.json(driverId))
+        .catch(err => res.status(400).json('Error : ' + err));
     });
 });
