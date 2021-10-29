@@ -36,7 +36,6 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   font_awesome_flutter: ^9.1.0
   marquee: ^2.2.0
-  jiffy: ^4.1.0
   google_fonts: ^2.1.0
   dotted_line: ^3.0.0
   carousel_slider: ^4.0.0

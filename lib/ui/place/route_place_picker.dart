@@ -57,17 +57,18 @@ class RoutePlacePicker extends HookConsumerWidget {
                   ),
                   onChanged: model.placeSuggester.updateSuggestions,
                   decoration: InputDecoration(
-                      prefixIcon: const Icon(
-                        CupertinoIcons.smallcircle_fill_circle_fill,
-                        color: Color(0xFF716bfd),
-                        size: 27,
-                      ),
-                      hintText: "Start Location",
-                      hintStyle: GoogleFonts.montserrat(
-                        fontSize: 17,
-                        color: const Color(0xffaaaaaa),
-                      ),
-                      border: InputBorder.none),
+                    prefixIcon: const Icon(
+                      CupertinoIcons.smallcircle_fill_circle_fill,
+                      color: Color(0xFF716bfd),
+                      size: 27,
+                    ),
+                    hintText: "Start Location",
+                    hintStyle: GoogleFonts.montserrat(
+                      fontSize: 17,
+                      color: const Color(0xffaaaaaa),
+                    ),
+                    border: InputBorder.none,
+                  ),
                 ),
                 const Divider(
                   color: Colors.white,
@@ -143,7 +144,7 @@ class RoutePlacePicker extends HookConsumerWidget {
                     )
                   ],
                 ),
-                savedLocations!.isEmpty
+                savedLocations?.isEmpty ?? true
                     ? Text(
                         'Book easier! Trip configuration is faster when places you usually visit are saved.',
                         style: GoogleFonts.montserrat(fontSize: 14),
@@ -151,7 +152,7 @@ class RoutePlacePicker extends HookConsumerWidget {
                     : Expanded(
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: savedLocations.length,
+                          itemCount: savedLocations!.length,
                           itemBuilder: (context, index) {
                             final sortedKeys = savedLocations.keys.toList()
                               ..sort();
