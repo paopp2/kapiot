@@ -21,16 +21,19 @@ class RequestAcceptedView extends HookConsumerWidget {
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return Scaffold(
-            body: KapiotSlidingPanel(
-              constraints: constraints,
-              panelHeight: constraints.maxHeight * 0.7,
-              map: Center(
-                child: RequestAcceptedViewMap(model: model),
-              ),
-              panel: RideInfoPanel(
-                model: model,
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              body: KapiotSlidingPanel(
                 constraints: constraints,
+                panelHeight: constraints.maxHeight * 0.7,
+                map: Center(
+                  child: RequestAcceptedViewMap(model: model),
+                ),
+                panel: RideInfoPanel(
+                  model: model,
+                  constraints: constraints,
+                ),
               ),
             ),
           );

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/driver_card_stream.dart';
 import 'package:kapiot/ui/rider/request_drivers/components/request_drivers_view_map.dart';
@@ -22,36 +21,32 @@ class RequestDriversView extends HookConsumerWidget {
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return Scaffold(
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: IconButton(
-                onPressed: AppRouter.instance.popView,
-                icon: const Icon(
-                  CupertinoIcons.arrow_left,
-                  color: Colors.blue,
-                ),
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
               ),
-            ),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: constraints.maxHeight * 0.65,
-                  child: Center(
-                    child: RequestDriversViewMap(model: model),
+              body: Column(
+                children: [
+                  SizedBox(
+                    height: constraints.maxHeight * 0.65,
+                    child: Center(
+                      child: RequestDriversViewMap(model: model),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: constraints.maxHeight * 0.35,
-                  width: constraints.maxWidth,
-                  child: DriverCardStream(
-                    model: model,
-                    constraints: constraints,
-                  ),
-                )
-              ],
+                  SizedBox(
+                    height: constraints.maxHeight * 0.35,
+                    width: constraints.maxWidth,
+                    child: DriverCardStream(
+                      model: model,
+                      constraints: constraints,
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },

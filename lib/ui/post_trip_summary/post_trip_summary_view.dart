@@ -59,31 +59,34 @@ class PostTripSummaryView extends HookConsumerWidget {
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return Scaffold(
-            body: Center(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      RewardPointsBackdrop(constraints: constraints),
-                      TransactionInfoPanel(
-                        model: model,
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              body: Center(
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        RewardPointsBackdrop(constraints: constraints),
+                        TransactionInfoPanel(
+                          model: model,
+                          constraints: constraints,
+                          transaction: transaction,
+                          isDriver: isDriver,
+                          driver: driver,
+                        ),
+                      ],
+                    ),
+                    Visibility(
+                      visible: isDriver,
+                      child: DriverPhoto(
                         constraints: constraints,
-                        transaction: transaction,
-                        isDriver: isDriver,
                         driver: driver,
                       ),
-                    ],
-                  ),
-                  Visibility(
-                    visible: isDriver,
-                    child: DriverPhoto(
-                      constraints: constraints,
-                      driver: driver,
                     ),
-                  ),
-                  RewardPointsConfetti(constraints: constraints),
-                ],
+                    RewardPointsConfetti(constraints: constraints),
+                  ],
+                ),
               ),
             ),
           );
