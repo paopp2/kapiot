@@ -18,7 +18,8 @@ class PlaceManagerView extends HookConsumerWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Scaffold(
-            backgroundColor: const Color(0xffeeeeee),
+            backgroundColor: const Color(0xffF8F9FD),
+            // const Color(0xffF2F3F8),
             appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
@@ -31,7 +32,7 @@ class PlaceManagerView extends HookConsumerWidget {
               ),
             ),
             body: Container(
-              color: const Color(0xffF8F9FD),
+              // color: const Color(0xffF8F9FD),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,6 +93,7 @@ class PlaceManagerView extends HookConsumerWidget {
                             final locLabel = sortedKeys[index];
                             final location = savedLocations[locLabel];
                             return Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 SizedBox(
                                   height: 70,
@@ -135,65 +137,6 @@ class PlaceManagerView extends HookConsumerWidget {
                             );
                           }
                         },
-                      ),
-                    ),
-                    Container(
-                      width: constraints.maxWidth,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xffF2F3F8),
-                          width: 2,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: constraints.maxHeight * 0.025,
-                        horizontal: constraints.maxWidth * 0.05,
-                      ),
-                      child: Text(
-                        'Recently Used',
-                        style: GoogleFonts.poppins(
-                          color: const Color(0xff333333),
-                          fontSize: 14,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          SizedBox(
-                            height: 80,
-                            child: Center(
-                              child: ListTile(
-                                leading: const Icon(
-                                  Icons.access_time_rounded,
-                                  color: Color(0xFF5F45A4),
-                                ),
-                                title: Text(
-                                  'University of San Carlos',
-                                  style: GoogleFonts.montserrat(
-                                    color: const Color(0xff333333),
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                  'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.montserrat(
-                                    color: const Color(0xff333333),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                trailing: const Icon(
-                                  Icons.bookmark_outline,
-                                  color: Color(0xFF5F45A4),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                   ],

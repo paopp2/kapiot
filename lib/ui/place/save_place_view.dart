@@ -113,7 +113,6 @@ class SavePlaceView extends HookConsumerWidget {
                                   ),
                                 ),
                                 trailing: const Icon(Icons.arrow_forward_ios),
-                                // dense: true,
                                 minLeadingWidth: 100,
                               ),
                             ],
