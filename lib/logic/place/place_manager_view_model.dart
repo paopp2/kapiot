@@ -56,7 +56,7 @@ class PlaceManagerViewModel extends ViewModel {
       Routes.savePlacePicker,
       args: locToEdit!.address!,
     );
-    read(locationToSaveProvider).state = newLocToSave;
+    read(locationToSaveProvider).state = newLocToSave ?? locToEdit;
   }
 
   void saveLocation({required String label}) {
