@@ -122,7 +122,7 @@ class RoutePlacePicker extends HookConsumerWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -154,9 +154,14 @@ class RoutePlacePicker extends HookConsumerWidget {
                   ),
                 ),
                 savedLocations?.isEmpty ?? true
-                    ? Text(
-                        'Book easier! Trip configuration is faster when places you usually visit are saved.',
-                        style: GoogleFonts.montserrat(fontSize: 14),
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.05,
+                        ),
+                        child: Text(
+                          'Book easier! Trip configuration is faster when places you usually visit are saved.',
+                          style: GoogleFonts.montserrat(fontSize: 14),
+                        ),
                       )
                     : Expanded(
                         child: ListView.builder(
