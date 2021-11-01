@@ -67,6 +67,10 @@ exports.populateAll = functions.https.onRequest(async (req, res) =>  {
         };
         await rtdb.ref(path).set(json);
     }
+    test_data.userInfoList.forEach(addUserInfo);
+    async function addUserInfo(userInfo) {
+        await userInfoRef.doc(userInfo.id).set(userInfo);
+    }
     res.json({result: "Populated drivers and riders'"});
 });
 
