@@ -42,9 +42,6 @@ class RoutePlacePicker extends HookConsumerWidget {
               ),
               color: const Color(0xffF8F9FD),
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: constraints.maxWidth * 0.05,
-            ),
             margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
             child: Column(
               children: [
