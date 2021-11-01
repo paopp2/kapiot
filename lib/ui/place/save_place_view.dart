@@ -56,7 +56,7 @@ class SavePlaceView extends HookConsumerWidget {
                             Text(
                               'Name',
                               style: GoogleFonts.poppins(
-                                color: Color(0xff333333),
+                                color: const Color(0xff333333),
                                 fontSize: 14,
                                 letterSpacing: 1.5,
                               ),
@@ -95,7 +95,7 @@ class SavePlaceView extends HookConsumerWidget {
                               Text(
                                 'Address',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0xff333333),
+                                  color: const Color(0xff333333),
                                   fontSize: 14,
                                   letterSpacing: 1.5,
                                 ),

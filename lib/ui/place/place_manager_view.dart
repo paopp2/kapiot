@@ -51,7 +51,7 @@ class PlaceManagerView extends HookConsumerWidget {
                       child: Text(
                         'Saved Places',
                         style: GoogleFonts.poppins(
-                          color: Color(0xff333333),
+                          color: const Color(0xff333333),
                           fontSize: 14,
                           letterSpacing: 1.5,
                         ),
@@ -79,7 +79,7 @@ class PlaceManagerView extends HookConsumerWidget {
                                   title: Text(
                                     'Add New',
                                     style: GoogleFonts.montserrat(
-                                      color: Color(0xff333333),
+                                      color: const Color(0xff333333),
                                       fontSize: 16,
                                     ),
                                   ),
@@ -104,7 +104,7 @@ class PlaceManagerView extends HookConsumerWidget {
                                       title: Text(
                                         locLabel,
                                         style: GoogleFonts.montserrat(
-                                          color: Color(0xff333333),
+                                          color: const Color(0xff333333),
                                           fontSize: 16,
                                         ),
                                       ),
@@ -112,7 +112,7 @@ class PlaceManagerView extends HookConsumerWidget {
                                         location?.address! ?? '',
                                         overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.montserrat(
-                                          color: Color(0xff333333),
+                                          color: const Color(0xff333333),
                                           fontSize: 13,
                                         ),
                                       ),
@@ -152,7 +152,7 @@ class PlaceManagerView extends HookConsumerWidget {
                       child: Text(
                         'Recently Used',
                         style: GoogleFonts.poppins(
-                          color: Color(0xff333333),
+                          color: const Color(0xff333333),
                           fontSize: 14,
                           letterSpacing: 1.5,
                         ),
@@ -174,7 +174,7 @@ class PlaceManagerView extends HookConsumerWidget {
                                 title: Text(
                                   'University of San Carlos',
                                   style: GoogleFonts.montserrat(
-                                    color: Color(0xff333333),
+                                    color: const Color(0xff333333),
                                     fontSize: 16,
                                   ),
                                 ),
@@ -182,7 +182,7 @@ class PlaceManagerView extends HookConsumerWidget {
                                   'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.montserrat(
-                                    color: Color(0xff333333),
+                                    color: const Color(0xff333333),
                                     fontSize: 13,
                                   ),
                                 ),
