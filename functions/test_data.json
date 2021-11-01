@@ -1015,6 +1015,72 @@
         "ratingResponseCount": 250,
         "rateTotal": 1234
       }
+    },
+    {
+      "points": 119.0611191017,
+      "savedLocations": {
+        "BB Wings": {
+          "lat": 10.331368915966438,
+          "lng": 123.90603965881408,
+          "address": "New York Buffalo Brad's Hot Wings"
+        },
+        "SM Cebu": {
+          "lat": 10.311607537040743,
+          "lng": 123.91784795512177,
+          "address": "SM City Cebu, SM City Cebu, Juan Luna Avenue Extension, Cebu City, Cebu"
+        },
+        "School": {
+          "lat": 10.3521222,
+          "lng": 123.9132676,
+          "address": "University of San Carlos - Talamban Campus, Cebu City, Cebu, Philippines"
+        },
+        "Ayala": {
+          "lat": 10.318612367074637,
+          "lng": 123.90442012628672,
+          "address": "Ayala Center Cebu, ayala center cebu, Archbishop Reyes Avenue, Cebu City, Cebu"
+        },
+        "Church": {
+          "lat": 10.314860579735567,
+          "lng": 123.91400062997877,
+          "address": "Mabolo Church, Pope John Paul II Avenue, Cebu City, Cebu"
+        },
+        "Home": {
+          "lat": 10.367889719514777,
+          "lng": 123.91384988211136,
+          "address": "Sunny Hills Subd Talamban Cebu City, Talamban Highway, Cebu City, Cebu"
+        }
+      },
+      "userType": "student",
+      "driverInfo": {
+        "registeredCars": [
+          {
+            "licensePlateNum": "JEJ 143",
+            "make": "CHRYSLER",
+            "model": "SEBRING",
+            "type": "coupe"
+          },
+          {
+            "licensePlateNum": "FAG 999",
+            "make": "PORCHE",
+            "model": "MACAN",
+            "type": "suv"
+          },
+          {
+            "licensePlateNum": "GA 1078",
+            "make": "BMW",
+            "model": "750i",
+            "type": "sedan"
+          },
+          {
+            "licensePlateNum": "CBA 321",
+            "make": "RAM",
+            "model": "1500",
+            "type": "pickup"
+          }
+        ],
+        "ratingResponseCount": 250,
+        "rateTotal": 2134
+      }
     }
   ]
 }
