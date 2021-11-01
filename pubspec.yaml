@@ -47,6 +47,7 @@ dependencies:
   dartz: ^0.10.0
   connectivity_plus: ^1.1.0
   fluttertoast: ^8.0.8
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   build_runner: ^2.1.1
@@ -69,6 +70,7 @@ flutter:
     - assets/images/error/
     - assets/images/
     - assets/icons/
+    - secrets/secrets.env
   fonts:
     - family: Sanz
       fonts:

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_place/google_place.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,8 +11,7 @@ import 'package:maps_toolkit/maps_toolkit.dart' as utils;
 import 'package:http/http.dart' as http;
 import 'dart:math' show cos, sqrt, asin;
 
-// TODO: Exposed API key! Hide in production
-const googleApiKey = "AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI";
+final googleApiKey = dotenv.env['GOOGLE_API_KEY']!;
 
 final googleMapsApiServicesProvider = Provider.autoDispose(
   (ref) => GoogleMapsApiServices(
