@@ -22,36 +22,32 @@ class RequestDriversView extends HookConsumerWidget {
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return Scaffold(
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: IconButton(
-                onPressed: AppRouter.instance.popView,
-                icon: const Icon(
-                  CupertinoIcons.arrow_left,
-                  color: Colors.blue,
-                ),
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
               ),
-            ),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: constraints.maxHeight * 0.65,
-                  child: Center(
-                    child: RequestDriversViewMap(model: model),
+              body: Column(
+                children: [
+                  SizedBox(
+                    height: constraints.maxHeight * 0.65,
+                    child: Center(
+                      child: RequestDriversViewMap(model: model),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: constraints.maxHeight * 0.35,
-                  width: constraints.maxWidth,
-                  child: DriverCardStream(
-                    model: model,
-                    constraints: constraints,
-                  ),
-                )
-              ],
+                  SizedBox(
+                    height: constraints.maxHeight * 0.35,
+                    width: constraints.maxWidth,
+                    child: DriverCardStream(
+                      model: model,
+                      constraints: constraints,
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },
