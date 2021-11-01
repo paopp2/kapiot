@@ -42,9 +42,6 @@ class RoutePlacePicker extends HookConsumerWidget {
               ),
               color: const Color(0xffF8F9FD),
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: constraints.maxWidth * 0.05,
-            ),
             margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.01),
             child: Column(
               children: [
@@ -56,6 +53,10 @@ class RoutePlacePicker extends HookConsumerWidget {
                     isForStartLoc: true,
                   ),
                   onChanged: model.placeSuggester.updateSuggestions,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 17,
+                    color: const Color(0xff333333),
+                  ),
                   decoration: InputDecoration(
                     prefixIcon: const Icon(
                       CupertinoIcons.smallcircle_fill_circle_fill,
@@ -83,6 +84,10 @@ class RoutePlacePicker extends HookConsumerWidget {
                     isForStartLoc: false,
                   ),
                   onChanged: model.placeSuggester.updateSuggestions,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 17,
+                    color: const Color(0xff333333),
+                  ),
                   decoration: InputDecoration(
                     prefixIcon: const Icon(
                       CupertinoIcons.location,
@@ -102,8 +107,7 @@ class RoutePlacePicker extends HookConsumerWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 2.5),
-            padding: EdgeInsets.symmetric(
-              horizontal: constraints.maxWidth * 0.05,
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
             ),
             height: 80,
@@ -118,36 +122,46 @@ class RoutePlacePicker extends HookConsumerWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Saved Places',
-                      style: GoogleFonts.montserrat(fontSize: 18),
-                    ),
-                    GestureDetector(
-                      onTap: model.gotoPlaceManagerView,
-                      child: Row(
-                        children: [
-                          Text(
-                            'Manage',
-                            style: GoogleFonts.montserrat(fontSize: 14),
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            size: 14,
-                          )
-                        ],
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth * 0.05,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Saved Places',
+                        style: GoogleFonts.montserrat(fontSize: 18),
                       ),
-                    )
-                  ],
+                      GestureDetector(
+                        onTap: model.gotoPlaceManagerView,
+                        child: Row(
+                          children: [
+                            Text(
+                              'Manage',
+                              style: GoogleFonts.montserrat(fontSize: 14),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 14,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 savedLocations?.isEmpty ?? true
-                    ? Text(
-                        'Book easier! Trip configuration is faster when places you usually visit are saved.',
-                        style: GoogleFonts.montserrat(fontSize: 14),
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.05,
+                        ),
+                        child: Text(
+                          'Book easier! Trip configuration is faster when places you usually visit are saved.',
+                          style: GoogleFonts.montserrat(fontSize: 14),
+                        ),
                       )
                     : Expanded(
                         child: ListView.builder(
@@ -158,17 +172,19 @@ class RoutePlacePicker extends HookConsumerWidget {
                               ..sort();
                             final locLabel = sortedKeys[index];
                             final location = savedLocations[locLabel];
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ActionChip(
-                                onPressed: () => model.pickSavedLocation(
-                                  location!,
-                                ),
-                                label: Text(locLabel),
-                                backgroundColor: Colors.white,
-                                shape: const StadiumBorder(
-                                  side: BorderSide(),
-                                ),
+                            return ActionChip(
+                              onPressed: () => model.pickSavedLocation(
+                                location!,
+                              ),
+                              label: Text(
+                                locLabel,
+                                style: GoogleFonts.montserrat(fontSize: 14),
+                              ),
+                              labelPadding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              backgroundColor: Colors.white,
+                              shape: const StadiumBorder(
+                                side: BorderSide(color: Color(0xffF2F3F8)),
                               ),
                             );
                           },

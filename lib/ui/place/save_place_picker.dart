@@ -44,6 +44,10 @@ class SavePlacePicker extends HookConsumerWidget {
             child: TextField(
               controller: tecSaveLoc,
               autofocus: true,
+              style: GoogleFonts.montserrat(
+                fontSize: 17,
+                color: const Color(0xff333333),
+              ),
               decoration: InputDecoration(
                 hintText: "Enter Address",
                 border: InputBorder.none,

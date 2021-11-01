@@ -86,9 +86,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                   ),
                   color: const Color(0xffF8F9FD),
                 ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth * 0.05,
-                ),
                 child: Column(
                   children: [
                     LocationInputContainer(

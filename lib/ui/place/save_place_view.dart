@@ -63,15 +63,17 @@ class SavePlaceView extends HookConsumerWidget {
                             ),
                             TextField(
                               controller: tecLabel,
+                              style: GoogleFonts.montserrat(
+                                fontSize: 17,
+                                color: const Color(0xff333333),
+                              ),
                               onTap: tecLabel.selectText,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'e.g. Gym / Airport',
                                 hintStyle: GoogleFonts.montserrat(
                                   fontSize: 17,
-                                  color: tecLabel.value.text.isEmpty
-                                      ? const Color(0xffaaaaaa)
-                                      : const Color(0xff333333),
+                                  color: const Color(0xffaaaaaa),
                                 ),
                               ),
                             ),
@@ -113,7 +115,6 @@ class SavePlaceView extends HookConsumerWidget {
                                   ),
                                 ),
                                 trailing: const Icon(Icons.arrow_forward_ios),
-                                // dense: true,
                                 minLeadingWidth: 100,
                               ),
                             ],
