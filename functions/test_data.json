@@ -948,5 +948,73 @@
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
     }
+  ],
+  "userInfoList": [
+    {
+      "points": 186.2266666666667,
+      "savedLocations": {
+        "Insular Square": {
+          "lat": 10.3502975,
+          "lng": 123.9482916,
+          "address": "Insular Square, Central Nautical Highway, Mandaue City, Cebu, Philippines"
+        },
+        "Jollibee Lacion": {
+          "lat": 10.3763113,
+          "lng": 123.9598846,
+          "address": "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines"
+        },
+        "School": {
+          "lat": 10.3521222,
+          "lng": 123.9132676,
+          "address": "University of San Carlos - Talamban Campus, Cebu City, Cebu, Philippines"
+        },
+        "SM Lacion": {
+          "lat": 10.380356,
+          "lng": 123.964477,
+          "address": "SM City Consolacion, Consolacion, Cebu, Philippines"
+        },
+        "Pacific Mall": {
+          "lat": 10.3410007,
+          "lng": 123.9474857,
+          "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu, Philippines"
+        },
+        "Home": {
+          "lat": 10.3831373,
+          "lng": 123.9720752,
+          "address": "Pitogo Barangay Hall, National Highway, Pitogo, Consolacion, Cebu, Philippines"
+        }
+      },
+      "userType": "student",
+      "driverInfo": {
+        "registeredCars": [
+          {
+            "licensePlateNum": "XYZ 789",
+            "make": "BUGATTI",
+            "model": "VEYRON",
+            "type": "coupe"
+          },
+          {
+            "licensePlateNum": "DAD 069",
+            "make": "BENTLEY",
+            "model": "BENTAYGA",
+            "type": "suv"
+          },
+          {
+            "licensePlateNum": "PEN 150",
+            "make": "AUDI",
+            "model": "R8",
+            "type": "coupe"
+          },
+          {
+            "licensePlateNum": "CBA 321",
+            "make": "FORD",
+            "model": "F-150",
+            "type": "pickup"
+          }
+        ],
+        "ratingResponseCount": 250,
+        "rateTotal": 1234
+      }
+    }
   ]
 }
