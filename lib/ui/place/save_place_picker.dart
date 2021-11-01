@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/place/place_suggester.dart';
@@ -30,7 +31,11 @@ class SavePlacePicker extends HookConsumerWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: const Color(0XFFE7DFE0),
+              color: const Color(0xffF8F9FD),
+              border: Border.all(
+                color: const Color(0xffF2F3F8),
+                width: 2,
+              ),
             ),
             padding: EdgeInsets.symmetric(
               horizontal: constraints.maxWidth * 0.05,
@@ -39,9 +44,13 @@ class SavePlacePicker extends HookConsumerWidget {
             child: TextField(
               controller: tecSaveLoc,
               autofocus: true,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: "Enter Address",
                 border: InputBorder.none,
+                hintStyle: GoogleFonts.montserrat(
+                  fontSize: 17,
+                  color: const Color(0xffaaaaaa),
+                ),
               ),
               onChanged: placeSuggester.updateSuggestions,
             ),

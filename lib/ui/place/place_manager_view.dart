@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/core/core_providers.dart';
@@ -30,101 +31,173 @@ class PlaceManagerView extends HookConsumerWidget {
               ),
             ),
             body: Container(
-              color: const Color(0xffeeeeee),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: constraints.maxHeight * 0.025,
-                      horizontal: constraints.maxWidth * 0.05,
+              color: const Color(0xffF8F9FD),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: constraints.maxWidth,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xffF2F3F8),
+                          width: 2,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: constraints.maxHeight * 0.025,
+                        horizontal: constraints.maxWidth * 0.05,
+                      ),
+                      child: Text(
+                        'Saved Places',
+                        style: GoogleFonts.poppins(
+                          color: Color(0xff333333),
+                          fontSize: 14,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
                     ),
-                    child: const Text('Saved Places'),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: savedLocations!.length + 1,
-                      itemBuilder: (context, index) {
-                        final lastIndex = savedLocations.length;
-                        final isLastItem = (index == lastIndex);
-                        if (isLastItem) {
-                          return SizedBox(
-                            height: 80,
-                            child: Center(
-                              child: ListTile(
-                                onTap: model.getLocationToSave,
-                                leading: const Icon(Icons.add),
-                                title: const Text('Add New'),
-                              ),
-                            ),
-                          );
-                        } else {
-                          final sortedKeys = savedLocations.keys.toList()
-                            ..sort();
-                          final locLabel = sortedKeys[index];
-                          final location = savedLocations[locLabel];
-                          return Column(
-                            children: [
-                              SizedBox(
-                                height: 80,
-                                child: Center(
-                                  child: ListTile(
-                                    leading: const Icon(Icons.bookmark),
-                                    title: Text(locLabel),
-                                    subtitle: Text(
-                                      location?.address! ?? '',
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    trailing: IconButton(
-                                      onPressed: () => model.editSavedLocation(
-                                        locLabel,
-                                        location,
-                                      ),
-                                      icon: const Icon(Icons.edit),
+                    Container(
+                      color: Colors.white,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: savedLocations!.length + 1,
+                        itemBuilder: (context, index) {
+                          final lastIndex = savedLocations.length;
+                          final isLastItem = (index == lastIndex);
+                          if (isLastItem) {
+                            return SizedBox(
+                              height: 70,
+                              child: Center(
+                                child: ListTile(
+                                  onTap: model.getLocationToSave,
+                                  leading: const Icon(
+                                    Icons.add,
+                                    color: Color(0xFF5F45A4),
+                                  ),
+                                  title: Text(
+                                    'Add New',
+                                    style: GoogleFonts.montserrat(
+                                      color: Color(0xff333333),
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ),
                               ),
-                              const Divider(),
-                            ],
-                          );
-                        }
-                      },
+                            );
+                          } else {
+                            final sortedKeys = savedLocations.keys.toList()
+                              ..sort();
+                            final locLabel = sortedKeys[index];
+                            final location = savedLocations[locLabel];
+                            return Column(
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                  child: Center(
+                                    child: ListTile(
+                                      leading: const Icon(
+                                        Icons.bookmark,
+                                        color: Color(0xFF5F45A4),
+                                      ),
+                                      title: Text(
+                                        locLabel,
+                                        style: GoogleFonts.montserrat(
+                                          color: Color(0xff333333),
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        location?.address! ?? '',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: GoogleFonts.montserrat(
+                                          color: Color(0xff333333),
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      trailing: IconButton(
+                                        onPressed: () =>
+                                            model.editSavedLocation(
+                                          locLabel,
+                                          location,
+                                        ),
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          color: Color(0xFF5F45A4),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Divider(),
+                              ],
+                            );
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: constraints.maxHeight * 0.025,
-                      horizontal: constraints.maxWidth * 0.05,
+                    Container(
+                      width: constraints.maxWidth,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xffF2F3F8),
+                          width: 2,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: constraints.maxHeight * 0.025,
+                        horizontal: constraints.maxWidth * 0.05,
+                      ),
+                      child: Text(
+                        'Recently Used',
+                        style: GoogleFonts.poppins(
+                          color: Color(0xff333333),
+                          fontSize: 14,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
                     ),
-                    child: const Text('Recently Used'),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: const [
-                        SizedBox(
-                          height: 80,
-                          child: Center(
-                            child: ListTile(
-                              leading: Icon(Icons.access_time_rounded),
-                              title: Text('University of San Carlos'),
-                              subtitle: Text(
-                                'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
-                                overflow: TextOverflow.ellipsis,
+                    Container(
+                      color: Colors.white,
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [
+                          SizedBox(
+                            height: 80,
+                            child: Center(
+                              child: ListTile(
+                                leading: const Icon(
+                                  Icons.access_time_rounded,
+                                  color: Color(0xFF5F45A4),
+                                ),
+                                title: Text(
+                                  'University of San Carlos',
+                                  style: GoogleFonts.montserrat(
+                                    color: Color(0xff333333),
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  'Sunlight Drive, Sunny Hills Subdivision, Talamban, Cebu City, Philippines',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.montserrat(
+                                    color: Color(0xff333333),
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                trailing: const Icon(
+                                  Icons.bookmark_outline,
+                                  color: Color(0xFF5F45A4),
+                                ),
                               ),
-                              trailing: Icon(Icons.bookmark_outline),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
