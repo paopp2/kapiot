@@ -19,7 +19,6 @@ class PlaceManagerView extends HookConsumerWidget {
         builder: (context, constraints) {
           return Scaffold(
             backgroundColor: const Color(0xffF8F9FD),
-            // const Color(0xffF2F3F8),
             appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
