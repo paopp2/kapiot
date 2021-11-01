@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
@@ -16,6 +17,7 @@ import 'package:kapiot/ui/portal_view.dart';
 const bool useFirebaseEmulator = true;
 
 void main() async {
+  await dotenv.load(fileName: 'secrets/secrets.env');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
