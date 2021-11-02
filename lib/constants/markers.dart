@@ -7,50 +7,49 @@ class Markers {
   static late final Marker startLoc;
   static late final Marker endLoc;
   static late final Marker currentUserLoc;
+  static late final Marker driverLoc;
+  static late final Marker riderEndLoc;
+  static late final Marker nextStopPoint;
 
-  static final driverLoc = Marker(
-    markerId: const MarkerId('driver_loc_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-  );
-
-  static final riderEndLoc = Marker(
-    markerId: const MarkerId('rider_loc_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
-  );
-
-  static final nextStopPoint = Marker(
-    markerId: const MarkerId('next_stop_point'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-  );
+  Future<Marker> _setupMarker({
+    required String iconPath,
+    required String id,
+  }) async {
+    return Marker(
+      anchor: const Offset(0.5, 0.5),
+      markerId: MarkerId(id),
+      icon: await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration.empty,
+        iconPath,
+      ),
+    );
+  }
 
   Future<void> initMarkers() async {
     String basePath = 'assets/icons/markers';
     startLoc = await _setupMarker(
-      path: '$basePath/startLoc.png',
+      iconPath: '$basePath/startLoc.png',
       id: 'start_loc_marker',
     );
     currentUserLoc = await _setupMarker(
-      path: '$basePath/currentLoc.png',
+      iconPath: '$basePath/currentLoc.png',
       id: 'current_user_marker',
     );
     endLoc = await _setupMarker(
-      path: '$basePath/endLoc.png',
+      iconPath: '$basePath/endLoc.png',
       id: 'end_loc_marker',
     );
-  }
-
-  Future<Marker> _setupMarker({
-    required String path,
-    required String id,
-  }) async {
-    final icon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration.empty,
-      path,
+    driverLoc = await _setupMarker(
+      iconPath: '$basePath/driverLoc.png',
+      id: 'driver_loc_marker',
     );
-    return Marker(
-      anchor: const Offset(0.5, 0.5),
-      markerId: MarkerId(id),
-      icon: icon,
+    riderEndLoc = await _setupMarker(
+      iconPath: '$basePath/endLoc.png',
+      id: 'rider_loc_marker',
+    );
+    nextStopPoint = await _setupMarker(
+      iconPath: '$basePath/nextStopPoint.png',
+      id: 'next_stop_point',
     );
   }
 }
