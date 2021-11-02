@@ -43,8 +43,10 @@ class CarRegisterView extends HookConsumerWidget {
                     Column(
                       children: [
                         Container(
+                          height: 80,
                           margin: EdgeInsets.only(
-                              top: constraints.maxHeight * 0.05),
+                            top: constraints.maxHeight * 0.05,
+                          ),
                           width: constraints.maxWidth,
                           padding: EdgeInsets.symmetric(
                             horizontal: constraints.maxWidth * 0.025,
@@ -63,31 +65,34 @@ class CarRegisterView extends HookConsumerWidget {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: const Color(0xffF8F9FD),
-                                  border: Border.all(
-                                    color: const Color(0xffF2F3F8),
-                                    width: 2,
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  textCapitalization:
-                                      TextCapitalization.characters,
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 17,
-                                    color: const Color(0xff333333),
-                                  ),
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(
-                                      horizontal: constraints.maxWidth * 0.03,
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    color: const Color(0xffF8F9FD),
+                                    border: Border.all(
+                                      color: const Color(0xffF2F3F8),
+                                      width: 2,
                                     ),
-                                    hintText: 'ABC 123',
-                                    border: InputBorder.none,
                                   ),
-                                  controller: model.tecLicensePlateField,
-                                  validator: model.carRegisterValidator,
+                                  child: TextFormField(
+                                    textAlign: TextAlign.center,
+                                    textCapitalization:
+                                        TextCapitalization.characters,
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 17,
+                                      color: const Color(0xff333333),
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: constraints.maxWidth * 0.03,
+                                      ),
+                                      hintText: 'ABC 123',
+                                      border: InputBorder.none,
+                                    ),
+                                    controller: model.tecLicensePlateField,
+                                    validator: model.carRegisterValidator,
+                                  ),
                                 ),
                               ),
                             ],
@@ -132,6 +137,7 @@ class CarRegisterView extends HookConsumerWidget {
                                           ),
                                         ),
                                         child: TextFormField(
+                                          textAlign: TextAlign.center,
                                           textCapitalization:
                                               TextCapitalization.characters,
                                           controller: model.tecCarMakeField,
@@ -186,6 +192,7 @@ class CarRegisterView extends HookConsumerWidget {
                                           ),
                                         ),
                                         child: TextFormField(
+                                          textAlign: TextAlign.center,
                                           textCapitalization:
                                               TextCapitalization.characters,
                                           controller: model.tecCarModelField,
