@@ -88,14 +88,14 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                               ? [
                                   const Color(0xFF5F45A4),
                                   const Color(0xFFBFB4DA),
-                                  const Color(0xffffffff),
+                                  const Color(0xFFFFFFFF),
                                   const Color(0xFFBFB4DA),
                                   const Color(0xFF5F45A4),
                                 ]
                               : [
-                                  const Color(0xfff5f5f5),
-                                  const Color(0xffffffff),
-                                  const Color(0xfff5f5f5),
+                                  const Color(0xFFF5F5F5),
+                                  const Color(0xFFFFFFFF),
+                                  const Color(0xFFF5F5F5),
                                 ],
                     ),
                   ),
@@ -116,7 +116,7 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                               style: GoogleFonts.montserrat(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xff333333),
+                                color: const Color(0xFF333333),
                               ),
                             ),
                             const SizedBox(
@@ -127,7 +127,7 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                               style: GoogleFonts.montserrat(
                                 fontSize: 12,
                                 height: 0.7,
-                                color: const Color(0xff333333),
+                                color: const Color(0xFF333333),
                               ),
                               overflow: TextOverflow.fade,
                               softWrap: false,
