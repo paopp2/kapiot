@@ -67,11 +67,16 @@ exports.populateAll = functions.https.onRequest(async (req, res) =>  {
         };
         await rtdb.ref(path).set(json);
     }
+
+    res.json({result: "Populated drivers and riders'"});
+});
+
+exports.populateActiveRiders = functions.https.onRequest(async (req, res) =>  {
     test_data.userInfoList.forEach(addUserInfo);
     async function addUserInfo(userInfo) {
         await userInfoRef.doc(userInfo.id).set(userInfo);
     }
-    res.json({result: "Populated drivers and riders'"});
+    res.json({result: "Populated 'user_info'"});
 });
 
 exports.populateActiveRiders = functions.https.onRequest(async (req, res) =>  {
