@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/logic/home/home_view_model.dart';
@@ -23,9 +25,20 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
     final ownedCars = currentUserInfo?.driverInfo?.registeredCars;
     final chosenCar = ref.watch(chosenCarProvider).state;
     return ExpansionTile(
-      leading: const Icon(Icons.drive_eta),
-      title: const Text(
-        'Owned Cars',
+      leading: const Icon(
+        Icons.drive_eta,
+        size: 26,
+        color: Color(0xffcccccc),
+      ),
+      title: Transform.translate(
+        offset: const Offset(-14, 0),
+        child: Text(
+          'Vehicle',
+          style: GoogleFonts.montserrat(
+            color: const Color(0xff414141),
+            fontSize: 16,
+          ),
+        ),
       ),
       children: [
         Container(
@@ -68,26 +81,29 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                       end: Alignment.bottomCenter,
                       colors: isLastItem
                           ? [
-                              const Color(0xffeeeeee),
-                              const Color(0xffeaeaea),
+                              Colors.white,
+                              Colors.white,
                             ]
                           : (isChosen)
                               ? [
-                                  const Color(0xffdbb3d4),
-                                  const Color(0xffe9d1e5),
-                                  const Color(0xffffffff),
-                                  const Color(0xffe9d1e5),
-                                  const Color(0xffaf8fa9),
+                                  const Color(0xFF5F45A4),
+                                  const Color(0xFFBFB4DA),
+                                  const Color(0xFFFFFFFF),
+                                  const Color(0xFFBFB4DA),
+                                  const Color(0xFF5F45A4),
                                 ]
                               : [
-                                  const Color(0xffeeeeee),
-                                  const Color(0xffffffff),
-                                  const Color(0xffa6a6a6),
+                                  const Color(0xFFF5F5F5),
+                                  const Color(0xFFFFFFFF),
+                                  const Color(0xFFF5F5F5),
                                 ],
                     ),
                   ),
                   child: (isLastItem)
-                      ? const Icon(Icons.add)
+                      ? const Icon(
+                          Icons.add,
+                          color: Color(0xFF5F45A4),
+                        )
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +113,10 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                             ),
                             Text(
                               car.licensePlateNum.toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                              style: GoogleFonts.montserrat(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF333333),
                               ),
                             ),
                             const SizedBox(
@@ -107,10 +124,12 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
                             ),
                             Text(
                               '${car.make.toUpperCase()} ${car.model.toUpperCase()}',
-                              style: const TextStyle(
+                              style: GoogleFonts.montserrat(
                                 fontSize: 12,
-                                overflow: TextOverflow.fade,
+                                height: 0.7,
+                                color: const Color(0xFF333333),
                               ),
+                              overflow: TextOverflow.fade,
                               softWrap: false,
                               maxLines: 1,
                             ),
