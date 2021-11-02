@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/user_info/driver_info/car_register_state.dart';
 import 'package:kapiot/logic/user_info/driver_info/car_register_view_model.dart';
@@ -33,16 +34,16 @@ class CarTypeBlock extends HookConsumerWidget {
           end: Alignment.bottomCenter,
           colors: isSelected
               ? [
-                  const Color(0xffdbb3d4),
-                  const Color(0xffe9d1e5),
+                  const Color(0xFF5F45A4),
+                  const Color(0xFFBFB4DA),
                   const Color(0xffffffff),
-                  const Color(0xffe9d1e5),
-                  const Color(0xffaf8fa9),
+                  const Color(0xFFBFB4DA),
+                  const Color(0xFF5F45A4),
                 ]
               : [
-                  const Color(0xffeeeeee),
+                  const Color(0xfff5f5f5),
                   const Color(0xffffffff),
-                  const Color(0xffa6a6a6),
+                  const Color(0xfff5f5f5),
                 ],
         ),
         borderRadius: BorderRadius.circular(12),
@@ -74,15 +75,16 @@ class CarTypeBlock extends HookConsumerWidget {
             ),
             Text(
               carType.label,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+              style: GoogleFonts.montserrat(
+                fontSize: 17,
                 color: isSelected ? Colors.white : const Color(0xff333333),
               ),
             ),
             Text(
               "${carType.capacity}-seater",
-              style: TextStyle(
-                color: isSelected ? Colors.white : const Color(0xff666666),
+              style: GoogleFonts.montserrat(
+                fontSize: 13,
+                color: isSelected ? Colors.white : const Color(0xff333333),
               ),
             ),
           ],

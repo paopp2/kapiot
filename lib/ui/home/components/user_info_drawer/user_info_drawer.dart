@@ -34,7 +34,7 @@ class UserInfoDrawer extends HookConsumerWidget {
                   Container(
                     height: constraints.maxHeight * 0.7,
                     width: constraints.maxWidth * 0.85,
-                    color: const Color(0xfff5f5f5),
+                    color: Colors.white,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
