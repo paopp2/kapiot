@@ -1080,7 +1080,7 @@
             "type": "pickup"
           }
         ],
-        "ratingResponseCount": 250,
+        "ratingResponseCount": 450,
         "rateTotal": 2134
       }
     },
@@ -1147,7 +1147,7 @@
             "type": "suv"
           }
         ],
-        "ratingResponseCount": 320,
+        "ratingResponseCount": 800,
         "rateTotal": 3860 
       }
     }
