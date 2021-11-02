@@ -70,6 +70,14 @@ exports.populateAll = functions.https.onRequest(async (req, res) =>  {
     res.json({result: "Populated drivers and riders'"});
 });
 
+exports.populateUserInfo = functions.https.onRequest(async (req, res) =>  {
+    test_data.userInfoList.forEach(addUserInfo);
+    async function addUserInfo(userInfo) {
+        await userInfoRef.doc(userInfo.id).set(userInfo);
+    }
+    res.json({result: "Populated 'user_info'"});
+});
+
 exports.populateActiveRiders = functions.https.onRequest(async (req, res) =>  {
     test_data.ridersList.forEach(addRider);
     async function addRider(rider) {
