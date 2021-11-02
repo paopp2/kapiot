@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/markers.dart';
 import 'package:kapiot/data/helpers/realtime_db_helper.dart';
 import 'package:kapiot/root_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
@@ -18,6 +19,7 @@ const bool useFirebaseEmulator = true;
 
 void main() async {
   await dotenv.load(fileName: 'secrets/secrets.env');
+  await Markers.instance.initMarkers();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
