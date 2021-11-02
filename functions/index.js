@@ -67,7 +67,6 @@ exports.populateAll = functions.https.onRequest(async (req, res) =>  {
         };
         await rtdb.ref(path).set(json);
     }
-
     res.json({result: "Populated drivers and riders'"});
 });
 
