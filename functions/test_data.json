@@ -1083,6 +1083,73 @@
         "ratingResponseCount": 250,
         "rateTotal": 2134
       }
+    },
+    {
+      "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
+      "points": 219.0516691781,
+      "savedLocations": {
+        "Mactan Doc": {
+          "lat": 10.2898386,
+          "lng": 123.9668083,
+          "address": "Mactan Doctors' Hospital, Jr. Avenue, Lapu-Lapu City, Cebu, Philippines"
+        },
+        "Sebastien Hotel": {
+          "lat": 10.3070114,
+          "lng": 123.0100629,
+          "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines"
+        },
+        "School": {
+          "lat": 10.3521222,
+          "lng": 123.9132676,
+          "address": "University of San Carlos - Talamban Campus, Cebu City, Cebu, Philippines"
+        },
+        "Pajo": {
+          "lat": 10.3030118,
+          "lng": 123.006218,
+          "address": "Pajo, Lapu-Lapu City, Cebu, PhilippinesRF PRINT SERVICES, Casanta Soong, Lapu-Lapu City, Cebu, Philippines"
+        },
+        "Mactan Ecozone": {
+          "lat": 10.29103,
+          "lng": 123.96105,
+          "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu"
+        },
+        "Home": {
+          "lat": 10.30058,
+          "lng": 123.96239,
+          "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu"
+        }
+      },
+      "userType": "student",
+      "driverInfo": {
+        "registeredCars": [
+          {
+            "licensePlateNum": "YKS 240",
+            "make": "CHEVROLET",
+            "model": "SPARK",
+            "type": "hatchback"
+          },
+          {
+            "licensePlateNum": "FAG 666",
+            "make": "NISSAN",
+            "model": "NAVARA",
+            "type": "pickup"
+          },
+          {
+            "licensePlateNum": "GAN 078",
+            "make": "HONDA",
+            "model": "CIVIC",
+            "type": "sedan"
+          },
+          {
+            "licensePlateNum": "SEX 030",
+            "make": "FORD",
+            "model": "EXPLORER",
+            "type": "suv"
+          }
+        ],
+        "ratingResponseCount": 320,
+        "rateTotal": 3860 
+      }
     }
   ]
 }
