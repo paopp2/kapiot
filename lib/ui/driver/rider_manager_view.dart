@@ -67,10 +67,9 @@ class RiderManagerView extends HookConsumerWidget {
                             ? SizedBox(
                                 height: constraints.maxHeight * 0.2,
                                 width: constraints.maxWidth,
-                                child: const LoadingWidget(
-                                  text: 'Fetching Requests',
-                                ),
-                              )
+                                child: const Center(
+                                  child: Text('No pending requests'),
+                                ))
                             : RequestingRidersPanel(
                                 model: model,
                                 constraints: constraints,
