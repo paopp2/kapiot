@@ -9,7 +9,6 @@ import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/driver/components/rider_manager_view_map.dart';
-import 'package:kapiot/ui/shared/loading_widget.dart';
 
 import 'components/requesting_riders_panel.dart';
 import 'components/stop_point_panel.dart';
