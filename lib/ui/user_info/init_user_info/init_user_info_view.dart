@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_state.dart';
@@ -31,52 +32,80 @@ class InitUserInfoView extends HookConsumerWidget {
             const SizedBox(),
             Text(
               'To which association do you belong?',
-              style: Styles.middleSizeText,
+              style: Styles.priMiddleSizedText,
             ),
-            Stack(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Wrap(
-                    spacing: constraints.maxWidth * 0.025,
-                    children: [
-                      ChoiceChip(
-                        onSelected: (_) => model.setUserType(UserType.student),
-                        selected: selectedUserType == UserType.student,
-                        labelPadding: const EdgeInsets.symmetric(
-                          vertical: 7,
-                          horizontal: 15,
+                Expanded(
+                  child: Center(
+                    child: Wrap(
+                      spacing: constraints.maxWidth * 0.025,
+                      children: [
+                        ChoiceChip(
+                          onSelected: (_) =>
+                              model.setUserType(UserType.student),
+                          selected: selectedUserType == UserType.student,
+                          selectedColor: const Color(0xFFBFB4DA),
+                          labelPadding: const EdgeInsets.symmetric(
+                            vertical: 7,
+                            horizontal: 15,
+                          ),
+                          label: Text(
+                            'Student',
+                            style: Styles.secMiddleSizedText,
+                          ),
                         ),
-                        label: const Text('Student'),
-                      ),
-                      ChoiceChip(
-                        onSelected: (_) => model.setUserType(UserType.faculty),
-                        selected: selectedUserType == UserType.faculty,
-                        labelPadding: const EdgeInsets.symmetric(
-                          vertical: 7,
-                          horizontal: 15,
+                        ChoiceChip(
+                          onSelected: (_) =>
+                              model.setUserType(UserType.faculty),
+                          selected: selectedUserType == UserType.faculty,
+                          selectedColor: const Color(0xFFBFB4DA),
+                          labelPadding: const EdgeInsets.symmetric(
+                            vertical: 7,
+                            horizontal: 15,
+                          ),
+                          label: Text(
+                            'Faculty',
+                            style: Styles.secMiddleSizedText,
+                          ),
                         ),
-                        label: const Text('Faculty'),
-                      ),
-                      ChoiceChip(
-                        onSelected: (_) => model.setUserType(UserType.staff),
-                        selected: selectedUserType == UserType.staff,
-                        labelPadding: const EdgeInsets.symmetric(
-                          vertical: 7,
-                          horizontal: 15,
+                        ChoiceChip(
+                          onSelected: (_) => model.setUserType(UserType.staff),
+                          selected: selectedUserType == UserType.staff,
+                          selectedColor: const Color(0xFFBFB4DA),
+                          labelPadding: const EdgeInsets.symmetric(
+                            vertical: 7,
+                            horizontal: 15,
+                          ),
+                          label: Text(
+                            'Staff',
+                            style: Styles.secMiddleSizedText,
+                          ),
                         ),
-                        label: const Text('Staff'),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: constraints.maxHeight * 0.5),
-                    child: TextButton(
-                      onPressed: model.goToNextStep,
-                      child: const Text('Submit'),
+                Container(
+                  margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                  child: ElevatedButton(
+                    onPressed: model.goToNextStep,
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFF5F45A4),
+                      elevation: 0,
+                      fixedSize: Size(constraints.maxWidth * 0.725, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    child: Text(
+                      'Submit',
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 17,
+                        letterSpacing: 1.5,
+                      ),
                     ),
                   ),
                 ),
@@ -85,35 +114,44 @@ class InitUserInfoView extends HookConsumerWidget {
             Container(
               height: constraints.maxHeight,
               width: constraints.maxWidth,
-              padding: EdgeInsets.symmetric(
-                vertical: constraints.maxHeight * 0.05,
-                horizontal: constraints.maxWidth * 0.075,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
               ),
-              child: Stack(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Align(
-                    alignment: Alignment.center,
+                  Expanded(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Saved Places',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        SizedBox(
-                          height: constraints.maxHeight * 0.025,
-                        ),
-                        const Text(
-                          'Saved Places helps you to easily set ride configurations.',
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(
-                          height: constraints.maxHeight * 0.05,
+                        Container(
+                          width: 275,
+                          margin: EdgeInsets.only(
+                            bottom: constraints.maxHeight * 0.05,
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Saved Places',
+                                style: Styles.priLargedSizedText,
+                              ),
+                              const SizedBox(height: 20),
+                              Text(
+                                'Saved Places helps you to easily set ride configurations.',
+                                textAlign: TextAlign.center,
+                                style: Styles.secSmallSizedText,
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0XFFE7DFE0),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: const Color(0xffF2F3F8),
+                              width: 2,
+                            ),
+                            color: const Color(0xffF8F9FD),
                           ),
                           padding: EdgeInsets.symmetric(
                             horizontal: constraints.maxWidth * 0.05,
@@ -131,15 +169,14 @@ class InitUserInfoView extends HookConsumerWidget {
                             hint: 'Home',
                           ),
                         ),
-                        const Divider(
-                          color: Colors.white,
-                          thickness: 1,
-                          height: 0.05,
-                        ),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0XFFE7DFE0),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: const Color(0xffF2F3F8),
+                              width: 2,
+                            ),
+                            color: const Color(0xffF8F9FD),
                           ),
                           padding: EdgeInsets.symmetric(
                             horizontal: constraints.maxWidth * 0.05,
@@ -162,31 +199,39 @@ class InitUserInfoView extends HookConsumerWidget {
                       ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                  Container(
+                    margin:
+                        EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 2),
-                          width: constraints.maxWidth * 0.75,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            color: const Color(0xffdbb3d4),
+                        ElevatedButton(
+                          onPressed: model.goToNextStep,
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFF5F45A4),
+                            elevation: 0,
+                            fixedSize: Size(constraints.maxWidth * 0.725, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
                           ),
-                          child: TextButton(
-                            onPressed: model.updateUserInfo,
-                            child: const Text(
-                              'Save Configuration',
-                              style: TextStyle(color: Colors.white),
+                          child: Text(
+                            'Save Configuration',
+                            style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontSize: 17,
+                              letterSpacing: 1.5,
                             ),
                           ),
                         ),
                         TextButton(
                           onPressed: model.updateUserInfo,
-                          child: const Text(
+                          child: Text(
                             'Set Up Later',
-                            style: TextStyle(color: Color(0xffdbb3d4)),
+                            style: GoogleFonts.montserrat(
+                              color: const Color(0xFF5F45A4),
+                              fontSize: 17,
+                              letterSpacing: 1.5,
+                            ),
                           ),
                         ),
                       ],
