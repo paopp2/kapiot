@@ -80,11 +80,11 @@ class ConfigTypePanel extends HookConsumerWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
+                  color: const Color(0xffF8F9FD),
                   border: Border.all(
                     color: const Color(0xffF2F3F8),
                     width: 2,
                   ),
-                  color: const Color(0xffF8F9FD),
                 ),
                 child: Column(
                   children: [

@@ -30,7 +30,7 @@ class SavePlacePicker extends HookConsumerWidget {
         return [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(12),
               color: const Color(0xffF8F9FD),
               border: Border.all(
                 color: const Color(0xffF2F3F8),
