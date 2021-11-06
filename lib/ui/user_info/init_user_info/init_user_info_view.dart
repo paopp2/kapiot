@@ -31,7 +31,7 @@ class InitUserInfoView extends HookConsumerWidget {
           final List<Widget> pageList = [
             const SizedBox(),
             Text(
-              'To which association do you belong?',
+              'Hi. Just a couple more things about yourself',
               style: Styles.priMiddleSizedText,
             ),
             Column(
