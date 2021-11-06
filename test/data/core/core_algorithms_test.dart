@@ -8,7 +8,7 @@ import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 void main() {
-  group("Case 1: Driver at start location and along rider's route", () {
+  group("Case 1: Drivers at their startLocs and along rider's route", () {
     test('1.1.1: SM Lacion to Basak Simbahan', () async {
       await verifyCompatibleDrivers(
         rider: 'Nicolas Paolo Pepito',
@@ -101,9 +101,13 @@ void main() {
 }
 
 /// Verifies whether the provided [rider] is compatible with the provided list
-/// of drivers the rider [shouldMatchWith].
+/// of drivers the rider [shouldMatchWith]. When [driverLocOverrides] is provided,
+/// it overrides the specified driver/s' currentLocation (useful for testing the
+/// case wherein a driver has passed a rider)
 ///
-/// Should be placed within a 'test' function
+/// All references to either [rider] or drivers in [shouldMatchWith] should be
+/// by displayName. The method should also be called within the callback of the
+/// 'test' function
 Future<void> verifyCompatibleDrivers({
   // required KapiotLocation riderStart,
   // required KapiotLocation riderEnd,
