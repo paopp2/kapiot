@@ -8,6 +8,8 @@ import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
+import 'package:kapiot/model/car/car.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/rider/request_accepted/components/divider_widget.dart';
 
 const uscLogo =
@@ -24,7 +26,7 @@ class RideInfoPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final acceptingDriverConfig =
-        ref.watch(acceptingDriverConfigProvider).state!;
+        ref.watch(acceptingDriverConfigProvider).state! as ForDriver;
     final acceptingDriver = acceptingDriverConfig.user;
     final driverName = acceptingDriver.displayName!;
     final estTimeArrival = ref.watch(driverArrivalTimeProvider).state;
@@ -128,7 +130,7 @@ class RideInfoPanel extends HookConsumerWidget {
                                   width: 5,
                                 ),
                                 Text(
-                                  '9 mins',
+                                  estTimeArrival,
                                   style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     color: const Color(0xFFAAAAAA),
@@ -142,10 +144,8 @@ class RideInfoPanel extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Image(
-                              image: AssetImage(
-                                'assets/images/car_body_types/coupe.png',
-                              ),
+                            Image(
+                              image: acceptingDriverConfig.car.type.image,
                               height: 50,
                             ),
                             RichText(
@@ -153,14 +153,16 @@ class RideInfoPanel extends HookConsumerWidget {
                                 style: const TextStyle(fontSize: 12),
                                 children: [
                                   TextSpan(
-                                    text: 'Toyota Fortuner - ',
+                                    text:
+                                        '${acceptingDriverConfig.car.make} ${acceptingDriverConfig.car.model} - ',
                                     style: GoogleFonts.montserrat(
                                       color: const Color(0xFFAAAAAA),
                                       fontSize: 12,
                                     ),
                                   ),
                                   TextSpan(
-                                    text: 'AAA 111',
+                                    text: acceptingDriverConfig
+                                        .car.licensePlateNum,
                                     style: GoogleFonts.montserrat(
                                       color: const Color(0xFF333333),
                                       fontSize: 12,
@@ -229,7 +231,7 @@ class RideInfoPanel extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      coRiderConfigsStream.data!.value.isEmpty
+                      coRiderConfigsStream.data?.value.isEmpty ?? true
                           ? 'Just you'
                           : 'You and $coRiderCount other people',
                       style: GoogleFonts.montserrat(
