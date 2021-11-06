@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
@@ -23,8 +24,41 @@ class DriverCardStream extends HookConsumerWidget {
         error: (_, __) => const Center(
           child: Text('Error'),
         ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
+        loading: () => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image:
+                  const AssetImage('assets/images/error/no_ride_request.png'),
+              height: constraints.maxHeight * 0.15,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              child: Column(
+                children: [
+                  Text(
+                    'No Request',
+                    style: GoogleFonts.poppins(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF333333),
+                    ),
+                  ),
+                  Text(
+                    'When you have ride requests,\nyou\'ll see them here.',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 12,
+                      color: const Color(0xFFAAAAAA),
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
         data: (compatibleDriverConfigs) {
           return ListView.builder(
