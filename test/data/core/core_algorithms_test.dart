@@ -109,6 +109,7 @@ Future<void> verifyCompatibleDrivers({
   // required KapiotLocation riderEnd,
   required String rider,
   required List<String> shouldMatchWith,
+  Map<String, KapiotLocation> driverLocOverrides = const {},
 }) async {
   final container = ProviderContainer();
   final coreAlgorithms = container.read(coreAlgorithmsProvider);
@@ -128,7 +129,8 @@ Future<void> verifyCompatibleDrivers({
     if (await coreAlgorithms.checkCompatibility(
       riderConfig: RouteConfig.fromJson(riderConfig),
       driverConfig: driver,
-      driverCurrentLoc: driver.startLocation,
+      driverCurrentLoc:
+          driverLocOverrides[driver.user.displayName] ?? driver.startLocation,
     )) {
       compatibleDrivers.add(driver);
     }
