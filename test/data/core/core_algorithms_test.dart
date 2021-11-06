@@ -121,13 +121,10 @@ Future<void> verifyCompatibleDrivers({
   final testData = jsonDecode(await rawTestData.readAsString());
   final ridersList = testData['ridersList'] as List;
   final driversList = testData['driversList'] as List;
-  // Who the rider is doesn't matter. What DOES matter is the rider's
-  // startLocation [riderStart] and endLocation [riderEnd] (copywith-ed below)
   final riderConfig = (ridersList.firstWhere((e) {
     e as Map<String, dynamic>;
     return e['user']['displayName'] == rider;
   }));
-
   final List<RouteConfig> compatibleDrivers = [];
   for (final driver in driversList.map((rc) => RouteConfig.fromJson(rc))) {
     if (await coreAlgorithms.checkCompatibility(
