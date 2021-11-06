@@ -79,9 +79,7 @@ class DriverCard extends HookConsumerWidget {
                             size: 18,
                             color: Colors.white,
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+                          const SizedBox(width: 5),
                           Text(
                             driverDistance,
                             style: GoogleFonts.montserrat(
@@ -150,9 +148,7 @@ class DriverCard extends HookConsumerWidget {
                                           size: 18,
                                           color: Color(0xFFFDCC0D),
                                         ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
+                                        const SizedBox(width: 5),
                                         Text(
                                           driverConfig.rating,
                                           style: GoogleFonts.montserrat(

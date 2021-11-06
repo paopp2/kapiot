@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
@@ -145,7 +144,8 @@ class RideInfoPanel extends HookConsumerWidget {
                           children: [
                             const Image(
                               image: AssetImage(
-                                  'assets/images/car_body_types/coupe.png'),
+                                'assets/images/car_body_types/coupe.png',
+                              ),
                               height: 50,
                             ),
                             RichText(
@@ -230,7 +230,7 @@ class RideInfoPanel extends HookConsumerWidget {
                     ),
                     Text(
                       coRiderConfigsStream.data!.value.isEmpty
-                          ? 'You'
+                          ? 'Just you'
                           : 'You and $coRiderCount other people',
                       style: GoogleFonts.montserrat(
                         fontSize: 12,
