@@ -37,7 +37,8 @@ class RequestDriversView extends HookConsumerWidget {
                       child: RequestDriversViewMap(model: model),
                     ),
                   ),
-                  SizedBox(
+                  Container(
+                    color: const Color(0xFFF8F9FD),
                     height: constraints.maxHeight * 0.35,
                     width: constraints.maxWidth,
                     child: DriverCardStream(
