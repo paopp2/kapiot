@@ -37,9 +37,6 @@ class CoreAlgorithms {
     required Stream<List<RouteConfig>> driverConfigsStream,
     required Stream<List<Map<String, KapiotLocation>>> driverLocsStream,
   }) async* {
-    riderConfig as ForRider;
-    final utils = googleMapsApiServices.utils;
-
     // A stream of a rider's compatible drivers derived from the merged
     // drivers' configs stream (Firestore) and drivers' currentLoc stream (RTDB)
     final compatibleDriversStream = driverConfigsStream
@@ -48,65 +45,31 @@ class CoreAlgorithms {
       (driverConfigs, driverLocs) async {
         final List<RouteConfig> compatibleDrivers = [];
         for (final driverConfig in driverConfigs) {
-          driverConfig as ForDriver;
-          final distFromDriverStartToRiderStart = utils.calculateDistance(
-            pointA: driverConfig.startLocation,
-            pointB: riderConfig.startLocation,
+          // Obtain the current location of this driverConfig from the
+          // driverLocs stream (if none found, return null)
+          final driverCurrentLoc = driverLocs
+              .singleWhereOrNull(
+                  (map) => (map.keys.first == driverConfig.user.id))
+              ?.values
+              .first;
+
+          await checkCompatibility(
+            riderConfig: riderConfig,
+            driverConfig: driverConfig,
+            driverCurrentLoc: driverCurrentLoc,
+            whenCompatible: () => compatibleDrivers.add(driverConfig),
+            whenUnreachable: () => firestoreHelper.deleteData(
+              // In case the rider has already hailed (requested) this driver
+              // before becoming unreachable (has passed the rider, for instance),
+              // this deletes any of this rider's pending requests to the driver
+              // to avoid instances where the driver may erroneously accept
+              // the unreachable rider (despite having compatible routes)
+              path: FirestorePath.docActiveDriverRequest(
+                driverConfig.user.id,
+                riderConfig.user.id,
+              ),
+            ),
           );
-
-          final distFromDriverStartToRiderEnd = utils.calculateDistance(
-            pointA: driverConfig.startLocation,
-            pointB: riderConfig.endLocation,
-          );
-
-          bool isGoingTheSameDirection =
-              (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
-
-          if (isGoingTheSameDirection) {
-            final decodedRoute = await utils.decodeRoute(
-              driverConfig.encodedRoute,
-            );
-            bool riderStartCompatible = await utils.isLocationAlongRoute(
-              location: riderConfig.startLocation,
-              decodedRoute: decodedRoute,
-            );
-            bool riderEndCompatible = await utils.isLocationAlongRoute(
-              location: riderConfig.endLocation,
-              decodedRoute: decodedRoute,
-            );
-            if (riderStartCompatible && riderEndCompatible) {
-              // Obtain the current location of this driverConfig from the
-              // driverLocs stream (if none found, return null)
-              final driverCurrentLocMap = driverLocs.singleWhereOrNull(
-                (map) => (map.keys.first == driverConfig.user.id),
-              );
-              if (driverCurrentLocMap != null) {
-                final distFromDriverStartToCurrent = utils.calculateDistance(
-                  // Driver's starting location
-                  pointA: driverConfig.startLocation,
-                  // Driver's current location
-                  pointB: driverCurrentLocMap.values.first,
-                );
-                bool driverHasPassedRider = distFromDriverStartToRiderStart <
-                    distFromDriverStartToCurrent;
-                if (!driverHasPassedRider) {
-                  compatibleDrivers.add(driverConfig);
-                } else {
-                  // In case the rider has already hailed (requested) this driver
-                  // before becoming unreachable (has passed the rider), this
-                  // deletes any of this rider's pending requests to the driver
-                  // to avoid instances where the driver may erroneously accept
-                  // this unreachable rider (despite having compatible routes)
-                  firestoreHelper.deleteData(
-                    path: FirestorePath.docActiveDriverRequest(
-                      driverConfig.user.id,
-                      riderConfig.user.id,
-                    ),
-                  );
-                }
-              }
-            }
-          }
         }
         return compatibleDrivers;
       },
@@ -124,6 +87,61 @@ class CoreAlgorithms {
         yield data;
       }
     }
+  }
+
+  /// Returns true when [riderConfig] is compatible with [driverConfig]
+  Future<bool> checkCompatibility({
+    required RouteConfig riderConfig,
+    required RouteConfig driverConfig,
+    required KapiotLocation? driverCurrentLoc,
+    void Function()? whenCompatible,
+    void Function()? whenUnreachable,
+  }) async {
+    final utils = googleMapsApiServices.utils;
+    final distFromDriverStartToRiderStart = utils.calculateDistance(
+      pointA: driverConfig.startLocation,
+      pointB: riderConfig.startLocation,
+    );
+
+    final distFromDriverStartToRiderEnd = utils.calculateDistance(
+      pointA: driverConfig.startLocation,
+      pointB: riderConfig.endLocation,
+    );
+
+    bool isGoingTheSameDirection =
+        (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
+
+    if (isGoingTheSameDirection) {
+      driverConfig as ForDriver;
+      final decodedRoute = await utils.decodeRoute(
+        driverConfig.encodedRoute,
+      );
+      bool riderStartCompatible = await utils.isLocationAlongRoute(
+        location: riderConfig.startLocation,
+        decodedRoute: decodedRoute,
+      );
+      bool riderEndCompatible = await utils.isLocationAlongRoute(
+        location: riderConfig.endLocation,
+        decodedRoute: decodedRoute,
+      );
+      if (riderStartCompatible && riderEndCompatible) {
+        if (driverCurrentLoc != null) {
+          final distFromDriverStartToCurrent = utils.calculateDistance(
+            pointA: driverConfig.startLocation,
+            pointB: driverCurrentLoc,
+          );
+          bool driverHasPassedRider =
+              distFromDriverStartToRiderStart < distFromDriverStartToCurrent;
+          if (!driverHasPassedRider) {
+            whenCompatible?.call();
+            return true;
+          } else {
+            whenUnreachable?.call();
+          }
+        }
+      }
+    }
+    return false;
   }
 
   List<StopPoint> sortStopPoints({
