@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 void main() {
@@ -87,6 +88,16 @@ void main() {
       );
     });
   });
+
+  // TODO: Update test_data with reverse routes then add tests here
+  // group('Case 2: Same routes with Case 1 but reversed', () {});
+
+  // TODO: Add check to satisfy Case 3 in core_algorithms.dart
+  // group("Case 3: A user can't pair with oneself as both rider and driver", () {});
+
+  // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
+  // should be 'ahead' of the rider's starting location
+  // group("Case 4: Drivers can't match with passed riders even if compatible", () {});
 }
 
 /// Verifies whether the provided [rider] is compatible with the provided list
