@@ -95,7 +95,7 @@ void main() {
     });
     test('1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
       await verifyCompatibleDrivers(
-        rider: "Atom Eve",
+        rider: "The Immortal",
         shouldMatchWith: [
           "Omni Man",
           "Damien Darkblood",
