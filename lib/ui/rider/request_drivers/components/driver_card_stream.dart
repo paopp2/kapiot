@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -61,10 +62,16 @@ class DriverCardStream extends HookConsumerWidget {
           ],
         ),
         data: (compatibleDriverConfigs) {
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
+          return CarouselSlider.builder(
             itemCount: compatibleDriverConfigs.length,
-            itemBuilder: (context, index) {
+            options: CarouselOptions(
+              autoPlay: false,
+              aspectRatio: 4 / 3,
+              viewportFraction: 0.7,
+              initialPage: 0,
+              enableInfiniteScroll: false,
+            ),
+            itemBuilder: (context, index, _) {
               final driverConfig = compatibleDriverConfigs[index];
               return DriverCard(
                 driverConfig: driverConfig as ForDriver,
