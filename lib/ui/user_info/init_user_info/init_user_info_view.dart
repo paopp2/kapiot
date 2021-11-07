@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_providers.dart';
+import 'package:kapiot/logic/shared/extensions.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_state.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
@@ -41,7 +42,7 @@ class InitUserInfoView extends HookConsumerWidget {
                   delay: const Duration(seconds: 2),
                   duration: const Duration(seconds: 1),
                   child: Text(
-                    'Hello ${currentUser.displayName!.split(' ').first}',
+                    'Hello ${currentUser.displayName!.firstName}',
                     style: Styles.priLargeSizedText,
                   ),
                 ),
@@ -67,7 +68,7 @@ class InitUserInfoView extends HookConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Choose community you belong to',
+                            'Choose your role at USC',
                             style: Styles.priMiddleSizedText,
                             textAlign: TextAlign.center,
                           ),
