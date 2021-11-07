@@ -45,9 +45,9 @@ class InitUserInfoView extends HookConsumerWidget {
                     style: Styles.priLargeSizedText,
                   ),
                 ),
-                Entry.scale(
-                  delay: const Duration(seconds: 2),
-                  duration: const Duration(seconds: 2),
+                Entry.opacity(
+                  delay: const Duration(milliseconds: 2250),
+                  duration: const Duration(milliseconds: 250),
                   child: Text(
                     'Just a couple more things about yourself',
                     style: Styles.priMiddleSizedText,
