@@ -39,7 +39,7 @@ class DriverCardStream extends HookConsumerWidget {
               child: Column(
                 children: [
                   Text(
-                    'No Request',
+                    'No Drivers Found',
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class DriverCardStream extends HookConsumerWidget {
                     ),
                   ),
                   Text(
-                    'When you have ride requests,\nyou\'ll see them here.',
+                    'When you have compatible drivers along your\nroute, you\'ll see them here.',
                     style: GoogleFonts.montserrat(
                       fontSize: 12,
                       color: const Color(0xFFAAAAAA),
