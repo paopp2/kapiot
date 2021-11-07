@@ -25,7 +25,11 @@ class InitUserInfoViewModel extends ViewModel {
   final KapiotUser currentUser;
   final UserInfoRepository userInfoRepo;
 
-  void goToNextStep() => read(pageIndexProvider).state++;
+  void goToNextStep({Duration? after}) {
+    (after == null)
+        ? read(pageIndexProvider).state++
+        : Future.delayed(after, () => read(pageIndexProvider).state++);
+  }
 
   void openSavePlacePicker({required bool isForHome}) async {
     final appRouter = AppRouter.instance;
@@ -49,6 +53,10 @@ class InitUserInfoViewModel extends ViewModel {
     }
   }
 
+  void skipSavingLocations() {
+    read(savedLocationsProvider).state = {};
+  }
+
   void setUserType(UserType userType) {
     read(userTypeProvider).state = userType;
   }
@@ -62,7 +70,7 @@ class InitUserInfoViewModel extends ViewModel {
       userType: userType,
     );
     userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
-    read(pageIndexProvider).state = 0;
+    goToNextStep();
     AppRouter.instance.popView();
   }
 }

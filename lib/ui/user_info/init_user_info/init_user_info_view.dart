@@ -35,12 +35,12 @@ class InitUserInfoView extends HookConsumerWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final List<Widget> pageList = [
-              Builder(builder: (context) {
-                Future.delayed(Duration.zero, model.goToNextStep);
+              Builder(builder: (_) {
+                model.goToNextStep(after: Duration.zero);
                 return const SizedBox();
               }),
-              Builder(builder: (context) {
-                Future.delayed(const Duration(seconds: 4), model.goToNextStep);
+              Builder(builder: (_) {
+                model.goToNextStep(after: const Duration(seconds: 4));
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -188,7 +188,7 @@ class InitUserInfoView extends HookConsumerWidget {
                                 ),
                                 const SizedBox(height: 20),
                                 Text(
-                                  'Saved Places helps you to easily set ride configurations.',
+                                  'Saved Places help you to easily set ride configurations.',
                                   textAlign: TextAlign.center,
                                   style: Styles.secSmallSizedText,
                                 ),
@@ -275,7 +275,9 @@ class InitUserInfoView extends HookConsumerWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: model.goToNextStep,
+                            onPressed: () => model
+                              ..goToNextStep()
+                              ..skipSavingLocations(),
                             child: Text(
                               'Set Up Later',
                               style: GoogleFonts.montserrat(
@@ -300,6 +302,7 @@ class InitUserInfoView extends HookConsumerWidget {
                   child: Text('Welcome to Kapiot'),
                 );
               }),
+              const SizedBox(),
             ];
             return Scaffold(
               backgroundColor: Colors.white,
