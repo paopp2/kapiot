@@ -78,7 +78,7 @@ void main() {
 
     test('1.1.7: Pike the Pet Lacion to Yasco Motor Parts Mandaue', () async {
       await verifyCompatibleDrivers(
-        rider: "",
+        rider: "Annie January",
         shouldMatchWith: [
           "Billy Butcher",
           "Nicolas Paolo Pepito",
@@ -87,85 +87,85 @@ void main() {
         ],
       );
     });
-  });
 
-  test('1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
-      () async {
-    await verifyCompatibleDrivers(
-      rider: "Robot",
-      shouldMatchWith: [
-        "Omni Man",
-        "Damien Darkblood",
-        "Allen the Alien",
-      ],
-    );
-  });
+    test('1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Robot",
+        shouldMatchWith: [
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
 
-  test('1.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital', () async {
-    await verifyCompatibleDrivers(
-      rider: "Atom Eve",
-      shouldMatchWith: [
-        "Omni Man",
-        "Damien Darkblood",
-        "Allen the Alien",
-      ],
-    );
-  });
+    test('1.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital', () async {
+      await verifyCompatibleDrivers(
+        rider: "Atom Eve",
+        shouldMatchWith: [
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
 
-  test('1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
-    await verifyCompatibleDrivers(
-      rider: "Atom Eve",
-      shouldMatchWith: [
-        "Omni Man",
-        "Damien Darkblood",
-        "Allen the Alien",
-      ],
-    );
-  });
+    test('1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
+      await verifyCompatibleDrivers(
+        rider: "Atom Eve",
+        shouldMatchWith: [
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
 
-  test('1.2.4: Sebastien Hotel to YES Mart', () async {
-    await verifyCompatibleDrivers(
-      rider: "Dupli-Kate",
-      shouldMatchWith: [
-        "The Invincible",
-        "Battle Beast",
-        "Mauler",
-      ],
-    );
-  });
+    test('1.2.4: Sebastien Hotel to YES Mart', () async {
+      await verifyCompatibleDrivers(
+        rider: "Dupli-Kate",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
 
-  test('1.2.5: Savemore Market Maribago to Fairchild Villas', () async {
-    await verifyCompatibleDrivers(
-      rider: "Black Samson",
-      shouldMatchWith: [
-        "The Invincible",
-        "Battle Beast",
-        "Mauler",
-      ],
-    );
-  });
+    test('1.2.5: Savemore Market Maribago to Fairchild Villas', () async {
+      await verifyCompatibleDrivers(
+        rider: "Black Samson",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
 
-  test('1.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
-      () async {
-    await verifyCompatibleDrivers(
-      rider: "Titan",
-      shouldMatchWith: [
-        "The Invincible",
-        "Battle Beast",
-        "Mauler",
-      ],
-    );
-  });
+    test('1.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Titan",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
 
-  test('1.2.7: AA BBQ Soong to Babag II Road', () async {
-    await verifyCompatibleDrivers(
-      rider: "Cecil",
-      shouldMatchWith: [
-        "The Invincible",
-        "Battle Beast",
-        "Mauler",
-      ],
-    );
+    test('1.2.7: AA BBQ Soong to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Cecil",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
   });
 
   // TODO: Update test_data with reverse routes then add tests here
