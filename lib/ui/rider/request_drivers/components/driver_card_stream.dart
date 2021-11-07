@@ -29,8 +29,7 @@ class DriverCardStream extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
-              image:
-                  const AssetImage('assets/images/error/no_ride_request.png'),
+              image: const AssetImage('assets/images/error/no_drivers.png'),
               height: constraints.maxHeight * 0.15,
             ),
             const SizedBox(
@@ -48,7 +47,7 @@ class DriverCardStream extends HookConsumerWidget {
                     ),
                   ),
                   Text(
-                    'When you have compatible drivers along your\nroute, you\'ll see them here.',
+                    "When you have compatible drivers along your\nroute, you'll see them here.",
                     style: GoogleFonts.montserrat(
                       fontSize: 12,
                       color: const Color(0xFFAAAAAA),
