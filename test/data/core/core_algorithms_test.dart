@@ -41,7 +41,6 @@ void main() {
         ],
       );
     });
-
     test('1.1.4: 7/11 Lamac to Basak Elem Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: "Mother's Milk",
@@ -52,7 +51,6 @@ void main() {
         ],
       );
     });
-
     test('1.1.5: Jollibee Lacion to Toyota Mandaue North', () async {
       await verifyCompatibleDrivers(
         rider: "Frenchie",
@@ -63,7 +61,6 @@ void main() {
         ],
       );
     });
-
     test('1.1.6: Enjoy Shopping Lacion to QBC Sporting Supplies', () async {
       await verifyCompatibleDrivers(
         rider: "Kimiko Miyashiro",
@@ -75,7 +72,6 @@ void main() {
         ],
       );
     });
-
     test('1.1.7: Pike the Pet Lacion to Yasco Motor Parts Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: "Annie January",
@@ -87,7 +83,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
         () async {
       await verifyCompatibleDrivers(
@@ -99,7 +94,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital', () async {
       await verifyCompatibleDrivers(
         rider: "Atom Eve",
@@ -110,7 +104,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
       await verifyCompatibleDrivers(
         rider: "Atom Eve",
@@ -121,7 +114,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.4: Sebastien Hotel to YES Mart', () async {
       await verifyCompatibleDrivers(
         rider: "Dupli-Kate",
@@ -132,7 +124,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.5: Savemore Market Maribago to Fairchild Villas', () async {
       await verifyCompatibleDrivers(
         rider: "Black Samson",
@@ -143,7 +134,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
         () async {
       await verifyCompatibleDrivers(
@@ -155,7 +145,6 @@ void main() {
         ],
       );
     });
-
     test('1.2.7: AA BBQ Soong to Babag II Road', () async {
       await verifyCompatibleDrivers(
         rider: "Cecil",
@@ -179,17 +168,14 @@ void main() {
   // group("Case 4: Drivers can't match with passed riders even if compatible", () {});
 }
 
-/// Verifies whether the provided [rider] is compatible with the provided list
-/// of drivers the rider [shouldMatchWith]. When [driverLocOverrides] is provided,
-/// it overrides the specified driver/s' currentLocation (useful for testing the
-/// case wherein a driver has passed a rider)
+/// Verifies that [rider] is compatible with the drivers he [shouldMatchWith]
 ///
 /// All references to either [rider] or drivers in [shouldMatchWith] should be
 /// by displayName. The method should also be called within the callback of the
-/// 'test' function
+/// 'test' function. When [driverLocOverrides] is provided, it overrides the
+/// specified driver/s' currentLocation (useful for testing the case wherein a
+/// driver has passed a rider)
 Future<void> verifyCompatibleDrivers({
-  // required KapiotLocation riderStart,
-  // required KapiotLocation riderEnd,
   required String rider,
   required List<String> shouldMatchWith,
   Map<String, KapiotLocation> driverLocOverrides = const {},
