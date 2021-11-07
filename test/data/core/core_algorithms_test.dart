@@ -155,6 +155,45 @@ void main() {
         ],
       );
     });
+
+    test('1.3.1: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Oogie Boogie",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+
+    test('1.3.2: AA BBQ Salinas Drive to UC Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Morty Smith",
+        shouldMatchWith: [
+          "Rick Sanchez",
+        ],
+      );
+    });
+
+    test('1.3.3: 88th Avenue to Phoenix Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Walter White",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Rick Sanchez",
+        ],
+      );
+    });
+
+    test('1.3.4: Cafe Georg to Coastal Conservation and Education', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jesse Pinkman ",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Rick Sanchez",
+        ],
+      );
+    });
   });
 
   // TODO: Update test_data with reverse routes then add tests here
