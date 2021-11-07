@@ -29,273 +29,281 @@ class InitUserInfoView extends HookConsumerWidget {
       return model.dispose;
     }, []);
 
-    return SafeArea(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final List<Widget> pageList = [
-            const SizedBox(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Entry(
-                  yOffset: 30,
-                  delay: const Duration(seconds: 2),
-                  duration: const Duration(seconds: 1),
-                  child: Text(
-                    'Hello ${currentUser.displayName!.firstName}',
-                    style: Styles.priLargeSizedText,
-                  ),
-                ),
-                Entry.opacity(
-                  delay: const Duration(milliseconds: 2250),
-                  duration: const Duration(milliseconds: 250),
-                  child: Text(
-                    'Just a couple more things about yourself',
-                    style: Styles.priMiddleSizedText,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: constraints.maxHeight,
-              width: constraints.maxWidth,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final List<Widget> pageList = [
+              const SizedBox(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Center(
+                  Entry(
+                    yOffset: 30,
+                    delay: const Duration(seconds: 2),
+                    duration: const Duration(seconds: 1),
+                    child: Text(
+                      'Hello ${currentUser.displayName!.firstName}',
+                      style: Styles.priLargeSizedText,
+                    ),
+                  ),
+                  Entry.opacity(
+                    delay: const Duration(milliseconds: 2250),
+                    duration: const Duration(milliseconds: 250),
+                    child: Text(
+                      'Just a couple more things about yourself',
+                      style: Styles.priMiddleSizedText,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: constraints.maxHeight,
+                width: constraints.maxWidth,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Choose your role at USC',
+                              style: Styles.priMiddleSizedText,
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: constraints.maxHeight * 0.05,
+                            ),
+                            Wrap(
+                              spacing: constraints.maxWidth * 0.025,
+                              children: [
+                                ChoiceChip(
+                                  onSelected: (_) =>
+                                      model.setUserType(UserType.student),
+                                  selected:
+                                      selectedUserType == UserType.student,
+                                  selectedColor: const Color(0xFFBFB4DA),
+                                  labelPadding: const EdgeInsets.symmetric(
+                                    vertical: 7,
+                                    horizontal: 15,
+                                  ),
+                                  label: Text(
+                                    'Student',
+                                    style: Styles.secMiddleSizedText,
+                                  ),
+                                ),
+                                ChoiceChip(
+                                  onSelected: (_) =>
+                                      model.setUserType(UserType.faculty),
+                                  selected:
+                                      selectedUserType == UserType.faculty,
+                                  selectedColor: const Color(0xFFBFB4DA),
+                                  labelPadding: const EdgeInsets.symmetric(
+                                    vertical: 7,
+                                    horizontal: 15,
+                                  ),
+                                  label: Text(
+                                    'Faculty',
+                                    style: Styles.secMiddleSizedText,
+                                  ),
+                                ),
+                                ChoiceChip(
+                                  onSelected: (_) =>
+                                      model.setUserType(UserType.staff),
+                                  selected: selectedUserType == UserType.staff,
+                                  selectedColor: const Color(0xFFBFB4DA),
+                                  labelPadding: const EdgeInsets.symmetric(
+                                    vertical: 7,
+                                    horizontal: 15,
+                                  ),
+                                  label: Text(
+                                    'Staff',
+                                    style: Styles.secMiddleSizedText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                      child: ElevatedButton(
+                        onPressed: model.goToNextStep,
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xFF5F45A4),
+                          elevation: 0,
+                          fixedSize: Size(constraints.maxWidth * 0.725, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                        ),
+                        child: Text(
+                          'Submit',
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 17,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: constraints.maxHeight,
+                width: constraints.maxWidth,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Choose your role at USC',
-                            style: Styles.priMiddleSizedText,
-                            textAlign: TextAlign.center,
+                          Container(
+                            width: 275,
+                            margin: EdgeInsets.only(
+                              bottom: constraints.maxHeight * 0.05,
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Saved Places',
+                                  style: Styles.priLargeSizedText,
+                                ),
+                                const SizedBox(height: 20),
+                                Text(
+                                  'Saved Places helps you to easily set ride configurations.',
+                                  textAlign: TextAlign.center,
+                                  style: Styles.secSmallSizedText,
+                                ),
+                              ],
+                            ),
                           ),
-                          SizedBox(
-                            height: constraints.maxHeight * 0.05,
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: const Color(0xffF2F3F8),
+                                width: 2,
+                              ),
+                              color: const Color(0xffF8F9FD),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: constraints.maxWidth * 0.05,
+                            ),
+                            margin: EdgeInsets.only(
+                              bottom: constraints.maxHeight * 0.01,
+                            ),
+                            child: LocationInputContainer(
+                              constraints: constraints,
+                              onPressed: () => model.openSavePlacePicker(
+                                isForHome: true,
+                              ),
+                              leadingIcon: Icons.home,
+                              text: homeFieldText,
+                              hint: 'Home',
+                            ),
                           ),
-                          Wrap(
-                            spacing: constraints.maxWidth * 0.025,
-                            children: [
-                              ChoiceChip(
-                                onSelected: (_) =>
-                                    model.setUserType(UserType.student),
-                                selected: selectedUserType == UserType.student,
-                                selectedColor: const Color(0xFFBFB4DA),
-                                labelPadding: const EdgeInsets.symmetric(
-                                  vertical: 7,
-                                  horizontal: 15,
-                                ),
-                                label: Text(
-                                  'Student',
-                                  style: Styles.secMiddleSizedText,
-                                ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: const Color(0xffF2F3F8),
+                                width: 2,
                               ),
-                              ChoiceChip(
-                                onSelected: (_) =>
-                                    model.setUserType(UserType.faculty),
-                                selected: selectedUserType == UserType.faculty,
-                                selectedColor: const Color(0xFFBFB4DA),
-                                labelPadding: const EdgeInsets.symmetric(
-                                  vertical: 7,
-                                  horizontal: 15,
-                                ),
-                                label: Text(
-                                  'Faculty',
-                                  style: Styles.secMiddleSizedText,
-                                ),
+                              color: const Color(0xffF8F9FD),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: constraints.maxWidth * 0.05,
+                            ),
+                            margin: EdgeInsets.only(
+                              bottom: constraints.maxHeight * 0.01,
+                            ),
+                            child: LocationInputContainer(
+                              constraints: constraints,
+                              onPressed: () => model.openSavePlacePicker(
+                                isForHome: false,
                               ),
-                              ChoiceChip(
-                                onSelected: (_) =>
-                                    model.setUserType(UserType.staff),
-                                selected: selectedUserType == UserType.staff,
-                                selectedColor: const Color(0xFFBFB4DA),
-                                labelPadding: const EdgeInsets.symmetric(
-                                  vertical: 7,
-                                  horizontal: 15,
-                                ),
-                                label: Text(
-                                  'Staff',
-                                  style: Styles.secMiddleSizedText,
-                                ),
-                              ),
-                            ],
+                              leadingIcon: Icons.work,
+                              text: nonHomeFieldText,
+                              hint: (selectedUserType == UserType.student)
+                                  ? 'School'
+                                  : 'Work',
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  Container(
-                    margin:
-                        EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
-                    child: ElevatedButton(
-                      onPressed: model.goToNextStep,
-                      style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xFF5F45A4),
-                        elevation: 0,
-                        fixedSize: Size(constraints.maxWidth * 0.725, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                      child: Text(
-                        'Submit',
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontSize: 17,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: constraints.maxHeight,
-              width: constraints.maxWidth,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 275,
-                          margin: EdgeInsets.only(
-                            bottom: constraints.maxHeight * 0.05,
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Saved Places',
-                                style: Styles.priLargeSizedText,
+                    Container(
+                      margin:
+                          EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                      child: Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: model.goToNextStep,
+                            style: TextButton.styleFrom(
+                              backgroundColor: const Color(0xFF5F45A4),
+                              elevation: 0,
+                              fixedSize: Size(constraints.maxWidth * 0.725, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
                               ),
-                              const SizedBox(height: 20),
-                              Text(
-                                'Saved Places helps you to easily set ride configurations.',
-                                textAlign: TextAlign.center,
-                                style: Styles.secSmallSizedText,
+                            ),
+                            child: Text(
+                              'Save Configuration',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 17,
+                                letterSpacing: 1.5,
                               ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: const Color(0xffF2F3F8),
-                              width: 2,
                             ),
-                            color: const Color(0xffF8F9FD),
                           ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.05,
-                          ),
-                          margin: EdgeInsets.only(
-                            bottom: constraints.maxHeight * 0.01,
-                          ),
-                          child: LocationInputContainer(
-                            constraints: constraints,
-                            onPressed: () => model.openSavePlacePicker(
-                              isForHome: true,
+                          TextButton(
+                            onPressed: model.updateUserInfo,
+                            child: Text(
+                              'Set Up Later',
+                              style: GoogleFonts.montserrat(
+                                color: const Color(0xFF5F45A4),
+                                fontSize: 17,
+                                letterSpacing: 1.5,
+                              ),
                             ),
-                            leadingIcon: Icons.home,
-                            text: homeFieldText,
-                            hint: 'Home',
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: const Color(0xffF2F3F8),
-                              width: 2,
-                            ),
-                            color: const Color(0xffF8F9FD),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: constraints.maxWidth * 0.05,
-                          ),
-                          margin: EdgeInsets.only(
-                            bottom: constraints.maxHeight * 0.01,
-                          ),
-                          child: LocationInputContainer(
-                            constraints: constraints,
-                            onPressed: () => model.openSavePlacePicker(
-                              isForHome: false,
-                            ),
-                            leadingIcon: Icons.work,
-                            text: nonHomeFieldText,
-                            hint: (selectedUserType == UserType.student)
-                                ? 'School'
-                                : 'Work',
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin:
-                        EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
-                    child: Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: model.goToNextStep,
-                          style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xFF5F45A4),
-                            elevation: 0,
-                            fixedSize: Size(constraints.maxWidth * 0.725, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
-                          child: Text(
-                            'Save Configuration',
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 17,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: model.updateUserInfo,
-                          child: Text(
-                            'Set Up Later',
-                            style: GoogleFonts.montserrat(
-                              color: const Color(0xFF5F45A4),
-                              fontSize: 17,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ];
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: SafeArea(
-              child: Center(
-                child: AnimatedSwitcher(
-                  duration: const Duration(seconds: 1),
-                  switchInCurve: Curves.easeInBack,
-                  switchOutCurve: Curves.easeInBack,
-                  child: pageList[pageIndex],
+                    const Center(
+                      child: Text('Welcome to Kapiot'),
+                    )
+                  ],
                 ),
               ),
-            ),
-          );
-        },
+            ];
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: SafeArea(
+                child: Center(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(seconds: 1),
+                    switchInCurve: Curves.easeInBack,
+                    switchOutCurve: Curves.easeInBack,
+                    child: pageList[pageIndex],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
