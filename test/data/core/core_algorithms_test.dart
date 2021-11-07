@@ -9,18 +9,7 @@ import 'package:kapiot/model/route_config/route_config.dart';
 
 void main() {
   group("Case 1: Drivers at their startLocs and along rider's route", () {
-    test('1.1.1: SM Lacion to Basak Simbahan', () async {
-      await verifyCompatibleDrivers(
-        rider: 'Nicolas Paolo Pepito',
-        shouldMatchWith: [
-          "Billy Butcher",
-          "Nicolas Paolo Pepito",
-          "Dominic Toretto",
-          "Hughie Campbell",
-        ],
-      );
-    });
-    test('1.1.2: Basak Elem School Mandaue to Pacific Mall', () async {
+    test('1.1.1: Basak Elem School Mandaue to Pacific Mall', () async {
       await verifyCompatibleDrivers(
         rider: 'Jim Preston',
         shouldMatchWith: [
@@ -30,7 +19,7 @@ void main() {
         ],
       );
     });
-    test('1.1.3: ABSCBN Mandaue to Insular Square', () async {
+    test('1.1.2: ABSCBN Mandaue to Insular Square', () async {
       await verifyCompatibleDrivers(
         rider: 'Arthur',
         shouldMatchWith: [
@@ -41,7 +30,7 @@ void main() {
         ],
       );
     });
-    test('1.1.4: 7/11 Lamac to Basak Elem Mandaue', () async {
+    test('1.1.3: 7/11 Lamac to Basak Elem Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: "Mother's Milk",
         shouldMatchWith: [
@@ -51,7 +40,7 @@ void main() {
         ],
       );
     });
-    test('1.1.5: Jollibee Lacion to Toyota Mandaue North', () async {
+    test('1.1.4: Jollibee Lacion to Toyota Mandaue North', () async {
       await verifyCompatibleDrivers(
         rider: "Frenchie",
         shouldMatchWith: [
@@ -61,7 +50,7 @@ void main() {
         ],
       );
     });
-    test('1.1.6: Enjoy Shopping Lacion to QBC Sporting Supplies', () async {
+    test('1.1.5: Enjoy Shopping Lacion to QBC Sporting Supplies', () async {
       await verifyCompatibleDrivers(
         rider: "Kimiko Miyashiro",
         shouldMatchWith: [
@@ -72,7 +61,7 @@ void main() {
         ],
       );
     });
-    test('1.1.7: Pike the Pet Lacion to Yasco Motor Parts Mandaue', () async {
+    test('1.1.6: Pike the Pet Lacion to Yasco Motor Parts Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: "Annie January",
         shouldMatchWith: [
@@ -187,7 +176,7 @@ void main() {
 
     test('1.3.4: Cafe Georg to Coastal Conservation and Education', () async {
       await verifyCompatibleDrivers(
-        rider: "Jesse Pinkman ",
+        rider: "Jesse Pinkman",
         shouldMatchWith: [
           "Skeleton Jack",
           "Rick Sanchez",
