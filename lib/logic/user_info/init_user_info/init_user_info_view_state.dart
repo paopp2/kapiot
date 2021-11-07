@@ -8,7 +8,7 @@ final userTypeProvider = StateProvider.autoDispose<UserType>(
 
 final pageIndexProvider = StateProvider((ref) {
   Future.delayed(Duration.zero, () => ref.controller.state = 1);
-  Future.delayed(const Duration(seconds: 3), () => ref.controller.state = 2);
+  Future.delayed(const Duration(seconds: 5), () => ref.controller.state = 2);
   return 0;
 });
 

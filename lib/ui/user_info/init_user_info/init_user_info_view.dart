@@ -1,9 +1,11 @@
+import 'package:entry/entry.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kapiot/constants/styles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_state.dart';
 import 'package:kapiot/logic/user_info/init_user_info/init_user_info_view_model.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
@@ -19,6 +21,7 @@ class InitUserInfoView extends HookConsumerWidget {
     final selectedUserType = ref.watch(userTypeProvider).state;
     final homeFieldText = ref.watch(homeFieldTextProvider).state;
     final nonHomeFieldText = ref.watch(nonHomeFieldTextProvider).state;
+    final currentUser = ref.watch(currentUserProvider)!;
 
     useEffect(() {
       model.initState();
@@ -30,86 +33,123 @@ class InitUserInfoView extends HookConsumerWidget {
         builder: (context, constraints) {
           final List<Widget> pageList = [
             const SizedBox(),
-            Text(
-              'Hi. Just a couple more things about yourself',
-              style: Styles.priMiddleSizedText,
-            ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Center(
-                    child: Wrap(
-                      spacing: constraints.maxWidth * 0.025,
-                      children: [
-                        ChoiceChip(
-                          onSelected: (_) =>
-                              model.setUserType(UserType.student),
-                          selected: selectedUserType == UserType.student,
-                          selectedColor: const Color(0xFFBFB4DA),
-                          labelPadding: const EdgeInsets.symmetric(
-                            vertical: 7,
-                            horizontal: 15,
-                          ),
-                          label: Text(
-                            'Student',
-                            style: Styles.secMiddleSizedText,
-                          ),
-                        ),
-                        ChoiceChip(
-                          onSelected: (_) =>
-                              model.setUserType(UserType.faculty),
-                          selected: selectedUserType == UserType.faculty,
-                          selectedColor: const Color(0xFFBFB4DA),
-                          labelPadding: const EdgeInsets.symmetric(
-                            vertical: 7,
-                            horizontal: 15,
-                          ),
-                          label: Text(
-                            'Faculty',
-                            style: Styles.secMiddleSizedText,
-                          ),
-                        ),
-                        ChoiceChip(
-                          onSelected: (_) => model.setUserType(UserType.staff),
-                          selected: selectedUserType == UserType.staff,
-                          selectedColor: const Color(0xFFBFB4DA),
-                          labelPadding: const EdgeInsets.symmetric(
-                            vertical: 7,
-                            horizontal: 15,
-                          ),
-                          label: Text(
-                            'Staff',
-                            style: Styles.secMiddleSizedText,
-                          ),
-                        ),
-                      ],
-                    ),
+                Entry(
+                  yOffset: 30,
+                  delay: const Duration(seconds: 2),
+                  duration: const Duration(seconds: 1),
+                  child: Text(
+                    'Hello ${currentUser.displayName!.split(' ').first}',
+                    style: Styles.priLargeSizedText,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
-                  child: ElevatedButton(
-                    onPressed: model.goToNextStep,
-                    style: TextButton.styleFrom(
-                      backgroundColor: const Color(0xFF5F45A4),
-                      elevation: 0,
-                      fixedSize: Size(constraints.maxWidth * 0.725, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    child: Text(
-                      'Submit',
-                      style: GoogleFonts.montserrat(
-                        color: Colors.white,
-                        fontSize: 17,
-                        letterSpacing: 1.5,
-                      ),
-                    ),
+                Entry.scale(
+                  delay: const Duration(seconds: 2),
+                  duration: const Duration(seconds: 2),
+                  child: Text(
+                    'Just a couple more things about yourself',
+                    style: Styles.priMiddleSizedText,
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: constraints.maxHeight,
+              width: constraints.maxWidth,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Choose community you belong to',
+                            style: Styles.priMiddleSizedText,
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: constraints.maxHeight * 0.05,
+                          ),
+                          Wrap(
+                            spacing: constraints.maxWidth * 0.025,
+                            children: [
+                              ChoiceChip(
+                                onSelected: (_) =>
+                                    model.setUserType(UserType.student),
+                                selected: selectedUserType == UserType.student,
+                                selectedColor: const Color(0xFFBFB4DA),
+                                labelPadding: const EdgeInsets.symmetric(
+                                  vertical: 7,
+                                  horizontal: 15,
+                                ),
+                                label: Text(
+                                  'Student',
+                                  style: Styles.secMiddleSizedText,
+                                ),
+                              ),
+                              ChoiceChip(
+                                onSelected: (_) =>
+                                    model.setUserType(UserType.faculty),
+                                selected: selectedUserType == UserType.faculty,
+                                selectedColor: const Color(0xFFBFB4DA),
+                                labelPadding: const EdgeInsets.symmetric(
+                                  vertical: 7,
+                                  horizontal: 15,
+                                ),
+                                label: Text(
+                                  'Faculty',
+                                  style: Styles.secMiddleSizedText,
+                                ),
+                              ),
+                              ChoiceChip(
+                                onSelected: (_) =>
+                                    model.setUserType(UserType.staff),
+                                selected: selectedUserType == UserType.staff,
+                                selectedColor: const Color(0xFFBFB4DA),
+                                labelPadding: const EdgeInsets.symmetric(
+                                  vertical: 7,
+                                  horizontal: 15,
+                                ),
+                                label: Text(
+                                  'Staff',
+                                  style: Styles.secMiddleSizedText,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin:
+                        EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                    child: ElevatedButton(
+                      onPressed: model.goToNextStep,
+                      style: TextButton.styleFrom(
+                        backgroundColor: const Color(0xFF5F45A4),
+                        elevation: 0,
+                        fixedSize: Size(constraints.maxWidth * 0.725, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 17,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
               height: constraints.maxHeight,
@@ -133,7 +173,7 @@ class InitUserInfoView extends HookConsumerWidget {
                             children: [
                               Text(
                                 'Saved Places',
-                                style: Styles.priLargedSizedText,
+                                style: Styles.priLargeSizedText,
                               ),
                               const SizedBox(height: 20),
                               Text(
