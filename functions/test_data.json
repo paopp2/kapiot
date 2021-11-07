@@ -785,15 +785,15 @@
       "acceptingDriverConfig": null,
       "endLocation": {
         "address": "YES Mart, Mactan Circumferential Road, Lapu-Lapu City, Cebu, Philippines",
-        "lat": 10.304074,
-        "lng": 123.0073734
+        "lat": 10.304253441319627,
+        "lng": 124.00722319320383
       },
       "riderCount": 1,
       "runtimeType": "rider",
       "startLocation": {
         "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines",
-        "lat": 10.3070114,
-        "lng": 123.0100629
+        "lat": 10.307261829568102,
+        "lng": 124.01009852107994
       },
       "timeOfTrip": "2021-08-29T06:45:22.819077",
       "user": {
@@ -809,16 +809,16 @@
       "id": "bmnIgkNSPz0P4eBgx2vpL8bAO9zG",
       "acceptingDriverConfig": null,
       "endLocation": {
-        "address": "AA BBQ Soong Branch, M.L. Quezon National Highway, Maribago, Lapu-Lapu City, Cebu",
-        "lat": 10.296584302302612, 
-        "lng": 124.00106820098407
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
       },
       "riderCount": 1,
       "runtimeType": "rider",
       "startLocation": {
-        "address": "Pajo, Lapu-Lapu City, Cebu, PhilippinesRF PRINT SERVICES, Casanta Soong, Lapu-Lapu City, Cebu, Philippines",
-        "lat": 10.3030118,
-        "lng": 123.006218
+        "address": "AA BBQ Soong Branch, M.L. Quezon National Highway, Maribago, Lapu-Lapu City, Cebu",
+        "lat": 10.296608053426377, 
+        "lng": 124.0010771028963
       },
       "timeOfTrip": "2021-08-29T06:45:22.819077",
       "user": {
