@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_model.dart';
 import 'package:kapiot/logic/rider/request_drivers/request_drivers_view_state.dart';
@@ -31,9 +33,13 @@ class DriverCard extends HookConsumerWidget {
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xffF2F3F8),
+          width: 2,
+        ),
       ),
       child: Material(
-        color: Colors.grey[100],
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           onTap: () => model
@@ -42,7 +48,7 @@ class DriverCard extends HookConsumerWidget {
           customBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          splashColor: Colors.black,
+          splashColor: const Color(0xFFF8F9FD),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,7 +67,7 @@ class DriverCard extends HookConsumerWidget {
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(12),
                       ),
-                      color: Color(0xffdbb3d4),
+                      color: Color(0xFF5F45A4),
                     ),
                     child: Align(
                       alignment: Alignment.centerRight,
@@ -69,13 +75,14 @@ class DriverCard extends HookConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const Icon(
-                            Icons.location_on_rounded,
+                            CupertinoIcons.location,
                             size: 18,
                             color: Colors.white,
                           ),
+                          const SizedBox(width: 5),
                           Text(
                             driverDistance,
-                            style: const TextStyle(
+                            style: GoogleFonts.montserrat(
                               fontSize: 12,
                               color: Colors.white,
                             ),
@@ -100,17 +107,23 @@ class DriverCard extends HookConsumerWidget {
                               margin: EdgeInsets.only(
                                 right: constraints.maxWidth * 0.025,
                               ),
+                              width: 50,
                               child: CircleAvatar(
-                                radius: constraints.maxHeight * 0.035,
-                                backgroundColor: Colors.blue,
+                                radius: 50,
                                 backgroundImage: NetworkImage(
                                   driverConfig.user.photoUrl ?? uscLogo,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(0xFF5F45A4),
+                                  width: 2,
                                 ),
                               ),
                             ),
                             Expanded(
                               child: SizedBox(
-                                height: constraints.maxHeight * 0.07,
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -121,18 +134,26 @@ class DriverCard extends HookConsumerWidget {
                                           'No name',
                                       overflow: TextOverflow.fade,
                                       softWrap: false,
-                                      style: const TextStyle(fontSize: 15),
+                                      style: GoogleFonts.montserrat(
+                                        color: const Color(0xff333333),
+                                        fontSize: 16,
+                                      ),
                                     ),
                                     Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         const Icon(
-                                          Icons.star,
+                                          Icons.star_rate,
                                           size: 18,
+                                          color: Color(0xFFFDCC0D),
                                         ),
+                                        const SizedBox(width: 5),
                                         Text(
                                           driverConfig.rating,
-                                          style: const TextStyle(
-                                            fontSize: 12,
+                                          style: GoogleFonts.montserrat(
+                                            color: const Color(0xff333333),
+                                            fontSize: 13,
                                           ),
                                         ),
                                       ],
@@ -155,7 +176,12 @@ class DriverCard extends HookConsumerWidget {
                               children: [
                                 Text(
                                   '${driverConfig.car.make} ${driverConfig.car.model}',
-                                  style: const TextStyle(fontSize: 15),
+                                  style: GoogleFonts.montserrat(
+                                    color: const Color(0xff333333),
+                                    fontSize: 13,
+                                  ),
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
                                 ),
                                 RichText(
                                   text: TextSpan(
@@ -164,43 +190,56 @@ class DriverCard extends HookConsumerWidget {
                                       TextSpan(
                                         text:
                                             '${driverConfig.car.licensePlateNum} - ',
-                                        style:
-                                            const TextStyle(color: Colors.grey),
+                                        style: GoogleFonts.montserrat(
+                                          color: const Color(0xFFAAAAAA),
+                                          fontSize: 13,
+                                        ),
                                       ),
                                       TextSpan(
                                         text:
                                             '${driverConfig.currentRiderCount}/${driverConfig.maxRiderCount}',
-                                        style: const TextStyle(
-                                          color: Colors.green,
+                                        style: GoogleFonts.montserrat(
+                                          color: const Color(0xFF5F45A4),
+                                          fontSize: 13,
                                         ),
                                       )
                                     ],
                                   ),
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
                                 ),
                               ],
                             ),
                           ),
-                          Column(
-                            children: [
-                              Image(
-                                image: driverConfig.car.type.image,
-                                height: constraints.maxHeight * 0.06,
-                              ),
-                            ],
+                          Image(
+                            image: driverConfig.car.type.image,
+                            height: constraints.maxHeight * 0.06,
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () => model.requestDriver(
-                                driverConfig.user.id,
-                              ),
-                              child: const Text('Hail Ride'),
-                            ),
+                      ElevatedButton(
+                        onPressed: () => model.requestDriver(
+                          driverConfig.user.id,
+                        ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xFF5F45A4),
+                          elevation: 0,
+                          fixedSize: Size(
+                            constraints.maxWidth * 0.5,
+                            40,
                           ),
-                        ],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                        ),
+                        child: Text(
+                          'Hail Ride',
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 17,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
                       ),
                     ],
                   ),

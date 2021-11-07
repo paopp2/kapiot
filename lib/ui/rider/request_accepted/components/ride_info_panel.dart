@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
+import 'package:kapiot/model/car/car.dart';
+import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/rider/request_accepted/components/divider_widget.dart';
 
 const uscLogo =
@@ -22,7 +26,7 @@ class RideInfoPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final acceptingDriverConfig =
-        ref.watch(acceptingDriverConfigProvider).state!;
+        ref.watch(acceptingDriverConfigProvider).state! as ForDriver;
     final acceptingDriver = acceptingDriverConfig.user;
     final driverName = acceptingDriver.displayName!;
     final estTimeArrival = ref.watch(driverArrivalTimeProvider).state;
@@ -34,13 +38,13 @@ class RideInfoPanel extends HookConsumerWidget {
         child: Column(
           children: [
             Container(
-              alignment: Alignment.bottomCenter,
-              height: constraints.maxHeight * 0.05,
+              alignment: Alignment.bottomLeft,
+              height: constraints.maxHeight * 0.08,
               child: Text(
                 '${driverName.firstName} is arriving in $estTimeArrival',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                style: GoogleFonts.montserrat(
+                  fontSize: 17,
+                  color: const Color(0xff333333),
                 ),
               ),
             ),
@@ -52,10 +56,12 @@ class RideInfoPanel extends HookConsumerWidget {
               child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(right: constraints.maxWidth * 0.02),
+                    margin: EdgeInsets.only(
+                      right: constraints.maxWidth * 0.025,
+                    ),
                     child: Material(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       elevation: 2.5,
                       child: Container(
@@ -71,85 +77,105 @@ class RideInfoPanel extends HookConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: SizedBox(
-                      height: 60,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 21,
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Text(
-                                      '${driverName.firstName} ${driverName.lastName}',
-                                      style: const TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 21,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  '${driverName.firstName} ${driverName.lastName}',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 17,
+                                    color: const Color(0xff333333),
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                const Text(
-                                  'Suzuki Ertiga',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
+                              ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.star_rate,
+                                  size: 18,
+                                  color: Color(0xFFFDCC0D),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '4.8',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    color: const Color(0xFFAAAAAA),
                                   ),
                                 )
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            width: constraints.maxWidth * 0.2,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        right: constraints.maxWidth * 0.02,
-                                      ),
-                                      child: const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                    ),
-                                    const Text(
-                                      '4.8',
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
+                                const Icon(
+                                  CupertinoIcons.location,
+                                  size: 18,
+                                  color: Color(0xFFAAAAAA),
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        right: constraints.maxWidth * 0.02,
-                                      ),
-                                      child: const Icon(
-                                        Icons.location_on,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    const Text(
-                                      '9 mins',
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  estTimeArrival,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    color: const Color(0xFFAAAAAA),
+                                  ),
                                 )
                               ],
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Image(
+                              image: acceptingDriverConfig.car.type.image,
+                              height: 50,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: const TextStyle(fontSize: 12),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        '${acceptingDriverConfig.car.make} ${acceptingDriverConfig.car.model} - ',
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xFFAAAAAA),
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: acceptingDriverConfig
+                                        .car.licensePlateNum,
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xFF333333),
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   )
                 ],
@@ -161,9 +187,13 @@ class RideInfoPanel extends HookConsumerWidget {
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.02),
-                  child: const Text(
-                    'PASSENGERS',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  child: Text(
+                    'Passengers',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 15,
+                      color: const Color(0xff333333),
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 Column(
@@ -201,8 +231,13 @@ class RideInfoPanel extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      'You and $coRiderCount other people',
-                      style: const TextStyle(color: Colors.grey),
+                      coRiderConfigsStream.data?.value.isEmpty ?? true
+                          ? 'Just you'
+                          : 'You and $coRiderCount other people',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        color: const Color(0xFFAAAAAA),
+                      ),
                     ),
                   ],
                 ),
@@ -214,22 +249,27 @@ class RideInfoPanel extends HookConsumerWidget {
                 margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.015),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       margin: EdgeInsets.only(
                         bottom: constraints.maxHeight * 0.005,
                       ),
-                      child: const Text(
+                      child: Text(
                         '10.0 points',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 15,
+                          color: const Color(0xff333333),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Ride Reward',
-                      style: TextStyle(color: Colors.grey),
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        color: const Color(0xFFAAAAAA),
+                      ),
                     ),
                   ],
                 ),
