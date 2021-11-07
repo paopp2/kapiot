@@ -128,7 +128,7 @@ void main() {
       rider: "Dupli-Kate",
       shouldMatchWith: [
         "The Invincible",
-        "Battles Beast",
+        "Battle Beast",
         "Mauler",
       ],
     );
@@ -139,7 +139,7 @@ void main() {
       rider: "Black Samson",
       shouldMatchWith: [
         "The Invincible",
-        "Battles Beast",
+        "Battle Beast",
         "Mauler",
       ],
     );
@@ -151,7 +151,7 @@ void main() {
       rider: "Titan",
       shouldMatchWith: [
         "The Invincible",
-        "Battles Beast",
+        "Battle Beast",
         "Mauler",
       ],
     );
@@ -162,7 +162,7 @@ void main() {
       rider: "Cecil",
       shouldMatchWith: [
         "The Invincible",
-        "Battles Beast",
+        "Battle Beast",
         "Mauler",
       ],
     );
