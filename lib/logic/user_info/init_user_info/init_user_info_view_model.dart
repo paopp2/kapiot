@@ -62,6 +62,7 @@ class InitUserInfoViewModel extends ViewModel {
       userType: userType,
     );
     userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);
+    read(pageIndexProvider).state = 0;
     AppRouter.instance.popView();
   }
 }

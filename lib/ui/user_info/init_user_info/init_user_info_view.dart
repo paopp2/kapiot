@@ -35,29 +35,35 @@ class InitUserInfoView extends HookConsumerWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final List<Widget> pageList = [
-              const SizedBox(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Entry(
-                    yOffset: 30,
-                    delay: const Duration(seconds: 2),
-                    duration: const Duration(seconds: 1),
-                    child: Text(
-                      'Hello ${currentUser.displayName!.firstName}',
-                      style: Styles.priLargeSizedText,
+              Builder(builder: (context) {
+                Future.delayed(Duration.zero, model.goToNextStep);
+                return const SizedBox();
+              }),
+              Builder(builder: (context) {
+                Future.delayed(const Duration(seconds: 4), model.goToNextStep);
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Entry(
+                      yOffset: 30,
+                      delay: const Duration(seconds: 2),
+                      duration: const Duration(seconds: 1),
+                      child: Text(
+                        'Hello ${currentUser.displayName!.firstName}',
+                        style: Styles.priLargeSizedText,
+                      ),
                     ),
-                  ),
-                  Entry.opacity(
-                    delay: const Duration(milliseconds: 2250),
-                    duration: const Duration(milliseconds: 250),
-                    child: Text(
-                      'Just a couple more things about yourself',
-                      style: Styles.priMiddleSizedText,
+                    Entry.opacity(
+                      delay: const Duration(milliseconds: 2250),
+                      duration: const Duration(milliseconds: 250),
+                      child: Text(
+                        'Just a couple more things about yourself',
+                        style: Styles.priMiddleSizedText,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                );
+              }),
               SizedBox(
                 height: constraints.maxHeight,
                 width: constraints.maxWidth,
@@ -269,7 +275,7 @@ class InitUserInfoView extends HookConsumerWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: model.updateUserInfo,
+                            onPressed: model.goToNextStep,
                             child: Text(
                               'Set Up Later',
                               style: GoogleFonts.montserrat(
@@ -282,12 +288,18 @@ class InitUserInfoView extends HookConsumerWidget {
                         ],
                       ),
                     ),
-                    const Center(
-                      child: Text('Welcome to Kapiot'),
-                    )
                   ],
                 ),
               ),
+              Builder(builder: (context) {
+                Future.delayed(
+                  const Duration(seconds: 2),
+                  model.updateUserInfo,
+                );
+                return const Center(
+                  child: Text('Welcome to Kapiot'),
+                );
+              }),
             ];
             return Scaffold(
               backgroundColor: Colors.white,
