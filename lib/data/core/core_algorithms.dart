@@ -75,6 +75,10 @@ class CoreAlgorithms {
       },
     );
 
+    // Initial yield (Without this, stream won't yield any data if there are no
+    // compatible drivers due to the logic below. App will be stuck at loading)
+    yield (List.empty());
+
     // To avoid unnecessary rebuilds to listeners (eg. StreamBuilders), only
     // emit data that is not equal to the last one (directly returning
     // the stream above (compatibleDriversStream) emits data everytime

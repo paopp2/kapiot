@@ -27,7 +27,7 @@ class DriverCardStream extends HookConsumerWidget {
           error: (_, __) => const Center(
             child: Text('Error'),
           ),
-          loading: () => LoadingWidget(),
+          loading: () => const LoadingWidget(),
           data: (compatibleDriverConfigs) {
             return compatibleDriverConfigs.isEmpty
                 ? SizedBox(
