@@ -1,0 +1,205 @@
+{
+ "userInfoList": [
+    {
+      "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
+      "points": 186.2266666666667,
+      "savedLocations": {
+        "Insular Square": {
+          "lat": 10.3502975,
+          "lng": 123.9482916,
+          "address": "Insular Square, Central Nautical Highway, Mandaue City, Cebu, Philippines"
+        },
+        "Jollibee Lacion": {
+          "lat": 10.3763113,
+          "lng": 123.9598846,
+          "address": "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines"
+        },
+        "School": {
+          "lat": 10.3521222,
+          "lng": 123.9132676,
+          "address": "University of San Carlos - Talamban Campus, Cebu City, Cebu, Philippines"
+        },
+        "SM Lacion": {
+          "lat": 10.380356,
+          "lng": 123.964477,
+          "address": "SM City Consolacion, Consolacion, Cebu, Philippines"
+        },
+        "Pacific Mall": {
+          "lat": 10.3410007,
+          "lng": 123.9474857,
+          "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu, Philippines"
+        },
+        "Home": {
+          "lat": 10.3831373,
+          "lng": 123.9720752,
+          "address": "Pitogo Barangay Hall, National Highway, Pitogo, Consolacion, Cebu, Philippines"
+        }
+      },
+      "userType": "student",
+      "driverInfo": {
+        "registeredCars": [
+          {
+            "licensePlateNum": "XYZ 789",
+            "make": "BUGATTI",
+            "model": "VEYRON",
+            "type": "coupe"
+          },
+          {
+            "licensePlateNum": "DAD 069",
+            "make": "BENTLEY",
+            "model": "BENTAYGA",
+            "type": "suv"
+          },
+          {
+            "licensePlateNum": "PEN 150",
+            "make": "AUDI",
+            "model": "R8",
+            "type": "coupe"
+          },
+          {
+            "licensePlateNum": "CBA 321",
+            "make": "FORD",
+            "model": "F-150",
+            "type": "pickup"
+          }
+        ],
+        "ratingResponseCount": 250,
+        "rateTotal": 1234
+      }
+    },
+    {
+      "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
+      "points": 119.0611191017,
+      "savedLocations": {
+        "BB Wings": {
+          "lat": 10.331368915966438,
+          "lng": 123.90603965881408,
+          "address": "New York Buffalo Brad's Hot Wings"
+        },
+        "SM Cebu": {
+          "lat": 10.311607537040743,
+          "lng": 123.91784795512177,
+          "address": "SM City Cebu, SM City Cebu, Juan Luna Avenue Extension, Cebu City, Cebu"
+        },
+        "School": {
+          "lat": 10.3521222,
+          "lng": 123.9132676,
+          "address": "University of San Carlos - Talamban Campus, Cebu City, Cebu, Philippines"
+        },
+        "Ayala": {
+          "lat": 10.318612367074637,
+          "lng": 123.90442012628672,
+          "address": "Ayala Center Cebu, ayala center cebu, Archbishop Reyes Avenue, Cebu City, Cebu"
+        },
+        "Church": {
+          "lat": 10.314860579735567,
+          "lng": 123.91400062997877,
+          "address": "Mabolo Church, Pope John Paul II Avenue, Cebu City, Cebu"
+        },
+        "Home": {
+          "lat": 10.367889719514777,
+          "lng": 123.91384988211136,
+          "address": "Sunny Hills Subd Talamban Cebu City, Talamban Highway, Cebu City, Cebu"
+        }
+      },
+      "userType": "student",
+      "driverInfo": {
+        "registeredCars": [
+          {
+            "licensePlateNum": "JEJ 143",
+            "make": "CHRYSLER",
+            "model": "SEBRING",
+            "type": "coupe"
+          },
+          {
+            "licensePlateNum": "FAG 999",
+            "make": "PORCHE",
+            "model": "MACAN",
+            "type": "suv"
+          },
+          {
+            "licensePlateNum": "GA 1078",
+            "make": "BMW",
+            "model": "750i",
+            "type": "sedan"
+          },
+          {
+            "licensePlateNum": "CBA 321",
+            "make": "RAM",
+            "model": "1500",
+            "type": "pickup"
+          }
+        ],
+        "ratingResponseCount": 450,
+        "rateTotal": 2134
+      }
+    },
+    {
+      "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
+      "points": 219.0516691781,
+      "savedLocations": {
+        "Mactan Doc": {
+          "lat": 10.2898386,
+          "lng": 123.9668083,
+          "address": "Mactan Doctors' Hospital, Jr. Avenue, Lapu-Lapu City, Cebu, Philippines"
+        },
+        "Sebastien Hotel": {
+          "lat": 10.3070114,
+          "lng": 123.0100629,
+          "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines"
+        },
+        "School": {
+          "lat": 10.3521222,
+          "lng": 123.9132676,
+          "address": "University of San Carlos - Talamban Campus, Cebu City, Cebu, Philippines"
+        },
+        "Pajo": {
+          "lat": 10.3030118,
+          "lng": 123.006218,
+          "address": "Pajo, Lapu-Lapu City, Cebu, PhilippinesRF PRINT SERVICES, Casanta Soong, Lapu-Lapu City, Cebu, Philippines"
+        },
+        "Mactan Ecozone": {
+          "lat": 10.29103,
+          "lng": 123.96105,
+          "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu"
+        },
+        "Home": {
+          "lat": 10.30058,
+          "lng": 123.96239,
+          "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu"
+        }
+      },
+      "userType": "student",
+      "driverInfo": {
+        "registeredCars": [
+          {
+            "licensePlateNum": "YKS 240",
+            "make": "CHEVROLET",
+            "model": "SPARK",
+            "type": "hatchback"
+          },
+          {
+            "licensePlateNum": "FAG 666",
+            "make": "NISSAN",
+            "model": "NAVARA",
+            "type": "pickup"
+          },
+          {
+            "licensePlateNum": "GAN 078",
+            "make": "HONDA",
+            "model": "CIVIC",
+            "type": "sedan"
+          },
+          {
+            "licensePlateNum": "SEX 030",
+            "make": "FORD",
+            "model": "EXPLORER",
+            "type": "suv"
+          }
+        ],
+        "ratingResponseCount": 800,
+        "rateTotal": 3860 
+      }
+    }
+  ]
+}
