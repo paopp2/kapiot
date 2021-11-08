@@ -38,7 +38,6 @@ class DriverCardStream extends HookConsumerWidget {
                           'No Drivers Found',
                           style: GoogleFonts.poppins(
                             fontSize: 24,
-                            fontWeight: FontWeight.bold,
                             color: const Color(0xFF333333),
                           ),
                         ),
