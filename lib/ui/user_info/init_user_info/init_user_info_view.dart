@@ -298,8 +298,12 @@ class InitUserInfoView extends HookConsumerWidget {
                   const Duration(seconds: 2),
                   model.updateUserInfo,
                 );
-                return const Center(
-                  child: Text('Welcome to Kapiot'),
+                return Center(
+                  child: Text(
+                    'Welcome to Kapiot',
+                    style: Styles.priLargeSizedText,
+                    textAlign: TextAlign.center,
+                  ),
                 );
               }),
               const SizedBox(),
