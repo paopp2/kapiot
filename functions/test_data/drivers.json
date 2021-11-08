@@ -1,0 +1,532 @@
+{
+  "driversList": [
+    {
+      "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
+      "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-29T06:47:07.099561",
+      "startLocation": {
+        "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.30058,
+        "lng": 123.96239
+      },
+      "endLocation": {
+        "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu",
+        "lat": 10.29103,
+        "lng": 123.96105
+      },
+      "user": {
+        "displayName": "Charles Jr. Ausejo",
+        "email": "16100938@usc.edu.ph",
+        "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
+        "phoneNumber": "",
+        "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "YKS 240",
+        "make": "CHEVROLET",
+        "model": "SPARK",
+        "type": "hatchback"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
+      "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
+        "lat": 10.367900273181055,
+        "lng": 123.9138391534901
+      },
+      "endLocation": {
+        "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
+        "lat": 10.318707364922172,
+        "lng": 123.9044093976717
+      },
+      "user": {
+        "displayName": "Christian Benedict Gonzales",
+        "email": "18105024@gmail.com",
+        "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
+        "phoneNumber": "",
+        "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gi6RZJXfmElWMUsZUJ0O7zZwQboH7mEH3Hcnxmc=s96-c",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "FAG 1401",
+        "make": "SUZUKI",
+        "model": "ERTIGA",
+        "type": "mpv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.9"
+    },
+    {
+      "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
+      "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T12:41:39.580591",
+      "startLocation": {
+        "address": "Vito Pepito Compound, Cebu North Road, Pitogo, Consolacion, Cebu",
+        "lat": 10.382572715457858,
+        "lng": 123.97153989606615
+      },
+      "endLocation": {
+        "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu",
+        "lat": 10.341275111172251,
+        "lng": 123.94751788441926
+      },
+      "user": {
+        "displayName": "Nicolas Paolo Pepito",
+        "email": "16100825@usc.edu.ph",
+        "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
+        "phoneNumber": "",
+        "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c",
+        "userType": "staff"
+      },
+      "car": {
+        "licensePlateNum": "XYZ 789",
+        "make": "BUGATTI",
+        "model": "VEYRON",
+        "type": "coupe"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
+      "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-29T06:47:07.099561",
+      "startLocation": {
+        "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.30058,
+        "lng": 123.96239
+      },
+      "endLocation": {
+        "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu",
+        "lat": 10.29103,
+        "lng": 123.96105
+      },
+      "user": {
+        "displayName": "Baby Driver",
+        "email": "babydriver@email.com",
+        "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
+        "phoneNumber": "",
+        "photoUrl": "https://i.pinimg.com/originals/94/d3/8c/94d38cd264ea699ef6ce1a067f764611.jpg",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "YKS 240",
+        "make": "CHEVROLET",
+        "model": "SPARK",
+        "type": "hatchback"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
+      "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T12:41:39.580591",
+      "startLocation": {
+        "address": "Vito Pepito Compound, Cebu North Road, Pitogo, Consolacion, Cebu",
+        "lat": 10.382572715457858,
+        "lng": 123.97153989606615
+      },
+      "endLocation": {
+        "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu",
+        "lat": 10.341275111172251,
+        "lng": 123.94751788441926
+      },
+      "user": {
+        "displayName": "Dominic Toretto",
+        "email": "fastnfurious4eva@usc.com",
+        "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/fastandfurious/images/5/59/Dom_-_Fast9Profile.jpeg/revision/latest?cb=20200310093642",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "DAD 069",
+        "make": "BENTLEY",
+        "model": "BENTAYGA",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
+      "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
+        "lat": 10.367900273181055,
+        "lng": 123.9138391534901
+      },
+      "endLocation": {
+        "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
+        "lat": 10.318707364922172,
+        "lng": 123.9044093976717
+      },
+      "user": {
+        "displayName": "Mad Max",
+        "email": "mad_max69@gmail.com",
+        "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
+        "phoneNumber": "",
+        "photoUrl": "https://c4.wallpaperflare.com/wallpaper/210/209/106/movie-mad-max-fury-road-max-rockatansky-tom-hardy-wallpaper-preview.jpg",
+        "userType": "staff"
+      },
+      "car": {
+        "licensePlateNum": "GAB 116",
+        "make": "NISSAN",
+        "model": "TERRA",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.8"
+    },
+    {
+      "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
+      "encodedRoute": "q~u}@gjusVG?IJs@f@Zt@zBjEvAdC{CzA_GvCe@VuKjFaTtJsGtCy@^iC~@aF`BsFjBiJzCeF~A{@TWH[g@mBiCq@w@KUCSD{@Ak@Yq@k@u@u@s@iChBs@n@[\\jApA|BdCbEdEmCx@oCfAwDdBiCnAmAh@_AZyIbCeCv@{DtAyAp@eDhBkBx@qAf@sAn@{@p@_@b@a@\\SPLNJPBj@I`AQz@kCfKcCpJOd@u@xC}AtF_@fAGPWTgAj@{@h@c@PuDvBFLBB\\NjJbCrB`@dCp@`Dx@NLxBi@rA[nAWbC_@",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Marigondon, Lapu-Lapu City, Cebu",
+        "lat": 10.27577,
+        "lng": 123.97748
+      },
+      "endLocation": {
+        "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.29983,
+        "lng": 123.95174
+      },
+      "user": {
+        "displayName": "Omni Man",
+        "email": "omni_man_420@gmail.com",
+        "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
+        "phoneNumber": "",
+        "photoUrl": "https://cdnb.artstation.com/p/assets/video_clips/images/037/231/373/large/sebastian-montecinos-thumb.jpg?1619826532",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "GAN 240",
+        "make": "NISSAN",
+        "model": "NAVARA",
+        "type": "pickup"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "s26b3o1rpuiw1lzebv88llz7zt2l",
+      "encodedRoute": "q~u}@gjusVG?IJs@f@Zt@zBjEvAdC{CzA_GvCe@VuKjFaTtJsGtCy@^iC~@aF`BsFjBiJzCeF~A{@TWH[g@mBiCq@w@KUCSD{@Ak@Yq@k@u@u@s@iChBs@n@[\\jApA|BdCbEdEmCx@oCfAwDdBiCnAmAh@_AZyIbCeCv@{DtAyAp@eDhBkBx@qAf@sAn@{@p@_@b@a@\\SPLNJPBj@I`AQz@kCfKcCpJOd@u@xC}AtF_@fAGPWTgAj@{@h@c@PuDvBFLBB\\NjJbCrB`@dCp@`Dx@NLxBi@rA[nAWbC_@",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Marigondon, Lapu-Lapu City, Cebu",
+        "lat": 10.27577,
+        "lng": 123.97748
+      },
+      "endLocation": {
+        "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.29983,
+        "lng": 123.95174
+      },
+      "user": {
+        "displayName": "Damien Darkblood",
+        "email": "damien_de_man_420@gmail.com",
+        "id": "s26b3o1rpuiw1lzebv88llz7zt2l",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/imagecomics/images/e/e0/Damien_Darkblood_Invincible_001.jpg/revision/latest?cb=20151221193954",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "GAN 250",
+        "make": "NISSAN",
+        "model": "TERRA",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "s26b3o1rpuiw1lzebv88llz7zt2q",
+      "encodedRoute": "q~u}@gjusVG?IJs@f@Zt@zBjEvAdC{CzA_GvCe@VuKjFaTtJsGtCy@^iC~@aF`BsFjBiJzCeF~A{@TWH[g@mBiCq@w@KUCSD{@Ak@Yq@k@u@u@s@iChBs@n@[\\jApA|BdCbEdEmCx@oCfAwDdBiCnAmAh@_AZyIbCeCv@{DtAyAp@eDhBkBx@qAf@sAn@{@p@_@b@a@\\SPLNJPBj@I`AQz@kCfKcCpJOd@u@xC}AtF_@fAGPWTgAj@{@h@c@PuDvBFLBB\\NjJbCrB`@dCp@`Dx@NLxBi@rA[nAWbC_@",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Marigondon, Lapu-Lapu City, Cebu",
+        "lat": 10.27577,
+        "lng": 123.97748
+      },
+      "endLocation": {
+        "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.29983,
+        "lng": 123.95174
+      },
+      "user": {
+        "displayName": "Allen the Alien",
+        "email": "allen_420@gmail.com",
+        "id": "s26b3o1rpuiw1lzebv88llz7zt2q",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/imagecomics/images/1/1f/Allen_The_Alien_%28Invincible%29_006.jpg/revision/latest/scale-to-width-down/200?cb=20150623170428",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "GAN 260",
+        "make": "NISSAN",
+        "model": "ALMERA",
+        "type": "sedan"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
+      "encodedRoute": "ax{}@m{{sVhAEAE?WVe@l@eANq@ZyA?IGOMQSQSEeAImBCeCIy@DS\\eApBo@tAUZOPITC^CzAKfAb@VnBjAbDlBtA|@~GrHlG`HdBvAhBlAvAbAlAfAh@h@z@v@dAh@~Ah@dAV~Ab@lAj@rAbAf@d@|AdBxDlGvBlDZ^x@n@`EdCdAh@x@Vl@Fr@BpAAdCExCG`DI~@Ej@Iz@Wt@]jAw@~A_Ab@Op@?t@JTHp@d@nA|AjBvBfDvDpB|Bp@|@`@z@|@`CT`@V`@~@dAp@n@jBbBdCvBdBzAf@h@j@`AtDbIzCtGv@hBjDtHpGpNxA~C|C~GPv@JfAC\\GZa@rAi@xAWbAKz@AhAH|Av@zEXfBT|@Zt@zBjE|CxFf@|@|@pArB|CzAzB~@hBjFpMdEdIh@r@\\PNDz@L~@Rx@j@zHpGfDtBnBpA^^^d@lA|Bv@bApDzDpElFfEdFl@p@`CpBt@n@xEfE`F~D~@~@~CnDjEvEpD|DbCxCl@~@fAtBVf@e@ROJSTuAvBOLmA\\iCh@m@Z]ZMVCHWrAUh@Mj@a@jAE`@BXmAZgOvDkBd@m@JuI~@{O`BkCPaBJqLrAwHn@iCRuDR_FVy@?kBI",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "user": {
+        "displayName": "The Invincible",
+        "email": "the_invincible_20@gmail.com",
+        "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
+        "phoneNumber": "",
+        "photoUrl": "https://m.media-amazon.com/images/M/MV5BM2NhNmZiZjgtNmEzZi00YjYyLTg4ZDMtOGIyOWYxMmIzYmViXkEyXkFqcGdeQWFybm8@._V1_QL75_UX500_CR0,0,500,281_.jpg",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "GAN 240",
+        "make": "NISSAN",
+        "model": "NAVARA",
+        "type": "pickup"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "3hngi1y8vuw1jid1bka8a9kdjyc6",
+      "encodedRoute": "ax{}@m{{sVhAEAE?WVe@l@eANq@ZyA?IGOMQSQSEeAImBCeCIy@DS\\eApBo@tAUZOPITC^CzAKfAb@VnBjAbDlBtA|@~GrHlG`HdBvAhBlAvAbAlAfAh@h@z@v@dAh@~Ah@dAV~Ab@lAj@rAbAf@d@|AdBxDlGvBlDZ^x@n@`EdCdAh@x@Vl@Fr@BpAAdCExCG`DI~@Ej@Iz@Wt@]jAw@~A_Ab@Op@?t@JTHp@d@nA|AjBvBfDvDpB|Bp@|@`@z@|@`CT`@V`@~@dAp@n@jBbBdCvBdBzAf@h@j@`AtDbIzCtGv@hBjDtHpGpNxA~C|C~GPv@JfAC\\GZa@rAi@xAWbAKz@AhAH|Av@zEXfBT|@Zt@zBjE|CxFf@|@|@pArB|CzAzB~@hBjFpMdEdIh@r@\\PNDz@L~@Rx@j@zHpGfDtBnBpA^^^d@lA|Bv@bApDzDpElFfEdFl@p@`CpBt@n@xEfE`F~D~@~@~CnDjEvEpD|DbCxCl@~@fAtBVf@e@ROJSTuAvBOLmA\\iCh@m@Z]ZMVCHWrAUh@Mj@a@jAE`@BXmAZgOvDkBd@m@JuI~@{O`BkCPaBJqLrAwHn@iCRuDR_FVy@?kBI",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "user": {
+        "displayName": "Battle Beast",
+        "email": "the_beast_breast@gmail.com",
+        "id": "3hngi1y8vuw1jid1bka8a9kdjyc6",
+        "phoneNumber": "",
+        "photoUrl": "https://www.cheatsheet.com/wp-content/uploads/2021/04/BATTLE-BEAST.jpeg",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "GAN 340",
+        "make": "NISSAN",
+        "model": "TERRA",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "3hngi1y8vuw1jid1bka8a9kdjyc7",
+      "encodedRoute": "ax{}@m{{sVhAEAE?WVe@l@eANq@ZyA?IGOMQSQSEeAImBCeCIy@DS\\eApBo@tAUZOPITC^CzAKfAb@VnBjAbDlBtA|@~GrHlG`HdBvAhBlAvAbAlAfAh@h@z@v@dAh@~Ah@dAV~Ab@lAj@rAbAf@d@|AdBxDlGvBlDZ^x@n@`EdCdAh@x@Vl@Fr@BpAAdCExCG`DI~@Ej@Iz@Wt@]jAw@~A_Ab@Op@?t@JTHp@d@nA|AjBvBfDvDpB|Bp@|@`@z@|@`CT`@V`@~@dAp@n@jBbBdCvBdBzAf@h@j@`AtDbIzCtGv@hBjDtHpGpNxA~C|C~GPv@JfAC\\GZa@rAi@xAWbAKz@AhAH|Av@zEXfBT|@Zt@zBjE|CxFf@|@|@pArB|CzAzB~@hBjFpMdEdIh@r@\\PNDz@L~@Rx@j@zHpGfDtBnBpA^^^d@lA|Bv@bApDzDpElFfEdFl@p@`CpBt@n@xEfE`F~D~@~@~CnDjEvEpD|DbCxCl@~@fAtBVf@e@ROJSTuAvBOLmA\\iCh@m@Z]ZMVCHWrAUh@Mj@a@jAE`@BXmAZgOvDkBd@m@JuI~@{O`BkCPaBJqLrAwHn@iCRuDR_FVy@?kBI",
+      "runtimeType": "driver",
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "user": {
+        "displayName": "Mauler",
+        "email": "og_mauler@gmail.com",
+        "id": "3hngi1y8vuw1jid1bka8a9kdjyc7",
+        "phoneNumber": "",
+        "photoUrl": "https://www.writeups.org/wp-content/uploads/Mauler-Twins-Invincible-Comics-j.jpg",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "GAN 440",
+        "make": "NISSAN",
+        "model": "ALMERA",
+        "type": "sedan"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5"
+    },
+    {
+      "id": "njZvKhumuBwVcBruGOTT1kUwh5p6",
+      "user": {
+        "id": "njZvKhumuBwVcBruGOTT1kUwh5p6",
+        "displayName": "Billy Butcher",
+        "email": "billybutcher@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://www.looper.com/img/gallery/this-is-the-worst-thing-billy-butcher-has-done-on-the-boys/intro-1616676416.jpg",
+        "userType": "staff"
+      },
+      "car": {
+        "licensePlateNum": "PEN 150",
+        "make": "AUDI",
+        "model": "R8",
+        "type": "coupe"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5",
+      "timeOfTrip": "2021-09-05T09:20:18.358634",
+      "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@k@zC",
+      "startLocation": {
+        "address": "Vito Pepito Compound, Cebu North Road, Pitogo, Consolacion, Cebu",
+        "lat": 10.382572715457858,
+        "lng": 123.97153989606615
+      },
+      "endLocation": {
+        "address": "Insular Square, Central Nautical Highway, Mandaue City, Cebu",
+        "lat": 10.350899084422592,
+        "lng": 123.94838815743111
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "oEMIyKdPlsgJh7vk42FhMD7EG418",
+      "user": {
+        "id": "oEMIyKdPlsgJh7vk42FhMD7EG418",
+        "displayName": "Hughie Campbell",
+        "email": "hughiecampbell@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/9/90/Hughie_Campbell_S2.jpg/revision/latest?cb=20200906153928",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "CBA 321",
+        "make": "FORD",
+        "model": "F-150",
+        "type": "pickup"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.5",
+      "timeOfTrip": "2021-09-05T09:23:05.430842",
+      "encodedRoute": "shj~@{xrsVEXL^DJ`@x@xBmAZl@\\d@bCjDzBhDb@r@hBdFJb@FjAJj@VvCVzDLlBF^Lb@n@pA\\p@b@r@t@t@dC`CdAv@j@ZvFvBxDbBpB`Ab@FTLpAf@v@PT@n@BbBAx@Bl@Dj@LXL~A`AhKjGzHtE~@\\zAT`Kt@xBHfFOlEQpI]fDQnC@`AHlFZtJx@vH`AtFdA~EbArGdApJnAvCb@f@DnAFr@AtBIvBXvBh@|@PbCp@FBDMVgACEk@M",
+      "startLocation": {
+        "address": "SM City Consolacion, Consolacion, Cebu",
+        "lat": 10.380190604294885,
+        "lng": 123.96463469791321
+      },
+      "endLocation": {
+        "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu",
+        "lat": 10.341275111172251,
+        "lng": 123.94751788441926
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "MyuLyfz42jzjomzNj6pfsAo7sX7x",
+      "user": {
+        "id": "MyuLyfz42jzjomzNj6pfsAo7sX7x",
+        "displayName": "Skeleton Jack",
+        "email": "jskeleton@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/disney/images/0/06/Profile_-_Jack_Skellington.jpeg/revision/latest?cb=20190316145716",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "CBG 119",
+        "make": "MAZDA",
+        "model": "3",
+        "type": "hatchback"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 3,
+      "rating": "4.7",
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "encodedRoute": "g||}@}sisVmEhDQ?}D}Eg@h@|BxCBNrAhByCjCiB`Bw@d@w@ZaB|@uAp@wC~AcIhE{KzFkCvAeAj@_EnBmDjBwKxFg@X{C`B{@^s@k@]Q}Am@oBo@s@MOAOGqBm@e@QwHeCmDgAoCo@}Do@uIeAmMoAgEe@eCUaAIYGw@KoEc@_E[K@c@E{KkA{BUwK_AiOyAsDe@oHw@qHiAuDq@sDs@m@Kq@UIC[l@a@x@YdA[lBc@?OBIFCFM|@e@bCSr@]v@S\\c@\\k@JuADiBC_DX",
+      "startLocation": {
+        "address": "SM City Cebu, Kaohsiung St., Cebu City, Cebu",
+        "lat": 10.31171309261737,
+        "lng": 123.91777285346731
+      },
+      "endLocation": {
+        "address": "D' Family Park, Cebu City, Cebu",
+        "lat": 10.358790249884327,
+        "lng": 123.91071495346755
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "X83R3O1cWgdP9znc28WkMUWZ7ORg",
+      "user": {
+        "id": "X83R3O1cWgdP9znc28WkMUWZ7ORg",
+        "displayName": "Rick Sanchez",
+        "email": "ricksanchez@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/rickandmorty/images/3/3c/Untitled117.png/revision/latest/top-crop/width/360/height/360?cb=20190519213632",
+        "userType": "staff"
+      },
+      "car": {
+        "licensePlateNum": "SEJ 017",
+        "make": "MAZDA",
+        "model": "CX30",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.6",
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "encodedRoute": "_s`~@e~esVTk@CKEEKA{@D[KhC}G^cAdE_KpDyIfDcHLYdA_B|BeDVMXQIKw@o@kAg@qBq@mA]_@CkCy@oDoAkGqBwBk@}Dw@mJmAaHu@_E_@gHu@gDYq@MsEe@eE_@YB]EGGIEo@KqCUoEk@IGMOEKCKXsD@e@A_@COh@iGZ_BBM",
+      "startLocation": {
+        "address": "JY Square Mall, Salinas Drive, Cebu City, Cebu",
+        "lat": 10.330265920863818,
+        "lng": 123.89858618230369
+      },
+      "endLocation": {
+        "address": "Cebu Home and Builders Centre, A.S. Fortuna St., Mandaue City, Cebu",
+        "lat": 10.34369866360422,
+        "lng": 123.91594826881274
+      },
+      "runtimeType": "driver"
+    }
+  ]
+}
