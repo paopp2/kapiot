@@ -137,8 +137,9 @@ class InitUserInfoView extends HookConsumerWidget {
                       ),
                     ),
                     Container(
-                      margin:
-                          EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                      margin: EdgeInsets.only(
+                        bottom: constraints.maxHeight * 0.05,
+                      ),
                       child: ElevatedButton(
                         onPressed: model.goToNextStep,
                         style: TextButton.styleFrom(
@@ -165,9 +166,7 @@ class InitUserInfoView extends HookConsumerWidget {
               Container(
                 height: constraints.maxHeight,
                 width: constraints.maxWidth,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -251,8 +250,9 @@ class InitUserInfoView extends HookConsumerWidget {
                       ),
                     ),
                     Container(
-                      margin:
-                          EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                      margin: EdgeInsets.only(
+                        bottom: constraints.maxHeight * 0.05,
+                      ),
                       child: Column(
                         children: [
                           ElevatedButton(
