@@ -3,7 +3,11 @@ const admin = require("firebase-admin");
 const firebase_tools = require('firebase-tools');
 const cors = require('cors');
 const polyUtil = require('./polyline_helpers');
-const test_data = require("./test_data.json");
+const driver_data = require("./test_data/drivers.json");
+const rider_data = require("./test_data/riders.json");
+const userInfo_data = require("./test_data/user_info.json");
+const test_data = Object.assign({},driver_data,rider_data,userInfo_data);
+
 admin.initializeApp();
 const db = admin.firestore();
 const rtdb = admin.database();
