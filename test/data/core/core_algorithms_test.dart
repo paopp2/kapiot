@@ -210,10 +210,12 @@ Future<void> verifyCompatibleDrivers({
 }) async {
   final container = ProviderContainer();
   final coreAlgorithms = container.read(coreAlgorithmsProvider);
-  final rawTestData = File('functions/test_data.json');
-  final testData = jsonDecode(await rawTestData.readAsString());
-  final ridersList = testData['ridersList'] as List;
-  final driversList = testData['driversList'] as List;
+  final ridersFile = File('functions/test_data/riders.json');
+  final driversFile = File('functions/test_data/drivers.json');
+  final riderData = jsonDecode(await ridersFile.readAsString());
+  final driverData = jsonDecode(await driversFile.readAsString());
+  final ridersList = riderData['ridersList'] as List;
+  final driversList = driverData['driversList'] as List;
   final riderConfig = (ridersList.firstWhere((e) {
     e as Map<String, dynamic>;
     return e['user']['displayName'] == rider;
