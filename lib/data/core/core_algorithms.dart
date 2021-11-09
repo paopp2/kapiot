@@ -108,10 +108,12 @@ class CoreAlgorithms {
       pointB: riderConfig.endLocation,
     );
 
+    bool isNotTheSameUser = driverConfig.user.id != riderConfig.user.id;
+
     bool isGoingTheSameDirection =
         (distFromDriverStartToRiderStart < distFromDriverStartToRiderEnd);
 
-    if (isGoingTheSameDirection) {
+    if (isNotTheSameUser && isGoingTheSameDirection) {
       driverConfig as ForDriver;
       final decodedRoute = await utils.decodeRoute(
         driverConfig.encodedRoute,
