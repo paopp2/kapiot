@@ -189,7 +189,6 @@ void main() {
         rider: "Jin Kazama",
         shouldMatchWith: [
           "Skeleton Jack",
-          "Rick Sanchez",
         ],
       );
     });
@@ -204,9 +203,7 @@ void main() {
     test('1.3.7: USPF to Yoshimeatsu', () async {
       await verifyCompatibleDrivers(
         rider: "Hwoarang",
-        shouldMatchWith: [
-          "Rick Sanchez",
-        ],
+        shouldMatchWith: [],
       );
     });
   });
