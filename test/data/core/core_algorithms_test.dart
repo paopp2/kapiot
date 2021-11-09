@@ -188,8 +188,29 @@ void main() {
   // TODO: Update test_data with reverse routes then add tests here
   // group('Case 2: Same routes with Case 1 but reversed', () {});
 
-  // TODO: Add check to satisfy Case 3 in core_algorithms.dart
-  // group("Case 3: A user can't pair with oneself as both rider and driver", () {});
+  group("Case 3: A user can't pair with oneself as both rider and driver", () {
+    test('3.1.1A Same user: SM Lacion to Fatima Basak', () async {
+      await verifyCompatibleDrivers(
+        rider: "Nicolas Paolo Pepito",
+        shouldMatchWith: [
+          "Billy Butcher",
+          "Hughie Campbell",
+          "Dominic Toretto",
+        ],
+      );
+    });
+    test('3.1.1B Diff user: SM Lacion to Fatima Basak', () async {
+      await verifyCompatibleDrivers(
+        rider: "Gaius Octavius Thurinus",
+        shouldMatchWith: [
+          "Nicolas Paolo Pepito",
+          "Billy Butcher",
+          "Hughie Campbell",
+          "Dominic Toretto",
+        ],
+      );
+    });
+  });
 
   // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
   // should be 'ahead' of the rider's starting location
