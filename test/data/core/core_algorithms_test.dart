@@ -186,6 +186,29 @@ void main() {
         ],
       );
     });
+
+    test('1.3.5: Holy Family Village II to Cafe Belle', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jin Kazama",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+
+    test('1.3.6: Marco Polo Plaza to SM City Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Heiachi Mishima",
+        shouldMatchWith: [],
+      );
+    });
+
+    test('1.3.7: USPF to Yoshimeatsu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Hwoarang",
+        shouldMatchWith: [],
+      );
+    });
   });
 
   // TODO: Update test_data with reverse routes then add tests here

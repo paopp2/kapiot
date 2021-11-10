@@ -749,6 +749,83 @@
       },
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
+    },
+    {
+      "id": "j0CH8QOqwdRJuuG00000MooazV80",
+      "user": {
+        "id": "j0CH8QOqwdRJuuG00000MooazV80",
+        "displayName": "Jin Kazama",
+        "email": "jinkaz69@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJ9ddVvUzCTaKVPRkAwDx6XFEw-cyaRaNTA&usqp=CAU",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.346351,
+        "lng": 123.913015,
+        "address": "Holy Family Village II, Gov. M. Cuenco Avenue, Cebu City,Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3541633,
+        "lng": 123.9143306,
+        "address": "Cafe Belle, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "9IhITC6SXVg6XD4nlt05P7V10wLS",
+      "user": {
+        "id": "9IhITC6SXVg6XD4nlt05P7V10wLS",
+        "displayName": "Heiachi Mishima",
+        "email": "mishimahei@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/deathbattle/images/8/8a/Portrait.heihachi.png/revision/latest?cb=20210714194812",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.3417299,
+        "lng": 123.8974558,
+
+        "address": "Marco Polo Plaza, Cebu Veterans Drive, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3114281,
+        "lng": 123.9178265,
+
+        "address": "SM City Cebu, Juan Luna Avenue Extension, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "kYw4T4nWS30M1Z74GSP9a3Uf28d8",
+      "user": {
+        "id": "kYw4T4nWS30M1Z74GSP9a3Uf28d8",
+        "displayName": "Hwoarang",
+        "email": "hwoarang@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://i.pinimg.com/originals/df/60/5a/df605afa83a5c830637901cd54308425.png",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.3285589,
+        "lng": 123.9009976,
+        "address": "University of Southern Philippines Foundation, USP Compound, Salinas Drive, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3280546,
+        "lng": 123.9092987,
+        "address": "Yoshimeatsu Cebu, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
     }
   ]
 }
