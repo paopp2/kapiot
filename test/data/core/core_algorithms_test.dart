@@ -77,6 +77,7 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "Robot",
         shouldMatchWith: [
+          "Charles Jr. Ausejo",
           "Omni Man",
           "Damien Darkblood",
           "Allen the Alien",
@@ -87,6 +88,7 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "Atom Eve",
         shouldMatchWith: [
+          "Charles Jr. Ausejo",
           "Omni Man",
           "Damien Darkblood",
           "Allen the Alien",
@@ -97,6 +99,7 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "The Immortal",
         shouldMatchWith: [
+          "Charles Jr. Ausejo",
           "Omni Man",
           "Damien Darkblood",
           "Allen the Alien",
@@ -207,6 +210,32 @@ void main() {
           "Billy Butcher",
           "Hughie Campbell",
           "Dominic Toretto",
+        ],
+      );
+    });
+
+    test(
+        '3.2.1A Same user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Charles Jr. Ausejo",
+        shouldMatchWith: [
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test(
+        '3.2.1B Diff user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Dekodeimos Vonzehos",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
         ],
       );
     });
