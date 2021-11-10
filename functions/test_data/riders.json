@@ -351,6 +351,56 @@
           }
         },
         {
+          "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
+          "acceptingDriverConfig": null,
+          "endLocation": {
+            "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+            "lat": 10.27405,
+            "lng": 123.94571
+          },
+          "riderCount": 1,
+          "runtimeType": "rider",
+          "startLocation": {
+            "address": "Mactan, Lapu-Lapu City, Cebu",
+            "lat": 10.30545,
+            "lng": 124.01095
+          },
+          "timeOfTrip": "2021-08-29T06:45:22.819077",
+          "user": {
+            "displayName": "The Invincible",
+            "email": "the_invincible_20@gmail.com",
+            "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
+            "phoneNumber": "",
+            "photoUrl": "https://m.media-amazon.com/images/M/MV5BM2NhNmZiZjgtNmEzZi00YjYyLTg4ZDMtOGIyOWYxMmIzYmViXkEyXkFqcGdeQWFybm8@._V1_QL75_UX500_CR0,0,500,281_.jpg",
+            "userType": "faculty"
+          }
+        },
+        {
+          "id": "200V9puLlinGUpoNtheHoOdUfoR1232sa99",
+          "acceptingDriverConfig": null,
+          "endLocation": {
+            "address": "YES Mart, Mactan Circumferential Road, Lapu-Lapu City, Cebu, Philippines",
+            "lat": 10.304253441319627,
+            "lng": 124.00722319320383
+          },
+          "riderCount": 1,
+          "runtimeType": "rider",
+          "startLocation": {
+            "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines",
+            "lat": 10.307261829568102,
+            "lng": 124.01009852107994
+          },
+          "timeOfTrip": "2021-08-29T06:45:22.819077",
+          "user": {
+            "displayName": "Oliver Grayson",
+            "email": "oliver_alien@gmail.com",
+            "id": "200V9puLlinGUpoNtheHoOdUfoR1232sa99",
+            "phoneNumber": "",
+            "photoUrl": "https://static.wikia.nocookie.net/imagecomics/images/3/3f/Oliver_Grayson_%28Invincible%29_002.jpg/revision/latest/scale-to-width-down/615?cb=20150327191915",
+            "userType": "student"
+          }
+        },
+        {
           "id": "XSA0DNCgIMECX4juiI16h1Qy8Bdm",
           "acceptingDriverConfig": null,
           "endLocation": {
@@ -373,6 +423,56 @@
             "phoneNumber": "",
             "photoUrl": "https://pbs.twimg.com/media/Ey4bTdxXAAIxiwD.jpg",
             "userType": "faculty"
+          }
+        },
+        {
+          "id": "3hngi1y8vuw1jid1bka8a9kdjyc6",
+          "acceptingDriverConfig": null,
+          "endLocation": {
+            "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+            "lat": 10.27405,
+            "lng": 123.94571
+          },
+          "riderCount": 1,
+          "runtimeType": "rider",
+          "startLocation": {
+            "address": "Mactan, Lapu-Lapu City, Cebu",
+            "lat": 10.30545,
+            "lng": 124.01095
+          },
+          "timeOfTrip": "2021-08-29T06:45:22.819077",
+          "user": {
+            "displayName": "Battle Beast",
+            "email": "the_beast_breast@gmail.com",
+            "id": "3hngi1y8vuw1jid1bka8a9kdjyc6",
+            "phoneNumber": "",
+            "photoUrl": "https://www.cheatsheet.com/wp-content/uploads/2021/04/BATTLE-BEAST.jpeg",
+            "userType": "faculty"
+          }
+        },
+        {
+          "id": "3@ts0m3h3@ltHyF0oDYouAr3GeTtingF@t",
+          "acceptingDriverConfig": null,
+          "endLocation": {
+            "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+            "lat": 10.27405,
+            "lng": 123.94571
+          },
+          "riderCount": 1,
+          "runtimeType": "rider",
+          "startLocation": {
+            "address": "AA BBQ Soong Branch, M.L. Quezon National Highway, Maribago, Lapu-Lapu City, Cebu",
+            "lat": 10.296608053426377, 
+            "lng": 124.0010771028963
+          },
+          "timeOfTrip": "2021-08-29T06:45:22.819077",
+          "user": {
+            "displayName": "Vazol BreastBone",
+            "email": "breastbone_vazol@email.com",
+            "id": "3@ts0m3h3@ltHyF0oDYouAr3GeTtingF@t",
+            "phoneNumber": "",
+            "photoUrl": "https://pbs.twimg.com/media/E2fVwlDWEAUTlCe.png",
+            "userType": "staff"
           }
         },
         {

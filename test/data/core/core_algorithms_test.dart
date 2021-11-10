@@ -260,6 +260,44 @@ void main() {
         ],
       );
     });
+    test('3.2.3A Same user: Sebastien Hotel to YES Mart', () async {
+      await verifyCompatibleDrivers(
+        rider: "The Invincible",
+        shouldMatchWith: [
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('3.2.3B Diff user: Sebastien Hotel to YES Mart', () async {
+      await verifyCompatibleDrivers(
+        rider: "Oliver Grayson",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('3.2.4A Same user: AA BBQ Soong to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Battle Beast",
+        shouldMatchWith: [
+          "The Invincible",
+          "Mauler",
+        ],
+      );
+    });
+    test('3.2.4B Diff user:  AA BBQ Soong to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Vazol BreastBone",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
   });
 
   // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
