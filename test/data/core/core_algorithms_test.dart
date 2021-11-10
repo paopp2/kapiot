@@ -239,6 +239,27 @@ void main() {
         ],
       );
     });
+    test('3.2.2A Same user: Papa Rony to City Time Square, LLC', () async {
+      await verifyCompatibleDrivers(
+        rider: "Omni Man",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('3.2.2B Diff user: Papa Rony to City Time Square, LLC', () async {
+      await verifyCompatibleDrivers(
+        rider: "Naughty Man",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
   });
 
   // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
