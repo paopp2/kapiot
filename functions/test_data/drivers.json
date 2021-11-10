@@ -2,18 +2,18 @@
   "driversList": [
     {
       "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
-      "encodedRoute": "syz}@}krsViAh@FJRM^SRKHIACj@UjBy@dDiBxAq@zDuAdCw@xIcCrAfCT\\VRtBpDrAlBfHzD~DxB",
+      "encodedRoute": "q~u}@gjusVG?IJs@f@Zt@zBjEvAdC{CzA_GvCe@VuKjFaTtJsGtCy@^iC~@aF`BsFjBiJzCeF~A{@TWH[g@mBiCq@w@KUCSD{@Ak@Yq@k@u@u@s@iChBs@n@[\\jApA|BdCbEdEmCx@oCfAwDdBiCnAmAh@_AZyIbCeCv@{DtAyAp@eDhBkBx@qAf@sAn@{@p@_@b@a@\\SPLNJPBj@I`AQz@kCfKcCpJOd@u@xC}AtF_@fAGPWTgAj@{@h@c@PuDvBFLBB\\NjJbCrB`@dCp@`Dx@NLxBi@rA[nAWbC_@",
       "runtimeType": "driver",
       "timeOfTrip": "2021-08-29T06:47:07.099561",
       "startLocation": {
-        "address": "Basak-Marigondon Rd, Lapu-Lapu City, Cebu",
-        "lat": 10.30058,
-        "lng": 123.96239
+        "address": "Marigondon, Lapu-Lapu City, Cebu",
+        "lat": 10.27577,
+        "lng": 123.97748
       },
       "endLocation": {
-        "address": "Mactan Ecozone 2, Lapu-Lapu City, Cebu",
-        "lat": 10.29103,
-        "lng": 123.96105
+        "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.29983,
+        "lng": 123.95174
       },
       "user": {
         "displayName": "Charles Jr. Ausejo",

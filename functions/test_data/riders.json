@@ -4,16 +4,16 @@
           "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
           "acceptingDriverConfig": null,
           "endLocation": {
-            "address": "Basak, Lapu-Lapu City, Cebu, Philippines",
-            "lat": 10.291023899999999,
-            "lng": 123.961041
+            "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+            "lat": 10.29983,
+            "lng": 123.95174
           },
           "riderCount": 1,
           "runtimeType": "rider",
           "startLocation": {
-            "address": "Maximo V. Patalinghug Jr Avenue, Lapu-Lapu City, Cebu, Central Visayas, Philippines",
-            "lat": 10.3006433,
-            "lng": 123.9625267
+            "address": "Marigondon, Lapu-Lapu City, Cebu",
+            "lat": 10.27577,
+            "lng": 123.97748
           },
           "timeOfTrip": "2021-08-27T20:02:56.483457",
           "user": {
@@ -22,6 +22,31 @@
             "id": "3WO9ATwspsMwYCRCgdbXnfpp5r83",
             "phoneNumber": "",
             "photoUrl": "https://lh3.googleusercontent.com/a/AATXAJzgbfEHTT7-WV0Sd2LdNZ4squ9aJYtOx_vQpdwE=s96-c",
+            "userType": "student"
+          }
+        },
+        {
+          "id": "4569ATwspsMwYCRCgdbXnfpp5r83",
+          "acceptingDriverConfig": null,
+          "endLocation": {
+            "address": "Don B. Benedicto Rd, Lapu-Lapu City, Cebu",
+            "lat": 10.29983,
+            "lng": 123.95174
+          },
+          "riderCount": 1,
+          "runtimeType": "rider",
+          "startLocation": {
+            "address": "Marigondon, Lapu-Lapu City, Cebu",
+            "lat": 10.27577,
+            "lng": 123.97748
+          },
+          "timeOfTrip": "2021-08-27T20:02:56.483457",
+          "user": {
+            "displayName": "Dekodeimos Vonzehos",
+            "email": "16100938@usc.edu.ph",
+            "id": "4569ATwspsMwYCRCgdbXnfpp5r83",
+            "phoneNumber": "",
+            "photoUrl": "https://yt3.ggpht.com/CIJIELY8Uu_A62mTceALm28e-sbwuvqT-owQvS36bbpXVUrOSintuYiKGUvank6DqFoTSOtf=s900-c-k-c0x00ffffff-no-rj",
             "userType": "student"
           }
         },
