@@ -77,6 +77,7 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "Robot",
         shouldMatchWith: [
+          "Charles Jr. Ausejo",
           "Omni Man",
           "Damien Darkblood",
           "Allen the Alien",
@@ -87,6 +88,7 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "Atom Eve",
         shouldMatchWith: [
+          "Charles Jr. Ausejo",
           "Omni Man",
           "Damien Darkblood",
           "Allen the Alien",
@@ -97,6 +99,7 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "The Immortal",
         shouldMatchWith: [
+          "Charles Jr. Ausejo",
           "Omni Man",
           "Damien Darkblood",
           "Allen the Alien",
@@ -170,6 +173,8 @@ void main() {
         shouldMatchWith: [
           "Skeleton Jack",
           "Rick Sanchez",
+          "Morty Smith",
+          "Jin Kazama",
         ],
       );
     });
@@ -180,7 +185,31 @@ void main() {
         shouldMatchWith: [
           "Skeleton Jack",
           "Rick Sanchez",
+          "Jin Kazama",
         ],
+      );
+    });
+
+    test('1.3.5: Holy Family Village II to Cafe Belle', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jin Kazama",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+
+    test('1.3.6: Marco Polo Plaza to SM City Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Heiachi Mishima",
+        shouldMatchWith: [],
+      );
+    });
+
+    test('1.3.7: USPF to Yoshimeatsu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Hwoarang",
+        shouldMatchWith: [],
       );
     });
   });
@@ -188,8 +217,228 @@ void main() {
   // TODO: Update test_data with reverse routes then add tests here
   // group('Case 2: Same routes with Case 1 but reversed', () {});
 
-  // TODO: Add check to satisfy Case 3 in core_algorithms.dart
-  // group("Case 3: A user can't pair with oneself as both rider and driver", () {});
+  group("Case 3: A user can't pair with oneself as both rider and driver", () {
+    test('3.1.1A Same user: SM Lacion to Fatima Basak', () async {
+      await verifyCompatibleDrivers(
+        rider: "Nicolas Paolo Pepito",
+        shouldMatchWith: [
+          "Billy Butcher",
+          "Hughie Campbell",
+          "Dominic Toretto",
+        ],
+      );
+    });
+    test('3.1.1B Diff user: SM Lacion to Fatima Basak', () async {
+      await verifyCompatibleDrivers(
+        rider: "Gaius Octavius Thurinus",
+        shouldMatchWith: [
+          "Nicolas Paolo Pepito",
+          "Billy Butcher",
+          "Hughie Campbell",
+          "Dominic Toretto",
+        ],
+      );
+    });
+    test('3.1.2A Same user: ABS CBN Mandaue to Lucky Table Factory', () async {
+      await verifyCompatibleDrivers(
+        rider: "Julius Caesar",
+        shouldMatchWith: [],
+      );
+    });
+    test('3.1.2B Diff user: ABS CBN Mandaue to Lucky Table Factory', () async {
+      await verifyCompatibleDrivers(
+        rider: "Cleopatra Philopator",
+        shouldMatchWith: ["Julius Caesar"],
+      );
+    });
+    test('3.1.3A Same user: Rose Pharmacy Pitogo to Co Jordan', () async {
+      await verifyCompatibleDrivers(
+        rider: "Mark Antony",
+        shouldMatchWith: [],
+      );
+    });
+    test('3.1.3B Diff user: Rose Pharmacy Pitogo to Co Jordan', () async {
+      await verifyCompatibleDrivers(
+        rider: "Atia Balba",
+        shouldMatchWith: ["Mark Antony"],
+      );
+    });
+    test('3.1.4A Same user: Mcdo Lacion to Lacion Municipal Hall', () async {
+      await verifyCompatibleDrivers(
+        rider: "Billy Butcher",
+        shouldMatchWith: [
+          "Nicolas Paolo Pepito",
+          "Dominic Toretto",
+          "Hughie Campbell",
+          "Julius Caesar",
+        ],
+      );
+    });
+    test('3.1.4B Diff user: Mcdo Lacion to Lacion Municipal Hall', () async {
+      await verifyCompatibleDrivers(
+        rider: "The Homelander",
+        shouldMatchWith: [
+          "Billy Butcher",
+          "Nicolas Paolo Pepito",
+          "Dominic Toretto",
+          "Hughie Campbell",
+          "Julius Caesar",
+        ],
+      );
+    });
+    test(
+        '3.2.1A Same user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Charles Jr. Ausejo",
+        shouldMatchWith: [
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test(
+        '3.2.1B Diff user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Dekodeimos Vonzehos",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('3.2.2A Same user: Papa Rony to City Time Square, LLC', () async {
+      await verifyCompatibleDrivers(
+        rider: "Omni Man",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('3.2.2B Diff user: Papa Rony to City Time Square, LLC', () async {
+      await verifyCompatibleDrivers(
+        rider: "Naughty Man",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('3.2.3A Same user: Sebastien Hotel to YES Mart', () async {
+      await verifyCompatibleDrivers(
+        rider: "The Invincible",
+        shouldMatchWith: [
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('3.2.3B Diff user: Sebastien Hotel to YES Mart', () async {
+      await verifyCompatibleDrivers(
+        rider: "Oliver Grayson",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('3.2.4A Same user: AA BBQ Soong to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Battle Beast",
+        shouldMatchWith: [
+          "The Invincible",
+          "Mauler",
+        ],
+      );
+    });
+    test('3.2.4B Diff user:  AA BBQ Soong to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Vazol BreastBone",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+
+    test('3.3.1A Same user: AA BBQ Salinas Drive to UC Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Morty Smith",
+        shouldMatchWith: [
+          "Rick Sanchez",
+        ],
+      );
+    });
+    test('3.3.1B Diff user: AA BBQ Salinas Drive to UC Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Steve Jobs",
+        shouldMatchWith: [
+          "Rick Sanchez",
+          "Morty Smith",
+        ],
+      );
+    });
+    test('3.3.2A Same user: SM Cebu to Family Park Talamban', () async {
+      await verifyCompatibleDrivers(
+        rider: "Skeleton Jack",
+        shouldMatchWith: [],
+      );
+    });
+    test('3.3.2B Diff user: SM Cebu to Family Park Talamban', () async {
+      await verifyCompatibleDrivers(
+        rider: "Oogie Boogie",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+    test('3.3.3A Same user: Sunny Hills to Ayala Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Mad Max",
+        shouldMatchWith: [
+          "Christian Benedict Gonzales",
+        ],
+      );
+    });
+    test('3.3.3B Diff user: Sunny Hills to Ayala Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Dolores Umbridge",
+        shouldMatchWith: [
+          "Christian Benedict Gonzales",
+          "Mad Max",
+        ],
+      );
+    });
+    test('3.3.4A Same user: J&T Mabolo to Silver Hills Nasipit', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jin Kazama",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+    test('3.3.4B Diff user: J&T Mabolo to Silver Hills Nasipit', () async {
+      await verifyCompatibleDrivers(
+        rider: "Walter White",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Rick Sanchez",
+          "Morty Smith",
+          "Jin Kazama",
+        ],
+      );
+    });
+  });
 
   // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
   // should be 'ahead' of the rider's starting location
