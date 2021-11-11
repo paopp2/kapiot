@@ -397,6 +397,39 @@
       "runtimeType": "driver"
     },
     {
+      "id": "sRunm1rBKTyRPIe2uEzKQfHH3y0G",
+      "user": {
+        "id": "sRunm1rBKTyRPIe2uEzKQfHH3y0G",
+        "displayName": "Julius Caesar",
+        "email": "juliuscaesar@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://cdn.britannica.com/11/196711-050-FA58D50D/Julius-Caesar-marble-sculpture-Andrea-di-Pietro.jpg",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-11-11T09:29:15.205249",
+      "startLocation": {
+        "lat": 10.381758,
+        "lng": 123.9682001,
+        "address": "Mendero Medical Center, Cebu North Road, Consolacion, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3679354,
+        "lng": 123.926915,
+        "address": "Sacred Heart School - Jesuits, Mandaue City, Cebu, Philippines"
+      },
+      "encodedRoute": "{tj~@mpssVNHPJd@o@l@u@p@]p@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@G`BK~@GPUb@g@p@G?eClCmBrBu@`Au@lAw@jBk@fBYhBGb@MpCQlEWjGU`GSfDWnBm@nCmC|HiBlFoEzMcBzEMn@?d@HdBXnDDv@?XO`As@vC_A`EdBfBf@i@NCD@XXFPEJ",
+      "rating": "4.9",
+      "currentRiderCount": 0,
+      "maxRiderCount": 6,
+      "car": {
+        "licensePlateNum": "DAD 069",
+        "make": "BENTLEY",
+        "model": "BENTAYGA",
+        "type": "suv"
+      },
+      "runtimeType": "driver"
+    },
+    {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
       "runtimeType": "driver",

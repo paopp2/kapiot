@@ -236,7 +236,20 @@ void main() {
         ],
       );
     });
-
+    test('3.1.2A Same user: ABS CBN Mandaue to Lucky Table Factory', () async {
+      await verifyCompatibleDrivers(
+        rider: "Julius Caesar",
+        shouldMatchWith: [],
+      );
+    });
+    test('3.1.2B Diff user: ABS CBN Mandaue to Lucky Table Factory', () async {
+      await verifyCompatibleDrivers(
+        rider: "Cleopatra Philopator",
+        shouldMatchWith: [
+          "Julius Caesar",
+        ],
+      );
+    });
     test(
         '3.2.1A Same user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
         () async {

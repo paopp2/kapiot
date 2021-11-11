@@ -601,6 +601,56 @@
       "runtimeType": "rider"
     },
     {
+      "id": "sRunm1rBKTyRPIe2uEzKQfHH3y0G",
+      "user": {
+        "id": "sRunm1rBKTyRPIe2uEzKQfHH3y0G",
+        "displayName": "Julius Caesar",
+        "email": "juliuscaesar@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://cdn.britannica.com/11/196711-050-FA58D50D/Julius-Caesar-marble-sculpture-Andrea-di-Pietro.jpg",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.366413774282965, 
+        "lng": 123.9504940825719,
+        "address": "ABS CBN Cebu"
+      },
+      "endLocation": {
+        "lat": 10.365334424918226, 
+        "lng": 123.94437451200658, 
+        "address": "Lucky Table Factory Canduman"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "lRXVWNQA4nAW6cJSdI8ihOgbmOAd",
+      "user": {
+        "id": "lRXVWNQA4nAW6cJSdI8ihOgbmOAd",
+        "displayName": "Cleopatra Philopator",
+        "email": "cleophilopator@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/choices-stories-you-play/images/2/2c/ACORClopatra.png/revision/latest?cb=20190522205723",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.366413774282965, 
+        "lng": 123.9504940825719,
+        "address": "ABS CBN Cebu"
+      },
+      "endLocation": {
+        "lat": 10.365334424918226, 
+        "lng": 123.94437451200658, 
+        "address": "Lucky Table Factory Canduman"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "acceptingDriverConfig": null,
       "endLocation": {
