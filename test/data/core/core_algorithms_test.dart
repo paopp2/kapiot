@@ -250,14 +250,37 @@ void main() {
     });
     test('3.1.3A Same user: Rose Pharmacy Pitogo to Co Jordan', () async {
       await verifyCompatibleDrivers(
-        rider: "Atia Balba",
-        shouldMatchWith: ["Mark Antony"],
+        rider: "Mark Antony",
+        shouldMatchWith: [],
       );
     });
     test('3.1.3B Diff user: Rose Pharmacy Pitogo to Co Jordan', () async {
       await verifyCompatibleDrivers(
-        rider: "Mark Antony",
-        shouldMatchWith: [],
+        rider: "Atia Balba",
+        shouldMatchWith: ["Mark Antony"],
+      );
+    });
+    test('3.1.4A Same user: Mcdo Lacion to Lacion Municipal Hall', () async {
+      await verifyCompatibleDrivers(
+        rider: "Billy Butcher",
+        shouldMatchWith: [
+          "Nicolas Paolo Pepito",
+          "Dominic Toretto",
+          "Hughie Campbell",
+          "Julius Caesar",
+        ],
+      );
+    });
+    test('3.1.4B Diff user: Mcdo Lacion to Lacion Municipal Hall', () async {
+      await verifyCompatibleDrivers(
+        rider: "The Homelander",
+        shouldMatchWith: [
+          "Billy Butcher",
+          "Nicolas Paolo Pepito",
+          "Dominic Toretto",
+          "Hughie Campbell",
+          "Julius Caesar",
+        ],
       );
     });
     test(

@@ -701,6 +701,56 @@
       "runtimeType": "rider"
     },
     {
+      "id": "njZvKhumuBwVcBruGOTT1kUwh5p6",
+      "user": {
+        "id": "njZvKhumuBwVcBruGOTT1kUwh5p6",
+        "displayName": "Billy Butcher",
+        "email": "billybutcher@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://www.looper.com/img/gallery/this-is-the-worst-thing-billy-butcher-has-done-on-the-boys/intro-1616676416.jpg",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.379395135671256,
+        "lng": 123.96517678032905,
+        "address": "Mcdo Lacion"
+      },
+      "endLocation": {
+        "lat": 10.375993392319117,
+        "lng": 123.9572448900204,
+        "address": "Lacion Municipal Hall"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "wkyJVubw92XmRgotjir6kgy7ZdeY",
+      "user": {
+        "id": "wkyJVubw92XmRgotjir6kgy7ZdeY",
+        "displayName": "The Homelander",
+        "email": "thehomelander@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/07/homelander.jpg",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.379395135671256,
+        "lng": 123.96517678032905,
+        "address": "Mcdo Lacion"
+      },
+      "endLocation": {
+        "lat": 10.375993392319117,
+        "lng": 123.9572448900204,
+        "address": "Lacion Municipal Hall"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "acceptingDriverConfig": null,
       "endLocation": {
