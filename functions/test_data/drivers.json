@@ -430,6 +430,39 @@
       "runtimeType": "driver"
     },
     {
+      "id": "XeM3HP9Im58OSpmHpYC5eI3jXV2n",
+      "user": {
+        "id": "XeM3HP9Im58OSpmHpYC5eI3jXV2n",
+        "displayName": "Mark Antony",
+        "email": "markantony@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://cdn.britannica.com/21/13421-050-0D5FAC1F/Mark-Antony-detail-marble-bust-Vatican-City.jpg",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-11-11T10:00:47.950462",
+      "startLocation": {
+        "lat": 10.3846139,
+        "lng": 123.970155,
+        "address": "Garden Bloom Acres, Iris St., Pitogo, Consolacion, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3514086,
+        "lng": 123.9715597,
+        "address": "Nagasaka Shipyard Inc., North Coastal Rd, Consolacion, Cebu, Philippines"
+      },
+      "encodedRoute": "ofk~@_|ssVPCbAXj@LD?FIDa@BGVFZVz@r@JDZI^Yl@w@LKp@]FMBa@DUd@k@z@pAr@dA`@x@b@fANn@bAxFXhAjC`HjAdDx@fCf@lAj@dAbBiAnBeA|CcBtCeBxBoArCeBrD_ClNiIpHcFlDeClCkBp@Up@Q^WV]\\aAbAaD@WAWCWB]Z}@d@yA?a@A[_@yFDSJKn@SZOZ_@LITIl@@~A@XGf@]t@o@p@[TKNOj@gA@I@G^w@nBcDdCaEHGr@YhAi@rCeCpAgAbA`AnAjA|E`F~@bAjFfG|EvFdFnFpGrGbFlFdEvDh@v@NPZh@Rp@n@fAb@p@VZJ@J?`@YBMEQU[c@k@UWg@y@]Um@a@QEWSh@m@",
+      "rating": "4.9",
+      "currentRiderCount": 0,
+      "maxRiderCount": 5,
+      "car": {
+        "licensePlateNum": "CBA 321",
+        "make": "FORD",
+        "model": "F-150",
+        "type": "pickup"
+      },
+      "runtimeType": "driver"
+    },
+    {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
       "runtimeType": "driver",

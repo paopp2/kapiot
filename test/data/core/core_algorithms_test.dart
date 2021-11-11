@@ -245,9 +245,19 @@ void main() {
     test('3.1.2B Diff user: ABS CBN Mandaue to Lucky Table Factory', () async {
       await verifyCompatibleDrivers(
         rider: "Cleopatra Philopator",
-        shouldMatchWith: [
-          "Julius Caesar",
-        ],
+        shouldMatchWith: ["Julius Caesar"],
+      );
+    });
+    test('3.1.3A Same user: Rose Pharmacy Pitogo to Co Jordan', () async {
+      await verifyCompatibleDrivers(
+        rider: "Atia Balba",
+        shouldMatchWith: ["Mark Antony"],
+      );
+    });
+    test('3.1.3B Diff user: Rose Pharmacy Pitogo to Co Jordan', () async {
+      await verifyCompatibleDrivers(
+        rider: "Mark Antony",
+        shouldMatchWith: [],
       );
     });
     test(
