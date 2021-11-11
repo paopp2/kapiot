@@ -173,6 +173,8 @@ void main() {
         shouldMatchWith: [
           "Skeleton Jack",
           "Rick Sanchez",
+          "Morty Smith",
+          "Jin Kazama",
         ],
       );
     });
@@ -183,6 +185,7 @@ void main() {
         shouldMatchWith: [
           "Skeleton Jack",
           "Rick Sanchez",
+          "Jin Kazama",
         ],
       );
     });
@@ -364,6 +367,74 @@ void main() {
           "The Invincible",
           "Battle Beast",
           "Mauler",
+        ],
+      );
+    });
+
+    test('3.3.1A Same user: AA BBQ Salinas Drive to UC Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Morty Smith",
+        shouldMatchWith: [
+          "Rick Sanchez",
+        ],
+      );
+    });
+    test('3.3.1B Diff user: AA BBQ Salinas Drive to UC Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Steve Jobs",
+        shouldMatchWith: [
+          "Rick Sanchez",
+          "Morty Smith",
+        ],
+      );
+    });
+    test('3.3.2A Same user: SM Cebu to Family Park Talamban', () async {
+      await verifyCompatibleDrivers(
+        rider: "Skeleton Jack",
+        shouldMatchWith: [],
+      );
+    });
+    test('3.3.2B Diff user: SM Cebu to Family Park Talamban', () async {
+      await verifyCompatibleDrivers(
+        rider: "Oogie Boogie",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+    test('3.3.3A Same user: Sunny Hills to Ayala Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Mad Max",
+        shouldMatchWith: [
+          "Christian Benedict Gonzales",
+        ],
+      );
+    });
+    test('3.3.3B Diff user: Sunny Hills to Ayala Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Dolores Umbridge",
+        shouldMatchWith: [
+          "Christian Benedict Gonzales",
+          "Mad Max",
+        ],
+      );
+    });
+    test('3.3.4A Same user: J&T Mabolo to Silver Hills Nasipit', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jin Kazama",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+    test('3.3.4B Diff user: J&T Mabolo to Silver Hills Nasipit', () async {
+      await verifyCompatibleDrivers(
+        rider: "Walter White",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Rick Sanchez",
+          "Morty Smith",
+          "Jin Kazama",
         ],
       );
     });

@@ -593,6 +593,72 @@
         "lng": 123.91594826881274
       },
       "runtimeType": "driver"
+    },
+    {
+      "id": "vl9DiX20vX83bs1UwwOVX0795DQ4",
+      "user": {
+        "id": "vl9DiX20vX83bs1UwwOVX0795DQ4",
+        "displayName": "Morty Smith",
+        "email": "mortydrug@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://w7.pngwing.com/pngs/856/256/png-transparent-rick-sanchez-morty-smith-pocket-mortys-rick-child-face-hand.png",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "WOW 888",
+        "make": "MERCEDES-BENZ",
+        "model": "GLA",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.6",
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "encodedRoute": "so`~@}lfsVdGaOvAgDfDcHLYdA_B|BeDVMXQIKw@o@kAg@qBq@mA]_@CkCy@oDoAkGqBwBk@}Dw@mJmAaHu@_E_@gHu@iBO@SIMWG",
+      "startLocation": {
+        "lat": 10.3297995,
+        "lng": 123.9011602,
+        "address": "AA BBQ, Salinas Drive, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3384599,
+        "lng": 123.9119323,
+        "address": "University of Cebu - Banilad Campus, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "j0CH8QOqwdRJuuG00000MooazV80",
+      "user": {
+        "id": "j0CH8QOqwdRJuuG00000MooazV80",
+        "displayName": "Jin Kazama",
+        "email": "jinkaz69@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJ9ddVvUzCTaKVPRkAwDx6XFEw-cyaRaNTA&usqp=CAU",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "LOL 111",
+        "make": "LAND ROVER",
+        "model": "RANGE ROVER EVOQUE",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.2",
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "encodedRoute": "wm}}@}bisVs@XaB|@uAp@cJzEgLhGkB~@kCvAeAj@_EnBiKrFyEdCeDfB{@^s@k@]QuCeAw@Ws@MOAOGqBm@sAe@iGqBmDgAoCo@qAW{HaAeC[eJ}@oHw@gE_@c@KmCUoBUwCUg@EK@oFi@wFm@_LcA{KeAyD_@wAQyEi@eHy@cEq@qKqBiA_@}@_@aAUi@Ke@A{EAeBAc@I{@g@w@i@]O]Ic@?gAFqH|@wAFcAIEh@",
+      "startLocation": {
+        "lat": 10.3140987,
+        "lng": 123.9149797,
+        "address": "J&T Express Mabolo, M. J. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3615244,
+        "lng": 123.9151338,
+        "address": "Silver Hills, Nasipit Road, Nasipit Talamban, Cebu City, Cebu, Philippines"
+      },
+      "runtimeType": "driver"
     }
   ]
 }

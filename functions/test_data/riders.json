@@ -949,6 +949,106 @@
       },
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
+    },
+    {
+      "id": "uQ9Di3x1vX83bs1UwwOVX0795Dcc",
+      "user": {
+        "id": "uQ9Di3x1vX83bs1UwwOVX0795Dcc",
+        "displayName": "Steve Jobs",
+        "email": "steveworks@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY2MzU3OTcxMTUwODQxNTM1/steve-jobs--david-paul-morrisbloomberg-via-getty-images.jpg",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 2,
+      "startLocation": {
+        "lat": 10.3297995,
+        "lng": 123.9011602,
+        "address": "AA BBQ, Salinas Drive, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3384599,
+        "lng": 123.9119323,
+        "address": "University of Cebu - Banilad Campus, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "MyuLyfz42jzjomzNj6pfsAo7sX7x",
+      "user": {
+        "id": "MyuLyfz42jzjomzNj6pfsAo7sX7x",
+        "displayName": "Skeleton Jack",
+        "email": "jskeleton@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/disney/images/0/06/Profile_-_Jack_Skellington.jpeg/revision/latest?cb=20190316145716",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "riderCount": 1,
+      "startLocation": {
+        "address": "SM City Cebu, Kaohsiung St., Cebu City, Cebu",
+        "lat": 10.31171309261737,
+        "lng": 123.91777285346731
+      },
+      "endLocation": {
+        "address": "D' Family Park, Cebu City, Cebu",
+        "lat": 10.358790249884327,
+        "lng": 123.91071495346755
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
+      "user": {
+        "displayName": "Mad Max",
+        "email": "mad_max69@gmail.com",
+        "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
+        "phoneNumber": "",
+        "photoUrl": "https://c4.wallpaperflare.com/wallpaper/210/209/106/movie-mad-max-fury-road-max-rockatansky-tom-hardy-wallpaper-preview.jpg",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "riderCount": 1,
+      "startLocation": {
+        "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
+        "lat": 10.367900273181055,
+        "lng": 123.9138391534901
+      },
+      "endLocation": {
+        "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
+        "lat": 10.318707364922172,
+        "lng": 123.9044093976717
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "143NtDbgk9bBh29TyCIK7Qw9Alk1",
+      "user": {
+        "displayName": "Dolores Umbridge",
+        "email": "mad_max69@gmail.com",
+        "id": "143NtDbgk9bBh29TyCIK7Qw9Alk1",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/harrypotter/images/6/68/Dolores_Umbridge_Deathly_Hallows_promotional_image.jpg/revision/latest?cb=20101127041001",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-08-30T13:45:35.234433",
+      "riderCount": 1,
+      "startLocation": {
+        "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
+        "lat": 10.367900273181055,
+        "lng": 123.9138391534901
+      },
+      "endLocation": {
+        "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
+        "lat": 10.318707364922172,
+        "lng": 123.9044093976717
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
     }
   ]
 }
