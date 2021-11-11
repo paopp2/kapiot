@@ -2,14 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
-import 'package:kapiot/logic/shared/shared_state.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
-import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/driver/components/rider_manager_view_map.dart';
 
+import 'components/drive_info_panel.dart';
 import 'components/requesting_riders_panel.dart';
 import 'components/stop_point_panel.dart';
 
@@ -19,15 +18,8 @@ class RiderManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
-    final currentDriverConfig =
-        ref.watch(currentRouteConfigProvider).state as ForDriver;
-    final maxRiderCount = currentDriverConfig.maxRiderCount;
-    final currentRiderCount = currentDriverConfig.currentRiderCount;
     final nextStop = ref.watch(nextStopProvider).state;
-    final driverPoints = ref.watch(driverPointsProvider).state;
-    final acceptedRidersStream = ref.watch(acceptedRidersStreamProvider);
     final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
-    final _expand = useState(false);
 
     useEffect(() {
       model.initState();
@@ -62,137 +54,46 @@ class RiderManagerView extends HookConsumerWidget {
                             child: RiderManagerViewMap(model: model),
                           ),
                         ),
-                        (requestingRidersStream.data?.value.isEmpty ?? true)
-                            ? SizedBox(
-                                height: constraints.maxHeight * 0.2,
-                                width: constraints.maxWidth,
-                                child: const Center(
-                                  child: Text('No pending requests'),
-                                ))
-                            : RequestingRidersPanel(
-                                model: model,
-                                constraints: constraints,
-                              ),
+                        Container(
+                          height: constraints.maxHeight * 0.2,
+                          color: Colors.white,
+                          child: (requestingRidersStream.data?.value.isEmpty ??
+                                  true)
+                              ? Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'No Ride Requests',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 24,
+                                          color: const Color(0xFF333333),
+                                        ),
+                                      ),
+                                      Text(
+                                        "When Carolinians along your\nroute send you hail requests, you'll see them here.",
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 12,
+                                          color: const Color(0xFFAAAAAA),
+                                          height: 1.5,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : RequestingRidersPanel(
+                                  model: model,
+                                  constraints: constraints,
+                                ),
+                        ),
                       ],
                     ),
                     SizedBox(
                       width: constraints.maxWidth,
                       child: Column(
                         children: [
-                          InkWell(
-                            onTap: () => (_expand.value = !_expand.value),
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInToLinear,
-                              margin: EdgeInsets.symmetric(
-                                vertical: constraints.maxHeight * 0.015,
-                              ),
-                              height: _expand.value
-                                  ? constraints.maxHeight * 0.3
-                                  : 50,
-                              width: _expand.value
-                                  ? constraints.maxWidth * 0.8
-                                  : 120,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      vertical: 15,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            right: constraints.maxWidth * 0.01,
-                                          ),
-                                          child: Image.asset(
-                                            'assets/icons/assist_points.png',
-                                            color: Colors.black,
-                                            width: 20,
-                                            height: 20,
-                                          ),
-                                        ),
-                                        Text(
-                                          driverPoints.toStringAsFixed(2),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '$currentRiderCount/$maxRiderCount',
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  _expand.value
-                                      ? Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            height: 100,
-                                            child: acceptedRidersStream.when(
-                                              error: (_, __) =>
-                                                  const SizedBox(),
-                                              loading: () => const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              ),
-                                              data: (acceptedRiders) {
-                                                return ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount:
-                                                      acceptedRiders.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    final rider =
-                                                        acceptedRiders[index];
-                                                    return Card(
-                                                      child: ListTile(
-                                                        leading: CircleAvatar(
-                                                          radius: 20,
-                                                          backgroundImage:
-                                                              NetworkImage(
-                                                            rider.photoUrl!,
-                                                          ),
-                                                        ),
-                                                        title: Text(
-                                                          rider.displayName ??
-                                                              '',
-                                                          overflow:
-                                                              TextOverflow.fade,
-                                                          maxLines: 1,
-                                                          softWrap: false,
-                                                        ),
-                                                        subtitle: Text(
-                                                          rider.userType!
-                                                              .description,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox()
-                                ],
-                              ),
-                            ),
-                          ),
+                          DriveInfoPanel(constraints: constraints),
                           (nextStop != null)
                               ? StopPointPanel(
                                   model: model,

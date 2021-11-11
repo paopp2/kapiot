@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
+
+const uscLogo =
+    'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
 class RequestingRidersPanel extends HookConsumerWidget {
   const RequestingRidersPanel({
@@ -30,61 +34,79 @@ class RequestingRidersPanel extends HookConsumerWidget {
             enlargeCenterPage: true,
             enableInfiniteScroll: false,
             autoPlay: true,
+            aspectRatio: 4 / 3,
+            viewportFraction: 0.7,
           ),
           itemBuilder: (context, index, _) {
             final rider = requestingRiders[index];
             return Center(
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  vertical: constraints.maxHeight * 0.02,
+                  vertical: constraints.maxHeight * 0.015,
                 ),
                 width: constraints.maxWidth * 0.8,
                 child: Stack(
                   children: [
                     Material(
-                      elevation: 10,
+                      elevation: 15,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Container(
-                        decoration: const BoxDecoration(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: const Color(0xffF2F3F8),
+                            width: 2,
+                          ),
                           color: Colors.white,
                         ),
-                        height: constraints.maxHeight * 0.13,
+                        height: constraints.maxHeight * 0.12,
                         width: constraints.maxWidth * 0.8,
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: constraints.maxWidth * 0.02,
+                              margin: EdgeInsets.only(
+                                right: constraints.maxWidth * 0.025,
                               ),
-                              height: 60,
                               width: 60,
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundImage: NetworkImage(
+                                  rider.photoUrl ?? uscLogo,
+                                ),
+                              ),
                               decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(rider.photoUrl!),
-                                  fit: BoxFit.cover,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(0xFF5F45A4),
+                                  width: 2,
                                 ),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                right: constraints.maxWidth * 0.02,
-                              ),
-                              height: constraints.maxHeight * 0.09,
-                              width: constraints.maxWidth * 0.54,
+                            Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     rider.displayName ?? 'No name',
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      fontWeight: FontWeight.bold,
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 17,
+                                      color: const Color(0xff333333),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    overflow: TextOverflow.fade,
+                                    softWrap: false,
+                                  ),
+                                  Text(
+                                    rider.userType!.description,
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xff333333),
+                                      fontSize: 13,
                                     ),
                                   ),
-                                  Text(rider.userType!.description),
                                 ],
                               ),
                             )
@@ -94,19 +116,24 @@ class RequestingRidersPanel extends HookConsumerWidget {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.grey,
-                        ),
+                      child: SizedBox(
                         height: constraints.maxHeight * 0.06,
                         width: constraints.maxWidth * 0.4,
                         child: ElevatedButton(
                           onPressed: () => model.acceptRider(rider.id),
-                          child: const Text('Accept'),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              Colors.grey,
+                          child: Text(
+                            'Accept',
+                            style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontSize: 17,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFF5F45A4),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
                             ),
                           ),
                         ),

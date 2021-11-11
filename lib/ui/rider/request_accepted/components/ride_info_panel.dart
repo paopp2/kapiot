@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_model.dart';
 import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
@@ -11,6 +12,8 @@ import 'package:kapiot/logic/shared/extensions.dart';
 import 'package:kapiot/model/car/car.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/rider/request_accepted/components/divider_widget.dart';
+
+import 'passenger_circle_avatar.dart';
 
 const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
@@ -32,6 +35,7 @@ class RideInfoPanel extends HookConsumerWidget {
     final estTimeArrival = ref.watch(driverArrivalTimeProvider).state;
     final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
     final coRiderCount = ref.watch(coRiderCountProvider);
+    final currentUser = ref.watch(currentUserProvider)!;
     return Expanded(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
@@ -61,16 +65,17 @@ class RideInfoPanel extends HookConsumerWidget {
                     ),
                     child: Material(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(3),
                       ),
                       elevation: 2.5,
                       child: Container(
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3),
                           image: DecorationImage(
                             image: NetworkImage(acceptingDriver.photoUrl!),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -141,34 +146,26 @@ class RideInfoPanel extends HookConsumerWidget {
                           ],
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Image(
                               image: acceptingDriverConfig.car.type.image,
                               height: 50,
                             ),
-                            RichText(
-                              text: TextSpan(
-                                style: const TextStyle(fontSize: 12),
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        '${acceptingDriverConfig.car.make} ${acceptingDriverConfig.car.model} - ',
-                                    style: GoogleFonts.montserrat(
-                                      color: const Color(0xFFAAAAAA),
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: acceptingDriverConfig
-                                        .car.licensePlateNum,
-                                    style: GoogleFonts.montserrat(
-                                      color: const Color(0xFF333333),
-                                      fontSize: 12,
-                                    ),
-                                  )
-                                ],
+                            Text(
+                              '${acceptingDriverConfig.car.make} ${acceptingDriverConfig.car.model}',
+                              style: GoogleFonts.montserrat(
+                                color: const Color(0xFFAAAAAA),
+                                fontSize: 12,
+                              ),
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
+                            ),
+                            Text(
+                              acceptingDriverConfig.car.licensePlateNum,
+                              style: GoogleFonts.montserrat(
+                                color: const Color(0xFF333333),
+                                fontSize: 12,
                               ),
                               overflow: TextOverflow.fade,
                               softWrap: false,
@@ -192,7 +189,7 @@ class RideInfoPanel extends HookConsumerWidget {
                     style: GoogleFonts.montserrat(
                       fontSize: 15,
                       color: const Color(0xff333333),
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
@@ -209,22 +206,19 @@ class RideInfoPanel extends HookConsumerWidget {
                           return ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: coRiderConfigsList.length,
+                            itemCount: coRiderConfigsList.length + 1,
                             itemBuilder: (context, index) {
-                              final coRider = coRiderConfigsList[index].user;
-                              return Align(
-                                widthFactor: 0.8,
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: Colors.white,
-                                  child: CircleAvatar(
-                                    radius: 25,
-                                    backgroundImage: NetworkImage(
-                                      coRider.photoUrl ?? uscLogo,
-                                    ),
-                                  ),
-                                ),
-                              );
+                              if (index == 0) {
+                                return PassengerCircleAvatar(
+                                  photoUrl: currentUser.photoUrl ?? uscLogo,
+                                );
+                              } else {
+                                final coRider =
+                                    coRiderConfigsList[index - 1].user;
+                                return PassengerCircleAvatar(
+                                  photoUrl: coRider.photoUrl ?? uscLogo,
+                                );
+                              }
                             },
                           );
                         },
@@ -232,8 +226,8 @@ class RideInfoPanel extends HookConsumerWidget {
                     ),
                     Text(
                       coRiderConfigsStream.data?.value.isEmpty ?? true
-                          ? 'Just you'
-                          : 'You and $coRiderCount other people',
+                          ? 'You'
+                          : 'You and $coRiderCount other',
                       style: GoogleFonts.montserrat(
                         fontSize: 12,
                         color: const Color(0xFFAAAAAA),
@@ -260,7 +254,7 @@ class RideInfoPanel extends HookConsumerWidget {
                         style: GoogleFonts.montserrat(
                           fontSize: 15,
                           color: const Color(0xff333333),
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
