@@ -6,6 +6,9 @@ import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 
+const uscLogo =
+    'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
+
 class RequestingRidersPanel extends HookConsumerWidget {
   const RequestingRidersPanel({
     Key? key,
@@ -59,7 +62,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
                           ),
                           color: Colors.white,
                         ),
-                        height: constraints.maxHeight * 0.13,
+                        height: constraints.maxHeight * 0.12,
                         width: constraints.maxWidth * 0.8,
                         child: Row(
                           children: [
@@ -67,21 +70,18 @@ class RequestingRidersPanel extends HookConsumerWidget {
                               margin: EdgeInsets.only(
                                 right: constraints.maxWidth * 0.025,
                               ),
-                              child: Material(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3),
+                              width: 60,
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundImage: NetworkImage(
+                                  rider.photoUrl!,
                                 ),
-                                elevation: 2.5,
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3),
-                                    image: DecorationImage(
-                                      image: NetworkImage(rider.photoUrl!),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(0xFF5F45A4),
+                                  width: 2,
                                 ),
                               ),
                             ),

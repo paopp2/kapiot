@@ -43,18 +43,20 @@ class StopPointPanel extends StatelessWidget {
                       margin: EdgeInsets.only(
                         right: constraints.maxWidth * 0.025,
                       ),
-                      width: 50,
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundImage: NetworkImage(
-                          rider.photoUrl ?? uscLogo,
+                      child: Material(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3),
                         ),
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: const Color(0xFF5F45A4),
-                          width: 2,
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            image: DecorationImage(
+                              image: NetworkImage(rider.photoUrl ?? uscLogo),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),
