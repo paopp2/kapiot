@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
 import 'package:marquee/marquee.dart';
@@ -42,10 +43,19 @@ class StopPointPanel extends StatelessWidget {
                       margin: EdgeInsets.only(
                         right: constraints.maxWidth * 0.025,
                       ),
+                      width: 50,
                       child: CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            NetworkImage(rider.photoUrl ?? uscLogo),
+                        radius: 25,
+                        backgroundImage: NetworkImage(
+                          rider.photoUrl ?? uscLogo,
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color(0xFF5F45A4),
+                          width: 2,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -59,19 +69,22 @@ class StopPointPanel extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               child: Text(
                                 rider.displayName ?? 'No name',
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 17,
+                                  color: const Color(0xff333333),
+                                  fontWeight: FontWeight.w500,
                                 ),
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
                               ),
                             ),
                             SizedBox(
                               height: 25,
                               child: Marquee(
                                 text: nextStop.stopLocation.address ?? '',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
+                                style: GoogleFonts.montserrat(
+                                  color: const Color(0xff333333),
+                                  fontSize: 13,
                                 ),
                                 blankSpace: 90,
                                 pauseAfterRound: const Duration(seconds: 2),
@@ -89,12 +102,29 @@ class StopPointPanel extends StatelessWidget {
                 children: [
                   Text(
                     (nextStop.isPickUp) ? "Pick-up" : "Drop-off",
-                    style: const TextStyle(fontSize: 14),
+                    style: GoogleFonts.montserrat(
+                      color: const Color(0xff333333),
+                      fontSize: 13,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: model.updateNextStop,
-                    child: const Text("Next stop"),
-                  )
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFF5F45A4),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    child: Text(
+                      "Next stop",
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 17,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],

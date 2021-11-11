@@ -61,16 +61,17 @@ class RideInfoPanel extends HookConsumerWidget {
                     ),
                     child: Material(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(3),
                       ),
                       elevation: 2.5,
                       child: Container(
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3),
                           image: DecorationImage(
                             image: NetworkImage(acceptingDriver.photoUrl!),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

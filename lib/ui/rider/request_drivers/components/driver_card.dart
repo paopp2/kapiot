@@ -109,7 +109,7 @@ class DriverCard extends HookConsumerWidget {
                               ),
                               width: 50,
                               child: CircleAvatar(
-                                radius: 50,
+                                radius: 25,
                                 backgroundImage: NetworkImage(
                                   driverConfig.user.photoUrl ?? uscLogo,
                                 ),

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
@@ -62,17 +64,39 @@ class RiderManagerView extends HookConsumerWidget {
                             child: RiderManagerViewMap(model: model),
                           ),
                         ),
-                        (requestingRidersStream.data?.value.isEmpty ?? true)
-                            ? SizedBox(
-                                height: constraints.maxHeight * 0.2,
-                                width: constraints.maxWidth,
-                                child: const Center(
-                                  child: Text('No pending requests'),
-                                ))
-                            : RequestingRidersPanel(
-                                model: model,
-                                constraints: constraints,
-                              ),
+                        Container(
+                          height: constraints.maxHeight * 0.2,
+                          color: Colors.white,
+                          child: (requestingRidersStream.data?.value.isEmpty ??
+                                  true)
+                              ? Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'No Ride Requests',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 24,
+                                          color: const Color(0xFF333333),
+                                        ),
+                                      ),
+                                      Text(
+                                        "When carolinians along your\nroute sends you hail requests, you'll see them here.",
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 12,
+                                          color: const Color(0xFFAAAAAA),
+                                          height: 1.5,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : RequestingRidersPanel(
+                                  model: model,
+                                  constraints: constraints,
+                                ),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -88,54 +112,42 @@ class RiderManagerView extends HookConsumerWidget {
                                 vertical: constraints.maxHeight * 0.015,
                               ),
                               height: _expand.value
-                                  ? constraints.maxHeight * 0.3
+                                  ? constraints.maxHeight * 0.25
                                   : 50,
                               width: _expand.value
                                   ? constraints.maxWidth * 0.8
-                                  : 120,
+                                  : 160,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(24),
+                                borderRadius: BorderRadius.circular(12),
                               ),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      vertical: 15,
+                                  ListTile(
+                                    dense: true,
+                                    title: Text(
+                                      driverPoints.toStringAsFixed(2),
+                                      style: GoogleFonts.montserrat(
+                                        color: const Color(0xff414141),
+                                        fontSize: 16,
+                                      ),
                                     ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            right: constraints.maxWidth * 0.01,
-                                          ),
-                                          child: Image.asset(
-                                            'assets/icons/assist_points.png',
-                                            color: Colors.black,
-                                            width: 20,
-                                            height: 20,
-                                          ),
-                                        ),
-                                        Text(
-                                          driverPoints.toStringAsFixed(2),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '$currentRiderCount/$maxRiderCount',
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
+                                    trailing: Text(
+                                      '$currentRiderCount/$maxRiderCount',
+                                      style: GoogleFonts.montserrat(
+                                        color:
+                                            (currentRiderCount == maxRiderCount)
+                                                ? Colors.red
+                                                : Colors.green,
+                                        fontSize: 16,
+                                      ),
                                     ),
+                                    leading: const Icon(
+                                      FontAwesomeIcons.handHoldingHeart,
+                                      size: 16,
+                                      color: Color(0xffcccccc),
+                                    ),
+                                    minLeadingWidth: 10,
                                   ),
                                   _expand.value
                                       ? Expanded(
@@ -150,40 +162,99 @@ class RiderManagerView extends HookConsumerWidget {
                                                     CircularProgressIndicator(),
                                               ),
                                               data: (acceptedRiders) {
-                                                return ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount:
-                                                      acceptedRiders.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    final rider =
-                                                        acceptedRiders[index];
-                                                    return Card(
-                                                      child: ListTile(
-                                                        leading: CircleAvatar(
-                                                          radius: 20,
-                                                          backgroundImage:
-                                                              NetworkImage(
-                                                            rider.photoUrl!,
+                                                return acceptedRiders.isEmpty
+                                                    ? Center(
+                                                        child: Text(
+                                                          'No Passengers',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            fontSize: 24,
+                                                            color: const Color(
+                                                                0xFF333333),
                                                           ),
                                                         ),
-                                                        title: Text(
-                                                          rider.displayName ??
-                                                              '',
-                                                          overflow:
-                                                              TextOverflow.fade,
-                                                          maxLines: 1,
-                                                          softWrap: false,
-                                                        ),
-                                                        subtitle: Text(
-                                                          rider.userType!
-                                                              .description,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
+                                                      )
+                                                    : ListView.builder(
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        itemCount:
+                                                            acceptedRiders
+                                                                .length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          final rider =
+                                                              acceptedRiders[
+                                                                  index];
+                                                          return Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12),
+                                                              border:
+                                                                  Border.all(
+                                                                color: const Color(
+                                                                    0xffF2F3F8),
+                                                                width: 2,
+                                                              ),
+                                                              color: const Color(
+                                                                  0xffF8F9FD),
+                                                            ),
+                                                            child: ListTile(
+                                                              leading:
+                                                                  Container(
+                                                                width: 40,
+                                                                child:
+                                                                    CircleAvatar(
+                                                                  radius: 20,
+                                                                  backgroundImage:
+                                                                      NetworkImage(
+                                                                    rider.photoUrl ??
+                                                                        uscLogo,
+                                                                  ),
+                                                                ),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: const Color(
+                                                                        0xFF5F45A4),
+                                                                    width: 2,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              title: Text(
+                                                                rider.displayName ??
+                                                                    '',
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                  color: const Color(
+                                                                      0xff333333),
+                                                                  fontSize: 16,
+                                                                ),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .fade,
+                                                                maxLines: 1,
+                                                                softWrap: false,
+                                                              ),
+                                                              subtitle: Text(
+                                                                rider.userType!
+                                                                    .description,
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                  color: const Color(
+                                                                      0xff333333),
+                                                                  fontSize: 13,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
                                               },
                                             ),
                                           ),
