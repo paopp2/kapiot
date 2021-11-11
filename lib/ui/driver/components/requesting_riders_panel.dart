@@ -74,7 +74,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundImage: NetworkImage(
-                                  rider.photoUrl!,
+                                  rider.photoUrl ?? uscLogo,
                                 ),
                               ),
                               decoration: BoxDecoration(

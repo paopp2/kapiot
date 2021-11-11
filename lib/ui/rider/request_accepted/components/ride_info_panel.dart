@@ -169,7 +169,7 @@ class RideInfoPanel extends HookConsumerWidget {
                               ),
                               overflow: TextOverflow.fade,
                               softWrap: false,
-                            )
+                            ),
                           ],
                         )
                       ],

@@ -12,7 +12,10 @@ const uscLogo =
     'https://www.passerellesnumeriques.org/wp-content/uploads/2016/09/USC.png';
 
 class DriveInfoPanel extends HookConsumerWidget {
-  const DriveInfoPanel({Key? key, required this.constraints}) : super(key: key);
+  const DriveInfoPanel({
+    Key? key,
+    required this.constraints,
+  }) : super(key: key);
   final BoxConstraints constraints;
 
   @override

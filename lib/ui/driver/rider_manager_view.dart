@@ -2,14 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
-import 'package:kapiot/logic/shared/shared_state.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
-import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/driver/components/rider_manager_view_map.dart';
 
 import 'components/drive_info_panel.dart';
@@ -90,7 +86,7 @@ class RiderManagerView extends HookConsumerWidget {
                                   model: model,
                                   constraints: constraints,
                                 ),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(
