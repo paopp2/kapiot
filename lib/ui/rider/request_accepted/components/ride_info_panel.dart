@@ -10,7 +10,6 @@ import 'package:kapiot/logic/rider/request_accepted/request_accepted_view_state.
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/extensions.dart';
 import 'package:kapiot/model/car/car.dart';
-import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/ui/rider/request_accepted/components/divider_widget.dart';
 

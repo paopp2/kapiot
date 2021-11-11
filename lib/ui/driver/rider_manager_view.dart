@@ -81,7 +81,7 @@ class RiderManagerView extends HookConsumerWidget {
                                         ),
                                       ),
                                       Text(
-                                        "When carolinians along your\nroute sends you hail requests, you'll see them here.",
+                                        "When Carolinians along your\nroute send you hail requests, you'll see them here.",
                                         style: GoogleFonts.montserrat(
                                           fontSize: 12,
                                           color: const Color(0xFFAAAAAA),
