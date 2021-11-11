@@ -166,7 +166,7 @@ class MapsUtils {
               ))
           .toList(),
       true,
-      tolerance: 100,
+      tolerance: 150,
     );
   }
 
