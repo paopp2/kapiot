@@ -976,6 +976,56 @@
       "runtimeType": "rider"
     },
     {
+      "id": "r2sAiaorV5QPvWTMI95CiDFoK64u",
+      "user": {
+        "id": "r2sAiaorV5QPvWTMI95CiDFoK64u",
+        "displayName": "Madelyn Stillwell",
+        "email": "madelynstillwell@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/a/ae/MadelynStillwell.png/revision/latest?cb=20200908061902",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.359384016141556, 
+        "lng": 123.94977962345635,
+        "address": "RUSI Mandaue North, Cebu Philippines"
+      },
+      "endLocation": {
+        "lat": 10.365424544438637, 
+        "lng": 123.94371931431311, 
+        "address": "Dave Housing Supply Cubacub, Mandaue Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "FQIjoawoBUpDz7PcbpHFM86qfuIy",
+      "user": {
+        "id": "FQIjoawoBUpDz7PcbpHFM86qfuIy",
+        "displayName": "Queen Maeve",
+        "email": "queenmaeve@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/a/ae/MadelynStillwell.png/revision/latest?cb=20200908061902",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.359384016141556, 
+        "lng": 123.94977962345635,
+        "address": "RUSI Mandaue North, Cebu Philippines"
+      },
+      "endLocation": {
+        "lat": 10.365424544438637, 
+        "lng": 123.94371931431311, 
+        "address": "Dave Housing Supply Cubacub, Mandaue Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
       "id": "tgBeQvnNS0qrXAB4WrRFmekYV6OS",
       "acceptingDriverConfig": null,
       "startLocation": {

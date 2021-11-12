@@ -1024,6 +1024,39 @@
       "runtimeType": "driver"
     },
     {
+      "id": "FQIjoawoBUpDz7PcbpHFM86qfuIy",
+      "user": {
+        "id": "FQIjoawoBUpDz7PcbpHFM86qfuIy",
+        "displayName": "Queen Maeve",
+        "email": "queenmaeve@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/2/24/Queen_Maeve_S2.jpg/revision/latest?cb=20200808192442",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-11-12T19:55:42.938415",
+      "startLocation": {
+        "lat": 10.3568104,
+        "lng": 123.9504509,
+        "address": "Gaisano Grand Mandaue North, Mandaue City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3708575,
+        "lng": 123.9248579,
+        "address": "Tintay Market, Mandaue City, Cebu, Philippines"
+      },
+      "encodedRoute": "yxe~@}~osVyHZuDReIZwA@}BMG`BK~@GPUb@g@p@G?eClCmBrBu@`Au@lAw@jBk@fBYhBGb@MpCQlEWjGU`GSfDWnBm@nCmC|HiBlFoEzMcBzEMn@?d@HdBXnDDv@?XO`As@vC_A`Ei@jCq@jBo@xAk@`Aa@h@e@d@qAz@QN",
+      "rating": "4.9",
+      "currentRiderCount": 0,
+      "maxRiderCount": 2,
+      "car": {
+        "licensePlateNum": "XYZ 789",
+        "make": "BUGATTI",
+        "model": "VEYRON",
+        "type": "coupe"
+      },
+      "runtimeType": "driver"
+    },
+    {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "encodedRoute": "w|g~@}|hsVCO@MTLl@Lx@@RDtCFbC@^Cf@Wx@w@HKPYl@k@r@WzDq@nDm@hAS\\Cl@?r@Fn@FT?\\AjC]xEg@lAEp@JvBrAb@Pl@DxH@n@H^Hn@N`@Ph@RbAZlKnBtEt@nIbAnD^bD^nD\\vD\\xGn@rHp@dHt@xCZJDjANvCT~BX`AHh@@HA|@H`E`@nKbA`Ht@dEf@fDd@zAVxEjAjGpB|Bx@nBn@pExAtCdANHn@j@`AbAhC`BfN~HbBdAPPPNdBdAzC`BTHFYr@uBvAh@vBv@|@Z",
       "runtimeType": "driver",
