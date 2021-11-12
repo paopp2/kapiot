@@ -9,14 +9,10 @@ import 'package:kapiot/model/route_config/route_config.dart';
 
 void main() {
   group("Case 1: Drivers at their startLocs and along rider's route", () {
-    test('1.1.1: Basak Elem School Mandaue to Pacific Mall', () async {
+    test('1.1.1: Seaoil Pitogo to Consolacion Community College', () async {
       await verifyCompatibleDrivers(
         rider: 'Jim Preston',
-        shouldMatchWith: [
-          "Nicolas Paolo Pepito",
-          "Dominic Toretto",
-          "Hughie Campbell",
-        ],
+        shouldMatchWith: ["Mark Antony"],
       );
     });
     test('1.1.2: ABSCBN Mandaue to Insular Square', () async {
@@ -50,26 +46,10 @@ void main() {
         ],
       );
     });
-    test('1.1.5: Enjoy Shopping Lacion to QBC Sporting Supplies', () async {
+    test("1.1.5: Mcdo Lacion to Steph's Korean Restaurant", () async {
       await verifyCompatibleDrivers(
-        rider: "Kimiko Miyashiro",
-        shouldMatchWith: [
-          "Billy Butcher",
-          "Nicolas Paolo Pepito",
-          "Dominic Toretto",
-          "Hughie Campbell",
-        ],
-      );
-    });
-    test('1.1.6: Pike the Pet Lacion to Yasco Motor Parts Mandaue', () async {
-      await verifyCompatibleDrivers(
-        rider: "Annie January",
-        shouldMatchWith: [
-          "Billy Butcher",
-          "Nicolas Paolo Pepito",
-          "Dominic Toretto",
-          "Hughie Campbell",
-        ],
+        rider: "A-Train",
+        shouldMatchWith: ["Julius Caesar"],
       );
     });
     test('1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',

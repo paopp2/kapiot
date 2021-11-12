@@ -654,16 +654,16 @@
       "id": "ji89ti6ie104O4j0YZcPSKFk5GS9",
       "acceptingDriverConfig": null,
       "endLocation": {
-        "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu, Philippines",
-        "lat": 10.341064019974215,
-        "lng": 123.94752861317745
+        "address": "Consolacion Community College, Cebu Philippines",
+        "lat": 10.36867474440445, 
+        "lng": 123.97085215973796
       },
       "riderCount": 1,
       "runtimeType": "rider",
       "startLocation": {
-        "address": "Basak Elementary School, Mandaue City, Cebu, Philippines",
-        "lat": 10.354020048179562,
-        "lng": 123.95020372879284
+        "address": "Seaoil Pitogo Consolacion, Cebu Philippines",
+        "lat": 10.380810754848916, 
+        "lng": 123.96823701102788
       },
       "timeOfTrip": "2021-08-29T06:45:22.819077",
       "user": {
@@ -950,6 +950,32 @@
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
     },
+    {
+      "id": "qWOucrbzwpMrwIBdKUbrUcHJ1hA5",
+      "user": {
+        "id": "qWOucrbzwpMrwIBdKUbrUcHJ1hA5",
+        "displayName": "A-Train",
+        "email": "atrain@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/d/d4/A-Train_S2.jpg/revision/latest?cb=20200808192510",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.379395135671256,
+        "lng": 123.96517678032905,
+        "address": "Mcdo Lacion"
+      },
+      "endLocation": {
+        "lat": 10.369387211224717, 
+        "lng": 123.9284379421086,
+        "address": "Stephanie's Korean Restaurant"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    
     {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "acceptingDriverConfig": null,
