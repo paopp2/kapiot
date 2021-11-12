@@ -219,7 +219,83 @@ void main() {
   });
 
   // TODO: Update test_data with reverse routes then add tests here
-  // group('Case 2: Same routes with Case 1 but reversed', () {});
+  group('Case 2: Same routes with Case 1 but reversed', () {
+    test('2.2.1: Gaisano Grandmall Basak, LLC to Soltana Nature Residences ',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "R Robot",
+        shouldMatchWith: [
+          "R Charles Jr. Ausejo",
+          "R Omni Man",
+          "R Damien Darkblood",
+          "R Allen the Alien",
+        ],
+      );
+    });
+    test('2.2.2: Mactan Doctor\'s Hospital to Basak Mercado, LLC', () async {
+      await verifyCompatibleDrivers(
+        rider: "R Atom Eve",
+        shouldMatchWith: [
+          "R Charles Jr. Ausejo",
+          "R Omni Man",
+          "R Damien Darkblood",
+          "R Allen the Alien",
+        ],
+      );
+    });
+    test('2.2.3: BOSS B Food Hub to Cookies \'N Dream', () async {
+      await verifyCompatibleDrivers(
+        rider: "R The Immortal",
+        shouldMatchWith: [
+          "R Charles Jr. Ausejo",
+          "R Omni Man",
+          "R Damien Darkblood",
+          "R Allen the Alien",
+        ],
+      );
+    });
+    // test('2.2.4: Sebastien Hotel to YES Mart', () async {
+    //   await verifyCompatibleDrivers(
+    //     rider: "Dupli-Kate",
+    //     shouldMatchWith: [
+    //       "The Invincible",
+    //       "Battle Beast",
+    //       "Mauler",
+    //     ],
+    //   );
+    // });
+    // test('2.2.5: Savemore Market Maribago to Fairchild Villas', () async {
+    //   await verifyCompatibleDrivers(
+    //     rider: "Black Samson",
+    //     shouldMatchWith: [
+    //       "The Invincible",
+    //       "Battle Beast",
+    //       "Mauler",
+    //     ],
+    //   );
+    // });
+    // test('2.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
+    //     () async {
+    //   await verifyCompatibleDrivers(
+    //     rider: "Titan",
+    //     shouldMatchWith: [
+    //       "The Invincible",
+    //       "Battle Beast",
+    //       "Mauler",
+    //     ],
+    //   );
+    // });
+    // test('2.2.7: AA BBQ Soong to Babag II Road', () async {
+    //   await verifyCompatibleDrivers(
+    //     rider: "Cecil",
+    //     shouldMatchWith: [
+    //       "The Invincible",
+    //       "Battle Beast",
+    //       "Mauler",
+    //     ],
+    //   );
+    // });
+  });
 
   group("Case 3: A user can't pair with oneself as both rider and driver", () {
     test('3.1.1A Same user: SM Lacion to Fatima Basak', () async {
