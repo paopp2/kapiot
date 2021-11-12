@@ -200,6 +200,49 @@ void main() {
 
   // TODO: Update test_data with reverse routes then add tests here
   group('Case 2: Same routes with Case 1 but reversed', () {
+    test('2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
+      await verifyCompatibleDrivers(
+        rider: 'R_Jim Preston',
+        shouldMatchWith: ["R_Mark Antony"],
+      );
+    });
+    test('2.1.2: Insular Square to ABSCBN Mandaue', () async {
+      await verifyCompatibleDrivers(
+        rider: 'R_Arthur',
+        shouldMatchWith: [
+          "R_Billy Butcher",
+          "R_Nicolas Paolo Pepito",
+          "R_Dominic Toretto",
+          "R_Hughie Campbell",
+        ],
+      );
+    });
+    test('2.1.3: Basak Elem Mandaue to Rose Pharmacy Pitogo', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Mother's Milk",
+        shouldMatchWith: [
+          "R_Billy Butcher",
+          "R_Nicolas Paolo Pepito",
+          "R_Dominic Toretto",
+        ],
+      );
+    });
+    test('2.1.4: Toyota Mandaue North to Jollibee Lacion', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Frenchie",
+        shouldMatchWith: [
+          "R_Nicolas Paolo Pepito",
+          "R_Dominic Toretto",
+          "R_Hughie Campbell",
+        ],
+      );
+    });
+    test("2.1.5: Steph's Korean Restaurant to Mcdo Lacion", () async {
+      await verifyCompatibleDrivers(
+        rider: "R_A-Train",
+        shouldMatchWith: ["R_Julius Caesar"],
+      );
+    });
     test('2.2.1: Gaisano Grandmall Basak, LLC to Soltana Nature Residences ',
         () async {
       await verifyCompatibleDrivers(
@@ -272,52 +315,10 @@ void main() {
           "R The Invincible",
           "R Battle Beast",
           "R Mauler",
-  group("Case 2: Reversed routes for Case 1 riders and drivers", () {
-    test('2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
-      await verifyCompatibleDrivers(
-        rider: 'R_Jim Preston',
-        shouldMatchWith: ["R_Mark Antony"],
-      );
-    });
-    test('2.1.2: Insular Square to ABSCBN Mandaue', () async {
-      await verifyCompatibleDrivers(
-        rider: 'R_Arthur',
-        shouldMatchWith: [
-          "R_Billy Butcher",
-          "R_Nicolas Paolo Pepito",
-          "R_Dominic Toretto",
-          "R_Hughie Campbell",
         ],
-      );
-    });
-    test('2.1.3: Basak Elem Mandaue to Rose Pharmacy Pitogo', () async {
-      await verifyCompatibleDrivers(
-        rider: "R_Mother's Milk",
-        shouldMatchWith: [
-          "R_Billy Butcher",
-          "R_Nicolas Paolo Pepito",
-          "R_Dominic Toretto",
-        ],
-      );
-    });
-    test('2.1.4: Toyota Mandaue North to Jollibee Lacion', () async {
-      await verifyCompatibleDrivers(
-        rider: "R_Frenchie",
-        shouldMatchWith: [
-          "R_Nicolas Paolo Pepito",
-          "R_Dominic Toretto",
-          "R_Hughie Campbell",
-        ],
-      );
-    });
-    test("2.1.5: Steph's Korean Restaurant to Mcdo Lacion", () async {
-      await verifyCompatibleDrivers(
-        rider: "R_A-Train",
-        shouldMatchWith: ["R_Julius Caesar"],
       );
     });
   });
-
   group("Case 3: A user can't pair with oneself as both rider and driver", () {
     test('3.1.1A Same user: SM Lacion to Fatima Basak', () async {
       await verifyCompatibleDrivers(
