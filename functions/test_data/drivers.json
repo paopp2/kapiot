@@ -614,7 +614,7 @@
       "maxRiderCount": 5,
       "rating": "4.5",
       "timeOfTrip": "2021-09-05T09:23:05.430842",
-      "encodedRoute": "shj~@{xrsVEXL^DJ`@x@xBmAZl@\\d@bCjDzBhDb@r@hBdFJb@FjAJj@VvCVzDLlBF^Lb@n@pA\\p@b@r@t@t@dC`CdAv@j@ZvFvBxDbBpB`Ab@FTLpAf@v@PT@n@BbBAx@Bl@Dj@LXL~A`AhKjGzHtE~@\\zAT`Kt@xBHfFOlEQpI]fDQnC@`AHlFZtJx@vH`AtFdA~EbArGdApJnAvCb@f@DnAFr@AtBIvBXvBh@|@PbCp@FBDMVgACEk@M",
+      "encodedRoute": "yhj~@ixrsVBTLZVh@JPxBmA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
       "startLocation": {
         "address": "SM City Consolacion, Consolacion, Cebu",
         "lat": 10.380190604294885,
@@ -746,7 +746,7 @@
       "maxRiderCount": 5,
       "rating": "4.5",
       "timeOfTrip": "2021-09-05T09:20:18.358634",
-      "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@k@zC",
+      "encodedRoute": "isd~@utosVj@{Cs@KwHaAuJy@cBKkEYoCAgDPqI\\mEPgFNk@AmAGqCSoFa@y@K_AUa@Q}A_AiPuJ}CmBYMk@Mm@Ey@CcB@o@CUAw@QqAg@UMMMCCk@WkH_DsEiBk@[uEkDu@u@c@s@]q@o@qAMc@G_@MmBW{DWwCKk@GkAKc@IYCa@_@{A]q@Oe@Q[GKsB}CqEqGc@eAWs@c@{@_A}BwBwFkAgD}AkIm@{Ai@_AoAmBoEmG",
       "endLocation": {
         "address": "Vito Pepito Compound, Cebu North Road, Pitogo, Consolacion, Cebu",
         "lat": 10.382572715457858,
@@ -794,7 +794,7 @@
     },
     {
       "id": "1MlyDCDJ4k0GbfvMoYpuN2HXQe6B",
-      "encodedRoute": "wxj~@setsVCJKPRVjAdBnAlBh@~@^z@L^j@pCp@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@|BLvAAdI[tDSjEMfCOt@C|CHpEXdEXhFd@hEf@`Dd@pB`@nHzArGdArEl@tHdAhBJd@@xBIVAfBT|@RhEbAhA\\\\sA?Eo@O",
+      "encodedRoute": "gwb~@eposVDGLi@Nu@CEYMlA_FTw@xFjBdBp@jBl@]lDcAtIoFkAWAE?a@WKIqAq@iA]wA]oDy@gBUW@yBHoCMuHeAsEm@sGeAoH{AqBa@aDe@iEg@iFe@eEYwCQy@G}CIu@BgCNkELuDReIZwA@w@EeAGgHe@mC]k@O_Ac@uD}BuLiHeDoBy@UcAGeDAg@Cw@QcA_@c@UMMYOcBs@oFaCwEoBUMsDmC_Aw@k@u@[i@aAqBQk@MyAQqCWaEUwAMcBOe@Ca@_@{A]q@Oe@Ye@GO{BeDyB}CsAoBw@uBy@aBq@gBY}@mBaF]_AYiAcAyFOo@c@gAa@y@oBwC_EwF",
       "runtimeType": "driver",
       "timeOfTrip": "2021-08-30T12:41:39.580591",
       "endLocation": {
@@ -845,7 +845,7 @@
       "maxRiderCount": 5,
       "rating": "4.5",
       "timeOfTrip": "2021-09-05T09:23:05.430842",
-      "encodedRoute": "shj~@{xrsVEXL^DJ`@x@xBmAZl@\\d@bCjDzBhDb@r@hBdFJb@FjAJj@VvCVzDLlBF^Lb@n@pA\\p@b@r@t@t@dC`CdAv@j@ZvFvBxDbBpB`Ab@FTLpAf@v@PT@n@BbBAx@Bl@Dj@LXL~A`AhKjGzHtE~@\\zAT`Kt@xBHfFOlEQpI]fDQnC@`AHlFZtJx@vH`AtFdA~EbArGdApJnAvCb@f@DnAFr@AtBIvBXvBh@|@PbCp@FBDMVgACEk@M",
+      "encodedRoute": "gwb~@eposVDGLi@Nu@CEYMlA_FTw@xFjBdBp@jBl@]lDcAtIoFkAWAE?a@WKIqAq@iA]wA]oDy@gBUW@yBHoCMuHeAsEm@sGeAoH{AqBa@aDe@iEg@iFe@eEYwCQy@G}CIu@BgCNkELuDReIZwA@w@EeAGgHe@mC]k@O_Ac@uD}BuLiHeDoBy@UcAGeDAg@Cw@QcA_@c@UMMYOcBs@oFaCwEoBUMsDmC_Aw@k@u@[i@aAqBQk@MyAQqCWaEUwAMcBOe@Ca@_@{A]q@Oe@Ye@GO{BeDyB}CsAoBw@uBy@aBu@^DLJZZt@DLA@QJ?B?BWLKJCN",
       "endLocation": {
         "address": "SM City Consolacion, Consolacion, Cebu",
         "lat": 10.380190604294885,
@@ -978,7 +978,7 @@
         "lng": 123.926915,
         "address": "Sacred Heart School - Jesuits, Mandaue City, Cebu, Philippines"
       },
-      "encodedRoute": "{tj~@mpssVNHPJd@o@l@u@p@]p@xDf@|AdCtGTj@x@`Cn@nBh@dA\\p@xCbEfA~AhAjBd@~@lAfDNd@LbBTvAV`EPpCLxAPj@`ApBZh@j@t@~@v@bBdBdAv@RL|ElBfDxAtClA^Tb@Fb@TbA^v@Pf@BpA?rA@bAFx@Tx@b@dI~EpKrGpAj@|@PhBRfHd@G`BK~@GPUb@g@p@G?eClCmBrBu@`Au@lAw@jBk@fBYhBGb@MpCQlEWjGU`GSfDWnBm@nCmC|HiBlFoEzMcBzEMn@?d@HdBXnDDv@?XO`As@vC_A`EdBfBf@i@NCD@XXFPEJ",
+      "encodedRoute": "i_h~@wnksVDOW_@MIG?QJ_@`@eBcBp@yCf@}Bd@mBDq@QaCWiDA{@B_@ZcAhCqHrBiGrDwK~AsE^{Af@sCFo@PqCFaCRwEh@aNTeCh@{BlA}ChAgBfBqBbCiCh@m@F?x@kAJ[`@[fAyAR_@c@CeAGgHe@iBS}@QqAk@qKsGeI_Fy@c@y@UcAGsAAqA?g@Cw@QcA_@c@UMMYOcGiCoAk@wEoBiE{C_Aw@k@u@}A{CQk@MyAi@sIUwAMcBOe@Ca@_@{A]q@Oe@Ye@oAsB_CeDwAoBi@y@g@uAiAaCkAeDkCaHYiAe@qCi@VSPgAxAa@U",
       "rating": "4.9",
       "currentRiderCount": 0,
       "maxRiderCount": 6,

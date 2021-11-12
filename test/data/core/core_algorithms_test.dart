@@ -26,7 +26,7 @@ void main() {
         ],
       );
     });
-    test('1.1.3: 7/11 Lamac to Basak Elem Mandaue', () async {
+    test('1.1.3: Rose Pharmacy Pitogo to Basak Elem Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: "Mother's Milk",
         shouldMatchWith: [
@@ -290,7 +290,7 @@ void main() {
         ],
       );
     });
-    test('2.1.3: Basak Elem Mandaue to 7/11 Lamac', () async {
+    test('2.1.3: Basak Elem Mandaue to Rose Pharmacy Pitogo', () async {
       await verifyCompatibleDrivers(
         rider: "R_Mother's Milk",
         shouldMatchWith: [

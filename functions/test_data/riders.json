@@ -713,9 +713,9 @@
       "timeOfTrip": "2021-09-05T09:26:38.961796",
       "riderCount": 3,
       "startLocation": {
-        "lat": 10.3799829,
-        "lng": 123.966197,
-        "address": "7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines"
+        "lat": 10.381069875725956, 
+        "lng": 123.96941564876614,
+        "address": "Rose Pharmacy Pitogo Consolacion Cebu, Philippines"
       },
       "endLocation": {
         "lat": 10.3540801,
@@ -1038,9 +1038,9 @@
       "timeOfTrip": "2021-09-05T09:26:38.961796",
       "riderCount": 3,
       "endLocation": {
-        "lat": 10.3799829,
-        "lng": 123.966197,
-        "address": "7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines"
+        "lat": 10.381069875725956, 
+        "lng": 123.96941564876614,
+        "address": "Rose Pharmacy Pitogo Consolacion Cebu, Philippines"
       },
       "startLocation": {
         "lat": 10.3540801,
