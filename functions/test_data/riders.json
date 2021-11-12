@@ -351,6 +351,31 @@
       }
     },
     {
+      "id": "mdB8yQ1h61Iiuj4XCEMIgCND0ASX",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.307261829568102,
+        "lng": 124.01009852107994
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "YES Mart, Mactan Circumferential Road, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.304253441319627,
+        "lng": 124.00722319320383
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R Dupli-Kate",
+        "email": "dupli_cate_30@email.com",
+        "id": "mdB8yQ1h61Iiuj4XCEMIgCND0ASX",
+        "phoneNumber": "",
+        "photoUrl": "https://pbs.twimg.com/media/Ey4bTdxXAAIxiwD.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
       "id": "3hngi1y8vuw1jid1bka8a9kdjyc6",
       "acceptingDriverConfig": null,
       "endLocation": {
@@ -401,6 +426,31 @@
       }
     },
     {
+      "id": "Gz9OAb8Lpv2xgBe4P0zPSNkgInmb",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "AA BBQ Soong Branch, M.L. Quezon National Highway, Maribago, Lapu-Lapu City, Cebu",
+        "lat": 10.296608053426377,
+        "lng": 124.0010771028963
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R Cecil",
+        "email": "cecil_38@email.com",
+        "id": "Gz9OAb8Lpv2xgBe4P0zPSNkgInmb",
+        "phoneNumber": "",
+        "photoUrl": "https://qph.fs.quoracdn.net/main-qimg-a322afaf48e1d016fe03972d2ba86ba6",
+        "userType": "staff"
+      }
+    },
+    {
       "id": "bmnIgkNSPz0P4eBgx2vpL8bAO9zG",
       "acceptingDriverConfig": null,
       "endLocation": {
@@ -429,6 +479,56 @@
       "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
       "acceptingDriverConfig": null,
       "endLocation": {
+        "address": "Savemore Market Maribago, Maribago, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2865945,
+        "lng": 123.9974986
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2714003,
+        "lng": 123.9688101
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R Black Samson",
+        "email": "black_samson_10@email.com",
+        "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
+        "phoneNumber": "",
+        "photoUrl": "https://static.tvmaze.com/uploads/images/medium_portrait/301/753519.jpg",
+        "userType": "student"
+      }
+    },
+    {
+      "id": "GHZ9uGVGKIk9h4Z3BtelF8yQDZTo",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2714003,
+        "lng": 123.9688101
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Savemore Market Maribago, Maribago, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2865945,
+        "lng": 123.9974986
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "Black Samson",
+        "email": "black_samson_10@email.com",
+        "id": "GHZ9uGVGKIk9h4Z3BtelF8yQDZTo",
+        "phoneNumber": "",
+        "photoUrl": "https://static.tvmaze.com/uploads/images/medium_portrait/301/753519.jpg",
+        "userType": "student"
+      }
+    },
+    {
+      "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
+      "acceptingDriverConfig": null,
+      "endLocation": {
         "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
         "lat": 10.2714003,
         "lng": 123.9688101
@@ -448,6 +548,31 @@
         "phoneNumber": "",
         "photoUrl": "https://static.tvmaze.com/uploads/images/medium_portrait/301/753519.jpg",
         "userType": "student"
+      }
+    },
+    {
+      "id": "icDvt6cAWSHu24T101FOpO2edRPL",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Andalucia Crest, Cordova, Cebu, Philippines",
+        "lat": 10.2652024,
+        "lng": 123.9642778
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Taytayan Floating Restaurant, Babag II Road, Cordova, Cebu, Philippines",
+        "lat": 10.2708654,
+        "lng": 123.945804
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R Titan",
+        "email": "titan_gel_4200@email.com",
+        "id": "icDvt6cAWSHu24T101FOpO2edRPL",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazon-invincible/images/c/c8/Titan_invincible_27s670_%284%29.png/revision/latest?cb=20210327234518",
+        "userType": "faculty"
       }
     },
     {

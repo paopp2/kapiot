@@ -254,47 +254,47 @@ void main() {
         ],
       );
     });
-    // test('2.2.4: Sebastien Hotel to YES Mart', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "Dupli-Kate",
-    //     shouldMatchWith: [
-    //       "The Invincible",
-    //       "Battle Beast",
-    //       "Mauler",
-    //     ],
-    //   );
-    // });
-    // test('2.2.5: Savemore Market Maribago to Fairchild Villas', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "Black Samson",
-    //     shouldMatchWith: [
-    //       "The Invincible",
-    //       "Battle Beast",
-    //       "Mauler",
-    //     ],
-    //   );
-    // });
-    // test('2.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
-    //     () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "Titan",
-    //     shouldMatchWith: [
-    //       "The Invincible",
-    //       "Battle Beast",
-    //       "Mauler",
-    //     ],
-    //   );
-    // });
-    // test('2.2.7: AA BBQ Soong to Babag II Road', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "Cecil",
-    //     shouldMatchWith: [
-    //       "The Invincible",
-    //       "Battle Beast",
-    //       "Mauler",
-    //     ],
-    //   );
-    // });
+    test('2.2.4: YES Mart to Sebastien Hotel', () async {
+      await verifyCompatibleDrivers(
+        rider: "R Dupli-Kate",
+        shouldMatchWith: [
+          "R The Invincible",
+          "R Battle Beast",
+          "R Mauler",
+        ],
+      );
+    });
+    test('2.2.5: Fairchild Villas to Savemore Market Maribago', () async {
+      await verifyCompatibleDrivers(
+        rider: "R Black Samson",
+        shouldMatchWith: [
+          "R The Invincible",
+          "R Battle Beast",
+          "R Mauler",
+        ],
+      );
+    });
+    test('2.2.6: Taytayan Floating Restaurant to Andalucia Crest Cordova',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "R Titan",
+        shouldMatchWith: [
+          "R The Invincible",
+          "R Battle Beast",
+          "R Mauler",
+        ],
+      );
+    });
+    test('2.2.7: Babag II Road to AA BBQ Soong', () async {
+      await verifyCompatibleDrivers(
+        rider: "R Cecil",
+        shouldMatchWith: [
+          "R The Invincible",
+          "R Battle Beast",
+          "R Mauler",
+        ],
+      );
+    });
   });
 
   group("Case 3: A user can't pair with oneself as both rider and driver", () {
