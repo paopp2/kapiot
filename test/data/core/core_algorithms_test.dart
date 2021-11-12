@@ -272,6 +272,191 @@ void main() {
           "R The Invincible",
           "R Battle Beast",
           "R Mauler",
+  group("Case 2: Reversed routes for Case 1 riders and drivers", () {
+    test('2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
+      await verifyCompatibleDrivers(
+        rider: 'R_Jim Preston',
+        shouldMatchWith: ["R_Mark Antony"],
+      );
+    });
+    test('2.1.2: Insular Square to ABSCBN Mandaue', () async {
+      await verifyCompatibleDrivers(
+        rider: 'R_Arthur',
+        shouldMatchWith: [
+          "R_Billy Butcher",
+          "R_Nicolas Paolo Pepito",
+          "R_Dominic Toretto",
+          "R_Hughie Campbell",
+        ],
+      );
+    });
+    test('2.1.3: Basak Elem Mandaue to 7/11 Lamac', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Mother's Milk",
+        shouldMatchWith: [
+          "R_Billy Butcher",
+          "R_Nicolas Paolo Pepito",
+          "R_Dominic Toretto",
+        ],
+      );
+    });
+    test('2.1.4: Toyota Mandaue North to Jollibee Lacion', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Frenchie",
+        shouldMatchWith: [
+          "R_Nicolas Paolo Pepito",
+          "R_Dominic Toretto",
+          "R_Hughie Campbell",
+        ],
+      );
+    });
+    test("2.1.5: Steph's Korean Restaurant to Mcdo Lacion", () async {
+      await verifyCompatibleDrivers(
+        rider: "R_A-Train",
+        shouldMatchWith: ["R_Julius Caesar"],
+      );
+    });
+    test('1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Robot",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('1.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital', () async {
+      await verifyCompatibleDrivers(
+        rider: "Atom Eve",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
+      await verifyCompatibleDrivers(
+        rider: "The Immortal",
+        shouldMatchWith: [
+          "Charles Jr. Ausejo",
+          "Omni Man",
+          "Damien Darkblood",
+          "Allen the Alien",
+        ],
+      );
+    });
+    test('1.2.4: Sebastien Hotel to YES Mart', () async {
+      await verifyCompatibleDrivers(
+        rider: "Dupli-Kate",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('1.2.5: Savemore Market Maribago to Fairchild Villas', () async {
+      await verifyCompatibleDrivers(
+        rider: "Black Samson",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('1.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Titan",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+    test('1.2.7: AA BBQ Soong to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Cecil",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
+
+    test('1.3.1: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "Oogie Boogie",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+
+    test('1.3.2: AA BBQ Salinas Drive to UC Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Morty Smith",
+        shouldMatchWith: [
+          "Rick Sanchez",
+        ],
+      );
+    });
+
+    test('1.3.3: 88th Avenue to Phoenix Banilad', () async {
+      await verifyCompatibleDrivers(
+        rider: "Walter White",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Rick Sanchez",
+          "Morty Smith",
+          "Jin Kazama",
+        ],
+      );
+    });
+
+    test('1.3.4: Cafe Georg to Coastal Conservation and Education', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jesse Pinkman",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Morty Smith",
+          "Rick Sanchez",
+          "Jin Kazama",
+        ],
+      );
+    });
+
+    test('1.3.5: Holy Family Village II to Cafe Belle', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jin Kazama",
+        shouldMatchWith: [
+          "Skeleton Jack",
+        ],
+      );
+    });
+
+    test('1.3.6: Marco Polo Plaza to SM City Cebu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Heiachi Mishima",
+        shouldMatchWith: [],
+      );
+    });
+
+    test('1.3.7: USPF to Yoshimeatsu', () async {
+      await verifyCompatibleDrivers(
+        rider: "Hwoarang",
+        shouldMatchWith: [
+          "Rick Sanchez",
+          "Morty Smith",
         ],
       );
     });

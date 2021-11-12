@@ -975,7 +975,131 @@
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
     },
-    
+    {
+      "id": "tgBeQvnNS0qrXAB4WrRFmekYV6OS",
+      "acceptingDriverConfig": null,
+      "startLocation": {
+        "address": "Consolacion Community College, Cebu Philippines",
+        "lat": 10.36867474440445, 
+        "lng": 123.97085215973796
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "endLocation": {
+        "address": "Seaoil Pitogo Consolacion, Cebu Philippines",
+        "lat": 10.380810754848916, 
+        "lng": 123.96823701102788
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Jim Preston",
+        "email": "r_jimpreston@rider.com",
+        "id": "tgBeQvnNS0qrXAB4WrRFmekYV6OS",
+        "phoneNumber": "",
+        "photoUrl": "https://pbs.twimg.com/media/CW83k9zUEAA0euy.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
+      "id": "HcQCeuDYPdAuYf6SUkbszF5skwzL",
+      "acceptingDriverConfig": null,
+      "startLocation": {
+        "address": "Insular Square, Central Nautical Highway, Mandaue City, Cebu, Philippines",
+        "lat": 10.3502975,
+        "lng": 123.9482916
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "endLocation": {
+        "address": "ABS-CBN Jagobiao, Mandaue City, Cebu, Philippines",
+        "lat": 10.36618,
+        "lng": 123.9505367
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Arthur",
+        "email": "R_arthur@robot.com",
+        "id": "HcQCeuDYPdAuYf6SUkbszF5skwzL",
+        "phoneNumber": "",
+        "photoUrl": "https://images.thestar.com/VbUjbMZWzk4YsPKUdAqS0Alucow=/1280x1024/smart/filters:cb(1525279967686)/https://www.thestar.com/content/dam/thestar/entertainment/movies/2016/12/20/passengers-actor-michael-sheen-talks-about-portraying-a-robo-bartender/michael-sheen.jpg",
+        "userType": "staff"
+      }
+    },
+    {
+      "id": "0azfGCwxzwttTnAG4n6vWqhT00IR",
+      "user": {
+        "id": "0azfGCwxzwttTnAG4n6vWqhT00IR",
+        "displayName": "R_Mother's Milk",
+        "email": "r_mothersmilk@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/c/ce/Mothers_Milk_S2.jpg/revision/latest?cb=20200906145235",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T09:26:38.961796",
+      "riderCount": 3,
+      "endLocation": {
+        "lat": 10.3799829,
+        "lng": 123.966197,
+        "address": "7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3540801,
+        "lng": 123.9501415,
+        "address": "Basak Elementary School, Mandaue City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "qTITNvQloeFLzJUpGqEDSXWgksCc",
+      "user": {
+        "id": "qTITNvQloeFLzJUpGqEDSXWgksCc",
+        "displayName": "R_Frenchie",
+        "email": "r_frenchie@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/1/14/Frenchie_S2.jpg/revision/latest?cb=20200911125421",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:28:44.459326",
+      "riderCount": 3,
+      "endLocation": {
+        "lat": 10.3763113,
+        "lng": 123.9598846,
+        "address": "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3450685,
+        "lng": 123.9476575,
+        "address": "Toyota Mandaue North Cebu, Inc., Central Nautical Highway, Mandaue City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "aPlNcJtBr0fenIdwLE10lk91X0Sf",
+      "user": {
+        "id": "aPlNcJtBr0fenIdwLE10lk91X0Sf",
+        "displayName": "R_A-Train",
+        "email": "r_atrain@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/d/d4/A-Train_S2.jpg/revision/latest?cb=20200808192510",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "endLocation": {
+        "lat": 10.379395135671256,
+        "lng": 123.96517678032905,
+        "address": "Mcdo Lacion"
+      },
+      "startLocation": {
+        "lat": 10.369387211224717, 
+        "lng": 123.9284379421086,
+        "address": "Stephanie's Korean Restaurant"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
     {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
       "acceptingDriverConfig": null,
