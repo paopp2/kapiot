@@ -222,9 +222,9 @@ class DriverCard extends HookConsumerWidget {
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: () => model.requestDriver(
-                          driverConfig.user.id,
-                        ),
+                        onPressed: !isRequested
+                            ? () => model.requestDriver(driverConfig.user.id)
+                            : null,
                         style: TextButton.styleFrom(
                           backgroundColor: isRequested
                               ? const Color(0xFF9F8FC8)
