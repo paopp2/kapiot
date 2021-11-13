@@ -124,21 +124,7 @@ void main() {
         ],
       );
     });
-
-    test('1.3.3: 88th Avenue to Phoenix Banilad', () async {
-      await verifyCompatibleDrivers(
-        rider: "Walter White",
-        shouldMatchWith: [
-          "Skeleton Jack",
-          "Rick Sanchez",
-          "Morty Smith",
-          "Jin Kazama",
-          "Tom Marvolo Riddle",
-        ],
-      );
-    });
-
-    test('1.3.4: Cafe Georg to Coastal Conservation and Education', () async {
+    test('1.3.3: Cafe Georg to Coastal Conservation and Education', () async {
       await verifyCompatibleDrivers(
         rider: "Jesse Pinkman",
         shouldMatchWith: [
@@ -150,8 +136,7 @@ void main() {
         ],
       );
     });
-
-    test('1.3.5: Holy Family Village II to Cafe Belle', () async {
+    test('1.3.4: Holy Family Village II to Cafe Belle', () async {
       await verifyCompatibleDrivers(
         rider: "Jin Kazama",
         shouldMatchWith: [
@@ -160,15 +145,7 @@ void main() {
         ],
       );
     });
-
-    test('1.3.6: Marco Polo Plaza to SM City Cebu', () async {
-      await verifyCompatibleDrivers(
-        rider: "Heiachi Mishima",
-        shouldMatchWith: [],
-      );
-    });
-
-    test('1.3.7: USPF to Yoshimeatsu', () async {
+    test('1.3.5: USPF to Yoshimeatsu', () async {
       await verifyCompatibleDrivers(
         rider: "Hwoarang",
         shouldMatchWith: [
@@ -178,7 +155,6 @@ void main() {
       );
     });
   });
-
   // TODO: Update test_data with reverse routes then add tests here
   group('Case 2: Same routes with Case 1 but reversed', () {
     test('2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
@@ -599,22 +575,320 @@ void main() {
     });
   });
 
-  // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
-  // should be 'ahead' of the rider's starting location
-  // group("Case 4: Drivers can't match with passed riders even if compatible", () {});
+  group("Case 4: Compatible drivers can't match with passed riders", () {
+    test(
+      '4.1.1 Seaoil Pitogo to Consolacion Community College, 1 driver passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "Jim Preston",
+          driverCurrentLocOverrides: {
+            "Mark Antony": const KapiotLocation(
+              address: 'Doc Darwin Clinic',
+              lat: 10.377972240521853,
+              lng: 123.96308286005973,
+            ),
+          },
+          shouldMatchWith: [],
+        );
+      },
+    );
+    test('4.1.2: ABSCBN Mandaue to Insular Square, 2 drivers passed', () async {
+      await verifyCompatibleDrivers(
+        rider: 'Arthur',
+        driverCurrentLocOverrides: {
+          "Nicolas Paolo Pepito": const KapiotLocation(
+            address: "Cenapro Chemical Corp., Mandaue City, Cebu Philippines",
+            lat: 10.365097859554922,
+            lng: 123.95064973628318,
+          ),
+          "Hughie Campbell": const KapiotLocation(
+            address:
+                "360 Pharmacy, Skina Canduman, Mandaue City, Cebu Philippines",
+            lat: 10.362572419176354,
+            lng: 123.94983174740908,
+          ),
+        },
+        shouldMatchWith: [
+          "Billy Butcher",
+          "Dominic Toretto",
+        ],
+      );
+    });
+    test('4.1.3: Insular Square to ABSCBN Mandaue', () async {
+      await verifyCompatibleDrivers(
+        rider: 'R_Arthur',
+        driverCurrentLocOverrides: {
+          "R_Billy Butcher": const KapiotLocation(
+            address: "Lapas Insular Square Padung Lacion, Mandaue Cebu",
+            lat: 10.350659670577313,
+            lng: 123.94923958853667,
+          ),
+          "R_Dominic Toretto": const KapiotLocation(
+            address: "Tabok Supershell Gas Station, Cebu Philippines",
+            lat: 10.350962498801193,
+            lng: 123.94930915643847,
+          ),
+        },
+        shouldMatchWith: [
+          "R_Nicolas Paolo Pepito",
+          "R_Hughie Campbell",
+        ],
+      );
+    });
+    test(
+      '4.1.4 Mcdo Lacion to Lacion Municipal Hall, 2 drivers passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "The Homelander",
+          driverCurrentLocOverrides: {
+            "Julius Caesar": const KapiotLocation(
+              address: "Approaching Mcdo Lacion (near but did not pass rider)",
+              lat: 10.379394167865847,
+              lng: 123.96523141541483,
+            ),
+            "Billy Butcher": const KapiotLocation(
+              address: "Eleven J Bakeshop, Consolacion Cebu",
+              lat: 10.378393468548602,
+              lng: 123.96361026482597,
+            ),
+            "Dominic Toretto": const KapiotLocation(
+              address: "Skina Laray, Consolacion Cebu",
+              lat: 10.378795692408227,
+              lng: 123.96394871330784,
+            ),
+          },
+          shouldMatchWith: [
+            "Nicolas Paolo Pepito",
+            "Hughie Campbell",
+            "Julius Caesar",
+          ],
+        );
+      },
+    );
+    test(
+      "4.1.5: Stephanie's Korean Restaurant to Mcdo Lacion, 1 driver passed",
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "R_A-Train",
+          driverCurrentLocOverrides: {
+            "R_Julius Caesar": const KapiotLocation(
+              address: "Unahan Steph's Korean Restaurant",
+              lat: 10.3685132733364,
+              lng: 123.92905751878283,
+            ),
+          },
+          shouldMatchWith: [],
+        );
+      },
+    );
+    test(
+      '4.2.1: Soltana Nature Residences to Gaisano Grandmall Basak LLC, 1 driver passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "Robot",
+          driverCurrentLocOverrides: {
+            "Charles Jr. Ausejo": const KapiotLocation(
+                address: 'Basak-Marigondon Rd',
+                lat: 10.289813053956808,
+                lng: 123.96750010228797),
+          },
+          shouldMatchWith: [
+            "Omni Man",
+            "Damien Darkblood",
+            "Allen the Alien",
+          ],
+        );
+      },
+    );
+    test(
+        '4.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital, 2 drivers passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Atom Eve',
+        driverCurrentLocOverrides: {
+          "Omni Man": const KapiotLocation(
+              address: "TNC Mactan",
+              lat: 10.293767415079285,
+              lng: 123.96561179866607),
+          "Damien Darkblood": const KapiotLocation(
+              address: "6015 Basak-Marigondon Rd.",
+              lat: 10.296378521568169,
+              lng: 123.96448902351165),
+        },
+        shouldMatchWith: ["Charles Jr. Ausejo", "Allen the Alien"],
+      );
+    });
+    test('4.2.3: Cookies \'N Dream to BOSS B Food Hub, 1 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'The Immortal',
+        driverCurrentLocOverrides: {
+          "Allen the Alien": const KapiotLocation(
+              address: "EUMS Water Refilling Station & Pet Supplies",
+              lat: 10.307174678590808,
+              lng: 123.95205208486078),
+        },
+        shouldMatchWith: ["Charles Jr. Ausejo", "Omni Man", "Damien Darkblood"],
+      );
+    });
+    test(
+      '4.2.4: YES Mart to Sebastien Hotel, 3 drivers passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "R_Dupli-Kate",
+          driverCurrentLocOverrides: {
+            "R_The Invincible": const KapiotLocation(
+                address: "M.L. Quezon National Highway",
+                lat: 10.30499102729754,
+                lng: 124.00823621499799),
+            "R_Battle Beast": const KapiotLocation(
+                address: "3 M.L. Quezon National Highway",
+                lat: 10.305993824224478,
+                lng: 124.00919108137111),
+            "R_Mauler": const KapiotLocation(
+                address: "M.L. Quezon National Highway",
+                lat: 10.305184542217843,
+                lng: 124.00837556211796),
+          },
+          shouldMatchWith: [],
+        );
+      },
+    );
+    test(
+      "4.2.5: Fairchild Villas to Savemore Market Maribago, 2 drivers passed",
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "R_Black Samson",
+          driverCurrentLocOverrides: {
+            "R_The Invincible": const KapiotLocation(
+                address: "Josephine Store",
+                lat: 10.272994380145574,
+                lng: 123.97245790192787),
+            "R_Battle Beast": const KapiotLocation(
+                address: "Beboy's Original La Paz Batchoy",
+                lat: 10.275084628362467,
+                lng: 123.97565509495247),
+          },
+          shouldMatchWith: ["R_Mauler"],
+        );
+      },
+    );
+
+    test('4.3.1: USPF to Yoshimeatsu, 1 driver passed', () async {
+      await verifyCompatibleDrivers(
+        rider: 'Hwoarang',
+        driverCurrentLocOverrides: {
+          "Rick Sanchez": const KapiotLocation(
+            address:
+                "Honda Philippines, Inc., Salinas Dr, Cebu City, 6000 Cebu",
+            lat: 10.327283651784851,
+            lng: 123.90527950055528,
+          ),
+        },
+        shouldMatchWith: [
+          "Morty Smith",
+        ],
+      );
+    });
+    test(
+        '4.3.2: Cafe Georg to Coastal Conservation and Education, 2 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Jesse Pinkman',
+        driverCurrentLocOverrides: {
+          "Skeleton Jack": const KapiotLocation(
+            address: "Mandaue Foam, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.332779236953503,
+            lng: 123.91058584666708,
+          ),
+          "Morty Smith": const KapiotLocation(
+            address: "Cebu Country Club, Cebu City, Cebu",
+            lat: 10.331354330063593,
+            lng: 123.91008159140792,
+          ),
+        },
+        shouldMatchWith: [
+          "Rick Sanchez",
+          "Jin Kazama",
+          "Tom Marvolo Riddle",
+        ],
+      );
+    });
+    test(
+        '4.3.3: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo, 1 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Oogie Boogie',
+        driverCurrentLocOverrides: {
+          "Skeleton Jack": const KapiotLocation(
+            address: "Roadstar, 135 Juan Luna Avenue, Cebu City, 6000 Cebu",
+            lat: 10.318324288528808,
+            lng: 123.91257008226225,
+          ),
+        },
+        shouldMatchWith: [],
+      );
+    });
+    test('4.3.4: Holy Family Village II to Cafe Belle, 1 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Jin Kazama',
+        driverCurrentLocOverrides: {
+          "Rick Sanchez": const KapiotLocation(
+            address:
+                "Silogan Ni Gian, Banilad Gov. M. Cuenco Avenue, Cebu City, Cebu",
+            lat: 10.347554190243633,
+            lng: 123.91304718395735,
+          ),
+        },
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Tom Marvolo Riddle",
+        ],
+      );
+    });
+    test('4.3.5: 88th Avenue to Phoenix Banilad, 3 driver passed', () async {
+      await verifyCompatibleDrivers(
+        rider: 'Walter White',
+        driverCurrentLocOverrides: {
+          "Jin Kazama": const KapiotLocation(
+            address:
+                "Cafe Georg, Ground Floor MLD Building, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.33002753149996,
+            lng: 123.90959988153878,
+          ),
+          "Skeleton Jack": const KapiotLocation(
+            address: "Mandaue Foam, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.332779236953503,
+            lng: 123.91058584666708,
+          ),
+          "Tom Marvolo Riddle": const KapiotLocation(
+            address:
+                "Sr. Pedro Lechon Manok, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.3346822231077,
+            lng: 123.91090879953619,
+          ),
+        },
+        shouldMatchWith: [
+          "Morty Smith",
+          "Rick Sanchez",
+        ],
+      );
+    });
+  });
 }
 
 /// Verifies that [rider] is compatible with the drivers he [shouldMatchWith]
 ///
 /// All references to either [rider] or drivers in [shouldMatchWith] should be
 /// by displayName. The method should also be called within the callback of the
-/// 'test' function. When [driverLocOverrides] is provided, it overrides the
+/// 'test' function. When [driverCurrentLocOverrides] is provided, it overrides the
 /// specified driver/s' currentLocation (useful for testing the case wherein a
 /// driver has passed a rider)
 Future<void> verifyCompatibleDrivers({
   required String rider,
   required List<String> shouldMatchWith,
-  Map<String, KapiotLocation> driverLocOverrides = const {},
+  Map<String, KapiotLocation> driverCurrentLocOverrides = const {},
 }) async {
   final container = ProviderContainer();
   final coreAlgorithms = container.read(coreAlgorithmsProvider);
@@ -633,8 +907,8 @@ Future<void> verifyCompatibleDrivers({
     if (await coreAlgorithms.checkCompatibility(
       riderConfig: RouteConfig.fromJson(riderConfig),
       driverConfig: driver,
-      driverCurrentLoc:
-          driverLocOverrides[driver.user.displayName] ?? driver.startLocation,
+      driverCurrentLoc: driverCurrentLocOverrides[driver.user.displayName] ??
+          driver.startLocation,
     )) {
       compatibleDrivers.add(driver);
     }
