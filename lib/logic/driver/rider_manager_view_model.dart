@@ -121,6 +121,7 @@ class RiderManagerViewModel extends ViewModel {
           points: points,
         );
         realtimeLocSub.cancel();
+        driverRepo.removeDriverConfig(currentUser!.id);
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       } else {
         mapController.addMarker(

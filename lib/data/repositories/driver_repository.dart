@@ -29,6 +29,12 @@ class DriverRepository {
     );
   }
 
+  Future<void> removeDriverConfig(String driverId) async {
+    await firestoreHelper.deleteData(
+      path: FirestorePath.docActiveDriver(driverId),
+    );
+  }
+
   Future<void> acceptRider(String riderId, RouteConfig driverConfig) async {
     assert(driverConfig is ForDriver);
     final driverId = driverConfig.user.id;
