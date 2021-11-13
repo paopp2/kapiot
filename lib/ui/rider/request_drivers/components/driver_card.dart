@@ -28,6 +28,10 @@ class DriverCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final driverDistance = ref.watch(driverDistanceProvider).state;
     final selectedDriverIndex = ref.watch(selectedDriverIndexProvider).state;
+    final isRequested = ref
+        .watch(requestedDriverIdListProvider)
+        .state
+        .contains(driverConfig.user.id);
     return Container(
       width: constraints.maxWidth * 0.6,
       margin: const EdgeInsets.all(10),
@@ -218,11 +222,13 @@ class DriverCard extends HookConsumerWidget {
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: () => model.requestDriver(
-                          driverConfig.user.id,
-                        ),
+                        onPressed: isRequested
+                            ? null
+                            : () => model.requestDriver(driverConfig.user.id),
                         style: TextButton.styleFrom(
-                          backgroundColor: const Color(0xFF5F45A4),
+                          backgroundColor: isRequested
+                              ? const Color(0xFF9F8FC8)
+                              : const Color(0xFF5F45A4),
                           elevation: 0,
                           fixedSize: Size(
                             constraints.maxWidth * 0.5,
@@ -233,7 +239,7 @@ class DriverCard extends HookConsumerWidget {
                           ),
                         ),
                         child: Text(
-                          'Hail Ride',
+                          isRequested ? 'Requested' : 'Hail Ride',
                           style: GoogleFonts.montserrat(
                             color: Colors.white,
                             fontSize: 17,
