@@ -441,6 +441,25 @@ void main() {
         ],
       );
     });
+    test('3.2.5A Same user: Mactan to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "Mauler",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+        ],
+      );
+    });
+    test('3.2.5B Diff user:  Mactan to Babag II Road', () async {
+      await verifyCompatibleDrivers(
+        rider: "The REAL Mauler",
+        shouldMatchWith: [
+          "The Invincible",
+          "Battle Beast",
+          "Mauler",
+        ],
+      );
+    });
 
     test('3.3.1A Same user: AA BBQ Salinas Drive to UC Banilad', () async {
       await verifyCompatibleDrivers(

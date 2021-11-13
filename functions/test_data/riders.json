@@ -326,6 +326,56 @@
       }
     },
     {
+      "id": "3hngi1y8vuw1jid1bka8a9kdjyc7",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "Mauler",
+        "email": "og_mauler@gmail.com",
+        "id": "3hngi1y8vuw1jid1bka8a9kdjyc7",
+        "phoneNumber": "",
+        "photoUrl": "https://www.writeups.org/wp-content/uploads/Mauler-Twins-Invincible-Comics-j.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
+      "id": "4hngi1y8vuw1jid1bka8a9kdjyc9",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "The REAL Mauler",
+        "email": "og_mauler@gmail.com",
+        "id": "4hngi1y8vuw1jid1bka8a9kdjyc9",
+        "phoneNumber": "",
+        "photoUrl": "https://www.writeups.org/wp-content/uploads/Mauler-Twins-Invincible-Comics-j.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
       "id": "XSA0DNCgIMECX4juiI16h1Qy8Bdm",
       "acceptingDriverConfig": null,
       "endLocation": {
