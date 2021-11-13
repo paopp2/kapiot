@@ -51,6 +51,31 @@
       }
     },
     {
+      "id": "2nluev36boadfdcdzhdktq0gxpwk",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Soltana Nature Residences, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2792615,
+        "lng": 123.9721603
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Gaisano Grandmall Basak, Grandmall, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2861709,
+        "lng": 123.9696562
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Robot",
+        "email": "robot@robot.com",
+        "id": "QVeUtU6YxWjGkkOulRU3gG5xyAmT",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/villains/images/0/01/Robot-Amazon%27s-Invincible.png/revision/latest/scale-to-width-down/250?cb=20210520183238",
+        "userType": "student"
+      }
+    },
+    {
       "id": "QVeUtU6YxWjGkkOulRU3gG5xyAmT",
       "acceptingDriverConfig": null,
       "endLocation": {
@@ -176,6 +201,31 @@
       }
     },
     {
+      "id": "n80v8vmhr7xipxt910ltvq1xbvrz",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Basak Mercado, Maximo V. Patalinghug Jr. Avenue, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2868366,
+        "lng": 123.968946
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Mactan Doctors' Hospital, Jr. Avenue, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2898386,
+        "lng": 123.9668083
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Atom Eve",
+        "email": "atom_eve_23@email.com",
+        "id": "n80v8vmhr7xipxt910ltvq1xbvrz",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/superheroes/images/c/cf/Atom_Eve.jpg/revision/latest?cb=20140727161239",
+        "userType": "staff"
+      }
+    },
+    {
       "id": "mLqb9RxMhDpsnk9ygmXKa7XffiNx",
       "acceptingDriverConfig": null,
       "endLocation": {
@@ -195,6 +245,31 @@
         "displayName": "The Immortal",
         "email": "the_immortal_35@email.com",
         "id": "mLqb9RxMhDpsnk9ygmXKa7XffiNx",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazon-invincible/images/d/d2/The_Immortal.png/revision/latest?cb=20210329131800",
+        "userType": "student"
+      }
+    },
+    {
+      "id": "69p858i9405hkzfc6qb8dhwhzxt4",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Cookies N’ Dream, South Osmeña Street, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.3018736,
+        "lng": 123.9605046
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "BOSS B Food Hub, A. Tumulak Street, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.3059828,
+        "lng": 123.9525222
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_The Immortal",
+        "email": "the_immortal_35@email.com",
+        "id": "69p858i9405hkzfc6qb8dhwhzxt4",
         "phoneNumber": "",
         "photoUrl": "https://static.wikia.nocookie.net/amazon-invincible/images/d/d2/The_Immortal.png/revision/latest?cb=20210329131800",
         "userType": "student"
@@ -251,6 +326,56 @@
       }
     },
     {
+      "id": "3hngi1y8vuw1jid1bka8a9kdjyc7",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "Mauler",
+        "email": "og_mauler@gmail.com",
+        "id": "3hngi1y8vuw1jid1bka8a9kdjyc7",
+        "phoneNumber": "",
+        "photoUrl": "https://www.writeups.org/wp-content/uploads/Mauler-Twins-Invincible-Comics-j.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
+      "id": "4hngi1y8vuw1jid1bka8a9kdjyc9",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Mactan, Lapu-Lapu City, Cebu",
+        "lat": 10.30545,
+        "lng": 124.01095
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "The REAL Mauler",
+        "email": "og_mauler@gmail.com",
+        "id": "4hngi1y8vuw1jid1bka8a9kdjyc9",
+        "phoneNumber": "",
+        "photoUrl": "https://www.writeups.org/wp-content/uploads/Mauler-Twins-Invincible-Comics-j.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
       "id": "XSA0DNCgIMECX4juiI16h1Qy8Bdm",
       "acceptingDriverConfig": null,
       "endLocation": {
@@ -270,6 +395,31 @@
         "displayName": "Dupli-Kate",
         "email": "dupli_cate_30@email.com",
         "id": "XSA0DNCgIMECX4juiI16h1Qy8Bdm",
+        "phoneNumber": "",
+        "photoUrl": "https://pbs.twimg.com/media/Ey4bTdxXAAIxiwD.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
+      "id": "mdB8yQ1h61Iiuj4XCEMIgCND0ASX",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Sebastien Hotel - Mactan, Ibabao - Gisi - Agus Rd, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.307261829568102,
+        "lng": 124.01009852107994
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "YES Mart, Mactan Circumferential Road, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.304253441319627,
+        "lng": 124.00722319320383
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Dupli-Kate",
+        "email": "dupli_cate_30@email.com",
+        "id": "mdB8yQ1h61Iiuj4XCEMIgCND0ASX",
         "phoneNumber": "",
         "photoUrl": "https://pbs.twimg.com/media/Ey4bTdxXAAIxiwD.jpg",
         "userType": "faculty"
@@ -326,6 +476,31 @@
       }
     },
     {
+      "id": "Gz9OAb8Lpv2xgBe4P0zPSNkgInmb",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "AA BBQ Soong Branch, M.L. Quezon National Highway, Maribago, Lapu-Lapu City, Cebu",
+        "lat": 10.296608053426377,
+        "lng": 124.0010771028963
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Babag II Rd, Lapu-Lapu City, Cebu",
+        "lat": 10.27405,
+        "lng": 123.94571
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Cecil",
+        "email": "cecil_38@email.com",
+        "id": "Gz9OAb8Lpv2xgBe4P0zPSNkgInmb",
+        "phoneNumber": "",
+        "photoUrl": "https://qph.fs.quoracdn.net/main-qimg-a322afaf48e1d016fe03972d2ba86ba6",
+        "userType": "staff"
+      }
+    },
+    {
       "id": "bmnIgkNSPz0P4eBgx2vpL8bAO9zG",
       "acceptingDriverConfig": null,
       "endLocation": {
@@ -354,6 +529,56 @@
       "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
       "acceptingDriverConfig": null,
       "endLocation": {
+        "address": "Savemore Market Maribago, Maribago, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2865945,
+        "lng": 123.9974986
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2714003,
+        "lng": 123.9688101
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Black Samson",
+        "email": "black_samson_10@email.com",
+        "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
+        "phoneNumber": "",
+        "photoUrl": "https://static.tvmaze.com/uploads/images/medium_portrait/301/753519.jpg",
+        "userType": "student"
+      }
+    },
+    {
+      "id": "GHZ9uGVGKIk9h4Z3BtelF8yQDZTo",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2714003,
+        "lng": 123.9688101
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Savemore Market Maribago, Maribago, Lapu-Lapu City, Cebu, Philippines",
+        "lat": 10.2865945,
+        "lng": 123.9974986
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "Black Samson",
+        "email": "black_samson_10@email.com",
+        "id": "GHZ9uGVGKIk9h4Z3BtelF8yQDZTo",
+        "phoneNumber": "",
+        "photoUrl": "https://static.tvmaze.com/uploads/images/medium_portrait/301/753519.jpg",
+        "userType": "student"
+      }
+    },
+    {
+      "id": "oTZDQy8FletB3Z4h9kIKGVGu9ZHG",
+      "acceptingDriverConfig": null,
+      "endLocation": {
         "address": "Fairchild Villas, Lapu-Lapu City, Cebu, Philippines",
         "lat": 10.2714003,
         "lng": 123.9688101
@@ -373,6 +598,31 @@
         "phoneNumber": "",
         "photoUrl": "https://static.tvmaze.com/uploads/images/medium_portrait/301/753519.jpg",
         "userType": "student"
+      }
+    },
+    {
+      "id": "icDvt6cAWSHu24T101FOpO2edRPL",
+      "acceptingDriverConfig": null,
+      "endLocation": {
+        "address": "Andalucia Crest, Cordova, Cebu, Philippines",
+        "lat": 10.2652024,
+        "lng": 123.9642778
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "startLocation": {
+        "address": "Taytayan Floating Restaurant, Babag II Road, Cordova, Cebu, Philippines",
+        "lat": 10.2708654,
+        "lng": 123.945804
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Titan",
+        "email": "titan_gel_4200@email.com",
+        "id": "icDvt6cAWSHu24T101FOpO2edRPL",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazon-invincible/images/c/c8/Titan_invincible_27s670_%284%29.png/revision/latest?cb=20210327234518",
+        "userType": "faculty"
       }
     },
     {
@@ -412,7 +662,7 @@
       "runtimeType": "rider",
       "startLocation": {
         "address": "SM City Consolacion, Consolacion, Cebu, Philippines",
-        "lat": 10.380380051933653, 
+        "lat": 10.380380051933653,
         "lng": 123.96446251879854
       },
       "timeOfTrip": "2021-08-29T06:45:22.819077",
@@ -454,16 +704,16 @@
       "id": "ji89ti6ie104O4j0YZcPSKFk5GS9",
       "acceptingDriverConfig": null,
       "endLocation": {
-        "address": "Pacific Mall Mandaue, U.N. Avenue, Mandaue City, Cebu, Philippines",
-        "lat": 10.341064019974215,
-        "lng": 123.94752861317745
+        "address": "Consolacion Community College, Cebu Philippines",
+        "lat": 10.36867474440445,
+        "lng": 123.97085215973796
       },
       "riderCount": 1,
       "runtimeType": "rider",
       "startLocation": {
-        "address": "Basak Elementary School, Mandaue City, Cebu, Philippines",
-        "lat": 10.354020048179562,
-        "lng": 123.95020372879284
+        "address": "Seaoil Pitogo Consolacion, Cebu Philippines",
+        "lat": 10.380810754848916,
+        "lng": 123.96823701102788
       },
       "timeOfTrip": "2021-08-29T06:45:22.819077",
       "user": {
@@ -513,9 +763,9 @@
       "timeOfTrip": "2021-09-05T09:26:38.961796",
       "riderCount": 3,
       "startLocation": {
-        "lat": 10.3799829,
-        "lng": 123.966197,
-        "address": "7/11 Lamac, Consolacion, Consolacion, Cebu, Philippines"
+        "lat": 10.381069875725956,
+        "lng": 123.96941564876614,
+        "address": "Rose Pharmacy Pitogo Consolacion Cebu, Philippines"
       },
       "endLocation": {
         "lat": 10.3540801,
@@ -746,6 +996,206 @@
         "lat": 10.375993392319117,
         "lng": 123.9572448900204,
         "address": "Lacion Municipal Hall"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "qWOucrbzwpMrwIBdKUbrUcHJ1hA5",
+      "user": {
+        "id": "qWOucrbzwpMrwIBdKUbrUcHJ1hA5",
+        "displayName": "A-Train",
+        "email": "atrain@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/d/d4/A-Train_S2.jpg/revision/latest?cb=20200808192510",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.379395135671256,
+        "lng": 123.96517678032905,
+        "address": "Mcdo Lacion"
+      },
+      "endLocation": {
+        "lat": 10.369387211224717,
+        "lng": 123.9284379421086,
+        "address": "Stephanie's Korean Restaurant"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "r2sAiaorV5QPvWTMI95CiDFoK64u",
+      "user": {
+        "id": "r2sAiaorV5QPvWTMI95CiDFoK64u",
+        "displayName": "Madelyn Stillwell",
+        "email": "madelynstillwell@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/a/ae/MadelynStillwell.png/revision/latest?cb=20200908061902",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.359384016141556,
+        "lng": 123.94977962345635,
+        "address": "RUSI Mandaue North, Cebu Philippines"
+      },
+      "endLocation": {
+        "lat": 10.365424544438637,
+        "lng": 123.94371931431311,
+        "address": "Dave Housing Supply Cubacub, Mandaue Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "FQIjoawoBUpDz7PcbpHFM86qfuIy",
+      "user": {
+        "id": "FQIjoawoBUpDz7PcbpHFM86qfuIy",
+        "displayName": "Queen Maeve",
+        "email": "queenmaeve@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/a/ae/MadelynStillwell.png/revision/latest?cb=20200908061902",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "startLocation": {
+        "lat": 10.359384016141556,
+        "lng": 123.94977962345635,
+        "address": "RUSI Mandaue North, Cebu Philippines"
+      },
+      "endLocation": {
+        "lat": 10.365424544438637,
+        "lng": 123.94371931431311,
+        "address": "Dave Housing Supply Cubacub, Mandaue Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "tgBeQvnNS0qrXAB4WrRFmekYV6OS",
+      "acceptingDriverConfig": null,
+      "startLocation": {
+        "address": "Consolacion Community College, Cebu Philippines",
+        "lat": 10.36867474440445,
+        "lng": 123.97085215973796
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "endLocation": {
+        "address": "Seaoil Pitogo Consolacion, Cebu Philippines",
+        "lat": 10.380810754848916,
+        "lng": 123.96823701102788
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Jim Preston",
+        "email": "r_jimpreston@rider.com",
+        "id": "tgBeQvnNS0qrXAB4WrRFmekYV6OS",
+        "phoneNumber": "",
+        "photoUrl": "https://pbs.twimg.com/media/CW83k9zUEAA0euy.jpg",
+        "userType": "faculty"
+      }
+    },
+    {
+      "id": "HcQCeuDYPdAuYf6SUkbszF5skwzL",
+      "acceptingDriverConfig": null,
+      "startLocation": {
+        "address": "Insular Square, Central Nautical Highway, Mandaue City, Cebu, Philippines",
+        "lat": 10.3502975,
+        "lng": 123.9482916
+      },
+      "riderCount": 1,
+      "runtimeType": "rider",
+      "endLocation": {
+        "address": "ABS-CBN Jagobiao, Mandaue City, Cebu, Philippines",
+        "lat": 10.36618,
+        "lng": 123.9505367
+      },
+      "timeOfTrip": "2021-08-29T06:45:22.819077",
+      "user": {
+        "displayName": "R_Arthur",
+        "email": "R_arthur@robot.com",
+        "id": "HcQCeuDYPdAuYf6SUkbszF5skwzL",
+        "phoneNumber": "",
+        "photoUrl": "https://images.thestar.com/VbUjbMZWzk4YsPKUdAqS0Alucow=/1280x1024/smart/filters:cb(1525279967686)/https://www.thestar.com/content/dam/thestar/entertainment/movies/2016/12/20/passengers-actor-michael-sheen-talks-about-portraying-a-robo-bartender/michael-sheen.jpg",
+        "userType": "staff"
+      }
+    },
+    {
+      "id": "0azfGCwxzwttTnAG4n6vWqhT00IR",
+      "user": {
+        "id": "0azfGCwxzwttTnAG4n6vWqhT00IR",
+        "displayName": "R_Mother's Milk",
+        "email": "r_mothersmilk@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/c/ce/Mothers_Milk_S2.jpg/revision/latest?cb=20200906145235",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T09:26:38.961796",
+      "riderCount": 3,
+      "endLocation": {
+        "lat": 10.381069875725956,
+        "lng": 123.96941564876614,
+        "address": "Rose Pharmacy Pitogo Consolacion Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3540801,
+        "lng": 123.9501415,
+        "address": "Basak Elementary School, Mandaue City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "qTITNvQloeFLzJUpGqEDSXWgksCc",
+      "user": {
+        "id": "qTITNvQloeFLzJUpGqEDSXWgksCc",
+        "displayName": "R_Frenchie",
+        "email": "r_frenchie@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/1/14/Frenchie_S2.jpg/revision/latest?cb=20200911125421",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:28:44.459326",
+      "riderCount": 3,
+      "endLocation": {
+        "lat": 10.3763113,
+        "lng": 123.9598846,
+        "address": "Jollibee, Cebu North Road, Consolacion, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3450685,
+        "lng": 123.9476575,
+        "address": "Toyota Mandaue North Cebu, Inc., Central Nautical Highway, Mandaue City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "aPlNcJtBr0fenIdwLE10lk91X0Sf",
+      "user": {
+        "id": "aPlNcJtBr0fenIdwLE10lk91X0Sf",
+        "displayName": "R_A-Train",
+        "email": "r_atrain@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/amazons-the-boys/images/d/d4/A-Train_S2.jpg/revision/latest?cb=20200808192510",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 1,
+      "endLocation": {
+        "lat": 10.379395135671256,
+        "lng": 123.96517678032905,
+        "address": "Mcdo Lacion"
+      },
+      "startLocation": {
+        "lat": 10.369387211224717,
+        "lng": 123.9284379421086,
+        "address": "Stephanie's Korean Restaurant"
       },
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
@@ -1046,6 +1496,156 @@
         "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
         "lat": 10.318707364922172,
         "lng": 123.9044093976717
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "v0KUvFUaWKfoc3QAc81Kw6CBmYTe",
+      "user": {
+        "id": "v0KUvFUaWKfoc3QAc81Kw6CBmYTe",
+        "displayName": "R_Oogie Boogie",
+        "email": "r_oogboog@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://2.bp.blogspot.com/-FXSlUbMPu3k/WeZy7wjlnLI/AAAAAAAAeaQ/gDzNqkl8pBc6_9bAg-SQ3cCgJ98S6MdQQCEwYBhgL/s1600/IMG_3284.JPG",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 2,
+      "endLocation": {
+        "lat": 10.3128777,
+        "lng": 123.9166685,
+        "address": "Prime Care Cebu @ APM CENTRALE, A. Soriano Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3151364,
+        "lng": 123.9143092,
+        "address": "Kaffee Alde Mabolo, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "BIMsN44UsPV7770p717fH8I3hqYd",
+      "user": {
+        "id": "BIMsN44UsPV7770p717fH8I3hqYd",
+        "displayName": "R_Morty Smith",
+        "email": "r_mortydrug@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://w7.pngwing.com/pngs/856/256/png-transparent-rick-sanchez-morty-smith-pocket-mortys-rick-child-face-hand.png",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 2,
+      "endLocation": {
+        "lat": 10.3297995,
+        "lng": 123.9011602,
+        "address": "AA BBQ, Salinas Drive, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3384599,
+        "lng": 123.9119323,
+        "address": "University of Cebu - Banilad Campus, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "2ta05JfIL3tM6eQ5c2581gYgMBV3",
+      "user": {
+        "id": "2ta05JfIL3tM6eQ5c2581gYgMBV3",
+        "displayName": "R_Walter White",
+        "email": "r_walterwhite@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 1,
+      "endLocation": {
+        "lat": 10.328402067426715,
+        "lng": 123.90913854208966,
+        "address": "88th Avenue, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.33562705907153,
+        "lng": 123.91103451140721,
+        "address": "Phoenix Banilad / Kasambagan, Paradise Village Road, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "nvi6bX300yVidnx4e82mFa9YWTAZ",
+      "user": {
+        "id": "nvi6bX300yVidnx4e82mFa9YWTAZ",
+        "displayName": "R_Jesse Pinkman",
+        "email": "r_jessepinkman@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://nofilmschool.com/sites/default/files/styles/article_wide/public/imrs.jpg?itok=-J9hUxs8",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 2,
+      "endLocation": {
+        "lat": 10.3297711,
+        "lng": 123.909749,
+        "address": "Cafe Georg, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3398167,
+        "lng": 123.9117812,
+        "address": "Coastal Conservation & Education Foundation, Inc., Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "Uq39M2g9VmYYu0I9SArNqZ9GIr6x",
+      "user": {
+        "id": "Uq39M2g9VmYYu0I9SArNqZ9GIr6x",
+        "displayName": "R_Jin Kazama",
+        "email": "r_jinkaz69@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJ9ddVvUzCTaKVPRkAwDx6XFEw-cyaRaNTA&usqp=CAU",
+        "userType": "student"
+      },
+      "riderCount": 1,
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "endLocation": {
+        "lat": 10.3140987,
+        "lng": 123.9149797,
+        "address": "J&T Express Mabolo, M. J. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3615244,
+        "lng": 123.9151338,
+        "address": "Silver Hills, Nasipit Road, Nasipit Talamban, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "hPVjBao8Z8Cr4ul6j8ux0At4sNzw",
+      "user": {
+        "id": "hPVjBao8Z8Cr4ul6j8ux0At4sNzw",
+        "displayName": "Tom Marvolo Riddle",
+        "email": "no_nose@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/harrypotter/images/a/aa/Voldemort_Headshot_DHP1.png/revision/latest/top-crop/width/360/height/360?cb=20161203031453",
+        "userType": "student"
+      },
+      "riderCount": 1,
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "startLocation": {
+        "lat": 10.31167,
+        "lng": 123.9041501,
+        "address": "Colegio de la Inmaculada Concepcion, Gorordo Avenue, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3713199,
+        "lng": 123.9253173,
+        "address": "Tintay Jeepney Terminal, H Abellana, Cebu City, Cebu"
       },
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
