@@ -797,6 +797,108 @@ void main() {
         );
       },
     );
+
+    test('4.3.1: USPF to Yoshimeatsu, 1 driver passed', () async {
+      await verifyCompatibleDrivers(
+        rider: 'Hwoarang',
+        driverCurrentLocOverrides: {
+          "Rick Sanchez": const KapiotLocation(
+            address:
+                "Honda Philippines, Inc., Salinas Dr, Cebu City, 6000 Cebu",
+            lat: 10.327283651784851,
+            lng: 123.90527950055528,
+          ),
+        },
+        shouldMatchWith: [
+          "Morty Smith",
+        ],
+      );
+    });
+    test(
+        '4.3.2: Cafe Georg to Coastal Conservation and Education, 2 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Jesse Pinkman',
+        driverCurrentLocOverrides: {
+          "Skeleton Jack": const KapiotLocation(
+            address: "Mandaue Foam, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.332779236953503,
+            lng: 123.91058584666708,
+          ),
+          "Morty Smith": const KapiotLocation(
+            address: "Cebu Country Club, Cebu City, Cebu",
+            lat: 10.331354330063593,
+            lng: 123.91008159140792,
+          ),
+        },
+        shouldMatchWith: [
+          "Rick Sanchez",
+          "Jin Kazama",
+          "Tom Marvolo Riddle",
+        ],
+      );
+    });
+    test(
+        '4.3.3: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo, 1 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Oogie Boogie',
+        driverCurrentLocOverrides: {
+          "Skeleton Jack": const KapiotLocation(
+            address: "Roadstar, 135 Juan Luna Avenue, Cebu City, 6000 Cebu",
+            lat: 10.318324288528808,
+            lng: 123.91257008226225,
+          ),
+        },
+        shouldMatchWith: [],
+      );
+    });
+    test('4.3.4: Holy Family Village II to Cafe Belle, 1 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Jin Kazama',
+        driverCurrentLocOverrides: {
+          "Rick Sanchez": const KapiotLocation(
+            address:
+                "Silogan Ni Gian, Banilad Gov. M. Cuenco Avenue, Cebu City, Cebu",
+            lat: 10.347554190243633,
+            lng: 123.91304718395735,
+          ),
+        },
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Tom Marvolo Riddle",
+        ],
+      );
+    });
+    test('4.3.5: 88th Avenue to Phoenix Banilad, 3 driver passed', () async {
+      await verifyCompatibleDrivers(
+        rider: 'Walter White',
+        driverCurrentLocOverrides: {
+          "Jin Kazama": const KapiotLocation(
+            address:
+                "Cafe Georg, Ground Floor MLD Building, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.33002753149996,
+            lng: 123.90959988153878,
+          ),
+          "Skeleton Jack": const KapiotLocation(
+            address: "Mandaue Foam, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.332779236953503,
+            lng: 123.91058584666708,
+          ),
+          "Tom Marvolo Riddle": const KapiotLocation(
+            address:
+                "Sr. Pedro Lechon Manok, Gov. M. Cuenco Ave, Cebu City, 6000 Cebu",
+            lat: 10.3346822231077,
+            lng: 123.91090879953619,
+          ),
+        },
+        shouldMatchWith: [
+          "Morty Smith",
+          "Rick Sanchez",
+        ],
+      );
+    });
   });
 }
 
