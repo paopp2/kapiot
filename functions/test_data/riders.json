@@ -1599,6 +1599,39 @@
       },
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
+    },
+    {
+      "id": "Uq39M2g9VmYYu0I9SArNqZ9GIr6x",
+      "user": {
+        "id": "Uq39M2g9VmYYu0I9SArNqZ9GIr6x",
+        "displayName": "R_Jin Kazama",
+        "email": "r_jinkaz69@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJ9ddVvUzCTaKVPRkAwDx6XFEw-cyaRaNTA&usqp=CAU",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "LOL 111",
+        "make": "LAND ROVER",
+        "model": "RANGE ROVER EVOQUE",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.2",
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "encodedRoute": "qvf~@sdisVDi@R@n@Fr@AjC]fCWpAOn@E\\?\\BRFdAn@p@b@b@Pl@DfG@p@?n@H^Hn@N`@Ph@R\\LxBd@~I`BnDj@pDd@fHt@hEf@pGl@pKbAzGj@tLpAJDJBvE`@`Eb@h@@HAfDXfHt@~D^`Ht@lJlA|Dv@vBj@jGpBnDnAjCx@LNVLnC`AfBt@`@XRXdEuB~BsAlCuAbKoF`CiAfAi@NOhB_AfFmChCuAzEgCtPyIjBaA~@k@r@m@zCiCNQOQiDtCiB`B{@f@",
+      "endLocation": {
+        "lat": 10.3140987,
+        "lng": 123.9149797,
+        "address": "J&T Express Mabolo, M. J. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3615244,
+        "lng": 123.9151338,
+        "address": "Silver Hills, Nasipit Road, Nasipit Talamban, Cebu City, Cebu, Philippines"
+      },
+      "runtimeType": "driver"
     }
   ]
 }

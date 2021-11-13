@@ -1063,12 +1063,12 @@
       "timeOfTrip": "2021-08-30T13:45:35.234433",
       "startLocation": {
         "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
-        "lat": 10.367921380499771, 
+        "lat": 10.367921380499771,
         "lng": 123.91396789976051
       },
       "endLocation": {
         "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
-        "lat": 10.318633477713318, 
+        "lat": 10.318633477713318,
         "lng": 123.90450595743106
       },
       "user": {
@@ -1096,12 +1096,12 @@
       "timeOfTrip": "2021-08-30T13:45:35.234433",
       "startLocation": {
         "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
-        "lat": 10.367921380499771, 
+        "lat": 10.367921380499771,
         "lng": 123.91396789976051
       },
       "endLocation": {
         "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
-        "lat": 10.318633477713318, 
+        "lat": 10.318633477713318,
         "lng": 123.90450595743106
       },
       "user": {
@@ -1317,6 +1317,39 @@
         "address": "Cebu Home and Builders Centre, A.S. Fortuna St., Mandaue City, Cebu",
         "lat": 10.34369866360422,
         "lng": 123.91594826881274
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "V5O4aSiDgq651SE8uQLZpinGE3Uf",
+      "user": {
+        "id": "V5O4aSiDgq651SE8uQLZpinGE3Uf",
+        "displayName": "R_Morty Smith",
+        "email": "r_mortydrug@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://w7.pngwing.com/pngs/856/256/png-transparent-rick-sanchez-morty-smith-pocket-mortys-rick-child-face-hand.png",
+        "userType": "student"
+      },
+      "car": {
+        "licensePlateNum": "WOW 888",
+        "make": "MERCEDES-BENZ",
+        "model": "GLA",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.6",
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "encodedRoute": "wfb~@wnhsVZHBF@LAHP@dCTnHv@dJ|@dCZzH`ApAVnCn@lDfAhGpBrAd@pBl@NFDHXPPHpE~Aj@Z\\\\uE|GUf@_DtG}@tB_BzDo@zAoCzG",
+      "endLocation": {
+        "lat": 10.3297995,
+        "lng": 123.9011602,
+        "address": "AA BBQ, Salinas Drive, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3384599,
+        "lng": 123.9119323,
+        "address": "University of Cebu - Banilad Campus, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
       },
       "runtimeType": "driver"
     }

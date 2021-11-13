@@ -23,6 +23,8 @@ class DriverRepository {
 
   Future<void> pushDriverConfig(RouteConfig driverConfig) async {
     assert(driverConfig is ForDriver);
+    final encodedRoute = driverConfig.toJson()['encodedRoute'];
+    print(encodedRoute);
     await firestoreHelper.setData(
       path: FirestorePath.docActiveDriver(driverConfig.user.id),
       data: driverConfig.toJson(),

@@ -289,6 +289,7 @@ void main() {
         rider: "R_Morty Smith",
         shouldMatchWith: [
           "R_Rick Sanchez",
+          "R_Morty Smith",
         ],
       );
     });
@@ -296,10 +297,10 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "R_Walter White",
         shouldMatchWith: [
-          // "R_Skeleton Jack",
-          // "R_Rick Sanchez",
-          // "R_Morty Smith",
-          // "R_Jin Kazama",
+          "R_Rick Sanchez",
+          "R_Morty Smith",
+          "Christian Benedict Gonzales",
+          "Mad Max",
         ],
       );
     });
@@ -307,19 +308,17 @@ void main() {
       await verifyCompatibleDrivers(
         rider: "R_Jesse Pinkman",
         shouldMatchWith: [
-          "R_Skeleton Jack",
           "R_Rick Sanchez",
-          // "R_Morty Smith",
-          // "R_Jin Kazama",
+          "R_Morty Smith",
+          "Christian Benedict Gonzales",
+          "Mad Max",
         ],
       );
     });
     test('2.3.5: Cafe Belle to Holy Family Village II', () async {
       await verifyCompatibleDrivers(
         rider: "R_Jin Kazama",
-        shouldMatchWith: [
-          // "R_Skeleton Jack",
-        ],
+        shouldMatchWith: [],
       );
     });
   });
