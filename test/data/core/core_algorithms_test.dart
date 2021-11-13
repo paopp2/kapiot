@@ -705,6 +705,98 @@ void main() {
         );
       },
     );
+    test(
+      '4.2.1: Soltana Nature Residences to Gaisano Grandmall Basak LLC, 1 driver passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "Robot",
+          driverCurrentLocOverrides: {
+            "Charles Jr. Ausejo": const KapiotLocation(
+                address: 'Basak-Marigondon Rd',
+                lat: 10.289813053956808,
+                lng: 123.96750010228797),
+          },
+          shouldMatchWith: [
+            "Omni Man",
+            "Damien Darkblood",
+            "Allen the Alien",
+          ],
+        );
+      },
+    );
+    test(
+        '4.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital, 2 drivers passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'Atom Eve',
+        driverCurrentLocOverrides: {
+          "Omni Man": const KapiotLocation(
+              address: "TNC Mactan",
+              lat: 10.293767415079285,
+              lng: 123.96561179866607),
+          "Damien Darkblood": const KapiotLocation(
+              address: "6015 Basak-Marigondon Rd.",
+              lat: 10.296378521568169,
+              lng: 123.96448902351165),
+        },
+        shouldMatchWith: ["Charles Jr. Ausejo", "Allen the Alien"],
+      );
+    });
+    test('4.2.3: Cookies \'N Dream to BOSS B Food Hub, 1 driver passed',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: 'The Immortal',
+        driverCurrentLocOverrides: {
+          "Allen the Alien": const KapiotLocation(
+              address: "EUMS Water Refilling Station & Pet Supplies",
+              lat: 10.307174678590808,
+              lng: 123.95205208486078),
+        },
+        shouldMatchWith: ["Charles Jr. Ausejo", "Omni Man", "Damien Darkblood"],
+      );
+    });
+    test(
+      '4.2.4: YES Mart to Sebastien Hotel, 3 drivers passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "R_Dupli-Kate",
+          driverCurrentLocOverrides: {
+            "R_The Invincible": const KapiotLocation(
+                address: "M.L. Quezon National Highway",
+                lat: 10.30499102729754,
+                lng: 124.00823621499799),
+            "R_Battle Beast": const KapiotLocation(
+                address: "3 M.L. Quezon National Highway",
+                lat: 10.305993824224478,
+                lng: 124.00919108137111),
+            "R_Mauler": const KapiotLocation(
+                address: "M.L. Quezon National Highway",
+                lat: 10.305184542217843,
+                lng: 124.00837556211796),
+          },
+          shouldMatchWith: [],
+        );
+      },
+    );
+    test(
+      "4.2.5: Fairchild Villas to Savemore Market Maribago, 2 drivers passed",
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "R_Black Samson",
+          driverCurrentLocOverrides: {
+            "R_The Invincible": const KapiotLocation(
+                address: "Josephine Store",
+                lat: 10.272994380145574,
+                lng: 123.97245790192787),
+            "R_Battle Beast": const KapiotLocation(
+                address: "Beboy's Original La Paz Batchoy",
+                lat: 10.275084628362467,
+                lng: 123.97565509495247),
+          },
+          shouldMatchWith: ["R_Mauler"],
+        );
+      },
+    );
   });
 }
 
