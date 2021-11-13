@@ -52,7 +52,7 @@ class Markers {
     );
     nextStopPoint = await _setupMarker(
       anchor: const Offset(0.5, 1.0),
-      iconPath: '$basePath/nextStopPoint.png',
+      iconPath: '$basePath/stopPoint.png',
       id: 'next_stop_point',
     );
   }
