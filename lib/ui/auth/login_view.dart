@@ -78,7 +78,7 @@ class LoginView extends HookConsumerWidget {
                         ),
                       ),
                       CustomPaint(
-                        size: Size(400, 400),
+                        size: const Size(400, 400),
                         painter: CurvedPainter(),
                       ),
                       Align(
