@@ -106,28 +106,6 @@ void main() {
         ],
       );
     });
-    test('1.2.6: Andalucia Crest Cordova to Taytayan Floating Restaurant',
-        () async {
-      await verifyCompatibleDrivers(
-        rider: "Titan",
-        shouldMatchWith: [
-          "The Invincible",
-          "Battle Beast",
-          "Mauler",
-        ],
-      );
-    });
-    test('1.2.7: AA BBQ Soong to Babag II Road', () async {
-      await verifyCompatibleDrivers(
-        rider: "Cecil",
-        shouldMatchWith: [
-          "The Invincible",
-          "Battle Beast",
-          "Mauler",
-        ],
-      );
-    });
-
     test('1.3.1: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo',
         () async {
       await verifyCompatibleDrivers(
@@ -246,75 +224,54 @@ void main() {
     test('2.2.1: Gaisano Grandmall Basak, LLC to Soltana Nature Residences ',
         () async {
       await verifyCompatibleDrivers(
-        rider: "R Robot",
+        rider: "R_Robot",
         shouldMatchWith: [
-          "R Charles Jr. Ausejo",
-          "R Omni Man",
-          "R Damien Darkblood",
-          "R Allen the Alien",
+          "R_Charles Jr. Ausejo",
+          "R_Omni Man",
+          "R_Damien Darkblood",
+          "R_Allen the Alien",
         ],
       );
     });
     test('2.2.2: Mactan Doctor\'s Hospital to Basak Mercado, LLC', () async {
       await verifyCompatibleDrivers(
-        rider: "R Atom Eve",
+        rider: "R_Atom Eve",
         shouldMatchWith: [
-          "R Charles Jr. Ausejo",
-          "R Omni Man",
-          "R Damien Darkblood",
-          "R Allen the Alien",
+          "R_Charles Jr. Ausejo",
+          "R_Omni Man",
+          "R_Damien Darkblood",
+          "R_Allen the Alien",
         ],
       );
     });
     test('2.2.3: BOSS B Food Hub to Cookies \'N Dream', () async {
       await verifyCompatibleDrivers(
-        rider: "R The Immortal",
+        rider: "R_The Immortal",
         shouldMatchWith: [
-          "R Charles Jr. Ausejo",
-          "R Omni Man",
-          "R Damien Darkblood",
-          "R Allen the Alien",
+          "R_Charles Jr. Ausejo",
+          "R_Omni Man",
+          "R_Damien Darkblood",
+          "R_Allen the Alien",
         ],
       );
     });
     test('2.2.4: YES Mart to Sebastien Hotel', () async {
       await verifyCompatibleDrivers(
-        rider: "R Dupli-Kate",
+        rider: "R_Dupli-Kate",
         shouldMatchWith: [
-          "R The Invincible",
-          "R Battle Beast",
-          "R Mauler",
+          "R_The Invincible",
+          "R_Battle Beast",
+          "R_Mauler",
         ],
       );
     });
     test('2.2.5: Fairchild Villas to Savemore Market Maribago', () async {
       await verifyCompatibleDrivers(
-        rider: "R Black Samson",
+        rider: "R_Black Samson",
         shouldMatchWith: [
-          "R The Invincible",
-          "R Battle Beast",
-          "R Mauler",
-        ],
-      );
-    });
-    test('2.2.6: Taytayan Floating Restaurant to Andalucia Crest Cordova',
-        () async {
-      await verifyCompatibleDrivers(
-        rider: "R Titan",
-        shouldMatchWith: [
-          "R The Invincible",
-          "R Battle Beast",
-          "R Mauler",
-        ],
-      );
-    });
-    test('2.2.7: Babag II Road to AA BBQ Soong', () async {
-      await verifyCompatibleDrivers(
-        rider: "R Cecil",
-        shouldMatchWith: [
-          "R The Invincible",
-          "R Battle Beast",
-          "R Mauler",
+          "R_The Invincible",
+          "R_Battle Beast",
+          "R_Mauler",
         ],
       );
     });
