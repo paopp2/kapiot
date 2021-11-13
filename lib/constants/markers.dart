@@ -14,9 +14,10 @@ class Markers {
   Future<Marker> _setupMarker({
     required String iconPath,
     required String id,
+    Offset anchor = const Offset(0.5, 0.5),
   }) async {
     return Marker(
-      anchor: const Offset(0.5, 0.5),
+      anchor: anchor,
       markerId: MarkerId(id),
       icon: await BitmapDescriptor.fromAssetImage(
         ImageConfiguration.empty,
@@ -28,6 +29,7 @@ class Markers {
   Future<void> initMarkers() async {
     String basePath = 'assets/icons/markers';
     startLoc = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
       iconPath: '$basePath/startLoc.png',
       id: 'start_loc_marker',
     );
@@ -36,6 +38,7 @@ class Markers {
       id: 'current_user_marker',
     );
     endLoc = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
       iconPath: '$basePath/endLoc.png',
       id: 'end_loc_marker',
     );
