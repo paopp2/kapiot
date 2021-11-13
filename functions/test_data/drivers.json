@@ -1063,13 +1063,13 @@
       "timeOfTrip": "2021-08-30T13:45:35.234433",
       "startLocation": {
         "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
-        "lat": 10.367900273181055,
-        "lng": 123.9138391534901
+        "lat": 10.367921380499771, 
+        "lng": 123.91396789976051
       },
       "endLocation": {
         "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
-        "lat": 10.318707364922172,
-        "lng": 123.9044093976717
+        "lat": 10.318633477713318, 
+        "lng": 123.90450595743106
       },
       "user": {
         "displayName": "Christian Benedict Gonzales",
@@ -1096,13 +1096,13 @@
       "timeOfTrip": "2021-08-30T13:45:35.234433",
       "startLocation": {
         "address": "Sunny Hills Subd, Talamban, Cebu City, Cebu",
-        "lat": 10.367900273181055,
-        "lng": 123.9138391534901
+        "lat": 10.367921380499771, 
+        "lng": 123.91396789976051
       },
       "endLocation": {
         "address": "Ayala Center Cebu, Archbishop Reyes Avenue, Cebu City, Cebu",
-        "lat": 10.318707364922172,
-        "lng": 123.9044093976717
+        "lat": 10.318633477713318, 
+        "lng": 123.90450595743106
       },
       "user": {
         "displayName": "Mad Max",
@@ -1251,6 +1251,72 @@
         "lat": 10.3615244,
         "lng": 123.9151338,
         "address": "Silver Hills, Nasipit Road, Nasipit Talamban, Cebu City, Cebu, Philippines"
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "eVjDRm3xnlP1VCPV51k1FHAFu63H",
+      "user": {
+        "id": "eVjDRm3xnlP1VCPV51k1FHAFu63H",
+        "displayName": "R_Skeleton Jack",
+        "email": "r_jskeleton@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/disney/images/0/06/Profile_-_Jack_Skellington.jpeg/revision/latest?cb=20190316145716",
+        "userType": "faculty"
+      },
+      "car": {
+        "licensePlateNum": "CBG 119",
+        "make": "MAZDA",
+        "model": "3",
+        "type": "hatchback"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 3,
+      "rating": "4.7",
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "encodedRoute": "kt}}@__isVgB~@gAj@BLfBhDLGz@]|DaBdAg@u@mBk@yAjAm@~A_A~EiEs@{@u@_AME}ByCmCgDYRb@l@`C|C",
+      "endLocation": {
+        "address": "SM City Cebu, Kaohsiung St., Cebu City, Cebu",
+        "lat": 10.31171309261737,
+        "lng": 123.91777285346731
+      },
+      "startLocation": {
+        "address": "D' Family Park, Cebu City, Cebu",
+        "lat": 10.358790249884327,
+        "lng": 123.91071495346755
+      },
+      "runtimeType": "driver"
+    },
+    {
+      "id": "5MFn15KZS1q5BANyR0jOXrFqFIZl",
+      "user": {
+        "id": "5MFn15KZS1q5BANyR0jOXrFqFIZl",
+        "displayName": "R_Rick Sanchez",
+        "email": "r_ricksanchez@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/rickandmorty/images/3/3c/Untitled117.png/revision/latest/top-crop/width/360/height/360?cb=20190519213632",
+        "userType": "staff"
+      },
+      "car": {
+        "licensePlateNum": "SEJ 017",
+        "make": "MAZDA",
+        "model": "CX30",
+        "type": "suv"
+      },
+      "currentRiderCount": 1,
+      "maxRiderCount": 5,
+      "rating": "4.6",
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "encodedRoute": "_cc~@{hisV_@lBi@hGGHCHE`@g@xFA\\ZBzDb@tFd@PAJC\\DJDJBvE`@`Eb@h@@HAfDXfHt@~D^`Ht@lJlA|Dv@vBj@jGpBnDnAjCx@LNVLnC`AfBt@`@XLNQVoDhFc@v@mEjJy@nBoHtQe@rAiBvEZJbAEFBDNUj@",
+      "endLocation": {
+        "address": "JY Square Mall, Salinas Drive, Cebu City, Cebu",
+        "lat": 10.330265920863818,
+        "lng": 123.89858618230369
+      },
+      "startLocation": {
+        "address": "Cebu Home and Builders Centre, A.S. Fortuna St., Mandaue City, Cebu",
+        "lat": 10.34369866360422,
+        "lng": 123.91594826881274
       },
       "runtimeType": "driver"
     }

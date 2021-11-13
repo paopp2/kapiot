@@ -275,53 +275,53 @@ void main() {
         ],
       );
     });
-    // test('2.3.1: Kaffee Alde Mabolo to Prime Care @ APM Shopping Center',
-    //     () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "R_Oogie Boogie",
-    //     shouldMatchWith: [
-    //       "R_Skeleton Jack",
-    //     ],
-    //   );
-    // });
-    // test('2.3.2: UC Banilad to AA BBQ Salinas Drive', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "R_Morty Smith",
-    //     shouldMatchWith: [
-    //       "R_Rick Sanchez",
-    //     ],
-    //   );
-    // });
-    // test('2.3.3: Phoenix Banilad to 88th Avenue', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "R_Walter White",
-    //     shouldMatchWith: [
-    //       "R_Skeleton Jack",
-    //       "R_Rick Sanchez",
-    //       "R_Morty Smith",
-    //       "R_Jin Kazama",
-    //     ],
-    //   );
-    // });
-    // test('2.3.4: Coastal Conservation and Education to Cafe Georg', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "R_Jesse Pinkman",
-    //     shouldMatchWith: [
-    //       "R_Skeleton Jack",
-    //       "R_Rick Sanchez",
-    //       "R_Morty Smith",
-    //       "R_Jin Kazama",
-    //     ],
-    //   );
-    // });
-    // test('2.3.5: Cafe Belle to Holy Family Village II', () async {
-    //   await verifyCompatibleDrivers(
-    //     rider: "R_Jin Kazama",
-    //     shouldMatchWith: [
-    //       "R_Skeleton Jack",
-    //     ],
-    //   );
-    // });
+    test('2.3.1: Kaffee Alde Mabolo to Prime Care @ APM Shopping Center',
+        () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Oogie Boogie",
+        shouldMatchWith: [
+          "R_Skeleton Jack",
+        ],
+      );
+    });
+    test('2.3.2: UC Banilad to AA BBQ Salinas Drive', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Morty Smith",
+        shouldMatchWith: [
+          "R_Rick Sanchez",
+        ],
+      );
+    });
+    test('2.3.3: Phoenix Banilad to 88th Avenue', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Walter White",
+        shouldMatchWith: [
+          // "R_Skeleton Jack",
+          // "R_Rick Sanchez",
+          // "R_Morty Smith",
+          // "R_Jin Kazama",
+        ],
+      );
+    });
+    test('2.3.4: Coastal Conservation and Education to Cafe Georg', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Jesse Pinkman",
+        shouldMatchWith: [
+          "R_Skeleton Jack",
+          "R_Rick Sanchez",
+          // "R_Morty Smith",
+          // "R_Jin Kazama",
+        ],
+      );
+    });
+    test('2.3.5: Cafe Belle to Holy Family Village II', () async {
+      await verifyCompatibleDrivers(
+        rider: "R_Jin Kazama",
+        shouldMatchWith: [
+          // "R_Skeleton Jack",
+        ],
+      );
+    });
   });
   group("Case 3: A user can't pair with oneself as both rider and driver", () {
     test('3.1.1A Same user: SM Lacion to Fatima Basak', () async {

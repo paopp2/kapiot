@@ -1499,6 +1499,106 @@
       },
       "acceptingDriverConfig": null,
       "runtimeType": "rider"
+    },
+    {
+      "id": "v0KUvFUaWKfoc3QAc81Kw6CBmYTe",
+      "user": {
+        "id": "v0KUvFUaWKfoc3QAc81Kw6CBmYTe",
+        "displayName": "R_Oogie Boogie",
+        "email": "r_oogboog@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://2.bp.blogspot.com/-FXSlUbMPu3k/WeZy7wjlnLI/AAAAAAAAeaQ/gDzNqkl8pBc6_9bAg-SQ3cCgJ98S6MdQQCEwYBhgL/s1600/IMG_3284.JPG",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T09:34:02.004783",
+      "riderCount": 2,
+      "endLocation": {
+        "lat": 10.3128777,
+        "lng": 123.9166685,
+        "address": "Prime Care Cebu @ APM CENTRALE, A. Soriano Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3151364,
+        "lng": 123.9143092,
+        "address": "Kaffee Alde Mabolo, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "BIMsN44UsPV7770p717fH8I3hqYd",
+      "user": {
+        "id": "BIMsN44UsPV7770p717fH8I3hqYd",
+        "displayName": "R_Morty Smith",
+        "email": "r_mortydrug@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://w7.pngwing.com/pngs/856/256/png-transparent-rick-sanchez-morty-smith-pocket-mortys-rick-child-face-hand.png",
+        "userType": "student"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 2,
+      "endLocation": {
+        "lat": 10.3297995,
+        "lng": 123.9011602,
+        "address": "AA BBQ, Salinas Drive, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3384599,
+        "lng": 123.9119323,
+        "address": "University of Cebu - Banilad Campus, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "2ta05JfIL3tM6eQ5c2581gYgMBV3",
+      "user": {
+        "id": "2ta05JfIL3tM6eQ5c2581gYgMBV3",
+        "displayName": "R_Walter White",
+        "email": "r_walterwhite@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg",
+        "userType": "faculty"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 1,
+      "endLocation": {
+        "lat": 10.328402067426715, 
+        "lng": 123.90913854208966,
+        "address": "88th Avenue, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.33562705907153, 
+        "lng": 123.91103451140721,
+        "address": "Phoenix Banilad / Kasambagan, Paradise Village Road, Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "nvi6bX300yVidnx4e82mFa9YWTAZ",
+      "user": {
+        "id": "nvi6bX300yVidnx4e82mFa9YWTAZ",
+        "displayName": "R_Jesse Pinkman",
+        "email": "r_jessepinkman@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://nofilmschool.com/sites/default/files/styles/article_wide/public/imrs.jpg?itok=-J9hUxs8",
+        "userType": "staff"
+      },
+      "timeOfTrip": "2021-09-05T17:34:47.670279",
+      "riderCount": 2,
+      "endLocation": {
+        "lat": 10.3297711,
+        "lng": 123.909749,
+        "address": "Cafe Georg, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
+      },
+      "startLocation": {
+        "lat": 10.3398167,
+        "lng": 123.9117812,
+        "address": "Coastal Conservation & Education Foundation, Inc., Cebu City, Cebu, Philippines"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
     }
   ]
 }
