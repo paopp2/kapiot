@@ -227,7 +227,7 @@ class DriverCard extends HookConsumerWidget {
                         ),
                         style: TextButton.styleFrom(
                           backgroundColor: isRequested
-                              ? const Color(0xFFAFAFAF)
+                              ? const Color(0xFF9F8FC8)
                               : const Color(0xFF5F45A4),
                           elevation: 0,
                           fixedSize: Size(
