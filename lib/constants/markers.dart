@@ -51,6 +51,7 @@ class Markers {
       id: 'rider_loc_marker',
     );
     nextStopPoint = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
       iconPath: '$basePath/nextStopPoint.png',
       id: 'next_stop_point',
     );
