@@ -599,9 +599,113 @@ void main() {
     });
   });
 
-  // TODO: Any mix of Case 1 / 2 but some of the compatible drivers' current locations
-  // should be 'ahead' of the rider's starting location
-  // group("Case 4: Drivers can't match with passed riders even if compatible", () {});
+  group("Case 4: Compatible drivers can't match with passed riders", () {
+    test(
+      '4.1.1 Seaoil Pitogo to Consolacion Community College, 1 driver passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "Jim Preston",
+          driverLocOverrides: {
+            "Mark Antony": const KapiotLocation(
+              address: 'Doc Darwin Clinic',
+              lat: 10.377972240521853,
+              lng: 123.96308286005973,
+            ),
+          },
+          shouldMatchWith: [],
+        );
+      },
+    );
+    test('4.1.2: ABSCBN Mandaue to Insular Square, 2 drivers passed', () async {
+      await verifyCompatibleDrivers(
+        rider: 'Arthur',
+        driverLocOverrides: {
+          "Nicolas Paolo Pepito": const KapiotLocation(
+            address: "Cenapro Chemical Corp., Mandaue City, Cebu Philippines",
+            lat: 10.365097859554922,
+            lng: 123.95064973628318,
+          ),
+          "Hughie Campbell": const KapiotLocation(
+            address:
+                "360 Pharmacy, Skina Canduman, Mandaue City, Cebu Philippines",
+            lat: 10.362572419176354,
+            lng: 123.94983174740908,
+          ),
+        },
+        shouldMatchWith: [
+          "Billy Butcher",
+          "Dominic Toretto",
+        ],
+      );
+    });
+    test('4.1.3: Insular Square to ABSCBN Mandaue', () async {
+      await verifyCompatibleDrivers(
+        rider: 'R_Arthur',
+        driverLocOverrides: {
+          "R_Billy Butcher": const KapiotLocation(
+            address: "Lapas Insular Square Padung Lacion, Mandaue Cebu",
+            lat: 10.350659670577313,
+            lng: 123.94923958853667,
+          ),
+          "R_Dominic Toretto": const KapiotLocation(
+            address: "Tabok Supershell Gas Station, Cebu Philippines",
+            lat: 10.350962498801193,
+            lng: 123.94930915643847,
+          ),
+        },
+        shouldMatchWith: [
+          "R_Nicolas Paolo Pepito",
+          "R_Hughie Campbell",
+        ],
+      );
+    });
+    test(
+      '4.1.4 Mcdo Lacion to Lacion Municipal Hall, 2 drivers passed',
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "The Homelander",
+          driverLocOverrides: {
+            "Julius Caesar": const KapiotLocation(
+              address: "Approaching Mcdo Lacion (near but did not pass rider)",
+              lat: 10.379394167865847,
+              lng: 123.96523141541483,
+            ),
+            "Billy Butcher": const KapiotLocation(
+              address: "Eleven J Bakeshop, Consolacion Cebu",
+              lat: 10.378393468548602,
+              lng: 123.96361026482597,
+            ),
+            "Dominic Toretto": const KapiotLocation(
+              address: "Skina Laray, Consolacion Cebu",
+              lat: 10.378795692408227,
+              lng: 123.96394871330784,
+            ),
+          },
+          shouldMatchWith: [
+            "Nicolas Paolo Pepito",
+            "Hughie Campbell",
+            "Julius Caesar",
+          ],
+        );
+      },
+    );
+    test(
+      "4.1.5: Stephanie's Korean Restaurant to Mcdo Lacion, 1 driver passed",
+      () async {
+        await verifyCompatibleDrivers(
+          rider: "R_A-Train",
+          driverLocOverrides: {
+            "R_Julius Caesar": const KapiotLocation(
+              address: "Unahan Steph's Korean Restaurant",
+              lat: 10.3685132733364,
+              lng: 123.92905751878283,
+            ),
+          },
+          shouldMatchWith: [],
+        );
+      },
+    );
+  });
 }
 
 /// Verifies that [rider] is compatible with the drivers he [shouldMatchWith]
