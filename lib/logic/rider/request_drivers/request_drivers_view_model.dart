@@ -63,6 +63,9 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> requestDriver(String driverId) async {
     final currentRouteConfig = read(currentRouteConfigProvider).state;
     assert(currentRouteConfig != null);
+    final requestedDrivers = read(requestedDriverIdListProvider).state
+      ..add(driverId);
+    read(requestedDriverIdListProvider).state = requestedDrivers;
     await riderRepo.requestDriver(
       driverId,
       currentRouteConfig!,
@@ -115,9 +118,11 @@ class RequestDriversViewModel extends ViewModel {
     _acceptingDriverConfigSub = acceptingDriverConfig.listen((driverConfig) {
       if (driverConfig != null) {
         final riderId = currentRiderConfig!.user.id;
-        riderRepo.deletePendingRequests(riderId);
+        riderRepo.deletePendingRequests(
+          riderId,
+          read(requestedDriverIdListProvider).state,
+        );
         read(acceptingDriverConfigProvider).state = driverConfig;
-
         // Clear map before reusing at the next View
         mapController.clearMap();
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);

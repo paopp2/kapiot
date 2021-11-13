@@ -8,3 +8,7 @@ final compatibleDriverConfigStreamProvider = StreamProvider.autoDispose(
 final driverDistanceProvider = StateProvider.autoDispose<String>((ref) => '');
 
 final selectedDriverIndexProvider = StateProvider.autoDispose<int>((ref) => 0);
+
+final requestedDriverIdListProvider = StateProvider.autoDispose<List<String>>(
+  (ref) => [],
+);

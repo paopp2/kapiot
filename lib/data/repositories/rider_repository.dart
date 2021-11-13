@@ -22,8 +22,6 @@ class RiderRepository {
   final LocationRepository locationRepo;
   final CoreAlgorithms coreAlgorithms;
 
-  final List<String> _driverIdList = [];
-
   Future<void> pushRiderConfig(RouteConfig riderConfig) async {
     assert(riderConfig is ForRider);
     await firestoreHelper.setData(
@@ -38,14 +36,17 @@ class RiderRepository {
       path: FirestorePath.docActiveDriverRequest(driverId, riderConfig.user.id),
       data: riderConfig.toJson(),
     );
-    _driverIdList.add(driverId);
   }
 
   /// Deletes all other requests from a Driver's requests colection
-  void deletePendingRequests(String riderId) {
-    for (var driverId in _driverIdList) {
+  void deletePendingRequests(
+    String riderId,
+    List<String> requestedDriverIdList,
+  ) {
+    for (var driverId in requestedDriverIdList) {
       firestoreHelper.deleteData(
-          path: FirestorePath.docActiveDriverRequest(driverId, riderId));
+        path: FirestorePath.docActiveDriverRequest(driverId, riderId),
+      );
     }
   }
 

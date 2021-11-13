@@ -28,6 +28,10 @@ class DriverCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final driverDistance = ref.watch(driverDistanceProvider).state;
     final selectedDriverIndex = ref.watch(selectedDriverIndexProvider).state;
+    final isRequested = ref
+        .watch(requestedDriverIdListProvider)
+        .state
+        .contains(driverConfig.user.id);
     return Container(
       width: constraints.maxWidth * 0.6,
       margin: const EdgeInsets.all(10),
@@ -233,7 +237,7 @@ class DriverCard extends HookConsumerWidget {
                           ),
                         ),
                         child: Text(
-                          'Hail Ride',
+                          isRequested ? 'Requested' : 'Hail Ride',
                           style: GoogleFonts.montserrat(
                             color: Colors.white,
                             fontSize: 17,
