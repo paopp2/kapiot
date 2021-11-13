@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -11,6 +12,7 @@ import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/data/services/location_service.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'request_accepted_map_controller.dart';
@@ -78,13 +80,23 @@ class RequestAcceptedViewModel extends ViewModel {
     // realtime location
     final acceptingDriver = read(acceptingDriverConfigProvider).state!;
     final driverId = acceptingDriver.user.id;
+    KapiotLocation? prevDriverLoc; // Used for getting driver's car heading
     driverLocStreamSub = locationRepo.getRealtimeLocation(driverId).listen(
       (driverLoc) async {
         // Show the driver's marker on the map
         mapController.addMarker(
-          marker: Markers.driverLoc,
+          marker: Markers.driverLoc.copyWith(
+            rotationParam: Geolocator.bearingBetween(
+              prevDriverLoc?.lat ?? acceptingDriver.startLocation.lat,
+              prevDriverLoc?.lng ?? acceptingDriver.startLocation.lng,
+              driverLoc.lat,
+              driverLoc.lng,
+            ),
+          ),
           location: driverLoc,
         );
+        prevDriverLoc = driverLoc;
+
         // Update driver's estimated time of arrival
         final distMatrix = googleMapsApiServices.distMatrix;
         final distMatrixResult = await distMatrix.getDistMatrixElement(
