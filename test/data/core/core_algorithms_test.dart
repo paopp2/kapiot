@@ -605,7 +605,7 @@ void main() {
       () async {
         await verifyCompatibleDrivers(
           rider: "Jim Preston",
-          driverLocOverrides: {
+          driverCurrentLocOverrides: {
             "Mark Antony": const KapiotLocation(
               address: 'Doc Darwin Clinic',
               lat: 10.377972240521853,
@@ -619,7 +619,7 @@ void main() {
     test('4.1.2: ABSCBN Mandaue to Insular Square, 2 drivers passed', () async {
       await verifyCompatibleDrivers(
         rider: 'Arthur',
-        driverLocOverrides: {
+        driverCurrentLocOverrides: {
           "Nicolas Paolo Pepito": const KapiotLocation(
             address: "Cenapro Chemical Corp., Mandaue City, Cebu Philippines",
             lat: 10.365097859554922,
@@ -641,7 +641,7 @@ void main() {
     test('4.1.3: Insular Square to ABSCBN Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: 'R_Arthur',
-        driverLocOverrides: {
+        driverCurrentLocOverrides: {
           "R_Billy Butcher": const KapiotLocation(
             address: "Lapas Insular Square Padung Lacion, Mandaue Cebu",
             lat: 10.350659670577313,
@@ -664,7 +664,7 @@ void main() {
       () async {
         await verifyCompatibleDrivers(
           rider: "The Homelander",
-          driverLocOverrides: {
+          driverCurrentLocOverrides: {
             "Julius Caesar": const KapiotLocation(
               address: "Approaching Mcdo Lacion (near but did not pass rider)",
               lat: 10.379394167865847,
@@ -694,7 +694,7 @@ void main() {
       () async {
         await verifyCompatibleDrivers(
           rider: "R_A-Train",
-          driverLocOverrides: {
+          driverCurrentLocOverrides: {
             "R_Julius Caesar": const KapiotLocation(
               address: "Unahan Steph's Korean Restaurant",
               lat: 10.3685132733364,
@@ -712,13 +712,13 @@ void main() {
 ///
 /// All references to either [rider] or drivers in [shouldMatchWith] should be
 /// by displayName. The method should also be called within the callback of the
-/// 'test' function. When [driverLocOverrides] is provided, it overrides the
+/// 'test' function. When [driverCurrentLocOverrides] is provided, it overrides the
 /// specified driver/s' currentLocation (useful for testing the case wherein a
 /// driver has passed a rider)
 Future<void> verifyCompatibleDrivers({
   required String rider,
   required List<String> shouldMatchWith,
-  Map<String, KapiotLocation> driverLocOverrides = const {},
+  Map<String, KapiotLocation> driverCurrentLocOverrides = const {},
 }) async {
   final container = ProviderContainer();
   final coreAlgorithms = container.read(coreAlgorithmsProvider);
@@ -737,8 +737,8 @@ Future<void> verifyCompatibleDrivers({
     if (await coreAlgorithms.checkCompatibility(
       riderConfig: RouteConfig.fromJson(riderConfig),
       driverConfig: driver,
-      driverCurrentLoc:
-          driverLocOverrides[driver.user.displayName] ?? driver.startLocation,
+      driverCurrentLoc: driverCurrentLocOverrides[driver.user.displayName] ??
+          driver.startLocation,
     )) {
       compatibleDrivers.add(driver);
     }
