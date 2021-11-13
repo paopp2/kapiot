@@ -124,21 +124,7 @@ void main() {
         ],
       );
     });
-
-    test('1.3.3: 88th Avenue to Phoenix Banilad', () async {
-      await verifyCompatibleDrivers(
-        rider: "Walter White",
-        shouldMatchWith: [
-          "Skeleton Jack",
-          "Rick Sanchez",
-          "Morty Smith",
-          "Jin Kazama",
-          "Tom Marvolo Riddle",
-        ],
-      );
-    });
-
-    test('1.3.4: Cafe Georg to Coastal Conservation and Education', () async {
+    test('1.3.3: Cafe Georg to Coastal Conservation and Education', () async {
       await verifyCompatibleDrivers(
         rider: "Jesse Pinkman",
         shouldMatchWith: [
@@ -150,8 +136,7 @@ void main() {
         ],
       );
     });
-
-    test('1.3.5: Holy Family Village II to Cafe Belle', () async {
+    test('1.3.4: Holy Family Village II to Cafe Belle', () async {
       await verifyCompatibleDrivers(
         rider: "Jin Kazama",
         shouldMatchWith: [
@@ -160,15 +145,7 @@ void main() {
         ],
       );
     });
-
-    test('1.3.6: Marco Polo Plaza to SM City Cebu', () async {
-      await verifyCompatibleDrivers(
-        rider: "Heiachi Mishima",
-        shouldMatchWith: [],
-      );
-    });
-
-    test('1.3.7: USPF to Yoshimeatsu', () async {
+    test('1.3.5: USPF to Yoshimeatsu', () async {
       await verifyCompatibleDrivers(
         rider: "Hwoarang",
         shouldMatchWith: [
@@ -178,7 +155,6 @@ void main() {
       );
     });
   });
-
   // TODO: Update test_data with reverse routes then add tests here
   group('Case 2: Same routes with Case 1 but reversed', () {
     test('2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
