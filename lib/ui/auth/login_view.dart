@@ -36,12 +36,12 @@ class LoginView extends HookConsumerWidget {
                       const Text(
                         'kapiot',
                         style: TextStyle(
-                            fontSize: 84,
-                            fontFamily: 'Sanz',
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 7,
-                            color: Color(0xffffc901)),
-                        // color: Color(0xff5eab53)),
+                          fontSize: 84,
+                          fontFamily: 'Sanz',
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 7,
+                          color: Color(0xFF5F45A4),
+                        ),
                       ),
                       SizedBox(
                         height: constraints.maxHeight * 0.01,
@@ -70,12 +70,16 @@ class LoginView extends HookConsumerWidget {
                           decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                   colors: [
-                                Color(0xffffc901),
-                                Color(0xffffd94e)
+                                Color(0xFF5F45A4),
+                                Color(0xFFCFC7E3)
                               ],
                                   begin: Alignment.bottomLeft,
                                   end: Alignment.topRight)),
                         ),
+                      ),
+                      CustomPaint(
+                        size: const Size(400, 400),
+                        painter: CurvedPainter(),
                       ),
                       Align(
                         alignment: Alignment.center,
@@ -104,7 +108,7 @@ class BackgroundClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
-    path.moveTo(0, size.height * 0.8);
+    path.moveTo(0, size.height * 0.4);
     path.lineTo(0, size.height);
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
@@ -113,6 +117,27 @@ class BackgroundClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
+class CurvedPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()..color = const Color(0xFF5F45A4);
+    var path = Path();
+    path.moveTo(0, size.height * 0.6);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.7,
+        size.width * 0.5, size.height * 0.8);
+    path.quadraticBezierTo(size.width * 0.75, size.height * 0.9,
+        size.width * 1.0, size.height * 0.9);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
   }
 }

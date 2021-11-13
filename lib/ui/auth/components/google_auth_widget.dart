@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kapiot/logic/auth/login_view_model.dart';
 
 class GoogleAuthWidget extends StatelessWidget {
@@ -18,12 +19,13 @@ class GoogleAuthWidget extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(4),
       child: OutlinedButton.icon(
-        label: const Text(
+        label: Text(
           "Log in with USC Email",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+          style: GoogleFonts.montserrat(
+            letterSpacing: 1.5,
+            fontWeight: FontWeight.w500,
             fontSize: 17,
-            color: Colors.black,
+            color: const Color(0xFF333333),
           ),
         ),
         icon: Image.asset(
@@ -34,13 +36,13 @@ class GoogleAuthWidget extends StatelessWidget {
         onPressed: () => model.signInWithGoogle(
           context: context,
           nonUscEmailDialog: AlertDialog(
-            title: const Text(
+            title: Text(
               "Oops!",
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 34,
                 fontWeight: FontWeight.bold,
-                color: Color(0xffffc901),
+                color: const Color(0xff333333),
               ),
             ),
             content: Column(
@@ -56,15 +58,24 @@ class GoogleAuthWidget extends StatelessWidget {
                     top: constraints.maxHeight * 0.05,
                     bottom: constraints.maxHeight * 0.02,
                   ),
-                  child: const Text(
+                  child: Text(
                     'Something went wrong',
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xff333333),
+                    ),
                   ),
                 ),
-                const Text(
+                Text(
                   'It seems like the account used is not affiliated with the USC community.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 12,
+                    color: const Color(0xff666666),
+                    height: 1.5,
+                  ),
                 )
               ],
             ),
