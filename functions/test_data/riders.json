@@ -1563,12 +1563,12 @@
       "timeOfTrip": "2021-09-05T17:34:47.670279",
       "riderCount": 1,
       "endLocation": {
-        "lat": 10.328402067426715, 
+        "lat": 10.328402067426715,
         "lng": 123.90913854208966,
         "address": "88th Avenue, Gov. M. Cuenco Avenue, Cebu City, Cebu, Philippines"
       },
       "startLocation": {
-        "lat": 10.33562705907153, 
+        "lat": 10.33562705907153,
         "lng": 123.91103451140721,
         "address": "Phoenix Banilad / Kasambagan, Paradise Village Road, Cebu City, Cebu, Philippines"
       },
@@ -1610,17 +1610,8 @@
         "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJ9ddVvUzCTaKVPRkAwDx6XFEw-cyaRaNTA&usqp=CAU",
         "userType": "student"
       },
-      "car": {
-        "licensePlateNum": "LOL 111",
-        "make": "LAND ROVER",
-        "model": "RANGE ROVER EVOQUE",
-        "type": "suv"
-      },
-      "currentRiderCount": 1,
-      "maxRiderCount": 5,
-      "rating": "4.2",
+      "riderCount": 1,
       "timeOfTrip": "2021-09-05T09:34:02.004783",
-      "encodedRoute": "qvf~@sdisVDi@R@n@Fr@AjC]fCWpAOn@E\\?\\BRFdAn@p@b@b@Pl@DfG@p@?n@H^Hn@N`@Ph@R\\LxBd@~I`BnDj@pDd@fHt@hEf@pGl@pKbAzGj@tLpAJDJBvE`@`Eb@h@@HAfDXfHt@~D^`Ht@lJlA|Dv@vBj@jGpBnDnAjCx@LNVLnC`AfBt@`@XRXdEuB~BsAlCuAbKoF`CiAfAi@NOhB_AfFmChCuAzEgCtPyIjBaA~@k@r@m@zCiCNQOQiDtCiB`B{@f@",
       "endLocation": {
         "lat": 10.3140987,
         "lng": 123.9149797,
@@ -1631,7 +1622,33 @@
         "lng": 123.9151338,
         "address": "Silver Hills, Nasipit Road, Nasipit Talamban, Cebu City, Cebu, Philippines"
       },
-      "runtimeType": "driver"
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
+    },
+    {
+      "id": "hPVjBao8Z8Cr4ul6j8ux0At4sNzw",
+      "user": {
+        "id": "hPVjBao8Z8Cr4ul6j8ux0At4sNzw",
+        "displayName": "Tom Marvolo Riddle",
+        "email": "no_nose@usc.edu.ph",
+        "phoneNumber": "",
+        "photoUrl": "https://static.wikia.nocookie.net/harrypotter/images/a/aa/Voldemort_Headshot_DHP1.png/revision/latest/top-crop/width/360/height/360?cb=20161203031453",
+        "userType": "student"
+      },
+      "riderCount": 1,
+      "timeOfTrip": "2021-09-05T17:48:17.601548",
+      "startLocation": {
+        "lat": 10.31167,
+        "lng": 123.9041501,
+        "address": "Colegio de la Inmaculada Concepcion, Gorordo Avenue, Cebu City, Cebu, Philippines"
+      },
+      "endLocation": {
+        "lat": 10.3713199,
+        "lng": 123.9253173,
+        "address": "Tintay Jeepney Terminal, H Abellana, Cebu City, Cebu"
+      },
+      "acceptingDriverConfig": null,
+      "runtimeType": "rider"
     }
   ]
 }

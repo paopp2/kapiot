@@ -133,6 +133,7 @@ void main() {
           "Rick Sanchez",
           "Morty Smith",
           "Jin Kazama",
+          "Tom Marvolo Riddle",
         ],
       );
     });
@@ -145,6 +146,7 @@ void main() {
           "Morty Smith",
           "Rick Sanchez",
           "Jin Kazama",
+          "Tom Marvolo Riddle",
         ],
       );
     });
@@ -154,6 +156,7 @@ void main() {
         rider: "Jin Kazama",
         shouldMatchWith: [
           "Skeleton Jack",
+          "Tom Marvolo Riddle",
         ],
       );
     });
@@ -281,6 +284,7 @@ void main() {
         rider: "R_Oogie Boogie",
         shouldMatchWith: [
           "R_Skeleton Jack",
+          "R_Jin Kazama",
         ],
       );
     });
@@ -301,6 +305,7 @@ void main() {
           "R_Morty Smith",
           "Christian Benedict Gonzales",
           "Mad Max",
+          "R_Jin Kazama",
         ],
       );
     });
@@ -312,6 +317,7 @@ void main() {
           "R_Morty Smith",
           "Christian Benedict Gonzales",
           "Mad Max",
+          "R_Jin Kazama",
         ],
       );
     });
@@ -560,6 +566,7 @@ void main() {
         rider: "Jin Kazama",
         shouldMatchWith: [
           "Skeleton Jack",
+          "Tom Marvolo Riddle",
         ],
       );
     });
@@ -571,6 +578,22 @@ void main() {
           "Rick Sanchez",
           "Morty Smith",
           "Jin Kazama",
+          "Tom Marvolo Riddle"
+        ],
+      );
+    });
+    test('3.3.5A Same user: CIC Cebu to Tintay Terminal', () async {
+      await verifyCompatibleDrivers(
+        rider: "Tom Marvolo Riddle",
+        shouldMatchWith: [],
+      );
+    });
+    test('3.3.5B Diff user: CIC Cebu to Tintay Terminal', () async {
+      await verifyCompatibleDrivers(
+        rider: "Jin Kazama",
+        shouldMatchWith: [
+          "Skeleton Jack",
+          "Tom Marvolo Riddle",
         ],
       );
     });
