@@ -53,7 +53,7 @@ class CoreAlgorithms {
               ?.values
               .first;
 
-          await checkCompatibility(
+          checkCompatibility(
             riderConfig: riderConfig,
             driverConfig: driverConfig,
             driverCurrentLoc: driverCurrentLoc,
