@@ -41,8 +41,8 @@ abstract class MapController {
   }
 
   Future<void> onMapCreated(GoogleMapController gmapController) async {
-    gmapController.setMapStyle(Styles.mapStyle);
     _tempController.complete(gmapController);
+    gmapController.setMapStyle(Styles.mapStyle);
   }
 
   void clearMap() {
