@@ -906,7 +906,7 @@ Future<void> verifyCompatibleDrivers({
   }));
   final List<RouteConfig> compatibleDrivers = [];
   for (final driver in driversList.map((rc) => RouteConfig.fromJson(rc))) {
-    if (await coreAlgorithms.checkCompatibility(
+    if (coreAlgorithms.checkCompatibility(
       riderConfig: RouteConfig.fromJson(riderConfig),
       driverConfig: driver,
       driverCurrentLoc: driverCurrentLocOverrides[driver.user.displayName] ??

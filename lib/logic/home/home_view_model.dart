@@ -168,8 +168,9 @@ class HomeViewModel extends ViewModel {
     } else {
       final routeCoordinates = read(routeCoordinatesProvider).state!;
       assert(routeCoordinates.isNotEmpty);
-      final encodedRoute =
-          await googleMapsApiServices.utils.encodeRoute(routeCoordinates);
+      final encodedRoute = googleMapsApiServices.utils.encodeRoute(
+        routeCoordinates,
+      );
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
         timeOfTrip: read(dateTimeProvider).state,

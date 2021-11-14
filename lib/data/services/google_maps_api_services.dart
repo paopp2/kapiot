@@ -137,7 +137,7 @@ class MapsUtils {
 
   // Conversion is necessary as google_maps_flutter and maps_toolkit both
   // implement a LatLng class
-  Future<String> encodeRoute(List<gmaps.LatLng> routeCoordinates) async {
+  String encodeRoute(List<gmaps.LatLng> routeCoordinates) {
     final convertedLatLngList = routeCoordinates
         .map((c) => utils.LatLng(c.latitude, c.longitude))
         .toList();
@@ -145,17 +145,17 @@ class MapsUtils {
   }
 
   // Same case with encodeRoute (why conversion is necessary)
-  Future<List<gmaps.LatLng>> decodeRoute(String encodedRoute) async {
+  List<gmaps.LatLng> decodeRoute(String encodedRoute) {
     final preConvertRouteCoordinates = utils.PolygonUtil.decode(encodedRoute);
     return preConvertRouteCoordinates
         .map((coor) => gmaps.LatLng(coor.latitude, coor.longitude))
         .toList();
   }
 
-  Future<bool> isLocationAlongRoute({
+  bool isLocationAlongRoute({
     required KapiotLocation location,
     required List<gmaps.LatLng> decodedRoute,
-  }) async {
+  }) {
     final convertedLocation = utils.LatLng(location.lat, location.lng);
     return utils.PolygonUtil.isLocationOnPath(
       convertedLocation,
