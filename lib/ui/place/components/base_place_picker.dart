@@ -29,7 +29,7 @@ class BasePlacePicker extends HookConsumerWidget {
                 onPressed: AppRouter.instance.popView,
                 icon: const Icon(
                   CupertinoIcons.arrow_left,
-                  color: Colors.blue,
+                  color: Color(0xFF5F45A4),
                 ),
               ),
             ),

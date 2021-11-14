@@ -24,11 +24,6 @@ class RequestDriversView extends HookConsumerWidget {
           return WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
-              extendBodyBehindAppBar: true,
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
               body: Column(
                 children: [
                   SizedBox(

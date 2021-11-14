@@ -70,6 +70,7 @@ flutter:
     - assets/images/error/
     - assets/images/
     - assets/icons/
+    - assets/logo/
     - secrets/secrets.env
   fonts:
     - family: Sanz

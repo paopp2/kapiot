@@ -27,17 +27,19 @@ class HomeView extends HookConsumerWidget {
             extendBodyBehindAppBar: true,
             drawer: UserInfoDrawer(model: model, constraints: constraints),
             appBar: AppBar(
-              iconTheme: const IconThemeData(color: Colors.black),
+              iconTheme: const IconThemeData(
+                color: Color(0xFF5F45A4),
+              ),
               toolbarHeight: constraints.maxHeight * 0.08,
               title: const Text(
                 'kapiot',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontFamily: 'Sanz',
-                  letterSpacing: 0.5,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  letterSpacing: 2,
+                  color: Color(0xFF5F45A4),
                 ),
               ),
               backgroundColor: Colors.transparent,
