@@ -37,14 +37,16 @@ Future<void> main() async {
         );
       },
     );
-    test('PS1.2.1: Assuming rider from Marigondon to Grandmall Basak',
-        () async {
-      await verifyPoints(
-        assumedTravelDistance: 5225,
-        assumedTravelTime: 940,
-        expectedPoints: 101,
-      );
-    });
+    test(
+      'PS1.2.1: Assuming rider from Marigondon to Grandmall Basak',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 5225,
+          assumedTravelTime: 940,
+          expectedPoints: 101,
+        );
+      },
+    );
     test(
       'PS1.2.2: Assuming rider from Mactan Doctor\'s Hospital to Tamiya, LLC',
       () async {
@@ -72,14 +74,16 @@ Future<void> main() async {
         );
       },
     );
-    test('PS1.2.5: Assuming rider from Marigondon to Grandmall Basak',
-        () async {
-      await verifyPoints(
-        assumedTravelDistance: 6851,
-        assumedTravelTime: 1446,
-        expectedPoints: 139.5466667,
-      );
-    });
+    test(
+      'PS1.2.5: Assuming rider from Marigondon to Grandmall Basak',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 6851,
+          assumedTravelTime: 1446,
+          expectedPoints: 139.5466667,
+        );
+      },
+    );
   });
 }
 
