@@ -11,36 +11,45 @@ Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   io.HttpOverrides.global = null;
   await dotenv.load(fileName: 'secrets/secrets.env');
-  test('PS1.1', () async {
+  test('PS1.1: Assuming driver from Pitogo Lacion to Pacific Mall', () async {
     await verifyPointsAcceptable(
       riders: ["Arthur", "Mother's Milk", "Frenchie"],
       expectedPoints: 185.666663,
     );
   });
-  test('PS1.2', () async {
+  test('PS1.2: Assuming driver from Pacific Mall to Pitogo Lacion', () async {
     await verifyPointsAcceptable(
       riders: ["R_Arthur", "R_Mother's Milk", "R_Frenchie"],
       expectedPoints: 176.666663,
     );
   });
-  test('PS1.3', () async {
-    await verifyPointsAcceptable(
-      riders: ["A-Train"],
-      expectedPoints: 103.333333,
-    );
-  });
-  test('PS1.4', () async {
-    await verifyPointsAcceptable(
-      riders: ["R_A-Train"],
-      expectedPoints: 99,
-    );
-  });
-  test('PS1.5', () async {
-    await verifyPointsAcceptable(
-      riders: ["Jim Preston"],
-      expectedPoints: 33.333333,
-    );
-  });
+  test(
+    "PS1.3: Assuming driver from Mcdo Lacion to Stephanie's Korean Restaurant",
+    () async {
+      await verifyPointsAcceptable(
+        riders: ["A-Train"],
+        expectedPoints: 103.333333,
+      );
+    },
+  );
+  test(
+    "PS1.4: Assuming driver from Stepanie's Korean Restaurant to Mcdo Lacion",
+    () async {
+      await verifyPointsAcceptable(
+        riders: ["R_A-Train"],
+        expectedPoints: 99,
+      );
+    },
+  );
+  test(
+    'PS1.5: Assuming driver from Seaoil Pitogo to Consolacion Community College',
+    () async {
+      await verifyPointsAcceptable(
+        riders: ["Jim Preston"],
+        expectedPoints: 33.333333,
+      );
+    },
+  );
 }
 
 /// Verifies that the points calculated by the system is within 5% of the
