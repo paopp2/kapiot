@@ -37,6 +37,49 @@ Future<void> main() async {
         );
       },
     );
+    test('PS1.2.1: Assuming rider from Marigondon to Grandmall Basak',
+        () async {
+      await verifyPoints(
+        assumedTravelDistance: 5225,
+        assumedTravelTime: 940,
+        expectedPoints: 101,
+      );
+    });
+    test(
+      'PS1.2.2: Assuming rider from Mactan Doctor\'s Hospital to Tamiya, LLC',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 6777,
+          assumedTravelTime: 1360,
+          expectedPoints: 135.6933333,
+        );
+      },
+    );
+    test('PS1.2.3: Assuming rider from Babag to Cordova', () async {
+      await verifyPoints(
+        assumedTravelDistance: 5102,
+        assumedTravelTime: 921,
+        expectedPoints: 98.72666667,
+      );
+    });
+    test(
+      'PS1.2.4: Assuming rider from Soong to Savemore Maribago',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 2010,
+          assumedTravelTime: 360,
+          expectedPoints: 38.8,
+        );
+      },
+    );
+    test('PS1.2.5: Assuming rider from Marigondon to Grandmall Basak',
+        () async {
+      await verifyPoints(
+        assumedTravelDistance: 6851,
+        assumedTravelTime: 1446,
+        expectedPoints: 139.5466667,
+      );
+    });
   });
 }
 
