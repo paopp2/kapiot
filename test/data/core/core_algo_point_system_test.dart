@@ -38,6 +38,36 @@ Future<void> main() async {
       },
     );
     test(
+      "PS1.1.3: Assuming rider from Citi Hardware Cebu Mandaue to Stephanie's Korean Restaurant",
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 4603,
+          assumedTravelTime: 480,
+          expectedPoints: 77.373333,
+        );
+      },
+    );
+    test(
+      "PS1.1.4: Assuming rider from CIM Community to KFC M.C. Briones",
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 2645,
+          assumedTravelTime: 300,
+          expectedPoints: 45.266667,
+        );
+      },
+    );
+    test(
+      "PS1.1.5: Assuming rider from Jagobiao NHS to DPond Family Fishing",
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 5169,
+          assumedTravelTime: 720,
+          expectedPoints: 92.92,
+        );
+      },
+    );
+    test(
       'PS1.2.1: Assuming rider from Marigondon to Grandmall Basak',
       () async {
         await verifyPoints(
@@ -135,9 +165,7 @@ Future<void> verifyPoints({
   expect(
     totalPoints,
     isA<double>().having(
-      (tp) {
-        return (tp.toStringAsFixed(2) == expectedPoints.toStringAsFixed(2));
-      },
+      (tp) => (tp.toStringAsFixed(2) == expectedPoints.toStringAsFixed(2)),
       'Actual and expected totalPoints are equal for up to 2 decimal places',
       true,
     ),
