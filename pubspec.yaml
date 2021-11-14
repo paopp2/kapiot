@@ -43,6 +43,7 @@ dependencies:
   animated_flip_counter: ^0.1.2
   entry: ^0.0.6
   flutter_rating_bar: ^4.0.0
+  flutter_spinkit: ^5.1.0
   # Utils
   dartz: ^0.10.0
   connectivity_plus: ^1.1.0
