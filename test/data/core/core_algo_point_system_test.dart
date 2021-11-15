@@ -5,9 +5,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
+import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
+import 'package:kapiot/logic/driver/rider_manager_view_model.dart';
+import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/model/dist_matrix_element/dist_matrix_element.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
+import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -115,6 +119,23 @@ Future<void> main() async {
       },
     );
   });
+
+  group('PS2: Multi rider tests', () {
+    test(
+      'PS2.1.1 Assuming riders along Pitogo Barangay Hall to Pacific Mall',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 2503, 'time': 364},
+            {'distance': 1132, 'time': 189},
+            {'distance': 1600, 'time': 315},
+          ],
+          expectedTotalPoints: 98.733333,
+        );
+      },
+    );
+  });
 }
 
 /// Verifies that the [expectedPoints] matches the actual calculated value by
@@ -147,6 +168,7 @@ Future<void> verifyPoints({
       )
     ],
   );
+  addTearDown(container.dispose);
   final coreAlgorithms = container.read(coreAlgorithmsProvider);
 
   when(mockDistMatrixService.getDistMatrixElement(
@@ -167,6 +189,65 @@ Future<void> verifyPoints({
     isA<double>().having(
       (pts) => (pts.toStringAsFixed(2) == expectedPoints.toStringAsFixed(2)),
       'Actual and expected points are equal for up to 2 decimal places',
+      true,
+    ),
+  );
+}
+
+/// Verifies that the [expectedTotalPoints] matches the actual calculated value
+/// by the system based on the values in the [assumedDistanceTimePerRider] of
+/// length [assumedRiderCount]
+///
+/// For each entry in the assumedDistanceTimePerRider, there should be a value
+/// for the keys 'time' and 'distance'. As the RiderManagerViewModel is the one
+/// responsible for adding up the points per rider dropped off, it is the one
+/// tested here.
+Future<void> verifyTotalPoints({
+  required int assumedRiderCount,
+  required List<Map<String, double>> assumedDistanceTimePerRider,
+  required double expectedTotalPoints,
+}) async {
+  assert(assumedRiderCount == assumedDistanceTimePerRider.length);
+  final mockDistMatrixService = MockDistanceMatrixService();
+  final ridersFile = File('functions/test_data/riders.json');
+  final riderData = jsonDecode(await ridersFile.readAsString());
+  final ridersList = riderData['ridersList'] as List<dynamic>;
+  final randomConfig = RouteConfig.fromJson(ridersList.first);
+  final container = ProviderContainer(
+    overrides: [
+      googleMapsApiServicesProvider.overrideWithValue(
+        GoogleMapsApiServices(
+          places: PlacesService.instance,
+          directions: DirectionsService.instance,
+          utils: MapsUtils.instance,
+          distMatrix: mockDistMatrixService,
+        ),
+      ),
+      currentUserProvider.overrideWithValue(const KapiotUser(id: 'fake_id')),
+    ],
+  );
+  addTearDown(container.dispose);
+
+  for (final entry in assumedDistanceTimePerRider) {
+    when(mockDistMatrixService.getDistMatrixElement(
+      pointA: argThat(isA<KapiotLocation>(), named: 'pointA'),
+      pointB: argThat(isA<KapiotLocation>(), named: 'pointB'),
+    )).thenAnswer((_) async => DistMatrixElement(
+          distanceText: '',
+          distanceValue: entry['distance']!,
+          durationText: '',
+          durationValue: entry['time']!,
+        ));
+    await container
+        .read(riderManagerViewModel)
+        .updateDriverPoints(randomConfig);
+  }
+
+  expect(
+    container.read(driverPointsProvider).state,
+    isA<double>().having(
+      (tp) => (tp.toStringAsFixed(2) == expectedTotalPoints.toStringAsFixed(2)),
+      'Actual and expected total points are equal for up to 2 decimal places',
       true,
     ),
   );
