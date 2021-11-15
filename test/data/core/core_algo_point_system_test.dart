@@ -23,14 +23,16 @@ Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: 'secrets/secrets.env');
   group('PS1: Single rider tests', () {
-    test('PS1.1.1: Assuming rider from Pitogo Lacion to Pacific Mall',
-        () async {
-      await verifyPoints(
-        assumedTravelDistance: 5123,
-        assumedTravelTime: 840,
-        expectedPoints: 96.306666,
-      );
-    });
+    test(
+      'PS1.1.1: Assuming rider from Pitogo Lacion to Pacific Mall',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 5123,
+          assumedTravelTime: 840,
+          expectedPoints: 96.306666,
+        );
+      },
+    );
     test(
       'PS1.1.2: Assuming rider from Mendero Medical Center to Co Jordan Farm and Fishing',
       () async {
@@ -132,6 +134,61 @@ Future<void> main() async {
             {'distance': 1600, 'time': 315},
           ],
           expectedTotalPoints: 98.733333,
+        );
+      },
+    );
+    test(
+      "PS2.1.2 Assuming riders along Seamen's Hospital Cebu to dPond Family Fishing",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 2,
+          assumedDistanceTimePerRider: [
+            {'distance': 2811, 'time': 300},
+            {'distance': 2365, 'time': 328},
+          ],
+          expectedTotalPoints: 89.946667,
+        );
+      },
+    );
+    test(
+      "PS2.1.3 Assuming riders along Seamen's Hospital Cebu to dPond Family Fishing",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 4,
+          assumedDistanceTimePerRider: [
+            {'distance': 1401, 'time': 248},
+            {'distance': 1369, 'time': 188},
+            {'distance': 1918, 'time': 240},
+            {'distance': 2537, 'time': 366},
+          ],
+          expectedTotalPoints: 131.066667,
+        );
+      },
+    );
+    test(
+      "PS2.1.4 Assuming riders along JMall to Paknaan Barangay Hall",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 2,
+          assumedDistanceTimePerRider: [
+            {'distance': 1298, 'time': 185},
+            {'distance': 1301, 'time': 242},
+          ],
+          expectedTotalPoints: 48.886667,
+        );
+      },
+    );
+    test(
+      "PS2.1.5 Assuming riders along Eversley to Co Jordan Talaban Farm Fishing",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 1444, 'time': 183},
+            {'distance': 750, 'time': 123},
+            {'distance': 2200, 'time': 241},
+          ],
+          expectedTotalPoints: 76.820000,
         );
       },
     );
