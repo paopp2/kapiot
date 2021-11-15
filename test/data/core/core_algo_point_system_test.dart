@@ -159,14 +159,14 @@ Future<void> verifyPoints({
         durationValue: assumedTravelTime,
       ));
 
-  final totalPoints = await coreAlgorithms.calculateDriverPointsFromRider(
+  final points = await coreAlgorithms.calculateDriverPointsFromRider(
     randomConfig,
   );
   expect(
-    totalPoints,
+    points,
     isA<double>().having(
-      (tp) => (tp.toStringAsFixed(2) == expectedPoints.toStringAsFixed(2)),
-      'Actual and expected totalPoints are equal for up to 2 decimal places',
+      (pts) => (pts.toStringAsFixed(2) == expectedPoints.toStringAsFixed(2)),
+      'Actual and expected points are equal for up to 2 decimal places',
       true,
     ),
   );
