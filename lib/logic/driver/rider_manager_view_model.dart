@@ -95,7 +95,8 @@ class RiderManagerViewModel extends ViewModel {
     read(nextStopProvider).stream.listen((nextStop) {
       if (nextStop != null) {
         mapController.addMarker(
-          marker: Markers.nextStopPoint,
+          marker:
+              (nextStop.isPickUp) ? Markers.pickupPoint : Markers.dropoffPoint,
           location: nextStop.stopLocation,
         );
       } else {
