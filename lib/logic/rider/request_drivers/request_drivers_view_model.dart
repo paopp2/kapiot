@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/animation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -39,6 +41,7 @@ class RequestDriversViewModel extends ViewModel {
   final LocationService locationService;
   final LocationRepository locationRepo;
   final GoogleMapsApiServices googleMapsApiServices;
+  final CarouselController driverCarouselController = CarouselController();
 
   StreamSubscription? _previewedDriverLocationSub;
   StreamSubscription? _acceptingDriverConfigSub;
@@ -72,13 +75,48 @@ class RequestDriversViewModel extends ViewModel {
     );
   }
 
-  Stream<List<RouteConfig>> getCompatibleDriverConfigs() {
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() async* {
     final currentRiderConfig = read(currentRouteConfigProvider).state!;
-    return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
+    final compatibleDriverConfigsStream =
+        riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
+    await for (final driverConfigs in compatibleDriverConfigsStream) {
+      autoSelectDriver(driverConfigs);
+      yield driverConfigs;
+    }
   }
 
-  void selectDriver(int index) {
+  void selectDriver(int? index) {
     read(selectedDriverIndexProvider).state = index;
+  }
+
+  // Auto selects and 'animates' to a driverCard in either case : the rider
+  // hasn't picked one yet, the current selected driver's index is out of range,
+  // driver list changed but current selected index still within range, no
+  // available drivers
+  Future<void> autoSelectDriver(List<RouteConfig> driverConfigs) async {
+    final selectedIndex = read(selectedDriverIndexProvider).state;
+
+    final bool isNoDriverSelected =
+        driverConfigs.isNotEmpty && selectedIndex == null;
+    final bool isDriverOutOfRange =
+        selectedIndex != null && driverConfigs.length <= selectedIndex;
+
+    if (isNoDriverSelected || isDriverOutOfRange) {
+      // Updates providers asychronously. Avoids erroneous UI rebuilds
+      Future.delayed(Duration.zero, () {
+        selectDriver(0);
+        previewDriverInfoAndLocation(driverConfigs[0]);
+        driverCarouselController.animateToPage(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      });
+    } else if (driverConfigs.isNotEmpty) {
+      previewDriverInfoAndLocation(driverConfigs[selectedIndex!]);
+    } else {
+      selectDriver(null);
+    }
   }
 
   Future<void> previewDriverInfoAndLocation(RouteConfig driverConfig) async {
