@@ -311,6 +311,76 @@ Future<void> main() async {
         );
       },
     );
+    test(
+      'PS2.3.1: Assuming riders along Mabolo Church to USC-TC',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 2,
+          assumedDistanceTimePerRider: [
+            {'distance': 4652, 'time': 1440},
+            {'distance': 2745, 'time': 840},
+          ],
+          expectedTotalPoints: 174.626667,
+        );
+      },
+    );
+    test(
+      'PS2.3.2: Assuming riders along USC-Main to SM City Cebu',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 3950, 'time': 1020},
+            {'distance': 2630, 'time': 960},
+            {'distance': 1490, 'time': 677},
+          ],
+          expectedTotalPoints: 196.166667,
+        );
+      },
+    );
+    test(
+      'PS2.3.3: Assuming riders along Cafe Racer to Marco Polo Plaza Cebu',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 4,
+          assumedDistanceTimePerRider: [
+            {'distance': 6298, 'time': 1860},
+            {'distance': 1720, 'time': 628},
+            {'distance': 2880, 'time': 1241},
+            {'distance': 6210, 'time': 1388},
+          ],
+          expectedTotalPoints: 398.673333,
+        );
+      },
+    );
+    test(
+      'PS2.3.4: Assuming riders along Gaisano Country Mall to SM Seaside City Cebu',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 9274, 'time': 3120},
+            {'distance': 2280, 'time': 482},
+            {'distance': 980, 'time': 206},
+          ],
+          expectedTotalPoints: 294.053333,
+        );
+      },
+    );
+    test(
+      'PS2.3.5: Assuming riders along Harolds Hotel to Bonifacio District',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 4420, 'time': 1080},
+            {'distance': 2210, 'time': 540},
+            {'distance': 1470, 'time': 360},
+          ],
+          expectedTotalPoints: 174,
+        );
+      },
+    );
   });
 }
 
