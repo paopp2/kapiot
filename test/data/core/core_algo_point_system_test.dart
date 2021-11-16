@@ -257,7 +257,7 @@ Future<void> main() async {
       },
     );
     test(
-      "PS2.2.2: Assuming rider from Mactan Doctor\'s Hospital to Tamiya, LLC",
+      "PS2.2.2: Assuming rider from Mactan Doctor's Hospital to Tamiya, LLC",
       () async {
         await verifyTotalPoints(
           assumedRiderCount: 2,
