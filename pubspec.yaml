@@ -74,9 +74,9 @@ flutter:
     - assets/logo/
     - secrets/secrets.env
   fonts:
-    - family: Sanz
+    - family: NooplaRegular
       fonts:
-        - asset: assets/fonts/RNSSanz-Bold.otf
+        - asset: assets/fonts/NooplaRegular.ttf
     - family: Vegur
       fonts:
         - asset: assets/fonts/Vegur-Regular.otf

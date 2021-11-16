@@ -29,7 +29,7 @@ class LoginView extends HookConsumerWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 140,
+                        height: 160,
                         child: Stack(
                           children: const [
                             Align(
@@ -47,8 +47,7 @@ class LoginView extends HookConsumerWidget {
                                 'kapiot',
                                 style: TextStyle(
                                   fontSize: 70,
-                                  fontFamily: 'Sanz',
-                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NooplaRegular',
                                   letterSpacing: 7,
                                   color: Color(0xFF5F45A4),
                                 ),

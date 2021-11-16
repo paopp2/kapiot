@@ -36,8 +36,7 @@ class HomeView extends HookConsumerWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
-                  fontFamily: 'Sanz',
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'NooplaRegular',
                   letterSpacing: 2,
                   color: Color(0xFF5F45A4),
                 ),
