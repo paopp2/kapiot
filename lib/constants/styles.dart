@@ -30,7 +30,7 @@ class Styles {
         "elementType": "all",
         "stylers": [
             {
-                "visibility": "on"
+                "visibility": "simplified"
             },
             {
                 "lightness": 33
@@ -84,7 +84,7 @@ class Styles {
                 "lightness": "40"
             },
             {
-                "visibility": "off"
+                "visibility": "simplified"
             }
         ]
     },
@@ -273,7 +273,7 @@ class Styles {
         "elementType": "all",
         "stylers": [
             {
-                "visibility": "on"
+                "visibility": "simplified"
             },
             {
                 "color": "#acbcc9"
@@ -315,16 +315,25 @@ class Styles {
         "elementType": "all",
         "stylers": [
             {
-                "visibility": "off"
-            },
-            {
                 "saturation": -100
             },
             {
-                "lightness": 60
+                "lightness": 30
+            },
+            {
+                "visibility": "simplified"
             }
         ]
     },
+    {
+    "featureType": "poi",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#C5E8C5"
+      }
+    ]
+  },
     {
         "featureType": "transit",
         "elementType": "all",
