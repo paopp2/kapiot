@@ -36,7 +36,8 @@ class LoginView extends HookConsumerWidget {
                               alignment: Alignment.topCenter,
                               child: Image(
                                 image: AssetImage(
-                                    'assets/logo/kapiot_logo_white.png'),
+                                  'assets/logo/kapiot_logo_white.png',
+                                ),
                                 width: 70,
                               ),
                             ),
@@ -98,7 +99,8 @@ class LoginView extends HookConsumerWidget {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           margin: EdgeInsets.only(
-                              bottom: constraints.maxHeight * 0.15),
+                            bottom: constraints.maxHeight * 0.15,
+                          ),
                           padding: EdgeInsets.symmetric(
                               horizontal: constraints.maxWidth * 0.05),
                           child: GoogleAuthWidget(
