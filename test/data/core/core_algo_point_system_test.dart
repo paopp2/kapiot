@@ -120,6 +120,56 @@ Future<void> main() async {
         );
       },
     );
+    test(
+      'PS1.3.1: Assuming rider from Mabolo Church to USC-TC',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 4652,
+          assumedTravelTime: 1440,
+          expectedPoints: 110.026667,
+        );
+      },
+    );
+    test(
+      'PS1.3.2: Assuming rider from USC-Main to SM City Cebu',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 3950,
+          assumedTravelTime: 1020,
+          expectedPoints: 86.666667,
+        );
+      },
+    );
+    test(
+      'PS1.3.3: Assuming rider from Cafe Racer to Marco Polo Plaza Cebu',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 6298,
+          assumedTravelTime: 1860,
+          expectedPoints: 145.973333,
+        );
+      },
+    );
+    test(
+      'PS1.3.4: Assuming rider from Gaisano Country Mall to SM Seaside City Cebu',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 9274,
+          assumedTravelTime: 3120,
+          expectedPoints: 227.653333,
+        );
+      },
+    );
+    test(
+      'PS1.3.5: Assuming rider from Harolds Hotel to Bonifacio District',
+      () async {
+        await verifyPoints(
+          assumedTravelDistance: 4420,
+          assumedTravelTime: 1080,
+          expectedPoints: 94.933333,
+        );
+      },
+    );
   });
 
   group('PS2: Multi rider tests', () {
