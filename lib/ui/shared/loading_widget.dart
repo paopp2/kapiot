@@ -15,11 +15,13 @@ class LoadingWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SpinKitWanderingCubes(
-            color: Color(0xFF5F45A4),
-            size: 50,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 20),
+            child: const SpinKitChasingDots(
+              color: Color(0xFF5F45A4),
+              size: 40,
+            ),
           ),
-          const SizedBox(height: 20),
           Text(
             text ?? '',
             textAlign: TextAlign.center,
