@@ -192,6 +192,75 @@ Future<void> main() async {
         );
       },
     );
+    test(
+      'PS2.2.1: Assuming rider from Marigondon to Grandmall Basak',
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 1406, 'time': 364},
+            {'distance': 1248, 'time': 189},
+            {'distance': 1509, 'time': 315},
+          ],
+          expectedTotalPoints: 84.44,
+        );
+      },
+    );
+    test(
+      "PS2.2.2: Assuming rider from Mactan Doctor\'s Hospital to Tamiya, LLC",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 2,
+          assumedDistanceTimePerRider: [
+            {'distance': 2800, 'time': 312},
+            {'distance': 2265, 'time': 328},
+          ],
+          expectedTotalPoints: 88.86666666666667,
+        );
+      },
+    );
+    test(
+      "PS2.2.3: Assuming rider from Babag to Cordova",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 4,
+          assumedDistanceTimePerRider: [
+            {'distance': 5102, 'time': 921},
+            {'distance': 5469, 'time': 912},
+            {'distance': 5258, 'time': 940},
+            {'distance': 5447, 'time': 996},
+          ],
+          expectedTotalPoints: 409.31333333333,
+        );
+      },
+    );
+    test(
+      "PS2.2.4: Assuming rider from Soong to Savemore Maribago",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 2,
+          assumedDistanceTimePerRider: [
+            {'distance': 2010, 'time': 360},
+            {'distance': 2020, 'time': 275},
+          ],
+          expectedTotalPoints: 74.9,
+        );
+      },
+    );
+    test(
+      "PS2.2.5: Assuming rider from Marigondon to Grandmall Basak",
+      () async {
+        await verifyTotalPoints(
+          assumedRiderCount: 3,
+          assumedDistanceTimePerRider: [
+            {'distance': 6851, 'time': 1446},
+            {'distance': 6750, 'time': 1423},
+            {'distance': 6224, 'time': 1441},
+          ],
+          expectedTotalPoints: 408.0,
+        );
+      },
+    );
   });
 }
 
