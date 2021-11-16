@@ -8,14 +8,14 @@ import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 
 void main() {
-  group("Case 1: Drivers at their startLocs and along rider's route", () {
-    test('1.1.1: Seaoil Pitogo to Consolacion Community College', () async {
+  group("CP1: Drivers at their startLocs and along rider's route", () {
+    test('CP1.1.1: Seaoil Pitogo to Consolacion Community College', () async {
       await verifyCompatibleDrivers(
         rider: 'Jim Preston',
         shouldMatchWith: ["Mark Antony"],
       );
     });
-    test('1.1.2: ABSCBN Mandaue to Insular Square', () async {
+    test('CP1.1.2: ABSCBN Mandaue to Insular Square', () async {
       await verifyCompatibleDrivers(
         rider: 'Arthur',
         shouldMatchWith: [
@@ -26,7 +26,7 @@ void main() {
         ],
       );
     });
-    test('1.1.3: Rose Pharmacy Pitogo to Basak Elem Mandaue', () async {
+    test('CP1.1.3: Rose Pharmacy Pitogo to Basak Elem Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: "Mother's Milk",
         shouldMatchWith: [
@@ -36,7 +36,7 @@ void main() {
         ],
       );
     });
-    test('1.1.4: Jollibee Lacion to Toyota Mandaue North', () async {
+    test('CP1.1.4: Jollibee Lacion to Toyota Mandaue North', () async {
       await verifyCompatibleDrivers(
         rider: "Frenchie",
         shouldMatchWith: [
@@ -46,13 +46,13 @@ void main() {
         ],
       );
     });
-    test("1.1.5: Mcdo Lacion to Steph's Korean Restaurant", () async {
+    test("CP1.1.5: Mcdo Lacion to Steph's Korean Restaurant", () async {
       await verifyCompatibleDrivers(
         rider: "A-Train",
         shouldMatchWith: ["Julius Caesar"],
       );
     });
-    test('1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+    test('CP1.2.1: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
         () async {
       await verifyCompatibleDrivers(
         rider: "Robot",
@@ -64,7 +64,7 @@ void main() {
         ],
       );
     });
-    test('1.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital', () async {
+    test('CP1.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital', () async {
       await verifyCompatibleDrivers(
         rider: "Atom Eve",
         shouldMatchWith: [
@@ -75,7 +75,7 @@ void main() {
         ],
       );
     });
-    test('1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
+    test('CP1.2.3: Cookies \'N Dream to BOSS B Food Hub', () async {
       await verifyCompatibleDrivers(
         rider: "The Immortal",
         shouldMatchWith: [
@@ -86,7 +86,7 @@ void main() {
         ],
       );
     });
-    test('1.2.4: Sebastien Hotel to YES Mart', () async {
+    test('CP1.2.4: Sebastien Hotel to YES Mart', () async {
       await verifyCompatibleDrivers(
         rider: "Dupli-Kate",
         shouldMatchWith: [
@@ -96,7 +96,7 @@ void main() {
         ],
       );
     });
-    test('1.2.5: Savemore Market Maribago to Fairchild Villas', () async {
+    test('CP1.2.5: Savemore Market Maribago to Fairchild Villas', () async {
       await verifyCompatibleDrivers(
         rider: "Black Samson",
         shouldMatchWith: [
@@ -106,7 +106,7 @@ void main() {
         ],
       );
     });
-    test('1.3.1: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo',
+    test('CP1.3.1: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo',
         () async {
       await verifyCompatibleDrivers(
         rider: "Oogie Boogie",
@@ -116,7 +116,7 @@ void main() {
       );
     });
 
-    test('1.3.2: AA BBQ Salinas Drive to UC Banilad', () async {
+    test('CP1.3.2: AA BBQ Salinas Drive to UC Banilad', () async {
       await verifyCompatibleDrivers(
         rider: "Morty Smith",
         shouldMatchWith: [
@@ -124,7 +124,7 @@ void main() {
         ],
       );
     });
-    test('1.3.3: Cafe Georg to Coastal Conservation and Education', () async {
+    test('CP1.3.3: Cafe Georg to Coastal Conservation and Education', () async {
       await verifyCompatibleDrivers(
         rider: "Jesse Pinkman",
         shouldMatchWith: [
@@ -136,7 +136,7 @@ void main() {
         ],
       );
     });
-    test('1.3.4: Holy Family Village II to Cafe Belle', () async {
+    test('CP1.3.4: Holy Family Village II to Cafe Belle', () async {
       await verifyCompatibleDrivers(
         rider: "Jin Kazama",
         shouldMatchWith: [
@@ -145,7 +145,7 @@ void main() {
         ],
       );
     });
-    test('1.3.5: USPF to Yoshimeatsu', () async {
+    test('CP1.3.5: USPF to Yoshimeatsu', () async {
       await verifyCompatibleDrivers(
         rider: "Hwoarang",
         shouldMatchWith: [
@@ -155,14 +155,14 @@ void main() {
       );
     });
   });
-  group('Case 2: Same routes with Case 1 but reversed', () {
-    test('2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
+  group('CP2: Same routes with Case 1 but reversed', () {
+    test('CP2.1.1: Consolacion Community College to Seaoil Pitogo', () async {
       await verifyCompatibleDrivers(
         rider: 'R_Jim Preston',
         shouldMatchWith: ["R_Mark Antony"],
       );
     });
-    test('2.1.2: Insular Square to ABSCBN Mandaue', () async {
+    test('CP2.1.2: Insular Square to ABSCBN Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: 'R_Arthur',
         shouldMatchWith: [
@@ -173,7 +173,7 @@ void main() {
         ],
       );
     });
-    test('2.1.3: Basak Elem Mandaue to Rose Pharmacy Pitogo', () async {
+    test('CP2.1.3: Basak Elem Mandaue to Rose Pharmacy Pitogo', () async {
       await verifyCompatibleDrivers(
         rider: "R_Mother's Milk",
         shouldMatchWith: [
@@ -183,7 +183,7 @@ void main() {
         ],
       );
     });
-    test('2.1.4: Toyota Mandaue North to Jollibee Lacion', () async {
+    test('CP2.1.4: Toyota Mandaue North to Jollibee Lacion', () async {
       await verifyCompatibleDrivers(
         rider: "R_Frenchie",
         shouldMatchWith: [
@@ -193,13 +193,13 @@ void main() {
         ],
       );
     });
-    test("2.1.5: Steph's Korean Restaurant to Mcdo Lacion", () async {
+    test("CP2.1.5: Steph's Korean Restaurant to Mcdo Lacion", () async {
       await verifyCompatibleDrivers(
         rider: "R_A-Train",
         shouldMatchWith: ["R_Julius Caesar"],
       );
     });
-    test('2.2.1: Gaisano Grandmall Basak, LLC to Soltana Nature Residences ',
+    test('CP2.2.1: Gaisano Grandmall Basak, LLC to Soltana Nature Residences ',
         () async {
       await verifyCompatibleDrivers(
         rider: "R_Robot",
@@ -211,7 +211,7 @@ void main() {
         ],
       );
     });
-    test('2.2.2: Mactan Doctor\'s Hospital to Basak Mercado, LLC', () async {
+    test('CP2.2.2: Mactan Doctor\'s Hospital to Basak Mercado, LLC', () async {
       await verifyCompatibleDrivers(
         rider: "R_Atom Eve",
         shouldMatchWith: [
@@ -222,7 +222,7 @@ void main() {
         ],
       );
     });
-    test('2.2.3: BOSS B Food Hub to Cookies \'N Dream', () async {
+    test('CP2.2.3: BOSS B Food Hub to Cookies \'N Dream', () async {
       await verifyCompatibleDrivers(
         rider: "R_The Immortal",
         shouldMatchWith: [
@@ -233,7 +233,7 @@ void main() {
         ],
       );
     });
-    test('2.2.4: YES Mart to Sebastien Hotel', () async {
+    test('CP2.2.4: YES Mart to Sebastien Hotel', () async {
       await verifyCompatibleDrivers(
         rider: "R_Dupli-Kate",
         shouldMatchWith: [
@@ -243,7 +243,7 @@ void main() {
         ],
       );
     });
-    test('2.2.5: Fairchild Villas to Savemore Market Maribago', () async {
+    test('CP2.2.5: Fairchild Villas to Savemore Market Maribago', () async {
       await verifyCompatibleDrivers(
         rider: "R_Black Samson",
         shouldMatchWith: [
@@ -253,7 +253,7 @@ void main() {
         ],
       );
     });
-    test('2.3.1: Kaffee Alde Mabolo to Prime Care @ APM Shopping Center',
+    test('CP2.3.1: Kaffee Alde Mabolo to Prime Care @ APM Shopping Center',
         () async {
       await verifyCompatibleDrivers(
         rider: "R_Oogie Boogie",
@@ -263,7 +263,7 @@ void main() {
         ],
       );
     });
-    test('2.3.2: UC Banilad to AA BBQ Salinas Drive', () async {
+    test('CP2.3.2: UC Banilad to AA BBQ Salinas Drive', () async {
       await verifyCompatibleDrivers(
         rider: "R_Morty Smith",
         shouldMatchWith: [
@@ -272,7 +272,7 @@ void main() {
         ],
       );
     });
-    test('2.3.3: Phoenix Banilad to 88th Avenue', () async {
+    test('CP2.3.3: Phoenix Banilad to 88th Avenue', () async {
       await verifyCompatibleDrivers(
         rider: "R_Walter White",
         shouldMatchWith: [
@@ -284,7 +284,7 @@ void main() {
         ],
       );
     });
-    test('2.3.4: Coastal Conservation and Education to Cafe Georg', () async {
+    test('CP2.3.4: Coastal Conservation and Education to Cafe Georg', () async {
       await verifyCompatibleDrivers(
         rider: "R_Jesse Pinkman",
         shouldMatchWith: [
@@ -296,15 +296,15 @@ void main() {
         ],
       );
     });
-    test('2.3.5: Cafe Belle to Holy Family Village II', () async {
+    test('CP2.3.5: Cafe Belle to Holy Family Village II', () async {
       await verifyCompatibleDrivers(
         rider: "R_Jin Kazama",
         shouldMatchWith: [],
       );
     });
   });
-  group("Case 3: A user can't pair with oneself as both rider and driver", () {
-    test('3.1.1A Same user: SM Lacion to Fatima Basak', () async {
+  group("CP3: A user can't pair with oneself as both rider and driver", () {
+    test('CP3.1.1A Same user: SM Lacion to Fatima Basak', () async {
       await verifyCompatibleDrivers(
         rider: "Nicolas Paolo Pepito",
         shouldMatchWith: [
@@ -314,7 +314,7 @@ void main() {
         ],
       );
     });
-    test('3.1.1B Diff user: SM Lacion to Fatima Basak', () async {
+    test('CP3.1.1B Diff user: SM Lacion to Fatima Basak', () async {
       await verifyCompatibleDrivers(
         rider: "Gaius Octavius Thurinus",
         shouldMatchWith: [
@@ -325,31 +325,33 @@ void main() {
         ],
       );
     });
-    test('3.1.2A Same user: ABS CBN Mandaue to Lucky Table Factory', () async {
+    test('CP3.1.2A Same user: ABS CBN Mandaue to Lucky Table Factory',
+        () async {
       await verifyCompatibleDrivers(
         rider: "Julius Caesar",
         shouldMatchWith: [],
       );
     });
-    test('3.1.2B Diff user: ABS CBN Mandaue to Lucky Table Factory', () async {
+    test('CP3.1.2B Diff user: ABS CBN Mandaue to Lucky Table Factory',
+        () async {
       await verifyCompatibleDrivers(
         rider: "Cleopatra Philopator",
         shouldMatchWith: ["Julius Caesar"],
       );
     });
-    test('3.1.3A Same user: Rose Pharmacy Pitogo to Co Jordan', () async {
+    test('CP3.1.3A Same user: Rose Pharmacy Pitogo to Co Jordan', () async {
       await verifyCompatibleDrivers(
         rider: "Mark Antony",
         shouldMatchWith: [],
       );
     });
-    test('3.1.3B Diff user: Rose Pharmacy Pitogo to Co Jordan', () async {
+    test('CP3.1.3B Diff user: Rose Pharmacy Pitogo to Co Jordan', () async {
       await verifyCompatibleDrivers(
         rider: "Atia Balba",
         shouldMatchWith: ["Mark Antony"],
       );
     });
-    test('3.1.4A Same user: Mcdo Lacion to Lacion Municipal Hall', () async {
+    test('CP3.1.4A Same user: Mcdo Lacion to Lacion Municipal Hall', () async {
       await verifyCompatibleDrivers(
         rider: "Billy Butcher",
         shouldMatchWith: [
@@ -360,7 +362,7 @@ void main() {
         ],
       );
     });
-    test('3.1.4B Diff user: Mcdo Lacion to Lacion Municipal Hall', () async {
+    test('CP3.1.4B Diff user: Mcdo Lacion to Lacion Municipal Hall', () async {
       await verifyCompatibleDrivers(
         rider: "The Homelander",
         shouldMatchWith: [
@@ -372,20 +374,20 @@ void main() {
         ],
       );
     });
-    test('3.1.5A Same user: Rusi Mandaue to Dave Housing Supply', () async {
+    test('CP3.1.5A Same user: Rusi Mandaue to Dave Housing Supply', () async {
       await verifyCompatibleDrivers(
         rider: "Queen Maeve",
         shouldMatchWith: [],
       );
     });
-    test('3.1.5B Diff user: RUSI Mandaue to Dave Housing Supply', () async {
+    test('CP3.1.5B Diff user: RUSI Mandaue to Dave Housing Supply', () async {
       await verifyCompatibleDrivers(
         rider: "Madelyn Stillwell",
         shouldMatchWith: ["Queen Maeve"],
       );
     });
     test(
-        '3.2.1A Same user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        'CP3.2.1A Same user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
         () async {
       await verifyCompatibleDrivers(
         rider: "Charles Jr. Ausejo",
@@ -397,7 +399,7 @@ void main() {
       );
     });
     test(
-        '3.2.1B Diff user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
+        'CP3.2.1B Diff user: Soltana Nature Residences to Gaisano Grandmall Basak, LLC',
         () async {
       await verifyCompatibleDrivers(
         rider: "Dekodeimos Vonzehos",
@@ -409,7 +411,7 @@ void main() {
         ],
       );
     });
-    test('3.2.2A Same user: Papa Rony to City Time Square, LLC', () async {
+    test('CP3.2.2A Same user: Papa Rony to City Time Square, LLC', () async {
       await verifyCompatibleDrivers(
         rider: "Omni Man",
         shouldMatchWith: [
@@ -419,7 +421,7 @@ void main() {
         ],
       );
     });
-    test('3.2.2B Diff user: Papa Rony to City Time Square, LLC', () async {
+    test('CP3.2.2B Diff user: Papa Rony to City Time Square, LLC', () async {
       await verifyCompatibleDrivers(
         rider: "Naughty Man",
         shouldMatchWith: [
@@ -430,7 +432,7 @@ void main() {
         ],
       );
     });
-    test('3.2.3A Same user: Sebastien Hotel to YES Mart', () async {
+    test('CP3.2.3A Same user: Sebastien Hotel to YES Mart', () async {
       await verifyCompatibleDrivers(
         rider: "The Invincible",
         shouldMatchWith: [
@@ -439,7 +441,7 @@ void main() {
         ],
       );
     });
-    test('3.2.3B Diff user: Sebastien Hotel to YES Mart', () async {
+    test('CP3.2.3B Diff user: Sebastien Hotel to YES Mart', () async {
       await verifyCompatibleDrivers(
         rider: "Oliver Grayson",
         shouldMatchWith: [
@@ -449,7 +451,7 @@ void main() {
         ],
       );
     });
-    test('3.2.4A Same user: AA BBQ Soong to Babag II Road', () async {
+    test('CP3.2.4A Same user: AA BBQ Soong to Babag II Road', () async {
       await verifyCompatibleDrivers(
         rider: "Battle Beast",
         shouldMatchWith: [
@@ -458,7 +460,7 @@ void main() {
         ],
       );
     });
-    test('3.2.4B Diff user:  AA BBQ Soong to Babag II Road', () async {
+    test('CP3.2.4B Diff user:  AA BBQ Soong to Babag II Road', () async {
       await verifyCompatibleDrivers(
         rider: "Vazol BreastBone",
         shouldMatchWith: [
@@ -468,7 +470,7 @@ void main() {
         ],
       );
     });
-    test('3.2.5A Same user: Mactan to Babag II Road', () async {
+    test('CP3.2.5A Same user: Mactan to Babag II Road', () async {
       await verifyCompatibleDrivers(
         rider: "Mauler",
         shouldMatchWith: [
@@ -477,7 +479,7 @@ void main() {
         ],
       );
     });
-    test('3.2.5B Diff user:  Mactan to Babag II Road', () async {
+    test('CP3.2.5B Diff user:  Mactan to Babag II Road', () async {
       await verifyCompatibleDrivers(
         rider: "The REAL Mauler",
         shouldMatchWith: [
@@ -488,7 +490,7 @@ void main() {
       );
     });
 
-    test('3.3.1A Same user: AA BBQ Salinas Drive to UC Banilad', () async {
+    test('CP3.3.1A Same user: AA BBQ Salinas Drive to UC Banilad', () async {
       await verifyCompatibleDrivers(
         rider: "Morty Smith",
         shouldMatchWith: [
@@ -496,7 +498,7 @@ void main() {
         ],
       );
     });
-    test('3.3.1B Diff user: AA BBQ Salinas Drive to UC Banilad', () async {
+    test('CP3.3.1B Diff user: AA BBQ Salinas Drive to UC Banilad', () async {
       await verifyCompatibleDrivers(
         rider: "Steve Jobs",
         shouldMatchWith: [
@@ -505,13 +507,13 @@ void main() {
         ],
       );
     });
-    test('3.3.2A Same user: SM Cebu to Family Park Talamban', () async {
+    test('CP3.3.2A Same user: SM Cebu to Family Park Talamban', () async {
       await verifyCompatibleDrivers(
         rider: "Skeleton Jack",
         shouldMatchWith: [],
       );
     });
-    test('3.3.2B Diff user: SM Cebu to Family Park Talamban', () async {
+    test('CP3.3.2B Diff user: SM Cebu to Family Park Talamban', () async {
       await verifyCompatibleDrivers(
         rider: "Oogie Boogie",
         shouldMatchWith: [
@@ -519,7 +521,7 @@ void main() {
         ],
       );
     });
-    test('3.3.3A Same user: Sunny Hills to Ayala Cebu', () async {
+    test('CP3.3.3A Same user: Sunny Hills to Ayala Cebu', () async {
       await verifyCompatibleDrivers(
         rider: "Mad Max",
         shouldMatchWith: [
@@ -527,7 +529,7 @@ void main() {
         ],
       );
     });
-    test('3.3.3B Diff user: Sunny Hills to Ayala Cebu', () async {
+    test('CP3.3.3B Diff user: Sunny Hills to Ayala Cebu', () async {
       await verifyCompatibleDrivers(
         rider: "Dolores Umbridge",
         shouldMatchWith: [
@@ -536,7 +538,7 @@ void main() {
         ],
       );
     });
-    test('3.3.4A Same user: J&T Mabolo to Silver Hills Nasipit', () async {
+    test('CP3.3.4A Same user: J&T Mabolo to Silver Hills Nasipit', () async {
       await verifyCompatibleDrivers(
         rider: "Jin Kazama",
         shouldMatchWith: [
@@ -545,7 +547,7 @@ void main() {
         ],
       );
     });
-    test('3.3.4B Diff user: J&T Mabolo to Silver Hills Nasipit', () async {
+    test('CP3.3.4B Diff user: J&T Mabolo to Silver Hills Nasipit', () async {
       await verifyCompatibleDrivers(
         rider: "Walter White",
         shouldMatchWith: [
@@ -557,13 +559,13 @@ void main() {
         ],
       );
     });
-    test('3.3.5A Same user: CIC Cebu to Tintay Terminal', () async {
+    test('CP3.3.5A Same user: CIC Cebu to Tintay Terminal', () async {
       await verifyCompatibleDrivers(
         rider: "Tom Marvolo Riddle",
         shouldMatchWith: [],
       );
     });
-    test('3.3.5B Diff user: CIC Cebu to Tintay Terminal', () async {
+    test('CP3.3.5B Diff user: CIC Cebu to Tintay Terminal', () async {
       await verifyCompatibleDrivers(
         rider: "Jin Kazama",
         shouldMatchWith: [
@@ -574,9 +576,9 @@ void main() {
     });
   });
 
-  group("Case 4: Compatible drivers can't match with passed riders", () {
+  group("CP4: Compatible drivers can't match with passed riders", () {
     test(
-      '4.1.1 Seaoil Pitogo to Consolacion Community College, 1 driver passed',
+      'CP4.1.1 Seaoil Pitogo to Consolacion Community College, 1 driver passed',
       () async {
         await verifyCompatibleDrivers(
           rider: "Jim Preston",
@@ -591,7 +593,8 @@ void main() {
         );
       },
     );
-    test('4.1.2: ABSCBN Mandaue to Insular Square, 2 drivers passed', () async {
+    test('CP4.1.2: ABSCBN Mandaue to Insular Square, 2 drivers passed',
+        () async {
       await verifyCompatibleDrivers(
         rider: 'Arthur',
         driverCurrentLocOverrides: {
@@ -613,7 +616,7 @@ void main() {
         ],
       );
     });
-    test('4.1.3: Insular Square to ABSCBN Mandaue', () async {
+    test('CP4.1.3: Insular Square to ABSCBN Mandaue', () async {
       await verifyCompatibleDrivers(
         rider: 'R_Arthur',
         driverCurrentLocOverrides: {
@@ -635,7 +638,7 @@ void main() {
       );
     });
     test(
-      '4.1.4 Mcdo Lacion to Lacion Municipal Hall, 2 drivers passed',
+      'CP4.1.4 Mcdo Lacion to Lacion Municipal Hall, 2 drivers passed',
       () async {
         await verifyCompatibleDrivers(
           rider: "The Homelander",
@@ -665,7 +668,7 @@ void main() {
       },
     );
     test(
-      "4.1.5: Stephanie's Korean Restaurant to Mcdo Lacion, 1 driver passed",
+      "CP4.1.5: Stephanie's Korean Restaurant to Mcdo Lacion, 1 driver passed",
       () async {
         await verifyCompatibleDrivers(
           rider: "R_A-Train",
@@ -681,7 +684,7 @@ void main() {
       },
     );
     test(
-      '4.2.1: Soltana Nature Residences to Gaisano Grandmall Basak LLC, 1 driver passed',
+      'CP4.2.1: Soltana Nature Residences to Gaisano Grandmall Basak LLC, 1 driver passed',
       () async {
         await verifyCompatibleDrivers(
           rider: "Robot",
@@ -700,7 +703,7 @@ void main() {
       },
     );
     test(
-        '4.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital, 2 drivers passed',
+        'CP4.2.2: Basak Mercado, LLC to Mactan Doctor\'s Hospital, 2 drivers passed',
         () async {
       await verifyCompatibleDrivers(
         rider: 'Atom Eve',
@@ -717,7 +720,7 @@ void main() {
         shouldMatchWith: ["Charles Jr. Ausejo", "Allen the Alien"],
       );
     });
-    test('4.2.3: Cookies \'N Dream to BOSS B Food Hub, 1 driver passed',
+    test('CP4.2.3: Cookies \'N Dream to BOSS B Food Hub, 1 driver passed',
         () async {
       await verifyCompatibleDrivers(
         rider: 'The Immortal',
@@ -731,7 +734,7 @@ void main() {
       );
     });
     test(
-      '4.2.4: YES Mart to Sebastien Hotel, 3 drivers passed',
+      'CP4.2.4: YES Mart to Sebastien Hotel, 3 drivers passed',
       () async {
         await verifyCompatibleDrivers(
           rider: "R_Dupli-Kate",
@@ -754,7 +757,7 @@ void main() {
       },
     );
     test(
-      "4.2.5: Fairchild Villas to Savemore Market Maribago, 2 drivers passed",
+      "CP4.2.5: Fairchild Villas to Savemore Market Maribago, 2 drivers passed",
       () async {
         await verifyCompatibleDrivers(
           rider: "R_Black Samson",
@@ -773,7 +776,7 @@ void main() {
       },
     );
 
-    test('4.3.1: USPF to Yoshimeatsu, 1 driver passed', () async {
+    test('CP4.3.1: USPF to Yoshimeatsu, 1 driver passed', () async {
       await verifyCompatibleDrivers(
         rider: 'Hwoarang',
         driverCurrentLocOverrides: {
@@ -790,7 +793,7 @@ void main() {
       );
     });
     test(
-        '4.3.2: Cafe Georg to Coastal Conservation and Education, 2 driver passed',
+        'CP4.3.2: Cafe Georg to Coastal Conservation and Education, 2 driver passed',
         () async {
       await verifyCompatibleDrivers(
         rider: 'Jesse Pinkman',
@@ -814,7 +817,7 @@ void main() {
       );
     });
     test(
-        '4.3.3: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo, 1 driver passed',
+        'CP4.3.3: Prime Care @ APM Shopping Center to Kaffe Alde Mabolo, 1 driver passed',
         () async {
       await verifyCompatibleDrivers(
         rider: 'Oogie Boogie',
@@ -828,7 +831,7 @@ void main() {
         shouldMatchWith: [],
       );
     });
-    test('4.3.4: Holy Family Village II to Cafe Belle, 1 driver passed',
+    test('CP4.3.4: Holy Family Village II to Cafe Belle, 1 driver passed',
         () async {
       await verifyCompatibleDrivers(
         rider: 'Jin Kazama',
@@ -846,7 +849,7 @@ void main() {
         ],
       );
     });
-    test('4.3.5: 88th Avenue to Phoenix Banilad, 3 driver passed', () async {
+    test('CP4.3.5: 88th Avenue to Phoenix Banilad, 3 driver passed', () async {
       await verifyCompatibleDrivers(
         rider: 'Walter White',
         driverCurrentLocOverrides: {
@@ -903,7 +906,7 @@ Future<void> verifyCompatibleDrivers({
   }));
   final List<RouteConfig> compatibleDrivers = [];
   for (final driver in driversList.map((rc) => RouteConfig.fromJson(rc))) {
-    if (await coreAlgorithms.checkCompatibility(
+    if (coreAlgorithms.checkCompatibility(
       riderConfig: RouteConfig.fromJson(riderConfig),
       driverConfig: driver,
       driverCurrentLoc: driverCurrentLocOverrides[driver.user.displayName] ??

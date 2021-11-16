@@ -53,7 +53,7 @@ class CoreAlgorithms {
               ?.values
               .first;
 
-          await checkCompatibility(
+          checkCompatibility(
             riderConfig: riderConfig,
             driverConfig: driverConfig,
             driverCurrentLoc: driverCurrentLoc,
@@ -90,13 +90,13 @@ class CoreAlgorithms {
   }
 
   /// Returns true when [riderConfig] is compatible with [driverConfig]
-  Future<bool> checkCompatibility({
+  bool checkCompatibility({
     required RouteConfig riderConfig,
     required RouteConfig driverConfig,
     required KapiotLocation? driverCurrentLoc,
     void Function()? whenCompatible,
     void Function()? whenUnreachable,
-  }) async {
+  }) {
     final utils = googleMapsApiServices.utils;
     final distFromDriverStartToRiderStart = utils.calculateDistance(
       pointA: driverConfig.startLocation,
@@ -115,14 +115,12 @@ class CoreAlgorithms {
 
     if (isNotTheSameUser && isGoingTheSameDirection) {
       driverConfig as ForDriver;
-      final decodedRoute = await utils.decodeRoute(
-        driverConfig.encodedRoute,
-      );
-      bool riderStartCompatible = await utils.isLocationAlongRoute(
+      final decodedRoute = utils.decodeRoute(driverConfig.encodedRoute);
+      bool riderStartCompatible = utils.isLocationAlongRoute(
         location: riderConfig.startLocation,
         decodedRoute: decodedRoute,
       );
-      bool riderEndCompatible = await utils.isLocationAlongRoute(
+      bool riderEndCompatible = utils.isLocationAlongRoute(
         location: riderConfig.endLocation,
         decodedRoute: decodedRoute,
       );

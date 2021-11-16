@@ -72,8 +72,7 @@ abstract class MapController {
   }
 
   Future<void> showRouteFromEncoded({required String encodedRoute}) async {
-    final decodedRoute =
-        await googleMapsApiServices.utils.decodeRoute(encodedRoute);
+    final decodedRoute = googleMapsApiServices.utils.decodeRoute(encodedRoute);
     final startLocation = KapiotLocation(
       lat: decodedRoute.first.latitude,
       lng: decodedRoute.first.longitude,
