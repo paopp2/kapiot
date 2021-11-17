@@ -23,24 +23,38 @@ class LoginView extends HookConsumerWidget {
             body: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: constraints.maxHeight * 0.15),
-                  child: const Image(
-                    image: AssetImage('assets/images/usc_logo.png'),
-                    width: 70,
+                  margin: EdgeInsets.only(
+                    top: constraints.maxHeight * 0.15,
+                    bottom: constraints.maxHeight * 0.2,
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(bottom: constraints.maxHeight * 0.1),
                   child: Column(
                     children: [
-                      const Text(
-                        'kapiot',
-                        style: TextStyle(
-                          fontSize: 84,
-                          fontFamily: 'Sanz',
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 7,
-                          color: Color(0xFF5F45A4),
+                      SizedBox(
+                        height: 160,
+                        child: Stack(
+                          children: const [
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Image(
+                                image: AssetImage(
+                                  'assets/logo/kapiot_logo_white.png',
+                                ),
+                                width: 70,
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                'kapiot',
+                                style: TextStyle(
+                                  fontSize: 70,
+                                  fontFamily: 'NooplaRegular',
+                                  letterSpacing: 7,
+                                  color: Color(0xFF5F45A4),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -50,8 +64,8 @@ class LoginView extends HookConsumerWidget {
                         child: Text(
                           'University of San Carlos',
                           style: TextStyle(
-                            letterSpacing: 3.5,
-                            fontSize: 18,
+                            letterSpacing: 3,
+                            fontSize: 16,
                             fontFamily: 'Vegur',
                             color: Colors.grey,
                           ),
@@ -68,13 +82,12 @@ class LoginView extends HookConsumerWidget {
                         clipper: BackgroundClipper(),
                         child: Container(
                           decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                Color(0xFF5F45A4),
-                                Color(0xFFCFC7E3)
-                              ],
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topRight)),
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF5F45A4), Color(0xFFCFC7E3)],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                            ),
+                          ),
                         ),
                       ),
                       CustomPaint(
@@ -82,10 +95,14 @@ class LoginView extends HookConsumerWidget {
                         painter: CurvedPainter(),
                       ),
                       Align(
-                        alignment: Alignment.center,
-                        child: Padding(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            bottom: constraints.maxHeight * 0.15,
+                          ),
                           padding: EdgeInsets.symmetric(
-                              horizontal: constraints.maxWidth * 0.05),
+                            horizontal: constraints.maxWidth * 0.05,
+                          ),
                           child: GoogleAuthWidget(
                             model: model,
                             constraints: constraints,
