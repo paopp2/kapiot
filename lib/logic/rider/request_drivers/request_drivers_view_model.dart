@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/animation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -39,6 +41,7 @@ class RequestDriversViewModel extends ViewModel {
   final LocationService locationService;
   final LocationRepository locationRepo;
   final GoogleMapsApiServices googleMapsApiServices;
+  final CarouselController driverCarouselController = CarouselController();
 
   StreamSubscription? _previewedDriverLocationSub;
   StreamSubscription? _acceptingDriverConfigSub;
@@ -47,7 +50,7 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
     assert(read(currentRouteConfigProvider).state != null);
-    final routeConfig = read(currentRouteConfigProvider).state! as ForRider;
+    final routeConfig = read(currentRouteConfigProvider).state!;
 
     mapController.addMarker(
       marker: Markers.currentUserLoc,
@@ -72,13 +75,58 @@ class RequestDriversViewModel extends ViewModel {
     );
   }
 
-  Stream<List<RouteConfig>> getCompatibleDriverConfigs() {
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() async* {
     final currentRiderConfig = read(currentRouteConfigProvider).state!;
-    return riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
+    final compatibleDriverConfigsStream =
+        riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
+    await for (final driverConfigs in compatibleDriverConfigsStream) {
+      autoSelectDriver(driverConfigs);
+      yield driverConfigs;
+    }
   }
 
-  void selectDriver(int index) {
+  void selectDriver(int? index) {
     read(selectedDriverIndexProvider).state = index;
+  }
+
+  // Auto selects and 'animates' to a driverCard in either case : the rider
+  // hasn't picked one yet, the current selected driver's index is out of range,
+  // driver list changed but current selected index still within range, no
+  // available drivers
+  Future<void> autoSelectDriver(List<RouteConfig> driverConfigs) async {
+    final selectedIndex = read(selectedDriverIndexProvider).state;
+
+    final bool isNoDriverSelected =
+        driverConfigs.isNotEmpty && selectedIndex == null;
+    final bool isDriverOutOfRange = selectedIndex != null &&
+        driverConfigs.length <= selectedIndex &&
+        driverConfigs.isNotEmpty;
+
+    // Provides a slight delay to allow the stream data to 'settle', avoiding
+    // erroneous UI rebuilds
+    Future.delayed(const Duration(milliseconds: 200), () async {
+      if (isNoDriverSelected || isDriverOutOfRange) {
+        // If no driver selected or if out of range, select the first one
+        // on the list
+        selectDriver(0);
+        previewDriverInfoAndLocation(driverConfigs[0]);
+        driverCarouselController.animateToPage(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      } else if (driverConfigs.isNotEmpty) {
+        // If the driver list changed/adjusted but the selected driver index is
+        // still within range, preview the new driver selected
+        previewDriverInfoAndLocation(driverConfigs[selectedIndex!]);
+      } else {
+        // If driver list is empty
+        final riderConfig = read(currentRouteConfigProvider).state!;
+        selectDriver(null);
+        mapController.clearMap();
+        mapController.animateToLocation(location: riderConfig.startLocation);
+      }
+    });
   }
 
   Future<void> previewDriverInfoAndLocation(RouteConfig driverConfig) async {

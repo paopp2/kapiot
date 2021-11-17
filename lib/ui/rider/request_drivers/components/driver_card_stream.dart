@@ -54,6 +54,7 @@ class DriverCardStream extends HookConsumerWidget {
                     ),
                   )
                 : CarouselSlider.builder(
+                    carouselController: model.driverCarouselController,
                     itemCount: compatibleDriverConfigs.length,
                     options: CarouselOptions(
                       autoPlay: false,

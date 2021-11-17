@@ -93,6 +93,19 @@ abstract class MapController {
     );
   }
 
+  Future<void> animateToLocation({
+    required KapiotLocation location,
+    Marker? marker,
+  }) async {
+    gmapController.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: LatLng(location.lat, location.lng),
+        zoom: 20,
+      ),
+    ));
+    addMarker(marker: marker ?? Markers.currentUserLoc, location: location);
+  }
+
   Future<void> animateToRoute({
     required KapiotLocation startLocation,
     required KapiotLocation endLocation,
