@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -14,6 +15,7 @@ import 'package:kapiot/logic/driver/rider_manager_map_controller.dart';
 import 'package:kapiot/logic/driver/rider_manager_view_state.dart';
 import 'package:kapiot/logic/shared/shared_state.dart';
 import 'package:kapiot/logic/shared/view_model.dart';
+import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
@@ -93,16 +95,20 @@ class RiderManagerViewModel extends ViewModel {
     read(nextStopProvider).stream.listen((nextStop) {
       if (nextStop != null) {
         mapController.addMarker(
-          marker: Markers.nextStopPoint,
+          marker:
+              (nextStop.isPickUp) ? Markers.pickupPoint : Markers.dropoffPoint,
           location: nextStop.stopLocation,
         );
       } else {
-        mapController.removeMarker(Markers.nextStopPoint);
+        // pickupPoint and dropoffPoint have the same Marker ID
+        // 'next_stop_point' so this should remove either of them
+        mapController.removeMarker(Markers.pickupPoint);
       }
     });
 
     // Push changes to this driver's location and return to HomeView once
     // this driver arrives at destination / end location
+    KapiotLocation? prevLoc; // Used for getting driver's car heading
     realtimeLocSub = locationService.getLocationStream().listen((currentLoc) {
       assert(currentUser != null);
       final utils = googleMapsApiServices.utils;
@@ -125,9 +131,17 @@ class RiderManagerViewModel extends ViewModel {
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       } else {
         mapController.addMarker(
-          marker: Markers.driverLoc,
+          marker: Markers.driverLoc.copyWith(
+            rotationParam: Geolocator.bearingBetween(
+              prevLoc?.lat ?? routeConfig.startLocation.lat,
+              prevLoc?.lng ?? routeConfig.startLocation.lng,
+              currentLoc.lat,
+              currentLoc.lng,
+            ),
+          ),
           location: currentLoc,
         );
+        prevLoc = currentLoc;
         locationRepo.updateLocation(currentUser!.id, currentLoc);
       }
     });

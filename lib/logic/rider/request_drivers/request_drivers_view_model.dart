@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/animation.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
 import 'package:kapiot/constants/markers.dart';
@@ -134,14 +135,23 @@ class RequestDriversViewModel extends ViewModel {
     // Cancel the last chosen driver's location stream subscription and
     // subscribe to the new one
     _previewedDriverLocationSub?.cancel();
+    KapiotLocation? prevDriverLoc; // Used for getting driver's car heading
     _previewedDriverLocationSub =
         locationRepo.getRealtimeLocation(driverConfig.user.id).listen(
       (driverLoc) {
         updateDriverDistance(driverLoc);
         mapController.addMarker(
-          marker: Markers.driverLoc,
+          marker: Markers.driverLoc.copyWith(
+            rotationParam: Geolocator.bearingBetween(
+              prevDriverLoc?.lat ?? driverConfig.startLocation.lat,
+              prevDriverLoc?.lng ?? driverConfig.startLocation.lng,
+              driverLoc.lat,
+              driverLoc.lng,
+            ),
+          ),
           location: driverLoc,
         );
+        prevDriverLoc = driverLoc;
       },
     );
   }

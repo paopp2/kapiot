@@ -70,6 +70,7 @@ flutter:
     - assets/images/car_body_types/
     - assets/images/error/
     - assets/images/
+    - assets/icons/markers/
     - assets/icons/
     - assets/logo/
     - secrets/secrets.env

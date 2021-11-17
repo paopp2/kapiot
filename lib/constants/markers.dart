@@ -1,33 +1,65 @@
+import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Markers {
-  static final startLoc = Marker(
-    markerId: const MarkerId('start_loc_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-  );
+  Markers._();
+  static final instance = Markers._();
+  static late final Marker startLoc;
+  static late final Marker endLoc;
+  static late final Marker currentUserLoc;
+  static late final Marker driverLoc;
+  static late final Marker riderEndLoc;
+  static late final Marker pickupPoint;
+  static late final Marker dropoffPoint;
 
-  static final endLoc = Marker(
-    markerId: const MarkerId('end_loc_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
-  );
+  Future<Marker> _setupMarker({
+    required String iconPath,
+    required String id,
+    Offset anchor = const Offset(0.5, 0.5),
+  }) async {
+    return Marker(
+      anchor: anchor,
+      markerId: MarkerId(id),
+      icon: await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration.empty,
+        iconPath,
+      ),
+    );
+  }
 
-  static final driverLoc = Marker(
-    markerId: const MarkerId('driver_loc_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-  );
-
-  static final riderEndLoc = Marker(
-    markerId: const MarkerId('rider_loc_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
-  );
-
-  static final currentUserLoc = Marker(
-    markerId: const MarkerId('current_user_marker'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
-  );
-
-  static final nextStopPoint = Marker(
-    markerId: const MarkerId('next_stop_point'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-  );
+  Future<void> initMarkers() async {
+    String basePath = 'assets/icons/markers';
+    startLoc = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
+      iconPath: '$basePath/startLoc.png',
+      id: 'start_loc_marker',
+    );
+    currentUserLoc = await _setupMarker(
+      iconPath: '$basePath/currentLoc.png',
+      id: 'current_user_marker',
+    );
+    endLoc = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
+      iconPath: '$basePath/endLoc.png',
+      id: 'end_loc_marker',
+    );
+    driverLoc = await _setupMarker(
+      iconPath: '$basePath/driverLoc.png',
+      id: 'driver_loc_marker',
+    );
+    riderEndLoc = await _setupMarker(
+      iconPath: '$basePath/endLoc.png',
+      id: 'rider_loc_marker',
+    );
+    pickupPoint = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
+      iconPath: '$basePath/pickupPoint.png',
+      id: 'next_stop_point',
+    );
+    dropoffPoint = await _setupMarker(
+      anchor: const Offset(0.5, 1.0),
+      iconPath: '$basePath/dropoffPoint.png',
+      id: 'next_stop_point',
+    );
+  }
 }

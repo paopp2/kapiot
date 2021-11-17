@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/constants/markers.dart';
+import 'package:kapiot/constants/styles.dart';
 import 'package:kapiot/data/services/google_maps_api_services.dart';
 import 'package:kapiot/model/kapiot_location/kapiot_location.dart';
 
@@ -41,6 +42,7 @@ abstract class MapController {
 
   Future<void> onMapCreated(GoogleMapController gmapController) async {
     _tempController.complete(gmapController);
+    gmapController.setMapStyle(Styles.mapStyle);
   }
 
   void clearMap() {
@@ -71,7 +73,10 @@ abstract class MapController {
     );
   }
 
-  Future<void> showRouteFromEncoded({required String encodedRoute}) async {
+  Future<void> showRouteFromEncoded({
+    required String encodedRoute,
+    bool showMarkers = true,
+  }) async {
     final decodedRoute = googleMapsApiServices.utils.decodeRoute(encodedRoute);
     final startLocation = KapiotLocation(
       lat: decodedRoute.first.latitude,
@@ -83,8 +88,10 @@ abstract class MapController {
     );
     setStartLocation(startLocation);
     setEndLocation(endLocation);
-    addMarker(marker: Markers.startLoc, location: startLocation);
-    addMarker(marker: Markers.endLoc, location: endLocation);
+    if (showMarkers) {
+      addMarker(marker: Markers.startLoc, location: startLocation);
+      addMarker(marker: Markers.endLoc, location: endLocation);
+    }
     drawPolyLine(decodedRoute);
 
     animateToRoute(
@@ -146,7 +153,8 @@ abstract class MapController {
     final polylines = read(polylinesProvider).state;
     Polyline polyline = Polyline(
       polylineId: const PolylineId("poly"),
-      color: Colors.red,
+      color: const Color(0xFF7F3B7C),
+      width: 7,
       points: routeCoordinates,
     );
     polylines.add(polyline);
