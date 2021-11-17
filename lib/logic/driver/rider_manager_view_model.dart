@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/animation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -53,6 +55,7 @@ class RiderManagerViewModel extends ViewModel {
   final KapiotUser? currentUser;
   final List<StopPoint> _finishedStopPoints = [];
   final List<RouteConfig> _riderConfigList = [];
+  final carouselController = CarouselController();
   late final StreamSubscription stopPointsSub;
   late final StreamSubscription realtimeLocSub;
 
@@ -216,5 +219,22 @@ class RiderManagerViewModel extends ViewModel {
     final pointsToAdd =
         await coreAlgorithms.calculateDriverPointsFromRider(riderConfig);
     read(driverPointsProvider).state = currentDriverPoints + pointsToAdd;
+  }
+
+  /// Autocenters/autoselects a new ridercard after a rider has been accepted
+  ///
+  /// This is required as the accepted rider (previously centered ridercard)
+  /// will be removed from the requesting riders list
+  Future<void> autocenterRiderCard({
+    required int currentIndex,
+    required int maxIndex,
+  }) async {
+    Future.delayed(Duration.zero, () {
+      carouselController.animateToPage(
+        (currentIndex == maxIndex) ? 0 : currentIndex,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
   }
 }
