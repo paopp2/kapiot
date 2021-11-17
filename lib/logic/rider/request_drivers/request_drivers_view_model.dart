@@ -50,7 +50,7 @@ class RequestDriversViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
     assert(read(currentRouteConfigProvider).state != null);
-    final routeConfig = read(currentRouteConfigProvider).state! as ForRider;
+    final routeConfig = read(currentRouteConfigProvider).state!;
 
     mapController.addMarker(
       marker: Markers.currentUserLoc,
@@ -98,12 +98,16 @@ class RequestDriversViewModel extends ViewModel {
 
     final bool isNoDriverSelected =
         driverConfigs.isNotEmpty && selectedIndex == null;
-    final bool isDriverOutOfRange =
-        selectedIndex != null && driverConfigs.length <= selectedIndex;
+    final bool isDriverOutOfRange = selectedIndex != null &&
+        driverConfigs.length <= selectedIndex &&
+        driverConfigs.isNotEmpty;
 
-    if (isNoDriverSelected || isDriverOutOfRange) {
-      // Updates providers asychronously. Avoids erroneous UI rebuilds
-      Future.delayed(Duration.zero, () {
+    // Provides a slight delay to allow the stream data to 'settle', avoiding
+    // erroneous UI rebuilds
+    Future.delayed(const Duration(milliseconds: 200), () async {
+      if (isNoDriverSelected || isDriverOutOfRange) {
+        // If no driver selected or if out of range, select the first one
+        // on the list
         selectDriver(0);
         previewDriverInfoAndLocation(driverConfigs[0]);
         driverCarouselController.animateToPage(
@@ -111,12 +115,18 @@ class RequestDriversViewModel extends ViewModel {
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
         );
-      });
-    } else if (driverConfigs.isNotEmpty) {
-      previewDriverInfoAndLocation(driverConfigs[selectedIndex!]);
-    } else {
-      selectDriver(null);
-    }
+      } else if (driverConfigs.isNotEmpty) {
+        // If the driver list changed/adjusted but the selected driver index is
+        // still within range, preview the new driver selected
+        previewDriverInfoAndLocation(driverConfigs[selectedIndex!]);
+      } else {
+        // If driver list is empty
+        final riderConfig = read(currentRouteConfigProvider).state!;
+        selectDriver(null);
+        mapController.clearMap();
+        mapController.animateToLocation(location: riderConfig.startLocation);
+      }
+    });
   }
 
   Future<void> previewDriverInfoAndLocation(RouteConfig driverConfig) async {
