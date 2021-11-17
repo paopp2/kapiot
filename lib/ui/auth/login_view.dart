@@ -24,8 +24,9 @@ class LoginView extends HookConsumerWidget {
               children: [
                 Container(
                   margin: EdgeInsets.only(
-                      top: constraints.maxHeight * 0.15,
-                      bottom: constraints.maxHeight * 0.2),
+                    top: constraints.maxHeight * 0.15,
+                    bottom: constraints.maxHeight * 0.2,
+                  ),
                   child: Column(
                     children: [
                       SizedBox(
@@ -81,13 +82,12 @@ class LoginView extends HookConsumerWidget {
                         clipper: BackgroundClipper(),
                         child: Container(
                           decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                Color(0xFF5F45A4),
-                                Color(0xFFCFC7E3)
-                              ],
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topRight)),
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF5F45A4), Color(0xFFCFC7E3)],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                            ),
+                          ),
                         ),
                       ),
                       CustomPaint(
@@ -101,7 +101,8 @@ class LoginView extends HookConsumerWidget {
                             bottom: constraints.maxHeight * 0.15,
                           ),
                           padding: EdgeInsets.symmetric(
-                              horizontal: constraints.maxWidth * 0.05),
+                            horizontal: constraints.maxWidth * 0.05,
+                          ),
                           child: GoogleAuthWidget(
                             model: model,
                             constraints: constraints,

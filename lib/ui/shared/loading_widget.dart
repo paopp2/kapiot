@@ -22,13 +22,16 @@ class LoadingWidget extends StatelessWidget {
               size: 40,
             ),
           ),
-          Text(
-            text ?? '',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.montserrat(
-              fontSize: 12,
-              color: const Color(0xff666666),
-              height: 1.5,
+          Visibility(
+            visible: text != null,
+            child: Text(
+              text ?? '',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                fontSize: 12,
+                color: const Color(0xff666666),
+                height: 1.5,
+              ),
             ),
           ),
         ],
