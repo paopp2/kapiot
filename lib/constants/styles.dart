@@ -23,7 +23,7 @@ class Styles {
     fontSize: 13,
   );
 
-  static String mapStyle = '''
+  static const String mapStyle = '''
   [
     {
         "featureType": "administrative",

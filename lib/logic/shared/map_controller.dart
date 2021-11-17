@@ -73,7 +73,10 @@ abstract class MapController {
     );
   }
 
-  Future<void> showRouteFromEncoded({required String encodedRoute}) async {
+  Future<void> showRouteFromEncoded({
+    required String encodedRoute,
+    bool showMarkers = true,
+  }) async {
     final decodedRoute =
         await googleMapsApiServices.utils.decodeRoute(encodedRoute);
     final startLocation = KapiotLocation(
@@ -86,8 +89,10 @@ abstract class MapController {
     );
     setStartLocation(startLocation);
     setEndLocation(endLocation);
-    addMarker(marker: Markers.startLoc, location: startLocation);
-    addMarker(marker: Markers.endLoc, location: endLocation);
+    if (showMarkers) {
+      addMarker(marker: Markers.startLoc, location: startLocation);
+      addMarker(marker: Markers.endLoc, location: endLocation);
+    }
     drawPolyLine(decodedRoute);
 
     animateToRoute(

@@ -9,7 +9,6 @@ class Markers {
   static late final Marker currentUserLoc;
   static late final Marker driverLoc;
   static late final Marker riderEndLoc;
-  static late final Marker nextStopPoint;
   static late final Marker pickupPoint;
   static late final Marker dropoffPoint;
 
@@ -51,11 +50,6 @@ class Markers {
     riderEndLoc = await _setupMarker(
       iconPath: '$basePath/endLoc.png',
       id: 'rider_loc_marker',
-    );
-    nextStopPoint = await _setupMarker(
-      anchor: const Offset(0.5, 1.0),
-      iconPath: '$basePath/stopPoint.png',
-      id: 'next_stop_point',
     );
     pickupPoint = await _setupMarker(
       anchor: const Offset(0.5, 1.0),

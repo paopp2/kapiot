@@ -44,6 +44,9 @@ class RequestAcceptedMapController extends MapController {
     final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
     acceptingDriverConfig as ForDriver;
     final driverEncodedRoute = acceptingDriverConfig.encodedRoute;
-    await showRouteFromEncoded(encodedRoute: driverEncodedRoute);
+    await showRouteFromEncoded(
+      encodedRoute: driverEncodedRoute,
+      showMarkers: false,
+    );
   }
 }

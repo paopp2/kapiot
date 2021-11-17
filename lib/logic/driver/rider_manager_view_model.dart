@@ -100,7 +100,9 @@ class RiderManagerViewModel extends ViewModel {
           location: nextStop.stopLocation,
         );
       } else {
-        mapController.removeMarker(Markers.nextStopPoint);
+        // pickupPoint and dropoffPoint have the same Marker ID
+        // 'next_stop_point' so this should remove either of them
+        mapController.removeMarker(Markers.pickupPoint);
       }
     });
 
