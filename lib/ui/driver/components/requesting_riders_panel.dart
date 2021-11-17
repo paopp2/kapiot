@@ -29,6 +29,7 @@ class RequestingRidersPanel extends HookConsumerWidget {
         error: (e, _) => Center(child: Text("Error $e")),
         loading: () => const Center(child: CircularProgressIndicator()),
         data: (requestingRiders) => CarouselSlider.builder(
+          carouselController: model.carouselController,
           itemCount: requestingRiders.length,
           options: CarouselOptions(
             enlargeCenterPage: true,
@@ -120,7 +121,14 @@ class RequestingRidersPanel extends HookConsumerWidget {
                         height: constraints.maxHeight * 0.06,
                         width: constraints.maxWidth * 0.4,
                         child: ElevatedButton(
-                          onPressed: () => model.acceptRider(rider.id),
+                          onPressed: () {
+                            model
+                              ..acceptRider(rider.id)
+                              ..autocenterRiderCard(
+                                currentIndex: index,
+                                maxIndex: (requestingRiders.length - 1),
+                              );
+                          },
                           child: Text(
                             'Accept',
                             style: GoogleFonts.montserrat(
