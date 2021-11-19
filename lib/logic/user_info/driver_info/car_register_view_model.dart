@@ -14,7 +14,7 @@ final carRegisterViewModel = Provider.autoDispose(
   (ref) => CarRegisterViewModel(
     read: ref.read,
     currentUser: ref.watch(currentUserProvider),
-    currentUserInfo: ref.watch(currentUserInfoProvider).data?.value,
+    currentUserInfo: ref.watch(currentUserInfoProvider).asData?.value,
     userInfoRepo: ref.watch(userInfoRepositoryProvider),
   ),
 );

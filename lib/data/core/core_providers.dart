@@ -29,7 +29,7 @@ final currentUserProvider = Provider.autoDispose<KapiotUser?>((ref) {
 /// currentUserInfoProvider's userType property without having to rebuild when
 /// any other property changes
 final _currentUserType = Provider.autoDispose<UserType?>((ref) {
-  final currentUserType = ref.watch(currentUserInfoProvider).data?.value;
+  final currentUserType = ref.watch(currentUserInfoProvider).asData?.value;
   return currentUserType?.userType;
 });
 

@@ -60,7 +60,7 @@ class PlaceManagerViewModel extends ViewModel {
   }
 
   void saveLocation({required String label}) {
-    final currentUserInfo = read(currentUserInfoProvider).data!.value!;
+    final currentUserInfo = read(currentUserInfoProvider).asData!.value!;
     final currentSavedLocations = currentUserInfo.savedLocations;
     userInfoRepository.pushUserInfo(
       userId: currentUser.id,

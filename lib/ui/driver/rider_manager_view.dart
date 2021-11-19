@@ -57,7 +57,8 @@ class RiderManagerView extends HookConsumerWidget {
                         Container(
                           height: constraints.maxHeight * 0.2,
                           color: Colors.white,
-                          child: (requestingRidersStream.data?.value.isEmpty ??
+                          child: (requestingRidersStream
+                                      .asData?.value.isEmpty ??
                                   true)
                               ? Center(
                                   child: Column(

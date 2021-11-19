@@ -19,7 +19,7 @@ class UserInfoDrawer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider)!;
-    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final currentUserInfo = ref.watch(currentUserInfoProvider).asData?.value;
     final ownedCars = currentUserInfo?.driverInfo?.registeredCars;
     final username = currentUser.email!.split('@').first;
     return SizedBox(

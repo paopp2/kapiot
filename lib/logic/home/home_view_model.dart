@@ -179,7 +179,7 @@ class HomeViewModel extends ViewModel {
         endLocation: endLoc,
         encodedRoute: encodedRoute,
         rating: read(currentUserInfoProvider)
-            .data!
+            .asData!
             .value!
             .driverInfo!
             .averageRating,

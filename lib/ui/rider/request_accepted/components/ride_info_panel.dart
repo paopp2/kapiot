@@ -225,7 +225,7 @@ class RideInfoPanel extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      coRiderConfigsStream.data?.value.isEmpty ?? true
+                      coRiderConfigsStream.asData?.value.isEmpty ?? true
                           ? 'You'
                           : 'You and $coRiderCount other',
                       style: GoogleFonts.montserrat(

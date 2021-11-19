@@ -25,7 +25,7 @@ final isForStartLocProvider = StateProvider.autoDispose<bool>((ref) {
 final chosenCarProvider = StateProvider.autoDispose<Car?>((ref) {
   final defaultCar = ref
       .watch(currentUserInfoProvider)
-      .data
+      .asData
       ?.value
       ?.driverInfo
       ?.registeredCars
