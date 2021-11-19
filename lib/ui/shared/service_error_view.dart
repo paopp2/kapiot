@@ -8,9 +8,9 @@ class ServiceErrorView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final internetEnabled = ref.watch(hasNetService).state;
-    final locationEnabled = ref.watch(hasLocService).state;
-    final hasPermission = ref.watch(hasLocPermission).state;
+    final internetEnabled = ref.watch(hasNetService);
+    final locationEnabled = ref.watch(hasLocService);
+    final hasPermission = ref.watch(hasLocPermission);
 
     String getImageAssetName() {
       if (!hasPermission && !internetEnabled && !locationEnabled) {

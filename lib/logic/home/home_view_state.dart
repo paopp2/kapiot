@@ -4,7 +4,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/model/car/car.dart';
 
 final riderCountProvider = StateProvider.autoDispose<int>((ref) {
-  return ref.watch(chosenCarProvider).state?.capacity ?? 1;
+  return ref.watch(chosenCarProvider.notifier).state?.capacity ?? 1;
 });
 
 final dateTimeProvider =

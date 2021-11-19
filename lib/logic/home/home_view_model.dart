@@ -74,7 +74,7 @@ class HomeViewModel extends ViewModel {
       ),
       (currentLoc) async {
         await mapController.initializeHomeMap(currentLoc);
-        final startLocation = read(startLocProvider).state!;
+        final startLocation = read(startLocProvider)!;
         final getAddressAttempt =
             await locationService.getAddressFromLocation(startLocation);
         getAddressAttempt.fold(
@@ -104,27 +104,27 @@ class HomeViewModel extends ViewModel {
       AppRouter.instance.navigateTo(Routes.placeManagerView);
 
   void openRoutePlacePicker({required bool isForStartLoc}) {
-    read(isForStartLocProvider).state = isForStartLoc;
+    read(isForStartLocProvider.notifier).state = isForStartLoc;
     AppRouter.instance.navigateTo(Routes.routePlacePicker);
   }
 
   void incRiderCount() {
-    final chosenCarCapacity = read(chosenCarProvider).state!.capacity;
-    if (chosenCarCapacity > read(riderCountProvider).state) {
-      read(riderCountProvider).state++;
+    final chosenCarCapacity = read(chosenCarProvider)!.capacity;
+    if (chosenCarCapacity > read(riderCountProvider)) {
+      read(riderCountProvider.notifier).state++;
     } else {
       Fluttertoast.showToast(msg: 'Max capacity');
     }
   }
 
   void decRiderCount() {
-    if (read(riderCountProvider).state > 1) {
-      read(riderCountProvider).state--;
+    if (read(riderCountProvider.notifier).state > 1) {
+      read(riderCountProvider.notifier).state--;
     }
   }
 
   void chooseCar(Car car) {
-    read(chosenCarProvider).state = car;
+    read(chosenCarProvider.notifier).state = car;
   }
 
   void getDateTime(BuildContext context) async {
@@ -139,7 +139,7 @@ class HomeViewModel extends ViewModel {
       initialTime: TimeOfDay.now(),
     );
     if (date != null && time != null) {
-      read(dateTimeProvider).state = DateTime(
+      read(dateTimeProvider.notifier).state = DateTime(
         date.year,
         date.month,
         date.day,
@@ -151,30 +151,30 @@ class HomeViewModel extends ViewModel {
 
   Future<void> pushRouteConfig(bool isRider) async {
     assert(currentUser != null);
-    final startLoc = read(startLocProvider).state;
-    final endLoc = read(endLocProvider).state;
+    final startLoc = read(startLocProvider);
+    final endLoc = read(endLocProvider);
     if (startLoc == null || endLoc == null) return;
     if (isRider) {
       final riderConfig = RouteConfig.rider(
         user: currentUser!,
-        timeOfTrip: read(dateTimeProvider).state,
+        timeOfTrip: read(dateTimeProvider),
         riderCount: 1, // Rider can only book for themselves
         startLocation: startLoc,
         endLocation: endLoc,
       );
       riderRepo.pushRiderConfig(riderConfig);
-      read(currentRouteConfigProvider).state = riderConfig;
+      read(currentRouteConfigProvider.notifier).state = riderConfig;
       AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
-      final routeCoordinates = read(routeCoordinatesProvider).state!;
+      final routeCoordinates = read(routeCoordinatesProvider.notifier).state!;
       assert(routeCoordinates.isNotEmpty);
       final encodedRoute = googleMapsApiServices.utils.encodeRoute(
         routeCoordinates,
       );
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
-        timeOfTrip: read(dateTimeProvider).state,
-        maxRiderCount: read(riderCountProvider).state,
+        timeOfTrip: read(dateTimeProvider.notifier).state,
+        maxRiderCount: read(riderCountProvider.notifier).state,
         startLocation: startLoc,
         endLocation: endLoc,
         encodedRoute: encodedRoute,
@@ -183,10 +183,10 @@ class HomeViewModel extends ViewModel {
             .value!
             .driverInfo!
             .averageRating,
-        car: read(chosenCarProvider).state!,
+        car: read(chosenCarProvider)!,
       );
       driverRepo.pushDriverConfig(driverConfig);
-      read(currentRouteConfigProvider).state = driverConfig;
+      read(currentRouteConfigProvider.notifier).state = driverConfig;
       AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
     // Clear map before reusing at the next View
@@ -213,7 +213,7 @@ class HomeViewModel extends ViewModel {
         ),
       );
       riderRepo.pushRiderConfig(riderConfig);
-      read(currentRouteConfigProvider).state = riderConfig;
+      read(currentRouteConfigProvider.notifier).state = riderConfig;
       AppRouter.instance.navigateTo(Routes.requestDriversView);
     } else {
       final driverConfig = RouteConfig.driver(
@@ -242,7 +242,7 @@ class HomeViewModel extends ViewModel {
         ),
       );
       driverRepo.pushDriverConfig(driverConfig);
-      read(currentRouteConfigProvider).state = driverConfig;
+      read(currentRouteConfigProvider.notifier).state = driverConfig;
       AppRouter.instance.navigateTo(Routes.riderManagerView);
     }
     // Clear map before reusing at the next View

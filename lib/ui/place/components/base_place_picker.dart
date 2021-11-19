@@ -17,7 +17,7 @@ class BasePlacePicker extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final placeSuggestions = ref.watch(placeSuggestionsProvider).state;
+    final placeSuggestions = ref.watch(placeSuggestionsProvider);
     return LayoutBuilder(
       builder: (context, constraints) {
         return SafeArea(

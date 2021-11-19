@@ -33,11 +33,11 @@ class PlaceSuggester {
     final suggestions =
         await _placesService.getAutocompleteSuggestions(value ?? '');
     _autocompleteSuggestionMaps = suggestions;
-    read(placeSuggestionsProvider).state =
+    read(placeSuggestionsProvider.notifier).state =
         suggestions.map((s) => s["address"]).toList();
   }
 
   void clearSuggestions() {
-    read(placeSuggestionsProvider).state = [];
+    read(placeSuggestionsProvider.notifier).state = [];
   }
 }

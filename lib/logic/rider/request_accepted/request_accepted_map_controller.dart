@@ -27,7 +27,7 @@ class RequestAcceptedMapController extends MapController {
   final LocationService locationService;
 
   Future<void> initializeRequestAcceptedMap() async {
-    final locationFromPreviousView = read(startLocProvider).state!;
+    final locationFromPreviousView = read(startLocProvider)!;
     await super.initializeMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(
@@ -41,7 +41,7 @@ class RequestAcceptedMapController extends MapController {
   }
 
   Future<void> showAcceptingDriverRoute() async {
-    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider);
     acceptingDriverConfig as ForDriver;
     final driverEncodedRoute = acceptingDriverConfig.encodedRoute;
     await showRouteFromEncoded(

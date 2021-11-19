@@ -52,8 +52,8 @@ class RequestAcceptedViewModel extends ViewModel {
 
   @override
   Future<void> initState() async {
-    assert(read(acceptingDriverConfigProvider).state != null);
-    assert(read(currentRouteConfigProvider).state != null);
+    assert(read(acceptingDriverConfigProvider) != null);
+    assert(read(currentRouteConfigProvider) != null);
     assert(currentUser != null);
 
     await mapController.initializeRequestAcceptedMap();
@@ -65,7 +65,7 @@ class RequestAcceptedViewModel extends ViewModel {
     mapController.showAcceptingDriverRoute();
 
     // Add markers for the current rider's start and end loc on the map
-    final routeConfig = read(currentRouteConfigProvider).state! as ForRider;
+    final routeConfig = read(currentRouteConfigProvider)! as ForRider;
     mapController
       ..addMarker(
         marker: Markers.currentUserLoc,
@@ -78,7 +78,7 @@ class RequestAcceptedViewModel extends ViewModel {
 
     // StreamSub that listens to the Stream that emits the accepting driver's
     // realtime location
-    final acceptingDriver = read(acceptingDriverConfigProvider).state!;
+    final acceptingDriver = read(acceptingDriverConfigProvider)!;
     final driverId = acceptingDriver.user.id;
     KapiotLocation? prevDriverLoc; // Used for getting driver's car heading
     driverLocStreamSub = locationRepo.getRealtimeLocation(driverId).listen(
@@ -103,12 +103,13 @@ class RequestAcceptedViewModel extends ViewModel {
           pointA: routeConfig.startLocation,
           pointB: driverLoc,
         );
-        read(driverArrivalTimeProvider).state = distMatrixResult.durationText;
+        read(driverArrivalTimeProvider.notifier).state =
+            distMatrixResult.durationText;
       },
     );
 
-    final transaction = read(transactionProvider).state;
-    read(transactionProvider).state = transaction.copyWith(
+    final transaction = read(transactionProvider);
+    read(transactionProvider.notifier).state = transaction.copyWith(
       startTime: DateTime.now(),
       driver: acceptingDriver,
     );
@@ -126,8 +127,8 @@ class RequestAcceptedViewModel extends ViewModel {
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
         // Update current transaction data
-        final transaction = read(transactionProvider).state;
-        read(transactionProvider).state = transaction.copyWith(
+        final transaction = read(transactionProvider);
+        read(transactionProvider.notifier).state = transaction.copyWith(
           endTime: DateTime.now(),
           points: 10,
           riders: _riderList,
@@ -147,7 +148,7 @@ class RequestAcceptedViewModel extends ViewModel {
   /// Remaps the stream containing all riderConfigs that have been accepted by
   /// the current rider's acceptingDriver except for the current rider
   Stream<List<RouteConfig>> getMyCoRiderConfigsStream() {
-    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider)!;
     final allCoRiderConfigsStream = riderRepo.getAllCoRiderConfigsStream(
       driver: acceptingDriverConfig.user,
     );
@@ -167,7 +168,7 @@ class RequestAcceptedViewModel extends ViewModel {
   /// from the driver's "accepted" collection. Listening for when this happens
   /// signifies the app as to when this rider is dropped off.
   Stream<bool> isDroppedOffStream() async* {
-    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state!;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider)!;
     final allCoRiderConfigsStream = riderRepo.getAllCoRiderConfigsStream(
       driver: acceptingDriverConfig.user,
     );

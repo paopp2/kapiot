@@ -18,10 +18,10 @@ class InitUserInfoView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(initUserInfoViewModel);
-    final pageIndex = ref.watch(pageIndexProvider).state;
-    final selectedUserType = ref.watch(userTypeProvider).state;
-    final homeFieldText = ref.watch(homeFieldTextProvider).state;
-    final nonHomeFieldText = ref.watch(nonHomeFieldTextProvider).state;
+    final pageIndex = ref.watch(pageIndexProvider);
+    final selectedUserType = ref.watch(userTypeProvider);
+    final homeFieldText = ref.watch(homeFieldTextProvider);
+    final nonHomeFieldText = ref.watch(nonHomeFieldTextProvider);
     final currentUser = ref.watch(currentUserProvider)!;
 
     useEffect(() {
