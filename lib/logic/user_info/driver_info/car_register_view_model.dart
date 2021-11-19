@@ -46,7 +46,7 @@ class CarRegisterViewModel extends ViewModel {
     assert(carRegisterFormKey.currentState != null);
     if (carRegisterFormKey.currentState!.validate()) {
       final userId = currentUser!.id;
-      final carType = read(carTypeProvider).state;
+      final carType = read(carTypeProvider);
       final carToAdd = Car(
         licensePlateNum: tecLicensePlateField.text,
         make: tecCarMakeField.text,
@@ -70,7 +70,7 @@ class CarRegisterViewModel extends ViewModel {
   }
 
   void setCarType(CarType carType) {
-    read(carTypeProvider).state = carType;
+    read(carTypeProvider.notifier).state = carType;
   }
 
   String? carRegisterValidator(String? value) {

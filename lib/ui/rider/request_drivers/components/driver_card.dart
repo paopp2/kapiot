@@ -26,12 +26,10 @@ class DriverCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final driverDistance = ref.watch(driverDistanceProvider).state;
-    final selectedDriverIndex = ref.watch(selectedDriverIndexProvider).state;
-    final isRequested = ref
-        .watch(requestedDriverIdListProvider)
-        .state
-        .contains(driverConfig.user.id);
+    final driverDistance = ref.watch(driverDistanceProvider);
+    final selectedDriverIndex = ref.watch(selectedDriverIndexProvider);
+    final isRequested =
+        ref.watch(requestedDriverIdListProvider).contains(driverConfig.user.id);
     return Container(
       width: constraints.maxWidth * 0.6,
       margin: const EdgeInsets.all(10),

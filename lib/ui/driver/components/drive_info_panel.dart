@@ -21,11 +21,11 @@ class DriveInfoPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentDriverConfig =
-        ref.watch(currentRouteConfigProvider).state as ForDriver;
+        ref.watch(currentRouteConfigProvider) as ForDriver;
     final _expand = useState(false);
     final maxRiderCount = currentDriverConfig.maxRiderCount;
     final currentRiderCount = currentDriverConfig.currentRiderCount;
-    final driverPoints = ref.watch(driverPointsProvider).state;
+    final driverPoints = ref.watch(driverPointsProvider);
     final acceptedRidersStream = ref.watch(acceptedRidersStreamProvider);
     return InkWell(
       onTap: () => (_expand.value = !_expand.value),

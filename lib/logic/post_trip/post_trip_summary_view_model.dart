@@ -41,8 +41,8 @@ class PostTripSummaryViewModel extends ViewModel {
 
   @override
   void initState() {
-    assert(read(currentRouteConfigProvider).state != null);
-    final currentRouteConfig = read(currentRouteConfigProvider).state!;
+    assert(read(currentRouteConfigProvider) != null);
+    final currentRouteConfig = read(currentRouteConfigProvider)!;
     completeTransaction(currentRouteConfig);
     updateTotalPoints();
   }
@@ -50,9 +50,9 @@ class PostTripSummaryViewModel extends ViewModel {
   Future<void> showRateDriverDialog({required Widget dialog}) async {
     Future.delayed(Duration.zero, () {
       // Initialize rating to 5 stars
-      read(ratingProvider).state = 5.0;
+      read(ratingProvider.notifier).state = 5.0;
     });
-    final isRider = (read(currentRouteConfigProvider).state is ForRider);
+    final isRider = (read(currentRouteConfigProvider) is ForRider);
     if (isRider) {
       // Show the dialog only once at the start of the PostTripSummaryView
       SchedulerBinding.instance?.addPostFrameCallback((_) {
@@ -65,12 +65,12 @@ class PostTripSummaryViewModel extends ViewModel {
   }
 
   void setRating(double rating) {
-    read(ratingProvider).state = rating;
+    read(ratingProvider.notifier).state = rating;
   }
 
   Future<void> updateDriverRating() async {
-    final rating = read(ratingProvider).state;
-    final acceptingDriverConfig = read(acceptingDriverConfigProvider).state;
+    final rating = read(ratingProvider.notifier).state;
+    final acceptingDriverConfig = read(acceptingDriverConfigProvider);
     final acceptingDriverId = acceptingDriverConfig!.user.id;
     final driverInfoStream = userInfoRepo.getUserInfoStream(acceptingDriverId);
     final driverUserInfo = (await driverInfoStream.first)!;
@@ -89,14 +89,14 @@ class PostTripSummaryViewModel extends ViewModel {
   void completeTransaction(RouteConfig routeConfig) {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;
-    final transaction = read(transactionProvider).state;
+    final transaction = read(transactionProvider);
     final distance = utils.calculateDistance(
       pointA: routeConfig.startLocation,
       pointB: routeConfig.endLocation,
     );
     // Asynchronously update transactionProvider to avoid premature rebuilding
     Future.delayed(Duration.zero, () {
-      read(transactionProvider).state = transaction.copyWith(
+      read(transactionProvider.notifier).state = transaction.copyWith(
         currentUserId: userId,
         distance: distance,
         startLocation: routeConfig.startLocation,
@@ -106,13 +106,13 @@ class PostTripSummaryViewModel extends ViewModel {
   }
 
   Future<void> updateTotalPoints() async {
-    final currentUserInfo = read(currentUserInfoProvider).data!.value!;
-    final pointsToAdd = read(transactionProvider).state.points!;
+    final currentUserInfo = read(currentUserInfoProvider).asData!.value!;
+    final pointsToAdd = read(transactionProvider).points!;
     final newTotal = currentUserInfo.points + pointsToAdd;
     // Delay here serves 2 purposes: (1) to update the provider asynchronously
     // avoiding premature rebuilding and (2) as a delay for the animation
     Future.delayed(const Duration(seconds: 2), () {
-      read(totalPointsProvider).state = newTotal;
+      read(totalPointsProvider.notifier).state = newTotal;
     });
     userInfoRepo.pushUserInfo(
       userId: read(currentUserProvider)!.id,
@@ -124,7 +124,7 @@ class PostTripSummaryViewModel extends ViewModel {
     // Clear shared Map state
     MapController.reset(read);
     // Set a new resetKey; notifies the HomeView that it should reset
-    read(resetKeyProvider).state = UniqueKey();
+    read(resetKeyProvider.notifier).state = UniqueKey();
     // Remove all Views then navigate to RootView
     AppRouter.instance.popAllThenNavigateTo('/');
   }

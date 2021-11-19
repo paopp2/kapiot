@@ -62,9 +62,9 @@ class RiderManagerViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
-    final routeConfig = read(currentRouteConfigProvider).state as ForDriver;
-    final transaction = read(transactionProvider).state;
-    read(transactionProvider).state = transaction.copyWith(
+    final routeConfig = read(currentRouteConfigProvider) as ForDriver;
+    final transaction = read(transactionProvider);
+    read(transactionProvider.notifier).state = transaction.copyWith(
       driver: routeConfig,
       startTime: DateTime.now(),
     );
@@ -76,26 +76,26 @@ class RiderManagerViewModel extends ViewModel {
     // Stream of current driver's stop points (pickup/dropoff locations)
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
-      read(stopPointsProvider).state = stopPointsList;
+      read(stopPointsProvider.notifier).state = stopPointsList;
       if (stopPointsList.isNotEmpty) {
         if (_finishedStopPoints.isEmpty) {
-          read(nextStopProvider).state = stopPointsList.first;
+          read(nextStopProvider.notifier).state = stopPointsList.first;
         } else {
           int i = 0;
           StopPoint stop = stopPointsList[i];
           while (_finishedStopPoints.contains(stop)) {
             stop = stopPointsList[i++];
           }
-          read(nextStopProvider).state = stop;
+          read(nextStopProvider.notifier).state = stop;
         }
       } else {
         _finishedStopPoints.clear();
-        read(nextStopProvider).state = null;
+        read(nextStopProvider.notifier).state = null;
       }
     });
 
     // Show the current next stop on the map (if any)
-    read(nextStopProvider).stream.listen((nextStop) {
+    read(nextStopProvider.notifier).stream.listen((nextStop) {
       if (nextStop != null) {
         mapController.addMarker(
           marker:
@@ -122,9 +122,9 @@ class RiderManagerViewModel extends ViewModel {
 
       // If driver is less than 100m away from destination (arriving)
       if (distToDriverEnd < 0.100) {
-        final points = read(driverPointsProvider).state;
-        final transaction = read(transactionProvider).state;
-        read(transactionProvider).state = transaction.copyWith(
+        final points = read(driverPointsProvider.notifier).state;
+        final transaction = read(transactionProvider.notifier).state;
+        read(transactionProvider.notifier).state = transaction.copyWith(
           endTime: DateTime.now(),
           riders: _riderConfigList,
           points: points,
@@ -164,12 +164,12 @@ class RiderManagerViewModel extends ViewModel {
       .map((rcList) => rcList.map((rc) => rc.user).toList());
 
   Stream<List<StopPoint>> getStopPointsStream() {
-    final currentDriverConfig = read(currentRouteConfigProvider).state!;
+    final currentDriverConfig = read(currentRouteConfigProvider)!;
     return driverRepo.getStopPointsStream(currentDriverConfig);
   }
 
   void acceptRider(String riderId) {
-    final currentDriverConfig = read(currentRouteConfigProvider).state;
+    final currentDriverConfig = read(currentRouteConfigProvider);
     currentDriverConfig as ForDriver;
     if (!currentDriverConfig.isCarFull) {
       driverRepo.acceptRider(
@@ -183,14 +183,14 @@ class RiderManagerViewModel extends ViewModel {
   }
 
   Future<void> updateNextStop() async {
-    final currentStop = read(nextStopProvider).state!;
+    final currentStop = read(nextStopProvider)!;
     _finishedStopPoints.add(currentStop);
     if (currentStop.isPickUp) {
-      final stopPointsList = read(stopPointsProvider).state;
+      final stopPointsList = read(stopPointsProvider);
       final currentIndex = stopPointsList.indexOf(currentStop);
-      read(nextStopProvider).state = stopPointsList[currentIndex + 1];
+      read(nextStopProvider.notifier).state = stopPointsList[currentIndex + 1];
     } else {
-      final currentDriverConfig = read(currentRouteConfigProvider).state!;
+      final currentDriverConfig = read(currentRouteConfigProvider)!;
       driverRepo.removeRiderFromAccepted(
         currentDriverConfig.user.id,
         currentStop.riderConfig.user.id,
@@ -202,10 +202,10 @@ class RiderManagerViewModel extends ViewModel {
   }
 
   Future<void> updateRiderCount({required bool increment}) async {
-    final driverConfig = read(currentRouteConfigProvider).state as ForDriver;
+    final driverConfig = read(currentRouteConfigProvider) as ForDriver;
     int rideCount = driverConfig.currentRiderCount;
     final newRiderCount = (increment) ? ++rideCount : --rideCount;
-    read(currentRouteConfigProvider).state = driverConfig.copyWith(
+    read(currentRouteConfigProvider.notifier).state = driverConfig.copyWith(
       currentRiderCount: newRiderCount,
     );
     driverRepo.pushDriverConfig(driverConfig.copyWith(
@@ -215,10 +215,11 @@ class RiderManagerViewModel extends ViewModel {
 
   Future<void> updateDriverPoints(RouteConfig riderConfig) async {
     riderConfig as ForRider;
-    final currentDriverPoints = read(driverPointsProvider).state;
+    final currentDriverPoints = read(driverPointsProvider.notifier).state;
     final pointsToAdd =
         await coreAlgorithms.calculateDriverPointsFromRider(riderConfig);
-    read(driverPointsProvider).state = currentDriverPoints + pointsToAdd;
+    read(driverPointsProvider.notifier).state =
+        currentDriverPoints + pointsToAdd;
   }
 
   /// Autocenters/autoselects a new ridercard after a rider has been accepted

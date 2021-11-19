@@ -18,7 +18,7 @@ class RiderManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
-    final nextStop = ref.watch(nextStopProvider).state;
+    final nextStop = ref.watch(nextStopProvider);
     final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
 
     useEffect(() {

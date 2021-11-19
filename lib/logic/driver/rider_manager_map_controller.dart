@@ -25,7 +25,7 @@ class RiderManagerMapController extends MapController {
   final LocationService locationService;
 
   Future<void> initializeRiderManagerMap() async {
-    final locationFromPreviousView = read(startLocProvider).state!;
+    final locationFromPreviousView = read(startLocProvider)!;
     await super.initializeMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(
