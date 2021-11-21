@@ -46,8 +46,8 @@ abstract class MapController {
   }
 
   void clearMap() {
-    read(markersProvider).state = {};
-    read(polylinesProvider).state = {};
+    read(markersProvider.notifier).state = {};
+    read(polylinesProvider.notifier).state = {};
   }
 
   Future<List<LatLng>> getRouteCoordinates({
@@ -149,8 +149,7 @@ abstract class MapController {
   }
 
   void drawPolyLine(List<LatLng> routeCoordinates) {
-    read(polylinesProvider).state = {};
-    final polylines = read(polylinesProvider).state;
+    final Set<Polyline> polylines = {};
     Polyline polyline = Polyline(
       polylineId: const PolylineId("poly"),
       color: const Color(0xFF7F3B7C),
@@ -158,42 +157,41 @@ abstract class MapController {
       points: routeCoordinates,
     );
     polylines.add(polyline);
-    read(polylinesProvider).state = polylines;
+    read(polylinesProvider.notifier).state = polylines;
   }
 
   void addMarker({
     required Marker marker,
     required KapiotLocation location,
   }) {
-    final markers = read(markersProvider).state;
-    markers.removeWhere((m) => (m.markerId == marker.markerId));
-    markers.add(
-      marker.copyWith(
-        positionParam: LatLng(location.lat, location.lng),
-      ),
-    );
-    read(markersProvider).state = markers;
+    read(markersProvider.notifier).update((state) {
+      return state
+        ..removeWhere((m) => m.markerId == marker.markerId)
+        ..add(marker.copyWith(
+          positionParam: LatLng(location.lat, location.lng),
+        ));
+    });
   }
 
   void removeMarker(Marker marker) {
-    final markers = read(markersProvider).state;
-    markers.removeWhere((m) => (m.markerId == marker.markerId));
-    read(markersProvider).state = markers;
+    read(markersProvider.notifier).update(
+      (state) => state..removeWhere((m) => (m.markerId == marker.markerId)),
+    );
   }
 
   void setStartLocation(KapiotLocation? startLocation) {
-    read(startLocProvider).state = startLocation;
+    read(startLocProvider.notifier).state = startLocation;
   }
 
   void setEndLocation(KapiotLocation? endLocation) {
-    read(endLocProvider).state = endLocation;
+    read(endLocProvider.notifier).state = endLocation;
   }
 
   void showRouteIfBothLocationsSet({
     Function(List<LatLng> routeCoordinates)? onRouteCalculated,
   }) async {
-    final startLocation = read(startLocProvider).state;
-    final endLocation = read(endLocProvider).state;
+    final startLocation = read(startLocProvider);
+    final endLocation = read(endLocProvider);
     if (startLocation != null && endLocation != null) {
       final routeCoordinates = await getRouteCoordinates(
         start: startLocation,
@@ -212,9 +210,9 @@ abstract class MapController {
 
   /// Resets the shared map state
   static void reset(Reader read) {
-    read(markersProvider).state = {};
-    read(polylinesProvider).state = {};
-    read(startLocProvider).state = null;
-    read(endLocProvider).state = null;
+    read(markersProvider.notifier).state = {};
+    read(polylinesProvider.notifier).state = {};
+    read(startLocProvider.notifier).state = null;
+    read(endLocProvider.notifier).state = null;
   }
 }

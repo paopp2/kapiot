@@ -15,8 +15,8 @@ class RoutePlacePicker extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(routePlacePickerModel);
-    final isForStartLoc = ref.watch(isForStartLocProvider).state;
-    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final isForStartLoc = ref.watch(isForStartLocProvider);
+    final currentUserInfo = ref.watch(currentUserInfoProvider).asData?.value;
     final savedLocations = currentUserInfo?.savedLocations;
 
     useEffect(() {

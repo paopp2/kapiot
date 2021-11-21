@@ -19,7 +19,7 @@ class RootView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authStateChanges = ref.watch(authStateChangesProvider);
     final serviceErrorHandler = ref.watch(serviceErrorHandlerProvider);
-    final resetKey = ref.watch(resetKeyProvider).state;
+    final resetKey = ref.watch(resetKeyProvider);
 
     useEffect(() {
       serviceErrorHandler.initialize();

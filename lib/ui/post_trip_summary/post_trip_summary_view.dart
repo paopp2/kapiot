@@ -16,7 +16,7 @@ class PostTripSummaryView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final transaction = ref.watch(transactionProvider).state;
+    final transaction = ref.watch(transactionProvider);
     final model = ref.watch(postTripSummaryViewModel);
     final isDriver = ref.watch(isDriverProvider);
     final driver = transaction.driver!.user;

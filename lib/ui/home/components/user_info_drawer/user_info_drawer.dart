@@ -21,7 +21,7 @@ class UserInfoDrawer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final currentUserInfo = ref.watch(currentUserInfoProvider).asData?.value;
     return SizedBox(
       width: constraints.maxWidth * 0.85,
       height: constraints.maxHeight,

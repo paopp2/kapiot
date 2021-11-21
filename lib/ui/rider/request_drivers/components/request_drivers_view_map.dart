@@ -16,10 +16,10 @@ class RequestDriversViewMap extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final startLocation = ref.watch(startLocProvider).state;
+    final startLocation = ref.watch(startLocProvider);
     final mapController = ref.watch(requestDriversMapController);
-    final markers = ref.watch(markersProvider).state;
-    final polylines = ref.watch(polylinesProvider).state;
+    final markers = ref.watch(markersProvider);
+    final polylines = ref.watch(polylinesProvider);
     return (startLocation == null)
         ? const LoadingWidget(text: "Initializing map...")
         : GoogleMap(

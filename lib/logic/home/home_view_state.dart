@@ -4,7 +4,7 @@ import 'package:kapiot/data/core/core_providers.dart';
 import 'package:kapiot/model/car/car.dart';
 
 final riderCountProvider = StateProvider.autoDispose<int>((ref) {
-  return ref.watch(chosenCarProvider).state?.capacity ?? 1;
+  return ref.watch(chosenCarProvider)?.capacity ?? 1;
 });
 
 final dateTimeProvider =
@@ -25,7 +25,7 @@ final isForStartLocProvider = StateProvider.autoDispose<bool>((ref) {
 final chosenCarProvider = StateProvider.autoDispose<Car?>((ref) {
   final defaultCar = ref
       .watch(currentUserInfoProvider)
-      .data
+      .asData
       ?.value
       ?.driverInfo
       ?.registeredCars

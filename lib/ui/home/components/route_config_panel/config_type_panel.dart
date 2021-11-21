@@ -27,12 +27,12 @@ class ConfigTypePanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final currentUserInfo = ref.watch(currentUserInfoProvider).asData?.value;
     final isRegisteredDriver = currentUserInfo?.isRegisteredDriver;
-    final chosenCar = ref.watch(chosenCarProvider).state;
-    final riderCount = ref.watch(riderCountProvider).state;
-    final startAddress = ref.watch(startLocProvider).state?.address;
-    final endAddress = ref.watch(endLocProvider).state?.address;
+    final chosenCar = ref.watch(chosenCarProvider);
+    final riderCount = ref.watch(riderCountProvider);
+    final startAddress = ref.watch(startLocProvider)?.address;
+    final endAddress = ref.watch(endLocProvider)?.address;
 
     return Container(
       padding: EdgeInsets.symmetric(

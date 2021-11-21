@@ -29,10 +29,10 @@ class RideInfoPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final acceptingDriverConfig =
-        ref.watch(acceptingDriverConfigProvider).state! as ForDriver;
+        ref.watch(acceptingDriverConfigProvider)! as ForDriver;
     final acceptingDriver = acceptingDriverConfig.user;
     final driverName = acceptingDriver.displayName!;
-    final estTimeArrival = ref.watch(driverArrivalTimeProvider).state;
+    final estTimeArrival = ref.watch(driverArrivalTimeProvider);
     final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
     final coRiderCount = ref.watch(coRiderCountProvider);
     final currentUser = ref.watch(currentUserProvider)!;
@@ -225,7 +225,7 @@ class RideInfoPanel extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      coRiderConfigsStream.data?.value.isEmpty ?? true
+                      coRiderConfigsStream.asData?.value.isEmpty ?? true
                           ? 'You'
                           : 'You and $coRiderCount other',
                       style: GoogleFonts.montserrat(

@@ -12,7 +12,7 @@ class PlaceManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(placeManagerViewModel);
-    final currentUserInfo = ref.watch(currentUserInfoProvider).data?.value;
+    final currentUserInfo = ref.watch(currentUserInfoProvider).asData?.value;
     final savedLocations = currentUserInfo?.savedLocations;
     return SafeArea(
       child: LayoutBuilder(

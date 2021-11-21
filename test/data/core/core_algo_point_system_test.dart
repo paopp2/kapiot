@@ -490,7 +490,7 @@ Future<void> verifyTotalPoints({
   }
 
   expect(
-    container.read(driverPointsProvider).state,
+    container.read(driverPointsProvider),
     isA<double>().having(
       (tp) => (tp.toStringAsFixed(2) == expectedTotalPoints.toStringAsFixed(2)),
       'Actual and expected total points are equal for up to 2 decimal places',

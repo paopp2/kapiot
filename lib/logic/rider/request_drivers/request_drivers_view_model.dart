@@ -50,8 +50,8 @@ class RequestDriversViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
-    assert(read(currentRouteConfigProvider).state != null);
-    final routeConfig = read(currentRouteConfigProvider).state!;
+    assert(read(currentRouteConfigProvider) != null);
+    final routeConfig = read(currentRouteConfigProvider)!;
 
     mapController.addMarker(
       marker: Markers.currentUserLoc,
@@ -65,19 +65,18 @@ class RequestDriversViewModel extends ViewModel {
   }
 
   Future<void> requestDriver(String driverId) async {
-    final currentRouteConfig = read(currentRouteConfigProvider).state;
-    assert(currentRouteConfig != null);
-    final requestedDrivers = read(requestedDriverIdListProvider).state
-      ..add(driverId);
-    read(requestedDriverIdListProvider).state = requestedDrivers;
+    final currentRouteConfig = read(currentRouteConfigProvider)!;
+    read(requestedDriverIdListProvider.notifier).update(
+      (state) => state..add(driverId),
+    );
     await riderRepo.requestDriver(
       driverId,
-      currentRouteConfig!,
+      currentRouteConfig,
     );
   }
 
   Stream<List<RouteConfig>> getCompatibleDriverConfigs() async* {
-    final currentRiderConfig = read(currentRouteConfigProvider).state!;
+    final currentRiderConfig = read(currentRouteConfigProvider)!;
     final compatibleDriverConfigsStream =
         riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
     await for (final driverConfigs in compatibleDriverConfigsStream) {
@@ -87,7 +86,7 @@ class RequestDriversViewModel extends ViewModel {
   }
 
   void selectDriver(int? index) {
-    read(selectedDriverIndexProvider).state = index;
+    read(selectedDriverIndexProvider.notifier).state = index;
   }
 
   // Auto selects and 'animates' to a driverCard in either case : the rider
@@ -95,7 +94,7 @@ class RequestDriversViewModel extends ViewModel {
   // driver list changed but current selected index still within range, no
   // available drivers
   Future<void> autoSelectDriver(List<RouteConfig> driverConfigs) async {
-    final selectedIndex = read(selectedDriverIndexProvider).state;
+    final selectedIndex = read(selectedDriverIndexProvider);
 
     final bool isNoDriverSelected =
         driverConfigs.isNotEmpty && selectedIndex == null;
@@ -122,7 +121,7 @@ class RequestDriversViewModel extends ViewModel {
         previewDriverInfoAndLocation(driverConfigs[selectedIndex!]);
       } else {
         // If driver list is empty
-        final riderConfig = read(currentRouteConfigProvider).state!;
+        final riderConfig = read(currentRouteConfigProvider)!;
         selectDriver(null);
         mapController.clearMap();
         mapController.animateToLocation(location: riderConfig.startLocation);
@@ -158,29 +157,30 @@ class RequestDriversViewModel extends ViewModel {
 
   void updateDriverDistance(KapiotLocation driverLoc) {
     final utils = googleMapsApiServices.utils;
-    final currentRouteConfig = read(currentRouteConfigProvider).state!;
+    final currentRouteConfig = read(currentRouteConfigProvider)!;
     final riderLoc = currentRouteConfig.startLocation;
     final distance = utils.calculateDistance(
       pointA: riderLoc,
       pointB: driverLoc,
     );
-    read(driverDistanceProvider).state = '${distance.toStringAsFixed(1)} km';
+    read(driverDistanceProvider.notifier).state =
+        '${distance.toStringAsFixed(1)} km';
   }
 
   /// Listen to when a driver accepts and respond accordingly
   Future<void> respondWhenDriverAccepts(
     Stream<RouteConfig?> acceptingDriverConfig,
   ) async {
-    final currentRiderConfig = read(currentRouteConfigProvider).state;
+    final currentRiderConfig = read(currentRouteConfigProvider);
     assert(currentRiderConfig != null);
     _acceptingDriverConfigSub = acceptingDriverConfig.listen((driverConfig) {
       if (driverConfig != null) {
         final riderId = currentRiderConfig!.user.id;
         riderRepo.deletePendingRequests(
           riderId,
-          read(requestedDriverIdListProvider).state,
+          read(requestedDriverIdListProvider),
         );
-        read(acceptingDriverConfigProvider).state = driverConfig;
+        read(acceptingDriverConfigProvider.notifier).state = driverConfig;
         // Clear map before reusing at the next View
         mapController.clearMap();
         AppRouter.instance.navigateTo(Routes.requestAcceptedView);

@@ -8,14 +8,14 @@ final ratingProvider = StateProvider.autoDispose<double>((ref) {
 });
 
 final pointsProvider = Provider.autoDispose<double>((ref) {
-  final transaction = ref.watch(transactionProvider).state;
+  final transaction = ref.watch(transactionProvider);
   Future.delayed(const Duration(milliseconds: 10))
       .then((_) => (ref.state = transaction.points!));
   return 0;
 });
 
 final distanceInKmProvider = Provider.autoDispose<double>((ref) {
-  final transaction = ref.watch(transactionProvider).state;
+  final transaction = ref.watch(transactionProvider);
   Future.delayed(
     const Duration(seconds: 2),
     () => (ref.state = transaction.distance!),
@@ -24,7 +24,7 @@ final distanceInKmProvider = Provider.autoDispose<double>((ref) {
 });
 
 final timeInMinsProvider = Provider.autoDispose<double>((ref) {
-  final transaction = ref.watch(transactionProvider).state;
+  final transaction = ref.watch(transactionProvider);
   final startTime = transaction.startTime!;
   final endTime = transaction.endTime!;
   // TODO: Change [inSeconds] to [inMinutes]
@@ -39,6 +39,6 @@ final timeInMinsProvider = Provider.autoDispose<double>((ref) {
 final totalPointsProvider = StateProvider.autoDispose<double>((ref) => 0);
 
 final isDriverProvider = Provider.autoDispose<bool>((ref) {
-  final currentRouteConfig = ref.watch(currentRouteConfigProvider).state;
+  final currentRouteConfig = ref.watch(currentRouteConfigProvider);
   return (currentRouteConfig is ForDriver);
 });

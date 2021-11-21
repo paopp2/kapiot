@@ -36,7 +36,7 @@ class TransactionInfoPanel extends HookConsumerWidget {
     final riders = transaction.riders!.map((rc) => rc.user).toList();
     final distanceInKm = ref.watch(distanceInKmProvider);
     final timeInMins = ref.watch(timeInMinsProvider);
-    final totalPoints = ref.watch(totalPointsProvider).state;
+    final totalPoints = ref.watch(totalPointsProvider);
     const idNumber = '18105024';
     const plateNumber = 'FAG 169';
 

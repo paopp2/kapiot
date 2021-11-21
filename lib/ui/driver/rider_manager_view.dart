@@ -18,7 +18,7 @@ class RiderManagerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(riderManagerViewModel);
-    final nextStop = ref.watch(nextStopProvider).state;
+    final nextStop = ref.watch(nextStopProvider);
     final requestingRidersStream = ref.watch(requestingRidersStreamProvider);
 
     useEffect(() {
@@ -57,7 +57,8 @@ class RiderManagerView extends HookConsumerWidget {
                         Container(
                           height: constraints.maxHeight * 0.2,
                           color: Colors.white,
-                          child: (requestingRidersStream.data?.value.isEmpty ??
+                          child: (requestingRidersStream
+                                      .asData?.value.isEmpty ??
                                   true)
                               ? Center(
                                   child: Column(

@@ -27,7 +27,7 @@ class RequestDriversMapController extends MapController {
 
   Future<void> initializeRequestDriversMap() async {
     // Use location set from the previous view to initialize new GoogleMap
-    final locationFromPreviousView = read(startLocProvider).state!;
+    final locationFromPreviousView = read(startLocProvider)!;
     await super.initializeMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(

@@ -23,7 +23,7 @@ class OwnedCarsExpansionTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ownedCars = currentUserInfo?.driverInfo?.registeredCars;
-    final chosenCar = ref.watch(chosenCarProvider).state;
+    final chosenCar = ref.watch(chosenCarProvider);
     return ExpansionTile(
       leading: const Icon(
         Icons.drive_eta,

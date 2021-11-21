@@ -16,7 +16,7 @@ class SavePlaceView extends HookConsumerWidget {
     final model = ref.watch(placeManagerViewModel);
     final initialLabel = ModalRoute.of(context)?.settings.arguments as String?;
     final tecLabel = useTextEditingController(text: initialLabel);
-    final locationToSave = ref.watch(locationToSaveProvider).state;
+    final locationToSave = ref.watch(locationToSaveProvider);
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {

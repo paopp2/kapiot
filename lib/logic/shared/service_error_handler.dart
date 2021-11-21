@@ -56,7 +56,7 @@ class ServiceErrorHandler {
       final permissionDenied = (status == LocationPermission.denied ||
           status == LocationPermission.deniedForever);
       if (permissionDenied) {
-        read(hasLocPermission).state = false;
+        read(hasLocPermission.notifier).state = false;
         _appRouter.popAllThenNavigateTo(Routes.serviceErrorView);
       }
     });
@@ -83,8 +83,8 @@ class ServiceErrorHandler {
       if (statusUpdate is ServiceStatus) currentLocStatus = statusUpdate;
       hasInternet = (currentNetStatus != ConnectivityResult.none);
       hasLocation = (currentLocStatus == ServiceStatus.enabled);
-      read(hasNetService).state = hasInternet;
-      read(hasLocService).state = hasLocation;
+      read(hasNetService.notifier).state = hasInternet;
+      read(hasLocService.notifier).state = hasLocation;
       yield (hasInternet && hasLocation);
     }
   }

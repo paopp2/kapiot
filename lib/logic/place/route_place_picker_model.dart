@@ -32,9 +32,9 @@ class RoutePlacePickerModel extends ViewModel {
 
   @override
   void initState() {
-    final isForStartLoc = read(isForStartLocProvider).state;
-    final startAddress = read(startLocProvider).state?.address;
-    final endAddress = read(endLocProvider).state?.address;
+    final isForStartLoc = read(isForStartLocProvider);
+    final startAddress = read(startLocProvider)?.address;
+    final endAddress = read(endLocProvider)?.address;
     tecStartLoc.text = startAddress ?? '';
     tecEndLoc.text = endAddress ?? '';
     if (isForStartLoc) {
@@ -53,7 +53,7 @@ class RoutePlacePickerModel extends ViewModel {
 
     mapController.showRouteIfBothLocationsSet(
       onRouteCalculated: (routeCoordinates) {
-        read(routeCoordinatesProvider).state = routeCoordinates;
+        read(routeCoordinatesProvider.notifier).state = routeCoordinates;
       },
     );
   }
@@ -65,7 +65,7 @@ class RoutePlacePickerModel extends ViewModel {
 
   void editPlaceAddress({required bool isForStartLoc}) {
     (isForStartLoc) ? tecStartLoc.selectText() : tecEndLoc.selectText();
-    read(isForStartLocProvider).state = isForStartLoc;
+    read(isForStartLocProvider.notifier).state = isForStartLoc;
   }
 
   Future<void> pickSuggestion({
@@ -90,7 +90,7 @@ class RoutePlacePickerModel extends ViewModel {
   }
 
   void pickSavedLocation(KapiotLocation pickedSavedLoc) {
-    final isForStartLoc = read(isForStartLocProvider).state;
+    final isForStartLoc = read(isForStartLocProvider);
     if (isForStartLoc) {
       tecStartLoc.text = pickedSavedLoc.address!;
       mapController.setStartLocation(pickedSavedLoc);
@@ -105,8 +105,8 @@ class RoutePlacePickerModel extends ViewModel {
 
   void _returnIfBothLocationsSet() {
     placeSuggester.clearSuggestions();
-    final isStartLocSet = (read(startLocProvider).state != null);
-    final isEndLocSet = (read(endLocProvider).state != null);
+    final isStartLocSet = (read(startLocProvider) != null);
+    final isEndLocSet = (read(endLocProvider) != null);
     if (isStartLocSet && isEndLocSet) {
       AppRouter.instance.popView();
     }

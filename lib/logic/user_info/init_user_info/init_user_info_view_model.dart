@@ -27,8 +27,8 @@ class InitUserInfoViewModel extends ViewModel {
 
   void goToNextStep({Duration? after}) {
     (after == null)
-        ? read(pageIndexProvider).state++
-        : Future.delayed(after, () => read(pageIndexProvider).state++);
+        ? read(pageIndexProvider.notifier).state++
+        : Future.delayed(after, () => read(pageIndexProvider.notifier).state++);
   }
 
   void openSavePlacePicker({required bool isForHome}) async {
@@ -36,37 +36,37 @@ class InitUserInfoViewModel extends ViewModel {
     final location = await appRouter.navigateTo(
       Routes.savePlacePicker,
       args: (isForHome)
-          ? read(homeFieldTextProvider).state
-          : read(nonHomeFieldTextProvider).state,
+          ? read(homeFieldTextProvider.notifier).state
+          : read(nonHomeFieldTextProvider.notifier).state,
     ) as KapiotLocation?;
     String label = 'Home';
     if (isForHome) {
-      read(homeFieldTextProvider).state = location?.address;
+      read(homeFieldTextProvider.notifier).state = location?.address;
     } else {
-      label = (read(userTypeProvider).state == UserType.student)
+      label = (read(userTypeProvider.notifier).state == UserType.student)
           ? 'School'
           : 'Work';
-      read(nonHomeFieldTextProvider).state = location?.address;
+      read(nonHomeFieldTextProvider.notifier).state = location?.address;
     }
     if (location != null) {
-      read(savedLocationsProvider).state[label] = location;
+      read(savedLocationsProvider.notifier).state[label] = location;
     }
   }
 
   void skipSavingLocations() {
-    read(savedLocationsProvider).state = {};
+    read(savedLocationsProvider.notifier).state = {};
   }
 
   void setUserType(UserType userType) {
-    read(userTypeProvider).state = userType;
+    read(userTypeProvider.notifier).state = userType;
   }
 
   void updateUserInfo() {
-    final userType = read(userTypeProvider).state;
+    final userType = read(userTypeProvider);
     final userId = currentUser.id;
     final userInfo = KapiotUserInfo(
       points: 0,
-      savedLocations: read(savedLocationsProvider).state,
+      savedLocations: read(savedLocationsProvider),
       userType: userType,
     );
     userInfoRepo.pushUserInfo(userId: userId, userInfo: userInfo);

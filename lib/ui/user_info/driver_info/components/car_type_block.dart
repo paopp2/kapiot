@@ -24,7 +24,7 @@ class CarTypeBlock extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCarType = ref.watch(carTypeProvider).state;
+    final selectedCarType = ref.watch(carTypeProvider);
     final isSelected = (selectedCarType == carType);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),

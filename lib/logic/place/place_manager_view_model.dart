@@ -33,7 +33,7 @@ class PlaceManagerViewModel extends ViewModel {
     String savedLocLabel,
     KapiotLocation? savedLoc,
   ) {
-    read(locationToSaveProvider).state = savedLoc;
+    read(locationToSaveProvider.notifier).state = savedLoc;
     _appRouter.navigateTo(
       Routes.savePlaceView,
       args: savedLocLabel,
@@ -45,28 +45,28 @@ class PlaceManagerViewModel extends ViewModel {
       Routes.savePlacePicker,
     );
     if (locToSave != null) {
-      read(locationToSaveProvider).state = locToSave;
+      read(locationToSaveProvider.notifier).state = locToSave;
       _appRouter.navigateTo(Routes.savePlaceView);
     }
   }
 
   Future<void> editLocationToSave() async {
-    final locToEdit = read(locationToSaveProvider).state;
+    final locToEdit = read(locationToSaveProvider);
     final newLocToSave = await _appRouter.navigateTo(
       Routes.savePlacePicker,
       args: locToEdit!.address!,
     );
-    read(locationToSaveProvider).state = newLocToSave ?? locToEdit;
+    read(locationToSaveProvider.notifier).state = newLocToSave ?? locToEdit;
   }
 
   void saveLocation({required String label}) {
-    final currentUserInfo = read(currentUserInfoProvider).data!.value!;
+    final currentUserInfo = read(currentUserInfoProvider).asData!.value!;
     final currentSavedLocations = currentUserInfo.savedLocations;
     userInfoRepository.pushUserInfo(
       userId: currentUser.id,
       userInfo: currentUserInfo.copyWith(
         savedLocations: currentSavedLocations
-          ..[label] = read(locationToSaveProvider).state!,
+          ..[label] = read(locationToSaveProvider)!,
       ),
     );
     _appRouter.popUntil(Routes.placeManagerView);
