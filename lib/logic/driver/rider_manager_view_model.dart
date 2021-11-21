@@ -63,10 +63,12 @@ class RiderManagerViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
     final routeConfig = read(currentRouteConfigProvider) as ForDriver;
-    read(transactionProvider.notifier).update((state) => state.copyWith(
-          driver: routeConfig,
-          startTime: DateTime.now(),
-        ));
+    read(transactionProvider.notifier).update(
+      (state) => state.copyWith(
+        driver: routeConfig,
+        startTime: DateTime.now(),
+      ),
+    );
 
     // Show the current driver's route on the map
     final encodedRoute = routeConfig.encodedRoute;
