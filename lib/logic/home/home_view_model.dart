@@ -173,8 +173,8 @@ class HomeViewModel extends ViewModel {
       );
       final driverConfig = RouteConfig.driver(
         user: currentUser!,
-        timeOfTrip: read(dateTimeProvider.notifier).state,
-        maxRiderCount: read(riderCountProvider.notifier).state,
+        timeOfTrip: read(dateTimeProvider),
+        maxRiderCount: read(riderCountProvider),
         startLocation: startLoc,
         endLocation: endLoc,
         encodedRoute: encodedRoute,

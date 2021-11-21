@@ -108,10 +108,11 @@ class RequestAcceptedViewModel extends ViewModel {
       },
     );
 
-    final transaction = read(transactionProvider);
-    read(transactionProvider.notifier).state = transaction.copyWith(
-      startTime: DateTime.now(),
-      driver: acceptingDriver,
+    read(transactionProvider.notifier).update(
+      (state) => state.copyWith(
+        startTime: DateTime.now(),
+        driver: acceptingDriver,
+      ),
     );
 
     // StreamSub that listens to the Stream that emits the current rider's
@@ -127,11 +128,12 @@ class RequestAcceptedViewModel extends ViewModel {
     isDroppedOffStreamSub = isDroppedOffStream().listen((isDroppedOff) {
       if (isDroppedOff) {
         // Update current transaction data
-        final transaction = read(transactionProvider);
-        read(transactionProvider.notifier).state = transaction.copyWith(
-          endTime: DateTime.now(),
-          points: 10,
-          riders: _riderList,
+        read(transactionProvider.notifier).update(
+          (state) => state.copyWith(
+            endTime: DateTime.now(),
+            points: 10,
+            riders: _riderList,
+          ),
         );
 
         // Cancel all StreamSubs at RequestAcceptedView

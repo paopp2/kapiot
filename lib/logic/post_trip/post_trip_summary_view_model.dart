@@ -69,7 +69,7 @@ class PostTripSummaryViewModel extends ViewModel {
   }
 
   Future<void> updateDriverRating() async {
-    final rating = read(ratingProvider.notifier).state;
+    final rating = read(ratingProvider);
     final acceptingDriverConfig = read(acceptingDriverConfigProvider);
     final acceptingDriverId = acceptingDriverConfig!.user.id;
     final driverInfoStream = userInfoRepo.getUserInfoStream(acceptingDriverId);
@@ -89,18 +89,19 @@ class PostTripSummaryViewModel extends ViewModel {
   void completeTransaction(RouteConfig routeConfig) {
     final utils = googleMapsApiServices.utils;
     final userId = routeConfig.user.id;
-    final transaction = read(transactionProvider);
     final distance = utils.calculateDistance(
       pointA: routeConfig.startLocation,
       pointB: routeConfig.endLocation,
     );
     // Asynchronously update transactionProvider to avoid premature rebuilding
     Future.delayed(Duration.zero, () {
-      read(transactionProvider.notifier).state = transaction.copyWith(
-        currentUserId: userId,
-        distance: distance,
-        startLocation: routeConfig.startLocation,
-        endLocation: routeConfig.endLocation,
+      read(transactionProvider.notifier).update(
+        (state) => state.copyWith(
+          currentUserId: userId,
+          distance: distance,
+          startLocation: routeConfig.startLocation,
+          endLocation: routeConfig.endLocation,
+        ),
       );
     });
   }

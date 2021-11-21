@@ -50,7 +50,7 @@ class RequestDriversViewModel extends ViewModel {
   @override
   Future<void> initState() async {
     await mapController.initializeRequestDriversMap();
-    assert(read(currentRouteConfigProvider.notifier).state != null);
+    assert(read(currentRouteConfigProvider) != null);
     final routeConfig = read(currentRouteConfigProvider)!;
 
     mapController.addMarker(
@@ -65,13 +65,13 @@ class RequestDriversViewModel extends ViewModel {
   }
 
   Future<void> requestDriver(String driverId) async {
-    final currentRouteConfig = read(currentRouteConfigProvider);
-    assert(currentRouteConfig != null);
-    final requestedDrivers = read(requestedDriverIdListProvider)..add(driverId);
-    read(requestedDriverIdListProvider.notifier).state = requestedDrivers;
+    final currentRouteConfig = read(currentRouteConfigProvider)!;
+    read(requestedDriverIdListProvider.notifier).update(
+      (state) => state..add(driverId),
+    );
     await riderRepo.requestDriver(
       driverId,
-      currentRouteConfig!,
+      currentRouteConfig,
     );
   }
 
@@ -178,7 +178,7 @@ class RequestDriversViewModel extends ViewModel {
         final riderId = currentRiderConfig!.user.id;
         riderRepo.deletePendingRequests(
           riderId,
-          read(requestedDriverIdListProvider.notifier).state,
+          read(requestedDriverIdListProvider),
         );
         read(acceptingDriverConfigProvider.notifier).state = driverConfig;
         // Clear map before reusing at the next View

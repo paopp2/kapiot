@@ -63,11 +63,10 @@ class RiderManagerViewModel extends ViewModel {
   Future<void> initState() async {
     await mapController.initializeRiderManagerMap();
     final routeConfig = read(currentRouteConfigProvider) as ForDriver;
-    final transaction = read(transactionProvider);
-    read(transactionProvider.notifier).state = transaction.copyWith(
-      driver: routeConfig,
-      startTime: DateTime.now(),
-    );
+    read(transactionProvider.notifier).update((state) => state.copyWith(
+          driver: routeConfig,
+          startTime: DateTime.now(),
+        ));
 
     // Show the current driver's route on the map
     final encodedRoute = routeConfig.encodedRoute;
@@ -77,21 +76,23 @@ class RiderManagerViewModel extends ViewModel {
     final stopPointsStream = getStopPointsStream();
     stopPointsSub = stopPointsStream.listen((stopPointsList) {
       read(stopPointsProvider.notifier).state = stopPointsList;
-      if (stopPointsList.isNotEmpty) {
-        if (_finishedStopPoints.isEmpty) {
-          read(nextStopProvider.notifier).state = stopPointsList.first;
-        } else {
-          int i = 0;
-          StopPoint stop = stopPointsList[i];
-          while (_finishedStopPoints.contains(stop)) {
-            stop = stopPointsList[i++];
+      read(nextStopProvider.notifier).update((_) {
+        if (stopPointsList.isNotEmpty) {
+          if (_finishedStopPoints.isEmpty) {
+            return stopPointsList.first;
+          } else {
+            int i = 0;
+            StopPoint stop = stopPointsList[i];
+            while (_finishedStopPoints.contains(stop)) {
+              stop = stopPointsList[i++];
+            }
+            return stop;
           }
-          read(nextStopProvider.notifier).state = stop;
+        } else {
+          _finishedStopPoints.clear();
+          return null;
         }
-      } else {
-        _finishedStopPoints.clear();
-        read(nextStopProvider.notifier).state = null;
-      }
+      });
     });
 
     // Show the current next stop on the map (if any)
@@ -122,12 +123,12 @@ class RiderManagerViewModel extends ViewModel {
 
       // If driver is less than 100m away from destination (arriving)
       if (distToDriverEnd < 0.100) {
-        final points = read(driverPointsProvider.notifier).state;
-        final transaction = read(transactionProvider.notifier).state;
-        read(transactionProvider.notifier).state = transaction.copyWith(
-          endTime: DateTime.now(),
-          riders: _riderConfigList,
-          points: points,
+        read(transactionProvider.notifier).update(
+          (state) => state.copyWith(
+            endTime: DateTime.now(),
+            riders: _riderConfigList,
+            points: read(driverPointsProvider),
+          ),
         );
         realtimeLocSub.cancel();
         driverRepo.removeDriverConfig(currentUser!.id);
@@ -169,8 +170,7 @@ class RiderManagerViewModel extends ViewModel {
   }
 
   void acceptRider(String riderId) {
-    final currentDriverConfig = read(currentRouteConfigProvider);
-    currentDriverConfig as ForDriver;
+    final currentDriverConfig = read(currentRouteConfigProvider) as ForDriver;
     if (!currentDriverConfig.isCarFull) {
       driverRepo.acceptRider(
         riderId,
@@ -202,24 +202,23 @@ class RiderManagerViewModel extends ViewModel {
   }
 
   Future<void> updateRiderCount({required bool increment}) async {
-    final driverConfig = read(currentRouteConfigProvider) as ForDriver;
-    int rideCount = driverConfig.currentRiderCount;
-    final newRiderCount = (increment) ? ++rideCount : --rideCount;
-    read(currentRouteConfigProvider.notifier).state = driverConfig.copyWith(
-      currentRiderCount: newRiderCount,
-    );
-    driverRepo.pushDriverConfig(driverConfig.copyWith(
-      currentRiderCount: newRiderCount,
-    ));
+    read(currentRouteConfigProvider.notifier).update((state) {
+      state as ForDriver;
+      int riderCount = state.currentRiderCount;
+      final updatedConfig = state.copyWith(
+        currentRiderCount: (increment) ? ++riderCount : --riderCount,
+      );
+      driverRepo.pushDriverConfig(updatedConfig);
+      return updatedConfig;
+    });
   }
 
   Future<void> updateDriverPoints(RouteConfig riderConfig) async {
     riderConfig as ForRider;
-    final currentDriverPoints = read(driverPointsProvider.notifier).state;
     final pointsToAdd =
         await coreAlgorithms.calculateDriverPointsFromRider(riderConfig);
-    read(driverPointsProvider.notifier).state =
-        currentDriverPoints + pointsToAdd;
+    read(driverPointsProvider.notifier)
+        .update((state) => (state + pointsToAdd));
   }
 
   /// Autocenters/autoselects a new ridercard after a rider has been accepted
