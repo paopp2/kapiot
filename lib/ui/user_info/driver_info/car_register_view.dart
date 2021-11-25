@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/app_router.dart';
+import 'package:kapiot/constants/input_formatters.dart';
 import 'package:kapiot/logic/user_info/driver_info/car_register_view_model.dart';
 import 'package:kapiot/model/car/car.dart';
 
@@ -79,6 +80,7 @@ class CarRegisterView extends HookConsumerWidget {
                                     textAlign: TextAlign.center,
                                     textCapitalization:
                                         TextCapitalization.characters,
+                                    inputFormatters: [UpperCaseTextFormatter()],
                                     style: GoogleFonts.montserrat(
                                       fontSize: 17,
                                       color: const Color(0xff333333),
@@ -140,6 +142,9 @@ class CarRegisterView extends HookConsumerWidget {
                                           textAlign: TextAlign.center,
                                           textCapitalization:
                                               TextCapitalization.characters,
+                                          inputFormatters: [
+                                            UpperCaseTextFormatter(),
+                                          ],
                                           controller: model.tecCarMakeField,
                                           validator: model.carRegisterValidator,
                                           style: GoogleFonts.montserrat(
@@ -195,6 +200,9 @@ class CarRegisterView extends HookConsumerWidget {
                                           textAlign: TextAlign.center,
                                           textCapitalization:
                                               TextCapitalization.characters,
+                                          inputFormatters: [
+                                            UpperCaseTextFormatter(),
+                                          ],
                                           controller: model.tecCarModelField,
                                           validator: model.carRegisterValidator,
                                           style: GoogleFonts.montserrat(
