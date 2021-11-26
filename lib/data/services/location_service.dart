@@ -65,7 +65,6 @@ class LocationService {
     }
   }
 
-  // TODO: Error-handling for getLocationStream
   Stream<KapiotLocation> getLocationStream() {
     final positionStream = Geolocator.getPositionStream(distanceFilter: 5);
     return positionStream.map(
