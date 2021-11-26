@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "492573649619",
+    "firebase_url": "https://kapiot-46cbc-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "kapiot-46cbc",
     "storage_bucket": "kapiot-46cbc.appspot.com"
   },
@@ -13,6 +14,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "492573649619-m96fmjvf2o0ba8pa7cliuejhcfp30fni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.agp.kapiot",
+            "certificate_hash": "5ff5a21dc5353c20931cfa2a49d73832ed065b39"
+          }
+        },
+        {
+          "client_id": "492573649619-vug1s4rto6j9ui02ltlpmm9i74k5cq8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.agp.kapiot",
+            "certificate_hash": "f1631970c1169e8f60f05c2316311d31d0f27af6"
+          }
+        },
         {
           "client_id": "492573649619-79ob7g1748f73frv3csn905v3ssg61he.apps.googleusercontent.com",
           "client_type": 3
