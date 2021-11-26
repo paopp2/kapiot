@@ -193,6 +193,7 @@ class HomeViewModel extends ViewModel {
     mapController.clearMap();
   }
 
+  // TODO: Assert no calls to this method in production
   void pushReadyMadeConfig(bool isRider) {
     if (isRider) {
       final riderConfig = RouteConfig.rider(
