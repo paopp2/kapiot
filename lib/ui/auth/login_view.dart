@@ -49,7 +49,6 @@ class LoginView extends HookConsumerWidget {
                                 style: TextStyle(
                                   fontSize: 70,
                                   fontFamily: 'NooplaRegular',
-                                  letterSpacing: 7,
                                   color: Color(0xFF5F45A4),
                                 ),
                               ),

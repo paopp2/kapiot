@@ -37,7 +37,6 @@ class HomeView extends HookConsumerWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'NooplaRegular',
-                  letterSpacing: 2,
                   color: Color(0xFF5F45A4),
                 ),
               ),
