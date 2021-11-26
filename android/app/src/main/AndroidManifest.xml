@@ -2,7 +2,7 @@
     package="com.agp.kapiot">
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
-        android:label="kapiot"
+        android:label="Kapiot"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyDTfMR7hhsrr5ZQ6nLVUau4pCMcW7ChtiI"/>

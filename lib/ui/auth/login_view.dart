@@ -30,26 +30,29 @@ class LoginView extends HookConsumerWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 160,
+                        height: constraints.maxHeight * 0.05,
+                      ),
+                      SizedBox(
+                        height: 100,
+                        width: 255,
                         child: Stack(
                           children: const [
                             Align(
-                              alignment: Alignment.topCenter,
+                              alignment: Alignment.centerLeft,
                               child: Image(
                                 image: AssetImage(
                                   'assets/logo/kapiot_logo_white.png',
                                 ),
-                                width: 70,
+                                height: 47,
                               ),
                             ),
                             Align(
-                              alignment: Alignment.bottomCenter,
+                              alignment: Alignment.bottomRight,
                               child: Text(
                                 'kapiot',
                                 style: TextStyle(
                                   fontSize: 70,
                                   fontFamily: 'NooplaRegular',
-                                  letterSpacing: 7,
                                   color: Color(0xFF5F45A4),
                                 ),
                               ),
@@ -58,14 +61,14 @@ class LoginView extends HookConsumerWidget {
                         ),
                       ),
                       SizedBox(
-                        height: constraints.maxHeight * 0.01,
+                        height: constraints.maxHeight * 0.005,
                       ),
                       const Center(
                         child: Text(
                           'University of San Carlos',
                           style: TextStyle(
                             letterSpacing: 3,
-                            fontSize: 16,
+                            fontSize: 20,
                             fontFamily: 'Vegur',
                             color: Colors.grey,
                           ),
