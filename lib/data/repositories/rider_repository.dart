@@ -30,6 +30,12 @@ class RiderRepository {
     );
   }
 
+  Future<void> removeRiderConfig(String riderId) async {
+    await firestoreHelper.deleteData(
+      path: FirestorePath.docActiveRider(riderId),
+    );
+  }
+
   Future<void> requestDriver(String driverId, RouteConfig riderConfig) async {
     assert(riderConfig is ForRider);
     await firestoreHelper.setData(

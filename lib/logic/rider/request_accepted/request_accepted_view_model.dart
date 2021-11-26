@@ -141,6 +141,9 @@ class RequestAcceptedViewModel extends ViewModel {
         isDroppedOffStreamSub.cancel();
         driverLocStreamSub.cancel();
 
+        // Remove current riderConfig
+        riderRepo.removeRiderConfig(routeConfig.user.id);
+
         // Navigate to PostTripSummaryView
         AppRouter.instance.navigateTo(Routes.postTripSummaryView);
       }
