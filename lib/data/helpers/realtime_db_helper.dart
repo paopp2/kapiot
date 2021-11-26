@@ -26,6 +26,10 @@ class RealtimeDbHelper {
     dbRef.child(path).set(data);
   }
 
+  Future<void> deleteData({required String path}) async {
+    dbRef.child(path).remove();
+  }
+
   Stream<T> documentStream<T>({
     required String path,
     required T Function(Map<String, dynamic> data) builder,

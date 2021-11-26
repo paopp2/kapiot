@@ -2,6 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kapiot/data/core/core_algorithms.dart';
 import 'package:kapiot/data/helpers/firestore_helper.dart';
 import 'package:kapiot/data/helpers/firestore_path.dart';
+import 'package:kapiot/data/helpers/realtime_db_helper.dart';
+import 'package:kapiot/data/helpers/realtime_db_path.dart';
 import 'package:kapiot/model/kapiot_user/kapiot_user.dart';
 import 'package:kapiot/model/route_config/route_config.dart';
 import 'package:kapiot/model/stop_point/stop_point.dart';
@@ -9,6 +11,7 @@ import 'package:kapiot/model/stop_point/stop_point.dart';
 final driverRepositoryProvider = Provider.autoDispose(
   (ref) => DriverRepository(
     firestoreHelper: FirestoreHelper.instance,
+    realtimeDbHelper: RealtimeDbHelper.instance,
     coreAlgorithms: ref.watch(coreAlgorithmsProvider),
   ),
 );
@@ -16,9 +19,11 @@ final driverRepositoryProvider = Provider.autoDispose(
 class DriverRepository {
   DriverRepository({
     required this.firestoreHelper,
+    required this.realtimeDbHelper,
     required this.coreAlgorithms,
   });
   final FirestoreHelper firestoreHelper;
+  final RealtimeDbHelper realtimeDbHelper;
   final CoreAlgorithms coreAlgorithms;
 
   Future<void> pushDriverConfig(RouteConfig driverConfig) async {
@@ -32,6 +37,9 @@ class DriverRepository {
   Future<void> removeDriverConfig(String driverId) async {
     await firestoreHelper.deleteData(
       path: FirestorePath.docActiveDriver(driverId),
+    );
+    await realtimeDbHelper.deleteData(
+      path: RealtimeDbPath.userRealtimeLocation(driverId),
     );
   }
 
