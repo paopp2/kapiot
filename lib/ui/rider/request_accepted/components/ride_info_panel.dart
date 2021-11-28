@@ -115,7 +115,7 @@ class RideInfoPanel extends HookConsumerWidget {
                                   width: 5,
                                 ),
                                 Text(
-                                  '4.8',
+                                  acceptingDriverConfig.rating,
                                   style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     color: const Color(0xFFAAAAAA),
