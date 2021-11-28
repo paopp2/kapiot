@@ -98,13 +98,21 @@ class RequestAcceptedViewModel extends ViewModel {
         prevDriverLoc = driverLoc;
 
         // Update driver's estimated time of arrival
-        final distMatrix = googleMapsApiServices.distMatrix;
-        final distMatrixResult = await distMatrix.getDistMatrixElement(
-          pointA: routeConfig.startLocation,
-          pointB: driverLoc,
-        );
-        read(driverArrivalTimeProvider.notifier).state =
-            distMatrixResult.durationText;
+        if (!driverHasPickedUpRider(
+          read(acceptingDriverConfigProvider)!,
+          routeConfig,
+          driverLoc,
+        )) {
+          final distMatrix = googleMapsApiServices.distMatrix;
+          final distMatrixResult = await distMatrix.getDistMatrixElement(
+            pointA: routeConfig.startLocation,
+            pointB: driverLoc,
+          );
+          read(driverArrivalTimeProvider.notifier).state =
+              distMatrixResult.durationText;
+        } else {
+          read(driverArrivalTimeProvider.notifier).state = 'Picked up';
+        }
       },
     );
 
@@ -183,5 +191,22 @@ class RequestAcceptedViewModel extends ViewModel {
       );
       yield !hasRider;
     }
+  }
+
+  bool driverHasPickedUpRider(
+    RouteConfig driverConfig,
+    RouteConfig riderConfig,
+    KapiotLocation driverCurrentLoc,
+  ) {
+    final utils = googleMapsApiServices.utils;
+    final distFromDriverStartToRiderStart = utils.calculateDistance(
+      pointA: driverConfig.startLocation,
+      pointB: riderConfig.startLocation,
+    );
+    final distFromDriverStartToCurrent = utils.calculateDistance(
+      pointA: driverConfig.startLocation,
+      pointB: driverCurrentLoc,
+    );
+    return distFromDriverStartToRiderStart < distFromDriverStartToCurrent;
   }
 }

@@ -45,7 +45,9 @@ class RideInfoPanel extends HookConsumerWidget {
               alignment: Alignment.bottomLeft,
               height: constraints.maxHeight * 0.08,
               child: Text(
-                '${driverName.firstName} is arriving in $estTimeArrival',
+                (estTimeArrival != 'Picked up')
+                    ? '${driverName.firstName} is arriving in $estTimeArrival'
+                    : '',
                 style: GoogleFonts.montserrat(
                   fontSize: 17,
                   color: const Color(0xff333333),
