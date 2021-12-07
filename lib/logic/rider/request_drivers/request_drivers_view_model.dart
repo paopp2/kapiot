@@ -46,6 +46,7 @@ class RequestDriversViewModel extends ViewModel {
 
   StreamSubscription? _previewedDriverLocationSub;
   StreamSubscription? _acceptingDriverConfigSub;
+  StreamSubscription? _compatibleDriverConfigsSub;
 
   @override
   Future<void> initState() async {
@@ -75,14 +76,18 @@ class RequestDriversViewModel extends ViewModel {
     );
   }
 
-  Stream<List<RouteConfig>> getCompatibleDriverConfigs() async* {
+  Stream<List<RouteConfig>> getCompatibleDriverConfigs() {
+    final streamController = StreamController<List<RouteConfig>>();
     final currentRiderConfig = read(currentRouteConfigProvider)!;
     final compatibleDriverConfigsStream =
         riderRepo.getCompatibleDriverConfigsAsStream(currentRiderConfig);
-    await for (final driverConfigs in compatibleDriverConfigsStream) {
-      autoSelectDriver(driverConfigs);
-      yield driverConfigs;
-    }
+    _compatibleDriverConfigsSub = compatibleDriverConfigsStream.listen(
+      (driverConfigs) {
+        autoSelectDriver(driverConfigs);
+        streamController.add(driverConfigs);
+      },
+    );
+    return streamController.stream;
   }
 
   void selectDriver(int? index) {
@@ -188,6 +193,7 @@ class RequestDriversViewModel extends ViewModel {
         // Cancel all stream subscriptions
         _acceptingDriverConfigSub?.cancel();
         _previewedDriverLocationSub?.cancel();
+        _compatibleDriverConfigsSub?.cancel();
       }
     });
   }

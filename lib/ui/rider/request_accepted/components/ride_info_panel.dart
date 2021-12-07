@@ -32,10 +32,12 @@ class RideInfoPanel extends HookConsumerWidget {
         ref.watch(acceptingDriverConfigProvider)! as ForDriver;
     final acceptingDriver = acceptingDriverConfig.user;
     final driverName = acceptingDriver.displayName!;
-    final estTimeArrival = ref.watch(driverArrivalTimeProvider);
+    final estTimeArrival = ref.watch(estArrivalTimeProvider);
     final coRiderConfigsStream = ref.watch(coRiderConfigsStreamProvider);
     final coRiderCount = ref.watch(coRiderCountProvider);
     final currentUser = ref.watch(currentUserProvider)!;
+    final hasPickedUpRider = ref.watch(hasPickedUpRiderProvider);
+
     return Expanded(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
@@ -45,7 +47,9 @@ class RideInfoPanel extends HookConsumerWidget {
               alignment: Alignment.bottomLeft,
               height: constraints.maxHeight * 0.08,
               child: Text(
-                '${driverName.firstName} is arriving in $estTimeArrival',
+                (hasPickedUpRider)
+                    ? 'Dropping you off in $estTimeArrival'
+                    : '${driverName.firstName} is arriving in $estTimeArrival',
                 style: GoogleFonts.montserrat(
                   fontSize: 17,
                   color: const Color(0xff333333),
@@ -115,7 +119,7 @@ class RideInfoPanel extends HookConsumerWidget {
                                   width: 5,
                                 ),
                                 Text(
-                                  '4.8',
+                                  acceptingDriverConfig.rating,
                                   style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     color: const Color(0xFFAAAAAA),
@@ -135,7 +139,9 @@ class RideInfoPanel extends HookConsumerWidget {
                                   width: 5,
                                 ),
                                 Text(
-                                  estTimeArrival,
+                                  (hasPickedUpRider)
+                                      ? 'Picked up'
+                                      : estTimeArrival,
                                   style: GoogleFonts.montserrat(
                                     fontSize: 12,
                                     color: const Color(0xFFAAAAAA),
