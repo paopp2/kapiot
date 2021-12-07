@@ -237,8 +237,6 @@ class ConfigTypePanel extends HookConsumerWidget {
                   ),
                   ElevatedButton(
                     onPressed: () => model.pushRouteConfig(isRider),
-                    // TODO: Remove method below on production
-                    onLongPress: () => model.pushReadyMadeConfig(isRider),
                     style: TextButton.styleFrom(
                       backgroundColor: const Color(0xFF5F45A4),
                       elevation: 0,
