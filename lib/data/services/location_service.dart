@@ -27,6 +27,10 @@ class LocationService {
   Future<Either<Exception, KapiotLocation>> getLocation() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) Geolocator.openAppSettings();
+    final locPermission = await Geolocator.checkPermission();
+    if (locPermission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+    }
     try {
       final position = await Geolocator.getCurrentPosition();
       return Right(KapiotLocation(
@@ -67,7 +71,9 @@ class LocationService {
 
   // TODO: Error-handling for getLocationStream
   Stream<KapiotLocation> getLocationStream() {
-    final positionStream = Geolocator.getPositionStream(distanceFilter: 5);
+    final positionStream = Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(distanceFilter: 5),
+    );
     return positionStream.map(
       (pos) => KapiotLocation(
         lat: pos.latitude,
