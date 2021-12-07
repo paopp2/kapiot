@@ -12,8 +12,10 @@ import 'package:kapiot/data/helpers/realtime_db_helper.dart';
 import 'package:kapiot/root_view.dart';
 import 'package:kapiot/ui/auth/login_view.dart';
 import 'package:kapiot/ui/home/home_view.dart';
+import 'package:kapiot/ui/portal_view.dart';
 
-const bool useFirebaseEmulator = false;
+// TODO: Set to false in production
+const bool useFirebaseEmulator = true;
 
 void main() async {
   await dotenv.load(fileName: 'secrets/secrets.env');
