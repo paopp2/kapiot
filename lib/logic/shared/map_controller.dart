@@ -165,12 +165,11 @@ abstract class MapController {
     required KapiotLocation location,
   }) {
     read(markersProvider.notifier).update((state) {
-      // return state
-      //   ..removeWhere((m) => m.markerId == marker.markerId)
-      //   ..add(marker.copyWith(
-      //     positionParam: LatLng(location.lat, location.lng),
-      //   ));
-      return {}..addAll(state..removeWhere((m) => m.markerId == marker.markerId)..add(marker.copyWith(positionParam: LatLng(location.lat, location.lng))));
+      return {...state}
+        ..removeWhere((m) => (m.markerId == marker.markerId))
+        ..add(marker.copyWith(
+          positionParam: LatLng(location.lat, location.lng),
+        ));
     });
   }
 
