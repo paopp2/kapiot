@@ -149,15 +149,13 @@ abstract class MapController {
   }
 
   void drawPolyLine(List<LatLng> routeCoordinates) {
-    final Set<Polyline> polylines = {};
-    Polyline polyline = Polyline(
+    final polyline = Polyline(
       polylineId: const PolylineId("poly"),
       color: const Color(0xFF7F3B7C),
       width: 7,
       points: routeCoordinates,
     );
-    polylines.add(polyline);
-    read(polylinesProvider.notifier).state = polylines;
+    read(polylinesProvider.notifier).state = {polyline};
   }
 
   void addMarker({
@@ -174,9 +172,8 @@ abstract class MapController {
   }
 
   void removeMarker(Marker marker) {
-    read(markersProvider.notifier).update(
-      (state) => state..removeWhere((m) => (m.markerId == marker.markerId)),
-    );
+    read(markersProvider.notifier).update((state) =>
+        {...state}..removeWhere((m) => (m.markerId == marker.markerId)));
   }
 
   void setStartLocation(KapiotLocation? startLocation) {
