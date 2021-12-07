@@ -98,21 +98,21 @@ class RequestAcceptedViewModel extends ViewModel {
         prevDriverLoc = driverLoc;
 
         // Update driver's estimated time of arrival
-        if (!driverHasPickedUpRider(
+        final distMatrix = googleMapsApiServices.distMatrix;
+        final _driverHasPickedUpRider = driverHasPickedUpRider(
           read(acceptingDriverConfigProvider)!,
           routeConfig,
           driverLoc,
-        )) {
-          final distMatrix = googleMapsApiServices.distMatrix;
-          final distMatrixResult = await distMatrix.getDistMatrixElement(
-            pointA: routeConfig.startLocation,
-            pointB: driverLoc,
-          );
-          read(driverArrivalTimeProvider.notifier).state =
-              distMatrixResult.durationText;
-        } else {
-          read(driverArrivalTimeProvider.notifier).state = 'Picked up';
-        }
+        );
+        read(hasPickedUpRiderProvider.notifier).state = _driverHasPickedUpRider;
+        final distMatrixResult = await distMatrix.getDistMatrixElement(
+          pointA: driverLoc,
+          pointB: (!_driverHasPickedUpRider)
+              ? routeConfig.startLocation
+              : routeConfig.endLocation,
+        );
+        read(estArrivalTimeProvider.notifier).state =
+            distMatrixResult.durationText;
       },
     );
 
@@ -193,6 +193,10 @@ class RequestAcceptedViewModel extends ViewModel {
     }
   }
 
+  /// Temporary check for when the accepting driver has picked up this rider.
+  // TODO: Change this check to an enum state stored in the backend DB
+  // State should only change once driver has picked up the driver (not based on
+  // their relative locations)
   bool driverHasPickedUpRider(
     RouteConfig driverConfig,
     RouteConfig riderConfig,
