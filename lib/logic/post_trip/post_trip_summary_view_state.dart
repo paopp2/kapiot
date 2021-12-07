@@ -27,7 +27,8 @@ final timeInMinsProvider = Provider.autoDispose<double>((ref) {
   final transaction = ref.watch(transactionProvider);
   final startTime = transaction.startTime!;
   final endTime = transaction.endTime!;
-  final duration = endTime.difference(startTime).inMinutes;
+  // TODO: Change [inSeconds] to [inMinutes]
+  final duration = endTime.difference(startTime).inSeconds;
   Future.delayed(
     const Duration(seconds: 2),
     () => (ref.state = duration.toDouble()),
