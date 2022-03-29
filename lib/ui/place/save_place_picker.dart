@@ -18,6 +18,7 @@ class SavePlacePicker extends HookConsumerWidget {
 
     useEffect(() {
       tecSaveLoc.selectText();
+      return;
     }, []);
 
     return BasePlacePicker(
