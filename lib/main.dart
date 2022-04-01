@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRouter = AppRouter.instance;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Kapiot',
       theme: ThemeData(
         primarySwatch: Colors.blue,

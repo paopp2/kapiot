@@ -35,7 +35,7 @@ class DriverCardStream extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'No Drivers Found',
+                          'No Drivers Found. Try changing your pick-up location, a site near the road works well with our system!',
                           style: GoogleFonts.poppins(
                             fontSize: 24,
                             color: const Color(0xFF333333),
