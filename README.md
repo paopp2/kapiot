@@ -6,9 +6,9 @@ A Proof of Concept of a Carpooled Ridesharing System for the USC Community (manu
 
 Made with ❤️ by:
 
-- Team Lead:   Nicolas Paolo Pepito
-- UI/UX:       Christian Benedict Gonzales
-- QA/Backend:  Charles Ausejo
+- Nicolas Paolo Pepito (Team Lead)
+- Christian Benedict Gonzales (UI/UX)
+- Charles Ausejo (QA/Backend)
 
 ## Screenshots
 
