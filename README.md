@@ -12,4 +12,5 @@ Made with ❤️ by Group K:
 
 ## Screenshots
 
-![kapiot](https://github.com/paopp2/kapiot/assets/29669631/67a3690c-07be-4b61-9ac6-6d3820abe563)
+![kapiot_screenshots](https://github.com/paopp2/kapiot/assets/29669631/57579f9a-7193-43a1-a25b-6124a51aa44e)
+
